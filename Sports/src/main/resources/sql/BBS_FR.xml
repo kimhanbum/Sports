@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="BBS_FR">
+	<select id="count" resultType="int">
+			select count(*) from BBS_FR
+	</select>
+	
+	<select id="list" parameterType="map" resultType="FR">		 
+		select * from 
+		(select rownum rnum, FR_NO, USER_ID, FR_SUBJECT,
+		  FR_CONTENT, FR_FILE, FR_ORIGINAL, 
+		  FR_READCOUNT, FR_DATE
+		  from
+		  (select * from BBS_FR
+		   order by FR_DATE desc
+		  )
+		)
+	  where
+	  	<![CDATA[
+	  		rnum >= #{start} 
+	  	 AND
+	  	 	rnum <= #{end} 
+	  	]]>
+	</select>
+	
+</mapper>
