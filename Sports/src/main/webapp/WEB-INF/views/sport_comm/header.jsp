@@ -74,7 +74,7 @@
                                         <li><a href="${pageContext.request.contextPath}/match/mainPage">운동 파트너 매칭</a></li>
                                         <li><a href="index.html">운동 멘티/멘토 매칭</a></li>
                                         <li><a href="index.html">운동 거래</a></li>
-                                        <li><a href="index.html">운동 자유 게시판</a></li>
+                                        <li><a href="${pageContext.request.contextPath}/BBS_FR/list">운동 자유 게시판</a></li>
                                     </ul>
                                 </nav>
                             </div>

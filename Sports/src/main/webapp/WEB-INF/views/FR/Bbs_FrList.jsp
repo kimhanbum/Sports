@@ -11,20 +11,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="manifest" href="site.webmanifest">
    <link rel="shortcut icon" type="image/x-icon" href="${pageContext.request.contextPath}/resources/img/favicon.ico">
-
-		<!-- CSS here -->
-            <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css">
-            <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/owl.carousel.min.css">
-            <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/flaticon.css">
-            <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/slicknav.css">
-            <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/animate.min.css">
-            <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/magnific-popup.css">
-            <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/fontawesome-all.min.css">
-            <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/themify-icons.css">
-            <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/slick.css">
-            <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/nice-select.css">
-            <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/style.css">
-
+	
+	<!-- 헤더 영역  -->
+	<jsp:include page="/WEB-INF/views/sport_comm/header.jsp"/>
+	<script src="${pageContext.request.contextPath}/resources/js/jquery-3.6.0.js"></script>
+	<script src="../resources/js/BBS_FR/list.js" charset="utf-8"></script>
+	<style>
+	.blog_right_sidebar{float:right}
+	</style>
 </head>
 
 <body>
@@ -40,127 +34,6 @@
             </div>
         </div>
     </div>
-    <!-- Preloader Start-->
-
-    <header>
-        <!-- Header Start -->
-       <div class="header-area">
-            <div class="main-header ">
-                <div class="header-top top-bg d-none d-lg-block">
-                   <div class="container-fluid">
-                       <div class="col-xl-12">
-                            <div class="row d-flex justify-content-between align-items-center">
-                                <div class="header-info-left d-flex">
-                                    <div class="flag">
-                                        <img src="assets/img/icon/header_icon.png" alt="">
-                                    </div>
-                                    <div class="select-this">
-                                        <form action="#">
-                                            <div class="select-itms">
-                                                <select name="select" id="select1">
-                                                    <option value="">USA</option>
-                                                    <option value="">SPN</option>
-                                                    <option value="">CDA</option>
-                                                    <option value="">USD</option>
-                                                </select>
-                                            </div>
-                                        </form>
-                                    </div>
-                                    <ul class="contact-now">     
-                                        <li>+777 2345 7886</li>
-                                    </ul>
-                                </div>
-                                <div class="header-info-right">
-                                    <ul id="navigation">                                                                                                                                     
-                                            <li><a href="index.html">홈화면</a></li>
-                                            <li><a href="index.html">운동 파트너 매칭</a></li>
-                                            <li><a href="index.html">운동 멘티/멘토 매칭</a></li>
-                                            <li><a href="index.html">운동 거래</a></li>
-                                            <li><a href="list">운동 자유 게시판</a></li>
-                                        </ul>
-                                </div>
-                            </div>
-                       </div>
-                   </div>
-                </div>
-               <div class="header-bottom  header-sticky">
-                    <div class="container-fluid">
-                        <div class="row align-items-center">
-                            <!-- Logo -->
-                            <div class="col-xl-1 col-lg-1 col-md-1 col-sm-3">
-                                <div class="logo">
-                                  <a href="index.html"><img src="assets/img/logo/logo.png" alt=""></a>
-                                </div>
-                            </div>
-                            <div class="col-xl-6 col-lg-8 col-md-7 col-sm-5">
-                                <!-- Main-menu -->
-                                <div class="main-menu f-right d-none d-lg-block">
-                                    <nav>                                                
-                                        <ul id="navigation">                                                                                                                                     
-                                            <li><a href="index.html">Home</a></li>
-                                            <li><a href="Catagori.html">Catagori</a></li>
-                                            <li class="hot"><a href="#">Latest</a>
-                                                <ul class="submenu">
-                                                    <li><a href="product_list.html"> Product list</a></li>
-                                                    <li><a href="single-product.html"> Product Details</a></li>
-                                                </ul>
-                                            </li>
-                                            <li><a href="blog.html">Blog</a>
-                                                <ul class="submenu">
-                                                    <li><a href="blog.html">Blog</a></li>
-                                                    <li><a href="single-blog.html">Blog Details</a></li>
-                                                </ul>
-                                            </li>
-                                            <li><a href="#">Pages</a>
-                                                <ul class="submenu">
-                                                    <li><a href="login.html">Login</a></li>
-                                                    <li><a href="cart.html">Card</a></li>
-                                                    <li><a href="elements.html">Element</a></li>
-                                                    <li><a href="about.html">About</a></li>
-                                                    <li><a href="confirmation.html">Confirmation</a></li>
-                                                    <li><a href="cart.html">Shopping Cart</a></li>
-                                                    <li><a href="checkout.html">Product Checkout</a></li>
-                                                </ul>
-                                            </li>
-                                            <li><a href="contact.html">Contact</a></li>
-                                        </ul>
-                                    </nav>
-                                </div>
-                            </div> 
-                            <div class="col-xl-5 col-lg-3 col-md-3 col-sm-3 fix-card">
-                                <ul class="header-right f-right d-none d-lg-block d-flex justify-content-between">
-                                    <li class="d-none d-xl-block">
-                                        <div class="form-box f-right ">
-                                            <input type="text" name="Search" placeholder="Search products">
-                                            <div class="search-icon">
-                                                <i class="fas fa-search special-tag"></i>
-                                            </div>
-                                        </div>
-                                     </li>
-                                    <li class=" d-none d-xl-block">
-                                        <div class="favorit-items">
-                                            <i class="far fa-heart"></i>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="shopping-card">
-                                            <a href="cart.html"><i class="fas fa-shopping-cart"></i></a>
-                                        </div>
-                                    </li>
-                                   <li class="d-none d-lg-block"> <a href="#" class="btn header-btn">Sign in</a></li>
-                                </ul>
-                            </div>
-                            <!-- Mobile Menu -->
-                            <div class="col-12">
-                                <div class="mobile_menu d-block d-lg-none"></div>
-                            </div>
-                        </div>
-                    </div>
-               </div>
-            </div>
-       </div>
-        <!-- Header End -->
-    </header>
 
     <!-- slider Area Start-->
     <div class="slider-area ">
@@ -170,7 +43,7 @@
                 <div class="row">
                     <div class="col-xl-12">
                         <div class="hero-cap text-center">
-                            <h2>Blog</h2>
+                            <h2>자유게시판</h2>
                         </div>
                     </div>
                 </div>
@@ -181,29 +54,40 @@
 
     <!--================BBS_FRList Area =================-->
     <section class="blog_area section-padding">
+     <div class="col-lg-4">
+                    <div class="blog_right_sidebar">
+                        <aside class="single_sidebar_widget search_widget">
+                            <form action="#">
+                                <div class="form-group">
+                                    <div class="input-group mb-3">
+                                        <input type="text" class="form-control" placeholder='Search Keyword'
+                                            onfocus="this.placeholder = ''"
+                                            onblur="this.placeholder = 'Search Keyword'">
+                                        <div class="input-group-append">
+                                            <button class="btns" type="button"><i class="ti-search"></i></button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <button class="button rounded-0 primary-bg text-white w-100 btn_1 boxed-btn"
+                                    type="submit">Search</button>
+                            </form>
+        				</aside>
+    			   </div>
+      </div>
         <div class="container">
+        
          <%-- 게시글이 있는 경우--%> 
 <c:if test="${listcount > 0 }">
-  <div class="rows">
-  	<span>줄보기</span>
-  	<select class="form-control" id="viewcount">
-  		<option value="1">1</option>
-  		<option value="3">3</option>
-  		<option value="5">5</option>
-  		<option value="7">7</option>
-  		<option value="10" selected>10</option>
-  	</select>
-  </div>
   <table class="table table-striped">
    <thead>
 	<tr>
-	   <th colspan="3">MVC 게시판 - list</th>
-	   <th colspan="2">
+	   <th colspan="6">
 			<font size=3>글 개수 : ${listcount}</font>
 	   </th>
 	</tr>
 	<tr>
 		<th><div>번호</div></th>
+		<th><div>분류</div></th>
 		<th><div>제목</div></th>
 		<th><div>작성자</div></th>
 		<th><div>날짜</div></th>
@@ -218,8 +102,22 @@
 		<c:out value="${num}"/><%-- num 출력 --%>		
 		<c:set var="num" value="${num-1}"/>	<%-- num=num-1; 의미--%>	
 	  </td>
+	  <td><div>
+          	    <c:if test="${b.FR_CSFC == '1' }">
+	                        운동기록
+		        </c:if>
+	            <c:if test="${b.FR_CSFC == '2' }">
+	                        운동팁
+		        </c:if>
+	            <c:if test="${b.FR_CSFC == '3' }">
+	                        수다
+		        </c:if>		
+	            <c:if test="${b.FR_CSFC == '4' }">
+	                        운동파트너
+		        </c:if>
+         </div></td>
 	  <td><%--제목 --%>
-	     <div>			
+	     <div>		
 			<a href="detail?num=${b.FR_NO}">
 				 <c:out value="${b.FR_SUBJECT}" />  
 				<%-- ${b.board_subject} --%>
@@ -277,97 +175,19 @@
 		 </ul>
 		</div>
      </c:if><%-- <c:if test="${listcount > 0 }"> end --%>
-     </div>
-     </section>
-    <!--================BBS_FRList Area =================-->
+     <%-- 게시글이 없는 경우--%>
+	<c:if test="${listcount == 0 }">
+		<font size=5>등록된 글이 없습니다.</font>
+	</c:if>
+	<button type="button" class="btn btn-info float-right">글 쓰 기</button>
+   </div>
+  </section>
+    <!--================BBS_FRList Area End=================-->
 
-    <footer>
-        <!-- Footer Start-->
-        <div class="footer-area footer-padding2">
-            <div class="container">
-                <div class="row d-flex justify-content-between">
-                    <div class="col-xl-3 col-lg-3 col-md-5 col-sm-6">
-                       <div class="single-footer-caption mb-50">
-                         <div class="single-footer-caption mb-30">
-                              <!-- logo -->
-                             <div class="footer-logo">
-                                 <a href="index.html"><img src="assets/img/logo/logo2_footer.png" alt=""></a>
-                             </div>
-                             <div class="footer-tittle">
-                                 <div class="footer-pera">
-                                     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit sed do eiusmod tempor incididunt ut labore.</p>
-                                </div>
-                             </div>
-                         </div>
-                       </div>
-                    </div>
-                    <div class="col-xl-2 col-lg-3 col-md-3 col-sm-5">
-                        <div class="single-footer-caption mb-50">
-                            <div class="footer-tittle">
-                                <h4>Quick Links</h4>
-                                <ul>
-                                    <li><a href="#">About</a></li>
-                                    <li><a href="#"> Offers & Discounts</a></li>
-                                    <li><a href="#"> Get Coupon</a></li>
-                                    <li><a href="#">  Contact Us</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-3 col-lg-3 col-md-4 col-sm-7">
-                        <div class="single-footer-caption mb-50">
-                            <div class="footer-tittle">
-                                <h4>New Products</h4>
-                                <ul>
-                                    <li><a href="#">Woman Cloth</a></li>
-                                    <li><a href="#">Fashion Accessories</a></li>
-                                    <li><a href="#"> Man Accessories</a></li>
-                                    <li><a href="#"> Rubber made Toys</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-3 col-lg-3 col-md-5 col-sm-7">
-                        <div class="single-footer-caption mb-50">
-                            <div class="footer-tittle">
-                                <h4>Support</h4>
-                                <ul>
-                                 <li><a href="#">Frequently Asked Questions</a></li>
-                                 <li><a href="#">Terms & Conditions</a></li>
-                                 <li><a href="#">Privacy Policy</a></li>
-                                 <li><a href="#">Privacy Policy</a></li>
-                                 <li><a href="#">Report a Payment Issue</a></li>
-                             </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- Footer bottom -->
-                <div class="row">
-                 <div class="col-xl-7 col-lg-7 col-md-7">
-                     <div class="footer-copy-right">
-                         <p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-  Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="ti-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
-  <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>                   </div>
-                 </div>
-                  <div class="col-xl-5 col-lg-5 col-md-5">
-                     <div class="footer-copy-right f-right">
-                         <!-- social -->
-                         <div class="footer-social">
-                             <a href="#"><i class="fab fa-twitter"></i></a>
-                             <a href="#"><i class="fab fa-facebook-f"></i></a>
-                             <a href="#"><i class="fab fa-behance"></i></a>
-                             <a href="#"><i class="fas fa-globe"></i></a>
-                         </div>
-                     </div>
-                 </div>
-             </div>
-            </div>
-        </div>
-        <!-- Footer End-->
-      </footer>
-
-<!-- JS here -->
+   <!-- Footer 영역  -->
+	<jsp:include page="/WEB-INF/views/sport_comm/footer.jsp"/>
+   
+	<!-- JS here -->
 	
 		<!-- All JS Custom Plugins Link Here here -->
         <script src="${pageContext.request.contextPath}/resources/js/vendor/modernizr-3.5.0.min.js"></script>
