@@ -23,10 +23,20 @@ public class Bbs_FrSeviceImpl implements Bbs_FrService{
 	@Override
 	public List<BBS_FR> getBoardList(int page, int limit) {
 		HashMap<String, Integer> map = new HashMap<String, Integer>();
-		int startrow=(page-1)*limit+1;
-		int endrow=startrow+limit-1;
+		int startrow = (page-1) * limit + 1;
+		int endrow = startrow + limit - 1;
 		map.put("start", startrow);
 		map.put("end",endrow);
 		return dao.getBoardList(map);
+	}
+
+	@Override
+	public void insertBoard(BBS_FR board) {
+		dao.insertBoard(board);
+	}
+
+	@Override
+	public BBS_FR getDetail(int num) {
+		return null;
 	}
 }

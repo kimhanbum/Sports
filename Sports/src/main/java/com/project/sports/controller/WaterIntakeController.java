@@ -1,5 +1,5 @@
 package com.project.sports.controller;
 
-public class BbbsFcmController {
+public class WaterIntakeController {
 
 }

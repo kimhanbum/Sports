@@ -25,4 +25,25 @@
 	  	]]>
 	</select>
 	
+	<insert id="insert" parameterType="FR">
+	<selectKey resultType="int" order="BEFORE"
+					keyProperty="FR_NO">
+			select nvl(max(FR_NO),0)+1 from BBS_FR
+		</selectKey>
+		insert into BBS_FR
+		(FR_NO, 
+		USER_ID, FR_PASS, FR_CSFC,
+		FR_SUBJECT, FR_CONTENT, FR_DATE,
+		FR_READCOUNT, FR_FILE, 
+		FR_ORIGINAL)
+		values
+		(#{FR_NO},
+		#{USER_ID}, #{FR_PASS}, #{FR_CSFC},
+		#{FR_SUBJECT}, #{FR_CONTENT},
+		sysdate, #{FR_READCOUNT},
+		#{FR_FILE, jdbcType=VARCHAR},
+		#{FR_ORIGINAL, jdbcType=VARCHAR}
+		)
+	</insert>
+	
 </mapper>

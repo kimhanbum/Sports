@@ -2,121 +2,80 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8"/>
-        <script type="text/javascript" src="event.js"></script>
-        <script type="text/javascript">
-            window.onload = function(){
-                function idcheck(){
-                    var insertId=document.inputForm.id.value;
-                    alert("아이디는 "+insertId+" 입니다.");
-                    return;
-                }
-                function emailcheck(){
-                    var email1 = document.inputForm.email.value;
-                    var email2 = document.inputForm.email2.value;
-                    alert("이메일은 "+email1+email2+" 입니다.");                 return;
-                }
-                
-                function joincheck(){
-                    var sname = document.inputForm.sname.value;
-                    var gender = document.inputForm.gender.value;
-                    var birth1 = document.inputForm.birth1.value;
-                    var birth2 = document.inputForm.birth2.value;
-                    var birth3 = document.inputForm.birth3.value;
-                    var Hobbys = [];
-                    for(var i=0; i<document.inputForm.hobby.length; i++){
-                        if(document.inputForm.hobby[i].checked) {
-                            Hobbys.push(document.inputForm.hobby[i].value);
-                        }
-                    }
-                    alert("이름 : "+sname+"\n"+"성별:"+gender+"\n"
-                    +"생년월일:"+birth1+"년"+birth2+"월"+birth3+"일"+"\n"
-                    +"취미:"+Hobbys.join("-"));
-                    return;
-                }
-                
-                var checkBtn = document.getElementById("check");
-                var checkEmail = document.getElementById("check2");
-                var joinBtn = document.getElementById("join");
-                addEvent(checkBtn, 'click', idcheck);
-                addEvent(checkEmail, 'click', emailcheck);
-                addEvent(joinBtn, 'click', joincheck);
+<head>
+<style>
 
-            }
-        </script>
-        <title> html </title>
-    </head>
+</style>
+<script>
+
+</script>
+</head>
 <body>
-    <form method="GET" name="inputForm">
+    <form method="post" name="joinform">
         <table width="1000px">
             <tr>
                 <td>
-                    <label for="sname">이름
+                    <label for="id">ID</label>
                 </td>
                 <td>
-                    <input type="text" name="sname" id="sname" size="20px"> 
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <label for="id">아이디
-                </td>
-                <td>
-                    <input type="text" name="id" id="id" size="20px">
-                    <input type="button" id="check" value="중복확인">
+                    <input type="text" name="id" id="id" size="20px" required>
+                    <input type="button" id="idcheck" value="중복확인">
                 </td>
             </tr>
             <tr>
                 <td>
-                    <label for="pwd">비밀번호
+                    <label for="password">비밀번호</label>
                 </td>
                 <td>
-                    <input type="text" name="pwd" id="pwd" size="20px"> 
+                    <input type="text" name="password" id="password" size="20px" required> 
                     *영문 대소문자/숫자/특수문자를 혼용하여 2종류10~16자 또는 3종 8~16자
                 </td>
             </tr>
             <tr>
                 <td>
-                    <label for="pwdCheck">비밀번호 확인
+                    <label for="passcheck">비밀번호 확인</label>
                 </td>
                 <td>
-                    <input type="text" name="pwdCheck" id="pwdCheck" size="20px">
+                    <input type="text" name="passcheck" id="passcheck" size="20px" required>
                 </td>
             </tr>
             <tr>
-                   <td>
-                         생일/성별
-                    </td>
-                    <td>
-                    <script type="text/javascript">
-                         var today = new Date();
-                         var toyear = parseInt(today.getFullYear ());
-                         var start = toyear;
-                         var end = toyear - 15;
-
-                         document.write("<select name=birth1> ");
-                         document.write("<option value='2015' selected>");
-                         for (i=start;i>=end;i--) document.write("<option>"+i);
-                         document.write("</select>년  ");
-
-                         document.write("<select name=birth2>");
-                         document.write("<option value='' selected>");
-                         for (i=1;i<=12;i++) document.write("<option>"+i);
-                         document.write("</select>월  ");
-
-                         document.write("<select name=birth3>");
-                         document.write("<option value='' selected>");
-                         for (i=1;i<=31;i++) document.write("<option>"+i);
-                         document.write("</select>일  </font>");
-                         </script>
-                         <input type="radio" name="gender" value="남">남
-                         <input type="radio" name="gender" value="여" checked>여
-                    </td>
+                <td>
+                    <label for="name">이름</label>
+                </td>
+                <td>
+                    <input type="text" name="name" id="name" size="20px" required> 
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="jumin">주민등록번호</label>
+                </td>
+                <td>
+                    <input type="text" name="jumin" id="jumin" size="10px" required>-
+                    <input type="text" name="jumin" id="jumin" size="10px" required>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="phone">연락처</label>
+                </td>
+                <td>
+                    <select id="phone">
+                        <option value="010">010</option>
+                        <option value="011">011</option>
+                        <option value="019">019</option>
+                    </select>
+                    -
+                    <input type="text" name="phone" id="phone" size="4" maxLength="4" required>-
+                    <input type="text" name="phone1" id="phone1" size="4" maxLength="4" required>
+                </td>
+            </tr>
+            <tr>
                </tr>
             <tr>
                 <td>
-                    <label for="dong">우편번호
+                    <label for="dong">우편번호</label>
                 </td>
                 <td>
                     <input type="text" name="dong" id="dong" size="5">-
@@ -126,15 +85,15 @@
             </tr>
             <tr>
                 <td>
-                    <label for="home">집주소
+                    <label for="home">집주소</label>
                 </td>
                 <td>
-                    <input type="text" name="home" id="home" size="60"> 
+                    <input type="text" name="home" id="home" size="60" required> 
                 </td>
             </tr>
             <tr>
                 <td>
-                    <label for="homeAddress">상세주소
+                    <label for="homeAddress">상세주소</label>
                 </td>
                 <td>
                     <input type="text" name="homeAddress" id="homeAddress" size="60">   
@@ -142,104 +101,82 @@
             </tr>
             <tr>
                 <td>
-                    <label for="phone">연락처
+                    <label for="email">이메일</label>
                 </td>
                 <td>
-                    <select id="phone">
-                        <option value=""></option>
-                        <option value="010">010</option>
-                        <option value="011">011</option>
-                        <option value="019">019</option>
-                    </select>
-                    -
-                    <input type="text" name="phone" id="phone" size="10">-
-                    <input type="text" name="phone" id="phone" size="10">
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <label for="email">이메일
-                </td>
-                <td>
-                    <input type="text" name="email" id="email" size="10">@
+                    <input type="text" name="email" id="email" size="10" required>@
                     <select id="email2">
-                        <option value=""></option>
-                        <option value="1">http://www.google.com</option>
-                        <option value="2">http://www.naver.com</option>
-                        <option value="3">http://www.daum.com</option>
+                        <option value="none">==주소를 선택하세요==</option>
+                        <option value="1">google.com</option>
+                        <option value="2">naver.com</option>
+                        <option value="3">daum.com</option>
                     </select>
                     <input type="button" id="check2" value="중복확인">
                 </td>
             </tr>
             <tr>
                 <td>
-                    <label for="homeAddress">회사전화
+                    <label for="ki">키</label>
                 </td>
                 <td>
-                    <select id="homeAddress">
-                        <option value=""></option>
-                        <option value="031">031</option>
-                        <option value="032">032</option>
-                        <option value="042">042</option>
+                	<input type="text" name="ki" id="ki" size="3" required>cm
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="pweight">현재몸무게</label>
+                </td>
+                <td>
+                	<input type="text" name="pweight" id="pweight" size="3" required>kg
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="wweight">목표몸무게</label>
+                </td>
+                <td>
+                	<input type="text" name="wweight" id="wweight" size="3" required>kg
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="sports">선호운동</label>
+                </td>
+                <td>
+                    <select id="sports_category" name="sports_category" >
+                        <option value="none">===운동종류===</option>
+                        <option value="1">구기운동</option>
+                        <option value="2">기구운동</option>
+                        <option value="3">맨몸운동</option>
                     </select>
-                    -
-                    <input type="text" name="homeAddress" id="homeAddress" size="10">-
-                    <input type="text" name="homeAddress" id="homeAddress" size="10">
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <label for="workhome">회사주소
-                </td>
-                <td>
-                    <input type="text" name="address1" id="address1" size="5">-
-                    <input type="text" name="address1" id="address1" size="5">
-                    <input type="button" id="check2" value="우편번호검색"><br/>
-                    <input type="text" name="workhome" id="workhome" size="40">
-
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    휴대폰
-                </td>
-                <td>
-                    <select id="smartPhone" name="smartPhone">
-                        <option value="010">010</option>
-                        <option value="011">011</option>
-                        <option value="019">019</option>
-                    </select>
-                    -<input type="text" name="smartPhone1" size="5">
-                    -<input type="text" name="smartPhone2" size="5">
-                </td>
-            </tr>
-            <tr>
-            <tr>
-                <td>
-                    <label for="news">뉴스메일
-                </td>
-                <td>
-                    <input type="radio" name="news" checked>받습니다.
-                    <input type="radio" name="news">받지 않습니다.
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <label for="sms">SMS안내(이벤트)
-                </td>
-                <td>
-                    <input type="radio" name="sms" checked>받습니다.
-                    <input type="radio" name="sms">받지 않습니다.
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <label for="hobby">취미
-                </td>
-                <td>
-                    <input type="checkbox" name="hobby" value="등산" checked>등산
-                    <input type="checkbox" name="hobby" value="게임">게임
-                    <input type="checkbox" name="hobby" value="영화">영화
+                    <select id="sports_name" name="sports_name">
+                        <option value="none">===운동이름===</option>
+                        
+                        <option value="풋살">풋살</option>
+                        <option value="축구">축구</option>
+                        <option value="야구">야구</option>
+                        <option value="농구">농구</option>
+                        <option value="야구">야구</option>
+                        <option value="배드민턴">배드민턴</option>
+                        <option value="테니스">테니스</option>
+                        <option value="탁구">탁구</option>
+                        <option value="골프">골프</option>
+                        
+                        <option value="헬스">헬스</option>
+                        <option value="크로스핏">크로스핏</option>
+                        <option value="스피닝">스피닝</option>
+                        <option value="사이클">사이클</option>
+                        <option value="서핑">서핑</option>
+                        
+                        <option value="요가">요가</option>
+                        <option value="필라테스">필라테스</option>
+                        <option value="등산">등산</option>
+                        <option value="러닝">러닝</option>
+                        <option value="주짓수">주짓수</option>
+                        <option value="복싱">복싱</option>
+                        <option value="태권도">태권도</option>
+                    </select><br>
+                    <span id="selectedsports"></span>
                 </td>
             </tr>
         </table>
@@ -247,4 +184,3 @@
     </form>
 </body>
 </html>
-[출처] HTML - 시험(회원가입 폼 이벤트 처리)|작성자 전갈
