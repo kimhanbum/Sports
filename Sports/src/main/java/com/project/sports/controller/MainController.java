@@ -15,7 +15,7 @@ public class MainController {
 	//글 목록 보기
 	@RequestMapping(value = "/mainPage", method = RequestMethod.GET)
 	public ModelAndView mainPage(ModelAndView mv) {
-		mv.setViewName("index");
+		mv.setViewName("main");
 		return mv;
 	}
 }
