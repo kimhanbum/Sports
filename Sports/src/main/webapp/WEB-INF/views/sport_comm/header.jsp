@@ -108,7 +108,7 @@
 						        	  <li class="d-none d-lg-block"> <a href="#" class="btn header-btn">마이페이지</a></li>
 						              <li class="d-none d-lg-block"> <a href="#" class="btn header-btn">로그아웃</a></li>
 						        </c:if> --%>
-						        <li class="d-none d-lg-block"> <a href="#" class="btn header-btn">로그인</a></li>
+						        <li class="d-none d-lg-block"> <a href="../member/login" class="btn header-btn">로그인</a></li>
                                 <li class="d-none d-lg-block"> <a href="#" class="btn header-btn">마이페이지</a></li>
                             </ul>
                         </div>
