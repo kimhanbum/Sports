@@ -9,11 +9,13 @@
                      <div class="single-footer-caption mb-30">
                           <!-- logo -->
                          <div class="footer-logo">
-                             <a href="index.html"><img src="${pageContext.request.contextPath}/resources/img/logo/logo2_footer.png" alt=""></a>
+                             <a href="${pageContext.request.contextPath}/main/mainPage"><img style="width:220px; height:120px;" src="${pageContext.request.contextPath}/resources/image/logo/sports_logo.png" alt=""></a>
                          </div>
                          <div class="footer-tittle">
                              <div class="footer-pera">
-                                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit sed do eiusmod tempor incididunt ut labore.</p>
+                                 <p>사업자등록번호 : 103-91-5585123  
+					      			통신판매업신고번호 : 중구 067199 
+					      			대표 : 건강챙기조 ㈜</p>
                             </div>
                          </div>
                      </div>
@@ -22,12 +24,12 @@
                 <div class="col-xl-2 col-lg-3 col-md-3 col-sm-5">
                     <div class="single-footer-caption mb-50">
                         <div class="footer-tittle">
-                            <h4>Quick Links</h4>
+                            <h4>메뉴</h4>
                             <ul>
-                                <li><a href="#">About</a></li>
-                                <li><a href="#"> Offers & Discounts</a></li>
-                                <li><a href="#"> Get Coupon</a></li>
-                                <li><a href="#">  Contact Us</a></li>
+                               <li><a href="index.html">운동 파트너 매칭</a></li>
+                               <li><a href="index.html">운동 멘티/멘토 매칭</a></li>
+                               <li><a href="index.html">운동 거래</a></li>
+                               <li><a href="index.html">운동 자유 게시판</a></li>
                             </ul>
                         </div>
                     </div>
@@ -35,12 +37,14 @@
                 <div class="col-xl-3 col-lg-3 col-md-4 col-sm-7">
                     <div class="single-footer-caption mb-50">
                         <div class="footer-tittle">
-                            <h4>New Products</h4>
+                            <h4>기타사항</h4>
                             <ul>
-                                <li><a href="#">Woman Cloth</a></li>
-                                <li><a href="#">Fashion Accessories</a></li>
-                                <li><a href="#"> Man Accessories</a></li>
-                                <li><a href="#"> Rubber made Toys</a></li>
+	                            <li><a href="#">개인정보처리방침</a></li>
+								<li><a href="#">이용약관 보기</a></li>
+								<li><a href="#">법적고지</a></li>
+								<li><a href="#">이메일 무단수집거부</a></li>
+								<li><a href="#">FAQs</a></li>
+							    <li><a href="#">Contact</a></li>
                             </ul>
                         </div>
                     </div>
@@ -48,13 +52,11 @@
                 <div class="col-xl-3 col-lg-3 col-md-5 col-sm-7">
                     <div class="single-footer-caption mb-50">
                         <div class="footer-tittle">
-                            <h4>Support</h4>
+                            <h4>문의사항</h4>
                             <ul>
-                             <li><a href="#">Frequently Asked Questions</a></li>
-                             <li><a href="#">Terms & Conditions</a></li>
-                             <li><a href="#">Privacy Policy</a></li>
-                             <li><a href="#">Privacy Policy</a></li>
-                             <li><a href="#">Report a Payment Issue</a></li>
+                             <li><i class="fas fa-map-marker-alt"></i>&nbsp;<a href="#">서울특별시 종로구 율곡로10길 105 디아망 401호(봉익동 10-1 디아망 401호)</a></li>
+                             <li><i class="fas fa-phone"></i>&nbsp;<a href="#">070-8240-3211</a></li>
+                             <li><i class="fas fa-edit"></i>&nbsp;<a href="#">edu@jhta.co.kr</a></li>
                          </ul>
                         </div>
                     </div>
@@ -65,7 +67,7 @@
              <div class="col-xl-7 col-lg-7 col-md-7">
                  <div class="footer-copy-right">
                      <p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="ti-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This website is made with <i class="ti-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">건강챙기조</a>
 <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>                   </div>
              </div>
               <div class="col-xl-5 col-lg-5 col-md-5">
