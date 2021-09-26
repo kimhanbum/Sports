@@ -1,0 +1,32 @@
+create table Deal_Auction (
+	AUC_NUMBER		 NUMBER primary key , 		--글번호 
+	AUC_SUBJECT 	 VARCHAR2(50) , 				--글제목
+	AUC_CONTENT 	 VARCHAR2(4000), 			--글내용
+	USER_ID			 VARCHAR2(60) references MEMBER_INFO(USER_ID)
+					on delete cascade , 		--아이디
+	AUC_DATE 		 DATE, 						--경매기간/		
+	AUC_PRICE 		 NUMBER, 					--경매가
+	AUC_UNIT		 NUMBER, 					--입찰단위
+	AUC_LPRICE		 NUMBER, 					--즉시구매가
+	AUC_COUNT		 NUMBER, 					--입찰수
+	AUC_DELIVERY	 VARCHAR2(20), 				--배송방법
+	AUC_DELIVERYCOM	 VARCHAR2(30), 				--택배사
+	AUC_DELIVERYNUM  NUMBER, 					--송장번호
+	ORI_AUC_MAINFILE	  VARCHAR2(100),			--진짜 메인사진
+	SAVE_AUC_MAINFILE	 VARCHAR2(100),			--저장용 메인사진
+	ORI_AUC_FILE2		 VARCHAR2(100), 			--진짜 사진2
+	SAVE_AUC_FILE2		 VARCHAR2(100), 			--저장용 사진2
+	ORI_AUC_FILE3		 VARCHAR2(100), 			--진짜 사진3
+	SAVE_AUC_FILE3		 VARCHAR2(100), 			--저장용 사진3
+	ORI_AUC_FILE4		 VARCHAR2(100), 			-- 진짜사진4
+	SAVE_AUC_FILE4		 VARCHAR2(100) );			-- 저장용사진4
+	
+	
+select * from Deal_Auction;
+select * from board;
+select * from member_info;
+
+/*추가된 부분*/
+create sequence Auc_seq; 
+
+

@@ -1,14 +1,16 @@
 package com.project.sports.domain;
 
+import org.springframework.web.multipart.MultipartFile;
+
 public class DealAuction {
 	private int		AUC_NUMBER;			//글번호
 	private String	AUC_SUBJECT; 		//글제목
 	private String	AUC_CONTENT;		//글내용
 	private String	USER_ID;			//아이디
 	private String	AUC_DATE; 			//경매기간
-	private int		AUC_PRICE; 			//경매가
-	private int		AUC_UNIT;			//입찰단위
-	private int		AUC_LPRICE;			//즉시구매가
+	private String	AUC_PRICE; 			//경매가
+	private String	AUC_UNIT;			//입찰단위
+	private String	AUC_LPRICE;			//즉시구매가
 	private int		AUC_COUNT;			//입찰수
 	private String	AUC_DELIVERY;		//배송방법
 	private String	AUC_DELIVERYCOM;	//택배사
@@ -21,6 +23,11 @@ public class DealAuction {
 	private String	SAVE_AUC_FILE3;
 	private String	ORI_AUC_FILE4;		//사진4
 	private String	SAVE_AUC_FILE4;
+	
+	private MultipartFile uploadfile1;
+	private MultipartFile uploadfile2;
+	private MultipartFile uploadfile3;
+	private MultipartFile uploadfile4;
 	
 	
 	public int getAUC_NUMBER() {
@@ -53,22 +60,22 @@ public class DealAuction {
 	public void setAUC_DATE(String aUC_DATE) {
 		AUC_DATE = aUC_DATE;
 	}
-	public int getAUC_PRICE() {
+	public String getAUC_PRICE() {
 		return AUC_PRICE;
 	}
-	public void setAUC_PRICE(int aUC_PRICE) {
+	public void setAUC_PRICE(String aUC_PRICE) {
 		AUC_PRICE = aUC_PRICE;
 	}
-	public int getAUC_UNIT() {
+	public String getAUC_UNIT() {
 		return AUC_UNIT;
 	}
-	public void setAUC_UNIT(int aUC_UNIT) {
+	public void setAUC_UNIT(String aUC_UNIT) {
 		AUC_UNIT = aUC_UNIT;
 	}
-	public int getAUC_LPRICE() {
+	public String getAUC_LPRICE() {
 		return AUC_LPRICE;
 	}
-	public void setAUC_LPRICE(int aUC_LPRICE) {
+	public void setAUC_LPRICE(String aUC_LPRICE) {
 		AUC_LPRICE = aUC_LPRICE;
 	}
 	public int getAUC_COUNT() {
@@ -143,6 +150,31 @@ public class DealAuction {
 	public void setSAVE_AUC_FILE4(String sAVE_AUC_FILE4) {
 		SAVE_AUC_FILE4 = sAVE_AUC_FILE4;
 	}
+	public MultipartFile getUploadfile1() {
+		return uploadfile1;
+	}
+	public void setUploadfile1(MultipartFile uploadfile1) {
+		this.uploadfile1 = uploadfile1;
+	}
+	public MultipartFile getUploadfile2() {
+		return uploadfile2;
+	}
+	public void setUploadfile2(MultipartFile uploadfile2) {
+		this.uploadfile2 = uploadfile2;
+	}
+	public MultipartFile getUploadfile3() {
+		return uploadfile3;
+	}
+	public void setUploadfile3(MultipartFile uploadfile3) {
+		this.uploadfile3 = uploadfile3;
+	}
+	public MultipartFile getUploadfile4() {
+		return uploadfile4;
+	}
+	public void setUploadfile4(MultipartFile uploadfile4) {
+		this.uploadfile4 = uploadfile4;
+	}
+
 	
 	
 }
