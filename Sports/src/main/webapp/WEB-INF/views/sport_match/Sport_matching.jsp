@@ -11,21 +11,6 @@
 		<link rel="shortcut icon" type="image/x-icon" href="${pageContext.request.contextPath}/resources/img/favicon.ico">
 
 		<!-- CSS here -->
-            <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css">
-            <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/owl.carousel.min.css">
-            <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/flaticon.css">
-            <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/slicknav.css">
-            <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/animate.min.css">
-            <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/magnific-popup.css">
-            <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/fontawesome-all.min.css">
-            <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/themify-icons.css">
-            <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/slick.css">
-            <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/nice-select.css">
-            <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/style.css">
-            
-            
-            <link rel="shortcut icon" href="https://www.baro-match.co.kr/newsite/icon1.ico" >
-			<!--<link rel="icon" href="https://www.baro-match.co.kr/newsite/icon.ico" type="image/x-icon"/>-->
 			<link rel="stylesheet" href="https://www.baro-match.co.kr/newsite/core/css/common.css?sng=1632462206" />
 			<link rel="stylesheet" href="https://www.baro-match.co.kr/newsite/core/css/bbs.css?sng=1632462206" />
 			<link rel="stylesheet" href="https://www.baro-match.co.kr/newsite/core/css/swiper.css" />
@@ -36,12 +21,8 @@
 			<link rel="stylesheet" href="https://www.baro-match.co.kr/newsite/web/korean/css/bxslider.css?sng=1632462206" />
 			<link rel="stylesheet" href="https://www.baro-match.co.kr/newsite/skin/member/basic_responsive/style.css?sng=1632462206"/>
 			<link rel="stylesheet" href="https://www.baro-match.co.kr/newsite/system/banner/css/banner.css?sng=1632462206" />
-			<link rel="stylesheet" href="https://www.baro-match.co.kr/newsite/system/tournament/css/tournament.css?sng=1632462206" />
-			<link rel="stylesheet" href="https://www.baro-match.co.kr/newsite/system/team/css/team.css?sng=1632462206" />
 			<link rel="stylesheet" href="https://www.baro-match.co.kr/newsite/system/match/css/match.css?sng=1632462206" />
-			<link rel="stylesheet" href="https://www.baro-match.co.kr/newsite/system/ground/css/ground.css?sng=1632462206" />
-<style>
-</style>
+			<link rel ="stylesheet" href="${pageContext.request.contextPath}/resources/css/sport_match.css">
    </head>
    <body>
     <!-- Preloader Start -->
@@ -56,82 +37,10 @@
         </div>
     </div>
     <!-- Preloader Start -->
-
-    <header>
-        <!-- Header Start -->
-       <div class="header-area">
-            <div class="main-header ">
-                <div class="header-top top-bg d-none d-lg-block">
-                   <div class="container-fluid">
-                       <div class="col-xl-12">
-                            <div class="row d-flex justify-content-between align-items-center">
-                                <div class="header-info-left d-flex">
-                                    <div class="flag">
-                                        <img src="assets/img/icon/header_icon.png" alt="">
-                                    </div>
-                                    <div class="select-this">
-                                        <form action="#">
-                                            <div class="select-itms">
-                                                <select name="select" id="select1">
-                                                    <option value="">USA</option>
-                                                    <option value="">SPN</option>
-                                                    <option value="">CDA</option>
-                                                    <option value="">USD</option>
-                                                </select>
-                                            </div>
-                                        </form>
-                                    </div>
-                                    <ul class="contact-now">     
-                                        <li>+777 2345 7886</li>
-                                    </ul>
-                                </div>
-                                <div class="header-info-right">
-                                   <ul>                                          
-                                       <li><a href="login.html">My Account </a></li>
-                                       <li><a href="product_list.html">Wish List  </a></li>
-                                       <li><a href="cart.html">Shopping</a></li>
-                                       <li><a href="cart.html">Cart</a></li>
-                                       <li><a href="checkout.html">Checkout</a></li>
-                                   </ul>
-                                </div>
-                            </div>
-                       </div>
-                   </div>
-                </div>
-               <div class="header-bottom  header-sticky">
-                    <div class="container-fluid">
-                        <div class="row align-items-center">
-                            <!-- Logo -->
-                            <div class="col-xl-1 col-lg-1 col-md-1 col-sm-3">
-                                <div class="logo">
-                                  <a href="index.html"><img src="assets/img/logo/logo.png" alt=""></a>
-                                </div>
-                            </div>
-                            <div class="col-xl">
-                                <!-- Main-menu -->
-                                <div class="main-menu">
-                                    <nav>                                                
-                                        <ul id="navigation">                                                                                                                                     
-                                            <li><a href="index.html">홈화면</a></li>
-                                            <li><a href="index.html">운동 파트너 매칭</a></li>
-                                            <li><a href="index.html">운동 멘티/멘토 매칭</a></li>
-                                            <li><a href="index.html">운동 거래</a></li>
-                                            <li><a href="index.html">운동 자유 게시판</a></li>
-                                        </ul>
-                                    </nav>
-                                </div>
-                            </div> 
-                            <!-- Mobile Menu -->
-                            <div class="col-12">
-                                <div class="mobile_menu d-block d-lg-none"></div>
-                            </div>
-                        </div>
-                    </div>
-               </div>
-            </div>
-       </div>
-        <!-- Header End -->
-    </header>
+    	<!-- 헤더 영역  -->
+    	
+	<jsp:include page="/WEB-INF/views/sport_comm/header.jsp"/>
+    
     <main>
         <!-- slider Area Start -->
         <div class="slider-area ">
@@ -139,7 +48,7 @@
 				<div class="web_size">
 					<ul>
 						<a href="soccer"><li class="icon01 top_icon" data-value="1/">축구/풋살</li></a>
-						<a href="baseball"><li class="icon03 top_icon" data-value="3/" >야구</li></a>
+						<a href="baseball" ><li class="icon03 top_icon" data-value="3/">야구</li></a>
 						<a href="football"><li class="icon09 top_icon" data-value="9/">족구</li></a>
 						<a href="basketball"><li class="icon02 top_icon" data-value="2/">농구</li></a>
 						<a href="volleyball"><li class="icon04 top_icon" data-value="4/">배구</li></a>
@@ -154,21 +63,60 @@
 				</div>
 			</div>
 			<br>
+			<div class="gnb_wrap">
+			<div class="web_size">
+				<div class="gnb">
+					<div class="m_icon_box">
+						<p class="icon01 top_icon" data-value="1/">축구/풋살</p>
+						<p class="icon03 top_icon" data-value="3/">야구</p>
+						<p class="icon09 top_icon" data-value="9/">족구</p>
+						<p class="icon02 top_icon" data-value="2/">농구</p>
+						<p class="icon04 top_icon" data-value="4/">배구</p>
+						<p class="icon05 top_icon" data-value="5/">탁구</p>
+						<p class="icon06 top_icon" data-value="6/">배드민턴</p>
+						<p class="icon07 top_icon" data-value="7/">테니스</p>
+						<p class="icon010 top_icon" data-value="10/">볼링</p>
+						<p class="icon008 top_icon" data-value="08/">골프</p>
+						<a href="http://ntler.co.kr" target="_blank"><p class="icon00">맞춤유니폼</p></a>
+					</div>
+					<ul class="m_menu_box">
+							<li id="menu1" class="topmenu_lis" data-depth1="1" data-key="1" data-width="16.666666666667%">
+									<a  href="https://www.baro-match.co.kr/newsite/web/page.php?pcode=50"  id="suba1" class="subas ">마이페이지</a>
+									<ul class="submenus" id="submenu1" data-height="390px" style="display:none;"><li><a  href="https://www.baro-match.co.kr/newsite/web/page.php?pcode=50"  >내 정보</a></li><li><a  href="https://www.baro-match.co.kr/newsite/web/page.php?pcode=41"  >팀 정보</a></li><li><a  href="https://www.baro-match.co.kr/newsite/bbs/board.php?bo_id=team_gallery"  >팀 갤러리</a></li><li><a  href="https://www.baro-match.co.kr/newsite/bbs/board.php?bo_id=team_board"  >팀 게시판</a></li><li><a  href="https://www.baro-match.co.kr/newsite/web/page.php?pcode=45"  >개인 메세지</a></li><li><a  href="https://www.baro-match.co.kr/newsite/web/page.php?pcode=48"  >내가 쓴 매치글</a></li><li><a  href="https://www.baro-match.co.kr/newsite/web/page.php?pcode=49"  >내가 쓴 게시글</a></li></ul>								</li>
+																<li id="menu2" class="topmenu_lis" data-depth1="2" data-key="2" data-width="16.666666666667%">
+									<a  href="https://www.baro-match.co.kr/newsite/web/page.php?pcode=11"  id="suba2" class="subas ">매치보드</a>
+									<ul class="submenus" id="submenu2" data-height="390px" style="display:none;"><li><a  href="https://www.baro-match.co.kr/newsite/web/page.php?pcode=11"  >매치신청</a></li></ul>								</li>
+																<li id="menu3" class="topmenu_lis" data-depth1="3" data-key="3" data-width="16.666666666667%">
+									<a  href="https://www.baro-match.co.kr/newsite/web/page.php?pcode=14"  id="suba3" class="subas ">팀</a>
+									<ul class="submenus" id="submenu3" data-height="390px" style="display:none;"><li><a  href="https://www.baro-match.co.kr/newsite/web/page.php?pcode=14"  >전국 팀 정보</a></li></ul>								</li>
+																<li id="menu4" class="topmenu_lis" data-depth1="4" data-key="4" data-width="16.666666666667%">
+									<a  href="https://www.baro-match.co.kr/newsite/bbs/board.php?bo_id=cmu01"  id="suba4" class="subas ">커뮤니티</a>
+									<ul class="submenus" id="submenu4" data-height="390px" style="display:none;"><li><a  href="https://www.baro-match.co.kr/newsite/bbs/board.php?bo_id=cmu01"  >공지사항</a></li><li><a  href="https://www.baro-match.co.kr/newsite/bbs/board.php?bo_id=cmu06"  >팀가입인사</a></li><li><a  href="https://www.baro-match.co.kr/newsite/bbs/board.php?bo_id=cmu04"  >모집게시판</a></li><li><a  href="https://www.baro-match.co.kr/newsite/bbs/board.php?bo_id=cmu02"  >자유게시판</a></li><li><a  href="https://www.baro-match.co.kr/newsite/bbs/board.php?bo_id=cmu07"  >국내소식</a></li><li><a  href="https://www.baro-match.co.kr/newsite/bbs/board.php?bo_id=cmu08"  >해외소식</a></li><li><a  href="https://www.baro-match.co.kr/newsite/bbs/board.php?bo_id=cmu09"  >축구동영상</a></li><li><a  href="https://www.baro-match.co.kr/newsite/bbs/board.php?bo_id=cmu10"  >축구갤러리</a></li><li><a  href="https://www.baro-match.co.kr/newsite/bbs/board.php?bo_id=cmu11_2"  >축구화 이야기</a></li><li><a  href="https://www.baro-match.co.kr/newsite/bbs/board.php?bo_id=cmu17"  >유니폼 이야기</a></li><li><a  href="https://www.baro-match.co.kr/newsite/bbs/board.php?bo_id=cmu03"  >매치경기 후기</a></li><li><a  href="https://www.baro-match.co.kr/newsite/bbs/board.php?bo_id=shop02"  >중고장터</a></li><li><a  href="https://www.baro-match.co.kr/newsite/bbs/board.php?bo_id=cmu16"  >엔틀러 유니폼</a></li><li><a  href="https://www.baro-match.co.kr/newsite/bbs/board.php?bo_id=webtoon01"  >훈’s 축구웹툰</a></li><li><a  href="https://www.baro-match.co.kr/newsite/bbs/board.php?bo_id=cmu_preview"  >훈’s 프리뷰</a></li></ul>								</li>
+																<li id="menu5" class="topmenu_lis" data-depth1="5" data-key="5" data-width="16.666666666667%">
+									<a  href="https://www.baro-match.co.kr/newsite/web/page.php?pcode=31"  id="suba5" class="subas ">대회</a>
+									<ul class="submenus" id="submenu5" data-height="390px" style="display:none;"><li><a  href="https://www.baro-match.co.kr/newsite/web/page.php?pcode=31"  >대회일정</a></li></ul>								</li>
+																<li id="menu6" class="topmenu_lis" data-depth1="6" data-key="6" data-width="16.666666666667%">
+									<a  href="https://www.baro-match.co.kr/newsite/web/page.php?pcode=51"  id="suba6" class="subas ">경기장</a>
+									<ul class="submenus" id="submenu6" data-height="390px" style="display:none;"><li><a  href="https://www.baro-match.co.kr/newsite/web/page.php?pcode=51"  >경기장안내</a></li><li><a  href="https://www.baro-match.co.kr/newsite/bbs/board.php?bo_id=ground_board"  >경기장 게시판</a></li></ul>								</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		</div>
             <div class="slider-active">
-                <div class="single-slider slider-height" data-background="${pageContext.request.contextPath}/resources/img/soccer.jpg">
+                <div class="single-slider slider-height" data-background="${pageContext.request.contextPath}/resources/image/sport/soccer.jpg">
                     <div class="container">
                         <div class="row d-flex align-items-center justify-content-between">
                             <div class="col-xl-6 col-lg-6 col-md-6 d-none d-md-block">
                                 <div class="hero__img" data-animation="bounceIn" data-delay=".4s">
-                                    <img src="${pageContext.request.contextPath}/resources/img/soccer.jpg" alt="">
+                                    <img src="${pageContext.request.contextPath}/resources/image/sport/soccer.jpg" alt="">
                                 </div>
                             </div>
                             <div class="col-xl-5 col-lg-5 col-md-5 col-sm-8">
                                 <div class="hero__caption">
-                                    <h1 data-animation="fadeInRight" data-delay=".6s" style="color: white;">Play <br>Soccer!<br></h1>
-                                    <!-- Hero-btn -->
+                                    <h1 data-animation="fadeInRight" data-delay=".6s" style="color: white; font-size: 100px">Play <br>Soccer!<br></h1>
                                     <div class="hero__btn" data-animation="fadeInRight" data-delay="1s">
-                                        <a href="industries.html" class="btn hero-btn">Shop Now</a>
+                                        <a href="industries.html" class="btn hero-btn">Login Now</a>
                                     </div>
                                 </div>
                             </div>
@@ -179,7 +127,7 @@
             </div>  
         <!-- slider Area End-->
         <!-- Category Area Start-->
-        <section class="category-area section-padding30">
+    <!--     <section class="category-area section-padding30">
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="section-tittle text-center mb-85">
@@ -227,12 +175,12 @@
                 </div>
             </div>
         </section>
-        <!-- Category Area End-->
-        <!-- Latest Products Start -->
+        Category Area End
+        Latest Products Start
         <section class="latest-product-area padding-bottom">
             <div class="container">
                 <div class="row product-btn d-flex justify-content-end align-items-end">
-                    <!-- Section Tittle -->
+                    Section Tittle
                     <div class="col-xl-4 col-lg-5 col-md-5">
                         <div class="section-tittle mb-30">
                             <h2>Latest Products</h2>
@@ -240,7 +188,7 @@
                     </div>
                     <div class="col-xl-8 col-lg-7 col-md-7">
                         <div class="properties__button f-right">
-                            <!--Nav Button  -->
+                            Nav Button 
                             <nav>                                                                                                
                                 <div class="nav nav-tabs" id="nav-tab" role="tablist">
                                     <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">All</a>
@@ -249,13 +197,13 @@
                                     <a class="nav-item nav-link" id="nav-last-tab" data-toggle="tab" href="#nav-last" role="tab" aria-controls="nav-contact" aria-selected="false">Offer</a>
                                 </div>
                             </nav>
-                            <!--End Nav Button  -->
+                            End Nav Button 
                         </div>
                     </div>
                 </div>
-                <!-- Nav Card -->
+                Nav Card
                 <div class="tab-content" id="nav-tabContent">
-                    <!-- card one -->
+                    card one
                     <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
                         <div class="row">
                             <div class="col-xl-4 col-lg-4 col-md-6">
@@ -407,7 +355,7 @@
                             </div>
                         </div>
                     </div>
-                    <!-- Card two -->
+                    Card two
                     <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
                         <div class="row">
                             <div class="col-xl-4 col-lg-4 col-md-6">
@@ -559,7 +507,7 @@
                             </div>
                         </div>
                     </div>
-                    <!-- Card three -->
+                    Card three
                     <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
                         <div class="row">
                             <div class="col-xl-4 col-lg-4 col-md-6">
@@ -711,7 +659,7 @@
                             </div>
                         </div>
                     </div>
-                    <!-- card foure -->
+                    card foure
                     <div class="tab-pane fade" id="nav-last" role="tabpanel" aria-labelledby="nav-last-tab">
                         <div class="row">
                             <div class="col-xl-4 col-lg-4 col-md-6">
@@ -864,11 +812,11 @@
                         </div>
                     </div>
                 </div>
-                <!-- End Nav Card -->
+                End Nav Card
             </div>
         </section>
-        <!-- Latest Products End -->
-        <!-- Best Product Start -->
+        Latest Products End
+        Best Product Start
         <div class="best-product-area lf-padding" >
            <div class="product-wrapper bg-height" style="background-image: url('assets/img/categori/card.png')">
                 <div class="container position-relative">
@@ -891,17 +839,17 @@
                     </div>
                 </div>
            </div>
-           <!-- Shape -->
+           Shape
            <div class="shape bounce-animate d-none d-md-block">
                <img src="assets/img/categori/card-shape.png" alt="">
            </div>
         </div>
-        <!-- Best Product End-->
-        <!-- Best Collection Start -->
+        Best Product End
+        Best Collection Start
         <div class="best-collection-area section-padding2">
             <div class="container">
                 <div class="row d-flex justify-content-between align-items-end">
-                    <!-- Left content -->
+                    Left content
                     <div class="col-xl-4 col-lg-4 col-md-6">
                         <div class="best-left-cap">
                             <h2>Best Collection of This Month</h2>
@@ -912,13 +860,13 @@
                             <img src="assets/img/collection/collection1.png" alt="">
                         </div>
                     </div>
-                    <!-- Mid Img -->
+                    Mid Img
                      <div class="col-xl-2 col-lg-2 d-none d-lg-block">
                         <div class="best-mid-img mb-30 ">
                             <img src="assets/img/collection/collection2.png" alt="">
                         </div>
                     </div>
-                    <!-- Riht Caption -->
+                    Riht Caption
                     <div class="col-xl-4 col-lg-6 col-md-6">
                         <div class="best-right-cap ">
                            <div class="best-single mb-30">
@@ -954,8 +902,8 @@
                 </div>
             </div>
         </div>
-        <!-- Best Collection End -->
-        <!-- Latest Offers Start -->
+        Best Collection End
+        Latest Offers Start
         <div class="latest-wrapper lf-padding">
             <div class="latest-area latest-height d-flex align-items-center" data-background="assets/img/collection/latest-offer.png">
                 <div class="container">
@@ -976,14 +924,14 @@
                         </div>
                     </div>
                 </div>
-                <!-- man Shape -->
+                man Shape
                 <div class="man-shape">
                     <img src="assets/img/collection/latest-man.png" alt="">
                 </div>
             </div>
         </div>
-        <!-- Latest Offers End -->
-        <!-- Shop Method Start-->
+        Latest Offers End
+        Shop Method Start
         <div class="shop-method-area section-padding30">
             <div class="container">
                 <div class="row d-flex justify-content-between">
@@ -1011,8 +959,8 @@
                 </div>
             </div>
         </div>
-        <!-- Shop Method End-->
-        <!-- Gallery Start-->
+        Shop Method End
+        Gallery Start
         <div class="gallery-wrapper lf-padding">
             <div class="gallery-area">
                 <div class="container-fluid">
@@ -1036,132 +984,10 @@
                 </div>
             </div>
         </div>
-        <!-- Gallery End-->
+        Gallery End -->
 
     </main>
-   <footer>
-
-       <!-- Footer Start-->
-       <div class="footer-area footer-padding">
-           <div class="container">
-               <div class="row d-flex justify-content-between">
-                   <div class="col-xl-3 col-lg-3 col-md-5 col-sm-6">
-                      <div class="single-footer-caption mb-50">
-                        <div class="single-footer-caption mb-30">
-                             <!-- logo -->
-                            <div class="footer-logo">
-                                <a href="index.html"><img src="assets/img/logo/logo2_footer.png" alt=""></a>
-                            </div>
-                            <div class="footer-tittle">
-                                <div class="footer-pera">
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit sed do eiusmod tempor incididunt ut labore.</p>
-                               </div>
-                            </div>
-                        </div>
-                      </div>
-                   </div>
-                   <div class="col-xl-2 col-lg-3 col-md-3 col-sm-5">
-                       <div class="single-footer-caption mb-50">
-                           <div class="footer-tittle">
-                               <h4>Quick Links</h4>
-                               <ul>
-                                   <li><a href="#">About</a></li>
-                                   <li><a href="#"> Offers & Discounts</a></li>
-                                   <li><a href="#"> Get Coupon</a></li>
-                                   <li><a href="#">  Contact Us</a></li>
-                               </ul>
-                           </div>
-                       </div>
-                   </div>
-                   <div class="col-xl-3 col-lg-3 col-md-4 col-sm-7">
-                       <div class="single-footer-caption mb-50">
-                           <div class="footer-tittle">
-                               <h4>New Products</h4>
-                               <ul>
-                                   <li><a href="#">Woman Cloth</a></li>
-                                   <li><a href="#">Fashion Accessories</a></li>
-                                   <li><a href="#"> Man Accessories</a></li>
-                                   <li><a href="#"> Rubber made Toys</a></li>
-                               </ul>
-                           </div>
-                       </div>
-                   </div>
-                   <div class="col-xl-3 col-lg-3 col-md-5 col-sm-7">
-                       <div class="single-footer-caption mb-50">
-                           <div class="footer-tittle">
-                               <h4>Support</h4>
-                               <ul>
-                                <li><a href="#">Frequently Asked Questions</a></li>
-                                <li><a href="#">Terms & Conditions</a></li>
-                                <li><a href="#">Privacy Policy</a></li>
-                                <li><a href="#">Privacy Policy</a></li>
-                                <li><a href="#">Report a Payment Issue</a></li>
-                            </ul>
-                           </div>
-                       </div>
-                   </div>
-               </div>
-               <!-- Footer bottom -->
-               <div class="row">
-                <div class="col-xl-7 col-lg-7 col-md-7">
-                    <div class="footer-copy-right">
-                        <p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-  Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="ti-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
-  <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>                   </div>
-                </div>
-                 <div class="col-xl-5 col-lg-5 col-md-5">
-                    <div class="footer-copy-right f-right">
-                        <!-- social -->
-                        <div class="footer-social">
-                            <a href="#"><i class="fab fa-twitter"></i></a>
-                            <a href="#"><i class="fab fa-facebook-f"></i></a>
-                            <a href="#"><i class="fab fa-behance"></i></a>
-                            <a href="#"><i class="fas fa-globe"></i></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-           </div>
-       </div>
-       <!-- Footer End-->
-
-   </footer>
-   
-	<!-- JS here -->
-	
-		<!-- All JS Custom Plugins Link Here here -->
-        <script src="${pageContext.request.contextPath}/resources/js/vendor/modernizr-3.5.0.min.js"></script>
-		<!-- Jquery, Popper, Bootstrap -->
-		<script src="${pageContext.request.contextPath}/resources/js/vendor/jquery-1.12.4.min.js"></script>
-        <script src="${pageContext.request.contextPath}/resources/js/popper.min.js"></script>
-        <script src="${pageContext.request.contextPath}/resources/js/bootstrap.min.js"></script>
-	    <!-- Jquery Mobile Menu -->
-        <script src="${pageContext.request.contextPath}/resources/js/jquery.slicknav.min.js"></script>
-
-		<!-- Jquery Slick , Owl-Carousel Plugins -->
-        <script src="${pageContext.request.contextPath}/resources/js/owl.carousel.min.js"></script>
-        <script src="${pageContext.request.contextPath}/resources/js/slick.min.js"></script>
-
-		<!-- One Page, Animated-HeadLin -->
-        <script src="${pageContext.request.contextPath}/resources/js/wow.min.js"></script>
-		<script src="${pageContext.request.contextPath}/resources/js/animated.headline.js"></script>
-        <script src="${pageContext.request.contextPath}/resources/js/jquery.magnific-popup.js"></script>
-
-		<!-- Scrollup, nice-select, sticky -->
-        <script src="${pageContext.request.contextPath}/resources/js/jquery.scrollUp.min.js"></script>
-        <script src="${pageContext.request.contextPath}/resources/js/jquery.nice-select.min.js"></script>
-		<script src="${pageContext.request.contextPath}/resources/js/jquery.sticky.js"></script>
-        
-        <!-- contact js -->
-        <script src="${pageContext.request.contextPath}/resources/js/contact.js"></script>
-        <script src="${pageContext.request.contextPath}/resources/js/jquery.form.js"></script>
-        <script src="${pageContext.request.contextPath}/resources/js/jquery.validate.min.js"></script>
-        <script src="${pageContext.request.contextPath}/resources/js/mail-script.js"></script>
-        <script src="${pageContext.request.contextPath}/resources/js/jquery.ajaxchimp.min.js"></script>
-        
-		<!-- Jquery Plugins, main Jquery -->	
-        <script src="${pageContext.request.contextPath}/resources/js/plugins.js"></script>
-        <script src="${pageContext.request.contextPath}/resources/js/main.js"></script>
-        
+	<!-- Footer 영역  -->
+	<jsp:include page="/WEB-INF/views/sport_comm/footer.jsp"/>
     </body>
 </html>

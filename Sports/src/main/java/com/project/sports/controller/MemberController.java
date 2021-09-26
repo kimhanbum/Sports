@@ -68,7 +68,7 @@ required=true 상태에서 지정한 이름을 가진 쿠키가 존재하지 않으면 스프링 MVC는 익
 	//회원가입 폼 이동
 	@RequestMapping(value="/join", method = RequestMethod.GET)
 	public String join() {
-		return "member/member_joinForm";//WEB-INF/views/member/member_joinForm.jsp
+		return "sports_member/join";//WEB-INF/views/sports_member/join.jsp
 	}
 	
 	//회원가입 폼 아이디 검사

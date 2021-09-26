@@ -18,7 +18,6 @@
     <!-- Header Start -->
    <div class="header-area">
         <div class="main-header ">
-        
         <div class="py-1 bg-primary">
 		  	<div class="container">
 		  		<div class="row no-gutters d-flex align-items-start align-items-center px-md-0">
@@ -39,9 +38,7 @@
 			    </div>
 		    </div>
 		  </div>
-		</div>
-      
-           
+		</div>   
            <div class="header-bottom  header-sticky">
                 <div class="container-fluid">
                     <div class="row align-items-center">
@@ -55,12 +52,12 @@
                             <!-- Main-menu -->
                             <div class="main-menu f-right d-none d-lg-block">
                                 <nav>                                                
-                                    <ul id="navigation">                                                                                                                                     
+                                    <ul id="navigation">       
                                         <li><a href="${pageContext.request.contextPath}/main/mainPage">홈화면</a></li>
-                                        <li><a href="index.html">운동 파트너 매칭</a></li>
+                                        <li><a href="${pageContext.request.contextPath}/match/mainPage">운동 파트너 매칭</a></li>
                                         <li><a href="index.html">운동 멘티/멘토 매칭</a></li>
-                                        <li><a href="index.html">운동 거래</a></li>
-                                        <li><a href="index.html">운동 자유 게시판</a></li>
+                                        <li><a href="${pageContext.request.contextPath}/DealA/list">운동 거래</a></li>
+                                        <li><a href="${pageContext.request.contextPath}/BBS_FR/list">운동 자유 게시판</a></li>
                                     </ul>
                                 </nav>
                             </div>
@@ -81,7 +78,7 @@
 						        	  <li class="d-none d-lg-block"> <a href="#" class="btn header-btn">마이페이지</a></li>
 						              <li class="d-none d-lg-block"> <a href="#" class="btn header-btn">로그아웃</a></li>
 						        </c:if> --%>
-						        <li class="d-none d-lg-block"> <a href="#" class="btn header-btn">로그인</a></li>
+						        <li class="d-none d-lg-block"> <a href="../member/login" class="btn header-btn">로그인</a></li>
                                 <li class="d-none d-lg-block"> <a href="#" class="btn header-btn">마이페이지</a></li>
                             </ul>
                         </div>

@@ -10,4 +10,9 @@ public class Bbs_FcmServiceImpl implements Bbs_FcmService{
 
 	@Autowired
 	Bbs_FcmDAO dao;
+
+	@Override
+	public int getListCount(int num) {
+		return 0;
+	}
 }

@@ -4,11 +4,11 @@
   
 <configuration>
   <typeAliases>
-<!--   	<typeAlias alias="member"  type="com.naver.myhome4.domain.Member" /> -->
+		<typeAlias alias="auction"	type="com.project.sports.domain.DealAuction"/>
   </typeAliases>
   
   <mappers>
-<!--  	<mapper resource="sql/member.xml"/>  -->
+	<mapper resource="sql/Deal_Auction.xml"/>
   </mappers>
   
 </configuration>
