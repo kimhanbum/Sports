@@ -22,4 +22,9 @@ public class Bbs_FrDAO {
 	public List<BBS_FR> getBoardList(HashMap<String, Integer> map) {
 		return sqlSession.selectList("BBS_FR.list", map);
 	}
+
+	public void insertBoard(BBS_FR board) {
+		sqlSession.insert("BBS_FR.insert", board);
+		
+	}
 }

@@ -9,7 +9,7 @@ public class BBS_FR {
 	private String FR_CSFC;
 	private String FR_SUBJECT	;
 	private String FR_CONTENT	;
-	private String BOARD_DATE	;
+	private String FR_DATE	;
 	private int FR_READCOUNT	;
 	private String FR_FILE		;
 	private String FR_ORIGINAL;
@@ -66,12 +66,13 @@ public class BBS_FR {
 		FR_CONTENT = fR_CONTENT;
 	}
 
-	public String getBOARD_DATE() {
-		return BOARD_DATE;
+
+	public String getFR_DATE() {
+		return FR_DATE;
 	}
 
-	public void setBOARD_DATE(String bOARD_DATE) {
-		BOARD_DATE = bOARD_DATE;
+	public void setFR_DATE(String fR_DATE) {
+		FR_DATE = fR_DATE;
 	}
 
 	public int getFR_READCOUNT() {
