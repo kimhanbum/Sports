@@ -24,10 +24,4 @@ public class MatchController {
 		mv.setViewName("sport_match/match_baseball");
 		return mv;
 	}
-	
-	@RequestMapping(value = "/football", method = RequestMethod.GET)
-	public ModelAndView match(ModelAndView mv) {
-		mv.setViewName("sport_match/match");
-		return mv;
-	}
 }

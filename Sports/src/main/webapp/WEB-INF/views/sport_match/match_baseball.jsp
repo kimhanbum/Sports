@@ -25,7 +25,18 @@
 			<link rel="stylesheet" href="https://www.baro-match.co.kr/newsite/system/team/css/team.css?sng=1632462206" />
 			<link rel="stylesheet" href="https://www.baro-match.co.kr/newsite/system/match/css/match.css?sng=1632462206" />
 			<link rel="stylesheet" href="https://www.baro-match.co.kr/newsite/system/ground/css/ground.css?sng=1632462206" />
-			<link rel ="stylesheet" href="${pageContext.request.contextPath}/resources/css/sport_match.css">
+			<link rel ="stylesheet" href="${pageContext.request.contextPath}/resources/css/match/sport_match.css">
+			<style>
+				#icon_box .icon03:after{z-index:1;
+									content: '';
+								    position: absolute;
+								    border-top: 10px solid #eb3b04;
+								    border-right: 10px solid transparent;
+								    border-left: 10px solid transparent;
+								    bottom: -9px;
+								    left: 45%;
+									}
+			</style>
    </head>
    <body>
     <!-- Preloader Start -->
@@ -50,7 +61,7 @@
         	<div id="icon_box">
 				<div class="web_size">
 					<ul>
-						<a href="soccer"><li class="icon01 top_icon" data-value="1/">축구/풋살</li></a>
+						<a href="mainPage"><li class="icon01 top_icon" data-value="1/">축구/풋살</li></a>
 						<a href="baseball" ><li class="icon03 top_icon" data-value="3/"  style="background-color:#eb3b04;">야구</li></a>
 						<a href="football"><li class="icon09 top_icon" data-value="9/">족구</li></a>
 						<a href="basketball"><li class="icon02 top_icon" data-value="2/">농구</li></a>
@@ -83,27 +94,13 @@
 						<a href="http://ntler.co.kr" target="_blank"><p class="icon00">맞춤유니폼</p></a>
 					</div>
 					<ul class="m_menu_box">
-														<li class="topmenu_lis mobile_menu" data-depth1="1" data-key="1" data-width="16.666666666667%"><a href="https://www.baro-match.co.kr/newsite">홈</a></li>
-																<li class="topmenu_lis mobile_menu" data-depth1="1" data-key="1" data-width="16.666666666667%"><a href="https://www.baro-match.co.kr/newsite/member/login.php">로그인</a></li>
-																								<li id="menu1" class="topmenu_lis" data-depth1="1" data-key="1" data-width="16.666666666667%">
-									<a  href="https://www.baro-match.co.kr/newsite/web/page.php?pcode=50"  id="suba1" class="subas ">마이페이지</a>
-									<ul class="submenus" id="submenu1" data-height="390px" style="display:none;"><li><a  href="https://www.baro-match.co.kr/newsite/web/page.php?pcode=50"  >내 정보</a></li><li><a  href="https://www.baro-match.co.kr/newsite/web/page.php?pcode=41"  >팀 정보</a></li><li><a  href="https://www.baro-match.co.kr/newsite/bbs/board.php?bo_id=team_gallery"  >팀 갤러리</a></li><li><a  href="https://www.baro-match.co.kr/newsite/bbs/board.php?bo_id=team_board"  >팀 게시판</a></li><li><a  href="https://www.baro-match.co.kr/newsite/web/page.php?pcode=45"  >개인 메세지</a></li><li><a  href="https://www.baro-match.co.kr/newsite/web/page.php?pcode=48"  >내가 쓴 매치글</a></li><li><a  href="https://www.baro-match.co.kr/newsite/web/page.php?pcode=49"  >내가 쓴 게시글</a></li></ul>								</li>
-																<li id="menu2" class="topmenu_lis" data-depth1="2" data-key="2" data-width="16.666666666667%">
-									<a  href="https://www.baro-match.co.kr/newsite/web/page.php?pcode=11"  id="suba2" class="subas ">매치보드</a>
-									<ul class="submenus" id="submenu2" data-height="390px" style="display:none;"><li><a  href="https://www.baro-match.co.kr/newsite/web/page.php?pcode=11"  >매치신청</a></li></ul>								</li>
-																<li id="menu3" class="topmenu_lis" data-depth1="3" data-key="3" data-width="16.666666666667%">
-									<a  href="https://www.baro-match.co.kr/newsite/web/page.php?pcode=14"  id="suba3" class="subas ">팀</a>
-									<ul class="submenus" id="submenu3" data-height="390px" style="display:none;"><li><a  href="https://www.baro-match.co.kr/newsite/web/page.php?pcode=14"  >전국 팀 정보</a></li></ul>								</li>
-																<li id="menu4" class="topmenu_lis" data-depth1="4" data-key="4" data-width="16.666666666667%">
-									<a  href="https://www.baro-match.co.kr/newsite/bbs/board.php?bo_id=cmu01"  id="suba4" class="subas ">커뮤니티</a>
-									<ul class="submenus" id="submenu4" data-height="390px" style="display:none;"><li><a  href="https://www.baro-match.co.kr/newsite/bbs/board.php?bo_id=cmu01"  >공지사항</a></li><li><a  href="https://www.baro-match.co.kr/newsite/bbs/board.php?bo_id=cmu06"  >팀가입인사</a></li><li><a  href="https://www.baro-match.co.kr/newsite/bbs/board.php?bo_id=cmu04"  >모집게시판</a></li><li><a  href="https://www.baro-match.co.kr/newsite/bbs/board.php?bo_id=cmu02"  >자유게시판</a></li><li><a  href="https://www.baro-match.co.kr/newsite/bbs/board.php?bo_id=cmu07"  >국내소식</a></li><li><a  href="https://www.baro-match.co.kr/newsite/bbs/board.php?bo_id=cmu08"  >해외소식</a></li><li><a  href="https://www.baro-match.co.kr/newsite/bbs/board.php?bo_id=cmu09"  >축구동영상</a></li><li><a  href="https://www.baro-match.co.kr/newsite/bbs/board.php?bo_id=cmu10"  >축구갤러리</a></li><li><a  href="https://www.baro-match.co.kr/newsite/bbs/board.php?bo_id=cmu11_2"  >축구화 이야기</a></li><li><a  href="https://www.baro-match.co.kr/newsite/bbs/board.php?bo_id=cmu17"  >유니폼 이야기</a></li><li><a  href="https://www.baro-match.co.kr/newsite/bbs/board.php?bo_id=cmu03"  >매치경기 후기</a></li><li><a  href="https://www.baro-match.co.kr/newsite/bbs/board.php?bo_id=shop02"  >중고장터</a></li><li><a  href="https://www.baro-match.co.kr/newsite/bbs/board.php?bo_id=cmu16"  >엔틀러 유니폼</a></li><li><a  href="https://www.baro-match.co.kr/newsite/bbs/board.php?bo_id=webtoon01"  >훈’s 축구웹툰</a></li><li><a  href="https://www.baro-match.co.kr/newsite/bbs/board.php?bo_id=cmu_preview"  >훈’s 프리뷰</a></li></ul>								</li>
-																<li id="menu5" class="topmenu_lis" data-depth1="5" data-key="5" data-width="16.666666666667%">
-									<a  href="https://www.baro-match.co.kr/newsite/web/page.php?pcode=31"  id="suba5" class="subas ">대회</a>
-									<ul class="submenus" id="submenu5" data-height="390px" style="display:none;"><li><a  href="https://www.baro-match.co.kr/newsite/web/page.php?pcode=31"  >대회일정</a></li></ul>								</li>
-																<li id="menu6" class="topmenu_lis" data-depth1="6" data-key="6" data-width="16.666666666667%">
-									<a  href="https://www.baro-match.co.kr/newsite/web/page.php?pcode=51"  id="suba6" class="subas ">경기장</a>
-									<ul class="submenus" id="submenu6" data-height="390px" style="display:none;"><li><a  href="https://www.baro-match.co.kr/newsite/web/page.php?pcode=51"  >경기장안내</a></li><li><a  href="https://www.baro-match.co.kr/newsite/bbs/board.php?bo_id=ground_board"  >경기장 게시판</a></li></ul>								</li>
-													</ul>
+						<li>
+							<a href="#">소셜매치</a>
+						</li>
+						<li>
+							<a href="#">매칭등록</a>
+						</li>
+					</ul>
 				</div>
 			</div>
 		</div>
@@ -178,7 +175,6 @@
                         </div>
                     </div>
                 </div>
-            </div>
         </section>
         <!-- Category Area End-->
         <!-- Latest Products Start -->
