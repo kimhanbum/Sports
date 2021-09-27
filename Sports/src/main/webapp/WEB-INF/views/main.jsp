@@ -1,16 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html class="no-js" lang="zxx">
-    <head>
-        <meta charset="utf-8">
+<html lang="en">
+	<head>
+  		<meta charset="UTF-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
         <title>Total Sports Contents</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="manifest" href="site.webmanifest">
+        <!-- <link rel="manifest" href="site.webmanifest"> -->
 		<link rel="shortcut icon" type="image/x-icon" href="${pageContext.request.contextPath}/resources/img/favicon.ico">
-
-
+		<script src="https://unpkg.com/feather-icons"></script>
+		<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/weather.css">
+		<script src="${pageContext.request.contextPath}/resources/js/weather.js"></script>
    </head>
 
    <body>
@@ -21,7 +22,7 @@
             <div class="preloader-inner position-relative">
                 <div class="preloader-circle"></div>
                 <div class="preloader-img pere-text">
-                    <img src="assets/img/logo/logo.png" alt="">
+                    <img src="${pageContext.request.contextPath}/resources/image/logo/sports_logo.png" alt="">
                 </div>
             </div>
         </div>
@@ -109,67 +110,184 @@
         </div>
         <!-- slider Area End-->
         
-                <!-- Best Collection Start -->
-        <div class="best-collection-area section-padding2">
-            <div class="container">
-                <div class="row d-flex justify-content-between align-items-end">
-                    <!-- Left content -->
-                    <div class="col-xl-4 col-lg-4 col-md-6">
-                        <div class="best-left-cap">
-                            <h2>Best Collection of This Month</h2>
-                            <p>Designers who are interesten crea.</p>
-                            <a href="#" class="btn shop1-btn">Shop Now</a>
-                        </div>
-                        <div class="best-left-img mb-30 d-none d-sm-block">
-                            <img src="${pageContext.request.contextPath}/resources/img/collection/collection1.png" alt="">
+        <!-- 날씨/미세먼지 Area Start-->
+        <section class="category-area section-padding30">
+            <div class="container-fluid">
+                <!-- Section Tittle -->
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="section-tittle text-center mb-85">
+                            <h2>날씨 / 미세먼지</h2>
                         </div>
                     </div>
-                    <!-- Mid Img -->
-                     <div class="col-xl-2 col-lg-2 d-none d-lg-block">
-                        <div class="best-mid-img mb-30 ">
-                            <img src="${pageContext.request.contextPath}/resources/img/collection/collection2.png" alt="">
-                        </div>
-                    </div>
-                    <!-- Riht Caption -->
-                    <div class="col-xl-4 col-lg-6 col-md-6">
-                        <div class="best-right-cap ">
-                           <div class="best-single mb-30">
-                               <div class="single-cap">
-                                   <h4>Menz Winter<br> Jacket</h4>
-                               </div>
-                               <div class="single-img">
-                                  <img src="${pageContext.request.contextPath}/resources/img/collection/collection3.png" alt="">
-                               </div>
-                           </div>
-                        </div>
-                        <div class="best-right-cap">
-                           <div class="best-single mb-30">
-                               <div class="single-cap active">
-                                   <h4>Menz Winter<br>Jacket</h4>
-                               </div>
-                               <div class="single-img">
-                                  <img src="${pageContext.request.contextPath}/resources/img/collection/collection4.png" alt="">
-                               </div>
-                           </div>
-                        </div>
-                        <div class="best-right-cap">
-                           <div class="best-single mb-30">
-                               <div class="single-cap">
-                                   <h4>Menz Winter<br> Jacket</h4>
-                               </div>
-                               <div class="single-img">
-                                  <img src="${pageContext.request.contextPath}/resources/img/collection/collection5.png" alt="">
-                               </div>
-                           </div>
-                        </div>
-                    </div> 
                 </div>
+                 <!-- Section weather/dust start -->
+                <div class="row">
+                	<!-- Section weather ui start -->
+                    <div class="col-xl-6 col-lg-6" style="text-align:center">
+						<div class="container w-container" style="margin-right: 30px">
+						  <div class="weather-side">
+						    <div class="weather-gradient"></div>
+						    <div class="date-container">
+						      <h1 style='color:white; font-family: "Poppins", sans-serif;' class="date-dayname">월요일</h1>
+						      <br>
+						      <span class="date-day">2021년 9월 27일</span>
+						      <i class="fas fa-map-marker-alt"></i>
+						      <span class="location">서울시 종로구</span>
+						    </div>
+						    <div class="weather-container">
+						      <img style="width:90px; height:90px;" src="${pageContext.request.contextPath}/resources/image/weather/sun.png" alt="">
+						      <!-- <i class="weather-icon" data-feather="sun"></i> -->
+						      <h1 style='color:white; font-family: "Poppins", sans-serif;' class="weather-temp">18°C</h1>
+						      <h3 class="weather-desc">맑음</h3>
+						    </div>
+						  </div>
+						  <div class="info-side">
+						    <div class="today-info-container">
+						      <div class="today-info">
+						        <div class="precipitation"> <span class="title">강수확률</span><span class="value">0 %</span>
+						          <div class="clear"></div>
+						        </div>
+						        <div class="humidity"> <span class="title">습도</span><span class="value">34 %</span>
+						          <div class="clear"></div>
+						        </div>
+						        <div class="wind"> <span class="title">풍속</span><span class="value">0 km/h</span>
+						          <div class="clear"></div>
+						        </div>
+						      </div>
+						    </div>
+						    <div class="week-container">
+						      <ul class="week-list">
+						        <li class="active">
+						        	<span class="day-icon">
+						        		<img style="width:30px; height:30px;" src="${pageContext.request.contextPath}/resources/image/weather/cloud.png" alt=""> 
+						        	</span>
+						        	<%-- style='background-image: url("${pageContext.request.contextPath}/resources/image/weather/sun.png")' --%>
+						        	<%-- <img style="width:45px; height:45px;" src="${pageContext.request.contextPath}/resources/image/weather/sun.png" alt=""> 
+						        	 --%><!-- <i class="day-icon" data-feather="sun"></i> -->
+						        	<span class="day-name">화</span>
+						        	<span class="day-temp">29°C</span>
+						        </li>
+						        <li>
+						        	<span class="day-icon">
+						        		<img style="width:30px; height:30px;" src="${pageContext.request.contextPath}/resources/image/weather/rain.png" alt=""> 
+						        	</span>
+						        	<span class="day-name">수</span>
+						        	<span class="day-temp">21°C</span>
+						        </li>
+						        <li>
+						        	<span class="day-icon">
+						        		<img style="width:30px; height:30px;" src="${pageContext.request.contextPath}/resources/image/weather/snow.png" alt=""> 
+						        	</span>
+						        	<span class="day-name">목</span>
+						        	<span class="day-temp">08°C</span>
+						        </li>
+						        <li>
+						        	<span class="day-icon">
+						        		<img style="width:30px; height:30px;" src="${pageContext.request.contextPath}/resources/image/weather/thunder.png" alt=""> 
+						        	</span>
+						        	<span class="day-name">금</span>
+						        	<span class="day-temp">19°C</span>
+						        </li>
+						        <div class="clear"></div>
+						      </ul>
+						    </div>
+						    <div class="location-container">
+						      <button class="location-button"> 
+						      <i class="fas fa-map-marker-alt"></i>
+						      <span>위치 변경</span></button>
+						    </div>
+						  </div>
+						</div>
+                    </div>
+                    <!-- Section weather ui end -->
+                    
+                	<!-- Section dust ui start -->
+                 <div class="col-xl-6 col-lg-6" style="text-align:center">
+						<div class="container w-container" style="margin-left: 30px">
+						  <div class="weather-side">
+						    <div class="weather-gradient"></div>
+						    <div class="date-container">
+						      <h1 style='color:white; font-family: "Poppins", sans-serif;' class="date-dayname">월요일</h1>
+						      <br>
+						      <span class="date-day">2021년 9월 27일</span>
+						      <i class="fas fa-map-marker-alt"></i>
+						      <span class="location">서울시 종로구</span>
+						    </div>
+						    <div class="weather-container">
+						      <img style="width:90px; height:90px;" src="${pageContext.request.contextPath}/resources/image/dust/good.png" alt="">
+						      <!-- <i class="weather-icon" data-feather="sun"></i> -->
+						      <h1 style='color:white; font-family: "Poppins", sans-serif;' class="weather-temp">좋음</h1>
+						      <h3 class="weather-desc">최고입니다.</h3>
+						    </div>
+						  </div>
+						  <div class="info-side">
+						    <div class="today-info-container">
+						      <div class="today-info">
+						        <div class="precipitation"> <span class="title">미세먼지</span><span class="value">0uM</span>
+						          <div class="clear"></div>
+						        </div>
+						        <div class="humidity"> <span class="title">초미세먼지</span><span class="value">34uM</span>
+						          <div class="clear"></div>
+						        </div>
+						        <div class="wind"> <span class="title">오존</span><span class="value">0 mm</span>
+						          <div class="clear"></div>
+						        </div>
+						      </div>
+						    </div>
+						    <div class="week-container">
+						      <ul class="week-list">
+						        <li class="active">
+						        	<span class="day-icon">
+						        		<img style="width:30px; height:30px;" src="${pageContext.request.contextPath}/resources/image/dust/good.png" alt=""> 
+						        	</span>
+						        	<%-- style='background-image: url("${pageContext.request.contextPath}/resources/image/weather/sun.png")' --%>
+						        	<%-- <img style="width:45px; height:45px;" src="${pageContext.request.contextPath}/resources/image/weather/sun.png" alt=""> 
+						        	 --%><!-- <i class="day-icon" data-feather="sun"></i> -->
+						        	<span class="day-name">화</span>
+						        	<span class="day-temp">29㎛</span>
+						        </li>
+						        <li>
+						        	<span class="day-icon">
+						        		<img style="width:30px; height:30px;" src="${pageContext.request.contextPath}/resources/image/dust/worst.png" alt=""> 
+						        	</span>
+						        	<span class="day-name">수</span>
+						        	<span class="day-temp">21㎛</span>
+						        </li>
+						        <li>
+						        	<span class="day-icon">
+						        		<img style="width:30px; height:30px;" src="${pageContext.request.contextPath}/resources/image/dust/normal.png" alt=""> 
+						        	</span>
+						        	<span class="day-name">목</span>
+						        	<span class="day-temp">08㎛</span>
+						        </li>
+						        <li>
+						        	<span class="day-icon">
+						        		<img style="width:30px; height:30px;" src="${pageContext.request.contextPath}/resources/image/dust/bad.png" alt=""> 
+						        	</span>
+						        	<span class="day-name">금</span>
+						        	<span class="day-temp">19㎛</span>
+						        </li>
+						        <div class="clear"></div>
+						      </ul>
+						    </div>
+						    <div class="location-container">
+						      <button class="location-button"> 
+						      <i class="fas fa-map-marker-alt"></i>
+						      <span>위치 변경</span></button>
+						    </div>
+						  </div>
+						</div>
+                    </div>
+                    <!-- Section dust ui end -->
+                </div>
+                <!-- Section weather/dust end -->
             </div>
-        </div>
-        <!-- Best Collection End -->
+        </section>
+        <!-- 날씨/미세먼지 Area End-->
         
         
-        <!-- Category Area Start-->
+        <!-- 추천 운동 Area Start-->
         <section class="category-area section-padding30">
             <div class="container-fluid">
                 <!-- Section Tittle -->
@@ -220,7 +338,8 @@
                 </div>
             </div>
         </section>
-        <!-- Category Area End-->
+        <!-- 추천 운동 Area End-->
+
   
 
         <!-- Latest Offers Start -->
@@ -247,6 +366,7 @@
             </div>
         </div>
         <!-- Latest Offers End -->
+        
         <!-- Shop Method Start-->
         <div class="shop-method-area section-padding30">
             <div class="container">
@@ -276,25 +396,26 @@
             </div>
         </div>
         <!-- Shop Method End-->
+        
         <!-- Gallery Start-->
         <div class="gallery-wrapper lf-padding">
             <div class="gallery-area">
                 <div class="container-fluid">
                     <div class="row">
                         <div class="gallery-items">
-                            <img src="assets/img/gallery/gallery1.jpg" alt="">
+                            <img src="${pageContext.request.contextPath}/resources/img/gallery/gallery1.jpg" alt="">
                         </div> 
                         <div class="gallery-items">
-                            <img src="assets/img/gallery/gallery2.jpg" alt="">
+                            <img src="${pageContext.request.contextPath}/resources/img/gallery/gallery2.jpg" alt="">
                         </div>
                         <div class="gallery-items">
-                            <img src="assets/img/gallery/gallery3.jpg" alt="">
+                            <img src="${pageContext.request.contextPath}/resources/img/gallery/gallery3.jpg" alt="">
                         </div>
                         <div class="gallery-items">
-                            <img src="assets/img/gallery/gallery4.jpg" alt="">
+                            <img src="${pageContext.request.contextPath}/resources/img/gallery/gallery4.jpg" alt="">
                         </div>
                         <div class="gallery-items">
-                            <img src="assets/img/gallery/gallery5.jpg" alt="">
+                            <img src="${pageContext.request.contextPath}/resources/img/gallery/gallery5.jpg" alt="">
                         </div>
                     </div>
                 </div>
