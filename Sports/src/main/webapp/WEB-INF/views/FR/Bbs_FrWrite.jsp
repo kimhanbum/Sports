@@ -50,7 +50,7 @@
 	 	<div class="form-group">
 	 		<label for="board_file">파일 첨부</label>
 	 		<label for="upfile">
-	 			<img src="../resources/image/attach.png" alt="파일첨부">
+	 			<img src="../resources/image/bbs_fr/attach.png" alt="파일첨부">
 	 		</label>
 	 		<input name="uploadfile" id="upfile" type="file">
 	 		<span id="filevalue"></span>

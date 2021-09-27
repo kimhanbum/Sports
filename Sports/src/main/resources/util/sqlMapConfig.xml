@@ -12,6 +12,7 @@
   <mappers>
 	<mapper resource="sql/Deal_Auction.xml"/>
  	<mapper resource="sql/BBS_FR.xml"/>
+ 	<mapper resource="sql/BBS_FCM.xml"/>
   </mappers>
   
 </configuration>

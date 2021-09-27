@@ -27,4 +27,14 @@ public class Bbs_FrDAO {
 		sqlSession.insert("BBS_FR.insert", board);
 		
 	}
+
+	
+	  public BBS_FR getDetail(int num) { 
+		  return sqlSession.selectOne("BBS_FR.detail", num);
+	}
+	  
+	  public int setReadCountUpdate(int num) { 
+		  return sqlSession.update("BBS_FR.readCountUpdate", num);
+	}
+	 
 }

@@ -18,4 +18,6 @@ public interface Bbs_FrService {
 	//상세보기	
 	public BBS_FR getDetail(int num);
 
+	//조회수 업데이트
+	public int setReadCountUpdate(int num);
 }

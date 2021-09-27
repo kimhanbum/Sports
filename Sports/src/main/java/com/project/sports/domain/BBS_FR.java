@@ -13,7 +13,16 @@ public class BBS_FR {
 	private int FR_READCOUNT	;
 	private String FR_FILE		;
 	private String FR_ORIGINAL;
+	private int CNT;
 	
+	public int getCNT() {
+		return CNT;
+	}
+
+	public void setCNT(int cNT) {
+		CNT = cNT;
+	}
+
 	//board_write.jsp에서 name속성 확인하세요.
 	//<input type="file" id="upfile" name="uploadfile">확인
 	private MultipartFile uploadfile;
