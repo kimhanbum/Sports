@@ -10,7 +10,6 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/fontawesome-all.min.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/themify-icons.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/slick.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/nice-select.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/style.css">
 
 <!-- Preloader Start -->
@@ -78,7 +77,7 @@
 						        	  <li class="d-none d-lg-block"> <a href="#" class="btn header-btn">마이페이지</a></li>
 						              <li class="d-none d-lg-block"> <a href="#" class="btn header-btn">로그아웃</a></li>
 						        </c:if> --%>
-						        <li class="d-none d-lg-block"> <a href="../member/login" class="btn header-btn">로그인</a></li>
+						        <li class="d-none d-lg-block"> <a href="${pageContext.request.contextPath}/member/login" class="btn header-btn">로그인</a></li>
                                 <li class="d-none d-lg-block"> <a href="#" class="btn header-btn">마이페이지</a></li>
                             </ul>
                         </div>

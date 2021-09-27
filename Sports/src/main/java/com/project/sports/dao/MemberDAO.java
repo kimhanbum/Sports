@@ -13,7 +13,7 @@ public class MemberDAO {
 	private SqlSessionTemplate sqlSession;
 	
 	public Member isId(String id) {
-		return sqlSession.selectOne("Members.idcheck",id);
+		return sqlSession.selectOne("Members.idcheck",id);//xml mapper¿Ã∏ß
 	}
 	public int insert(Member m) {
 		return sqlSession.insert("Members.insert",m);

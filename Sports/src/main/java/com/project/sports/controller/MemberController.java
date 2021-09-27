@@ -106,8 +106,8 @@ response.sendRedirect()를 사용할 때와 동일한 용도로 사용합니다.
 	}
 	@RequestMapping(value="/loginProcess", method=RequestMethod.POST)
 	public String loginProcess(//갖고오는것
-			@RequestParam("id") String id,
-			@RequestParam("password") String password,
+			@RequestParam("USER_ID") String id,
+			@RequestParam("USER_PASS") String password,
 			@RequestParam(value="remember",defaultValue="",required=false)
 			String remember,
 			HttpSession session, RedirectAttributes rattr,
@@ -117,7 +117,7 @@ response.sendRedirect()를 사용할 때와 동일한 용도로 사용합니다.
 		
 		if(result == 1) {
 			//로그인 성공
-			session.setAttribute("id", id);
+			session.setAttribute("USER_ID", id);
 			Cookie savecookie = new Cookie("saveid",id);
 			if(!remember.equals("")) {
 				savecookie.setMaxAge(60*60);

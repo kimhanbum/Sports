@@ -37,4 +37,16 @@ public class MemberServiceImpl implements MemberService {
 	public int insert(Member m) {
 		return dao.insert(m);
 	}
+
+	public Member member_info(String id) {
+		return dao.member_info(id);
+	}
+
+	public void delete(String id) {
+		dao.delete(id);
+	}
+
+	public int update(Member m) {
+		return dao.update(m);
+	}
 }

@@ -73,7 +73,7 @@ if(result=='joinSuccess'){
                         <div class="login_part_text_iner">
                             <h2>처음이신가요?</h2>
                             <p>같이 운동할 파트너와 멘토/멘티를 찾으신다면</p>
-                            <a href="/join" class="btn_3">새 계정 만들기</a>
+                            <a href="${pageContext.request.contextPath}/member/join" class="btn_3">새 계정 만들기</a>
                         </div>
                     </div>
                 </div>
