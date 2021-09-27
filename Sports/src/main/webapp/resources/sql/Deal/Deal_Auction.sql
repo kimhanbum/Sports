@@ -26,6 +26,8 @@ select * from Deal_Auction;
 select * from board;
 select * from member_info;
 
+delete from DEAL_AUCTION;
+
 /*추가된 부분*/
 create sequence Auc_seq; 
 

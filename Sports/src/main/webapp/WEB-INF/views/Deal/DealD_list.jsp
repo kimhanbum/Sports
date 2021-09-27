@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -43,7 +44,7 @@
 
 .pagination {
 	position: absolute;
-	left: 40%;
+	left: 43%;
 }
 
 .pagination a {
@@ -89,11 +90,7 @@ background-color
 	border: 1px solid white;
 }
 
-.sungjinS {
-	position: absolute;
-	left: 63%;
-	top: 190%
-}
+
 </style>
 <body>
 
@@ -172,33 +169,34 @@ background-color
 				<div class="tab-pane fade show active" id="nav-home" role="tabpanel"
 					aria-labelledby="nav-home-tab">
 					<div class="row">
+						<c:forEach var="b" items="${Direct}">
 						<div class="col-xl-4 col-lg-4 col-md-6">
 							<div class="single-product mb-60">
 								<div class="product-img">
 									<img
-										src="${pageContext.request.contextPath}/resources/img/categori/product1.png"
-										alt="">
+										src="${pageContext.request.contextPath}/resources/dealupload2/${b.SAVE_DIR_MAINFILE}"
+										alt="" style="width: 300px; height: 250px;">
 
 								</div>
 								<div class="product-caption">
 
 									<h4>
-										<a href="${pageContext.request.contextPath}/DealD/detail"><b>바지 팝니다(급처)</b></a>
+										<a href="${pageContext.request.contextPath}/DealD/detail"><b>${b.DIR_SUBJECT}</b></a>
 									</h4>
 									<div class="price">
 										<table class="table">
 											<tr>
 												<th>금액</th>
-												<td>1000원</td>
+												<td>${b.DIR_PRICE}</td>
 
 											</tr>
 											<tr>
 												<th>거래지역</th>
-												<td>지행역</td>
+												<td>${b.DIR_ADDRESS}</td>
 											</tr>
 											<tr>
 												<th>올리시간</th>
-												<td>09-22</td>
+												<td>${b.DIR_DATE}</td>
 											</tr>
 
 										</table>
@@ -207,190 +205,10 @@ background-color
 								</div>
 							</div>
 						</div>
+						</c:forEach>
 
 
-
-						<div class="col-xl-4 col-lg-4 col-md-6">
-							<div class="single-product mb-60">
-								<div class="product-img">
-									<img
-										src="${pageContext.request.contextPath}/resources/img/categori/product1.png"
-										alt="">
-
-								</div>
-								<div class="product-caption">
-
-									<h4>
-										<a href="#"><b>바지 팝니다(급처)</b></a>
-									</h4>
-									<div class="price">
-										<table class="table">
-											<tr>
-												<th>금액</th>
-												<td>1000원</td>
-
-											</tr>
-											<tr>
-												<th>거래지역</th>
-												<td>지행역</td>
-											</tr>
-											<tr>
-												<th>올리시간</th>
-												<td>09-22</td>
-											</tr>
-
-										</table>
-
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-xl-4 col-lg-4 col-md-6">
-							<div class="single-product mb-60">
-								<div class="product-img">
-									<img
-										src="${pageContext.request.contextPath}/resources/img/categori/product1.png"
-										alt="">
-
-								</div>
-								<div class="product-caption">
-
-									<h4>
-										<a href="#"><b>바지 팝니다(급처)</b></a>
-									</h4>
-									<div class="price">
-										<table class="table">
-											<tr>
-												<th>금액</th>
-												<td>1000원</td>
-
-											</tr>
-											<tr>
-												<th>거래지역</th>
-												<td>지행역</td>
-											</tr>
-											<tr>
-												<th>올리시간</th>
-												<td>09-22</td>
-											</tr>
-
-										</table>
-
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-xl-4 col-lg-4 col-md-6">
-							<div class="single-product mb-60">
-								<div class="product-img">
-									<img
-										src="${pageContext.request.contextPath}/resources/img/categori/product1.png"
-										alt="">
-
-								</div>
-								<div class="product-caption">
-
-									<h4>
-										<a href="#"><b>바지 팝니다(급처)</b></a>
-									</h4>
-									<div class="price">
-										<table class="table">
-											<tr>
-												<th>금액</th>
-												<td>1000원</td>
-
-											</tr>
-											<tr>
-												<th>거래지역</th>
-												<td>지행역</td>
-											</tr>
-											<tr>
-												<th>올리시간</th>
-												<td>09-22</td>
-											</tr>
-
-										</table>
-
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-xl-4 col-lg-4 col-md-6">
-							<div class="single-product mb-60">
-								<div class="product-img">
-									<img
-										src="${pageContext.request.contextPath}/resources/img/categori/product1.png"
-										alt="">
-
-								</div>
-								<div class="product-caption">
-
-									<h4>
-										<a href="#"><b>바지 팝니다(급처)</b></a>
-									</h4>
-									<div class="price">
-										<table class="table">
-											<tr>
-												<th>금액</th>
-												<td>1000원</td>
-
-											</tr>
-											<tr>
-												<th>거래지역</th>
-												<td>지행역</td>
-											</tr>
-											<tr>
-												<th>올리시간</th>
-												<td>09-22</td>
-											</tr>
-
-										</table>
-
-									</div>
-								</div>
-							</div>
-						</div>
-
-						<div class="col-xl-4 col-lg-4 col-md-6">
-							<div class="single-product mb-60">
-								<div class="product-img">
-									<img
-										src="${pageContext.request.contextPath}/resources/img/categori/product1.png"
-										alt="">
-
-								</div>
-								<div class="product-caption">
-
-									<h4>
-										<a href="#"><b>바지 팝니다(급처)</b></a>
-									</h4>
-									<div class="price">
-										<table class="table">
-											<tr>
-												<th>금액</th>
-												<td>1000원</td>
-
-											</tr>
-											<tr>
-												<th>거래지역</th>
-												<td>지행역</td>
-											</tr>
-											<tr>
-												<th>올리시간</th>
-												<td>09-22</td>
-											</tr>
-
-										</table>
-
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="container" id="paging">
-							<!-- Latest Products End -->
-							<!-- Latest Offers Start -->
-
-						</div>
+	
 
 					</div>
 
@@ -426,10 +244,30 @@ background-color
 
 			</div>
 			<div class="pagination">
-				<a href="#" id="paging">&laquo;</a> <a href="#" id="paging">1</a> <a
-					href="#" id="paging">2</a> <a href="#" id="paging">3</a> <a
-					href="#" id="paging">4</a> <a href="#" id="paging">5</a> <a
-					href="#" id="paging">&raquo;</a>
+			<c:if test="${page <= 1 }">
+				 <a id="paging">&laquo;</a>
+			
+			 </c:if>
+			<c:if test="${page > 1 }">			
+				<a href="list?page=${page-1}" id="paging">&laquo;</a>
+			 </c:if>
+				
+				<c:forEach var="a" begin="${startpage}" end="${endpage}">
+				 
+				 <c:if test="${a == page }">
+				 	<a href="#" id="paging">${a}</a>
+				 </c:if>
+				 <c:if test="${a != page }">
+					  <a href="list?page=${a}" id="paging">${a}</a>	
+				</c:if> 
+				</c:forEach> 
+			<c:if test="${page >= maxpage }">				
+				  <a id="paging">&raquo;</a> 
+			</c:if>
+			<c:if test="${page < maxpage }">
+				<a href="list?page=${page+1}"
+				  id="paging">&raquo;</a>
+			</c:if>
 			</div>
 
 		</div>
@@ -509,59 +347,6 @@ background-color
 
 	<!-- JS here -->
 
-	<!-- All JS Custom Plugins Link Here here -->
-	<script
-		src="${pageContext.request.contextPath}/resources/js/vendor/modernizr-3.5.0.min.js"></script>
-
-	<!-- Jquery, Popper, Bootstrap -->
-	<script
-		src="${pageContext.request.contextPath}/resources/js/vendor/jquery-1.12.4.min.js"></script>
-	<script
-		src="${pageContext.request.contextPath}/resources/js/popper.min.js"></script>
-	<script
-		src="${pageContext.request.contextPath}/resources/js/bootstrap.min.js"></script>
-	<!-- Jquery Mobile Menu -->
-	<script
-		src="${pageContext.request.contextPath}/resources/js/jquery.slicknav.min.js"></script>
-
-	<!-- Jquery Slick , Owl-Carousel Plugins -->
-	<script
-		src="${pageContext.request.contextPath}/resources/js/owl.carousel.min.js"></script>
-	<script
-		src="${pageContext.request.contextPath}/resources/js/slick.min.js"></script>
-
-	<!-- One Page, Animated-HeadLin -->
-	<script
-		src="${pageContext.request.contextPath}/resources/js/wow.min.js"></script>
-	<script
-		src="${pageContext.request.contextPath}/resources/js/animated.headline.js"></script>
-	<script
-		src="${pageContext.request.contextPath}/resources/js/jquery.magnific-popup.js"></script>
-
-	<!-- Scrollup, nice-select, sticky -->
-	<script
-		src="${pageContext.request.contextPath}/resources/js/jquery.scrollUp.min.js"></script>
-	<script
-		src="${pageContext.request.contextPath}/resources/js/jquery.nice-select.min.js"></script>
-	<script
-		src="${pageContext.request.contextPath}/resources/js/jquery.sticky.js"></script>
-
-	<!-- contact js -->
-	<script
-		src="${pageContext.request.contextPath}/resources/js/contact.js"></script>
-	<script
-		src="${pageContext.request.contextPath}/resources/js/jquery.form.js"></script>
-	<script
-		src="${pageContext.request.contextPath}/resources/js/jquery.validate.min.js"></script>
-	<script
-		src="${pageContext.request.contextPath}/resources/js/mail-script.js"></script>
-	<script
-		src="${pageContext.request.contextPath}/resources/js/jquery.ajaxchimp.min.js"></script>
-
-	<!-- Jquery Plugins, main Jquery -->
-	<script
-		src="${pageContext.request.contextPath}/resources/js/plugins.js"></script>
-	<script src="${pageContext.request.contextPath}/resources/js/main.js"></script>
 
 </body>
 </html>

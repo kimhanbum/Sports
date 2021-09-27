@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="Direct">
+
+<insert id="insert" parameterType="Direct">
+	insert into Deal_Direct
+	(DIR_NUMBER, DIR_SUBJECT ,DIR_CONTENT,USER_ID ,
+	DIR_PRICE,DIR_PHONE,DIR_ADDRESS , DIR_DATE,
+	ORI_DIR_MAINFILE , SAVE_DIR_MAINFILE ,
+	ORI_DIR_FILE2 ,SAVE_DIR_FILE2 ,
+	 ORI_DIR_FILE3 ,SAVE_DIR_FILE3 ,
+	 ORI_DIR_FILE4 , SAVE_DIR_FILE4)
+	VALUES( DIR_SEQ.NEXTVAL , #{DIR_SUBJECT} , #{DIR_CONTENT} ,
+			#{USER_ID} , #{DIR_PRICE},
+			#{DIR_PHONE} , #{DIR_ADDRESS},
+			sysdate , #{ORI_DIR_MAINFILE} ,
+			#{SAVE_DIR_MAINFILE} , #{ORI_DIR_FILE2} ,
+			#{SAVE_DIR_FILE2} , #{ORI_DIR_FILE3} ,
+			#{SAVE_DIR_FILE3} , #{ORI_DIR_FILE4} ,
+			#{SAVE_DIR_FILE4})
+	
+
+
+</insert>
+
+<select id="count" resultType="int">
+	select count(*) from deal_direct
+</select>
+
+<select id="list" parameterType="java.util.Map" resultType="Direct">
+select * from
+	(select rownum rnum , 	DIR_NUMBER , DIR_SUBJECT , 
+	DIR_PRICE ,DIR_ADDRESS ,DIR_DATE ,SAVE_DIR_MAINFILE
+		from(
+		select * from deal_direct
+		order by dir_number desc))
+	 where rnum &gt;= #{start} and rnum  &lt;=  #{end}
+	</select>
+
+
+
+</mapper>

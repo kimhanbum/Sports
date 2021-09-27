@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.project.sports.domain.DealAuction;
+import com.project.sports.domain.DealDirect;
 
 @Repository
 public class DealAuctionDAO {
@@ -29,5 +30,7 @@ public class DealAuctionDAO {
 		 sqlSession.insert("Auction.insert" , auction);
 		
 	}
+
+
 
 }

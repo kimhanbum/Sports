@@ -1,5 +1,7 @@
 package com.project.sports.domain;
 
+import org.springframework.web.multipart.MultipartFile;
+
 public class DealDirect {
 	private int 	DIR_NUMBER;			//글번호
 	private String  DIR_SUBJECT;		//글제목
@@ -17,6 +19,12 @@ public class DealDirect {
 	private String  SAVE_DIR_FILE3;
 	private String  ORI_DIR_FILE4;		//사진4 
 	private String  SAVE_DIR_FILE4;
+	
+	private MultipartFile uploadfile1;
+	private MultipartFile uploadfile2;
+	private MultipartFile uploadfile3;
+	private MultipartFile uploadfile4;
+	
 	
 	
 	public int getDIR_NUMBER() {
@@ -115,6 +123,32 @@ public class DealDirect {
 	public void setSAVE_DIR_FILE4(String sAVE_DIR_FILE4) {
 		SAVE_DIR_FILE4 = sAVE_DIR_FILE4;
 	}
+	public MultipartFile getUploadfile1() {
+		return uploadfile1;
+	}
+	public void setUploadfile1(MultipartFile uploadfile1) {
+		this.uploadfile1 = uploadfile1;
+	}
+	public MultipartFile getUploadfile2() {
+		return uploadfile2;
+	}
+	public void setUploadfile2(MultipartFile uploadfile2) {
+		this.uploadfile2 = uploadfile2;
+	}
+	public MultipartFile getUploadfile3() {
+		return uploadfile3;
+	}
+	public void setUploadfile3(MultipartFile uploadfile3) {
+		this.uploadfile3 = uploadfile3;
+	}
+	public MultipartFile getUploadfile4() {
+		return uploadfile4;
+	}
+	public void setUploadfile4(MultipartFile uploadfile4) {
+		this.uploadfile4 = uploadfile4;
+	}
+	
+	
 	
 	
 }

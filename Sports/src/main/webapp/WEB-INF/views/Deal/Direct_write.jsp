@@ -268,13 +268,12 @@ input.checkbox:checked+label.input-label.radio::before {
 							</h2>
 
 						</div>
-						<form method="post">
-
+						<form action ="add" method = "post" enctype="multipart/form-data">
 							<div class="row">
 								<div class="col-md-4 form-group">
-									<label for="fname">제목</label> <input type="text" id="fname"
+									<label for="DIR_SUBJECT">제목</label> <input type="text" id="DIR_SUBJECT"
 										class="form-control form-control-lg" style="width: 1000px"
-										placeholder="제목을 입력하세요.....">
+										placeholder="제목을 입력하세요....." name = "DIR_SUBJECT"> 
 								</div>
 
 							</div>
@@ -282,22 +281,22 @@ input.checkbox:checked+label.input-label.radio::before {
 
 							<div class="row">
 								<div class="col-md-6 form-group">
-									<label for="lname">금액</label><br> <input type="text"
-										id="lname" class="form-control" style="width: 200px"
-										placeholder="금액 입력 .. ">
+									<label for="DIR_PRICE">금액</label><br> <input type="text"
+										id="DIR_PRICE" class="form-control" style="width: 200px"
+										placeholder="금액 입력 .. " name = "DIR_PRICE">
 								</div>
 								<div class="col-md-6 form-group">
-									<label for="lname">전화번호</label><br> <input type="text"
-										id="lname" class="form-control" style="width: 200px"
-										placeholder="010-xxxx-xxxx ">
+									<label for="DIR_PHONE">전화번호</label><br> <input type="text"
+										id="DIR_PHONE" class="form-control" style="width: 200px"
+										placeholder="010-xxxx-xxxx" name= "DIR_PHONE">
 								</div>
 
 							</div>
 							<div class="row">
 								<div class="col-md-4 form-group">
-									<label for="fname">거래장소</label> <input type="text" id="fname"
+									<label for="DIR_ADDRESS">거래장소</label> <input type="text" id="DIR_ADDRESS"
 										class="form-control form-control-lg" style="width: 1000px"
-										placeholder="종로3가역 3번출구앞 ....">
+										placeholder="종로3가역 3번출구앞 ...." name= "DIR_ADDRESS">
 								</div>
 
 							</div>
@@ -306,33 +305,41 @@ input.checkbox:checked+label.input-label.radio::before {
 							<div class="row">
 								<div class="col-md-11 form-group">
 									<label for="message">내용</label>
-									<textarea name="" id="message" cols="30" rows="10"
+									<textarea name="DIR_CONTENT" id="DIR_CONTENT"
+										
+									 cols="30" rows="10"
 										class="form-control" placeholder="내용 입력 .. "></textarea>
 								</div>
 							</div>
+							
 							<hr>
 							<div class="row">
 								<div class="col-md-6 form-group">
 									<label for="message">사진 첨부</label><br> <label class="file"
 										title=""><input type="file"
-										onchange="this.parentNode.setAttribute('title', this.value.replace(/^.*[\\/]/, ''))" /></label>
+										onchange="this.parentNode.setAttribute('title', this.value.replace(/^.*[\\/]/, ''))"
+										id="upfile1" name="uploadfile1" /></label>
+
 								</div>
 								<div class="col-md-6 form-group">
 									<label for="message"></label><br> <label class="file"
 										title=""><input type="file"
-										onchange="this.parentNode.setAttribute('title', this.value.replace(/^.*[\\/]/, ''))" /></label>
+										onchange="this.parentNode.setAttribute('title', this.value.replace(/^.*[\\/]/, ''))"
+										id="upfile2" name="uploadfile2" /></label>
 								</div>
 							</div>
 							<div class="row">
 								<div class="col-md-6 form-group">
 									<label for="message"></label><br> <label class="file"
 										title=""><input type="file"
-										onchange="this.parentNode.setAttribute('title', this.value.replace(/^.*[\\/]/, ''))" /></label>
+										onchange="this.parentNode.setAttribute('title', this.value.replace(/^.*[\\/]/, ''))"
+										id="upfile3" name="uploadfile3"/></label>
 								</div>
 								<div class="col-md-6 form-group">
 									<label for="message"></label><br> <label class="file"
 										title=""><input type="file"
-										onchange="this.parentNode.setAttribute('title', this.value.replace(/^.*[\\/]/, ''))" /></label>
+										onchange="this.parentNode.setAttribute('title', this.value.replace(/^.*[\\/]/, ''))"
+										id="upfile4" name="uploadfile4"/></label>
 								</div>
 							</div>
 							<hr>
