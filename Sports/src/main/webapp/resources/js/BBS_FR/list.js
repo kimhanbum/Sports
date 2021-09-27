@@ -47,12 +47,12 @@ function ajax(sdata){
 							}
 							
 							output += "<td><div>" + blank + img
-							output += ' <a href="detail?num='+ item.board_NUM + '">'
-							output += item.board_SUBJECT.replace(/</g, '&lt;').replace(/>/g, '&gt;')
-									+ '</a></div></td>'
-							output += '<td><div>' + item.board_NAME+'</div></td>'
-							output += '<td><div>' + item.board_DATE+'</div></td>'
-							output += '<td><div>' + item.board_READCOUNT
+							output += ' <a href="detail?num='+ item.fr_NO + '">'
+							output += item.fr_SUBJECT.replace(/</g, '&lt;').replace(/>/g, '&gt;')
+									+ '</a>' +'<span style="color:gray;font-size:small">' +  '[' + item.cnt +']'  + '</span></div></td>'
+							output += '<td><div>' + item.user_ID+'</div></td>'
+							output += '<td><div>' + item.fr_DATE+'</div></td>'
+							output += '<td><div>' + item.fr_READCOUNT
 									+ '</div></td></tr>'
 						})
 				output += "</tbody>"

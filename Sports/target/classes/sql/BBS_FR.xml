@@ -8,16 +8,19 @@
 	</select>
 	
 	<select id="list" parameterType="map" resultType="FR">		 
-		select * from 
-		(select rownum rnum, FR_NO, USER_ID, FR_SUBJECT,
-		  FR_CONTENT, FR_FILE, FR_ORIGINAL, 
-		  FR_READCOUNT, FR_DATE
-		  from
-		  (select * from BBS_FR
-		   order by FR_DATE desc
+		select * from
+		  (select rownum rnum, b.*
+		  from 
+		  		(select BBS_FR.*, nvl(cnt,0) cnt
+				from 
+				BBS_FR left outer join (select FR_NO, count(*) cnt
+		 								from BBS_FCM
+		 								group by FR_NO) c
+				on BBS_FR.FR_NO = c.FR_NO
+				order by FR_DATE desc
+				)b
 		  )
-		)
-	  where
+	 	 where
 	  	<![CDATA[
 	  		rnum >= #{start} 
 	  	 AND
@@ -46,4 +49,14 @@
 		)
 	</insert>
 	
+	<select id="detail" parameterType="int" resultType="FR">
+		select * from BBS_FR
+		where FR_NO = #{FR_NO}
+	</select>
+	
+	<update id="readCountUpdate" parameterType="int">
+		update BBS_FR
+		set FR_READCOUNT=FR_READCOUNT+1
+		where FR_NO = #{number}
+	</update>
 </mapper>

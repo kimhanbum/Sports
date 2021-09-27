@@ -8,7 +8,7 @@ FR_NO			 NUMBER references BBS_FR(FR_NO) on delete cascade
 
 create sequence FCM_SEQ;
 
-insert into BBS_FCMde
+insert into BBS_FCM
 		values(FCM_SEQ.nextval, 'admin01', '¥Ò±€¿‘¥œ¥Ÿ1.', sysdate, 1);
 insert into BBS_FCM
 		values(FCM_SEQ.nextval, 'user01', '¥Ò±€¿‘¥œ¥Ÿ2.', sysdate, 1);
@@ -16,3 +16,4 @@ insert into BBS_FCM
 		values(FCM_SEQ.nextval, 'user02', '¥Ò±€¿‘¥œ¥Ÿ3.', sysdate, 1);
 		
 SELECT * FROM BBS_FCM;
+delete BBS_FCM where FCM_NO = 21;

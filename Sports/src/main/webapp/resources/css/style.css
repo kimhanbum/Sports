@@ -5199,9 +5199,9 @@ input:focus {
 
 /* line 10, ../../SAIFUL/Running_project/250 eCommerce_HTML/250 eCommerce_HTML/250 eCommerce_HTML/assets/scss/_blog_page.scss */
 .blog_area a {
-  color: "Playfair Display", serif !important;
   text-decoration: none;
   transition: .4s;
+  color: #065797;
 }
 
 /* line 14, ../../SAIFUL/Running_project/250 eCommerce_HTML/250 eCommerce_HTML/250 eCommerce_HTML/assets/scss/_blog_page.scss */

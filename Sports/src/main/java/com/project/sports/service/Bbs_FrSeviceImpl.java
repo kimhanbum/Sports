@@ -35,8 +35,14 @@ public class Bbs_FrSeviceImpl implements Bbs_FrService{
 		dao.insertBoard(board);
 	}
 
-	@Override
-	public BBS_FR getDetail(int num) {
-		return null;
+	@Override 
+	public BBS_FR getDetail(int num) { if(setReadCountUpdate(num)!=1)
+		return null; return dao.getDetail(num); 
 	}
+	  
+	@Override 
+	public int setReadCountUpdate(int num) { return
+	  dao.setReadCountUpdate(num);
+	}
+	 
 }

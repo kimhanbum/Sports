@@ -18,6 +18,7 @@
 	<script src="../resources/js/BBS_FR/list.js" charset="utf-8"></script>
 	<style>
 	.blog_right_sidebar{float:right}
+	.cnt{color:gray; font-size:small}
 	</style>
 </head>
 
@@ -38,7 +39,7 @@
     <!-- slider Area Start-->
     <div class="slider-area ">
         <!-- Mobile Menu -->
-        <div class="single-slider slider-height2 d-flex align-items-center" data-background="assets/img/hero/category.jpg">
+        <div class="single-slider slider-height2 d-flex align-items-center" data-background="${pageContext.request.contextPath}/resources/image/bbs_fr/board_headline.jpg">
             <div class="container">
                 <div class="row">
                     <div class="col-xl-12">
@@ -54,7 +55,7 @@
 
     <!--================BBS_FRList Area =================-->
     <section class="blog_area section-padding">
-     <div class="col-lg-4">
+   <!--   <div class="col-lg-4">
                     <div class="blog_right_sidebar">
                         <aside class="single_sidebar_widget search_widget">
                             <form action="#">
@@ -73,12 +74,12 @@
                             </form>
         				</aside>
     			   </div>
-      </div>
+      </div> -->
         <div class="container">
         
          <%-- 게시글이 있는 경우--%> 
 <c:if test="${listcount > 0 }">
-  <table class="table table-striped">
+  <table class="table">
    <thead>
 	<tr>
 	   <th colspan="6">
@@ -116,13 +117,14 @@
 	                        운동파트너
 		        </c:if>
          </div></td>
-	  <td><%--제목 --%>
+	  <td ><%--제목 --%>
 	     <div>		
 			<a href="detail?num=${b.FR_NO}">
 				 <c:out value="${b.FR_SUBJECT}" />  
 				<%-- ${b.board_subject} --%>
 				<%-- escapeXml="true" : HTML 태그를 화면에 그대로 보여줍니다. --%>	
 			</a>
+			<span class="cnt">[<c:out value="${b.CNT}"/>]</span>
 		  </div>
 		</td>
 		<td><div>${b.USER_ID}</div></td>
