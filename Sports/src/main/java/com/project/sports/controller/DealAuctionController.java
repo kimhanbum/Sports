@@ -34,9 +34,8 @@ public class DealAuctionController {
 	@Autowired
 	private DealService DealService;
 	
-	//savefolder.properties에서 작성한 savefoldername 속성의 값을 String saveFolder에 주입합니다.
-	@Value("${savefoldername}")
-	private String saveFolder;
+
+	private String saveFolder = "C:\\Users\\82109\\git\\Sports\\Sports\\src\\main\\webapp\\resources\\dealupload1\\";
 	
 	//메인 페이지 리스트
 	@RequestMapping(value="/list",method=RequestMethod.GET)
@@ -100,6 +99,7 @@ public class DealAuctionController {
 					// 	+ "/upload/";
 			String fileDBName = fileDBName(fileName,saveFolder);
 			logger.info("fileDBName= " + fileDBName);
+			logger.info("성진아" + saveFolder + fileDBName);
 			
 			//transferTo(File path) : 업로드한 파일을 매개변수의 경로에 저장합니다. 
 			uploadfile1.transferTo(new File(saveFolder + fileDBName));
@@ -107,6 +107,78 @@ public class DealAuctionController {
 			//바뀐 파일명으로 저장 
 			Auction.setSAVE_AUC_MAINFILE(fileDBName);
 		}
+		
+		if(!uploadfile2.isEmpty()) {
+			String fileName = uploadfile2.getOriginalFilename();//원래 파일명
+			Auction.setORI_AUC_FILE2(fileName);//원래 파일명 저장
+			//String saveFolder = 
+					// request.getSession().getServletContext().getRealPath("resources")
+					// 	+ "/upload/";
+			String fileDBName = fileDBName(fileName,saveFolder);
+			logger.info("fileDBName= " + fileDBName);
+			
+			//transferTo(File path) : 업로드한 파일을 매개변수의 경로에 저장합니다. 
+			uploadfile2.transferTo(new File(saveFolder + fileDBName));
+			
+			//바뀐 파일명으로 저장 
+			Auction.setSAVE_AUC_FILE2(fileDBName);
+		}else {
+			Auction.setSAVE_AUC_FILE2("0");
+			Auction.setORI_AUC_FILE2("0");
+		}
+		
+		if(!uploadfile3.isEmpty()) {
+			String fileName = uploadfile3.getOriginalFilename();//원래 파일명
+			Auction.setORI_AUC_FILE3(fileName);//원래 파일명 저장
+			//String saveFolder = 
+					// request.getSession().getServletContext().getRealPath("resources")
+					// 	+ "/upload/";
+			String fileDBName = fileDBName(fileName,saveFolder);
+			logger.info("fileDBName= " + fileDBName);
+			
+			//transferTo(File path) : 업로드한 파일을 매개변수의 경로에 저장합니다. 
+			uploadfile3.transferTo(new File(saveFolder + fileDBName));
+			
+			//바뀐 파일명으로 저장 
+			Auction.setSAVE_AUC_FILE3(fileDBName);
+		}else {
+			Auction.setSAVE_AUC_FILE3("0");
+			Auction.setORI_AUC_FILE3("0");
+		}
+		
+		if(!uploadfile4.isEmpty()) {
+			String fileName = uploadfile4.getOriginalFilename();//원래 파일명
+			Auction.setORI_AUC_FILE4(fileName);//원래 파일명 저장
+			//String saveFolder = 
+					// request.getSession().getServletContext().getRealPath("resources")
+					// 	+ "/upload/";
+			String fileDBName = fileDBName(fileName,saveFolder);
+			logger.info("fileDBName= " + fileDBName);
+			
+			//transferTo(File path) : 업로드한 파일을 매개변수의 경로에 저장합니다. 
+			uploadfile4.transferTo(new File(saveFolder + fileDBName));
+			
+			//바뀐 파일명으로 저장 
+			Auction.setSAVE_AUC_FILE4(fileDBName);
+		}else {
+			Auction.setSAVE_AUC_FILE4("0");
+			Auction.setORI_AUC_FILE4("0");
+		}
+		
+		logger.info("제목" + Auction.getAUC_SUBJECT());
+		logger.info("시작가" + Auction.getAUC_PRICE());
+		logger.info("상한가" + Auction.getAUC_LPRICE());
+		logger.info("입찰단위" + Auction.getAUC_UNIT());
+		logger.info("내용" + Auction.getAUC_CONTENT());
+		logger.info("파일1" + Auction.getORI_AUC_MAINFILE());
+		logger.info("파일1" + Auction.getSAVE_AUC_MAINFILE());
+		logger.info("날짜" + Auction.getAUC_DATE());
+		logger.info("배송" + Auction.getAUC_DELIVERY());
+		logger.info("save폴더" + saveFolder);
+		
+		
+		//예비로해놈 9-26 
+		Auction.setUSER_ID("admin01");
 		
 		DealService.insert(Auction);	//저장메서드 호출
 		
@@ -120,7 +192,7 @@ public class DealAuctionController {
 		int month = c.get(Calendar.MONTH)+1 ; //오늘 월 구합니다. 
 		int date = c.get(Calendar.DATE);	//오늘 일 구합니다.
 		
-		String homedir = saveFolder + year + "-" + month + "-" + date;
+		String homedir = saveFolder;
 		logger.info(homedir);
 		File path1 = new File(homedir);
 		if(!(path1.exists())) {
@@ -144,11 +216,11 @@ public class DealAuctionController {
 		/**** 확장자 구하기 끝 ***/
 		
 		//새로운 파일명 
-		String refileName = "bbs" + year + month + date + random + "." + fileExtension ;
+		String refileName = "auc" + year + month + date + random + "." + fileExtension ;
 		logger.info("refileName = " + refileName);
 		
 		//오라클 디비에 저장될 파일 명 
-		String fileDBName = "/" + year + "-" + month + "-" +date + "/" + refileName;
+		String fileDBName =  refileName;
 		logger.info("fileDBName = " + fileDBName);
 		return fileDBName ;
 	}

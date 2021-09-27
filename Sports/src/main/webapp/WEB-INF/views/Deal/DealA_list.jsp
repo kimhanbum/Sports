@@ -557,61 +557,7 @@ background-color
 	<!-- Footer 영역  -->
 	<jsp:include page="/WEB-INF/views/sport_comm/footer.jsp"/>
 
-	<!-- JS here -->
 
-	<!-- All JS Custom Plugins Link Here here -->
-	<script
-		src="${pageContext.request.contextPath}/resources/js/vendor/modernizr-3.5.0.min.js"></script>
-
-	<!-- Jquery, Popper, Bootstrap -->
-	<script
-		src="${pageContext.request.contextPath}/resources/js/vendor/jquery-1.12.4.min.js"></script>
-	<script
-		src="${pageContext.request.contextPath}/resources/js/popper.min.js"></script>
-	<script
-		src="${pageContext.request.contextPath}/resources/js/bootstrap.min.js"></script>
-	<!-- Jquery Mobile Menu -->
-	<script
-		src="${pageContext.request.contextPath}/resources/js/jquery.slicknav.min.js"></script>
-
-	<!-- Jquery Slick , Owl-Carousel Plugins -->
-	<script
-		src="${pageContext.request.contextPath}/resources/js/owl.carousel.min.js"></script>
-	<script
-		src="${pageContext.request.contextPath}/resources/js/slick.min.js"></script>
-
-	<!-- One Page, Animated-HeadLin -->
-	<script
-		src="${pageContext.request.contextPath}/resources/js/wow.min.js"></script>
-	<script
-		src="${pageContext.request.contextPath}/resources/js/animated.headline.js"></script>
-	<script
-		src="${pageContext.request.contextPath}/resources/js/jquery.magnific-popup.js"></script>
-
-	<!-- Scrollup, nice-select, sticky -->
-	<script
-		src="${pageContext.request.contextPath}/resources/js/jquery.scrollUp.min.js"></script>
-	<script
-		src="${pageContext.request.contextPath}/resources/js/jquery.nice-select.min.js"></script>
-	<script
-		src="${pageContext.request.contextPath}/resources/js/jquery.sticky.js"></script>
-
-	<!-- contact js -->
-	<script
-		src="${pageContext.request.contextPath}/resources/js/contact.js"></script>
-	<script
-		src="${pageContext.request.contextPath}/resources/js/jquery.form.js"></script>
-	<script
-		src="${pageContext.request.contextPath}/resources/js/jquery.validate.min.js"></script>
-	<script
-		src="${pageContext.request.contextPath}/resources/js/mail-script.js"></script>
-	<script
-		src="${pageContext.request.contextPath}/resources/js/jquery.ajaxchimp.min.js"></script>
-
-	<!-- Jquery Plugins, main Jquery -->
-	<script
-		src="${pageContext.request.contextPath}/resources/js/plugins.js"></script>
-	<script src="${pageContext.request.contextPath}/resources/js/main.js"></script>
 
 </body>
 </html>

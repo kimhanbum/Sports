@@ -8,11 +8,31 @@
 	select count(*) from Deal_Auction
 </select>
 
-<insert id="insert" parmeterType="Auction">
 
+<insert id="insert" parameterType="Auction">
+	insert into Deal_Auction
+	(AUC_NUMBER, AUC_SUBJECT , AUC_PRICE , AUC_LPRICE , AUC_UNIT ,
+	AUC_CONTENT,AUC_DELIVERY, AUC_DATE ,USER_ID,
+	ORI_AUC_MAINFILE , SAVE_AUC_MAINFILE ,
+	ORI_AUC_FILE2 ,SAVE_AUC_FILE2 ,
+	 ORI_AUC_FILE3 ,SAVE_AUC_FILE3 ,
+	 ORI_AUC_FILE4 , SAVE_AUC_FILE4)
+	VALUES( AUC_SEQ.NEXTVAL , #{AUC_SUBJECT} , #{AUC_PRICE} ,
+			#{AUC_LPRICE} , #{AUC_UNIT},
+			#{AUC_CONTENT} , #{AUC_DELIVERY},
+			#{AUC_DATE} , #{USER_ID} ,
+			#{ORI_AUC_MAINFILE} , #{SAVE_AUC_MAINFILE} ,
+			#{ORI_AUC_FILE2} , #{SAVE_AUC_FILE2} ,
+			#{ORI_AUC_FILE3} , #{SAVE_AUC_FILE3} ,
+			#{ORI_AUC_FILE4} , #{SAVE_AUC_FILE4})
+	
 
 
 </insert>
+
+
+
+
 
 
 

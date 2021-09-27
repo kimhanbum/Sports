@@ -69,17 +69,11 @@ a
 
 :hover
 
-
 :not
-
-
-
 
 
 (
 .active
-
-
 
 
 )
@@ -87,17 +81,10 @@ a
 background-color
 
 
-
-
 :
 
 
-
-
 #ddd
-
-
-
 
 ;
 }
@@ -314,26 +301,30 @@ input.checkbox:checked+label.input-label.radio::before {
 
 							<div class="row">
 								<div class="col-md-3 form-group">
-									<label for="AUC_PRICE">시작가</label><br> <input type="text"
+									<label for="input-label">시작가</label><br> <input type="text"
 										id="AUC_PRICE" name="AUC_PRICE" class="form-control" style="width: 200px"
 										placeholder="시작가 입력 .. ">
 								</div>
 								<div class="col-md-3 form-group">
-									<label for="AUC_LPRICE">즉시구매가</label><br> <input type="text"
+									<label for="input-label">즉시구매가</label><br> <input type="text"
 										id="AUC_LPRICE" name="AUC_LPRICE" class="form-control" style="width: 200px"
 										placeholder="즉시구매가 입력 .. ">
 								</div>
+								
+								
 								<div class="col-md-3 form-group">
-									<label for="AUC_UNIT">입찰단위</label><br> <select name='AUC_UNIT'
-															id="AUC_UNIT">
-										<option value='' selected>-- 선택 --</option>
-										<option value=1000>1000</option>
+									<label for="AUC_UNIT">입찰단위</label><br> 
+									<select name='AUC_UNIT' id="AUC_UNIT">
+										<option value='' >-- 선택 --</option>
+										<option value=1000 selected >1000</option>
 										<option value=3000>3000</option>
 										<option value=5000>5000</option>
 										<option value=10000>10000</option>
 									</select>
 								</div>
 							</div>
+							
+							
 
 
 
@@ -349,9 +340,11 @@ input.checkbox:checked+label.input-label.radio::before {
 							<div class="row">
 								<div class="col-md-6 form-group">
 									<label for="AUC_DELIVERY">&emsp;택배 배송</label> <br> <input
-										type="radio" name="AUC_DELIVERY" id="AUC_DELIVERY" class="checkbox">
-									<label for="radio0" class="input-label radio">선불</label> <input
-										type="radio" name="AUC_DELIVERY" id="AUC_DELIVERY" class="checkbox" checked>
+										type="radio" name="AUC_DELIVERY" id="radio0" class="checkbox"
+										value="선불" checked>
+									<label for="radio0" class="input-label radio"  >선불</label> <input
+										type="radio" name="AUC_DELIVERY" id="radio1" class="checkbox" 
+										value = "착불">
 									<label for="radio1" class="input-label radio">착불</label>
 								</div>
 								<div class="col-md-6 form-group">
@@ -434,59 +427,7 @@ input.checkbox:checked+label.input-label.radio::before {
 
 	<!-- JS here -->
 
-	<!-- All JS Custom Plugins Link Here here -->
-	<script
-		src="${pageContext.request.contextPath}/resources/js/vendor/modernizr-3.5.0.min.js"></script>
 
-	<!-- Jquery, Popper, Bootstrap -->
-	<script
-		src="${pageContext.request.contextPath}/resources/js/vendor/jquery-1.12.4.min.js"></script>
-	<script
-		src="${pageContext.request.contextPath}/resources/js/popper.min.js"></script>
-	<script
-		src="${pageContext.request.contextPath}/resources/js/bootstrap.min.js"></script>
-	<!-- Jquery Mobile Menu -->
-	<script
-		src="${pageContext.request.contextPath}/resources/js/jquery.slicknav.min.js"></script>
-
-	<!-- Jquery Slick , Owl-Carousel Plugins -->
-	<script
-		src="${pageContext.request.contextPath}/resources/js/owl.carousel.min.js"></script>
-	<script
-		src="${pageContext.request.contextPath}/resources/js/slick.min.js"></script>
-
-	<!-- One Page, Animated-HeadLin -->
-	<script
-		src="${pageContext.request.contextPath}/resources/js/wow.min.js"></script>
-	<script
-		src="${pageContext.request.contextPath}/resources/js/animated.headline.js"></script>
-	<script
-		src="${pageContext.request.contextPath}/resources/js/jquery.magnific-popup.js"></script>
-
-	<!-- Scrollup, nice-select, sticky -->
-	<script
-		src="${pageContext.request.contextPath}/resources/js/jquery.scrollUp.min.js"></script>
-	<script
-		src="${pageContext.request.contextPath}/resources/js/jquery.nice-select.min.js"></script>
-	<script
-		src="${pageContext.request.contextPath}/resources/js/jquery.sticky.js"></script>
-
-	<!-- contact js -->
-	<script
-		src="${pageContext.request.contextPath}/resources/js/contact.js"></script>
-	<script
-		src="${pageContext.request.contextPath}/resources/js/jquery.form.js"></script>
-	<script
-		src="${pageContext.request.contextPath}/resources/js/jquery.validate.min.js"></script>
-	<script
-		src="${pageContext.request.contextPath}/resources/js/mail-script.js"></script>
-	<script
-		src="${pageContext.request.contextPath}/resources/js/jquery.ajaxchimp.min.js"></script>
-
-	<!-- Jquery Plugins, main Jquery -->
-	<script
-		src="${pageContext.request.contextPath}/resources/js/plugins.js"></script>
-	<script src="${pageContext.request.contextPath}/resources/js/main.js"></script>
 
 </body>
 </html>
