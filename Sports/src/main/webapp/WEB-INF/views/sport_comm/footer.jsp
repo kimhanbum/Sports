@@ -110,7 +110,6 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 
 <!-- Scrollup, nice-select, sticky -->
 <script src="${pageContext.request.contextPath}/resources/js/jquery.scrollUp.min.js"></script>
-<script src="${pageContext.request.contextPath}/resources/js/jquery.nice-select.min.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/jquery.sticky.js"></script>
 
 <!-- contact js -->
