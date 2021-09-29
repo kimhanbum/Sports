@@ -3,30 +3,18 @@
 <html class="no-js" lang="zxx">
     <head>
         <meta charset="utf-8">
-        <meta http-equiv="x-ua-compatible" content="ie=edge">
         <title>eCommerce HTML-5 Template </title>
-        <meta name="description" content="">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="manifest" href="site.webmanifest">
 		<link rel="shortcut icon" type="image/x-icon" href="${pageContext.request.contextPath}/resources/img/favicon.ico">
-<!--     	<link rel="stylesheet" href="fonts/material-icon/css/material-design-iconic-font.min.css"> -->
-    	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/match/jquery-ui.min.css">
-   		 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/match/style.css">
+   		<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/match/style2.css">
 		<!-- CSS here -->
-			<link rel="stylesheet" href="https://www.baro-match.co.kr/newsite/core/css/common.css?sng=1632462206" />
 			<link rel="stylesheet" href="https://www.baro-match.co.kr/newsite/core/css/bbs.css?sng=1632462206" />
 			<link rel="stylesheet" href="https://www.baro-match.co.kr/newsite/core/css/swiper.css" />
 			<link rel="stylesheet" href="https://www.baro-match.co.kr/newsite/web/korean/css/layout.css?sng=1632462206" />
 			<link rel="stylesheet" href="https://www.baro-match.co.kr/newsite/web/korean/css/topmenu.css?sng=1632462206" />
 			<link rel="stylesheet" href="https://www.baro-match.co.kr/newsite/web/korean/css/main.css?sng=1632462206" />
 			<link rel="stylesheet" href="https://www.baro-match.co.kr/newsite/web/korean/css/sub.css?sng=1632462206" />
-			<link rel="stylesheet" href="https://www.baro-match.co.kr/newsite/web/korean/css/bxslider.css?sng=1632462206" />
-			<link rel="stylesheet" href="https://www.baro-match.co.kr/newsite/skin/member/basic_responsive/style.css?sng=1632462206"/>
 			<link rel="stylesheet" href="https://www.baro-match.co.kr/newsite/system/banner/css/banner.css?sng=1632462206" />
-			<link rel="stylesheet" href="https://www.baro-match.co.kr/newsite/system/tournament/css/tournament.css?sng=1632462206" />
-			<link rel="stylesheet" href="https://www.baro-match.co.kr/newsite/system/team/css/team.css?sng=1632462206" />
 			<link rel="stylesheet" href="https://www.baro-match.co.kr/newsite/system/match/css/match.css?sng=1632462206" />
-			<link rel="stylesheet" href="https://www.baro-match.co.kr/newsite/system/ground/css/ground.css?sng=1632462206" />
 			<link rel ="stylesheet" href="${pageContext.request.contextPath}/resources/css/match/sport_match.css">
 			<style>
 				#icon_box .icon01:after{z-index:1;
@@ -38,23 +26,19 @@
 								    bottom: -9px;
 								    left: 45%;
 									}
+				select.form-control{
+        		width:auto;margin-bottom:2em;display:inline-block}
+   				.rows{text-align:right;}
+   				.gray{color:gray}
+			    body > div > table > thead > tr:nth-child(2) > th:nth-child(1){width:8%}
+			    body > div > table > thead > tr:nth-child(2) > th:nth-child(2){width:50%}
+			    body > div > table > thead > tr:nth-child(2) > th:nth-child(3){width:14%}
+			    body > div > table > thead > tr:nth-child(2) > th:nth-child(4){width:17%}
+			    body > div > table > thead > tr:nth-child(2) > th:nth-child(5){width:11%}
 			</style>
    </head>
    <body>
-    <!-- Preloader Start -->
-    <div id="preloader-active">
-        <div class="preloader d-flex align-items-center justify-content-center">
-            <div class="preloader-inner position-relative">
-                <div class="preloader-circle"></div>
-                <div class="preloader-img pere-text">
-                    <img src="assets/img/logo/logo.png" alt="">
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Preloader Start -->
     	<!-- 헤더 영역  -->
-    	
 	<jsp:include page="/WEB-INF/views/sport_comm/header.jsp"/>
     
     <main>
@@ -82,19 +66,6 @@
 			<div class="gnb_wrap">
 			<div class="web_size">
 				<div class="gnb">
-					<div class="m_icon_box">
-						<p class="icon01 top_icon" data-value="1/">축구/풋살</p>
-						<p class="icon03 top_icon" data-value="3/">야구</p>
-						<p class="icon09 top_icon" data-value="9/">족구</p>
-						<p class="icon02 top_icon" data-value="2/">농구</p>
-						<p class="icon04 top_icon" data-value="4/">배구</p>
-						<p class="icon05 top_icon" data-value="5/">탁구</p>
-						<p class="icon06 top_icon" data-value="6/">배드민턴</p>
-						<p class="icon07 top_icon" data-value="7/">테니스</p>
-						<p class="icon010 top_icon" data-value="10/">볼링</p>
-						<p class="icon008 top_icon" data-value="08/">골프</p>
-						<a href="http://ntler.co.kr" target="_blank"><p class="icon00">맞춤유니폼</p></a>
-					</div>
 					<ul class="m_menu_box">
 						<li>
 							<a href="#" style="text-decoration:none; fo">소셜매치</a>
@@ -108,7 +79,7 @@
 		</div>
 		</div>
             <div class="slider-active">
-                <div class="single-slider slider-height" data-background="${pageContext.request.contextPath}/resources/image/sport/soccer.jpg">
+                <div class="single-slider slider-height slider-heights" data-background="${pageContext.request.contextPath}/resources/image/sport/soccer.jpg">
                     <div class="container1">
                         <div class="row d-flex align-items-center justify-content-between">
                             <div class="col-xl-6 col-lg-6 col-md-6 d-none d-md-block">
@@ -128,22 +99,27 @@
                     </div>
                 </div>
              </div> 
-             
     <div class="main">
         </div>
         <div class="container1">
-            <form id="booking-form" class="booking-form" method="POST">
+            <form id="booking-form" class="booking-form"  action="Search" method="POST">
                 <div class="form-group">
                     <div class="form-destination">
-                        <label for="destination">지역</label>
+                        <label for="destination" style="color:white">City</label>
                         <input type="text" id="destination" name="destination" placeholder="서울" />
+                        <select name="city">
+                        	<option value="">지역선택</option>
+                        	<option value="서울">서울</option>
+                        	<option value="인천">인천</option>
+                        </select>
+                        
                     </div>
                     <div class="form-date-to form-icon">
-                        <label for="date_to">Date</label>
+                        <label for="date_to" style="color:white">Date</label>
                         <input type="text" id="date_to" class="date_to" placeholder="날짜를 선택해주세요." />
                     </div>
                     <div class="form-quantity">
-                        <label for="quantity">PERSON</label>
+                        <label for="quantity" style="color:white">PERSON</label>
                         <span class="modify-qty plus" onClick="Tang()"><i class="zmdi zmdi-chevron-up"></i></span>
                         <input type="number" name="quantity" id="quantity" value="0" min="0" class="nput-text qty text">
                         <span class="modify-qty minus" onClick="Giam()"><i class="zmdi zmdi-chevron-down"></i></span>
@@ -154,8 +130,125 @@
                 </div>
             </form>
         </div>
+       <div class="container">
+<%-- 게시글이 있는 경우--%> 
+<c:if test="${listcount > 0 }">
+ <div class="rows">
+ 	<span>줄보기</span>
+ 	 <select class="form-control" id="viewcount">
+ 		<option value="1">1</option>
+ 		<option value="3">3</option>
+ 		<option value="5">5</option>
+ 		<option value="7">7</option>
+ 		<option value="10" selected>10</option>
+ 	</select> 
+ </div>
+  <table class="table table-striped">
+   <thead>
+	<tr>
+	   <th colspan="3">Matching list</th>
+	   <th colspan="2">
+			<font size=3>Total : ${listcount}</font>
+	   </th>
+	</tr>
+	<tr>
+		<th><div>글번호</div></th>
+		<th><div>지역</div></th>
+		<th><div>작성자</div></th>
+		<th><div>날짜</div></th>
+		<th><div>인원</div></th>
+	</tr>	
+   </thead>
+   <tbody>
+	<c:set var="num" value="${listcount-(page-1)*limit}"/>	
+	<c:forEach var="b" items="${boardlist}">	
+	<tr>
+	  <td><%--번호 --%>
+		<c:out value="${num}"/><%-- num 출력 --%>		
+		<c:set var="num" value="${num-1}"/>	<%-- num=num-1; 의미--%>	
+	  </td>
+	  <td><%--제목 --%>
+	     <div>			
+			<%-- 답변글 제목앞에 여백 처리 부분 
+			      board_re_lev,  board_num, 
+			      board_subject, board_name, board_date, 
+			      board_readcount : property 이름 --%>
+		    <c:if test="${b.board_re_lev != 0}">  <!--  답글인 경우 -->
+				<c:forEach var="a" begin="0" end="${b.board_re_lev*2}" step="1">
+				&nbsp; 	
+				</c:forEach>		
+				<img src='${pageContext.request.contextPath}/resources/image/line.gif'>
+			</c:if>  
+			 
+			<c:if test="${b.board_re_lev == 0}">  <%-- 원문인 경우 --%>
+				&nbsp;  
+			</c:if> 			
+			
+			<a href="detail?num=${b.board_num}">
+				 <c:out value="${b.board_subject}" />  
+				<%-- ${b.board_subject} --%>
+				<%-- escapeXml="true" : HTML 태그를 화면에 그대로 보여줍니다. --%>	
+			</a>
+		  </div>
+		</td>
+		<td><div>${b.board_name}</div></td>
+		<td><div>${b.board_date}</div></td>	
+		<td><div>${b.board_readcount}</div></td>
+	   </tr>
+	  </c:forEach>
+	 </tbody>	
+	</table>
+		
+	<div class="center-block">
+		  <ul class="pagination justify-content-center">		
+			 <c:if test="${page <= 1 }">
+				<li class="page-item">
+				  <a class="page-link gray">이전&nbsp;</a>
+				</li>
+			 </c:if>
+			 <c:if test="${page > 1 }">			
+				<li class="page-item">
+				   <a href="list?page=${page-1}" 
+				      class="page-link">이전&nbsp;</a>
+				</li> 
+			 </c:if>
+					
+			<c:forEach var="a" begin="${startpage}" end="${endpage}">
+				<c:if test="${a == page }">
+					<li class="page-item " >
+					   <a class="page-link gray">${a}</a>
+					</li>
+				</c:if>
+				<c:if test="${a != page }">
+				    <li class="page-item">
+					   <a href="list?page=${a}" 
+					      class="page-link">${a}</a>
+				    </li>	
+				</c:if>
+			</c:forEach>
+			
+			<c:if test="${page >= maxpage }">
+				<li class="page-item">
+				   <a class="page-link gray">&nbsp;다음</a> 
+				</li>
+			</c:if>
+			<c:if test="${page < maxpage }">
+			  <li class="page-item">
+				<a href="list?page=${page+1}" 
+				   class="page-link">&nbsp;다음</a>
+			  </li>	
+			</c:if>
+		 </ul>
+		</div>
+     </c:if><%-- <c:if test="${listcount > 0 }"> end --%>
+	
+<%-- 게시글이 없는 경우--%>
+<c:if test="${listcount == 0 }">
+	<font size=5>등록된 글이 없습니다.</font>
+</c:if>
+</div>
 
-    </div>
+	
     <script src="${pageContext.request.contextPath}/resources/js/match/jquery.min.js"></script>
     <script src="${pageContext.request.contextPath}/resources/js/match/jquery-ui.min.js"></script>
     <script src="${pageContext.request.contextPath}/resources/js/match/main.js"></script>
