@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -24,17 +25,28 @@
 <link rel="stylesheet" href="plugins/colorbox/colorbox.css">
 
 <!-- CSS here -->
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/owl.carousel.min.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/flaticon.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/slicknav.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/animate.min.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/magnific-popup.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/fontawesome-all.min.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/themify-icons.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/slick.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/nice-select.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/style.css">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/resources/css/owl.carousel.min.css">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/resources/css/flaticon.css">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/resources/css/slicknav.css">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/resources/css/animate.min.css">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/resources/css/magnific-popup.css">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/resources/css/fontawesome-all.min.css">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/resources/css/themify-icons.css">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/resources/css/slick.css">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/resources/css/nice-select.css">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/resources/css/style.css">
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
 </head>
@@ -68,7 +80,15 @@
 
 
 
+
+
+
+
 a
+
+
+
+
 
 
 
@@ -82,7 +102,15 @@ a
 
 
 
+
+
+
+
 :not
+
+
+
+
 
 
 
@@ -102,9 +130,17 @@ a
 
 
 
+
+
+
+
 )
 {
 background-color
+
+
+
+
 
 
 
@@ -122,7 +158,15 @@ background-color
 
 
 
+
+
+
+
 #ddd
+
+
+
+
 
 
 
@@ -279,7 +323,7 @@ input.checkbox:checked+label.input-label.radio::before {
 	content: "\f058";
 }
 
-.button3 {
+.buttonM {
 	width: 140px;
 	height: 45px;
 	font-family: 'Roboto', sans-serif;
@@ -297,7 +341,31 @@ input.checkbox:checked+label.input-label.radio::before {
 	outline: none;
 }
 
-.button3:hover {
+.buttonM:hover {
+	background-color: #2EE59D;
+	box-shadow: 0px 15px 20px rgba(46, 229, 157, 0.4);
+	color: #fff;
+	transform: translateY(-7px);
+}
+.buttonD {
+	width: 140px;
+	height: 45px;
+	font-family: 'Roboto', sans-serif;
+	font-size: 11px;
+	text-transform: uppercase;
+	letter-spacing: 2.5px;
+	font-weight: 500;
+	color: #000;
+	background-color: #fff;
+	border: none;
+	border-radius: 45px;
+	box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+	transition: all 0.3s ease 0s;
+	cursor: pointer;
+	outline: none;
+}
+
+.buttonD:hover {
 	background-color: #2EE59D;
 	box-shadow: 0px 15px 20px rgba(46, 229, 157, 0.4);
 	color: #fff;
@@ -319,7 +387,10 @@ input.checkbox:checked+label.input-label.radio::before {
 #mon2 {
 	padding-top: 50px
 }
+
+
 </style>
+
 <body data-spy="scroll" data-target=".site-navbar-target"
 	data-offset="300">
 
@@ -330,7 +401,9 @@ input.checkbox:checked+label.input-label.radio::before {
 			<div class="preloader-inner position-relative">
 				<div class="preloader-circle"></div>
 				<div class="preloader-img pere-text">
-					<img src="${pageContext.request.contextPath}/resources/img/logo/logo.png" alt="">
+					<img
+						src="${pageContext.request.contextPath}/resources/img/logo/logo.png"
+						alt="">
 				</div>
 			</div>
 		</div>
@@ -338,7 +411,7 @@ input.checkbox:checked+label.input-label.radio::before {
 	<!-- Preloader Start -->
 
 	<!-- 헤더 영역  -->
-	<jsp:include page="/WEB-INF/views/sport_comm/header.jsp"/>
+	<jsp:include page="/WEB-INF/views/sport_comm/header.jsp" />
 
 	<main> <!-- slider Area Start-->
 	<div class="slider-area ">
@@ -359,15 +432,22 @@ input.checkbox:checked+label.input-label.radio::before {
 	<!-- slider Area End--> <!-- Latest Products Start --> <!--바디부분 -->
 	<section class="section">
 		<div class="container" id="mainpic">
-			<h3><b>제목</b></h3>
+			<h3>
+				<b>${b.DIR_SUBJECT}</b>
+			</h3>
 			<h6 class="text-color">Computer Science</h6>
-			<span>Lorem ipsum dolor, sit amet consectetur
-				adipisicing elit. Cumque ac voluptas quae.</span>
-				<hr>
+			<span>Lorem ipsum dolor, sit amet consectetur adipisicing
+				elit. Cumque ac voluptas quae.</span>
+			<hr>
+
+
 			<div class="row">
+
+
 				<div class="col-md-5 mb-5">
-					<img class="img-fluid w-100" src="${pageContext.request.contextPath}/resources/image/404.png"
-						alt="teacher" style="width: 600px; height: 400px;">
+					<img class="img-fluid w-100"
+						src="${pageContext.request.contextPath}/resources/dealupload2/${b.SAVE_DIR_MAINFILE}"
+						alt="teacher" style="width: 500px; height: 300px;">
 				</div>
 				<div class="col-md-6 mb-5" id="subject">
 					<div class="row">
@@ -375,16 +455,16 @@ input.checkbox:checked+label.input-label.radio::before {
 							<h4 class="mb-4">Auction Info</h4>
 							<hr>
 							<ul class="list-unstyled">
-								
-								<li><b>금액</b>&emsp;&emsp;&emsp;20,000원
+
+								<li><b>금액</b>&emsp;&emsp;&emsp;${b.DIR_PRICE}
 									<hr></li>
-								<li><b>올린시간</b>&emsp;09-22
+								<li><b>올린시간</b>&emsp;${b.DIR_DATE}
 									<hr></li>
-								<li><b>핸드폰</b>&emsp;&emsp;010-1234-1234
+								<li><b>핸드폰</b>&emsp;&emsp;${b.DIR_PHONE}
 									<hr></li>
-								<li><b>거래지역</b>&emsp;지행역
+								<li><b>거래지역</b>&emsp;${b.DIR_ADDRESS}
 									<hr></li>
-								<li><b>아이디</b>&emsp;&emsp;admin
+								<li><b>아이디</b>&emsp;&emsp;${b.USER_ID}
 									<hr></li>
 							</ul>
 						</div>
@@ -393,11 +473,10 @@ input.checkbox:checked+label.input-label.radio::before {
 							<hr>
 							<ul class="list-unstyled" id="buttonG">
 								<li class="mb-3" id="modifyB">
-									<button class="button3" 
-									 >수정</button>
+									<button class="buttonM">수정</button>
 								</li>
 								<li class="mb-3" id="mon2">
-									<button class="button3">삭제</button>
+									<button class="buttonD">삭제</button>
 								</li>
 							</ul>
 						</div>
@@ -405,92 +484,154 @@ input.checkbox:checked+label.input-label.radio::before {
 				</div>
 
 				<div class="col-12">
-					<h4 class="mb-4"><b>글 내용</b></h4>
-					<p class="mb-5">Lorem ipsum dolor sit amet, consectetur
-						adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-						dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-						exercitation ullamco laboris nisi ut aliquip ex ea commodo
-						consequat. Duis aute irure dolor in reprehenderit in voluptate
-						velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
-						occaecat cupidatat non proident, sunt in culpa qui officia
-						deserunt mollit anim id est laborum. Sed ut perspiciatis unde
-						omnis iste natus error sit voluptatem accusantium doloremque
-						laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore
-						veritatis et quasi architecto.</p>
+					<h4 class="mb-4">
+						<b>글 내용</b>
+					</h4>
+					<p class="mb-5">${b.DIR_CONTENT}</p>
 				</div>
 			</div>
 			<div class="row justify-content-center">
 				<div class="col-12">
-					<h4 class="mb-4"><b>서브사진</b></h4>
+					<h4 class="mb-4">
+						<b>서브사진</b>
+					</h4>
 				</div>
 				<!-- course item -->
 				<div class="col-lg-4 col-sm-6 mb-5">
-					<div class="card p-0 border-primary rounded-0 hover-shadow" >
-						<img class="card-img-top rounded-0"
-							src="${pageContext.request.contextPath}/resources/image/404.png" alt="course thumb"
-							style="width: 358px; height: 300px;">
+					<div>
+						<c:choose>
+							<c:when test="${b.SAVE_DIR_FILE2=='0'}">
+								<img class="card-img-top rounded-0"
+									src="${pageContext.request.contextPath}/resources/dealupload2/white.jpg"
+									alt="course thumb" style="width: 358px; height: 300px;">
+							</c:when>
+							<c:otherwise>
+								<img class="card-img-top rounded-0"
+									src="${pageContext.request.contextPath}/resources/dealupload2/${b.SAVE_DIR_FILE2}"
+									alt="course thumb" style="width: 358px; height: 300px;">
+							</c:otherwise>
+						</c:choose>
+
 
 					</div>
 				</div>
 				<!-- course item -->
 				<div class="col-lg-4 col-sm-6 mb-5">
-					<div class="card p-0 border-primary rounded-0 hover-shadow">
-						<img class="card-img-top rounded-0"
-							src="${pageContext.request.contextPath}/resources/image/404.png" alt="course thumb"
-							style="width: 358px; height: 300px;">
+					<div>
+						<c:choose>
+							<c:when test="${b.SAVE_DIR_FILE3=='0'}">
+								<img class="card-img-top rounded-0"
+									src="${pageContext.request.contextPath}/resources/dealupload2/white.jpg"
+									alt="course thumb" style="width: 358px; height: 300px;">
+							</c:when>
+							<c:otherwise>
+								<img class="card-img-top rounded-0"
+									src="${pageContext.request.contextPath}/resources/dealupload2/${b.SAVE_DIR_FILE3}"
+									alt="course thumb" style="width: 358px; height: 300px;">
+							</c:otherwise>
+						</c:choose>
 
 					</div>
 				</div>
 				<!-- course item -->
 				<div class="col-lg-4 col-sm-6 mb-5">
-					<div class="card p-0 border-primary rounded-0 hover-shadow">
-						<img class="card-img-top rounded-0"
-							src="${pageContext.request.contextPath}/resources/image/404.png" alt="course thumb"
-							style="width: 358px; height: 300px;">
+					<div>
+						<c:choose>
+							<c:when test="${b.SAVE_DIR_FILE4=='0'}">
+								<img class="card-img-top rounded-0"
+									src="${pageContext.request.contextPath}/resources/dealupload2/white.jpg"
+									alt="course thumb" style="width: 358px; height: 300px;">
+							</c:when>
+							<c:otherwise>
+								<img class="card-img-top rounded-0"
+									src="${pageContext.request.contextPath}/resources/dealupload2/${b.SAVE_DIR_FILE4}"
+									alt="course thumb" style="width: 358px; height: 300px;">
+							</c:otherwise>
+						</c:choose>
 
 					</div>
 				</div>
+
 			</div>
 		</div>
+
 	</section>
 	<!-- /teacher details --> <!-- Gallery End--> </main>
 	<!-- Footer 영역  -->
-	<jsp:include page="/WEB-INF/views/sport_comm/footer.jsp"/>
+	<jsp:include page="/WEB-INF/views/sport_comm/footer2.jsp" />
 	<!-- JS here -->
+<script>
 
+$(function(){
+	//삭제버튼 클릭시
+	$(".buttonD").click(function(){ //로그인창에서 회원가입버튼 클릭 시
+		var a = ${param.num};
+		var b = confirm("정말 삭제 하시겠습니까?");
+		if(b==true){	
+			location.href = "${pageContext.request.contextPath}/DealD/delete"
+			 + "?num=" + a;
+		}
+     });
+	//수정버튼 클릭시
+	$(".buttonM").click(function(){ //로그인창에서 회원가입버튼 클릭 시
+			var a = ${param.num};
+			location.href = "${pageContext.request.contextPath}/DealD/modifyView"
+			 + "?num=" + a;
+		
+     });
+})
+</script>
 	<!-- All JS Custom Plugins Link Here here -->
 	<script src="./assets/js/vendor/modernizr-3.5.0.min.js"></script>
 
 	<!-- Jquery, Popper, Bootstrap -->
-	<script src="${pageContext.request.contextPath}/resources/js/vendor/jquery-1.12.4.min.js"></script>
-	<script src="${pageContext.request.contextPath}/resources/js/popper.min.js"></script>
-	<script src="${pageContext.request.contextPath}/resources/js/bootstrap.min.js"></script>
+	<script
+		src="${pageContext.request.contextPath}/resources/js/vendor/jquery-1.12.4.min.js"></script>
+	<script
+		src="${pageContext.request.contextPath}/resources/js/popper.min.js"></script>
+	<script
+		src="${pageContext.request.contextPath}/resources/js/bootstrap.min.js"></script>
 	<!-- Jquery Mobile Menu -->
-	<script src="${pageContext.request.contextPath}/resources/js/jquery.slicknav.min.js"></script>
+	<script
+		src="${pageContext.request.contextPath}/resources/js/jquery.slicknav.min.js"></script>
 
 	<!-- Jquery Slick , Owl-Carousel Plugins -->
-	<script src="${pageContext.request.contextPath}/resources/js/owl.carousel.min.js"></script>
-	<script src="${pageContext.request.contextPath}/resources/js/slick.min.js"></script>
+	<script
+		src="${pageContext.request.contextPath}/resources/js/owl.carousel.min.js"></script>
+	<script
+		src="${pageContext.request.contextPath}/resources/js/slick.min.js"></script>
 
 	<!-- One Page, Animated-HeadLin -->
-	<script src="${pageContext.request.contextPath}/resources/js/wow.min.js"></script>
-	<script src="${pageContext.request.contextPath}/resources/js/animated.headline.js"></script>
-	<script src="${pageContext.request.contextPath}/resources/js/jquery.magnific-popup.js"></script>
+	<script
+		src="${pageContext.request.contextPath}/resources/js/wow.min.js"></script>
+	<script
+		src="${pageContext.request.contextPath}/resources/js/animated.headline.js"></script>
+	<script
+		src="${pageContext.request.contextPath}/resources/js/jquery.magnific-popup.js"></script>
 
 	<!-- Scrollup, nice-select, sticky -->
-	<script src="${pageContext.request.contextPath}/resources/js/jquery.scrollUp.min.js"></script>
-	<script src="${pageContext.request.contextPath}/resources/js/jquery.nice-select.min.js"></script>
-	<script src="${pageContext.request.contextPath}/resources/js/jquery.sticky.js"></script>
+	<script
+		src="${pageContext.request.contextPath}/resources/js/jquery.scrollUp.min.js"></script>
+	<script
+		src="${pageContext.request.contextPath}/resources/js/jquery.nice-select.min.js"></script>
+	<script
+		src="${pageContext.request.contextPath}/resources/js/jquery.sticky.js"></script>
 
 	<!-- contact js -->
-	<script src="${pageContext.request.contextPath}/resources/js/contact.js"></script>
-	<script src="${pageContext.request.contextPath}/resources/js/jquery.form.js"></script>
-	<script src="${pageContext.request.contextPath}/resources/js/jquery.validate.min.js"></script>
-	<script src="${pageContext.request.contextPath}/resources/js/mail-script.js"></script>
-	<script src="${pageContext.request.contextPath}/resources/js/jquery.ajaxchimp.min.js"></script>
+	<script
+		src="${pageContext.request.contextPath}/resources/js/contact.js"></script>
+	<script
+		src="${pageContext.request.contextPath}/resources/js/jquery.form.js"></script>
+	<script
+		src="${pageContext.request.contextPath}/resources/js/jquery.validate.min.js"></script>
+	<script
+		src="${pageContext.request.contextPath}/resources/js/mail-script.js"></script>
+	<script
+		src="${pageContext.request.contextPath}/resources/js/jquery.ajaxchimp.min.js"></script>
 
 	<!-- Jquery Plugins, main Jquery -->
-	<script src="${pageContext.request.contextPath}/resources/js/plugins.js"></script>
+	<script
+		src="${pageContext.request.contextPath}/resources/js/plugins.js"></script>
 	<script src="${pageContext.request.contextPath}/resources/js/main.js"></script>
 
 </body>

@@ -38,7 +38,19 @@ select * from
 		order by dir_number desc))
 	 where rnum &gt;= #{start} and rnum  &lt;=  #{end}
 	</select>
+	
+<select id="detail" parameterType="int" resultType="Direct">
+	select *
+	from deal_direct
+	where DIR_NUMBER = #{number}
 
+</select>
+
+<delete id="delete" parameterType="int">
+	delete from deal_direct
+	where dir_number = #{number}
+
+</delete>
 
 
 </mapper>

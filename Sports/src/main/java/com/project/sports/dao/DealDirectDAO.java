@@ -26,4 +26,12 @@ public class DealDirectDAO {
 		public List<DealDirect> getDirectList(HashMap<String, Integer> map) {
 			return sqlSession.selectList("Direct.list", map);
 		}
+
+		public DealDirect D_getDetail(int num) {
+			return sqlSession.selectOne("Direct.detail",num);
+		}
+
+		public int D_Delete(int num) {
+			return sqlSession.delete("Direct.delete",num);
+		}
 }

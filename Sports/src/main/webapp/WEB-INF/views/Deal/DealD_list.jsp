@@ -181,13 +181,14 @@ background-color
 								<div class="product-caption">
 
 									<h4>
-										<a href="${pageContext.request.contextPath}/DealD/detail"><b>${b.DIR_SUBJECT}</b></a>
+										<a href="${pageContext.request.contextPath}/DealD/detail?num=${b.DIR_NUMBER}">
+										<b>${b.DIR_SUBJECT}</b></a>
 									</h4>
 									<div class="price">
 										<table class="table">
 											<tr>
 												<th>금액</th>
-												<td>${b.DIR_PRICE}</td>
+												<td>${b.DIR_PRICE}원</td>
 
 											</tr>
 											<tr>
@@ -343,7 +344,7 @@ background-color
 	</div>
 	<!-- Gallery End--> </main>
 	<!-- Footer 영역  -->
-	<jsp:include page="/WEB-INF/views/sport_comm/footer.jsp"/>
+	<jsp:include page="/WEB-INF/views/sport_comm/footer2.jsp"/>
 
 	<!-- JS here -->
 

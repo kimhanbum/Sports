@@ -23,4 +23,10 @@ public interface DealService {
 
 	public List<DealDirect> getDirectList(int page, int limit);
 
+	public DealDirect D_getDetail(int num);
+
+	public int D_Delete(int num);
+
+	
+
 }
