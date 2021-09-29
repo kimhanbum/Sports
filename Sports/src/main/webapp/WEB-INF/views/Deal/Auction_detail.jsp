@@ -462,7 +462,7 @@ input.checkbox:checked+label.input-label.radio::before {
 	<!-- /teacher details --> <!-- Gallery End--> </main>
 	
 	<!-- Footer 영역  -->
-	<jsp:include page="/WEB-INF/views/sport_comm/footer.jsp"/>
+	<jsp:include page="/WEB-INF/views/sport_comm/footer2.jsp"/>
 
 	<!-- JS here -->
 

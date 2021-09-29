@@ -35,6 +35,7 @@
 	href="${pageContext.request.contextPath}/resources/css/nice-select.css">
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/style.css">
+	
 </head>
 <style>
 #paging {
@@ -555,7 +556,7 @@ background-color
 	</div>
 	<!-- Gallery End--> </main>
 	<!-- Footer 영역  -->
-	<jsp:include page="/WEB-INF/views/sport_comm/footer.jsp"/>
+	<jsp:include page="/WEB-INF/views/sport_comm/footer2.jsp"/>
 
 
 

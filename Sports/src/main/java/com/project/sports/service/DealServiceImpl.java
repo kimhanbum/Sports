@@ -62,5 +62,16 @@ public class DealServiceImpl implements DealService {
 			return dao2.getDirectList(map);
 		}
 
+		@Override
+		public DealDirect D_getDetail(int num) {
+			return dao2.D_getDetail(num);
+		}
+
+		@Override
+		public int D_Delete(int num) {
+			int result = 0;
+			return result = dao2.D_Delete(num);
+		}
+
 
 }

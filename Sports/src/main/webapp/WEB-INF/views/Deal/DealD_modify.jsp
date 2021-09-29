@@ -1,11 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
-<title>직거래 메인</title>
 <meta charset="utf-8">
 <meta http-equiv="x-ua-compatible" content="ie=edge">
+<title>직거래 글쓰기</title>
 <meta name="description" content="">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="manifest" href="site.webmanifest">
@@ -13,28 +13,19 @@
 	href="assets/img/favicon.ico">
 
 <!-- CSS here -->
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/owl.carousel.min.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/flaticon.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/slicknav.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/animate.min.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/magnific-popup.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/fontawesome-all.min.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/themify-icons.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/slick.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/nice-select.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/style.css">
 <link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/css/owl.carousel.min.css">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/css/flaticon.css">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/css/slicknav.css">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/css/animate.min.css">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/css/magnific-popup.css">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/css/fontawesome-all.min.css">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/css/themify-icons.css">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/css/slick.css">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/css/nice-select.css">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/css/style.css">
+	href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
 </head>
 <style>
 #paging {
@@ -42,8 +33,7 @@
 }
 
 .pagination {
-	position: absolute;
-	left: 40%;
+	display: inline-block;
 }
 
 .pagination a {
@@ -58,44 +48,168 @@
 }
 
 .pagination
- 
+
+
+
 a
 :hover
 :not
- 
+
+
+
 (
 .active
- 
+
+
 )
 {
 background-color
+
+
 :
- 
+
+
 #ddd
+
+
 ;
-
-
 }
 #paging {
 	text-align: center;
 	margin-top: 0
 }
 
-#timeback {
-	width: 100%;
-	height: 30px;
-	background-color: #556069;
-	color: white;
-	border: 1px solid white;
+#fname, #lname {
+	border-radius: 30px 30px 30px 30px;
 }
 
-.sungjinS {
-	position: absolute;
-	left: 63%;
-	top: 190%
+/*파일 */
+label.file input {position:absolute; width:0; overflow:hidden; opacity:0;}
+label.file {
+  width:0%; /* Use for fluid design */
+  min-width:200px;
+  height:30px;
+  line-height:28px!important;
+  cursor:pointer;
+  position:relative;
+  display:inline-block;
+  white-space:nowrap;
+  font-family:sans-serif;
+  text-align:right;
+}
+#filevalue {
+  content:"No file chosen";
+  display:block;
+  position:absolute;
+  box-sizing:border-box;
+  width:100%;
+  height:inherit;
+  padding:0 84px 0 10px;
+  border:0px solid #e8eeef;
+  border-width:2px 0px 2px 2px;
+  border-radius:3px 0 0 3px;
+  background-color:#fff;
+  color:#a0b7c5;
+  font-size:12px;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  text-align:center;
+  vertical-align:middle;
+}
+
+label.file:after {
+  content:"BROWSE";
+  display:inline-block;
+  position:relative;
+  box-sizing:border-box;
+  width:74px;
+  height:inherit;
+  padding:0 4px;
+  border-radius:0 3px 3px 0;
+  background-color:#a0b7c5;
+  color:#fff;
+  overflow:hidden;
+  font-size:9px;
+  font-weight:bold;
+  text-overflow:ellipsis;
+  text-align:center;
+  vertical-align:middle;
+}
+
+/* 라디오 */
+.checkbox[type=checkbox], .checkbox[type=radio] {
+	display: none;
+}
+
+label.input-label {
+	display: inline-block;
+	font-size: 13px;
+	cursor: pointer;
+}
+
+label.input-label::before {
+	display: inline-block;
+	margin: 0 20px;
+	font-family: FontAwesome;
+	font-size: 20px;
+	color: rgba(4, 120, 193, 0.2);
+	-webkit-transition: transform 0.2s ease-out, color 0.2s ease;
+	-moz-transition: transform 0.2s ease-out, color 0.2s ease;
+	-ms-transition: transform 0.2s ease-out, color 0.2s ease;
+	-o-transition: transform 0.2s ease-out, color 0.2s ease;
+	transition: transform 0.2s ease-out, color 0.2s ease;
+	-webkit-transform: scale3d(0.8, 0.8, 1);
+	-moz-transform: scale3d(0.8, 0.8, 1);
+	-ms-transform: scale3d(0.8, 0.8, 1);
+	-o-transform: scale3d(0.8, 0.8, 1);
+	transform: scale3d(0.8, 0.8, 1);
+}
+
+label.input-label.checkbox::before {
+	content: "\f0c8";
+}
+
+label.input-label.radio::before {
+	content: "\f111";
+}
+
+input.checkbox+label.input-label:hover::before {
+	-webkit-transform: scale3d(1, 1, 1);
+	-moz-transform: scale3d(1, 1, 1);
+	-ms-transform: scale3d(1, 1, 1);
+	-o-transform: scale3d(1, 1, 1);
+	transform: scale3d(1, 1, 1);
+}
+
+input.checkbox+label.input-label:active::before {
+	-webkit-transform: scale3d(1.5, 1.5, 1);
+	-moz-transform: scale3d(1.5, 1.5, 1);
+	-ms-transform: scale3d(1.5, 1.5, 1);
+	-o-transform: scale3d(1.5, 1.5, 1);
+	transform: scale3d(1.5, 1.5, 1);
+}
+
+input.checkbox:checked+label.input-label::before {
+	display: inline-block;
+	font-family: FontAwesome;
+	color: #0478c1;
+	-webkit-transform: scale3d(1, 1, 1);
+	-moz-transform: scale3d(1, 1, 1);
+	-ms-transform: scale3d(1, 1, 1);
+	-o-transform: scale3d(1, 1, 1);
+	transform: scale3d(1, 1, 1);
+}
+
+input.checkbox:checked+label.input-label.checkbox::before {
+	content: "\f14a";
+}
+
+input.checkbox:checked+label.input-label.radio::before {
+	content: "\f058";
 }
 </style>
-<body>
+<body data-spy="scroll" data-target=".site-navbar-target"
+	data-offset="300">
 
 	<!-- Preloader Start -->
 	<div id="preloader-active">
@@ -104,9 +218,7 @@ background-color
 			<div class="preloader-inner position-relative">
 				<div class="preloader-circle"></div>
 				<div class="preloader-img pere-text">
-					<img
-						src="${pageContext.request.contextPath}/resources/img/logo/logo.png"
-						alt="">
+					<img src="${pageContext.request.contextPath}/resources/img/logo/logo.png" alt="">
 				</div>
 			</div>
 		</div>
@@ -125,7 +237,7 @@ background-color
 				<div class="row">
 					<div class="col-xl-12">
 						<div class="hero-cap text-center">
-							<h2>운동물품 거래</h2>
+							<h2>직 거래 글쓰기</h2>
 						</div>
 					</div>
 				</div>
@@ -133,434 +245,223 @@ background-color
 		</div>
 	</div>
 	<!-- slider Area End--> <!-- Latest Products Start -->
-	<section class="latest-product-area latest-padding">
-		<div class="container">
-			<div class="row product-btn d-flex justify-content-between">
-				<div class="properties__button">
-					<!--Nav Button  -->
-					<nav>
-						<div class="nav nav-tabs" id="nav-tab" role="tablist">
-							<a class="nav-item nav-link " id="nav-home-tab"
-								href="${pageContext.request.contextPath}/DealA/list">경매
-								거래</a> <a class="nav-item nav-link active" id="nav-profile-tab"
-								href="${pageContext.request.contextPath}/DealD/list">직거래</a>
-
-						</div>
-					</nav>
-					<!--End Nav Button  -->
-				</div>
-				<div class="select-this d-flex">
-					<div class="featured">
-						<span>정렬 </span>
-					</div>
-					<form action="#">
-						<div class="select-itms">
-							<select name="select" id="select1">
-								<option value="">최신순</option>
-								<option value="">정확순</option>
-								<option value="">조회순</option>
-								<option value="">Featured C</option>
-							</select>
-						</div>
-					</form>
-				</div>
-			</div>
-			<!-- Nav Card -->
-
-			<div class="tab-content" id="nav-tabContent">
-				<!-- card one -->
-				<div class="tab-pane fade show active" id="nav-home" role="tabpanel"
-					aria-labelledby="nav-home-tab">
-					<div class="row">
-						<div class="col-xl-4 col-lg-4 col-md-6">
-							<div class="single-product mb-60">
-								<div class="product-img">
-									<img
-										src="${pageContext.request.contextPath}/resources/img/categori/product1.png"
-										alt="">
-
-								</div>
-								<div class="product-caption">
-
-									<h4>
-										<a href="${pageContext.request.contextPath}/DealD/detail"><b>바지 팝니다(급처)</b></a>
-									</h4>
-									<div class="price">
-										<table class="table">
-											<tr>
-												<th>금액</th>
-												<td>1000원</td>
-
-											</tr>
-											<tr>
-												<th>거래지역</th>
-												<td>지행역</td>
-											</tr>
-											<tr>
-												<th>올리시간</th>
-												<td>09-22</td>
-											</tr>
-
-										</table>
-
-									</div>
-								</div>
-							</div>
-						</div>
 
 
 
-						<div class="col-xl-4 col-lg-4 col-md-6">
-							<div class="single-product mb-60">
-								<div class="product-img">
-									<img
-										src="${pageContext.request.contextPath}/resources/img/categori/product1.png"
-										alt="">
-
-								</div>
-								<div class="product-caption">
-
-									<h4>
-										<a href="#"><b>바지 팝니다(급처)</b></a>
-									</h4>
-									<div class="price">
-										<table class="table">
-											<tr>
-												<th>금액</th>
-												<td>1000원</td>
-
-											</tr>
-											<tr>
-												<th>거래지역</th>
-												<td>지행역</td>
-											</tr>
-											<tr>
-												<th>올리시간</th>
-												<td>09-22</td>
-											</tr>
-
-										</table>
-
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-xl-4 col-lg-4 col-md-6">
-							<div class="single-product mb-60">
-								<div class="product-img">
-									<img
-										src="${pageContext.request.contextPath}/resources/img/categori/product1.png"
-										alt="">
-
-								</div>
-								<div class="product-caption">
-
-									<h4>
-										<a href="#"><b>바지 팝니다(급처)</b></a>
-									</h4>
-									<div class="price">
-										<table class="table">
-											<tr>
-												<th>금액</th>
-												<td>1000원</td>
-
-											</tr>
-											<tr>
-												<th>거래지역</th>
-												<td>지행역</td>
-											</tr>
-											<tr>
-												<th>올리시간</th>
-												<td>09-22</td>
-											</tr>
-
-										</table>
-
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-xl-4 col-lg-4 col-md-6">
-							<div class="single-product mb-60">
-								<div class="product-img">
-									<img
-										src="${pageContext.request.contextPath}/resources/img/categori/product1.png"
-										alt="">
-
-								</div>
-								<div class="product-caption">
-
-									<h4>
-										<a href="#"><b>바지 팝니다(급처)</b></a>
-									</h4>
-									<div class="price">
-										<table class="table">
-											<tr>
-												<th>금액</th>
-												<td>1000원</td>
-
-											</tr>
-											<tr>
-												<th>거래지역</th>
-												<td>지행역</td>
-											</tr>
-											<tr>
-												<th>올리시간</th>
-												<td>09-22</td>
-											</tr>
-
-										</table>
-
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-xl-4 col-lg-4 col-md-6">
-							<div class="single-product mb-60">
-								<div class="product-img">
-									<img
-										src="${pageContext.request.contextPath}/resources/img/categori/product1.png"
-										alt="">
-
-								</div>
-								<div class="product-caption">
-
-									<h4>
-										<a href="#"><b>바지 팝니다(급처)</b></a>
-									</h4>
-									<div class="price">
-										<table class="table">
-											<tr>
-												<th>금액</th>
-												<td>1000원</td>
-
-											</tr>
-											<tr>
-												<th>거래지역</th>
-												<td>지행역</td>
-											</tr>
-											<tr>
-												<th>올리시간</th>
-												<td>09-22</td>
-											</tr>
-
-										</table>
-
-									</div>
-								</div>
-							</div>
-						</div>
-
-						<div class="col-xl-4 col-lg-4 col-md-6">
-							<div class="single-product mb-60">
-								<div class="product-img">
-									<img
-										src="${pageContext.request.contextPath}/resources/img/categori/product1.png"
-										alt="">
-
-								</div>
-								<div class="product-caption">
-
-									<h4>
-										<a href="#"><b>바지 팝니다(급처)</b></a>
-									</h4>
-									<div class="price">
-										<table class="table">
-											<tr>
-												<th>금액</th>
-												<td>1000원</td>
-
-											</tr>
-											<tr>
-												<th>거래지역</th>
-												<td>지행역</td>
-											</tr>
-											<tr>
-												<th>올리시간</th>
-												<td>09-22</td>
-											</tr>
-
-										</table>
-
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="container" id="paging">
-							<!-- Latest Products End -->
-							<!-- Latest Offers Start -->
-
-						</div>
-
-					</div>
 
 
-				</div>
 
 
-			</div>
-			<hr>
-			<div class="sungjinS">
-				<div class="header-bottom ">
-					<ul
-						class="header-right f-right d-none d-lg-block d-flex justify-content-between">
-						<li class="d-none d-xl-block" id="sd-none">
-							<div class="form-box f-right ">
-								<input type="text" name="Search" id="sinput"
-									placeholder="Search products">
-								<div class="search-icon">
-									<i class="fas fa-search special-tag"></i>
-								</div>
-							</div>
-						</li>
-
-					</ul>
-
-				</div>
-			</div>
 
 
-			<div id="write-b">
-				<a href="${pageContext.request.contextPath}/DealD/write"
-					class="btn header-btn">글쓰기</a>
-
-			</div>
-			<div class="pagination">
-				<a href="#" id="paging">&laquo;</a> <a href="#" id="paging">1</a> <a
-					href="#" id="paging">2</a> <a href="#" id="paging">3</a> <a
-					href="#" id="paging">4</a> <a href="#" id="paging">5</a> <a
-					href="#" id="paging">&raquo;</a>
-			</div>
-
-		</div>
-
-
-		</div>
-		<!-- End Nav Card -->
-		</div>
-	</section>
-
-
-	> <!-- Latest Offers End --> <!-- Shop Method Start-->
-	<div class="shop-method-area section-padding30">
-		<div class="container">
-			<div class="row d-flex justify-content-between">
-				<div class="col-xl-3 col-lg-3 col-md-6">
-					<div class="single-method mb-40">
-						<i class="ti-package"></i>
-						<h6>Free Shipping Method</h6>
-						<p>aorem ixpsacdolor sit ameasecur adipisicing elitsf edasd.</p>
-					</div>
-				</div>
-				<div class="col-xl-3 col-lg-3 col-md-6">
-					<div class="single-method mb-40">
-						<i class="ti-unlock"></i>
-						<h6>Secure Payment System</h6>
-						<p>aorem ixpsacdolor sit ameasecur adipisicing elitsf edasd.</p>
-					</div>
-				</div>
-				<div class="col-xl-3 col-lg-3 col-md-6">
-					<div class="single-method mb-40">
-						<i class="ti-reload"></i>
-						<h6>Secure Payment System</h6>
-						<p>aorem ixpsacdolor sit ameasecur adipisicing elitsf edasd.</p>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	<!-- Shop Method End--> <!-- Gallery Start-->
-	<div class="gallery-wrapper lf-padding">
-		<div class="gallery-area">
-			<div class="container-fluid">
+		<div class="site-section bg-light">
+			<div class="container">
 				<div class="row">
-					<div class="gallery-items">
-						<img
-							src="${pageContext.request.contextPath}/resources/img/gallery/gallery1.jpg"
-							alt="">
+
+					<div class="col-lg-12">
+						<div class="section-title mb-5">
+							<h2>
+								<b>Write</b>
+							</h2>
+
+						</div>
+						<form action ="add" method = "post" enctype="multipart/form-data">
+							<div class="row">
+								<div class="col-md-4 form-group">
+									<label for="DIR_SUBJECT">제목</label> <input type="text" id="DIR_SUBJECT"
+										class="form-control form-control-lg" style="width: 1000px"
+										placeholder="제목을 입력하세요....." name = "DIR_SUBJECT"
+										value = "${d.DIR_SUBJECT}"> 
+								</div>
+
+							</div>
+
+
+							<div class="row">
+								<div class="col-md-6 form-group">
+									<label for="DIR_PRICE">금액</label><br> <input type="text"
+										id="DIR_PRICE" class="form-control" style="width: 200px"
+										placeholder="금액 입력 .. " name = "DIR_PRICE"
+										value = "${d.DIR_PRICE}">
+								</div>
+								<div class="col-md-6 form-group">
+									<label for="DIR_PHONE">전화번호</label><br> <input type="text"
+										id="DIR_PHONE" class="form-control" style="width: 200px"
+										placeholder="010-xxxx-xxxx" name= "DIR_PHONE"
+										value= "${d.DIR_PHONE}">
+								</div>
+
+							</div>
+							<div class="row">
+								<div class="col-md-4 form-group">
+									<label for="DIR_ADDRESS">거래장소</label> <input type="text" id="DIR_ADDRESS"
+										class="form-control form-control-lg" style="width: 1000px"
+										placeholder="종로3가역 3번출구앞 ...." name= "DIR_ADDRESS"
+										value="${d.DIR_ADDRESS}">
+								</div>
+
+							</div>
+
+
+							<div class="row">
+								<div class="col-md-11 form-group">
+									<label for="message">내용</label>
+									<textarea name="DIR_CONTENT" id="DIR_CONTENT"
+								cols="30" rows="10"
+						class="form-control"
+						 placeholder="내용 입력 .. ">${d.DIR_CONTENT}</textarea>
+								</div>
+							</div>
+							
+							<hr>
+							<div class="row">
+								<div class="col-md-6 form-group">
+									<label for="message">사진 첨부</label><br> <label class="file"
+										title="">
+										 <span id="filevalue">${d.ORI_DIR_MAINFILE}</span>
+										<input type="file"
+										onchange="this.parentNode.setAttribute('title', this.value.replace(/^.*[\\/]/, ''))"
+										id="upfile1" name="uploadfile1" 
+										/></label>
+
+								</div>
+								<div class="col-md-6 form-group">
+									<label for="message"></label><br> <label class="file"
+										title="">
+										<span id="filevalue2">${d.ORI_DIR_FILE2}</span>
+										<input type="file"
+										onchange="this.parentNode.setAttribute('title', this.value.replace(/^.*[\\/]/, ''))"
+										id="upfile2" name="uploadfile2"
+										 /></label>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-md-6 form-group">
+									<label for="message"></label><br> <label class="file"
+										title="">
+										<span id="filevalue3">${d.ORI_DIR_FILE3}</span>
+										<input type="file"
+										onchange="this.parentNode.setAttribute('title', this.value.replace(/^.*[\\/]/, ''))"
+										id="upfile3" name="uploadfile3"
+										/></label>
+								</div>
+								<div class="col-md-6 form-group">
+									<label for="message"></label><br> <label class="file"
+										title="">
+										<span id="filevalue4">${d.ORI_DIR_FILE2}</span>
+										<input type="file"
+										onchange="this.parentNode.setAttribute('title', this.value.replace(/^.*[\\/]/, ''))"
+										id="upfile4" name="uploadfile4"
+										/></label>
+								</div>
+							</div>
+							<hr>
+							<br> <br> <br>
+							<div class="container">
+								<div class="row" style="text-align: center">
+									<div class="col-11">
+										<input type="submit" value="Submit"
+											class="btn btn-primary py-3 px-5"
+											style="background-color: black; height: 50px"> &emsp;
+										<input type="submit" value="Cancel"
+											class="btn btn-primary py-3 px-5"
+											style="background-color: gray; height: 50px">
+									</div>
+									<br> <br> <br> <br> <br> <br> <br>
+
+								</div>
+							</div>
+
+
+						</form>
 					</div>
-					<div class="gallery-items">
-						<img
-							src="${pageContext.request.contextPath}/resources/img/gallery/gallery2.jpg"
-							alt="">
-					</div>
-					<div class="gallery-items">
-						<img
-							src="${pageContext.request.contextPath}/resources/img/gallery/gallery3.jpg"
-							alt="">
-					</div>
-					<div class="gallery-items">
-						<img
-							src="${pageContext.request.contextPath}/resources/img/gallery/gallery4.jpg"
-							alt="">
-					</div>
-					<div class="gallery-items">
-						<img
-							src="${pageContext.request.contextPath}/resources/img/gallery/gallery5.jpg"
-							alt="">
-					</div>
+
 				</div>
+
+
 			</div>
 		</div>
+
+
+
+
+
+
 	</div>
+
+
+
+
 	<!-- Gallery End--> </main>
 	<!-- Footer 영역  -->
-	<jsp:include page="/WEB-INF/views/sport_comm/footer.jsp"/>
+	<jsp:include page="/WEB-INF/views/sport_comm/footer2.jsp"/>
 
 	<!-- JS here -->
-
+	<script>
+	$(document).ready(function(){
+		
+		var check = 0 ;
+		
+		
+		$("#upfile1").change(function(){
+			check++;
+			var inputfile = $(this).val().split('\\');
+			$('#filevalue').text(inputfile[inputfile.length - 1]);
+			console.log(check);
+		});
+		$("#upfile2").change(function(){
+			check++;
+			var inputfile = $(this).val().split('\\');
+			$('#filevalue2').text(inputfile[inputfile.length - 1]);
+			console.log(check);
+		});
+		$("#upfile3").change(function(){
+			check++;
+			var inputfile = $(this).val().split('\\');
+			$('#filevalue3').text(inputfile[inputfile.length - 1]);
+			console.log(check);
+		});
+		$("#upfile4").change(function(){
+			check++;
+			var inputfile = $(this).val().split('\\');
+			$('#filevalue4').text(inputfile[inputfile.length - 1]);
+			console.log(check);
+		});
+	})
+	</script>
 	<!-- All JS Custom Plugins Link Here here -->
-	<script
-		src="${pageContext.request.contextPath}/resources/js/vendor/modernizr-3.5.0.min.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/js/vendor/modernizr-3.5.0.min.js"></script>
 
 	<!-- Jquery, Popper, Bootstrap -->
-	<script
-		src="${pageContext.request.contextPath}/resources/js/vendor/jquery-1.12.4.min.js"></script>
-	<script
-		src="${pageContext.request.contextPath}/resources/js/popper.min.js"></script>
-	<script
-		src="${pageContext.request.contextPath}/resources/js/bootstrap.min.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/js/vendor/jquery-1.12.4.min.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/js/popper.min.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/js/bootstrap.min.js"></script>
 	<!-- Jquery Mobile Menu -->
-	<script
-		src="${pageContext.request.contextPath}/resources/js/jquery.slicknav.min.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/js/jquery.slicknav.min.js"></script>
 
 	<!-- Jquery Slick , Owl-Carousel Plugins -->
-	<script
-		src="${pageContext.request.contextPath}/resources/js/owl.carousel.min.js"></script>
-	<script
-		src="${pageContext.request.contextPath}/resources/js/slick.min.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/js/owl.carousel.min.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/js/slick.min.js"></script>
 
 	<!-- One Page, Animated-HeadLin -->
-	<script
-		src="${pageContext.request.contextPath}/resources/js/wow.min.js"></script>
-	<script
-		src="${pageContext.request.contextPath}/resources/js/animated.headline.js"></script>
-	<script
-		src="${pageContext.request.contextPath}/resources/js/jquery.magnific-popup.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/js/wow.min.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/js/animated.headline.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/js/jquery.magnific-popup.js"></script>
 
 	<!-- Scrollup, nice-select, sticky -->
-	<script
-		src="${pageContext.request.contextPath}/resources/js/jquery.scrollUp.min.js"></script>
-	<script
-		src="${pageContext.request.contextPath}/resources/js/jquery.nice-select.min.js"></script>
-	<script
-		src="${pageContext.request.contextPath}/resources/js/jquery.sticky.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/js/jquery.scrollUp.min.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/js/jquery.nice-select.min.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/js/jquery.sticky.js"></script>
 
 	<!-- contact js -->
-	<script
-		src="${pageContext.request.contextPath}/resources/js/contact.js"></script>
-	<script
-		src="${pageContext.request.contextPath}/resources/js/jquery.form.js"></script>
-	<script
-		src="${pageContext.request.contextPath}/resources/js/jquery.validate.min.js"></script>
-	<script
-		src="${pageContext.request.contextPath}/resources/js/mail-script.js"></script>
-	<script
-		src="${pageContext.request.contextPath}/resources/js/jquery.ajaxchimp.min.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/js/contact.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/js/jquery.form.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/js/jquery.validate.min.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/js/mail-script.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/js/jquery.ajaxchimp.min.js"></script>
 
 	<!-- Jquery Plugins, main Jquery -->
-	<script
-		src="${pageContext.request.contextPath}/resources/js/plugins.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/js/plugins.js"></script>
 	<script src="${pageContext.request.contextPath}/resources/js/main.js"></script>
 
 </body>
