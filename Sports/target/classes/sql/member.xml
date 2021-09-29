@@ -41,7 +41,7 @@ where rnum &gt; = #{start} and rnum &lt; = #{end}
     and
     <choose>
 	<when test="search_field=='USER_ID'">USER_ID</when>
-	<when test="search_field=='name'">USER_NAME</when>
+	<when test="search_field=='USER_NAME'">USER_NAME</when>
     </choose>
 	like #{search_word}
   </if>
