@@ -1,14 +1,18 @@
 $(document).ready(function() {
 	//submit 버튼 클릭할 때 이벤트 부분
 	$("form").submit(function(){
-		if($.trim($("input").eq(1).val()) == ""){
-			alert("비밀번호를 입력하세요");
-			$("input:eq(1)").focus();
+		if($.trim($("#FR_CSFC").val())==""){
+			alert("카테고리를 선택하세요");
 			return false;
 		}
-		if($.trim($("input").eq(2).val()) == ""){
+		if($.trim($("#FR_PASS").val()) == ""){
+			alert("비밀번호를 입력하세요");
+			$("#FR_PASS").focus();
+			return false;
+		}
+		if($.trim($("#FR_SUBJECT").val()) == ""){
 			alert("제목을 입력하세요");
-			$("input:eq(2)").focus();
+			$("#FR_SUBJECT").focus();
 			return false;
 		}
 		if($.trim($("textarea").val()) == ""){

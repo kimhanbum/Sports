@@ -17,9 +17,9 @@
 	}
 	$(function(){
 		$("form[action=delete]").submit(function(){
-			if($("#board_pass").val() == ''){
+			if($("#FR_PASS").val() == ''){
 				alert("비밀번호를 입력하세요");
-				$("#board_pass").focus();
+				$("#FR_PASS").focus();
 				return false;
 			}
 	
@@ -32,14 +32,14 @@
 width:60%
 }
 
-#count{
+/* #count{
 	position: relative;
 	top: -10px;
 	left: -10px;
 	background: orange;
 	color:white;
 	border-radius: 30%
-}
+} */
 
 textarea{resixe:none}
 
@@ -109,8 +109,8 @@ form[action=down] > input[type=submit]{
 				</tr>
 			<tr>
 				<td colspan="2" class="center">
-				  	<button class="btn btn-primary start">댓글</button>
-				  		<span id="count">${count}</span>
+				  	<%-- <button class="btn btn-primary start">댓글</button>
+				  		<span id="count">${count}</span> --%>
 				  <c:if test="${board.USER_ID == id || id =='admin' }">
 				   <a href="modifyView?num=${boarddata.FR_NO}">
 				   	<button class="btn btn-warning">수정</button>
@@ -150,7 +150,7 @@ form[action=down] > input[type=submit]{
 				 		<label for ="pwd">비밀번호</label>
 				 		<input type="password"
 				 				class="form-control" placeholder="Enter password"
-				 				name="BOARD_PASS" id="board_pass">
+				 				name="FR_PASS" id="FR_PASS">
 				 	</div>
 				 	<button type="submit" class="btn btn-primary">전송</button>
 				 	<button type="button" class="btn btn-danger" data-dismiss="modal">취소</button>
@@ -160,11 +160,16 @@ form[action=down] > input[type=submit]{
 		</div><!-- class="modal-dialog" -->
 		</div><!-- class="modal" end -->
 		
+	<!-- comment area -->
 	<div id="comment">
-		<button class="btn btn-info float-left">총 50자까지 가능합니다.</button>
-		<button id="write" class="btn btn-info float-right">등록</button>
+		<button class="btn-dark float-left">총 50자까지 가능합니다.</button>
+		<span>댓글</span>
+		<span id="count">${count}</span>
+		<div>
 		<textarea rows=3 class="form-control"
 				  id="content" maxLength="50"></textarea>
+		<button id="write" style=" border-radius: 25px;" class="btn-dark float-right">등록</button>
+		</div>
 		<table class="table table_striped">
 			<thead>
 			  <tr><td>아이디</td><td>내용</td><td>날짜</td></tr>

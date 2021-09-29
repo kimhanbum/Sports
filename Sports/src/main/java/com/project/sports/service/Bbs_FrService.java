@@ -20,4 +20,10 @@ public interface Bbs_FrService {
 
 	//조회수 업데이트
 	public int setReadCountUpdate(int num);
+	
+	//비밀번호 확인(삭제)
+	public boolean isFrWriter(int num, String pass);
+	
+	//게시글 삭제
+	public int FrDelete(int num);
 }

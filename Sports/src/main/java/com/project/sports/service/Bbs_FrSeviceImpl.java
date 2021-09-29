@@ -2,6 +2,7 @@ package com.project.sports.service;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -44,5 +45,26 @@ public class Bbs_FrSeviceImpl implements Bbs_FrService{
 	public int setReadCountUpdate(int num) { return
 	  dao.setReadCountUpdate(num);
 	}
+
+	@Override
+	public boolean isFrWriter(int num, String pass) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("num", num);
+		map.put("pass",pass);
+		BBS_FR result = dao.isFrWriter(map);
+		if(result==null)
+			return false;
+		else
+			return true;
+	}
+
+	@Override
+	public int FrDelete(int num) {
+		int result = 0;
+		BBS_FR board =dao.getDetail(num);
+		if(board!=null) {
+			result=dao.FrDelete(board);
+		}
+		return result;	}
 	 
 }

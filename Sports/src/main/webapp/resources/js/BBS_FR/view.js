@@ -129,7 +129,7 @@ $(function() {
 	})
 
 	$("#comment").on('click', '.remove', function(){
-		if(!confirm("정말 삭제하시겠습니까?")){
+		if(!confirm("댓글을 삭제하시겠습니까?")){
 			return;
 		}
 		var deleteNum = $(this).next().val(); //댓글 번호

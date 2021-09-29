@@ -2,6 +2,7 @@ package com.project.sports.dao;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,6 +36,14 @@ public class Bbs_FrDAO {
 	  
 	  public int setReadCountUpdate(int num) { 
 		  return sqlSession.update("BBS_FR.readCountUpdate", num);
+	}
+
+	public BBS_FR isFrWriter(Map<String, Object> map) {
+		return sqlSession.selectOne("BBS_FR.FrWriter", map);
+	}
+
+	public int FrDelete(BBS_FR fr) {
+		return sqlSession.delete("BBS_FR.delete",fr);
 	}
 	 
 }
