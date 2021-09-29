@@ -13,6 +13,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.project.sports.domain.BBS_FR;
 import com.project.sports.service.Bbs_FcmService;
@@ -207,4 +209,38 @@ import com.project.sports.service.Bbs_FrService;
 		}
 		return mv;
 	}
-}
+	
+	 @PostMapping("/delete")
+	 public String BoardDeleteAction(String FR_PASS, int num, 
+									Model mv,RedirectAttributes rattr,
+									HttpServletRequest request
+			 						) throws Exception {
+		// 글 삭제 명령을 요청한 사용자가 글을 작성한 사용자인지 판단하기 위해
+		// 입력한 비밀번호와 저장된 비밀번호를 비교하여 일치하면 삭제합니다.
+		 boolean usercheck = FrService.isFrWriter(num, FR_PASS);
+		 	Logger.info("num" + num);
+		// 비밀번호 일치하지 않는 경우
+		if (usercheck == false) {
+			rattr.addFlashAttribute("result","passFail");
+			rattr.addAttribute("num",num);
+			return "redirect:detail";
+		}
+		
+		// 비밀번호 일치하는 경우 삭제 처리 합니다.
+		int result = FrService.FrDelete(num);
+			Logger.info("result:" + result);
+		//삭제 처리 실패한 경우
+		if(result == 0) {
+			Logger.info("게시판 삭제 실패");
+			mv.addAttribute("url", request.getRequestURL());
+			mv.addAttribute("message", "삭제실패");
+			return "error/error";
+							
+		}
+		//삭세 처리 성공한 경우 - 글 목록 보기 요청을 전송하는 부분입니다.
+			Logger.info("게시판 삭제 성공");
+			rattr.addFlashAttribute("result","deleteSuccess");
+			return "redirect:list";
+		  }
+	 
+} 

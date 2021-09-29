@@ -59,4 +59,18 @@
 		set FR_READCOUNT=FR_READCOUNT+1
 		where FR_NO = #{number}
 	</update>
+
+	<select id="FrWriter" parameterType="map" resultType="FR">
+		select * from BBS_FR
+		where 	 FR_NO = #{num}
+		and 	 FR_PASS = #{pass}
+	</select>
+	
+	 <delete id="delete" parameterType="FR">
+	 <![CDATA[ 
+	     delete from BBS_FR 
+		 where 	FR_NO = #{FR_NO}
+		]]>
+	</delete>
+	
 </mapper>
