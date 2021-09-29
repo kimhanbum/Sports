@@ -4,7 +4,7 @@
 <html>
 <head>
 <script src="${pageContext.request.contextPath}/resources/js/jquery-3.6.0.js"></script>
-
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <style>
 form {
     background-color: #e6fffe;
@@ -36,6 +36,95 @@ $(function(){
 		   $('input:checkbox:checked').prop("checked",false); //비활성화
 	   }
 	});
+	$("#submit").on("click", function(){
+		if($("#USER_ID").val()==""){
+			alert("아이디를 입력해주세요.");
+			$("#USER_ID").focus();
+			return false;
+		}
+		else if($("#USER_PASS").val()==""){
+			alert("비밀번호를 입력해주세요.");
+			$("#USER_PASS").focus();
+			return false;
+		}
+		else if($("#USER_NAME").val()==""){
+			alert("성명을 입력해주세요.");
+			$("#USER_NAME").focus();
+			return false;
+		}
+		else if($("#USER_JUMIN").val()==""){
+			alert("주민번호 앞자리를 입력해주세요.");
+			$("#USER_JUMIN").focus();
+			return false;
+		}
+		else if($("#USER_JUMIN1").val()==""){
+			alert("주민번호 뒷자리를 입력해주세요.");
+			$("#USER_JUMIN").focus();
+			return false;
+		}
+		else if($("#USER_MOBILE").val()==""){
+			alert("성명을 입력해주세요.");
+			$("#USER_MOBILE").focus();
+			return false;
+		}
+		else if($("#USER_ADDRESS").val()==""){
+			alert("성명을 입력해주세요.");
+			$("#USER_ADDRESS").focus();
+			return false;
+		}
+	});
+	<input type="text" id="dong" placeholder="우편번호">
+	<input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기"><br>
+	<input type="text" id="sample6_address" placeholder="주소"><br>
+	<input type="text" id="sample6_detailAddress" placeholder="상세주소">
+	<input type="text" id="sample6_extraAddress" placeholder="참고항목">
+    function dong() {
+        new daum.Postcode({
+            oncomplete: function(data) {
+                // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+
+                // 각 주소의 노출 규칙에 따라 주소를 조합한다.
+                // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+                var addr = ''; // 주소 변수
+                var extraAddr = ''; // 참고항목 변수
+
+                //사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
+                if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
+                    addr = data.roadAddress;
+                } else { // 사용자가 지번 주소를 선택했을 경우(J)
+                    addr = data.jibunAddress;
+                }
+
+                // 사용자가 선택한 주소가 도로명 타입일때 참고항목을 조합한다.
+                if(data.userSelectedType === 'R'){
+                    // 법정동명이 있을 경우 추가한다. (법정리는 제외)
+                    // 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
+                    if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
+                        extraAddr += data.bname;
+                    }
+                    // 건물명이 있고, 공동주택일 경우 추가한다.
+                    if(data.buildingName !== '' && data.apartment === 'Y'){
+                        extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+                    }
+                    // 표시할 참고항목이 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
+                    if(extraAddr !== ''){
+                        extraAddr = ' (' + extraAddr + ')';
+                    }
+                    // 조합된 참고항목을 해당 필드에 넣는다.
+                    document.getElementById("sample6_extraAddress").value = extraAddr;
+                
+                } else {
+                    document.getElementById("sample6_extraAddress").value = '';
+                }
+
+                // 우편번호와 주소 정보를 해당 필드에 넣는다.
+                document.getElementById(${"#dong"}).value = data.zonecode;
+                document.getElementById(${"#home"}).value = addr;
+                // 커서를 상세주소 필드로 이동한다.
+                document.getElementById(${"#homeaddress"}).focus();
+            }
+        }).open();
+    }
 })
 </script>
 
@@ -59,19 +148,19 @@ $(function(){
         <table>
             <tr>
                 <td>
-                    <label for="id">ID</label>
+                    <label for="USER_ID">ID</label>
                 </td>
                 <td>
-                    <input type="text" name="id" id="id" size="20px" required>
+                    <input type="text" name="USER_ID" id="USER_ID" size="20px" required>
                     <input type="button" id="idcheck" value="중복확인">
                 </td>
             </tr>
             <tr>
                 <td>
-                    <label for="password">비밀번호</label>
+                    <label for="USER_PASS">비밀번호</label>
                 </td>
                 <td>
-                    <input type="text" name="password" id="password" size="20px" required><br>
+                    <input type="text" name="USER_PASS" id="USER_PASS" size="20px" required><br>
                     <span style="font-size:5px;">*영문 대소문자/숫자/특수문자를 혼용하여 2종류10~16자 또는 3종 8~16자</span>
                 </td>
             </tr>
@@ -85,19 +174,19 @@ $(function(){
             </tr>
             <tr>
                 <td>
-                    <label for="name">이름</label>
+                    <label for="USER_NAME">이름</label>
                 </td>
                 <td>
-                    <input type="text" name="name" id="name" size="20px" required> 
+                    <input type="text" name="USER_NAME" id="USER_NAME" size="20px" required> 
                 </td>
             </tr>
             <tr>
                 <td>
-                    <label for="jumin">주민등록번호</label>
+                    <label for="USER_JUMIN">주민등록번호</label>
                 </td>
                 <td>
-                    <input type="text" name="jumin" id="jumin" size="10px" required>-
-                    <input type="text" name="jumin" id="jumin" size="10px" required>
+                    <input type="text" name="USER_JUMIN" id="USER_JUMIN" size="10px" required>-
+                    <input type="text" name="USER_JUMIN1" id="USER_JUMIN1" size="10px" required>
                 </td>
             </tr>
             <tr>
@@ -105,14 +194,14 @@ $(function(){
                     <label for="phone">연락처</label>
                 </td>
                 <td>
-                    <select name="phone">
+                    <select name="USER_MOBILE">
                         <option value="010">010</option>
                         <option value="011">011</option>
                         <option value="019">019</option>
                     </select>
                     -
-                    <input type="text" name="phone1" id="phone1" size="4" maxLength="4" required>-
-                    <input type="text" name="phone2" id="phone2" size="4" maxLength="4" required>
+                    <input type="text" name="USER_MOBILE" id="USER_MOBILE1" size="4" maxLength="4" required>-
+                    <input type="text" name="USER_MOBILE" id="USER_MOBILE2" size="4" maxLength="4" required>
                 </td>
             </tr>
             <tr>
@@ -122,7 +211,6 @@ $(function(){
                     <label for="dong">우편번호</label>
                 </td>
                 <td>
-                    <input type="text" name="dong" id="dong" size="5">-
                     <input type="text" name="dong" id="dong" size="5">
                     <input type="button" id="address" value="우편번호검색">
                 </td>

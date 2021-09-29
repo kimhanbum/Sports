@@ -127,7 +127,7 @@ response.sendRedirect()를 사용할 때와 동일한 용도로 사용합니다.
 				savecookie.setMaxAge(0);
 			}
 			response.addCookie(savecookie);
-			return "redirect:/board/list";//boardController로
+			return "redirect:/login";//boardController로
 		}else {
 			rattr.addFlashAttribute("result",result);
 			return "redirect:login";
