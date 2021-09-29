@@ -244,28 +244,28 @@
 						        	<%-- style='background-image: url("${pageContext.request.contextPath}/resources/image/weather/sun.png")' --%>
 						        	<%-- <img style="width:45px; height:45px;" src="${pageContext.request.contextPath}/resources/image/weather/sun.png" alt=""> 
 						        	 --%><!-- <i class="day-icon" data-feather="sun"></i> -->
-						        	<span class="day-name">화</span>
+						        	<span class="day-name">오늘</span>
 						        	<span class="day-temp">29㎛</span>
 						        </li>
 						        <li>
 						        	<span class="day-icon">
 						        		<img style="width:30px; height:30px;" src="${pageContext.request.contextPath}/resources/image/dust/worst.png" alt=""> 
 						        	</span>
-						        	<span class="day-name">수</span>
+						        	<span class="day-name">아침</span>
 						        	<span class="day-temp">21㎛</span>
 						        </li>
 						        <li>
 						        	<span class="day-icon">
 						        		<img style="width:30px; height:30px;" src="${pageContext.request.contextPath}/resources/image/dust/normal.png" alt=""> 
 						        	</span>
-						        	<span class="day-name">목</span>
+						        	<span class="day-name">점심</span>
 						        	<span class="day-temp">08㎛</span>
 						        </li>
 						        <li>
 						        	<span class="day-icon">
 						        		<img style="width:30px; height:30px;" src="${pageContext.request.contextPath}/resources/image/dust/bad.png" alt=""> 
 						        	</span>
-						        	<span class="day-name">금</span>
+						        	<span class="day-name">저녁</span>
 						        	<span class="day-temp">19㎛</span>
 						        </li>
 						        <div class="clear"></div>
@@ -285,10 +285,9 @@
             </div>
         </section>
         <!-- 날씨/미세먼지 Area End-->
-        
-        
+
         <!-- 추천 운동 Area Start-->
-        <section class="category-area section-padding30">
+        <section class="category-area">
             <div class="container-fluid">
                 <!-- Section Tittle -->
                 <div class="row">
@@ -300,38 +299,26 @@
                 </div>
                 <div class="row">
                     <div class="col-xl-4 col-lg-6">
+                    	<h2 style="text-align: center;">복싱</h2>
                         <div class="single-category mb-30">
                             <div class="category-img">
-                                <img src="${pageContext.request.contextPath}/resources/img/categori/cat1.jpg" alt="">
-                                <div class="category-caption">
-                                    <h2>Owmen`s</h2>
-                                    <span class="best"><a href="#">Best New Deals</a></span>
-                                    <span class="collection">New Collection</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                     <div class="col-xl-4 col-lg-6">
-                        <div class="single-category mb-30">
-                            <div class="category-img text-center">
-                                <img src="${pageContext.request.contextPath}/resources/img/categori/cat2.jpg" alt="">
-                                <div class="category-caption">
-                                    <span class="collection">Discount!</span>
-                                    <h2>Winter Cloth</h2>
-                                   <p>New Collection</p>
-                                </div>
+                                <img style="width: 100%; height:100%" src="${pageContext.request.contextPath}/resources/image/recomm_sports/boxing.jpg" alt="">
                             </div>
                         </div>
                     </div>
                     <div class="col-xl-4 col-lg-6">
+                    	<h2 style="text-align: center;">사이클</h2>
+                        <div class="single-category mb-30">
+                            <div class="category-img text-center">
+                                <img style="width: 100%; height:100%"  src="${pageContext.request.contextPath}/resources/image/recomm_sports/cycle.jpg" alt="">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-4 col-lg-6">
+                   		<h2 style="text-align: center;">요가</h2>
                         <div class="single-category mb-30">
                             <div class="category-img">
-                                <img src="${pageContext.request.contextPath}/resources/img/categori/cat3.jpg" alt="">
-                                <div class="category-caption">
-                                    <h2>Man`s Cloth</h2>
-                                    <span class="best"><a href="#">Best New Deals</a></span>
-                                    <span class="collection">New Collection</span>
-                                </div>
+                                <img style="width: 100%; height:100%"  src="${pageContext.request.contextPath}/resources/image/recomm_sports/yoga.jpg" alt="">
                             </div>
                         </div>
                     </div>
@@ -339,33 +326,6 @@
             </div>
         </section>
         <!-- 추천 운동 Area End-->
-
-  
-
-        <!-- Latest Offers Start -->
-        <div class="latest-wrapper lf-padding">
-            <div class="latest-area latest-height d-flex align-items-center" data-background="${pageContext.request.contextPath}/resources/image/letter/latest-offer.png">
-                <div class="container">
-                    <div class="row d-flex align-items-center">
-                        <div class="col-xl-5 col-lg-5 col-md-6 offset-xl-1 offset-lg-1">
-                            <div class="latest-caption">
-                                <h2>우리의 최신 정보를<br> 수신하기 위해</h2>
-                                <p>메일로 구독을 신청하세요!!</p>
-                            </div>
-                        </div>
-                         <div class="col-xl-5 col-lg-5 col-md-6 ">
-                            <div class="latest-subscribe">
-                                <form action="#">
-                                    <input type="email" placeholder="Your email here">
-                                    <button>Subscript Now</button>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Latest Offers End -->
         
         <!-- Shop Method Start-->
         <div class="shop-method-area section-padding30">
@@ -397,40 +357,35 @@
         </div>
         <!-- Shop Method End-->
         
-        <!-- Gallery Start-->
-        <div class="gallery-wrapper lf-padding">
-            <div class="gallery-area">
-                <div class="container-fluid">
-                    <div class="row">
-                        <div class="gallery-items">
-                            <img src="${pageContext.request.contextPath}/resources/img/gallery/gallery1.jpg" alt="">
-                        </div> 
-                        <div class="gallery-items">
-                            <img src="${pageContext.request.contextPath}/resources/img/gallery/gallery2.jpg" alt="">
+        <!-- Latest Offers Start -->
+        <div class="latest-wrapper lf-padding">
+            <div class="latest-area latest-height d-flex align-items-center" data-background="${pageContext.request.contextPath}/resources/image/letter/latest-offer.png">
+                <div class="container">
+                    <div class="row d-flex align-items-center">
+                        <div class="col-xl-5 col-lg-5 col-md-6 offset-xl-1 offset-lg-1">
+                            <div class="latest-caption">
+                                <h2>우리의 최신 정보를<br> 수신하기 위해</h2>
+                                <p>메일로 구독을 신청하세요!!</p>
+                            </div>
                         </div>
-                        <div class="gallery-items">
-                            <img src="${pageContext.request.contextPath}/resources/img/gallery/gallery3.jpg" alt="">
-                        </div>
-                        <div class="gallery-items">
-                            <img src="${pageContext.request.contextPath}/resources/img/gallery/gallery4.jpg" alt="">
-                        </div>
-                        <div class="gallery-items">
-                            <img src="${pageContext.request.contextPath}/resources/img/gallery/gallery5.jpg" alt="">
+                         <div class="col-xl-5 col-lg-5 col-md-6 ">
+                            <div class="latest-subscribe">
+                                <form action="#">
+                                    <input type="email" placeholder="Your email here">
+                                    <button>Subscript Now</button>
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <!-- Gallery End-->
-
+        <!-- Latest Offers End -->
+       
     </main>
 
 	<!-- Footer 영역  -->
 	<jsp:include page="/WEB-INF/views/sport_comm/footer.jsp"/>
    
-	<!-- JS here -->
-	
-
-        
     </body>
 </html>
