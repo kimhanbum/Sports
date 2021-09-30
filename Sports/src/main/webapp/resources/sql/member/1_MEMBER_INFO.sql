@@ -14,10 +14,20 @@ USER_BMI		 NUMBER,						--회원BMI(현재몸무게/(키*키)*10000)
 USER_RMR		 NUMBER,						--회원기초대사량
 											--(남자:66.47+(13.75*현재몸무게)+(5*키)-(6.75*나이)
 											--(여자:655.1+(9.56*현재몸무게)+(1.85*키)-(4.68*나이)
-USER_WATER		 VARCHAR2(10)						--회원물섭취량
+USER_WATER		 VARCHAR2(10),						--회원물섭취량
+USER_IMAGE		 VARCHAR2(100),				--회원 프로필
+USER_PSPORTS1	 VARCHAR2(10),				--선호운동1
+USER_PSPORTS2	 VARCHAR2(10),				--선호운동2
+USER_PSPORTS3	 VARCHAR2(10)				--선호운동3
 );
 
 SELECT * FROM MEMBER_INFO;--MEMBER_INFO 조회
+
+alter table MEMBER_INFO  ADD USER_IMAGE VARCHAR2(100);		--컬럼 추가 구문
+alter table MEMBER_INFO  ADD USER_PSPORTS1	 VARCHAR2(10);	--프로필,선호운동1,2,3
+alter table MEMBER_INFO  ADD USER_PSPORTS2	 VARCHAR2(10);
+alter table MEMBER_INFO  ADD USER_PSPORTS3	 VARCHAR2(10);
+
 DROP TABLE MEMBER_INFO CASCADE CONSTRAINTS;--MEMBER_INFO 삭제
 
 INSERT INTO MEMBER_INFO(
