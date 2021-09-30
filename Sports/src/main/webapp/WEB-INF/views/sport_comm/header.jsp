@@ -54,7 +54,7 @@
                                     <ul id="navigation">       
                                         <li><a href="${pageContext.request.contextPath}/main/mainPage">홈화면</a></li>
                                         <li><a href="${pageContext.request.contextPath}/match/mainPage">운동 파트너 매칭</a></li>
-                                        <li><a href="index.html">운동 멘티/멘토 매칭</a></li>
+                                        <li><a href="${pageContext.request.contextPath}/mmatch/mainPage">운동 멘티/멘토 매칭</a></li>
                                         <li><a href="${pageContext.request.contextPath}/DealA/list">운동 거래</a></li>
                                         <li><a href="${pageContext.request.contextPath}/BBS_FR/list">운동 자유 게시판</a></li>
                                     </ul>
