@@ -25,6 +25,8 @@ public class DealDirect {
 	private MultipartFile uploadfile3;
 	private MultipartFile uploadfile4;
 	
+	private int DIR_READCOUNT;			//글 조회수(9-30 추가)
+	
 	
 	
 	public int getDIR_NUMBER() {
@@ -146,6 +148,12 @@ public class DealDirect {
 	}
 	public void setUploadfile4(MultipartFile uploadfile4) {
 		this.uploadfile4 = uploadfile4;
+	}
+	public int getDIR_READCOUNT() {
+		return DIR_READCOUNT;
+	}
+	public void setDIR_READCOUNT(int dIR_READCOUNT) {
+		DIR_READCOUNT = dIR_READCOUNT;
 	}
 	
 	

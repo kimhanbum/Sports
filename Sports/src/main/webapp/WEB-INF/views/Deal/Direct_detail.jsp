@@ -438,6 +438,7 @@ input.checkbox:checked+label.input-label.radio::before {
 			<h6 class="text-color">Computer Science</h6>
 			<span>Lorem ipsum dolor, sit amet consectetur adipisicing
 				elit. Cumque ac voluptas quae.</span>
+			<div style="text-align:right"><b>조회수</b>&emsp;${b.DIR_READCOUNT}</div>
 			<hr>
 
 
@@ -466,8 +467,11 @@ input.checkbox:checked+label.input-label.radio::before {
 									<hr></li>
 								<li><b>아이디</b>&emsp;&emsp;${b.USER_ID}
 									<hr></li>
+								<li><b>조회수</b>&emsp;&emsp;${b.USER_ID}
+									</li>
 							</ul>
 						</div>
+						
 						<div class="col-md-6">
 							<h4 class="mb-4">Button Group</h4>
 							<hr>
@@ -574,6 +578,7 @@ $(function(){
      });
 	//수정버튼 클릭시
 	$(".buttonM").click(function(){ //로그인창에서 회원가입버튼 클릭 시
+			
 			var a = ${param.num};
 			location.href = "${pageContext.request.contextPath}/DealD/modifyView"
 			 + "?num=" + a;

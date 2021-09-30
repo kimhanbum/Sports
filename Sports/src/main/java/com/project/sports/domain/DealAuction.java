@@ -23,6 +23,7 @@ public class DealAuction {
 	private String	SAVE_AUC_FILE3;
 	private String	ORI_AUC_FILE4;		//사진4
 	private String	SAVE_AUC_FILE4;
+	private int AUC_READCOUNT;			//글 조회수 (9-30 추가)
 	
 	private MultipartFile uploadfile1;
 	private MultipartFile uploadfile2;
@@ -173,6 +174,12 @@ public class DealAuction {
 	}
 	public void setUploadfile4(MultipartFile uploadfile4) {
 		this.uploadfile4 = uploadfile4;
+	}
+	public int getAUC_READCOUNT() {
+		return AUC_READCOUNT;
+	}
+	public void setAUC_READCOUNT(int aUC_READCOUNT) {
+		AUC_READCOUNT = aUC_READCOUNT;
 	}
 
 	

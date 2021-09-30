@@ -19,6 +19,13 @@ create table Deal_Direct (
 	
 	/*추가된 부분 9-27*/
 	create sequence Dir_seq; 
+	/*-----------*/
+	
+	/*추가된 부분 9-30*/
+	ALTER TABLE Deal_Direct ADD DIR_READCOUNT number  DEFAULT 0; 
+	/*-----------*/
+	
+	ALTER TABLE Deal_Direct DROP COLUMN DIR_READCOUNT;
 	
 	delete from Deal_Direct;
 	
@@ -26,13 +33,11 @@ create table Deal_Direct (
 	
 	select* from Deal_direct;
 	
-	select * from
-	(select rownum rnum , DIR_NUMBER , DIR_SUBJECT , 
-	DIR_PRICE ,DIR_ADDRESS ,DIR_DATE ,SAVE_DIR_MAINFILE
-		from(
-		select * from deal_direct
-		order by dir_number))
-	where rnum >= 1 and rnum <=10
-		
+	
+	
+update deal_direct set DIR_READCOUNT = DIR_READCOUNT +1 
+where dir_number = 35;
+
+
 
 	

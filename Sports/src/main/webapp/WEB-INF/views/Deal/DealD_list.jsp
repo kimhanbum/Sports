@@ -36,6 +36,7 @@
 	href="${pageContext.request.contextPath}/resources/css/nice-select.css">
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/style.css">
+	<script src = "http://code.jquery.com/jquery-latest.js"></script>
 </head>
 <style>
 #paging {
@@ -152,11 +153,11 @@ background-color
 					</div>
 					<form action="#">
 						<div class="select-itms">
-							<select name="select" id="select1">
-								<option value="">최신순</option>
-								<option value="">정확순</option>
-								<option value="">조회순</option>
-								<option value="">Featured C</option>
+							<select name="select" id="view">
+								<option value="1" selected>최신순</option>
+								<option value="2">정확순</option>
+								<option value="3">조회순</option>
+								<option value="4">금액순</option>
 							</select>
 						</div>
 					</form>
@@ -199,6 +200,10 @@ background-color
 												<th>올리시간</th>
 												<td>${b.DIR_DATE}</td>
 											</tr>
+											<tr>
+												<th>조회수</th>
+												<td>${b.DIR_READCOUNT}</td>
+											</tr>
 
 										</table>
 
@@ -216,7 +221,6 @@ background-color
 
 				</div>
 
-
 			</div>
 			<hr>
 			<div class="sungjinS">
@@ -225,16 +229,19 @@ background-color
 						class="header-right f-right d-none d-lg-block d-flex justify-content-between">
 						<li class="d-none d-xl-block" id="sd-none">
 							<div class="form-box f-right ">
-								<input type="text" name="Search" id="sinput"
-									placeholder="Search products">
+							 <form  method="get" action="list" name="form1" id ="form1">
+								<input type="text" name="search" id="search"
+									placeholder="Search products" >
+							
 								<div class="search-icon">
-									<i class="fas fa-search special-tag"></i>
+									<i onclick="SubmitForm()" class="fas fa-search special-tag" id ="searchB"></i>
 								</div>
+							</form>
 							</div>
 						</li>
 
 					</ul>
-
+				
 				</div>
 			</div>
 
@@ -342,8 +349,29 @@ background-color
 			</div>
 		</div>
 	</div>
+		<script>
+		 function SubmitForm()
+	        {
+
+	            form1.submit();
+	        }
+		 function go(page) {
+				var view = $("#view").val(); //최신순부터 값은 1~3
+				
+				console.log(view)
+				console.log(page)
+				
+				console.log(data)
+				ajax(data);
+			}
+		 $(function() {
+			 var data = "limit=" + limit + "&state=ajax&page=" + page;
+				ajax(data);
+			}
+	</script>
 	<!-- Gallery End--> </main>
 	<!-- Footer 영역  -->
+
 	<jsp:include page="/WEB-INF/views/sport_comm/footer2.jsp"/>
 
 	<!-- JS here -->

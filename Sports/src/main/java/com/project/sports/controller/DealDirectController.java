@@ -1,6 +1,7 @@
 package com.project.sports.controller;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Random;
@@ -36,12 +37,19 @@ public class DealDirectController {
 	private String saveFolder = "C:\\Users\\82109\\git\\Sports\\Sports\\src\\main\\webapp\\resources\\dealupload2\\";
 
 	// 메인 페이지 리스트
-	@RequestMapping(value = "/list", method = RequestMethod.GET)
-	public ModelAndView AutionList(@RequestParam(value = "page", defaultValue = "1", required = false) int page,
+	@RequestMapping(value = "/list")
+	public ModelAndView AutionList
+	(@RequestParam(value = "page",
+	defaultValue = "1", required = false) int page, 
+			@RequestParam(value = "search",
+			defaultValue = "", required = false) String search,
+			String view,
 			ModelAndView mv) {
-
+		
 		int limit = 6; // 한 화면에 출력할 레코드 갯수
-
+		
+		logger.info("View" + view);
+		
 		int listcount = DealService.getListCount2(); // 총 리스트 수를 받아옴
 
 		// 총 페이지 수
@@ -55,8 +63,15 @@ public class DealDirectController {
 
 		if (endpage > maxpage)
 			endpage = maxpage;
-
-		List<DealDirect> Direct = DealService.getDirectList(page, limit); //리스트를 받아옴 
+		
+		List<DealDirect> Direct = new ArrayList<DealDirect>();
+		
+		if(search == "") {
+			Direct = DealService.getDirectList(page, limit); //리스트를 받아옴
+		}else {
+			Direct = DealService.getSearchDirecList(page,limit,search);
+		}
+		 
 		
 		mv.setViewName("Deal/DealD_list");
 		mv.addObject("page",page);
@@ -68,9 +83,6 @@ public class DealDirectController {
 		mv.addObject("limit",limit);
 		
 		
-		
-		
-	
 		
 		return mv;
 
@@ -89,6 +101,10 @@ public class DealDirectController {
 	public ModelAndView Direct_detail(int num, ModelAndView mv,
 			HttpServletRequest request) {
 		DealDirect Direct = DealService.D_getDetail(num);
+		
+		
+		int count = DealService.D_readcount(num);
+		
 		if(Direct==null) {
 			logger.info("상세보기 실패");
 			mv.setViewName("error/error");
@@ -281,10 +297,191 @@ public class DealDirectController {
 		//수정 폼 페이지로 이동할 때 원문 글 내용을 보여주기 때문에 boarddata 개게를 
 		//ModelAndView 객체에 저장합니다. 
 		mv.addObject("d", Direct);
+		logger.info("성진" + Direct.getORI_DIR_FILE2());
 		//글 수정 폼 페이지로 이도아기위해 경로를 설정합니다.
 		mv.setViewName("Deal/DealD_modify");
 		
 		return mv;
+	}
+	@PostMapping("/modifyAction")
+	public String BoardModifyAction( DealDirect Direct, 
+			String check , String check2 , String check3,
+			String check4 , Model mv, HttpServletRequest request,
+			RedirectAttributes rattr ,int num) throws Exception {
+		
+		DealDirect Direct2 = DealService.D_getDetail(num);
+		Direct.setDIR_NUMBER(num);
+		
+		MultipartFile uploadfile1 = Direct.getUploadfile1();
+		MultipartFile uploadfile2= Direct.getUploadfile2();
+		MultipartFile uploadfile3 = Direct.getUploadfile3();
+		MultipartFile uploadfile4 = Direct.getUploadfile4();
+		//String saveFolder = 
+				//request.getSession().getServletContext().getRealPath("resources") + "/upload/";
+		
+		if(check!=null && !check.equals("")) { //기존파일 그대로 사용하는 경우입니다.
+			logger.info("기존파일 그대로 사용합니다.");
+			Direct.setORI_DIR_MAINFILE(check);
+			Direct.setSAVE_DIR_MAINFILE(Direct2.getSAVE_DIR_MAINFILE());
+			//<input type="hidden" name = "BOARD_FILE" value="${baorddata.BAORD_FILE}">
+			//위 문장 때문에 board.setBAORD_FILE()값은 자동 저장됩니다. 
+			
+		}else {
+			
+			if(!uploadfile1.isEmpty()) {
+				logger.info("파일 변경되었습니다.");
+				
+				
+				String fileName = uploadfile1.getOriginalFilename(); //원래 파일명
+				Direct.setORI_DIR_MAINFILE(fileName);
+				
+				String fileDBName = fileDBName(fileName, saveFolder);
+				
+				//transferTo(File path) : 업로드한 파일을 매개변수의 경로에 저장합니다. 
+				uploadfile1.transferTo(new File(saveFolder + fileDBName));
+				
+				//바뀐 파일며으로 저장 
+				Direct.setSAVE_DIR_MAINFILE(fileDBName);
+				
+			} else { //uploadfile.isEmpty() 인 경우 - 파일 선택하지 않은 경우
+				logger.info("선택 파일 없습니다.");
+				//<input type="hidden" name="BOARD_FILE" value="${boarddata.BOARD_FILE}">
+				//위 태그에 값이 있다면 ""로 값을 변경합니다.
+				Direct.setORI_DIR_MAINFILE("0");//""로 초기화 합니다.
+				Direct.setSAVE_DIR_MAINFILE("0");//""로 초기화 합니다.
+			}//else end
+		}// else end 
+		
+		if(check2!=null && !check2.equals("")) { //기존파일 그대로 사용하는 경우입니다.
+			logger.info("기존파일 그대로 사용합니다.");
+			Direct.setORI_DIR_FILE2(check2);
+			Direct.setSAVE_DIR_FILE2(Direct2.getSAVE_DIR_FILE2());
+			//<input type="hidden" name = "BOARD_FILE" value="${baorddata.BAORD_FILE}">
+			//위 문장 때문에 board.setBAORD_FILE()값은 자동 저장됩니다. 
+			
+		}else {
+			
+			if(!uploadfile2.isEmpty()) {
+				logger.info("파일 변경되었습니다.");
+				
+				
+				String fileName = uploadfile2.getOriginalFilename(); //원래 파일명
+				Direct.setORI_DIR_FILE2(fileName);
+				
+				String fileDBName = fileDBName(fileName, saveFolder);
+				
+				//transferTo(File path) : 업로드한 파일을 매개변수의 경로에 저장합니다. 
+				uploadfile2.transferTo(new File(saveFolder + fileDBName));
+				
+				//바뀐 파일며으로 저장 
+				Direct.setSAVE_DIR_FILE2(fileDBName);
+				
+			} else { //uploadfile.isEmpty() 인 경우 - 파일 선택하지 않은 경우
+				logger.info("선택 파일 없습니다.");
+				//<input type="hidden" name="BOARD_FILE" value="${boarddata.BOARD_FILE}">
+				//위 태그에 값이 있다면 ""로 값을 변경합니다.
+				Direct.setSAVE_DIR_FILE2("0");
+				Direct.setORI_DIR_FILE2("0");
+			}//else end
+		}// else end
+		
+		if(check3!=null && !check3.equals("")) { //기존파일 그대로 사용하는 경우입니다.
+			logger.info("기존파일 그대로 사용합니다.");
+			Direct.setORI_DIR_FILE3(check3);
+			Direct.setSAVE_DIR_FILE3(Direct2.getSAVE_DIR_FILE3());
+			//<input type="hidden" name = "BOARD_FILE" value="${baorddata.BAORD_FILE}">
+			//위 문장 때문에 board.setBAORD_FILE()값은 자동 저장됩니다. 
+			
+		}else {
+			
+			if(!uploadfile3.isEmpty()) {
+				logger.info("파일 변경되었습니다.");
+				
+				
+				String fileName = uploadfile3.getOriginalFilename(); //원래 파일명
+				Direct.setORI_DIR_FILE3(fileName);
+				
+				String fileDBName = fileDBName(fileName, saveFolder);
+				
+				//transferTo(File path) : 업로드한 파일을 매개변수의 경로에 저장합니다. 
+				uploadfile3.transferTo(new File(saveFolder + fileDBName));
+				
+				//바뀐 파일며으로 저장 
+				Direct.setSAVE_DIR_FILE3(fileDBName);
+				
+			} else { //uploadfile.isEmpty() 인 경우 - 파일 선택하지 않은 경우
+				logger.info("선택 파일 없습니다.");
+				//<input type="hidden" name="BOARD_FILE" value="${boarddata.BOARD_FILE}">
+				//위 태그에 값이 있다면 ""로 값을 변경합니다.
+				Direct.setSAVE_DIR_FILE3("0");
+				Direct.setORI_DIR_FILE3("0");
+			}//else end
+		}// else end
+		
+		if(check4!=null && !check4.equals("")) { //기존파일 그대로 사용하는 경우입니다.
+			logger.info("기존파일 그대로 사용합니다.");
+			Direct.setORI_DIR_FILE4(check4);
+			Direct.setSAVE_DIR_FILE4(Direct2.getSAVE_DIR_FILE4());
+			//<input type="hidden" name = "BOARD_FILE" value="${baorddata.BAORD_FILE}">
+			//위 문장 때문에 board.setBAORD_FILE()값은 자동 저장됩니다. 
+			
+		}else {
+			
+			if(!uploadfile4.isEmpty()) {
+				logger.info("파일 변경되었습니다.");
+				
+				
+				String fileName = uploadfile4.getOriginalFilename(); //원래 파일명
+				Direct.setORI_DIR_FILE4(fileName);
+				
+				String fileDBName = fileDBName(fileName, saveFolder);
+				
+				//transferTo(File path) : 업로드한 파일을 매개변수의 경로에 저장합니다. 
+				uploadfile4.transferTo(new File(saveFolder + fileDBName));
+				
+				//바뀐 파일며으로 저장 
+				Direct.setSAVE_DIR_FILE4(fileDBName);
+				
+			} else { //uploadfile.isEmpty() 인 경우 - 파일 선택하지 않은 경우
+				logger.info("선택 파일 없습니다.");
+				//<input type="hidden" name="BOARD_FILE" value="${boarddata.BOARD_FILE}">
+				//위 태그에 값이 있다면 ""로 값을 변경합니다.
+				Direct.setSAVE_DIR_FILE4("0");
+				Direct.setORI_DIR_FILE4("0");
+			}//else end
+		}// else end
+		
+		logger.info("DIR_SUBJECT" + Direct.getDIR_SUBJECT());
+		logger.info("DIR_PHONE" + Direct.getDIR_PHONE());
+		logger.info("DIR_ADDRESS" + Direct.getDIR_ADDRESS());
+		logger.info("DIR_PRICE" + Direct.getDIR_PRICE());
+		logger.info("DIR_CONTENT" + Direct.getDIR_CONTENT());
+		logger.info("ORI_DIR_MAINFILE" + Direct.getORI_DIR_MAINFILE());
+		logger.info("SAVE_DIR_MAINFILE" + Direct.getSAVE_DIR_MAINFILE());
+		logger.info("ORI_DIR_FILE2" + Direct.getORI_DIR_FILE2());
+		logger.info("SAVE_DIR_FILE2" + Direct.getSAVE_DIR_FILE2());
+		logger.info("ORI_DIR_FILE3" + Direct.getORI_DIR_FILE3());
+		logger.info("SAVE_DIR_FILE3" + Direct.getSAVE_DIR_FILE3());
+		logger.info("ORI_DIR_FILE4" + Direct.getORI_DIR_FILE4());
+		logger.info("SAVE_DIR_FILE4" + Direct.getSAVE_DIR_FILE4());
+		String url ="";
+		// DAO에서 수정 메서드 호출하여 수정합니다. 
+		int result = DealService.D_Modify(Direct);
+		//수정에 실패한 경우 
+		if (result ==0) {
+			logger.info("게시판 수정 실패");
+			mv.addAttribute("url",request.getRequestURL());
+			mv.addAttribute("message", "게시판 술정 실패");
+			url = "error/error";
+		}else {//수정 성공의 경우
+			logger.info("게시판 수정 완료");
+			// 수정한 글 내용을 보여주기 위해글 내용 보기 보기 페이지로 이동하기위해 경로를 설정합니다.
+			url = "redirect:detail";
+			rattr.addAttribute("num", Direct.getDIR_NUMBER());
+			
+		
+		}
+		return url;
 	}
 
 }

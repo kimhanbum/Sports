@@ -34,4 +34,16 @@ public class DealDirectDAO {
 		public int D_Delete(int num) {
 			return sqlSession.delete("Direct.delete",num);
 		}
+
+		public int D_Modify(DealDirect direct) {
+			return sqlSession.delete("Direct.modify",direct);
+		}
+
+		public List<DealDirect> getSearchDirectList(HashMap<String, Object> map) {
+			return sqlSession.selectList("Direct.searchlist",map);
+		}
+
+		public int D_readcount(int num) {
+			return sqlSession.update("Direct.readcount",num);
+		}
 }
