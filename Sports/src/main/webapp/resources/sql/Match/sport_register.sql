@@ -25,3 +25,6 @@ values('admin02', reg_seq.nextval, 2, 9, '서울', '종로구', '13:00', '중');
 
 insert into SPORT_REGISTER(REGISTER_ID, REGISTER_NUM, SPORT_NUM,MATCH_PRS, MATCH_ADR, MATCH_DTL_ADR, MATCH_TIME, MATCH_SKL)
 values('admin03', reg_seq.nextval, 3, 11, '인천', '연수구', '11:00', '상');
+
+
+
