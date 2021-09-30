@@ -25,9 +25,52 @@ public class MatchController {
 		return mv;
 	}
 	
-	@RequestMapping(value = "/Search", method = RequestMethod.POST)
-	public ModelAndView search(ModelAndView mv) {
-		mv.setViewName("sport_match/match_baseball");
+	@RequestMapping(value = "/football", method = RequestMethod.GET)
+	public ModelAndView football(ModelAndView mv) {
+		mv.setViewName("sport_match/match_football");
+		return mv;
+	}
+	
+	@RequestMapping(value = "/basketball", method = RequestMethod.GET)
+	public ModelAndView basketball(ModelAndView mv) {
+		mv.setViewName("sport_match/match_basketball");
+		return mv;
+	}
+	
+	@RequestMapping(value = "/golf", method = RequestMethod.GET)
+	public ModelAndView golf(ModelAndView mv) {
+		mv.setViewName("sport_match/match_golf");
+		return mv;
+	}
+	
+	@RequestMapping(value = "/bowling", method = RequestMethod.GET)
+	public ModelAndView bowling(ModelAndView mv) {
+		mv.setViewName("sport_match/match_bowling");
+		return mv;
+	}
+	
+	@RequestMapping(value = "/tennis", method = RequestMethod.GET)
+	public ModelAndView tennis(ModelAndView mv) {
+		mv.setViewName("sport_match/match_tennis");
+		return mv;
+	}
+	
+	@RequestMapping(value = "/badminton", method = RequestMethod.GET)
+	public ModelAndView badminton(ModelAndView mv) {
+		mv.setViewName("sport_match/match_badminton");
+		return mv;
+	}
+	
+	
+	@RequestMapping(value = "/tabletennis", method = RequestMethod.GET)
+	public ModelAndView tabletennis(ModelAndView mv) {
+		mv.setViewName("sport_match/match_tabletennis");
+		return mv;
+	}
+	
+	@RequestMapping(value = "/volleyball", method = RequestMethod.GET)
+	public ModelAndView vallyball(ModelAndView mv) {
+		mv.setViewName("sport_match/match_volleyball");
 		return mv;
 	}
 }

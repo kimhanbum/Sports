@@ -17,7 +17,7 @@
 <link rel="stylesheet" href="https://www.baro-match.co.kr/newsite/system/match/css/match.css?sng=1632462206" />
 <link rel ="stylesheet" href="${pageContext.request.contextPath}/resources/css/match/sport_match.css">
 <style>
-	#icon_box .icon03:after{z-index:1;
+	#icon_box .icon06:after{z-index:1;
 						content: '';
 					    position: absolute;
 					    border-top: 10px solid #eb3b04;
@@ -42,12 +42,12 @@
 			<div class="web_size">
 				<ul>
 					<a href="mainPage"><li class="icon01 top_icon" data-value="1/" >축구/풋살</li></a>
-					<a href="baseball" ><li class="icon03 top_icon" data-value="3/" style="background-color:#eb3b04;">야구</li></a>
+					<a href="baseball" ><li class="icon03 top_icon" data-value="3/">야구</li></a>
 					<a href="football"><li class="icon09 top_icon" data-value="9/">족구</li></a>
 					<a href="basketball"><li class="icon02 top_icon" data-value="2/">농구</li></a>
 					<a href="volleyball"><li class="icon04 top_icon" data-value="4/">배구</li></a>
 					<a href="tabletennis"><li class="icon05 top_icon" data-value="5/">탁구</li></a>
-					<a href="badminton"><li class="icon06 top_icon" data-value="6/" >배드민턴</li></a>
+					<a href="badminton"><li class="icon06 top_icon" data-value="6/" style="background-color:#eb3b04;">배드민턴</li></a>
 					<a href="tennis"><li class="icon07 top_icon" data-value="7/">테니스</li></a>
 					<a href="bowling"><li class="icon010 top_icon" data-value="10/">볼링</li></a>
 					<a href="golf"><li class="icon08 top_icon" data-value="8/">골프</li></a>
@@ -73,12 +73,12 @@
 	</div>
 	</div>
            <div class="slider-active">
-               <div class="single-slider slider-height" data-background="${pageContext.request.contextPath}/resources/image/sport/baseball.jpg">
+               <div class="single-slider slider-height" data-background="${pageContext.request.contextPath}/resources/image/sport/badminton.jpg">
                    <div class="container1">
                        <div class="row d-flex align-items-center justify-content-between">
                            <div class="col-xl-5 col-lg-6 col-md-6 d-none d-md-block">
                                <div class="hero__img" data-animation="bounceIn" data-delay=".4s">
-                                   <img class="smallsoccer" src="${pageContext.request.contextPath}/resources/image/sport/baseball.jpg" alt="">
+                                   <img class="smallsoccer" src="${pageContext.request.contextPath}/resources/image/sport/badminton.jpg" alt="">
                                </div>
                            </div>
                            <div class="col-xl-5 col-lg-5 col-md-5 col-sm-8">
