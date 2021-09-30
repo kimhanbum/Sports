@@ -5,7 +5,7 @@
 <head>
 <title>자유게시판 상세보기</title>
 <jsp:include page="/WEB-INF/views/sport_comm/header.jsp"/>
-<%-- <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/view.css">
+ <%-- <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/view.css">
  --%>
 <script src="${pageContext.request.contextPath}/resources/js/jquery-3.6.0.js"></script>
  <script src="${pageContext.request.contextPath}/resources/js/BBS_FR/view.js"></script>
@@ -181,5 +181,8 @@ form[action=down] > input[type=submit]{
 			<div id="message"></div>
 	</div>
 </div>
+<!-- footer 영역  -->
+<jsp:include page="/WEB-INF/views/sport_comm/footer.jsp"/>
+
 </body>
 </html>

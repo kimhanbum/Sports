@@ -1,104 +1,35 @@
 function go(page){
 	var limit = $('#viewcount').val();
 	var data = "limit=" + limit + "&state=ajax&page=" + page;
-	ajax(data);
 }
-
-function setPaging(href, digit){
-	var output = "<li class=page-item>";
-	gray="";
-	if(href==""){
-		gray=" gray";
-	}
-	anchor = "<a class='page-link" + gray + "'" + href + ">"+ digit + "</a></li>";
-	output += anchor;
-	return output; 
-}
-
-function ajax(sdata){
-	console.log(sdata)
-	output = "";
-	$.ajax({
-		type : "POST",
-		data : sdata,
-		url : "list_ajax",
-		dataType : "json",
-		cache : false,
-		success : function(data) {
-			$("#viewcount").val(data.limit);
-			$("table").find("font").text("글 개수 : " + data.listcount);
-			
-			if(data.listcount > 0) {	//총 개수가 0보다 큰 경우
-				$("tbody").remove();
-				var num = data.listcount - (data.page - 1) * data.limit;
-				console.log(num)
-				var output = "<tbody>";
-				$(data.boardlist).each(
-						function(index, item){
-							output += '<tr><td>' + (num--) + '</td>'
-							blank_count = item.board_RE_LEV * 2 + 1;
-							blank ='&nbsp;';
-							for (var i = 0; i < blank_count; i++){
-								blank += '&nbsp;&nbsp;';
-							}
-							img="";
-							if(item.board_RE_LEV > 0){
-								img="<img src='../resources/image/line.gif'>";
-							}
-							
-							output += "<td><div>" + blank + img
-							output += ' <a href="detail?num='+ item.fr_NO + '">'
-							output += item.fr_SUBJECT.replace(/</g, '&lt;').replace(/>/g, '&gt;')
-									+ '</a>' +'<span style="color:gray;font-size:small">' +  '[' + item.cnt +']'  + '</span></div></td>'
-							output += '<td><div>' + item.user_ID+'</div></td>'
-							output += '<td><div>' + item.fr_DATE+'</div></td>'
-							output += '<td><div>' + item.fr_READCOUNT
-									+ '</div></td></tr>'
-						})
-				output += "</tbody>"
-				$('table').append(output)//table완성
-			
-				$(".pagination").empty();//페이징 처리 영역 내용 제거
-				output = "";
-				
-				digit = '이전&nbsp;'
-				href="";
-				if (data.page > 1){
-					href = 'href=javascript:go(' + (data.page - 1) + ')';
-				}
-				output += setPaging(href, digit);
-				
-				for (var i = data.startpage; i <= data.endpage; i++){
-					digit = i;
-					href="";
-					if(i != data.page){
-						href = 'href=javascript:go(' + i + ')';
-					}
-					output += setPaging( href, digit);
-				}
-				digit = '&nbsp;다음&nbsp;';
-				href="";
-				if (data.page < data.maxpage){
-					href = 'href=javascript:go(' + (data.page + 1) + ')';
-				}
-				output += setPaging( href, digit);
-				
-				$('.pagination').append(output)
-			}//if(data.listcount) end
-			
-		},//success end
-		error : function(){
-			console.log('에러')
-		}
-	})//ajax end
-}//function ajax end
+//검색
+$(function(){
+	//검색 클릭 후 응답화면에는 검색 시 선택한 필드가 선택되도록합니다.
+	var selectedValue = '${search_field}'
+	if(selectedValue != '-1')
+		$("#viewcount").val(selectedValue);
+	
+	
+	//검색어 입력창에 placeholder 나타나도록 합니다.
+	$("#viewcount").change(function(){
+		selectedValue = $(this).val();
+		$("input").val('');
+		message=["카테고리", "아이디", "제목", "내용"]
+		$("input").attr("placeholder", message[selectedValue] + "입력하세요");
+	});	//$("#viewcount").change end
+	
+})
 
 $(function(){
 	$("#viewcount").change(function(){
 		go(1);//보여줄 페이지를 1페이지로 설정합니다.
 	});	//change end
 	
-	$("button").click(function(){
+	$("#write").click(function(){
 		location.href="write";
+	})
+	
+	$("#sub").click(function(){
+		location.href="list?search_word="+$("#sinput").val()+"&search_field="+$("#viewcount").val();
 	})
 })
