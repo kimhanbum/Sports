@@ -3,12 +3,15 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="BBS_FR">
-	<select id="count" resultType="int">
-			select count(*) from BBS_FR
+
+	<select id="searchCount" parameterType="map" resultType="int">
+		select count(*) 
+		from BBS_FR
+	 	<include refid="search_"/>
 	</select>
 	
-	<select id="list" parameterType="map" resultType="FR">		 
-		select * from
+	<select id="searchList" parameterType="list" resultType="FR">
+		 select * from
 		  (select rownum rnum, b.*
 		  from 
 		  		(select BBS_FR.*, nvl(cnt,0) cnt
@@ -17,6 +20,7 @@
 		 								from BBS_FCM
 		 								group by FR_NO) c
 				on BBS_FR.FR_NO = c.FR_NO
+				<include refid="search_"/>
 				order by FR_DATE desc
 				)b
 		  )
@@ -27,6 +31,19 @@
 	  	 	rnum <= #{end} 
 	  	]]>
 	</select>
+	
+	<sql id="search_">
+		<if test="search_field!=null">
+		where
+	 	<choose>
+	 		<when test="search_field=='FR_CSFC'">FR_CSFC</when>
+	 		<when test="search_field=='USER_ID'">USER_ID</when>
+	 		<when test="search_field=='FR_SUBJECT'">FR_SUBJECT</when>
+	 		<when test="search_field=='FR_CONTENT'">FR_CONTENT</when>
+	 	</choose>
+	 	like #{search_word}
+		</if>
+	</sql>
 	
 	<insert id="insert" parameterType="FR">
 	<selectKey resultType="int" order="BEFORE"
@@ -67,10 +84,18 @@
 	</select>
 	
 	 <delete id="delete" parameterType="FR">
-	 <![CDATA[ 
 	     delete from BBS_FR 
 		 where 	FR_NO = #{FR_NO}
-		]]>
 	</delete>
+	
+	<update id="modify" parameterType="FR">
+		update BBS_FR
+		set
+			FR_SUBJECT=#{FR_SUBJECT},
+			FR_CONTENT=#{FR_CONTENT},
+			FR_FILE=#{FR_FILE, jdbcType=VARCHAR},
+			FR_ORIGINAL=#{FR_ORIGINAL, jdbcType=VARCHAR}
+		where FR_NO=${FR_NO}
+	</update>
 	
 </mapper>

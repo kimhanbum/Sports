@@ -7,10 +7,10 @@ import com.project.sports.domain.BBS_FR;
 
 public interface Bbs_FrService {
 	//글의 개수 구하기
-	public int getListCount();
+	public int getSearchListCount(int index, String search_word);
 		
 	//글의 목록 보기
-	public List<BBS_FR> getBoardList(int page, int limit);
+	public List<BBS_FR> getSearchList(int index, String search_word, int page, int limit);
 	
 	//글 작성
 	public void insertBoard(BBS_FR board);
@@ -26,4 +26,9 @@ public interface Bbs_FrService {
 	
 	//게시글 삭제
 	public int FrDelete(int num);
+	
+	//게시글 수정
+	public int FrModify(BBS_FR boarddata);
+
+
 }
