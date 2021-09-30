@@ -28,7 +28,15 @@ select * from member_info;
 
 delete from DEAL_AUCTION;
 
-/*추가된 부분*/
+/*추가된 부분 9- 27 */
 create sequence Auc_seq; 
+/*----------*/
 
+/*추가된 부분 9-30*/
+	ALTER TABLE DEAL_AUCTION ADD AUC_READCOUNT number  DEFAULT 0; 
+/*-----------*/
+
+	ALTER TABLE DEAL_AUCTION DROP COLUMN AUC_READCOUNT;
+	
+	select * from deal_auction;
 

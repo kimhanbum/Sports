@@ -73,5 +73,26 @@ public class DealServiceImpl implements DealService {
 			return result = dao2.D_Delete(num);
 		}
 
+		@Override
+		public int D_Modify(DealDirect direct) {
+			return dao2.D_Modify(direct);
+		}
+
+		@Override
+		public List<DealDirect> getSearchDirecList(int page, int limit, String search) {
+			HashMap<String , Object>map = new HashMap<String,Object>();
+			int startrow=(page-1)*limit +1; 
+			int endrow = startrow+limit-1;
+			map.put("start", startrow);
+			map.put("end",endrow);
+			map.put("search_word", "%" + search + "%");
+			return dao2.getSearchDirectList(map);
+		}
+
+		@Override
+		public int D_readcount(int num) {
+			return dao2.D_readcount(num);
+		}
+
 
 }

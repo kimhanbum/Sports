@@ -27,6 +27,12 @@ public interface DealService {
 
 	public int D_Delete(int num);
 
+	public int D_Modify(DealDirect direct);
+
+	public List<DealDirect> getSearchDirecList(int page, int limit, String search);
+
+	public int D_readcount(int num);
+
 	
 
 }

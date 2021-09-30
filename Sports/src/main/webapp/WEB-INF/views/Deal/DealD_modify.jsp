@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -97,7 +98,7 @@ label.file {
   font-family:sans-serif;
   text-align:right;
 }
-#filevalue {
+#filevalue , #filevalue2,#filevalue3,#filevalue4{
   content:"No file chosen";
   display:block;
   position:absolute;
@@ -265,7 +266,7 @@ input.checkbox:checked+label.input-label.radio::before {
 							</h2>
 
 						</div>
-						<form action ="add" method = "post" enctype="multipart/form-data">
+						<form action ="modifyAction?num=${param.num}" method = "post" enctype="multipart/form-data">
 							<div class="row">
 								<div class="col-md-4 form-group">
 									<label for="DIR_SUBJECT">제목</label> <input type="text" id="DIR_SUBJECT"
@@ -318,7 +319,14 @@ input.checkbox:checked+label.input-label.radio::before {
 								<div class="col-md-6 form-group">
 									<label for="message">사진 첨부</label><br> <label class="file"
 										title="">
+										<c:choose>
+										 <c:when test="${d.ORI_DIR_MAINFILE!='0'}">
 										 <span id="filevalue">${d.ORI_DIR_MAINFILE}</span>
+										</c:when>
+										<c:when test="${d.ORI_DIR_MAINFILE=='0'}">
+										 <span id="filevalue">No file chosen</span>
+										</c:when>
+										</c:choose>
 										<input type="file"
 										onchange="this.parentNode.setAttribute('title', this.value.replace(/^.*[\\/]/, ''))"
 										id="upfile1" name="uploadfile1" 
@@ -328,7 +336,14 @@ input.checkbox:checked+label.input-label.radio::before {
 								<div class="col-md-6 form-group">
 									<label for="message"></label><br> <label class="file"
 										title="">
-										<span id="filevalue2">${d.ORI_DIR_FILE2}</span>
+										<c:choose>
+										 <c:when test="${d.ORI_DIR_FILE2!='0'}">
+										 <span id="filevalue2">${d.ORI_DIR_FILE2}</span>
+										</c:when>
+										<c:when test="${d.ORI_DIR_FILE2=='0'}">
+										 <span id="filevalue2">No file chosen</span>
+										</c:when>
+										</c:choose>
 										<input type="file"
 										onchange="this.parentNode.setAttribute('title', this.value.replace(/^.*[\\/]/, ''))"
 										id="upfile2" name="uploadfile2"
@@ -339,7 +354,14 @@ input.checkbox:checked+label.input-label.radio::before {
 								<div class="col-md-6 form-group">
 									<label for="message"></label><br> <label class="file"
 										title="">
-										<span id="filevalue3">${d.ORI_DIR_FILE3}</span>
+										<c:choose>
+										 <c:when test="${d.ORI_DIR_FILE3!='0'}">
+										 <span id="filevalue3">${d.ORI_DIR_FILE3}</span>
+										</c:when>
+										<c:when test="${d.ORI_DIR_FILE3=='0'}">
+										 <span id="filevalue3">No file chosen</span>
+										</c:when>
+										</c:choose>
 										<input type="file"
 										onchange="this.parentNode.setAttribute('title', this.value.replace(/^.*[\\/]/, ''))"
 										id="upfile3" name="uploadfile3"
@@ -348,7 +370,14 @@ input.checkbox:checked+label.input-label.radio::before {
 								<div class="col-md-6 form-group">
 									<label for="message"></label><br> <label class="file"
 										title="">
-										<span id="filevalue4">${d.ORI_DIR_FILE2}</span>
+										<c:choose>
+										 <c:when test="${d.ORI_DIR_FILE4!='0'}">
+										 <span id="filevalue4">${d.ORI_DIR_FILE4}</span>
+										</c:when>
+										<c:when test="${d.ORI_DIR_FILE4=='0'}">
+										 <span id="filevalue4">No file chosen</span>
+										</c:when>
+										</c:choose>
 										<input type="file"
 										onchange="this.parentNode.setAttribute('title', this.value.replace(/^.*[\\/]/, ''))"
 										id="upfile4" name="uploadfile4"
@@ -401,7 +430,59 @@ input.checkbox:checked+label.input-label.radio::before {
 	$(document).ready(function(){
 		
 		var check = 0 ;
-		
+		var check2 = 0 ;
+		var check3 = 0 ;
+		var check4 = 0; 
+		//submit 버튼 클릭할 때 이벤트 부분
+		$("form").submit(function(){
+	
+			/*
+			 이곳이 적용되는 경우
+			 1. 파일 첨부를 변경하지 않은 경우
+			 	파일 첨부를 변경하지 않으면 $('#filevalue').text()의 파일명을 
+			 	파라미터 'check'라는 이름으로 form에 추가하여 전송합니다.
+			 
+			 2. 파일첨부의 remove 이미지를 클릭해서 파일을 제거하고 파일첨부를 변경하지 않은 경우 
+			 	이때 value의 값은 ''입니다.
+			 * 
+			 */
+			if (check==0){
+				value=$('#filevalue').text();
+				if(value=='No file chosen'){
+					value='0';
+				}
+				
+				html = "<input type='text' value='" + value + "' name = 'check'>";
+				$(this).append(html);
+			}
+			
+			if (check2==0){
+				value2=$('#filevalue2').text();
+				if(value2=='No file chosen'){
+					value2='0';
+				}
+				html = "<input type='text' value='" + value2 + "' name = 'check2'>";
+				$(this).append(html);
+			}
+			
+			if (check3==0){
+				value3=$('#filevalue3').text();
+				if(value3=='No file chosen'){
+					value3='0';
+				}
+				html = "<input type='text' value='" + value3 + "' name = 'check3'>";
+				$(this).append(html);
+			}
+			
+			if (check4==0){
+				value4=$('#filevalue4').text();
+				if(value4=='No file chosen'){
+					value4='0';
+				}
+				html = "<input type='text' value='" + value4 + "' name = 'check4'>";
+				$(this).append(html);
+			}
+		}); //submit end 
 		
 		$("#upfile1").change(function(){
 			check++;
@@ -410,19 +491,19 @@ input.checkbox:checked+label.input-label.radio::before {
 			console.log(check);
 		});
 		$("#upfile2").change(function(){
-			check++;
+			check2++;
 			var inputfile = $(this).val().split('\\');
 			$('#filevalue2').text(inputfile[inputfile.length - 1]);
 			console.log(check);
 		});
 		$("#upfile3").change(function(){
-			check++;
+			check3++;
 			var inputfile = $(this).val().split('\\');
 			$('#filevalue3').text(inputfile[inputfile.length - 1]);
 			console.log(check);
 		});
 		$("#upfile4").change(function(){
-			check++;
+			check4++;
 			var inputfile = $(this).val().split('\\');
 			$('#filevalue4').text(inputfile[inputfile.length - 1]);
 			console.log(check);
