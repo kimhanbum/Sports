@@ -5,8 +5,16 @@ public class Member {
 	private String USER_PASS;
 	private String USER_NAME;
 	private String USER_JUMIN;
+	private String JUMIN;
+	private String JUMIN1;
 	private String USER_MOBILE;
+	private String MOBILE1;
+	private String MOBILE2;
+	private String MOBILE3;
 	private String USER_ADDRESS;
+	private String DONG;
+	private String HOME;
+	private String HOMEADDRESS;
 	private String USER_EMAIL;
 	private int USER_HEIGHT;	 //키
 	private int USER_PWEIGHT;	 //현재몸무게
@@ -16,6 +24,10 @@ public class Member {
 	//(남자:66.47+(13.75*현재몸무게)+(5*키)-(6.75*나이)
 	//(여자:655.1+(9.56*현재몸무게)+(1.85*키)-(4.68*나이)
 	private int USER_WATER;		 //물섭취량
+	private String USER_IMAGE;
+	private int USER_PSPORTS1;
+	private int USER_PSPORTS2;
+	private int USER_PSPORTS3;
 	public String getUSER_ID() {
 		return USER_ID;
 	}
@@ -40,17 +52,65 @@ public class Member {
 	public void setUSER_JUMIN(String uSER_JUMIN) {
 		USER_JUMIN = uSER_JUMIN;
 	}
+	public String getJUMIN() {
+		return JUMIN;
+	}
+	public void setJUMIN(String jUMIN) {
+		JUMIN = jUMIN;
+	}
+	public String getJUMIN1() {
+		return JUMIN1;
+	}
+	public void setJUMIN1(String jUMIN1) {
+		JUMIN1 = jUMIN1;
+	}
 	public String getUSER_MOBILE() {
 		return USER_MOBILE;
 	}
 	public void setUSER_MOBILE(String uSER_MOBILE) {
 		USER_MOBILE = uSER_MOBILE;
 	}
+	public String getMOBILE1() {
+		return MOBILE1;
+	}
+	public void setMOBILE1(String mOBILE1) {
+		MOBILE1 = mOBILE1;
+	}
+	public String getMOBILE2() {
+		return MOBILE2;
+	}
+	public void setMOBILE2(String mOBILE2) {
+		MOBILE2 = mOBILE2;
+	}
+	public String getMOBILE3() {
+		return MOBILE3;
+	}
+	public void setMOBILE3(String mOBILE3) {
+		MOBILE3 = mOBILE3;
+	}
 	public String getUSER_ADDRESS() {
 		return USER_ADDRESS;
 	}
 	public void setUSER_ADDRESS(String uSER_ADDRESS) {
 		USER_ADDRESS = uSER_ADDRESS;
+	}
+	public String getDONG() {
+		return DONG;
+	}
+	public void setDONG(String dONG) {
+		DONG = dONG;
+	}
+	public String getHOME() {
+		return HOME;
+	}
+	public void setHOME(String hOME) {
+		HOME = hOME;
+	}
+	public String getHOMEADDRESS() {
+		return HOMEADDRESS;
+	}
+	public void setHOMEADDRESS(String hOMEADDRESS) {
+		HOMEADDRESS = hOMEADDRESS;
 	}
 	public String getUSER_EMAIL() {
 		return USER_EMAIL;
@@ -94,4 +154,29 @@ public class Member {
 	public void setUSER_WATER(int uSER_WATER) {
 		USER_WATER = uSER_WATER;
 	}
+	public String getUSER_IMAGE() {
+		return USER_IMAGE;
+	}
+	public void setUSER_IMAGE(String uSER_IMAGE) {
+		USER_IMAGE = uSER_IMAGE;
+	}
+	public int getUSER_PSPORTS1() {
+		return USER_PSPORTS1;
+	}
+	public void setUSER_PSPORTS1(int uSER_PSPORTS1) {
+		USER_PSPORTS1 = uSER_PSPORTS1;
+	}
+	public int getUSER_PSPORTS2() {
+		return USER_PSPORTS2;
+	}
+	public void setUSER_PSPORTS2(int uSER_PSPORTS2) {
+		USER_PSPORTS2 = uSER_PSPORTS2;
+	}
+	public int getUSER_PSPORTS3() {
+		return USER_PSPORTS3;
+	}
+	public void setUSER_PSPORTS3(int uSER_PSPORTS3) {
+		USER_PSPORTS3 = uSER_PSPORTS3;
+	}
+	
 }

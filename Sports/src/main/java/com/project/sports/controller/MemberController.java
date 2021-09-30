@@ -83,10 +83,13 @@ required=true 상태에서 지정한 이름을 가진 쿠키가 존재하지 않으면 스프링 MVC는 익
 	
 	//회원가입 유저 정보 저장
 	@RequestMapping(value="/joinProcess", method=RequestMethod.POST)
-	public String joinProcess(Member member,//Member : command 객체
+	public String joinProcess(Member m,//Member : command 객체
 			RedirectAttributes rattr, Model model,
 			HttpServletRequest request) throws Exception{
-		int result = memberservice.insert(member);
+		m.setUSER_MOBILE(m.getMOBILE1()+m.getMOBILE2()+m.getMOBILE3());
+		m.setUSER_ADDRESS(m.getDONG()+m.getHOME()+m.getHOMEADDRESS());
+		m.setUSER_JUMIN(m.getJUMIN()+m.getJUMIN1());
+		int result = memberservice.insert(m);
 /*
 스프링에서 제공하는 RedirectAttributes는 기존의 Serlvet에서 사용되던
 response.sendRedirect()를 사용할 때와 동일한 용도로 사용합니다.
