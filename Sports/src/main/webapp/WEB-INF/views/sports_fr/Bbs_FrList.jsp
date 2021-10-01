@@ -10,21 +10,16 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="manifest" href="site.webmanifest">
-   <link rel="shortcut icon" type="image/x-icon" href="${pageContext.request.contextPath}/resources/img/favicon.ico">
+    <link rel="shortcut icon" type="image/x-icon" href="${pageContext.request.contextPath}/resources/img/favicon.ico">
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/bbs_fr/list.css">
 	
 	<!-- 헤더 영역  -->
 	<jsp:include page="/WEB-INF/views/sport_comm/header.jsp"/>
 	<script src="${pageContext.request.contextPath}/resources/js/jquery-3.6.0.js"></script>
 	<script src="../resources/js/BBS_FR/list.js" charset="utf-8"></script>
-	<style>
-	
-	.blog_right_sidebar{float:right}
-	.cnt{color:gray; font-size:small}
-	</style>
 </head>
 
 <body>
-    
     <!-- Preloader Start -->
     <div id="preloader-active">
         <div class="preloader d-flex align-items-center justify-content-center">
@@ -55,22 +50,22 @@
     <!-- slider Area End-->
 
     <!--================BBS_FRList Area =================-->
-    <section class="blog_area section-padding">
-        
-       
+    
+ <section class="blog_area section-padding">
+ <div class="container">
  <form action="list">
  <div class="JooSearch">
 	<div class="header-bottom ">
 	  <ul
 		class="header-right f-right d-none d-lg-block d-flex justify-content-between">
 		<li class="d-none d-xl-block" id="sd-none">
-			<select style="position:absolute; left:970px;" id="viewcount" name="search_field">
+			<select  style="position:relative;" id="viewcount" name="search_field">
  		 		<option value="0">카테고리</option>
  		 		<option value="1">아이디</option>
  		  		<option value="2">제목</option>
  		 		<option value="3">내용</option>
  			</select>
-			<div class="form-box f-right ">
+			<div style="width:70%" class="form-box f-right">
 	 		 <input name="search_word" type="text" class="form-control"
  			   placeholder="검색어를 입력하세요" value="${search_word}" id="sinput">
 			<div class="search-icon">
@@ -143,50 +138,41 @@
 <div>
  	  <ul class="pagination justify-content-center">
  	  	<c:if test="${page <= 1 }">
- 	  		<li class="page-item">
- 	  			<a class="page-link current" href="#">이전&nbsp;</a>
- 	  		</li>
+				<a href="#" id="paging">&laquo;</a>
  	  	</c:if>
  	  	<c:if test="${page > 1 }">
- 	  		<li class="page-item">
-<a href="list?page=${page-1}&search_field=${search_field}&search_word=${search_word}"
-				class="page-link">이전</a>&nbsp;
-			</li>
+			 <a href="list?page=${page-1}&search_field=${search_field}&search_word=${search_word}"
+	  			id="paging">&laquo;</a>	
 		</c:if>
 		
 		<c:forEach var="a" begin="${startpage}" end="${endpage}">
 			<c:if test ="${a == page }">
-				<li class="page-item">
-					<a class="page-link current" href="#">${a}</a>
-				</li>
+						 <a href="#" id="paging">${a}</a>	
 			</c:if>
-			<c:if test="${a != page }">
-				<li class="page-item">
-		<a href="list?page=${a}&search_field=${search_field}&search_word=${search_word}"
-						class="page-link">${a}</a>
-				</li>
-			</c:if>
+		<c:if test="${a != page }">
+			 <a href="list?page=${a}&search_field=${search_field}&search_word=${search_word}"
+				id="paging">${a}</a>	
+		</c:if>
 		</c:forEach>
 		
 		<c:if test="${page >= maxpage}">
-			<li class="page-item">
-				<a class="page-link current" href="#">&nbsp;다음</a>
-			</li>
+			<a href="#" id="paging">&raquo;</a>
 		</c:if>
 		<c:if test="${page < maxpage }">
-			<li class="page-item">
-	<a href="list?page=${page+1}&search_field=${search_field}&search_word=${search_word}"
-					class="page-link">&nbsp;다음</a>
-			</li>
+			<a href="list?page=${page+1}&search_field=${search_field}&search_word=${search_word}"
+			   id="paging">&raquo;</a>
 		</c:if>
  	  </ul>
  </div>
      </c:if><%-- <c:if test="${listcount > 0 }"> end --%>
      <%-- 게시글이 없는 경우--%>
+     <div class="container">
 	<c:if test="${listcount == 0 }">
 		<font size=5>등록된 글이 없습니다.</font>
 	</c:if>
-	<button id="write" type="button" class="btn btn-info float-right">글 쓰 기</button>
+	</div>
+	<button style=" height: 50px;" id="write" type="button" class="btn btn-primary py-3 px-5 float-left">글 쓰 기</button>
+  </div>
   </section>
     <!--================BBS_FRList Area End=================-->
 

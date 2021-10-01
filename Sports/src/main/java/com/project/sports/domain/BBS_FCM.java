@@ -6,7 +6,7 @@ public class BBS_FCM {
 	private String FCM_CONTENT;
 	private String FCM_REF_DATE;
 	private int FR_NO;
-	
+
 	public int getFCM_NO() {
 		return FCM_NO;
 	}
