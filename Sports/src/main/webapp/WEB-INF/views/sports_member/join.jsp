@@ -10,18 +10,19 @@ form {
     background-color: #e6fffe;
     margin: 5% auto 15% auto;
     border: 1px solid lightgray;
-    width: 650px;
-    height:950px;
+    width: 550px;
+    height:900px;
     padding: 16px;
 }
 td{border: 1px solid #6bd6d2;}
-#join{margin:0 auto; display:block; background-color:lightgreen; width:200px; height:150; }
+td:first-child{width:110px;}
+#join{margin:15px auto; display:block; background-color:lightgreen; width:200px; height:150;}
 </style>
 
 <script>
 $(function(){
 	$('#EMAIL2').change(function(){  
-		if($(this).val()== ''){
+		if($(this).val()== '1'){
 			$("#EMAIL1").val(''); 
 			$("#EMAIL1").attr("disabled",false); 
 		}else{
@@ -192,7 +193,7 @@ function Postcode() {
                     <label for="HOME">집주소</label>
                 </td>
                 <td>
-                    <input type="text" name="HOME" id="HOME" size="60"> 
+                    <input type="text" name="HOME" id="HOME" size="40"> 
                 </td>
             </tr>
             <tr>
@@ -200,7 +201,7 @@ function Postcode() {
                     <label for="HOMEADDRESS">상세주소</label>
                 </td>
                 <td>
-                    <input type="text" name="HOMEADDRESS" id="HOMEADDRESS" size="60">   
+                    <input type="text" name="HOMEADDRESS" id="HOMEADDRESS" size="40">   
                 </td>
             </tr>
             <tr>
@@ -212,7 +213,7 @@ function Postcode() {
                     <input type="text" name="EMAIL1" id="email1" style="width:100px">
                     
                     <select id="EMAIL2" name="EMAIL2">
-                        <option value="">직접입력</option>
+                        <option value="1">직접입력</option>
                         <option value="gmail.com">gmail.com</option>
                         <option value="naver.com">naver.com</option>
                         <option value="daum.com">daum.com</option>
@@ -250,29 +251,29 @@ function Postcode() {
                 </td>
                 <td>
                 	<label for="sports1">구기운동</label><br>
-                		<input type="checkbox" name="SPORTS_NAME" value="풋살">풋살	
-                		<input type="checkbox" name="SPORTS_NAME" value="축구">축구	
-                		<input type="checkbox" name="SPORTS_NAME" value="야구">야구	
-                		<input type="checkbox" name="SPORTS_NAME" value="농구">농구	
-                		<input type="checkbox" name="SPORTS_NAME" value="야구">야구	<br>
-                		<input type="checkbox" name="SPORTS_NAME" value="배드민턴">배드민턴	
-                		<input type="checkbox" name="SPORTS_NAME" value="테니스">테니스	
-                		<input type="checkbox" name="SPORTS_NAME" value="탁구">탁구	
-                		<input type="checkbox" name="SPORTS_NAME" value="골프">골프<br><br>
+                		<input type="checkbox" id="SPORTS_NAME1" name="USER_PSPORTS1" value="풋살">풋살	
+                		<input type="checkbox" id="SPORTS_NAME2" name="USER_PSPORTS1" value="축구">축구	
+                		<input type="checkbox" id="SPORTS_NAME3" name="USER_PSPORTS1" value="야구">야구	
+                		<input type="checkbox" id="SPORTS_NAME4" name="USER_PSPORTS1" value="농구">농구	
+                		<input type="checkbox" id="SPORTS_NAME5" name="USER_PSPORTS1" value="야구">야구	<br>
+                		<input type="checkbox" id="SPORTS_NAME6" name="USER_PSPORTS1" value="배드민턴">배드민턴	
+                		<input type="checkbox" id="SPORTS_NAME7" name="USER_PSPORTS1" value="테니스">테니스	
+                		<input type="checkbox" id="SPORTS_NAME8" name="USER_PSPORTS1" value="탁구">탁구	
+                		<input type="checkbox" id="SPORTS_NAME9" name="USER_PSPORTS1" value="골프">골프<br><br>
                 	<label for="sports2">기구운동</label><br>
-                		<input type="checkbox" name="SPORTS_NAME" value="헬스">헬스	
-                		<input type="checkbox" name="SPORTS_NAME" value="크로스핏">크로스핏	
-                		<input type="checkbox" name="SPORTS_NAME" value="스피닝">스피닝	
-                		<input type="checkbox" name="SPORTS_NAME" value="사이클">사이클	
-                		<input type="checkbox" name="SPORTS_NAME" value="서핑">서핑	<br><br>
+                		<input type="checkbox" id="SPORTS_NAME10" name="USER_PSPORTS2" value="헬스">헬스	
+                		<input type="checkbox" id="SPORTS_NAME11" name="USER_PSPORTS2" value="크로스핏">크로스핏	
+                		<input type="checkbox" id="SPORTS_NAME12" name="USER_PSPORTS2" value="스피닝">스피닝	
+                		<input type="checkbox" id="SPORTS_NAME13" name="USER_PSPORTS2" value="사이클">사이클	
+                		<input type="checkbox" id="SPORTS_NAME14" name="USER_PSPORTS2" value="서핑">서핑	<br><br>
                 	<label for="sports3">맨몸운동</label><br>
-                		<input type="checkbox" name="SPORTS_NAME" value="요가">요가	
-                		<input type="checkbox" name="SPORTS_NAME" value="필라테스">필라테스	
-                		<input type="checkbox" name="SPORTS_NAME" value="등산">등산	
-                		<input type="checkbox" name="SPORTS_NAME" value="러닝">러닝	
-                		<input type="checkbox" name="SPORTS_NAME" value="주짓수">주짓수	
-                		<input type="checkbox" name="SPORTS_NAME" value="복싱">복싱	
-                		<input type="checkbox" name="SPORTS_NAME" value="태권도">태권도	<br><br>
+                		<input type="checkbox" id="SPORTS_NAME15" name="USER_PSPORTS3" value="요가">요가	
+                		<input type="checkbox" id="SPORTS_NAME16" name="USER_PSPORTS3" value="필라테스">필라테스	
+                		<input type="checkbox" id="SPORTS_NAME17" name="USER_PSPORTS3" value="등산">등산	
+                		<input type="checkbox" id="SPORTS_NAME18" name="USER_PSPORTS3" value="러닝">러닝	
+                		<input type="checkbox" id="SPORTS_NAME19" name="USER_PSPORTS3" value="주짓수">주짓수	
+                		<input type="checkbox" id="SPORTS_NAME20" name="USER_PSPORTS3" value="복싱">복싱	
+                		<input type="checkbox" id="SPORTS_NAME21" name="USER_PSPORTS3" value="태권도">태권도	<br><br>
                 </td>
             </tr>
         </table><br>

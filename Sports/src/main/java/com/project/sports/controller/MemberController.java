@@ -90,6 +90,17 @@ required=true 상태에서 지정한 이름을 가진 쿠키가 존재하지 않으면 스프링 MVC는 익
 		m.setUSER_ADDRESS(m.getDONG()+m.getHOME()+m.getHOMEADDRESS());
 		m.setUSER_JUMIN(m.getJUMIN()+m.getJUMIN1());
 		int result = memberservice.insert(m);
+		try{
+			int cnt = Integer.parseInt(request.getParameter("cnt"));
+	           for(int j=1; j<=cnt; j++){
+				for(int i=0; i<request.getParameterValues(
+						"SPORTS_NAME" + String.valueOf(j)).length; i++){
+					System.out.println(request.getParameterValues("SPORTS_NAME" + String.valueOf(j))[i]);
+				}
+			}
+		} catch(Exception e){
+			e.printStackTrace();
+		}
 /*
 스프링에서 제공하는 RedirectAttributes는 기존의 Serlvet에서 사용되던
 response.sendRedirect()를 사용할 때와 동일한 용도로 사용합니다.
