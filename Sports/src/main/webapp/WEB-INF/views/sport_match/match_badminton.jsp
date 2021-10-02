@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%-- <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> --%>
 <!DOCTYPE html>
 <html class="no-js" lang="zxx">
     <head>
@@ -72,27 +73,27 @@
 		</div>
 	</div>
 	</div>
-           <div class="slider-active">
-               <div class="single-slider slider-height" data-background="${pageContext.request.contextPath}/resources/image/sport/badminton.jpg">
-                   <div class="container1">
-                       <div class="row d-flex align-items-center justify-content-between">
-                           <div class="col-xl-5 col-lg-6 col-md-6 d-none d-md-block">
-                               <div class="hero__img" data-animation="bounceIn" data-delay=".4s">
-                                   <img class="smallsoccer" src="${pageContext.request.contextPath}/resources/image/sport/badminton.jpg" alt="">
-                               </div>
-                           </div>
-                           <div class="col-xl-5 col-lg-5 col-md-5 col-sm-8">
-                               <div class="hero__caption">
-                                   <h1 data-animation="fadeInRight" data-delay=".6s" style="color: white; font-size: 90px">Social<br>Match<br></h1>
-                                   <div class="hero__btn" data-animation="fadeInRight" data-delay="1s">
-                                       <a href="industries.html" class="btn hero-btn">Login Now</a>
-                                   </div>
-                               </div>
-                           </div>
-                       </div>
-                   </div>
-               </div>
-            </div> 
+     <div class="slider-active" id="social">
+         <div class="single-slider slider-height" data-background="${pageContext.request.contextPath}/resources/image/sport/badminton.jpg">
+             <div class="container1">
+                 <div class="row d-flex align-items-center justify-content-between">
+                     <div class="col-xl-5 col-lg-6 col-md-6 d-none d-md-block">
+                         <div class="hero__img" data-animation="bounceIn" data-delay=".4s">
+                             <img class="smallsoccer" src="${pageContext.request.contextPath}/resources/image/sport/badminton.jpg" alt="">
+                         </div>
+                     </div>
+                     <div class="col-xl-5 col-lg-5 col-md-5 col-sm-8">
+                         <div class="hero__caption">
+                             <h1 data-animation="fadeInRight" data-delay=".6s" style="color: white; font-size: 90px">Social<br>Match<br></h1>
+                             <div class="hero__btn" data-animation="fadeInRight" data-delay="1s">
+                                 <a href="industries.html" class="btn hero-btn">Login Now</a>
+                             </div>
+                         </div>
+                     </div>
+                 </div>
+             </div>
+         </div>
+      </div> 
    <div class="main">
        </div>
        <div class="container1">
@@ -101,8 +102,8 @@
                    <div class="city ibx">
                        <label for="city" style="color:white;  width: 30%">City</label>
                        <div class="rows">
-                       	<select name="city" class="form-control">
-	                       	<option value="" selected>지역선택</option>
+                       	<select name="city" class="form-control1">
+	                       	<option value="" selected>&nbsp;지역&nbsp;</option>
 	                       	<option value="서울">서울</option>
 	                       	<option value="인천">인천</option>
                        	</select>
@@ -111,8 +112,8 @@
                    <div class="city_detail ibx">
                        <label for="city" style="color:white;  width: 30%">detail</label>
                        <div class="rows">
-                       	<select name="city_detail" class="form-control">
-                       		<option value="" selected>세부지역 선택</option>
+                       	<select name="city_detail" class="form-control1">
+                       		<option value="" selected>&nbsp;세부지역&nbsp;&nbsp;</option>
                        		<option value="연수구">연수구</option>
                        	</select>
                        </div>
@@ -133,15 +134,15 @@
                    <div class="skill ibx">
 	                   <div class="rows">
 	                   <label for="city" style="color:white;  width: 30%">Skill</label>
-	                   	<select name="skill" class="form-control">
-	                   		<option value="" selected>실력선택</option>
+	                   	<select name="skill" class="form-control1">
+	                   		<option value="" selected>실력</option>
 	                   		<option value="상">상</option>
 	                   		<option value="중">중</option>
 	                   		<option value="하">하</option>
 	                   	</select>
 	                   </div>
                    </div>
-                   <div id="btnSubmit" onclick="javascript:btnClick();" class="submit ibx">Search now</div>
+                   <div id="btnSubmit" onclick="javascript:btnClick();" class="submit ibx">Search</div>
                    <!-- <div class="form-submit">
                        <input type="submit" id="submit" class="submit" value="Search now" />
                    </div> -->
