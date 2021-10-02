@@ -198,6 +198,9 @@ p {
     padding-right: 0px;
     padding-left: 0px;
 }
+.modal>.modal-dialog{
+	padding-top: 72px;
+}
 </style>
 
 <body>
@@ -239,35 +242,35 @@ p {
 	</div>
 	<!-- slider Area End--> 
 	
-	<section id="search_section" style="padding-top: 70px;">	
+	<section id="search_section" style="padding-top: 70px; ">	
 		<div class="container">
-			<div>300</div>명의 멘토가 검색되었습니다.
+			<div style="display:inline !important"><h1 style="display:inline !important">300</h1>명의 멘토가 검색되었습니다.</div>
 			<br>
 			<br>
 			<div class="row">
-				<div class="col" data-toggle="modal" data-target="#addressModal">
-				  <input type="radio" id="control_01" name="select" value="1" checked>
+				<div class="col">
+				  <input type="radio" id="control_01" name="select" value="1" data-toggle="modal" data-target="#addressModal">
 				  <label for="control_01">
 				    <h2>수업지역</h2>
 				    <img class="icon-xxxl" src="${pageContext.request.contextPath}/resources/image/mmatch/ic_search_filter_location.png">
 				  </label>
 				</div>
-				<div class="col" data-toggle="modal" data-target="#subjectModal">
-				  <input type="radio" id="control_02" name="select" value="2">
+				<div class="col">
+				  <input type="radio" id="control_02" name="select" value="2" data-toggle="modal" data-target="#subjectModal">
 				  <label for="control_02">
 				    <h2>전체과목</h2>
 				    <img class="icon-xxxl" src="${pageContext.request.contextPath}/resources/image/mmatch/ic_search_filter_class.png">
 				 </label>
 				</div>
-				<div class="col" data-toggle="modal" data-target="#paymentModal">
-				  <input type="radio" id="control_03" name="select" value="3">
+				<div class="col">
+				  <input type="radio" id="control_03" name="select" value="3" data-toggle="modal" data-target="#paymentModal">
 				  <label for="control_03">
 				    <h2>전체수업료</h2>
 				    <img class="icon-xxxl" src="${pageContext.request.contextPath}/resources/image/mmatch/ic_search_filter_payment.png">
 				 </label>
 				</div>
-				<div class="col" data-toggle="modal" data-target="#genderModal">
-				  <input type="radio" id="control_04" name="select" value="4">
+				<div class="col">
+				  <input type="radio" id="control_04" name="select" value="4" data-toggle="modal" data-target="#genderModal">
 				  <label for="control_04">
 				    <h2>전체성별</h2>
 				    <img class="icon-xxxl" src="${pageContext.request.contextPath}/resources/image/mmatch/ic_search_filter_sex.png">
@@ -277,313 +280,272 @@ p {
 		</div>
 	</section>
 	
-
-	<!-- Latest Products Start -->
-	<section class="latest-product-area latest-padding" style="padding-top: 70px;">
-		<div class="container">
-			<div class="row product-btn d-flex justify-content-between">
-				<div class="properties__button">
-					<!--Nav Button  -->
-					<nav>
-						<div class="nav nav-tabs" id="nav-tab" role="tablist">
-							<a class="nav-item nav-link active" id="nav-home-tab"
-								href="${pageContext.request.contextPath}/DealA/list">
-								멘토 공고
-							</a> 
-							<a class="nav-item nav-link" id="nav-profile-tab"
-								href="${pageContext.request.contextPath}/DealD/list">
-								멘티 공고
-							</a>
-						</div>
-					</nav>
-					<!--End Nav Button  -->
+	<!-- 주소 필터 modal -->
+ 	<div class="modal" id="addressModal">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-body">
+					<form name="deleteFrom" action="delete" method="post">
+					 <input type="hidden" name="num" value="${param.num}" id="board_num">
+					 <div class="form-group">
+					 	<label for="pwd">주소</label>
+					 	<input type="password"
+					 	       class="form-control" placeholder="Ente password"
+					 	       name="board_pass" id="board_pass">
+					 </div>
+					 <button type="submit" class="btn btn-primary">전송</button>
+					 <button type="button" class="btn btn-danger" data-dismiss="modal">취소</button>
+					</form>
 				</div>
 			</div>
-			<!-- Nav Card -->
-
+		</div>
+	</div> 
+	
+	<!-- 과목 필터 modal -->
+	<div class="modal" id="subjectModal">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-body">
+					<form name="deleteFrom" action="delete" method="post">
+					 <input type="hidden" name="num" value="${param.num}" id="board_num">
+					 <div class="form-group">
+					 	<label for="pwd">과목</label>
+					 	<input type="password"
+					 	       class="form-control" placeholder="Ente password"
+					 	       name="board_pass" id="board_pass">
+					 </div>
+					 <button type="submit" class="btn btn-primary">전송</button>
+					 <button type="button" class="btn btn-danger" data-dismiss="modal">취소</button>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div> 
+	
+	<!-- 수업료 필터 modal -->
+	<div class="modal" id="paymentModal">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-body">
+					<form name="deleteFrom" action="delete" method="post">
+					 <input type="hidden" name="num" value="${param.num}" id="board_num">
+					 <div class="form-group">
+					 	<label for="pwd">수업료</label>
+					 	<input type="password"
+					 	       class="form-control" placeholder="Ente password"
+					 	       name="board_pass" id="board_pass">
+					 </div>
+					 <button type="submit" class="btn btn-primary">전송</button>
+					 <button type="button" class="btn btn-danger" data-dismiss="modal">취소</button>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div> 
+	
+	<!-- 성별 필터 modal -->
+	<div class="modal" id="genderModal">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-body">
+					<form name="deleteFrom" action="delete" method="post">
+					 <input type="hidden" name="num" value="${param.num}" id="board_num">
+					 <div class="form-group">
+					 	<label for="pwd">성별</label>
+					 	<input type="password"
+					 	       class="form-control" placeholder="Ente password"
+					 	       name="board_pass" id="board_pass">
+					 </div>
+					 <button type="submit" class="btn btn-primary">전송</button>
+					 <button type="button" class="btn btn-danger" data-dismiss="modal">취소</button>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div> 
+	
+	<!-- Latest Products Start -->
+	<section class="latest-product-area latest-padding" style="padding-top: 70px;">
+		
+		<div class="container">
+			<hr><br><br><br>
 			<div class="tab-content" id="nav-tabContent">
 				<!-- card one -->
 				<div class="tab-pane fade show active" id="nav-home" role="tabpanel"
 					aria-labelledby="nav-home-tab">
 					<div class="row">
 						<div class="col-xl-4 col-lg-4 col-md-6">
-							<div class="single-product mb-60">
-								<div id="timeback">
-									<span class="fas fa-clock" /> <span id="time1"></span>
-								</div>
+							<div class="single-product mb-60" style="border: 2px solid black;">
 								<div class="product-img">
-									<img
-										src="${pageContext.request.contextPath}/resources/img/categori/product1.png"
-										alt="">
-
+									<a href="#" data-toggle="modal" data-target="#detailModal">
+										<img src="${pageContext.request.contextPath}/resources/img/categori/product1.png" alt="">
+									</a>
 								</div>
 								<div class="product-caption">
-
-									<h4>
-										<a href="${pageContext.request.contextPath}/DealA/detail"><b>바지
-												팝니다(급처)</b></a>
-									</h4>
+									<h3><b>modal 테스트</b></h3>
 									<div class="price">
 										<table class="table">
 											<tr>
-												<th>시작가</th>
-												<td>1000원</td>
+												<th>종목</th>
+												<td>러닝</td>
 											</tr>
 											<tr>
-												<th class="discount2">현재가</th>
-												<td class="discount2">3000원</td>
+												<th>장소</th>
+												<td>서울시 종로구 종로3가</td>
 											</tr>
 											<tr>
-												<th>입찰횟수</th>
-												<td>1회</td>
+												<th>인원</th>
+												<td>3명</td>
 											</tr>
-											<tr>
-												<th>올린시간</th>
-												<td>09-22</td>
-											</tr>
-
 										</table>
-
-									</div>
-								</div>
-							</div>
-						</div>
-						<!-- 남은 시간 구하는 스크립트문 -->
-						<script>
-							var a = 2021
-
-							var endTime = new Date(a, 08, 19, 15, 0, 0) / 1000;
-							function setClock() {
-								var elapsed = new Date() / 1000;
-								var totalTime = endTime - elapsed;
-								var hr = parseInt(totalTime / 3600)
-								var min = parseInt(totalTime / 60) % 60;
-								var sec = parseInt(totalTime % 60, 10);
-								var result = hr + " 시 " + min + " 분 " + sec
-										+ " 초";
-								document.getElementById("time1").innerHTML = result;
-								setTimeout(setClock, 1000);
-							}
-							setClock();
-						</script>
-
-						<div class="col-xl-4 col-lg-4 col-md-6">
-							<div class="single-product mb-60">
-								<div id="timeback">
-									<span class="fas fa-clock" /> <span id="time1"></span>
-								</div>
-								<div class="product-img">
-									<img
-										src="${pageContext.request.contextPath}/resources/img/categori/product1.png"
-										alt="">
-	
-								</div>
-								<div class="product-caption">
-
-									<h4>
-										<a href="${pageContext.request.contextPath}/Mydeal/main"><b>바지
-												팝니다(급처)</b></a>
-									</h4>
-									<div class="price">
-										<table class="table">
-											<tr>
-												<th>시작가</th>
-												<td>1000원</td>
-											</tr>
-											<tr>
-												<th class="discount2">현재가</th>
-												<td class="discount2">3000원</td>
-											</tr>
-											<tr>
-												<th>입찰횟수</th>
-												<td>1회</td>
-											</tr>
-											<tr>
-												<th>올린시간</th>
-												<td>09-22</td>
-											</tr>
-
-										</table>
-
 									</div>
 								</div>
 							</div>
 						</div>
 						<div class="col-xl-4 col-lg-4 col-md-6">
-							<div class="single-product mb-60">
-								<div id="timeback">
-									<span class="fas fa-clock" /> <span id="time1"></span>
-								</div>
+							<div class="single-product mb-60" style="border: 2px solid black;">
 								<div class="product-img">
-									<img
-										src="${pageContext.request.contextPath}/resources/img/categori/product1.png"
-										alt="">
-
+									<a href="#">
+									<img src="${pageContext.request.contextPath}/resources/img/categori/product1.png" alt="">
+									</a>
 								</div>
 								<div class="product-caption">
-
-									<h4>
-										<a href="${pageContext.request.contextPath}/DealA/detail"><b>바지
-												팝니다(급처)</b></a>
-									</h4>
+									<h3><b>러닝 가르쳐 드립니다.</b></h3>
 									<div class="price">
 										<table class="table">
 											<tr>
-												<th>시작가</th>
-												<td>1000원</td>
+												<th>종목</th>
+												<td>러닝</td>
 											</tr>
 											<tr>
-												<th class="discount2">현재가</th>
-												<td class="discount2">3000원</td>
+												<th>장소</th>
+												<td>서울시 종로구 종로3가</td>
 											</tr>
 											<tr>
-												<th>입찰횟수</th>
-												<td>1회</td>
+												<th>인원</th>
+												<td>3명</td>
 											</tr>
-											<tr>
-												<th>올린시간</th>
-												<td>09-22</td>
-											</tr>
-
 										</table>
-
 									</div>
 								</div>
 							</div>
 						</div>
 						<div class="col-xl-4 col-lg-4 col-md-6">
-							<div class="single-product mb-60">
-								<div id="timeback">
-									<span class="fas fa-clock" /> <span id="time1"></span>
-								</div>
+							<div class="single-product mb-60" style="border: 2px solid black;">
 								<div class="product-img">
-									<img
-										src="${pageContext.request.contextPath}/resources/img/categori/product1.png"
-										alt="">
-
+									<a href="#">
+									<img src="${pageContext.request.contextPath}/resources/img/categori/product1.png" alt="">
+									</a>
 								</div>
 								<div class="product-caption">
-
-									<h4>
-										<a href="${pageContext.request.contextPath}/DealA/detail"><b>바지
-												팝니다(급처)</b></a>
-									</h4>
+									<h3><b>러닝 가르쳐 드립니다.</b></h3>
 									<div class="price">
 										<table class="table">
 											<tr>
-												<th>시작가</th>
-												<td>1000원</td>
+												<th>종목</th>
+												<td>러닝</td>
 											</tr>
 											<tr>
-												<th class="discount2">현재가</th>
-												<td class="discount2">3000원</td>
+												<th>장소</th>
+												<td>서울시 종로구 종로3가</td>
 											</tr>
 											<tr>
-												<th>입찰횟수</th>
-												<td>1회</td>
+												<th>인원</th>
+												<td>3명</td>
 											</tr>
-											<tr>
-												<th>올린시간</th>
-												<td>09-22</td>
-											</tr>
-
 										</table>
-
 									</div>
 								</div>
 							</div>
 						</div>
 						<div class="col-xl-4 col-lg-4 col-md-6">
-							<div class="single-product mb-60">
-								<div id="timeback">
-									<span class="fas fa-clock" /> <span id="time1"></span>
-								</div>
+							<div class="single-product mb-60" style="border: 2px solid black;">
 								<div class="product-img">
-									<img
-										src="${pageContext.request.contextPath}/resources/img/categori/product1.png"
-										alt="">
-
+									<a href="#">
+									<img src="${pageContext.request.contextPath}/resources/img/categori/product1.png" alt="">
+									</a>
 								</div>
 								<div class="product-caption">
-
-									<h4>
-										<a href="${pageContext.request.contextPath}/DealA/detail"><b>바지
-												팝니다(급처)</b></a>
-									</h4>
+									<h3><b>러닝 가르쳐 드립니다.</b></h3>
 									<div class="price">
 										<table class="table">
 											<tr>
-												<th>시작가</th>
-												<td>1000원</td>
+												<th>종목</th>
+												<td>러닝</td>
 											</tr>
 											<tr>
-												<th class="discount2">현재가</th>
-												<td class="discount2">3000원</td>
+												<th>장소</th>
+												<td>서울시 종로구 종로3가</td>
 											</tr>
 											<tr>
-												<th>입찰횟수</th>
-												<td>1회</td>
+												<th>인원</th>
+												<td>3명</td>
 											</tr>
-											<tr>
-												<th>올린시간</th>
-												<td>09-22</td>
-											</tr>
-
 										</table>
-
 									</div>
 								</div>
 							</div>
 						</div>
 						<div class="col-xl-4 col-lg-4 col-md-6">
-							<div class="single-product mb-60">
-								<div id="timeback">
-									<span class="fas fa-clock" /> <span id="time1"></span>
-								</div>
+							<div class="single-product mb-60" style="border: 2px solid black;">
 								<div class="product-img">
-									<img
-										src="${pageContext.request.contextPath}/resources/img/categori/product1.png"
-										alt="">
-		
+									<a href="#">
+									<img src="${pageContext.request.contextPath}/resources/img/categori/product1.png" alt="">
+									</a>
 								</div>
 								<div class="product-caption">
-
-									<h4>
-										<a href="${pageContext.request.contextPath}/DealA/detail"><b>바지
-												팝니다(급처)</b></a>
-									</h4>
+									<h3><b>러닝 가르쳐 드립니다.</b></h3>
 									<div class="price">
 										<table class="table">
 											<tr>
-												<th>시작가</th>
-												<td>1000원</td>
+												<th>종목</th>
+												<td>러닝</td>
 											</tr>
 											<tr>
-												<th class="discount2">현재가</th>
-												<td class="discount2">3000원</td>
+												<th>장소</th>
+												<td>서울시 종로구 종로3가</td>
 											</tr>
 											<tr>
-												<th>입찰횟수</th>
-												<td>1회</td>
+												<th>인원</th>
+												<td>3명</td>
 											</tr>
-											<tr>
-												<th>올린시간</th>
-												<td>09-22</td>
-											</tr>
-
 										</table>
-
 									</div>
 								</div>
 							</div>
 						</div>
-
-
+						<div class="col-xl-4 col-lg-4 col-md-6">
+							<div class="single-product mb-60" style="border: 2px solid black;">
+								<div class="product-img">
+									<a href="#">
+									<img src="${pageContext.request.contextPath}/resources/img/categori/product1.png" alt="">
+									</a>
+								</div>
+								<div class="product-caption">
+									<h3><b>러닝 가르쳐 드립니다.</b></h3>
+									<div class="price">
+										<table class="table">
+											<tr>
+												<th>종목</th>
+												<td>러닝</td>
+											</tr>
+											<tr>
+												<th>장소</th>
+												<td>서울시 종로구 종로3가</td>
+											</tr>
+											<tr>
+												<th>인원</th>
+												<td>3명</td>
+											</tr>
+										</table>
+									</div>
+								</div>
+							</div>
+						</div>
 					</div>
 					<hr>
-
 					<div id="write-b">
-						<a href="${pageContext.request.contextPath}/DealA/write"
+						<a href="${pageContext.request.contextPath}/mmatch/mentorWrite"
 							class="btn header-btn">글쓰기</a>
 
 					</div>
@@ -593,25 +555,45 @@ p {
 							href="#" id="paging">4</a> <a href="#" id="paging">5</a> <a
 							href="#" id="paging">&raquo;</a>
 					</div>
-
-				</div>
-
-
-			</div>
-			<!-- End Nav Card -->
-		</div>
+			   </div>
+		   </div>
+	   </div>
 	</section>
+	
+   <!-- 상세보기 modal -->
+	<div class="modal" id="detailModal">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-body">
+					<form name="deleteFrom" action="delete" method="post">
+					 <input type="hidden" name="num" value="${param.num}" id="board_num">
+					 <div class="form-group">
+					 	<label for="pwd">상세보기(네이버가게꺼비슷하게갈꺼)</label>
+					 	<input type="password"
+					 	       class="form-control" placeholder="Ente password"
+					 	       name="board_pass" id="board_pass">
+					 </div>
+					 <button type="submit" class="btn btn-primary">전송</button>
+					 <button type="button" class="btn btn-danger" data-dismiss="modal">취소</button>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div> 
 	</main>
 	<!-- Footer 영역  -->
 	<jsp:include page="/WEB-INF/views/sport_comm/footer.jsp"/>
-	                        <script>
-                        	$('#sel1125 > p').click(function(){
-                        		console.log($(this).text());
-                        		$('#sel1125').css("display","none");
-                        		$('#sel1126').text($(this).text());
-                        	});
-                        	
-                        	
-                        </script>
+	
+
+	
+    <script>
+      	$('#sel1125 > p').click(function(){
+      		console.log($(this).text());
+      		$('#sel1125').css("display","none");
+      		$('#sel1126').text($(this).text());
+      	});
+      	
+      	
+    </script>
 </body>
 </html>
