@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%-- <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> --%>
 <!DOCTYPE html>
 <html class="no-js" lang="zxx">
     <head>
@@ -16,6 +17,7 @@
 <link rel="stylesheet" href="https://www.baro-match.co.kr/newsite/system/banner/css/banner.css?sng=1632462206" />
 <link rel="stylesheet" href="https://www.baro-match.co.kr/newsite/system/match/css/match.css?sng=1632462206" />
 <link rel ="stylesheet" href="${pageContext.request.contextPath}/resources/css/match/sport_match.css">
+<%-- <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/match/modal1.css"> --%>
 <style>
 	#icon_box .icon01:after{z-index:1;
 						content: '';
@@ -72,27 +74,27 @@
 		</div>
 	</div>
 	</div>
-           <div class="slider-active">
-               <div class="single-slider slider-height" data-background="${pageContext.request.contextPath}/resources/image/sport/soccer.jpg">
-                   <div class="container1">
-                       <div class="row d-flex align-items-center justify-content-between">
-                           <div class="col-xl-5 col-lg-6 col-md-6 d-none d-md-block">
-                               <div class="hero__img" data-animation="bounceIn" data-delay=".4s">
-                                   <img class="smallsoccer" src="${pageContext.request.contextPath}/resources/image/sport/soccer.jpg" alt="">
-                               </div>
-                           </div>
-                           <div class="col-xl-5 col-lg-5 col-md-5 col-sm-8">
-                               <div class="hero__caption">
-                                   <h1 data-animation="fadeInRight" data-delay=".6s" style="color: white; font-size: 90px">Social<br>Match<br></h1>
-                                   <div class="hero__btn" data-animation="fadeInRight" data-delay="1s">
-                                       <a href="industries.html" class="btn hero-btn">Login Now</a>
-                                   </div>
-                               </div>
-                           </div>
-                       </div>
-                   </div>
-               </div>
-            </div> 
+     <div class="slider-active" id="social">
+         <div class="single-slider slider-height" data-background="${pageContext.request.contextPath}/resources/image/sport/soccer.jpg">
+             <div class="container1">
+                 <div class="row d-flex align-items-center justify-content-between">
+                     <div class="col-xl-5 col-lg-6 col-md-6 d-none d-md-block">
+                         <div class="hero__img" data-animation="bounceIn" data-delay=".4s">
+                             <img class="smallsoccer" src="${pageContext.request.contextPath}/resources/image/sport/soccer.jpg" alt="">
+                         </div>
+                     </div>
+                     <div class="col-xl-5 col-lg-5 col-md-5 col-sm-8">
+                         <div class="hero__caption">
+                             <h1 id="text" data-animation="fadeInRight" data-delay=".6s" style="color: white; font-size: 90px">Social<br>Match<br></h1>
+                             <div class="hero__btn" data-animation="fadeInRight" data-delay="1s">
+                                 <a href="industries.html" class="btn hero-btn">Login Now</a>
+                             </div>
+                         </div>
+                     </div>
+                 </div>
+             </div>
+         </div>
+      </div> 
    <div class="main">
        </div>
        <div class="container1">
@@ -101,8 +103,8 @@
                    <div class="city ibx">
                        <label for="city" style="color:white;  width: 30%">City</label>
                        <div class="rows">
-                       	<select name="city" class="form-control">
-	                       	<option value="" selected>지역선택</option>
+                       	<select id="city" name="city" class="form-control1">
+	                       	<option value="" selected>&nbsp;지역&nbsp;</option>
 	                       	<option value="서울">서울</option>
 	                       	<option value="인천">인천</option>
                        	</select>
@@ -111,37 +113,37 @@
                    <div class="city_detail ibx">
                        <label for="city" style="color:white;  width: 30%">detail</label>
                        <div class="rows">
-                       	<select name="city_detail" class="form-control">
-                       		<option value="" selected>세부지역 선택</option>
+                       	<select id="city_detail" name="city_detail" class="form-control1">
+                       		<option value="" selected>&nbsp;세부지역&nbsp;&nbsp;</option>
                        		<option value="연수구">연수구</option>
                        	</select>
                        </div>
                    </div>
                    
-                   <div class="form-date-to form-icon ibx">
+                   <div id="date" class="form-date-to form-icon ibx">
                        <label for="date_to" style="color:white">Date</label>
                        <input type="date"
-									name="match_date" min="2015-12-30" max="2022-12-31"
+									name="match_date" max="2022-12-31"
 									id= "match_Date" class="match_Date"
 									 >
                    </div>
-                   <div class="form-quantity ibx">
+                   <div id="person" class="form-quantity ibx">
                        <label for="quantity" style="color:white">PERSON</label>
-                       <input type="number" value="0" min="0" max="11" >
+                       <input type="number" name="person" value="0" min="0" max="11" >
                    </div>
                    
                    <div class="skill ibx">
 	                   <div class="rows">
 	                   <label for="city" style="color:white;  width: 30%">Skill</label>
-	                   	<select name="skill" class="form-control">
-	                   		<option value="" selected>실력선택</option>
+	                   	<select id="skill" name="skill" class="form-control1">
+	                   		<option value="" selected>실력</option>
 	                   		<option value="상">상</option>
 	                   		<option value="중">중</option>
 	                   		<option value="하">하</option>
 	                   	</select>
 	                   </div>
                    </div>
-                   <div id="btnSubmit" onclick="javascript:btnClick();" class="submit ibx">Search now</div>
+                   <div id="btnSubmit" onclick="javascript:btnClick();" class="submit ibx">Search&nbsp;&nbsp;</div>
                    <!-- <div class="form-submit">
                        <input type="submit" id="submit" class="submit" value="Search now" />
                    </div> -->
@@ -169,7 +171,7 @@
   </thead>
   <tbody>
 <c:set var="num" value="${listcount-(page-1)*limit}"/>	
-<c:forEach var="b" items="${boardlist}">	
+<c:forEach var="b" items="${matchlist}">	
 <tr>
   <td><%--번호 --%>
 	<c:out value="${num}"/><%-- num 출력 --%>		
@@ -253,6 +255,66 @@
 		<font size=5>등록된 글이 없습니다.</font>
 	</c:if>
 	</div>
+	
+	<!--  모달 영역 -->
+	<div id="genderModal" class="modal hide" style="display: none;">
+    <div class="wrapper">
+        <div class="container">
+            <div class="row_subject">매칭등록</div><div class="modal_id">ID:admin</div>
+            		<div class="row1">
+                        <label class="radio radio-sm">
+                            <div class="container">
+                                <div class="label">Sport</div>
+                                 <input class="modal_input" name="Sport" type="text" readonly>
+                            </div>
+                        </label>
+                         <label>
+                            <div class="container ">
+                                <div class="label">Skill</div>
+                                 <input class="modal_input" name="Skill" type="text" readonly>
+                            </div>
+                        </label>
+                    </div>
+                    <div class="row1">
+                        <label class="radio radio-sm">
+                            <div class="container">
+                                <div class="label">City</div>
+                                 <input class="modal_input" name="City" type="text" readonly>
+                            </div>
+                        </label>
+                         <label>
+                            <div class="container ">
+                                <div class="label">detail</div>
+                                 <input class="modal_input" name="detail" type="text" readonly>
+                            </div>
+                        </label>
+                    </div>
+                     <div class="row1">
+                        <label>
+                            <div class="container">
+                                <div class="label">Date</div>
+                                 <input class="modal_input" name="Date" type="text" readonly>
+                            </div>
+                        </label>
+                         <label>
+                            <div class="container">
+                                <div class="label">Person</div>
+                                 <input class="modal_input" name="Person" type="text" readonly>
+                            </div>
+                        </label>
+                    </div>
+            </div>
+            <div class="modal_row">
+                <div class="modalbutton">
+                    <button class="closeModal row btn" onclick="javascript:colseModal();">닫기</button>
+                </div>
+                <div class="modalbutton">
+                    <button class="btnSearch row btn btn-fill btn-blue-light">등록</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 	
     <script src="${pageContext.request.contextPath}/resources/js/match/jquery.min.js"></script>

@@ -101,7 +101,7 @@
                    <div class="city ibx">
                        <label for="city" style="color:white;  width: 30%">City</label>
                        <div class="rows">
-                       	<select name="city" class="form-control">
+                       	<select name="city" class="form-control1">
 	                       	<option value="" selected>지역선택</option>
 	                       	<option value="서울">서울</option>
 	                       	<option value="인천">인천</option>
@@ -111,7 +111,7 @@
                    <div class="city_detail ibx">
                        <label for="city" style="color:white;  width: 30%">detail</label>
                        <div class="rows">
-                       	<select name="city_detail" class="form-control">
+                       	<select name="city_detail" class="form-control1">
                        		<option value="" selected>세부지역 선택</option>
                        		<option value="연수구">연수구</option>
                        	</select>
@@ -133,7 +133,7 @@
                    <div class="skill ibx">
 	                   <div class="rows">
 	                   <label for="city" style="color:white;  width: 30%">Skill</label>
-	                   	<select name="skill" class="form-control">
+	                   	<select name="skill" class="form-control1">
 	                   		<option value="" selected>실력선택</option>
 	                   		<option value="상">상</option>
 	                   		<option value="중">중</option>
