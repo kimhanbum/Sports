@@ -33,6 +33,8 @@ public interface DealService {
 
 	public int D_readcount(int num);
 
+	public List<DealAuction> getSearchAuctionList(int page, int limit, String search);
+
 	
 
 }

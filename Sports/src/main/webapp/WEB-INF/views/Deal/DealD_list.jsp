@@ -356,18 +356,45 @@ background-color
 	            form1.submit();
 	        }
 		 function go(page) {
-				var view = $("#view").val(); //최신순부터 값은 1~3
+			var view = $("#view").val(); //최신순부터 값은 1~3
+			
+			 var data = "view=" + view + "&state=ajax";
+			console.log(view)
+			console.log(page)
 				
-				console.log(view)
-				console.log(page)
-				
-				console.log(data)
-				ajax(data);
-			}
+			console.log(data)
+			ajax(data);
+		}
 		 $(function() {
-			 var data = "limit=" + limit + "&state=ajax&page=" + page;
-				ajax(data);
-			}
+			$("#view").change(function(){ //최신순, 등록순, 조회순 변경 시
+			go(1);
+		
+			})
+		 })
+		 
+		 function ajax(sdata){
+			 console.log(sdata)
+			 output = "";
+			 $.ajax({
+				type : "get",
+				url : "list",
+				dataType : "json",
+				success : function(data){
+					console.log("성공");
+				},
+				error : function(request, status, error){
+					console.log( request.status  + 
+	             			 + "받은 데이터 :" + request.responseText  +
+	             			 + "error status : " + status +
+	             	         + "error 메시지 : " + error)
+
+                 }//error end
+
+			 	
+			 })
+		 }
+		 
+		 
 	</script>
 	<!-- Gallery End--> </main>
 	<!-- Footer 영역  -->

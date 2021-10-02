@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -37,18 +38,19 @@ public class DealDirectController {
 	private String saveFolder = "C:\\Users\\82109\\git\\Sports\\Sports\\src\\main\\webapp\\resources\\dealupload2\\";
 
 	// 메인 페이지 리스트
-	@RequestMapping(value = "/list")
+	@RequestMapping(value = "/list", method=RequestMethod.GET)
+	@ResponseBody
 	public ModelAndView AutionList
 	(@RequestParam(value = "page",
 	defaultValue = "1", required = false) int page, 
 			@RequestParam(value = "search",
-			defaultValue = "", required = false) String search,
-			String view,
-			ModelAndView mv) {
+			defaultValue = "", required = false) String search ,ModelAndView mv)
+			
+	{
 		
 		int limit = 6; // 한 화면에 출력할 레코드 갯수
 		
-		logger.info("View" + view);
+		
 		
 		int listcount = DealService.getListCount2(); // 총 리스트 수를 받아옴
 

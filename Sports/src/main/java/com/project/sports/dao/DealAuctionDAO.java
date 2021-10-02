@@ -31,6 +31,10 @@ public class DealAuctionDAO {
 		
 	}
 
+	public List<DealAuction> getSearchAuctionList(HashMap<String, Object> map) {
+		return sqlSession.selectList("Auction.searchlist",map);
+	}
+
 
 
 }

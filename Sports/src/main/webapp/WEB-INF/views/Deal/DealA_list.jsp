@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -35,7 +36,8 @@
 	href="${pageContext.request.contextPath}/resources/css/nice-select.css">
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/style.css">
-	
+<script src = "http://code.jquery.com/jquery-latest.js"></script>
+
 </head>
 <style>
 #paging {
@@ -59,23 +61,37 @@
 }
 
 .pagination
+
  
+
 a
+
+
 :hover
+
+
 :not
+
  
+
 (
 .active
+
  
+
 )
 {
 background-color
+
+
 :
+
  
+
 #ddd
+
+
 ;
-
-
 }
 #paging {
 	text-align: center;
@@ -119,7 +135,7 @@ background-color
 	<!-- Preloader Start -->
 
 	<!-- 헤더 영역  -->
-	<jsp:include page="/WEB-INF/views/sport_comm/header.jsp"/>
+	<jsp:include page="/WEB-INF/views/sport_comm/header.jsp" />
 
 	<main> <!-- slider Area Start-->
 	<div class="slider-area ">
@@ -146,8 +162,8 @@ background-color
 					<nav>
 						<div class="nav nav-tabs" id="nav-tab" role="tablist">
 							<a class="nav-item nav-link active" id="nav-home-tab"
-								href="${pageContext.request.contextPath}/DealA/list">경매
-								거래</a> <a class="nav-item nav-link" id="nav-profile-tab"
+								href="${pageContext.request.contextPath}/DealA/list">경매 거래</a> <a
+								class="nav-item nav-link" id="nav-profile-tab"
 								href="${pageContext.request.contextPath}/DealD/list">직거래</a>
 
 						</div>
@@ -177,6 +193,7 @@ background-color
 				<div class="tab-pane fade show active" id="nav-home" role="tabpanel"
 					aria-labelledby="nav-home-tab">
 					<div class="row">
+					<c:forEach var="b" items="${Auction}">
 						<div class="col-xl-4 col-lg-4 col-md-6">
 							<div class="single-product mb-60">
 								<div id="timeback">
@@ -184,33 +201,33 @@ background-color
 								</div>
 								<div class="product-img">
 									<img
-										src="${pageContext.request.contextPath}/resources/img/categori/product1.png"
-										alt="">
+										src="${pageContext.request.contextPath}/resources/dealupload1/${b.SAVE_AUC_MAINFILE}"
+										alt=""
+										style="width: 355px; height: 250px;">
 
 								</div>
 								<div class="product-caption">
 
 									<h4>
-										<a href="${pageContext.request.contextPath}/DealA/detail"><b>바지
-												팝니다(급처)</b></a>
+										<a href="${pageContext.request.contextPath}/DealA/detail"><b>${b.AUC_SUBJECT}</b></a>
 									</h4>
 									<div class="price">
 										<table class="table">
 											<tr>
 												<th>시작가</th>
-												<td>1000원</td>
+												<td>${b.AUC_PRICE}원</td>
 											</tr>
 											<tr>
 												<th class="discount2">현재가</th>
-												<td class="discount2">3000원</td>
+												<td class="discount2">${b.AUC_PRICE}원</td>
 											</tr>
 											<tr>
 												<th>입찰횟수</th>
-												<td>1회</td>
+												<td>${b.AUC_COUNT}회</td>
 											</tr>
 											<tr>
 												<th>올린시간</th>
-												<td>09-22</td>
+												<td>${b.AUC_DATE}</td>
 											</tr>
 
 										</table>
@@ -221,9 +238,22 @@ background-color
 						</div>
 						<!-- 남은 시간 구하는 스크립트문 -->
 						<script>
-							var a = 2021
-
-							var endTime = new Date(a, 08, 19, 15, 0, 0) / 1000;
+						 $(function() {
+							
+							
+							
+							
+						 	var aucdate = '${b.AUC_DATE}';
+						 	console.log(aucdate)
+						 	var dateyear = aucdate.substring(0,4)
+						 	var datemonth = aucdate.substring(5,7)
+						 	var dateday = aucdate.substring(8,10)
+						 	console.log(dateyear)
+						 	console.log(datemonth)
+						 	console.log(dateday)
+						 	var number = ${b.AUC_NUMBER}
+						 	console.log(number)
+							var endTime = new Date(dateyear,datemonth-1, dateday, 10, 0, 0) / 1000;
 							function setClock() {
 								var elapsed = new Date() / 1000;
 								var totalTime = endTime - elapsed;
@@ -234,220 +264,19 @@ background-color
 										+ " 초";
 								document.getElementById("time1").innerHTML = result;
 								setTimeout(setClock, 1000);
+								
+								if(result == "0 시 00 분 00 초"){
+									alert("입찰종료")
+									document.getElementById("time1").innerHTML = "입찰종료";
+									
+								}
 							}
 							setClock();
+						 })
+							
 						</script>
+					</c:forEach>
 
-						<div class="col-xl-4 col-lg-4 col-md-6">
-							<div class="single-product mb-60">
-								<div id="timeback">
-									<span class="fas fa-clock" /> <span id="time1"></span>
-								</div>
-								<div class="product-img">
-									<img
-										src="${pageContext.request.contextPath}/resources/img/categori/product1.png"
-										alt="">
-	
-								</div>
-								<div class="product-caption">
-
-									<h4>
-										<a href="${pageContext.request.contextPath}/Mydeal/main"><b>바지
-												팝니다(급처)</b></a>
-									</h4>
-									<div class="price">
-										<table class="table">
-											<tr>
-												<th>시작가</th>
-												<td>1000원</td>
-											</tr>
-											<tr>
-												<th class="discount2">현재가</th>
-												<td class="discount2">3000원</td>
-											</tr>
-											<tr>
-												<th>입찰횟수</th>
-												<td>1회</td>
-											</tr>
-											<tr>
-												<th>올린시간</th>
-												<td>09-22</td>
-											</tr>
-
-										</table>
-
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-xl-4 col-lg-4 col-md-6">
-							<div class="single-product mb-60">
-								<div id="timeback">
-									<span class="fas fa-clock" /> <span id="time1"></span>
-								</div>
-								<div class="product-img">
-									<img
-										src="${pageContext.request.contextPath}/resources/img/categori/product1.png"
-										alt="">
-
-								</div>
-								<div class="product-caption">
-
-									<h4>
-										<a href="${pageContext.request.contextPath}/DealA/detail"><b>바지
-												팝니다(급처)</b></a>
-									</h4>
-									<div class="price">
-										<table class="table">
-											<tr>
-												<th>시작가</th>
-												<td>1000원</td>
-											</tr>
-											<tr>
-												<th class="discount2">현재가</th>
-												<td class="discount2">3000원</td>
-											</tr>
-											<tr>
-												<th>입찰횟수</th>
-												<td>1회</td>
-											</tr>
-											<tr>
-												<th>올린시간</th>
-												<td>09-22</td>
-											</tr>
-
-										</table>
-
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-xl-4 col-lg-4 col-md-6">
-							<div class="single-product mb-60">
-								<div id="timeback">
-									<span class="fas fa-clock" /> <span id="time1"></span>
-								</div>
-								<div class="product-img">
-									<img
-										src="${pageContext.request.contextPath}/resources/img/categori/product1.png"
-										alt="">
-
-								</div>
-								<div class="product-caption">
-
-									<h4>
-										<a href="${pageContext.request.contextPath}/DealA/detail"><b>바지
-												팝니다(급처)</b></a>
-									</h4>
-									<div class="price">
-										<table class="table">
-											<tr>
-												<th>시작가</th>
-												<td>1000원</td>
-											</tr>
-											<tr>
-												<th class="discount2">현재가</th>
-												<td class="discount2">3000원</td>
-											</tr>
-											<tr>
-												<th>입찰횟수</th>
-												<td>1회</td>
-											</tr>
-											<tr>
-												<th>올린시간</th>
-												<td>09-22</td>
-											</tr>
-
-										</table>
-
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-xl-4 col-lg-4 col-md-6">
-							<div class="single-product mb-60">
-								<div id="timeback">
-									<span class="fas fa-clock" /> <span id="time1"></span>
-								</div>
-								<div class="product-img">
-									<img
-										src="${pageContext.request.contextPath}/resources/img/categori/product1.png"
-										alt="">
-
-								</div>
-								<div class="product-caption">
-
-									<h4>
-										<a href="${pageContext.request.contextPath}/DealA/detail"><b>바지
-												팝니다(급처)</b></a>
-									</h4>
-									<div class="price">
-										<table class="table">
-											<tr>
-												<th>시작가</th>
-												<td>1000원</td>
-											</tr>
-											<tr>
-												<th class="discount2">현재가</th>
-												<td class="discount2">3000원</td>
-											</tr>
-											<tr>
-												<th>입찰횟수</th>
-												<td>1회</td>
-											</tr>
-											<tr>
-												<th>올린시간</th>
-												<td>09-22</td>
-											</tr>
-
-										</table>
-
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-xl-4 col-lg-4 col-md-6">
-							<div class="single-product mb-60">
-								<div id="timeback">
-									<span class="fas fa-clock" /> <span id="time1"></span>
-								</div>
-								<div class="product-img">
-									<img
-										src="${pageContext.request.contextPath}/resources/img/categori/product1.png"
-										alt="">
-		
-								</div>
-								<div class="product-caption">
-
-									<h4>
-										<a href="${pageContext.request.contextPath}/DealA/detail"><b>바지
-												팝니다(급처)</b></a>
-									</h4>
-									<div class="price">
-										<table class="table">
-											<tr>
-												<th>시작가</th>
-												<td>1000원</td>
-											</tr>
-											<tr>
-												<th class="discount2">현재가</th>
-												<td class="discount2">3000원</td>
-											</tr>
-											<tr>
-												<th>입찰횟수</th>
-												<td>1회</td>
-											</tr>
-											<tr>
-												<th>올린시간</th>
-												<td>09-22</td>
-											</tr>
-
-										</table>
-
-									</div>
-								</div>
-							</div>
-						</div>
 
 
 					</div>
@@ -458,11 +287,15 @@ background-color
 								class="header-right f-right d-none d-lg-block d-flex justify-content-between">
 								<li class="d-none d-xl-block" id="sd-none">
 									<div class="form-box f-right ">
-										<input type="text" name="Search" id="sinput"
-											placeholder="Search products">
-										<div class="search-icon">
-											<i class="fas fa-search special-tag"></i>
-										</div>
+										<form method="get" action="list" name="form1" id="form1">
+											<input type="text" name="search" id="search"
+												placeholder="Search products">
+
+											<div class="search-icon">
+												<i onclick="SubmitForm()" class="fas fa-search special-tag"
+													id="searchB"></i>
+											</div>
+										</form>
 									</div>
 								</li>
 
@@ -519,6 +352,13 @@ background-color
 				</div>
 			</div>
 		</div>
+		<script>
+		function SubmitForm()
+        {
+
+            form1.submit();
+        }
+		</script>
 	</div>
 	<!-- Shop Method End--> <!-- Gallery Start-->
 	<div class="gallery-wrapper lf-padding">
@@ -556,7 +396,7 @@ background-color
 	</div>
 	<!-- Gallery End--> </main>
 	<!-- Footer 영역  -->
-	<jsp:include page="/WEB-INF/views/sport_comm/footer2.jsp"/>
+	<jsp:include page="/WEB-INF/views/sport_comm/footer2.jsp" />
 
 
 

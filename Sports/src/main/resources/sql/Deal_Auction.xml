@@ -30,6 +30,31 @@
 
 </insert>
 
+<select id="list" parameterType="java.util.Map" resultType="Auction">
+select * from
+	(select rownum rnum , 	AUC_NUMBER , AUC_SUBJECT , AUC_DATE
+	AUC_PRICE ,AUC_COUNT ,SAVE_AUC_MAINFILE 
+		from(
+		select * from Deal_Auction
+		order by AUC_NUMBER desc))
+	 where rnum &gt;= #{start} and rnum  &lt;=  #{end}
+	</select>
+
+<select id = "searchlist" parameterType="java.util.Map"
+	resultType="Auction">
+select * from
+	(select rownum rnum , 	AUC_NUMBER , AUC_SUBJECT , 
+	AUC_DATE ,AUC_PRICE ,AUC_COUNT ,SAVE_AUC_MAINFILE 
+		from(
+		select * from Deal_Auction
+		where AUC_SUBJECT like #{search_word}
+		order by AUC_NUMBER desc
+		))
+	 where rnum &gt;= #{start} and rnum  &lt;=  #{end}
+	 
+
+	
+</select>
 
 
 
