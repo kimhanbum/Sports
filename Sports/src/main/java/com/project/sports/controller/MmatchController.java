@@ -12,10 +12,17 @@ import org.springframework.web.servlet.ModelAndView;
 public class MmatchController {
 	private static final Logger logger = LoggerFactory.getLogger(MmatchController.class);
 	
-	//글 목록 보기
-	@RequestMapping(value = "/mainPage", method = RequestMethod.GET)
-	public ModelAndView mainPage(ModelAndView mv) {
+	//멘토 글 리스트 보기
+	@RequestMapping(value = "/mentorPage", method = RequestMethod.GET)
+	public ModelAndView metorMainPage(ModelAndView mv) {
 		mv.setViewName("sport_menMatch/sports_mentor");
+		return mv;
+	}
+	
+	//멘토 글 작성
+	@RequestMapping(value = "/mentorWrite", method = RequestMethod.GET)
+	public ModelAndView mentorWrite(ModelAndView mv) {
+		mv.setViewName("sport_menMatch/sports_mentor_write");
 		return mv;
 	}
 }
