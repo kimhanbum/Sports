@@ -17,72 +17,8 @@
 	 img{width:20px}
 	</style> -->
 </head>
-<!-- <body>
- <div class="container">
-	 <form action="add" method="post" enctype="multipart/form-data"
-	 	name="boardform">
-	 	<h1>자유게시판 글쓰기</h1>
-	 	 <div class="form-group">
-	 	 <select name="FR_CSFC" id="FR_CSFC"  style="radius:25%; width:100px; height:30px;">
-	 	 			  <option value="">Category</option>
-                      <option value="1">운동기록</option>
-                      <option value="2">운동팁</option>
-                      <option value="3">수다</option>
-                      <option value="4">운동파트너</option>
-    	 </select></div>
-	 	<div class="form-group">
-	 		<label for="USER_ID">글쓴이</label>
-	 		<input name="USER_ID" id="USER_ID" value="admin01" readOnly
-	 				type="text"	class="form-control"
-	 				placeholder="Enter your ID">
-	 	</div>
-	 	<div class="form-group">
-	 		<label for="FR_PASS">비밀번호</label>
-	 		<input name="FR_PASS" id="FR_PASS" type="password" maxlength="30"
-	 				class="form-control" placeholder="비밀번호를 입력하세요">
-	 	</div>
-	 	<div class="form-group">
-	 		<label for="FR_SUBJECT">제목</label>
-	 		<input name="FR_SUBJECT" id="FR_SUBJECT" type="text" maxlength="100"
-	 				class="form-control" placeholder="제목을 입력하세요">
-	 	</div>
-	 	<div class="form-group">
-	 		<label for="FR_CONTENT">내용</label>
-	 		<textarea name="FR_CONTENT" id="FR_CONTENT"
-	 				cols="67" rows="10" class="form-control"></textarea>
-	 	</div>
-	 	<div class="form-group">
-	 		<label for="board_file">파일 첨부</label>
-	 		<label for="upfile">
-	 			<img src="../resources/image/bbs_fr/attach.png" alt="파일첨부">
-	 		</label>
-	 		<input name="uploadfile" id="upfile" type="file">
-	 		<span id="filevalue"></span>
- 		</div>
- 			<div class="container">
-								<div class="row" style="text-align: center">
-									<div class="col-11">
-										<input type="submit" value="Submit"
-											class="btn btn-primary py-3 px-5"
-											style="background-color: black; height: 50px"> &emsp;
-										<input type="reset" value="Cancel"
-											class="btn btn-primary py-3 px-5"
-											style="background-color: gray; height: 50px"
-											 onclick="window.history.back()">
-									</div>
-									<br> <br> <br> <br> <br> <br> <br>
-
-								</div>
-							</div>
- 		
- 		
-	 </form>
- </div>  -->
- 
- 
  <body data-spy="scroll" data-target=".site-navbar-target"
 	data-offset="300">
-
 	<!-- Preloader Start -->
 	<div id="preloader-active">
 		<div
@@ -96,8 +32,6 @@
 		</div>
 	</div>
 	<!-- Preloader Start -->
-
-
 	<main> <!-- slider Area Start-->
 	<div class="slider-area ">
 		<!-- Mobile Menu -->
@@ -140,7 +74,7 @@
 						<div class="col-md-4 form-group">
 							<label for="USER_ID">글쓴이</label> 
 							<input type="text" id="USER_ID" value="admin01" readOnly
-									class="form-control form-control-lg" style="width: 680px"
+									class="form-control" style="width: 680px"
 									placeholder="제목을 입력하세요" name="USER_ID"> 
 						</div>
 					</div>
@@ -148,7 +82,7 @@
 						<div class="col-md-4 form-group">
 	 						<label for="FR_PASS">비밀번호</label>
 	 						<input name="FR_PASS" id="FR_PASS" type="password" maxlength="30"
-	 								class="form-control form-control-lg" style="width: 680px"
+	 								class="form-control" style="width: 680px"
 	 								placeholder="비밀번호를 입력하세요">
 	 					</div>
 					</div>
@@ -156,7 +90,7 @@
 						<div class="col-md-4 form-group">
 							<label for="FR_SUBJECT">제목</label> 
 							<input type="text" id="FR_SUBJECT"
-									class="form-control form-control-lg" style="width: 680px"
+									class="form-control" style="width: 680px"
 									placeholder="제목을 입력하세요" name="FR_SUBJECT"> 
 						</div>
 					</div>
@@ -164,19 +98,17 @@
 						<div class="col-md-11 form-group">
 							<label for="message">내용</label>
 							<textarea name="FR_CONTENT" id="FR_CONTENT" cols="40" rows="10"
-									class="form-control" placeholder="내용 입력 .. "></textarea>
+									class="form-control"></textarea>
 						</div>
 					</div>
 					<hr>
-					<div class="row">
-						<div class="col-md-6 form-group">
-							<label for="message">사진 첨부</label><br> <label class="file" title="">
-							<input type="file"
-									onchange="this.parentNode.setAttribute('title', this.value.replace(/^.*[\\/]/, ''))"
-									 name="uploadfile" id="upfile"/>
-							</label>
-						</div>
-					</div>
+					<div class="col-md-6 form-group">
+									<label for="message">사진 첨부</label><br>
+									<label class="file" title="">
+									<input type="file"
+										onchange="this.parentNode.setAttribute('title', this.value.replace(/^.*[\\/]/, ''))"
+										id="upfile" name="uploadfile" /></label>
+								</div>
 			<hr>
 			<br> <br> <br>
 			<div class="container">

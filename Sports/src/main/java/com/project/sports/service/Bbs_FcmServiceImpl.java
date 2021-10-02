@@ -25,7 +25,6 @@ public class Bbs_FcmServiceImpl implements Bbs_FcmService{
 	public List<BBS_FCM> getFcmList(int FR_NO, int page) {
 		int startrow =1;
 		int endrow = page*3;
-		
 		Map<String,Integer> map = new HashMap<String, Integer>();
 		map.put("FR_NO", FR_NO);
 		map.put("start", startrow);

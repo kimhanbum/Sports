@@ -18,15 +18,16 @@ $(document).ready(function() {
 			$("#FR_PASS").focus();
 			return false;
 		}
-	
-		/* 이곳이 적용되는 경우
+	/*
+		 이곳이 적용되는 경우
 		  1. 파일 첨부를 변경하지 않은 경우
 		  	  파일 첨부를 변경하지 않으면 ${'#filevalue').text()의 파일명을 
 		  	  파라미터 'check'라는 이름으로 form에 추가하여 전송합니다.
 		  	  
 		  2. 파일 첨부의 remove 이미지를 클릭해서 파일을 제거하고 파일 첨부를 변경하지 않은 경우 
 		  	  이때 value의 값은 ''입니다.
-		 */
+	 */
+		 
 		//한번도 변경하지 않으면 $("filevalue").text()의 파일명을 전송합니다.
 		if (check == 0){
 			value = $('#filevalue').text();

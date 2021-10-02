@@ -34,7 +34,7 @@ import com.project.sports.service.Bbs_FrService;
 @RequestMapping(value="/BBS_FR")
 	public class BbsFrController {
 
-	private static final Logger Logger
+	private static final Logger logger
 	= LoggerFactory.getLogger(BbsFrController.class);
 
 	@Autowired
@@ -42,6 +42,8 @@ import com.project.sports.service.Bbs_FrService;
 	
 	@Autowired
 	private Bbs_FcmService FcmService;
+	
+	private String saveFolder = "C:\\Users\\박주영\\git\\Sports\\Sports\\src\\main\\webapp\\resources\\BBS_FRupload\\";
 	
 	private String fileDBName(String fileName, String saveFolder) {
 		//새로운 폴더 이름 : 오늘 년 + 월 + 일
@@ -51,7 +53,7 @@ import com.project.sports.service.Bbs_FrService;
 		int date = c.get(Calendar.DATE); //오늘 일 구합니다.
 		
 		String homedir = saveFolder + year + "_" + month + "_" + date;
-		Logger.info(homedir);
+		logger.info(homedir);
 		File path1 = new File(homedir);
 		if(!(path1.exists())) {
 			path1.mkdir();//새로운 폴더를 생성
@@ -67,19 +69,19 @@ import com.project.sports.service.Bbs_FrService;
 		//indexOf가 처음 발견되는 문자열에 대한 index를 반환하는 반면
 		// lastIndexOf는 마지막으로 발견되는 문자열의 index를 반환합니다.
 		// (파일명에 점이 여러 개 있을 경우 맨 마지막에 발견되는 문자열의 위치를 리턴합니다.)
-		Logger.info("index = " + index);
+		logger.info("index = " + index);
 		
 		String fileExtension = fileName.substring(index + 1);
-		Logger.info("fileExtension = " + fileExtension);
+		logger.info("fileExtension = " + fileExtension);
 		/**** 확장자 구하기 끝 ****/
 		
 		//새로운 파일명
 		String refileName = "bbs" + year + month + date + random + "." + fileExtension;
-		Logger.info("refileName = " + refileName);
+		logger.info("refileName = " + refileName);
 		
 		//오라클 디비에 저장될 파일 명
 		String fileDBName = "/" + year + "_" + month + "_" +date + "/" + refileName;
-		Logger.info("fileDBName = " + fileDBName);
+		logger.info("fileDBName = " + fileDBName);
 		return fileDBName;
 	} 
 	//리스트
@@ -92,6 +94,7 @@ import com.project.sports.service.Bbs_FrService;
 			String search_word,
 			ModelAndView mv) {
 		int limit = 10;	// 한 화면에 출력할 레코드 개수
+		
 		
 		if(index == 0) {// 카테고리 선택한 경우
 			switch(search_word) {
@@ -125,7 +128,7 @@ import com.project.sports.service.Bbs_FrService;
 			endpage = maxpage;
 		
 		List<BBS_FR> boardlist = FrService.getSearchList(index, search_word, page, limit);
-		Logger.info("boardlist =" + boardlist);
+		logger.info("boardlist =" + boardlist);
 
 		mv.setViewName("sports_fr/Bbs_FrList");
 		mv.addObject("page",page);
@@ -139,6 +142,7 @@ import com.project.sports.service.Bbs_FrService;
 		mv.addObject("search_word",search_word);
 		return mv;
 	}
+	
 	
 	//글쓰기 
 	@RequestMapping(value="/write", method=RequestMethod.GET)
@@ -157,23 +161,29 @@ import com.project.sports.service.Bbs_FrService;
 		if(!uploadfile.isEmpty()) {
 			String fileName = uploadfile.getOriginalFilename();//원래 파일명
 			board.setFR_ORIGINAL(fileName);	//원래 파일명 저장
-			String saveFolder =
-					request.getSession().getServletContext().getRealPath("resources")
-					+ "/BBS_FRupload/";
+			
+			/*
+			 * String saveFolder =
+			 * request.getSession().getServletContext().getRealPath("resources") +
+			 * "/BBS_FRupload/";
+			 */
+			 
 			String fileDBName = fileDBName(fileName, saveFolder);
-			Logger.info("fileDBName= " + fileDBName);
+			logger.info("fileDBName= " + fileDBName);
 			
 			//transferTo(File path) : 업로드한 파일을 매개변수의 경로에 저장합니다.
 			uploadfile.transferTo(new File(saveFolder + fileDBName));
 			
-			//분류
-			Logger.info("분류 값 : " + board.getFR_CSFC());
-			System.out.println(board.getFR_CSFC());
 			
 			//바뀐 파일명으로 저장
 			board.setFR_FILE(fileDBName);
 			
 		}
+		logger.info("save폴더" + saveFolder);
+		//분류
+		logger.info("분류 값 : " + board.getFR_CSFC());
+		
+		//board.setUSER_ID("admin01"); //예비
 		
 		FrService.insertBoard(board); //저장메서드 호출
 		
@@ -185,20 +195,21 @@ import com.project.sports.service.Bbs_FrService;
 			HttpServletRequest request) {
 
 		BBS_FR board = FrService.getDetail(num);
-		Logger.info("num:" + num);
+		logger.info("num:" + num);
 		//board=null;//error 페이지 이동 확인하고자 임의로 지정합니다.
 		if(board==null) {
-			Logger.info("상세보기 실패");
+			logger.info("상세보기 실패");
 			mv.setViewName("error/error");
 			mv.addObject("url",request.getRequestURL());
 			mv.addObject("message", "상세보기 실패입니다.");
 		}else {
-			Logger.info("상세보기 성공");
+			logger.info("상세보기 성공");
 			int count = FcmService.getListCount(num);
 			mv.setViewName("sports_fr/Bbs_FrView");
 			mv.addObject("count", count);
 			mv.addObject("boarddata", board);
 		}
+		logger.info("분류 값 : " + board.getFR_CSFC());
 		return mv;
 	}
 	
@@ -212,7 +223,7 @@ import com.project.sports.service.Bbs_FrService;
 		// 글 삭제 명령을 요청한 사용자가 글을 작성한 사용자인지 판단하기 위해
 		// 입력한 비밀번호와 저장된 비밀번호를 비교하여 일치하면 삭제합니다.
 		 boolean usercheck = FrService.isFrWriter(num, FR_PASS);
-		 	Logger.info("num" + num);
+		 	logger.info("num" + num);
 		// 비밀번호 일치하지 않는 경우
 		if (usercheck == false) {
 			rattr.addFlashAttribute("result","passFail");
@@ -222,17 +233,17 @@ import com.project.sports.service.Bbs_FrService;
 		
 		// 비밀번호 일치하는 경우 삭제 처리 합니다.
 		int result = FrService.FrDelete(num);
-			Logger.info("result:" + result);
+			logger.info("result:" + result);
 		//삭제 처리 실패한 경우
 		if(result == 0) {
-			Logger.info("게시판 삭제 실패");
+			logger.info("게시판 삭제 실패");
 			mv.addAttribute("url", request.getRequestURL());
 			mv.addAttribute("message", "삭제실패");
 			return "error/error";
 							
 		}
 		//삭제 처리 성공한 경우 - 글 목록 보기 요청을 전송하는 부분입니다.
-			Logger.info("게시판 삭제 성공");
+			logger.info("게시판 삭제 성공");
 			rattr.addFlashAttribute("result","deleteSuccess");
 			return "redirect:list";
 		  }
@@ -246,16 +257,17 @@ import com.project.sports.service.Bbs_FrService;
 		  
 		  //글 내용 불러오기 실패한 경우
 		  if (boarddata == null) {
-			  Logger.info("수정보기 실패");
+			  logger.info("수정보기 실패");
 			  mv.setViewName("error/error");
 			  mv.addObject("url", request.getRequestURL());
 			  mv.addObject("message","수정보기 실패입니다.");
 			  return mv;
 		  }
-		  Logger.info("(수정)상세보기 성공");
+		  logger.info("(수정)상세보기 성공");
 		  //수정 폼 페이지로 이동할 때 원문 글 내용을 보여주기 때문에 boarddata 객체를
 		  //ModelAndView객체에 저장합니다.
 		  mv.addObject("boarddata", boarddata);
+		  logger.info("파일 이름" + boarddata.getFR_ORIGINAL());
 		  //글 수정 폼 페이지로 이동하기 위해 경로를 설정합니다.
 		  mv.setViewName("sports_fr/Bbs_FrModify");
 		  return mv;
@@ -276,17 +288,20 @@ import com.project.sports.service.Bbs_FrService;
 		  			return "redirect:modifyView";
 		  		}
 		  	MultipartFile uploadfile = boarddata.getUploadfile();
-		  	String saveFolder=
-		  request.getSession().getServletContext().getRealPath("resources") + "/BBS_FRupload/";
+		/*
+		 * String saveFolder=
+		 * request.getSession().getServletContext().getRealPath("resources") +
+		 * "/BBS_FRupload/";
+		 */
 		  	
 		  	if(check != null && !check.equals("")) {	//기존 파일 그대로 사용하는 경우입니다.
-		  		Logger.info("기존 파일 그대로 사용합니다.");
+		  		logger.info("기존 파일 그대로 사용합니다.");
 		  		boarddata.setFR_ORIGINAL(check);
 		  		//<input type="hidden" name=BOARD_FILE" value="${boarddata.BOARD_FILE}">
 		  		//위 문장 때문에 board.setBOARD_FILE()값은 자동 저장됩니다.
 		  	}else {
 		  		if(uploadfile!=null && !uploadfile.isEmpty()) {
-		  			Logger.info("파일 변경되었습니다.");
+		  			logger.info("파일 변경되었습니다.");
 		  			//답변 글을 수정할 경우 <input type="file" id="upfile" name="uploadfile">엘리먼트
 		  			//private MultipartFile uploadfile;에서 uploadfile는 null입니다.
 		  			
@@ -301,7 +316,7 @@ import com.project.sports.service.Bbs_FrService;
 		  			//바뀐 파일명으로 저장
 		  			boarddata.setFR_FILE(fileDBName);
 		  		}else {	//uploadfile.isEmpty()인 경우 - 파일 선택하지 않은 경우
-		  			Logger.info("선택 파일이 없습니다.");
+		  			logger.info("선택 파일이 없습니다.");
 		  			//<input type="hidden" name="BOARD_FILE" value="${boarddata.BOARD_FILE}">
 		  			//위 태그에 값이 있다면 ""로 값을 변경합니다.
 		  			boarddata.setFR_FILE("");//""로 초기화합니다.
@@ -309,17 +324,21 @@ import com.project.sports.service.Bbs_FrService;
 		  		}//else end
 		  }//else end
 		  
+		  logger.info("FR_SUBJECT" + boarddata.getFR_SUBJECT());
+		  logger.info("FR_CONTENT" + boarddata.getFR_CONTENT());
+		  logger.info("FR_FILE"+ boarddata.getFR_FILE());
+		  logger.info("FR_ORIGINAL"+boarddata.getFR_ORIGINAL());
 		  //DAO에서 수정 메서드 호출하여 수정합니다.
 		  int result = FrService.FrModify(boarddata);
 		  //수정에 실패한 경우
 		  if(result == 0) {
-			  Logger.info("게시판 수정 실패");
+			  logger.info("게시판 수정 실패");
 			  mv.addAttribute("url",request.getRequestURL());
 			  mv.addAttribute("message","게시판 수정 실패");
 			  url="error/error";
 			  
 		  }else {// 수정성공의 경우
-			  Logger.info("게시판 수정 완료");
+			  logger.info("게시판 수정 완료");
 			  //수정한 글 내용을 보여주기 위해 글 내용 보기 보기 페이지로 이동하기 위해 경로를 설정합니다.
 			  url = "redirect:list";
 			  rattr.addAttribute("num",boarddata.getFR_NO());
@@ -331,21 +350,22 @@ import com.project.sports.service.Bbs_FrService;
 			 HttpServletRequest request, String original,
 			 HttpServletResponse response) throws Exception {
 		 
-		 String savePath = "resources/BBS_FRupload";
+		 //String savePath = "resources/BBS_FRupload";
 		 //서블릿의 실행 환경 정보를 담고 있는 객체를 리턴합니다.
 		 ServletContext context = request.getSession().getServletContext();
-		 String sDownloadPath = context.getRealPath(savePath);
+		 //String sDownloadPath = context.getRealPath(savePath);
 		 
 		 //String sFilePath = sDownloadPath + "\\" + fileName;
 		 // "\" 추가하기 위해 "\\" 사용합니다.
-		 String sFilePath = sDownloadPath + "/" + filename;
-		 Logger.info(sFilePath);
+		 //String sFilePath = sDownloadPath + "/" + filename;
+		 String sFilePath = saveFolder + "/" + filename;
+		 logger.info(sFilePath);
 		 
 		 byte b[] = new byte[4096];
 		 
 		 //sFilePath에 있는 파일의 MimeType을 구해옵니다.
 		 String sMimeType = context.getMimeType(sFilePath);
-		 Logger.info("sMimeType>>>" + sMimeType);
+		 logger.info("sMimeType>>>" + sMimeType);
 		 
 		 if(sMimeType == null)
 			 sMimeType = "application/octet-stream";
