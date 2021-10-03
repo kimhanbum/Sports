@@ -51,7 +51,7 @@ select * from
 	DIR_PRICE ,DIR_ADDRESS ,DIR_DATE ,SAVE_DIR_MAINFILE ,DIR_READCOUNT
 		from(
 		select * from deal_direct
-		order by dir_number desc))
+		order by #{view}))
 	 where rnum &gt;= #{start} and rnum  &lt;=  #{end}
 	</select>
 	

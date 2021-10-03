@@ -21,7 +21,7 @@ public interface DealService {
 
 	public void D_insert(DealDirect direct);
 
-	public List<DealDirect> getDirectList(int page, int limit);
+	public List<DealDirect> getDirectList(int page, int limit , String view);
 
 	public DealDirect D_getDetail(int num);
 
@@ -29,11 +29,13 @@ public interface DealService {
 
 	public int D_Modify(DealDirect direct);
 
-	public List<DealDirect> getSearchDirecList(int page, int limit, String search);
+	public List<DealDirect> getSearchDirecList(int page, int limit, String search, String view);
 
 	public int D_readcount(int num);
 
 	public List<DealAuction> getSearchAuctionList(int page, int limit, String search);
+
+
 
 	
 

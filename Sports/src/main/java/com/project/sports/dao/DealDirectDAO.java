@@ -23,7 +23,7 @@ public class DealDirectDAO {
 			return sqlSession.selectOne("Direct.count");
 		}
 
-		public List<DealDirect> getDirectList(HashMap<String, Integer> map) {
+		public List<DealDirect> getDirectList(HashMap<String, Object> map) {
 			return sqlSession.selectList("Direct.list", map);
 		}
 

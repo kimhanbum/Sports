@@ -33,11 +33,23 @@ create table Deal_Direct (
 	
 	select* from Deal_direct;
 	
+	/* 10-02ÀÏ º¯°æ */
+	ALTER TABLE Deal_direct MODIFY DIR_PRICE NUMBER;
+	/*-------------*/
 	
 	
 update deal_direct set DIR_READCOUNT = DIR_READCOUNT +1 
 where dir_number = 35;
 
+
+
+select * from
+	(select rownum rnum , 	DIR_NUMBER , DIR_SUBJECT , 
+	DIR_PRICE ,DIR_ADDRESS ,DIR_DATE ,SAVE_DIR_MAINFILE ,DIR_READCOUNT
+		from(
+		select * from deal_direct
+		order by DIR_PRICE desc ))
+	 where rnum >= 1 and rnum  <=  10
 
 
 	

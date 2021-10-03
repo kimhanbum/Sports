@@ -3,7 +3,9 @@ package com.project.sports.controller;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
 import javax.servlet.http.HttpServletRequest;
@@ -38,19 +40,22 @@ public class DealDirectController {
 	private String saveFolder = "C:\\Users\\82109\\git\\Sports\\Sports\\src\\main\\webapp\\resources\\dealupload2\\";
 
 	// 메인 페이지 리스트
-	@RequestMapping(value = "/list", method=RequestMethod.GET)
-	@ResponseBody
+	@RequestMapping(value = "/list")
 	public ModelAndView AutionList
 	(@RequestParam(value = "page",
 	defaultValue = "1", required = false) int page, 
 			@RequestParam(value = "search",
-			defaultValue = "", required = false) String search ,ModelAndView mv)
+			defaultValue = "", required = false) String search ,ModelAndView mv,
+			@RequestParam(value = "view",
+			defaultValue = "1", required = false) String view  )
 			
 	{
 		
 		int limit = 6; // 한 화면에 출력할 레코드 갯수
 		
-		
+		logger.info("뷰뷰" + view);
+		view="2";
+		view="4";
 		
 		int listcount = DealService.getListCount2(); // 총 리스트 수를 받아옴
 
@@ -69,13 +74,13 @@ public class DealDirectController {
 		List<DealDirect> Direct = new ArrayList<DealDirect>();
 		
 		if(search == "") {
-			Direct = DealService.getDirectList(page, limit); //리스트를 받아옴
+			Direct = DealService.getDirectList(page, limit,view); //리스트를 받아옴
 		}else {
-			Direct = DealService.getSearchDirecList(page,limit,search);
+			Direct = DealService.getSearchDirecList(page,limit,search,view);
 		}
-		 
+		logger.info("뷰뷰3233  " + Direct.get(3).getDIR_NUMBER());
+	
 		
-		mv.setViewName("Deal/DealD_list");
 		mv.addObject("page",page);
 		mv.addObject("maxpage",maxpage);
 		mv.addObject("startpage",startpage);
@@ -83,12 +88,70 @@ public class DealDirectController {
 		mv.addObject("listcount",listcount);
 		mv.addObject("Direct",Direct);
 		mv.addObject("limit",limit);
+		mv.setViewName("Deal/DealD_list");
 		
 		
 		
 		return mv;
 
 	}
+	
+	@ResponseBody
+	@RequestMapping(value="/list_ajax")
+		public Map<String , Object> boardListAjax(
+		@RequestParam(value="page" , defaultValue="1" , required=false) int page,
+		@RequestParam(value = "search",
+		defaultValue = "", required = false) String search ,
+		@RequestParam(value = "view",
+		defaultValue = "1", required = false) String view  
+		
+				){
+		int limit = 6; // 한 화면에 출력할 레코드 갯수
+		
+		logger.info("뷰" + view);
+		logger.info("page" + page);
+		
+		int listcount = DealService.getListCount2();	//총 리스트 수를 받아옴
+		
+		//총 페이지 수
+		int maxpage=(listcount + limit-1) / limit;
+		
+		//현재 페이지에 보여줄 시작 페이지 수 (1, 11, 21 등 ...)
+		int startpage = ((page -1 ) / 10) * 10 + 1 ; 
+		
+		//현재 페이지에 보여줄 마지막 페이지 수 (10, 20 ,30 등...)
+		int endpage = startpage +10 -1 ;
+		
+		if (endpage > maxpage)
+			endpage = maxpage;
+		
+		List<DealDirect> Direct = new ArrayList<DealDirect>();
+		
+		//최신순
+		
+			if(search == "") {
+				Direct = DealService.getDirectList(page, limit,view); //리스트를 받아옴
+			}else {
+				Direct = DealService.getSearchDirecList(page,limit,search,view);
+			}
+		
+
+		
+		Map<String,Object> map = new HashMap<String,Object>();
+		
+		map.put("page",page);
+		map.put("maxpage",maxpage);
+		map.put("startpage",startpage);
+		map.put("endpage",endpage);
+		map.put("listcount",listcount);
+		map.put("Direct",Direct);
+		map.put("limit",limit);
+		
+		
+		return map;
+	}
+	
+
 
 	// 글쓰기
 	@GetMapping(value = "/write")

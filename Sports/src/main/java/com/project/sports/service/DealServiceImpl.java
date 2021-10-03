@@ -53,10 +53,26 @@ public class DealServiceImpl implements DealService {
 		}
 
 		@Override
-		public List<DealDirect> getDirectList(int page, int limit) {
-			HashMap<String , Integer>map = new HashMap<String,Integer>();
+		public List<DealDirect> getDirectList(int page, int limit,String view) {
+			HashMap<String , Object>map = new HashMap<String,Object>();
 			int startrow=(page-1)*limit +1; 
 			int endrow = startrow+limit-1;
+			
+			
+			if(view=="1") {
+				map.put("view" , "DIR_NUMBER desc");
+			}
+			if(view=="2") {
+				map.put("view" , "DIR_NUMBER asc");
+			}
+			if(view=="3") {
+				map.put("view" , "DIR_READCOUNT desc");
+			}
+			if(view=="4"){
+				map.put("view" , "DIR_PRICE desc");
+			}
+			
+			
 			map.put("start", startrow);
 			map.put("end",endrow);
 			return dao2.getDirectList(map);
@@ -79,10 +95,19 @@ public class DealServiceImpl implements DealService {
 		}
 
 		@Override
-		public List<DealDirect> getSearchDirecList(int page, int limit, String search) {
+		public List<DealDirect> getSearchDirecList(int page, int limit, String search , String view) {
 			HashMap<String , Object>map = new HashMap<String,Object>();
 			int startrow=(page-1)*limit +1; 
 			int endrow = startrow+limit-1;
+			if(view=="1") {
+				map.put("view" , "DIR_NUMBER desc");
+			}else if(view=="2") {
+				map.put("view" , "DIR_NUMBER asc");
+			}else if(view=="3") {
+				map.put("view" , "AUC_READCOUNT desc");
+			}else {
+				map.put("view" , "AUC_PRICE desc");
+			}
 			map.put("start", startrow);
 			map.put("end",endrow);
 			map.put("search_word", "%" + search + "%");
@@ -104,6 +129,8 @@ public class DealServiceImpl implements DealService {
 			map.put("search_word", "%" + search + "%");
 			return dao.getSearchAuctionList(map);
 		}
+
+
 
 
 }
