@@ -98,7 +98,7 @@ background-color
 	margin-top: 0
 }
 
-#timeback {
+.timeback {
 	width: 100%;
 	height: 30px;
 	background-color: #556069;
@@ -115,6 +115,112 @@ background-color
 .discount2 {
 	color: red;
 }
+/** Custom Select **/
+.custom-select-wrapper {
+  position: relative;
+  display: inline-block;
+  user-select: none;
+}
+  .custom-select-wrapper select {
+    display: none;
+  }
+  .custom-select {
+    position: relative;
+    display: inline-block;
+  }
+    .custom-select-trigger {
+      position: relative;
+      display: block;
+      width: 130px;
+      padding: 0 84px 0 22px;
+      font-size: 22px;
+      font-weight: 300;
+      color: #fff;
+      line-height: 60px;
+      background: #5c9cd8;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+      .custom-select-trigger:after {
+        position: absolute;
+        display: block;
+        content: '';
+        width: 10px; height: 10px;
+        top: 50%; right: 25px;
+        margin-top: -3px;
+        border-bottom: 1px solid #fff;
+        border-right: 1px solid #fff;
+        transform: rotate(45deg) translateY(-50%);
+        transition: all .4s ease-in-out;
+        transform-origin: 50% 0;
+      }
+      .custom-select.opened .custom-select-trigger:after {
+        margin-top: 3px;
+        transform: rotate(-135deg) translateY(-50%);
+      }
+  .custom-options {
+    position: absolute;
+    display: block;
+    top: 100%; left: 0; right: 0;
+    min-width: 100%;
+    margin: 15px 0;
+    border: 1px solid #b5b5b5;
+    border-radius: 4px;
+    box-sizing: border-box;
+    box-shadow: 0 2px 1px rgba(0,0,0,.07);
+    background: #fff;
+    transition: all .4s ease-in-out;
+    
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transform: translateY(-15px);
+  }
+  .custom-select.opened .custom-options {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: all;
+    transform: translateY(0);
+  }
+    .custom-options:before {
+      position: absolute;
+      display: block;
+      content: '';
+      bottom: 100%; right: 25px;
+      width: 7px; height: 7px;
+      margin-bottom: -4px;
+      border-top: 1px solid #b5b5b5;
+      border-left: 1px solid #b5b5b5;
+      background: #fff;
+      transform: rotate(45deg);
+      transition: all .4s ease-in-out;
+    }
+    .option-hover:before {
+      background: #f9f9f9;
+    }
+    .custom-option {
+      position: relative;
+      display: block;
+      padding: 0 22px;
+      border-bottom: 1px solid #b5b5b5;
+      font-size: 18px;
+      font-weight: 600;
+      color: #b5b5b5;
+      line-height: 47px;
+      cursor: pointer;
+      transition: all .4s ease-in-out;
+    }
+    .custom-option:first-of-type {
+      border-radius: 4px 4px 0 0;
+    }
+    .custom-option:last-of-type {
+      border-bottom: 0;
+      border-radius: 0 0 4px 4px;
+    }
+    .custom-option:hover,
+    .custom-option.selection {
+      background: #f9f9f9;
+    }
 </style>
 <body>
 
@@ -171,17 +277,17 @@ background-color
 					<!--End Nav Button  -->
 				</div>
 				<div class="select-this d-flex">
-					<div class="featured">
-						<span>정렬 </span>
-					</div>
+					
 					<form action="#">
 						<div class="select-itms">
-							<select name="select" id="select1">
-								<option value="">최신순</option>
-								<option value="">정확순</option>
-								<option value="">조회순</option>
-								<option value="">Featured C</option>
+							<div class="center">
+							<select name="sources" id="sources" class="custom-select sources"
+								placeholder="Source Type">
+								<option value="profile">Profile</option>
+								<option value="word">Word</option>
+								<option value="hashtag">Hashtag</option>
 							</select>
+						</div>
 						</div>
 					</form>
 				</div>
@@ -196,8 +302,8 @@ background-color
 					<c:forEach var="b" items="${Auction}">
 						<div class="col-xl-4 col-lg-4 col-md-6">
 							<div class="single-product mb-60">
-								<div id="timeback">
-									<span class="fas fa-clock" /> <span id="time1"></span>
+								<div id="timeback" class="timeback">
+									 
 								</div>
 								<div class="product-img">
 									<img
@@ -239,10 +345,7 @@ background-color
 						<!-- 남은 시간 구하는 스크립트문 -->
 						<script>
 						 $(function() {
-							
-							
-							
-							
+														
 						 	var aucdate = '${b.AUC_DATE}';
 						 	console.log(aucdate)
 						 	var dateyear = aucdate.substring(0,4)
@@ -253,21 +356,41 @@ background-color
 						 	console.log(dateday)
 						 	var number = ${b.AUC_NUMBER}
 						 	console.log(number)
+						 	
+						 	var timeid = "timeback" + number;
+						 	
+						 	$("#timeback").attr("id",timeid)
+						 	
+						 	
+						 	
+						 	var watch = '<span class="fas fa-clock" /> <span id="' + number + '"></span>'
+						 	document.getElementById(timeid).innerHTML = watch;
+						 	
 							var endTime = new Date(dateyear,datemonth-1, dateday, 10, 0, 0) / 1000;
+							//var endTime = new Date(2021,09, 05, 19, 38, 0) / 1000;
 							function setClock() {
 								var elapsed = new Date() / 1000;
 								var totalTime = endTime - elapsed;
 								var hr = parseInt(totalTime / 3600)
 								var min = parseInt(totalTime / 60) % 60;
 								var sec = parseInt(totalTime % 60, 10);
+								
+								
+								
+								
 								var result = hr + " 시 " + min + " 분 " + sec
 										+ " 초";
-								document.getElementById("time1").innerHTML = result;
+								eval("var count"+number+"=" + "'" + result + "'");
+	
+								document.getElementById(number).innerHTML = result;
 								setTimeout(setClock, 1000);
 								
-								if(result == "0 시 00 분 00 초"){
+								if(eval("count" + number) == "61 시 50 분 30 초"){
 									alert("입찰종료")
-									document.getElementById("time1").innerHTML = "입찰종료";
+									clearTimeout(setClock);
+									document.getElementById(timeid).innerHTML = "입찰종료";
+									//location.href="write"
+									
 									
 								}
 							}

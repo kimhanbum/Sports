@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -36,7 +36,7 @@
 	href="${pageContext.request.contextPath}/resources/css/nice-select.css">
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/style.css">
-	<script src = "http://code.jquery.com/jquery-latest.js"></script>
+<script src="http://code.jquery.com/jquery-latest.js"></script>
 </head>
 <style>
 #paging {
@@ -60,23 +60,37 @@
 }
 
 .pagination
+
  
+
 a
+
+
 :hover
+
+
 :not
+
  
+
 (
 .active
+
  
+
 )
 {
 background-color
+
+
 :
+
  
+
 #ddd
+
+
 ;
-
-
 }
 #paging {
 	text-align: center;
@@ -91,7 +105,116 @@ background-color
 	border: 1px solid white;
 }
 
+/* 정렬 */
 
+
+
+/** Custom Select **/
+.custom-select-wrapper {
+  position: relative;
+  display: inline-block;
+  user-select: none;
+}
+  .custom-select-wrapper select {
+    display: none;
+  }
+  .custom-select {
+    position: relative;
+    display: inline-block;
+  }
+    .custom-select-trigger {
+      position: relative;
+      display: block;
+      width: 130px;
+      padding: 0 84px 0 22px;
+      font-size: 22px;
+      font-weight: 300;
+      color: #fff;
+      line-height: 60px;
+      background: #5c9cd8;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+      .custom-select-trigger:after {
+        position: absolute;
+        display: block;
+        content: '';
+        width: 10px; height: 10px;
+        top: 50%; right: 25px;
+        margin-top: -3px;
+        border-bottom: 1px solid #fff;
+        border-right: 1px solid #fff;
+        transform: rotate(45deg) translateY(-50%);
+        transition: all .4s ease-in-out;
+        transform-origin: 50% 0;
+      }
+      .custom-select.opened .custom-select-trigger:after {
+        margin-top: 3px;
+        transform: rotate(-135deg) translateY(-50%);
+      }
+  .custom-options {
+    position: absolute;
+    display: block;
+    top: 100%; left: 0; right: 0;
+    min-width: 100%;
+    margin: 15px 0;
+    border: 1px solid #b5b5b5;
+    border-radius: 4px;
+    box-sizing: border-box;
+    box-shadow: 0 2px 1px rgba(0,0,0,.07);
+    background: #fff;
+    transition: all .4s ease-in-out;
+    
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transform: translateY(-15px);
+  }
+  .custom-select.opened .custom-options {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: all;
+    transform: translateY(0);
+  }
+    .custom-options:before {
+      position: absolute;
+      display: block;
+      content: '';
+      bottom: 100%; right: 25px;
+      width: 7px; height: 7px;
+      margin-bottom: -4px;
+      border-top: 1px solid #b5b5b5;
+      border-left: 1px solid #b5b5b5;
+      background: #fff;
+      transform: rotate(45deg);
+      transition: all .4s ease-in-out;
+    }
+    .option-hover:before {
+      background: #f9f9f9;
+    }
+    .custom-option {
+      position: relative;
+      display: block;
+      padding: 0 22px;
+      border-bottom: 1px solid #b5b5b5;
+      font-size: 18px;
+      font-weight: 600;
+      color: #b5b5b5;
+      line-height: 47px;
+      cursor: pointer;
+      transition: all .4s ease-in-out;
+    }
+    .custom-option:first-of-type {
+      border-radius: 4px 4px 0 0;
+    }
+    .custom-option:last-of-type {
+      border-bottom: 0;
+      border-radius: 0 0 4px 4px;
+    }
+    .custom-option:hover,
+    .custom-option.selection {
+      background: #f9f9f9;
+    }
 </style>
 <body>
 
@@ -112,7 +235,7 @@ background-color
 	<!-- Preloader Start -->
 
 	<!-- 헤더 영역  -->
-	<jsp:include page="/WEB-INF/views/sport_comm/header.jsp"/>
+	<jsp:include page="/WEB-INF/views/sport_comm/header.jsp" />
 
 	<main> <!-- slider Area Start-->
 	<div class="slider-area ">
@@ -139,8 +262,8 @@ background-color
 					<nav>
 						<div class="nav nav-tabs" id="nav-tab" role="tablist">
 							<a class="nav-item nav-link " id="nav-home-tab"
-								href="${pageContext.request.contextPath}/DealA/list">경매
-								거래</a> <a class="nav-item nav-link active" id="nav-profile-tab"
+								href="${pageContext.request.contextPath}/DealA/list">경매 거래</a> <a
+								class="nav-item nav-link active" id="nav-profile-tab"
 								href="${pageContext.request.contextPath}/DealD/list">직거래</a>
 
 						</div>
@@ -148,13 +271,12 @@ background-color
 					<!--End Nav Button  -->
 				</div>
 				<div class="select-this d-flex">
-					<div class="featured">
-						<span>정렬 </span>
-					</div>
+					
 					<form action="#">
-						<div class="select-itms">
-							<select name="select" id="view">
-								<option value="1" selected>최신순</option>
+						<div class="center">
+							<select name="sources" id="view" class="custom-select sources"
+								placeholder="Source Type" name="view">
+								<option value="1">최신순</option>
 								<option value="2">정확순</option>
 								<option value="3">조회순</option>
 								<option value="4">금액순</option>
@@ -169,53 +291,58 @@ background-color
 				<!-- card one -->
 				<div class="tab-pane fade show active" id="nav-home" role="tabpanel"
 					aria-labelledby="nav-home-tab">
-					<div class="row">
+					<div id="ajax">
+					<div class="row" id="aa">
+					
 						<c:forEach var="b" items="${Direct}">
-						<div class="col-xl-4 col-lg-4 col-md-6">
-							<div class="single-product mb-60">
-								<div class="product-img">
-									<img
-										src="${pageContext.request.contextPath}/resources/dealupload2/${b.SAVE_DIR_MAINFILE}"
-										alt="" style="width: 300px; height: 250px;">
+							<div class="col-xl-4 col-lg-4 col-md-6" >
+								<div class="single-product mb-60">
+									<div class="product-img">
+										<img
+											src="${pageContext.request.contextPath}/resources/dealupload2/${b.SAVE_DIR_MAINFILE}"
+											alt="" style="width: 300px; height: 250px;">
 
-								</div>
-								<div class="product-caption">
+									</div>
+									<div class="product-caption">
 
-									<h4>
-										<a href="${pageContext.request.contextPath}/DealD/detail?num=${b.DIR_NUMBER}">
-										<b>${b.DIR_SUBJECT}</b></a>
-									</h4>
-									<div class="price">
-										<table class="table">
-											<tr>
-												<th>금액</th>
-												<td>${b.DIR_PRICE}원</td>
+										<h4>
+											<a
+												href="${pageContext.request.contextPath}/DealD/detail?num=${b.DIR_NUMBER}">
+												<b>${b.DIR_SUBJECT}</b>
+											</a>
+										</h4>
+										<div class="price">
+											<table class="table">
+												<tr>
+													<th>금액</th>
+													<td>${b.DIR_PRICE}원</td>
 
-											</tr>
-											<tr>
-												<th>거래지역</th>
-												<td>${b.DIR_ADDRESS}</td>
-											</tr>
-											<tr>
-												<th>올리시간</th>
-												<td>${b.DIR_DATE}</td>
-											</tr>
-											<tr>
-												<th>조회수</th>
-												<td>${b.DIR_READCOUNT}</td>
-											</tr>
+												</tr>
+												<tr>
+													<th>거래지역</th>
+													<td>${b.DIR_ADDRESS}</td>
+												</tr>
+												<tr>
+													<th>올리시간</th>
+													<td>${b.DIR_DATE}</td>
+												</tr>
+												<tr>
+													<th>조회수</th>
+													<td>${b.DIR_READCOUNT}</td>
+												</tr>
 
-										</table>
+											</table>
 
+										</div>
 									</div>
 								</div>
 							</div>
-						</div>
 						</c:forEach>
 
+						
 
-	
 
+					</div>
 					</div>
 
 
@@ -229,19 +356,20 @@ background-color
 						class="header-right f-right d-none d-lg-block d-flex justify-content-between">
 						<li class="d-none d-xl-block" id="sd-none">
 							<div class="form-box f-right ">
-							 <form  method="get" action="list" name="form1" id ="form1">
-								<input type="text" name="search" id="search"
-									placeholder="Search products" >
-							
-								<div class="search-icon">
-									<i onclick="SubmitForm()" class="fas fa-search special-tag" id ="searchB"></i>
-								</div>
-							</form>
+								<form method="get" action="list" name="form1" id="form1">
+									<input type="text" name="search" id="search"
+										placeholder="Search products">
+
+									<div class="search-icon">
+										<i onclick="SubmitForm()" class="fas fa-search special-tag"
+											id="searchB"></i>
+									</div>
+								</form>
 							</div>
 						</li>
 
 					</ul>
-				
+
 				</div>
 			</div>
 
@@ -252,30 +380,29 @@ background-color
 
 			</div>
 			<div class="pagination">
-			<c:if test="${page <= 1 }">
-				 <a id="paging">&laquo;</a>
-			
-			 </c:if>
-			<c:if test="${page > 1 }">			
-				<a href="list?page=${page-1}" id="paging">&laquo;</a>
-			 </c:if>
-				
+				<c:if test="${page <= 1 }">
+					<a id="paging">&laquo;</a>
+
+				</c:if>
+				<c:if test="${page > 1 }">
+					<a href="list?page=${page-1}" id="paging">&laquo;</a>
+				</c:if>
+
 				<c:forEach var="a" begin="${startpage}" end="${endpage}">
-				 
-				 <c:if test="${a == page }">
-				 	<a href="#" id="paging">${a}</a>
-				 </c:if>
-				 <c:if test="${a != page }">
-					  <a href="list?page=${a}" id="paging">${a}</a>	
-				</c:if> 
-				</c:forEach> 
-			<c:if test="${page >= maxpage }">				
-				  <a id="paging">&raquo;</a> 
-			</c:if>
-			<c:if test="${page < maxpage }">
-				<a href="list?page=${page+1}"
-				  id="paging">&raquo;</a>
-			</c:if>
+
+					<c:if test="${a == page }">
+						<a href="#" id="paging">${a}</a>
+					</c:if>
+					<c:if test="${a != page }">
+						<a href="list?page=${a}" id="paging">${a}</a>
+					</c:if>
+				</c:forEach>
+				<c:if test="${page >= maxpage }">
+					<a id="paging">&raquo;</a>
+				</c:if>
+				<c:if test="${page < maxpage }">
+					<a href="list?page=${page+1}" id="paging">&raquo;</a>
+				</c:if>
 			</div>
 
 		</div>
@@ -349,57 +476,81 @@ background-color
 			</div>
 		</div>
 	</div>
-		<script>
-		 function SubmitForm()
-	        {
+	<script>
+	function SubmitForm() {
 
-	            form1.submit();
-	        }
-		 function go(page) {
-			var view = $("#view").val(); //최신순부터 값은 1~3
-			
-			 var data = "view=" + view + "&state=ajax";
-			console.log(view)
-			console.log(page)
-				
-			console.log(data)
-			ajax(data);
-		}
-		 $(function() {
-			$("#view").change(function(){ //최신순, 등록순, 조회순 변경 시
-			go(1);
+		form1.submit();
+	}
+	function go(page) {
+		var view = $("#view").val(); //최신순부터 값은 1~3
+
+		var data = "view=" + view + "&state=ajax&page=" +page;
+		console.log("뷰" + view)
 		
-			})
-		 })
-		 
-		 function ajax(sdata){
-			 console.log(sdata)
-			 output = "";
-			 $.ajax({
-				type : "get",
-				url : "list",
-				dataType : "json",
-				success : function(data){
-					console.log("성공");
-				},
-				error : function(request, status, error){
-					console.log( request.status  + 
-	             			 + "받은 데이터 :" + request.responseText  +
-	             			 + "error status : " + status +
-	             	         + "error 메시지 : " + error)
+		console.log(page)
+		console.log(data)
+		
+		ajax(data);
+	}
+	$(function() {
+		$("#view").change(function() { //최신순, 등록순, 조회순 변경 시
+			go(1);
 
-                 }//error end
+		})
+	})
 
-			 	
-			 })
-		 }
-		 
-		 
-	</script>
-	<!-- Gallery End--> </main>
+	function ajax(sdata) {
+		
+		output = "";
+		$.ajax({
+			type : "post",
+			data:sdata,
+			url : "list_ajax",
+			dataType : "json",
+			success : function(data) {
+				console.log("aa")
+				$("#aa").remove();
+				var output = '<div class="row" id="aa">';
+				console.log(data)
+				$(data.Direct).each(
+						function(index, item) {
+							output+='<div class="col-xl-4 col-lg-4 col-md-6" >'
+							output+='<div class="single-product mb-60">'
+							output+= '<div class="product-img">'
+							output+= '<img src="${pageContext.request.contextPath}/resources/dealupload2/'
+							output+= item.save_DIR_MAINFILE + '"'
+							output+='alt="" style="width: 300px; height: 250px;">'
+							output+='</div>'
+							output+='<div class="product-caption">'
+							output+='<h4> <a href="${pageContext.request.contextPath}/DealD/detail?num='
+							output+= item.dir_NUMBER +'">'
+							output+= '<b>' + item.dir_SUBJECT + '<div class="price"><table class="table">'
+							output+='<tr><th>금액</th><td>' + item.dir_PRICE +'원</td>'
+							output+='<tr><th>거래지역</th><td>' + item.dir_ADDRESS + '</td>'
+							output+= '</tr><tr><th>올린시간</th><td>' + item.dir_DATE + '</td>'
+							output+= '</tr><tr><th>조회수</th><td>' + item.dir_READCOUNT + '</td></tr></table>'
+							output+= '</div></div></div></div>'
+
+						}
+				)
+				output +="</div>"
+				console.log(output)
+				
+				$('#ajax').append(output) //table 완성
+			},
+			error : function(request, status, error) {
+				console.log(request.status + +"받은 데이터 :"
+						+ request.responseText + +"error status : "
+						+ status + +"error 메시지 : " + error)
+
+			}//error end
+
+		})
+	}
+	</script> <!-- Gallery End--> </main>
 	<!-- Footer 영역  -->
 
-	<jsp:include page="/WEB-INF/views/sport_comm/footer2.jsp"/>
+	<jsp:include page="/WEB-INF/views/sport_comm/footer2.jsp" />
 
 	<!-- JS here -->
 
