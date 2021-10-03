@@ -16,7 +16,7 @@
                   </a>
               </li>
               <li>
-                  <a href="#" class="d-flex">
+                  <a href="${pageContext.request.contextPath}/water/list" class="d-flex">
                       <p>물 섭취량</p>
                   </a>
               </li>
