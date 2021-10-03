@@ -1,15 +1,15 @@
 package com.project.sports.domain;
 
-public class Sport_register {
-	private String REGISTER_ID;  //글 작성자
-	private int    REGISTER_NUM; //게시글 번호
-	private int    SPORTS_NUM;   //스포츠번호
-	private int    MATCH_PRS;    //매칭인원
-	private String MATCH_ADR;	 //지역
-	private String MATCH_DTL_ADR;//세부지역
-	private String MATCH_TIME;   //매칭시간/날짜
-	private String MATCH_SKL;    //매칭실력
-	private int    REGISTER_STUS;//매칭상황
+public class Match {
+	private String REGISTER_ID;  
+	private int    REGISTER_NUM; 
+	private int    SPORTS_NUM;  
+	private int    MATCH_PRS;    
+	private String MATCH_ADR;	 
+	private String MATCH_DTL_ADR;
+	private String MATCH_TIME;   
+	private String MATCH_SKL;    
+	private int    REGISTER_STUS;
 	
 	
 	public String getREGISTER_ID() {

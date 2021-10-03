@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%-- <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> --%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html class="no-js" lang="zxx">
     <head>
@@ -17,7 +17,6 @@
 <link rel="stylesheet" href="https://www.baro-match.co.kr/newsite/system/banner/css/banner.css?sng=1632462206" />
 <link rel="stylesheet" href="https://www.baro-match.co.kr/newsite/system/match/css/match.css?sng=1632462206" />
 <link rel ="stylesheet" href="${pageContext.request.contextPath}/resources/css/match/sport_match.css">
-<%-- <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/match/modal1.css"> --%>
 <style>
 	#icon_box .icon01:after{z-index:1;
 						content: '';
@@ -103,10 +102,8 @@
                    <div class="city ibx">
                        <label for="city" style="color:white;  width: 30%">City</label>
                        <div class="rows">
-                       	<select id="city" name="city" class="form-control1">
+                       	<select id="city" name="city" class="form-control1" onchange="javascript:initAddress();">
 	                       	<option value="" selected>&nbsp;지역&nbsp;</option>
-	                       	<option value="서울">서울</option>
-	                       	<option value="인천">인천</option>
                        	</select>
                        </div>
                    </div>
@@ -115,7 +112,6 @@
                        <div class="rows">
                        	<select id="city_detail" name="city_detail" class="form-control1">
                        		<option value="" selected>&nbsp;세부지역&nbsp;&nbsp;</option>
-                       		<option value="연수구">연수구</option>
                        	</select>
                        </div>
                    </div>
@@ -162,47 +158,35 @@
    </th>
 </tr>
 <tr>
-	<th><div>글번호</div></th>
 	<th><div>지역</div></th>
-	<th><div>작성자</div></th>
+	<th><div>세부지역</div></th>
 	<th><div>날짜</div></th>
 	<th><div>인원</div></th>
+	<th><div>실력</div></th>
 </tr>	
   </thead>
   <tbody>
 <c:set var="num" value="${listcount-(page-1)*limit}"/>	
-<c:forEach var="b" items="${matchlist}">	
+<c:forEach var="m" items="${matchlist}">	
 <tr>
-  <td><%--번호 --%>
-	<c:out value="${num}"/><%-- num 출력 --%>		
-	<c:set var="num" value="${num-1}"/>	<%-- num=num-1; 의미--%>	
+  <%-- <td>번호
+	<c:out value="${num}"/>num 출력		
+	<c:set var="num" value="${num-1}"/>	num=num-1; 의미	
   </td>
-  <td><%--제목 --%>
+  <td>제목
      <div>			
-		<%-- 답변글 제목앞에 여백 처리 부분 
-		      board_re_lev,  board_num, 
-		      board_subject, board_name, board_date, 
-		      board_readcount : property 이름 --%>
-	    <c:if test="${b.board_re_lev != 0}">  <!--  답글인 경우 -->
-			<c:forEach var="a" begin="0" end="${b.board_re_lev*2}" step="1">
-			&nbsp; 	
-			</c:forEach>		
-		</c:if>  
-		 
-		<c:if test="${b.board_re_lev == 0}">  <%-- 원문인 경우 --%>
-			&nbsp;  
-		</c:if> 			
-		
-		<a href="detail?num=${b.board_num}">
+		<a href="detail?num=${m.}">
 			 <c:out value="${b.board_subject}" />  
-			<%-- ${b.board_subject} --%>
-			<%-- escapeXml="true" : HTML 태그를 화면에 그대로 보여줍니다. --%>	
+			${b.board_subject}
+			escapeXml="true" : HTML 태그를 화면에 그대로 보여줍니다.	
 		</a>
-	  </div>
+	  </div> --%>
 	</td>
-	<td><div>${b.board_name}</div></td>
-	<td><div>${b.board_date}</div></td>	
-	<td><div>${b.board_readcount}</div></td>
+	<td><div>${m.MATCH_ADR}</div></td>
+	<td><div>${m.MATCH_DTL_ADR}</div></td>	
+	<td><div>${m.MATCH_TIME}</div></td>
+	<td><div>${m.MATCH_PRS}</div></td>
+	<td><div>${m.MATCH_SKL}</div></td>
    </tr>
   </c:forEach>
  </tbody>	
@@ -216,7 +200,7 @@
 			 </c:if>
 			 <c:if test="${page > 1 }">			
 				<li class="page-item">
-				   <a href="list?page=${page-1}" 
+				   <a href="match/mainPage?page=${page-1}" 
 				      class="page-link">이전&nbsp;</a>
 				</li> 
 			 </c:if>
@@ -229,7 +213,7 @@
 				</c:if>
 				<c:if test="${a != page }">
 				    <li class="page-item">
-					   <a href="list?page=${a}" 
+					   <a href="match/mainPage?page=${a}" 
 					      class="page-link">${a}</a>
 				    </li>	
 				</c:if>
@@ -242,7 +226,7 @@
 			</c:if>
 			<c:if test="${page < maxpage }">
 			  <li class="page-item">
-				<a href="list?page=${page+1}" 
+				<a href="match/mainPage?page=${page+1}" 
 				   class="page-link">&nbsp;다음</a>
 			  </li>	
 			</c:if>

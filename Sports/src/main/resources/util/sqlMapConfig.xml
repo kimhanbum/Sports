@@ -8,6 +8,7 @@
    		<typeAlias alias="FCM" type="com.project.sports.domain.BBS_FCM" />
 		<typeAlias alias="auction"	type="com.project.sports.domain.DealAuction"/>
 		<typeAlias alias="direct"	type="com.project.sports.domain.DealDirect"/>
+		<typeAlias alias="match"	type="com.project.sports.domain.Match"/>
   </typeAliases>
   
   <mappers>
@@ -15,6 +16,7 @@
 	<mapper resource="sql/Deal_Direct.xml"/>
  	<mapper resource="sql/BBS_FR.xml"/>
  	<mapper resource="sql/BBS_FCM.xml"/>
+ 	<mapper resource="sql/Sport_match.xml"/>
   </mappers>
   
 </configuration>
