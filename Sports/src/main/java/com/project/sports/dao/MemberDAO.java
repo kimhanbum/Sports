@@ -1,5 +1,8 @@
 package com.project.sports.dao;
 
+import java.util.List;
+import java.util.Map;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -17,6 +20,12 @@ public class MemberDAO {
 	}
 	public int insert(Member m) {
 		return sqlSession.insert("Members.insert",m);
+	}
+	public int getSearchListCount(Map<String, String> map) {
+		return sqlSession.selectOne("Members.searchCount",map);//primary key 가져올때는 selectOne
+	}
+	public List<Member> getSearchList(Map<String, Object> map) {
+		return sqlSession.selectList("Members.searchList",map);
 	}
 	public Member member_info(String id) {
 		return sqlSession.selectOne("Members.idcheck",id);

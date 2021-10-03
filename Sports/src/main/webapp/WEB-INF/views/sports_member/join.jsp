@@ -21,7 +21,7 @@ td:first-child{width:110px;}
 
 <script>
 $(function(){
-	$('#EMAIL2').change(function(){  
+	$('#EMAIL2').change(function(){  //이메일 뒷자리 선택
 		if($(this).val()== '1'){
 			$("#EMAIL1").val(''); 
 			$("#EMAIL1").attr("disabled",false); 
@@ -31,7 +31,7 @@ $(function(){
 		} 
 	});
 
-	$('input:checkbox').on('change', function(event) {
+	$('input:checkbox').on('change', function(event) {//선호운동 선택 max값
 	   if($('input:checkbox:checked').length > 3) {
 		   alert("선호운동은 최대 3개 선택할 수 있습니다.");
 		   $('input:checkbox:checked').prop("checked",false); //비활성화
@@ -50,9 +50,10 @@ $(function(){
 			return false;
 		}
 	});
+	
 })
 
-function Postcode() {
+function Postcode() {//우편번호찾기
     new daum.Postcode({
         oncomplete: function(data) {
             // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
@@ -98,6 +99,19 @@ function Postcode() {
             document.getElementById("HOMEADDRESS").focus();
         }
     }).open();
+    $.ajax({
+		url : "idcheck",
+		data : {"USER_ID" : USER_ID},
+		success : function(resp){
+			if(resp == -1){//db에 해당 id가 없는 경우
+				alert("사용 가능한 아이디 입니다.");
+				checkid=true;
+			} else{//db에 해당 id가 있는 경우(0)
+				alert("사용중인 아이디 입니다.");
+				checkid=false;
+			}
+		}
+	});//ajax
 }
 </script>
 
@@ -158,8 +172,8 @@ function Postcode() {
                     <label for="JUMIN">주민등록번호</label>
                 </td>
                 <td>
-                    <input type="text" name="JUMIN" id="JUMIN" size="10px" maxsize="6">-
-                    <input type="text" name="JUMIN1" id="JUMIN1" size="10px" maxsize="7">
+                    <input type="text" name="JUMIN" id="JUMIN" size="10px" maxLength="6">-
+                    <input type="text" name="JUMIN1" id="JUMIN1" size="10px" maxLength="7">
                 </td>
             </tr>
             <tr>
@@ -209,8 +223,8 @@ function Postcode() {
                     <label for="EMAIL">이메일</label>
                 </td>
                 <td>
-                    <input type="text" name="EMAIL" id="email" size="10">@
-                    <input type="text" name="EMAIL1" id="email1" style="width:100px">
+                    <input type="text" name="EMAIL" id="EMAIL" size="10">@
+                    <input type="text" name="EMAIL1" id="EMAIL1" style="width:100px">
                     
                     <select id="EMAIL2" name="EMAIL2">
                         <option value="1">직접입력</option>

@@ -25,9 +25,9 @@ public class Member {
 	//(여자:655.1+(9.56*현재몸무게)+(1.85*키)-(4.68*나이)
 	private int USER_WATER;		 //물섭취량
 	private String USER_IMAGE;
-	private int USER_PSPORTS1;
-	private int USER_PSPORTS2;
-	private int USER_PSPORTS3;
+	private String USER_PSPORTS1;
+	private String USER_PSPORTS2;
+	private String USER_PSPORTS3;
 	public String getUSER_ID() {
 		return USER_ID;
 	}
@@ -160,22 +160,22 @@ public class Member {
 	public void setUSER_IMAGE(String uSER_IMAGE) {
 		USER_IMAGE = uSER_IMAGE;
 	}
-	public int getUSER_PSPORTS1() {
+	public String getUSER_PSPORTS1() {
 		return USER_PSPORTS1;
 	}
-	public void setUSER_PSPORTS1(int uSER_PSPORTS1) {
+	public void setUSER_PSPORTS1(String uSER_PSPORTS1) {
 		USER_PSPORTS1 = uSER_PSPORTS1;
 	}
-	public int getUSER_PSPORTS2() {
+	public String getUSER_PSPORTS2() {
 		return USER_PSPORTS2;
 	}
-	public void setUSER_PSPORTS2(int uSER_PSPORTS2) {
+	public void setUSER_PSPORTS2(String uSER_PSPORTS2) {
 		USER_PSPORTS2 = uSER_PSPORTS2;
 	}
-	public int getUSER_PSPORTS3() {
+	public String getUSER_PSPORTS3() {
 		return USER_PSPORTS3;
 	}
-	public void setUSER_PSPORTS3(int uSER_PSPORTS3) {
+	public void setUSER_PSPORTS3(String uSER_PSPORTS3) {
 		USER_PSPORTS3 = uSER_PSPORTS3;
 	}
 	

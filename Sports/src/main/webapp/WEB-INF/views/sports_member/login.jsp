@@ -1,16 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!doctype html>
-<html lang="zxx">
+<html>
 
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible">
-    <title>eCommerce HTML-5 Template </title>
+    <title>Login </title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="manifest" href="site.webmanifest">
     <link rel="shortcut icon" type="image/x-icon" href="resources/img/favicon.ico">
+<script src="${pageContext.request.contextPath}/resources/js/jquery-3.6.0.js"></script>
 <script>
 
 var result='${result}';
@@ -82,25 +83,33 @@ if(result=='joinSuccess'){
                         <div class="login_part_form_iner">
                             <h3>환영합니다 !<br>
 								로그인 정보를 입력하세요</h3>
-                            <form class="row contact_form" action="#" method="post">
+                            <form class="row contact_form" 
+                            action="${pageContext.request.contextPath}/member/loginProcess" method="post">
                                 <div class="col-md-12 form-group p_star">
-                                    <input type="text" class="form-control" id="name" name="name" value=""
+                                    <input type="text" class="form-control" id="USER_ID" name="USER_ID" required
+									<c:if test="${!empty saveid}">
+									value="${saveid}
+									</c:if>
                                         placeholder="ID">
                                 </div>
                                 <div class="col-md-12 form-group p_star">
-                                    <input type="password" class="form-control" id="password" name="password" value=""
+                                    <input type="password" class="form-control" id="USER_PASS" name="USER_PASS"
+									<c:if test="${!empty saveid}">
+									value="${saveid}
+									</c:if>
                                         placeholder="Password">
                                 </div>
                                 <div class="col-md-12 form-group">
                                     <div class="creat_account d-flex align-items-center">
-                                        <input type="checkbox" id="f-option" name="selector">
+                                        <input type="checkbox" id="f-option" name="remember"
+                                        <c:if test="${!empty saveid}">
+										checked
+										</c:if>>
                                         <label for="f-option">Remember me</label>
                                     </div>
-                                    <div class="clearfix">
                                     <button type="submit" value="submit" class="btn_3">
                                         log in
                                     </button>
-                                    </div>
                                     <a class="lost_pass" href="#">비밀번호를 잊으셨나요?</a>
                                 </div>
                             </form>

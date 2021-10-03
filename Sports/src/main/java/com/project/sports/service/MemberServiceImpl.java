@@ -1,5 +1,9 @@
 package com.project.sports.service;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -48,5 +52,30 @@ public class MemberServiceImpl implements MemberService {
 
 	public int update(Member m) {
 		return dao.update(m);
+	}
+	@Override
+	public List<Member> getSearchList(int index, String search_word, int page, int limit) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		if(index != -1) {
+			String[] search_field = new String[] {"USER_ID","USER_PASS","USER_NAME","USER_JUMIN"};
+			map.put("search_field", search_field[index]);
+			map.put("search_word","%"+search_word+"%");
+		}
+		int startrow = (page-1)*limit+1;
+		int endrow = startrow + limit - 1;
+		map.put("start",startrow);
+		map.put("end",endrow);
+		return dao.getSearchList(map);
+	}
+
+	@Override
+	public int getSearchListCount(int index, String search_word) {
+		Map<String, String> map = new HashMap<String, String>();
+		if(index!=-1) {//컨트롤러 /list에서 search_field가 아닐 경우
+			String[] search_field = new String[] {"USER_ID","USER_PASS","USER_NAME","USER_JUMIN"};
+			map.put("search_field", search_field[index]);
+			map.put("search_word","%"+search_word+"%");
+		}
+		return dao.getSearchListCount(map);
 	}
 }
