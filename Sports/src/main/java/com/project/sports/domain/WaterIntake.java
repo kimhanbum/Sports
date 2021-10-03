@@ -1,6 +1,6 @@
 package com.project.sports.domain;
 
-public class Water_Intake {
+public class WaterIntake {
 	private int WI_NO;
 	private String USER_ID;
 	private String WI_INTAKE;

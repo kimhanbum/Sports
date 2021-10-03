@@ -56,11 +56,10 @@
  <form action="list">
  <div class="JooSearch">
 	<div class="header-bottom ">
-	  <ul
-		class="header-right f-right d-none d-lg-block d-flex justify-content-between">
+	  <ul class="header-right f-right d-none d-lg-block d-flex justify-content-between">
 		<li class="d-none d-xl-block" id="sd-none">
 			<select  style="position:relative;" id="viewcount" name="search_field">
- 		 		<option value="0">카테고리</option>
+ 		 		<option value="0" selected>카테고리</option>
  		 		<option value="1">아이디</option>
  		  		<option value="2">제목</option>
  		 		<option value="3">내용</option>
@@ -73,7 +72,7 @@
 			</div>
 			</div>
 		</li>
-	  </ul>
+	   </ul>
 	</div>
  </div>
 </form>

@@ -105,7 +105,7 @@
 									onchange="this.parentNode.setAttribute('title', this.value.replace(/^.*[\\/]/, ''))"
 									id="upfile" name="uploadfile" />
 							</label>
-							<img src="../resources/image/bbs_fr/remove.png" alt="파일삭제" width="10px" class="remove">
+							<img src="../resources/image/bbs_fr/close.png" alt="파일삭제" width="10px" class="remove">
 							
 						</div>
 					</div>
