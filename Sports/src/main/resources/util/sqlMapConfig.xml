@@ -9,6 +9,7 @@
 		<typeAlias alias="auction"	type="com.project.sports.domain.DealAuction"/>
 		<typeAlias alias="direct"	type="com.project.sports.domain.DealDirect"/>
 		<typeAlias alias="Water"	type="com.project.sports.domain.WaterIntake"/>
+		<typeAlias alias="match"	type="com.project.sports.domain.Match"/>
   </typeAliases>
   
   <mappers>
@@ -17,6 +18,7 @@
  	<mapper resource="sql/BBS_FR.xml"/>
  	<mapper resource="sql/BBS_FCM.xml"/>
  	<mapper resource="sql/Water_Intake.xml"/>
+ 	<mapper resource="sql/Sport_match.xml"/>
   </mappers>
   
 </configuration>
