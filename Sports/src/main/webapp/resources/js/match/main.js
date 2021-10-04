@@ -48,7 +48,6 @@ function initAddress(){//선택된 city에 해당하는 디테일 주소 초기�
 	eval("var address_detail = address_json." + tmp_txt);//eval > 코드로 인식해주는 함수
 	//var address_detail = address_json.city_detail_@ 
 	//@에 숫자 들어간 형태로 코드생성 > json에서 해당 키값에 해당하는 데이터 가져옴
-	
 	$("#city_detail").append('<option value="">&nbsp;세부지역&nbsp;&nbsp;</option>');//옵션 첫 디폴트값 생성
 	for(var i = 0; i < address_detail.length; i++){//디테일 지역 옵션 추가
 		$("#city_detail").append('<option value="'+ i +'">'+ address_detail[i] +'</option>');
@@ -100,20 +99,24 @@ function btnClick(){
 
 function btnClick2(){
 	console.log("매칭등록 클릭");
-	var string = "";
-	string += $("select[name=city]").val() + " / ";
-	string += $("select[name=city_detail]").val() + " / ";
-	string += $("input[name=match_date]").val() + " / ";
-	string += $("input[name=person]").val() + " / ";
-	string += $("select[name=skill]").val() + " / ";
-	console.log(string);
-	$("#genderModal").css({
+	var city = $("#city option:checked").text();
+	var city_detail = $("#city_detail option:checked").text();
+	var date = $("input[name=match_date]").val();
+	var person = $("input[name=person]").val();
+	var skill = $("select[name=skill]").val();
+	
+	$("#RegisterModal #City").val(city);
+	$("#RegisterModal #Detail").val(city_detail);
+	$("#RegisterModal #Date").val(date);
+	$("#RegisterModal #Skill").val(skill);
+	$("#RegisterModal #Person").val(person);
+	$("#RegisterModal").css({
 		"display" :"block"
 	});
 }
 
 function colseModal(){
-	$("#genderModal").css({
+	$("#RegisterModal").css({
 		"display" :"none"
 	});
 }

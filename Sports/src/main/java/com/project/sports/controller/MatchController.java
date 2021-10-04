@@ -22,12 +22,6 @@ public class MatchController {
 	@Autowired
 	private MatchService matchservice;
 	
-	//글 목록 보기
-	/*
-	 * @RequestMapping(value = "/mainPage", method = RequestMethod.GET) public
-	 * ModelAndView mainPage(ModelAndView mv) {
-	 * mv.setViewName("sport_match/Sport_matching"); return mv; }
-	 */
 	@RequestMapping(value = "/baseball", method = RequestMethod.GET)
 	public ModelAndView baseball(ModelAndView mv) {
 		mv.setViewName("sport_match/match_baseball");
