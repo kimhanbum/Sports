@@ -72,18 +72,15 @@
                                     <div class="shopping-card">
                                         <a href="cart.html"><i class="fas fa-edit"></i></a>
                                     </div>
-                                </li>
-                                <%-- 회원가입 처리 완료 후 이부분 사용						        
-                                <c:if test="${empty id}">
-						              <li class="d-none d-lg-block"> <a href="#" class="btn header-btn">로그인</a></li>
-                                      <li class="d-none d-lg-block"> <a href="#" class="btn header-btn">회원가입</a></li>
+                                </li>						        
+                                <c:if test="${empty USER_ID}">
+						              <li class="d-none d-lg-block"> <a href="${pageContext.request.contextPath}/member/login" class="btn header-btn">로그인</a></li>
+                                      <li class="d-none d-lg-block"> <a href="${pageContext.request.contextPath}/member/join" class="btn header-btn">회원가입</a></li>
 						        </c:if>
-						        <c:if test="${!empty id}">
+						        <c:if test="${!empty USER_ID}">
 						        	  <li class="d-none d-lg-block"> <a href="#" class="btn header-btn">마이페이지</a></li>
-						              <li class="d-none d-lg-block"> <a href="#" class="btn header-btn">로그아웃</a></li>
-						        </c:if> --%>
-						        <li class="d-none d-lg-block"> <a href="${pageContext.request.contextPath}/member/login" class="btn header-btn">로그인</a></li>
-                                <li class="d-none d-lg-block"> <a href="${pageContext.request.contextPath}/mypage/main" class="btn header-btn">마이페이지</a></li>
+						              <li class="d-none d-lg-block"> <a href="${pageContext.request.contextPath}/member/logout" class="btn header-btn">로그아웃</a></li>
+						        </c:if>
                             </ul>
                         </div>
                         <!-- Mobile Menu -->

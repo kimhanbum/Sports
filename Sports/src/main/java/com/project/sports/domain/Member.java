@@ -16,6 +16,7 @@ public class Member {
 	private String HOME;
 	private String HOMEADDRESS;
 	private String USER_EMAIL;
+	private String USER_EMAILDOMAIN;
 	private int USER_HEIGHT;	 //虐
 	private int USER_PWEIGHT;	 //泅犁个公霸
 	private int USER_WWEIGHT;	 //格钎个公霸
@@ -117,6 +118,12 @@ public class Member {
 	}
 	public void setUSER_EMAIL(String uSER_EMAIL) {
 		USER_EMAIL = uSER_EMAIL;
+	}
+	public String getUSER_EMAILDOMAIN() {
+		return USER_EMAILDOMAIN;
+	}
+	public void setUSER_EMAILDOMAIN(String uSER_EMAILDOMAIN) {
+		USER_EMAILDOMAIN = uSER_EMAILDOMAIN;
 	}
 	public int getUSER_HEIGHT() {
 		return USER_HEIGHT;

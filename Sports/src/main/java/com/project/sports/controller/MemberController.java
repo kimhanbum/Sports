@@ -89,6 +89,9 @@ required=true 상태에서 지정한 이름을 가진 쿠키가 존재하지 않으면 스프링 MVC는 익
 		m.setUSER_MOBILE(m.getMOBILE1()+m.getMOBILE2()+m.getMOBILE3());
 		m.setUSER_ADDRESS(m.getDONG()+m.getHOME()+m.getHOMEADDRESS());
 		m.setUSER_JUMIN(m.getJUMIN()+m.getJUMIN1());
+		m.setUSER_EMAIL(m.getUSER_EMAIL()+m.getUSER_EMAILDOMAIN());
+		m.setUSER_BMI(m.getUSER_PWEIGHT()/(m.getUSER_HEIGHT()*m.getUSER_HEIGHT())*10000);//BMI계산
+		//m.setUSER_BMI();
 		int result = memberservice.insert(m);
 		try{
 			int cnt = Integer.parseInt(request.getParameter("cnt"));
@@ -141,7 +144,7 @@ response.sendRedirect()를 사용할 때와 동일한 용도로 사용합니다.
 				savecookie.setMaxAge(0);
 			}
 			response.addCookie(savecookie);
-			return "redirect:login";//boardController로
+			return "/main";//boardController로
 		}else {
 			rattr.addFlashAttribute("result",result);
 			return "redirect:login";
