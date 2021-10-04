@@ -1,5 +1,11 @@
 package com.project.sports.service;
 
-public class WaterIntakeService {
+import com.project.sports.domain.WaterIntake;
 
-}
+public interface WaterIntakeService {
+
+	public void Waterinsert(WaterIntake water);
+	
+		
+	}
+
