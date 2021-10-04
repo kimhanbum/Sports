@@ -35,6 +35,10 @@ public interface DealService {
 
 	public List<DealAuction> getSearchAuctionList(int page, int limit, String search);
 
+	public DealAuction A_getDetail(int num);
+
+	public int Auction_pricemodi(DealAuction auction);
+
 
 
 	

@@ -45,7 +45,7 @@
 
 .pagination {
 	position: absolute;
-	left: 43%;
+	left: 44%;
 }
 
 .pagination a {

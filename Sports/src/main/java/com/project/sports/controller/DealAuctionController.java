@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
-
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.project.sports.domain.DealAuction;
 import com.project.sports.domain.DealDirect;
@@ -75,7 +75,7 @@ public class DealAuctionController {
 			Auction = DealService.getSearchAuctionList(page,limit,search);
 		}
 		
-		logger.info("옥션  " + Auction.get(0).getAUC_NUMBER());
+
 		 
 		
 		mv.setViewName("Deal/DealA_list");
@@ -103,8 +103,27 @@ public class DealAuctionController {
 	// 상세 페이지
 	@GetMapping(value="/detail")
 	//@RequestMapping(value="/write", method=requestMethod.GET)
-	public String Auction_detail() {
-		return "Deal/Auction_detail";
+	public ModelAndView Auction_detail(int num, ModelAndView mv,
+			HttpServletRequest request) {
+		DealAuction Auction = DealService.A_getDetail(num);
+		
+		
+		int count = DealService.D_readcount(num);
+		
+		if(Auction==null) {
+			logger.info("상세보기 실패");
+			mv.setViewName("error/error");
+			mv.addObject("url",request.getRequestURL());
+			mv.addObject("message", "상세보기 실패 입니다.");
+		}else {
+			logger.info("상세보기 성공");
+			mv.setViewName("Deal/Auction_detail");
+			logger.info("파일" + Auction.getSAVE_AUC_FILE2());
+			mv.addObject("b" ,Auction);
+			
+		}
+		
+		return mv;
 	}
 	
 	@PostMapping("/add")
@@ -250,5 +269,21 @@ public class DealAuctionController {
 		logger.info("fileDBName = " + fileDBName);
 		return fileDBName ;
 	}
+	
+	//입찰
+	@RequestMapping(value="/bid")
+	public String AuctionBid(RedirectAttributes rattr , 
+			HttpServletRequest request , int num) {
+		
+		DealAuction Auction = DealService.A_getDetail(num);
+		
+		int pricemodify = DealService.Auction_pricemodi(Auction);
+		
+		
+		
+		return "Deal/DealD_list"; 
+	}
+	
+	
 	
 }

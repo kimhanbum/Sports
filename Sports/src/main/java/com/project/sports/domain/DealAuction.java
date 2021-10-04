@@ -24,6 +24,7 @@ public class DealAuction {
 	private String	ORI_AUC_FILE4;		//사진4
 	private String	SAVE_AUC_FILE4;
 	private int AUC_READCOUNT;			//글 조회수 (9-30 추가)
+	private int AUC_SPRICE;				//경매 시작값 (10-03 추가)
 	
 	private MultipartFile uploadfile1;
 	private MultipartFile uploadfile2;
@@ -181,7 +182,14 @@ public class DealAuction {
 	public void setAUC_READCOUNT(int aUC_READCOUNT) {
 		AUC_READCOUNT = aUC_READCOUNT;
 	}
-
+	public int getAUC_SPRICE() {
+		return AUC_SPRICE;
+	}
+	public void setAUC_SPRICE(int aUC_SPRICE) {
+		AUC_SPRICE = aUC_SPRICE;
+	}
+   
+	
 	
 	
 }

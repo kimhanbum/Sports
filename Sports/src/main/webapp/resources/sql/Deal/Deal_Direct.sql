@@ -36,10 +36,12 @@ create table Deal_Direct (
 	/* 10-02¿œ ∫Ø∞Ê */
 	ALTER TABLE Deal_direct MODIFY DIR_PRICE NUMBER;
 	/*-------------*/
-	
+	W
 	
 update deal_direct set DIR_READCOUNT = DIR_READCOUNT +1 
 where dir_number = 35;
+
+
 
 
 

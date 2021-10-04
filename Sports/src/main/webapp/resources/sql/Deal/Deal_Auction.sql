@@ -32,7 +32,7 @@ delete from DEAL_AUCTION;
 create sequence Auc_seq; 
 /*----------*/
 
-/*추가된 부분 9-30*/
+/*추가된 부분 9-30 조회수컬럼*/
 	ALTER TABLE DEAL_AUCTION ADD AUC_READCOUNT number  DEFAULT 0; 
 /*-----------*/
 
@@ -40,3 +40,11 @@ create sequence Auc_seq;
 	
 	select * from deal_auction;
 
+/*추가된 부분10-03 시작금액 컬럼*/
+	ALTER TABLE DEAL_AUCTION ADD AUC_SPRICE number ; 
+/*--------------------------*/
+	
+/*추가된 부분 10-03 입찰횟수 기본값 변경 */
+	ALTER TABLE DEAL_AUCTION DROP COLUMN AUC_COUNT;
+	ALTER TABLE DEAL_AUCTION ADD AUC_COUNT number  DEFAULT 0; 
+/*----------------------------*/

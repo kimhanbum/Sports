@@ -35,6 +35,14 @@ public class DealAuctionDAO {
 		return sqlSession.selectList("Auction.searchlist",map);
 	}
 
+	public DealAuction A_getDetail(int num) {
+		return sqlSession.selectOne("Auction.detail",num);
+	}
+
+	public int Auction_pricemodi(DealAuction Auction) {
+		return sqlSession.update("Auction.pricemodi" ,Auction);
+	}
+
 
 
 }

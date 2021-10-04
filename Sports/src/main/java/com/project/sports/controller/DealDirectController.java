@@ -78,7 +78,7 @@ public class DealDirectController {
 		}else {
 			Direct = DealService.getSearchDirecList(page,limit,search,view);
 		}
-		logger.info("ºäºä3233  " + Direct.get(3).getDIR_NUMBER());
+		
 	
 		
 		mv.addObject("page",page);
