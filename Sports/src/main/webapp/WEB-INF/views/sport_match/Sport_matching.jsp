@@ -42,7 +42,7 @@
        	<div id="icon_box">
 			<div class="web_size">
 				<ul>
-					<a href="mainPage"><li class="icon01 top_icon" data-value="1/" style="background-color:#eb3b04;">축구/풋살</li></a>
+					<a href="mainPage"><li class="icon01 top_icon" data-value="1/" style="background-color:#eb3b04;">축구</li></a>
 					<a href="baseball" ><li class="icon03 top_icon" data-value="3/">야구</li></a>
 					<a href="football"><li class="icon09 top_icon" data-value="9/">족구</li></a>
 					<a href="basketball"><li class="icon02 top_icon" data-value="2/">농구</li></a>
@@ -130,7 +130,7 @@
                    
                    <div class="skill ibx">
 	                   <div class="rows">
-	                   <label for="city" style="color:white;  width: 30%">Skill</label>
+	                   <label for="skill" style="color:white;  width: 30%">Skill</label>
 	                   	<select id="skill" name="skill" class="form-control1">
 	                   		<option value="" selected>실력</option>
 	                   		<option value="상">상</option>
@@ -146,105 +146,92 @@
                </div>
            </form>
        </div>
+       <!-- 리스트 -->
       <div id="container" class="container">
-<%-- 게시글이 있는 경우--%> 
-<c:if test="${listcount > 0 }">
- <table class="table table-striped">
-  <thead>
-<tr>
-   <th colspan="3">Matching list</th>
-   <th colspan="2">
-		<font size=3>Total : ${listcount}</font>
-   </th>
-</tr>
-<tr>
-	<th><div>지역</div></th>
-	<th><div>세부지역</div></th>
-	<th><div>날짜</div></th>
-	<th><div>인원</div></th>
-	<th><div>실력</div></th>
-</tr>	
-  </thead>
-  <tbody>
-<c:set var="num" value="${listcount-(page-1)*limit}"/>	
-<c:forEach var="m" items="${matchlist}">	
-<tr>
-  <%-- <td>번호
-	<c:out value="${num}"/>num 출력		
-	<c:set var="num" value="${num-1}"/>	num=num-1; 의미	
-  </td>
-  <td>제목
-     <div>			
-		<a href="detail?num=${m.}">
-			 <c:out value="${b.board_subject}" />  
-			${b.board_subject}
-			escapeXml="true" : HTML 태그를 화면에 그대로 보여줍니다.	
-		</a>
-	  </div> --%>
-	</td>
-	<td><div>${m.MATCH_ADR}</div></td>
-	<td><div>${m.MATCH_DTL_ADR}</div></td>	
-	<td><div>${m.MATCH_TIME}</div></td>
-	<td><div>${m.MATCH_PRS}</div></td>
-	<td><div>${m.MATCH_SKL}</div></td>
-   </tr>
-  </c:forEach>
- </tbody>	
-</table>
-	<div class="center-block">
-		  <ul class="pagination justify-content-center">		
-			 <c:if test="${page <= 1 }">
-				<li class="page-item">
-				  <a class="page-link gray">이전&nbsp;</a>
-				</li>
-			 </c:if>
-			 <c:if test="${page > 1 }">			
-				<li class="page-item">
-				   <a href="match/mainPage?page=${page-1}" 
-				      class="page-link">이전&nbsp;</a>
-				</li> 
-			 </c:if>
-					
-			<c:forEach var="a" begin="${startpage}" end="${endpage}">
-				<c:if test="${a == page }">
-					<li class="page-item " >
-					   <a class="page-link gray">${a}</a>
-					</li>
-				</c:if>
-				<c:if test="${a != page }">
-				    <li class="page-item">
-					   <a href="match/mainPage?page=${a}" 
-					      class="page-link">${a}</a>
-				    </li>	
-				</c:if>
-			</c:forEach>
-			
-			<c:if test="${page >= maxpage }">
-				<li class="page-item">
-				   <a class="page-link gray">&nbsp;다음</a> 
-				</li>
+					<%-- 게시글이 있는 경우--%> 
+					<c:if test="${listcount > 0 }">
+			<table class="table table-striped">
+				<thead>
+					<tr>
+					   <th colspan="3">Matching list</th>
+					   <th colspan="2">
+							<font size=3>Total : ${listcount}</font>
+					   </th>
+					</tr>
+					<tr>
+						<th><div>지역</div></th>
+						<th><div>세부지역</div></th>
+						<th><div>날짜</div></th>
+						<th><div>인원</div></th>
+						<th><div>실력</div></th>
+					</tr>	
+				</thead>
+				<tbody>
+					<c:set var="num" value="${listcount-(page-1)*limit}"/>	
+					<c:forEach var="m" items="${matchlist}">	
+						<tr>
+							<td><div>${m.MATCH_ADR}</div></td>
+							<td><div>${m.MATCH_DTL_ADR}</div></td>	
+							<td><div>${m.MATCH_TIME}</div></td>
+							<td><div>${m.MATCH_PRS}</div></td>
+							<td><div>${m.MATCH_SKL}</div></td>
+						</tr>
+					</c:forEach>
+				 </tbody>	
+			</table>
+				<div class="center-block">
+					  <ul class="pagination justify-content-center">		
+						 <c:if test="${page <= 1 }">
+							<li class="page-item">
+							  <a class="page-link gray">이전&nbsp;</a>
+							</li>
+						 </c:if>
+						 <c:if test="${page > 1 }">			
+							<li class="page-item">
+							   <a href="mainPage?page=${page-1}" 
+							      class="page-link">이전&nbsp;</a>
+							</li> 
+						 </c:if>
+								
+						<c:forEach var="a" begin="${startpage}" end="${endpage}">
+							<c:if test="${a == page }">
+								<li class="page-item " >
+								   <a class="page-link gray">${a}</a>
+								</li>
+							</c:if>
+							<c:if test="${a != page }">
+							    <li class="page-item">
+								   <a href="mainPage?page=${a}" 
+								      class="page-link">${a}</a>
+							    </li>	
+							</c:if>
+						</c:forEach>
+						
+						<c:if test="${page >= maxpage }">
+							<li class="page-item">
+							   <a class="page-link gray">&nbsp;다음</a> 
+							</li>
+						</c:if>
+						<c:if test="${page < maxpage }">
+						  <li class="page-item">
+							<a href="mainPage?page=${page+1}" 
+							   class="page-link">&nbsp;다음</a>
+						  </li>	
+						</c:if>
+					 </ul>
+				</div>
 			</c:if>
-			<c:if test="${page < maxpage }">
-			  <li class="page-item">
-				<a href="match/mainPage?page=${page+1}" 
-				   class="page-link">&nbsp;다음</a>
-			  </li>	
+			<%-- 게시글이 없는 경우--%>
+			<c:if test="${listcount == 0 }">
+				<font size=5>등록된 글이 없습니다.</font>
 			</c:if>
-		 </ul>
-		</div>
-	    </c:if><%-- <c:if test="${listcount > 0 }"> end --%>
-	
-	<%-- 게시글이 없는 경우--%>
-	<c:if test="${listcount == 0 }">
-		<font size=5>등록된 글이 없습니다.</font>
-	</c:if>
 	</div>
 	
 	<!--  모달 영역 -->
-	<div id="genderModal" class="modal hide" style="display: none;">
-    <div class="wrapper">
-        <div class="container">
-            <div class="row_subject">매칭등록</div><div class="modal_id">ID:admin</div>
+	<div id="RegisterModal" class="modal hide" style="display: none;">
+	   	 <div class="wrapper">
+	        	<div class="container">
+	            	<div class="row_subject">매칭등록</div><div class="modal_id">ID:admin</div>
             		<div class="row1">
                         <label class="radio radio-sm">
                             <div class="container">
@@ -255,7 +242,7 @@
                          <label>
                             <div class="container ">
                                 <div class="label">Skill</div>
-                                 <input class="modal_input" name="Skill" type="text" readonly>
+                                 <input id="Skill" class="modal_input" name="Skill" type="text" value="" readonly>
                             </div>
                         </label>
                     </div>
@@ -263,13 +250,13 @@
                         <label class="radio radio-sm">
                             <div class="container">
                                 <div class="label">City</div>
-                                 <input class="modal_input" name="City" type="text" readonly>
+                                 <input id="City" class="modal_input" name="City" type="text" readonly>
                             </div>
                         </label>
                          <label>
                             <div class="container ">
                                 <div class="label">detail</div>
-                                 <input class="modal_input" name="detail" type="text" readonly>
+                                 <input id="Detail" class="modal_input" name="detail" type="text" readonly>
                             </div>
                         </label>
                     </div>
@@ -277,17 +264,17 @@
                         <label>
                             <div class="container">
                                 <div class="label">Date</div>
-                                 <input class="modal_input" name="Date" type="text" readonly>
+                                 <input id="Date" class="modal_input" name="Date" type="text" value="" readonly>
                             </div>
                         </label>
                          <label>
                             <div class="container">
                                 <div class="label">Person</div>
-                                 <input class="modal_input" name="Person" type="text" readonly>
+                                 <input id="Person" class="modal_input" name="Person" type="text" value="" readonly>
                             </div>
                         </label>
                     </div>
-            </div>
+         		</div>
             <div class="modal_row">
                 <div class="modalbutton">
                     <button class="closeModal row btn" onclick="javascript:colseModal();">닫기</button>
@@ -298,8 +285,6 @@
             </div>
         </div>
     </div>
-</div>
-
 	
     <script src="${pageContext.request.contextPath}/resources/js/match/jquery.min.js"></script>
    <script src="${pageContext.request.contextPath}/resources/js/match/jquery-ui.min.js"></script>
