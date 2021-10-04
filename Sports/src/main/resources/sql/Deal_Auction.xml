@@ -16,7 +16,8 @@
 	ORI_AUC_MAINFILE , SAVE_AUC_MAINFILE ,
 	ORI_AUC_FILE2 ,SAVE_AUC_FILE2 ,
 	 ORI_AUC_FILE3 ,SAVE_AUC_FILE3 ,
-	 ORI_AUC_FILE4 , SAVE_AUC_FILE4)
+	 ORI_AUC_FILE4 , SAVE_AUC_FILE4 ,
+	 AUC_SPRICE)
 	VALUES( AUC_SEQ.NEXTVAL , #{AUC_SUBJECT} , #{AUC_PRICE} ,
 			#{AUC_LPRICE} , #{AUC_UNIT},
 			#{AUC_CONTENT} , #{AUC_DELIVERY},
@@ -24,7 +25,8 @@
 			#{ORI_AUC_MAINFILE} , #{SAVE_AUC_MAINFILE} ,
 			#{ORI_AUC_FILE2} , #{SAVE_AUC_FILE2} ,
 			#{ORI_AUC_FILE3} , #{SAVE_AUC_FILE3} ,
-			#{ORI_AUC_FILE4} , #{SAVE_AUC_FILE4})
+			#{ORI_AUC_FILE4} , #{SAVE_AUC_FILE4},
+			#{AUC_PRICE})
 	
 
 
@@ -33,7 +35,7 @@
 <select id="list" parameterType="java.util.Map" resultType="Auction">
 select * from
 	(select rownum rnum , 	AUC_NUMBER , AUC_SUBJECT , AUC_DATE
-	AUC_PRICE ,AUC_COUNT ,SAVE_AUC_MAINFILE 
+	AUC_PRICE ,AUC_COUNT ,SAVE_AUC_MAINFILE  ,AUC_SPRICE
 		from(
 		select * from Deal_Auction
 		order by AUC_NUMBER desc))
@@ -44,7 +46,7 @@ select * from
 	resultType="Auction">
 select * from
 	(select rownum rnum , 	AUC_NUMBER , AUC_SUBJECT , 
-	AUC_DATE ,AUC_PRICE ,AUC_COUNT ,SAVE_AUC_MAINFILE 
+	AUC_DATE ,AUC_PRICE ,AUC_COUNT ,SAVE_AUC_MAINFILE , AUC_SPRICE
 		from(
 		select * from Deal_Auction
 		where AUC_SUBJECT like #{search_word}
@@ -52,10 +54,22 @@ select * from
 		))
 	 where rnum &gt;= #{start} and rnum  &lt;=  #{end}
 	 
-
+</select>
 	
+<select id="detail" parameterType="int" resultType="Auction">
+	select *
+	from deal_auction
+	where AUC_NUMBER = #{number}
+
 </select>
 
+<update id="pricemodi" parameterType="Auction">
+		update deal_auction
+		set
+		AUC_price = Auc_price + #{AUC_UNIT},
+		AUC_COUNT = AUC_COUNT +1 
+		where AUC_NUMBER=#{AUC_NUMBER}
+</update>
 
 
 

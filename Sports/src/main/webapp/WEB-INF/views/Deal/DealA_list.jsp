@@ -46,7 +46,7 @@
 
 .pagination {
 	position: absolute;
-	left: 40%;
+	left: 44%;
 }
 
 .pagination a {
@@ -106,11 +106,7 @@ background-color
 	border: 1px solid white;
 }
 
-.sungjinS {
-	position: absolute;
-	left: 63%;
-	top: 205%
-}
+
 
 .discount2 {
 	color: red;
@@ -315,13 +311,14 @@ background-color
 								<div class="product-caption">
 
 									<h4>
-										<a href="${pageContext.request.contextPath}/DealA/detail"><b>${b.AUC_SUBJECT}</b></a>
+										<a href="${pageContext.request.contextPath}
+										/DealA/detail?num=${b.AUC_NUMBER}"><b>${b.AUC_SUBJECT}</b></a>
 									</h4>
 									<div class="price">
 										<table class="table">
 											<tr>
 												<th>시작가</th>
-												<td>${b.AUC_PRICE}원</td>
+												<td>${b.AUC_SPRICE}원</td>
 											</tr>
 											<tr>
 												<th class="discount2">현재가</th>
@@ -433,10 +430,29 @@ background-color
 
 					</div>
 					<div class="pagination">
-						<a href="#" id="paging">&laquo;</a> <a href="#" id="paging">1</a>
-						<a href="#" id="paging">2</a> <a href="#" id="paging">3</a> <a
-							href="#" id="paging">4</a> <a href="#" id="paging">5</a> <a
-							href="#" id="paging">&raquo;</a>
+						<c:if test="${page <= 1 }">
+					<a id="paging">&laquo;</a>
+
+				</c:if>
+				<c:if test="${page > 1 }">
+					<a href="list?page=${page-1}" id="paging">&laquo;</a>
+				</c:if>
+
+				<c:forEach var="a" begin="${startpage}" end="${endpage}">
+
+					<c:if test="${a == page }">
+						<a href="#" id="paging">${a}</a>
+					</c:if>
+					<c:if test="${a != page }">
+						<a href="list?page=${a}" id="paging">${a}</a>
+					</c:if>
+				</c:forEach>
+				<c:if test="${page >= maxpage }">
+					<a id="paging">&raquo;</a>
+				</c:if>
+				<c:if test="${page < maxpage }">
+					<a href="list?page=${page+1}" id="paging">&raquo;</a>
+				</c:if>
 					</div>
 
 				</div>

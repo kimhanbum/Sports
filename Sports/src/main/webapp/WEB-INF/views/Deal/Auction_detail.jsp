@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+ <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -38,6 +39,7 @@
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
 </head>
+<script src = "http://code.jquery.com/jquery-latest.js"></script>
 <style>
 #paging {
 	color: black;
@@ -279,7 +281,7 @@ input.checkbox:checked+label.input-label.radio::before {
 	content: "\f058";
 }
 
-.button3 {
+.buttonA , .buttonE, .buttonJ {
 	width: 140px;
 	height: 45px;
 	font-family: 'Roboto', sans-serif;
@@ -297,7 +299,7 @@ input.checkbox:checked+label.input-label.radio::before {
 	outline: none;
 }
 
-.button3:hover {
+.buttonA:hover , .buttonE:hover ,.buttonJ:hover{
 	background-color: #2EE59D;
 	box-shadow: 0px 15px 20px rgba(46, 229, 157, 0.4);
 	color: #fff;
@@ -363,10 +365,12 @@ input.checkbox:checked+label.input-label.radio::before {
 			<h6 class="text-color">Computer Science</h6>
 			<span>Lorem ipsum dolor, sit amet consectetur
 				adipisicing elit. Cumque ac voluptas quae.</span>
+				<div style="text-align:right"><b>조회수</b>&emsp;${b.AUC_READCOUNT}</div>
 				<hr>
 			<div class="row">
 				<div class="col-md-5 mb-5">
-					<img class="img-fluid w-100" src="${pageContext.request.contextPath}/resources/image/404.png"
+					<img class="img-fluid w-100" src="${pageContext.request.contextPath}/resources/
+					dealupload1/${b.SAVE_AUC_MAINFILE}"
 						alt="teacher" style="width: 600px; height: 500px;">
 				</div>
 				<div class="col-md-6 mb-5" id="subject">
@@ -375,21 +379,21 @@ input.checkbox:checked+label.input-label.radio::before {
 							<h4 class="mb-4">Auction Info</h4>
 							<hr>
 							<ul class="list-unstyled">
-								<li><b>경매기간</b>&emsp;2021-9-26 18:00
+								<li><b>경매기간</b>&emsp;${b.AUC_DATE}
 									<hr></li>
-								<li><b>입찰단위</b>&emsp;1,000원
+								<li><b>입찰단위</b>&emsp;${b.AUC_UNIT}
 									<hr></li>
-								<li><b>시작가</b>&emsp;&emsp;5,000원
+								<li><b>시작가</b>&emsp;&emsp;${b.AUC_SPRICE}
 									<hr></li>
-								<li><b>현재가</b>&emsp;&emsp;8,000원
+								<li><b>현재가</b>&emsp;&emsp;${b.AUC_PRICE}
 									<hr></li>
-								<li><b>즉시구매</b>&emsp;20,000원
+								<li><b>즉시구매</b>&emsp;${b.AUC_LPRICE}
 									<hr></li>
-								<li><b>입찰수</b>&emsp;&emsp;20회
+								<li><b>입찰수</b>&emsp;&emsp;${b.AUC_COUNT}
 									<hr></li>
-								<li><b>배송방법</b>&emsp;착불
+								<li><b>배송방법</b>&emsp;${b.AUC_DELIVERY}
 									<hr></li>
-								<li><b>아이디</b>&emsp;&emsp;admin
+								<li><b>아이디</b>&emsp;&emsp;${b.USER_ID}
 									<hr></li>
 							</ul>
 						</div>
@@ -398,13 +402,13 @@ input.checkbox:checked+label.input-label.radio::before {
 							<hr>
 							<ul class="list-unstyled" id="buttonG">
 								<li class="mb-3">
-									<button class="button3">입찰하기</button>
+									<button class="buttonA">입찰하기</button>
 								</li>
 								<li class="mb-3" id="zzim">
-									<button class="button3">찜하기</button>
+									<button class="buttonJ">찜하기</button>
 								</li>
 								<li class="mb-3" id="mon2">
-									<button class="button3">문의하기</button>
+									<button class="buttonE">문의하기</button>
 								</li>
 							</ul>
 						</div>
@@ -431,30 +435,54 @@ input.checkbox:checked+label.input-label.radio::before {
 				</div>
 				<!-- course item -->
 				<div class="col-lg-4 col-sm-6 mb-5">
-					<div class="card p-0 border-primary rounded-0 hover-shadow" >
-						<img class="card-img-top rounded-0"
-							src="${pageContext.request.contextPath}/resources/image/404.png" alt="course thumb"
-							style="width: 358px; height: 300px;">
-
-					</div>
+					<div>
+					<c:choose>
+							<c:when test="${b.SAVE_AUC_FILE2=='0'}">
+								<img class="card-img-top rounded-0"
+									src="${pageContext.request.contextPath}/resources/dealupload2/white.jpg"
+									alt="course thumb" style="width: 358px; height: 300px;">
+							</c:when>
+							<c:otherwise>
+								<img class="card-img-top rounded-0"
+									src="${pageContext.request.contextPath}/resources/dealupload1/${b.SAVE_AUC_FILE2}"
+									alt="course thumb" style="width: 358px; height: 300px;">
+							</c:otherwise>
+						</c:choose>
+						</div>
 				</div>
 				<!-- course item -->
 				<div class="col-lg-4 col-sm-6 mb-5">
-					<div class="card p-0 border-primary rounded-0 hover-shadow">
-						<img class="card-img-top rounded-0"
-							src="${pageContext.request.contextPath}/resources/image/404.png" alt="course thumb"
-							style="width: 358px; height: 300px;">
-
-					</div>
+					<div>
+					<c:choose>
+							<c:when test="${b.SAVE_AUC_FILE3=='0'}">
+								<img class="card-img-top rounded-0"
+									src="${pageContext.request.contextPath}/resources/dealupload2/white.jpg"
+									alt="course thumb" style="width: 358px; height: 300px;">
+							</c:when>
+							<c:otherwise>
+								<img class="card-img-top rounded-0"
+									src="${pageContext.request.contextPath}/resources/dealupload1/${b.SAVE_AUC_FILE3}"
+									alt="course thumb" style="width: 358px; height: 300px;">
+							</c:otherwise>
+						</c:choose>
+						</div>
 				</div>
 				<!-- course item -->
 				<div class="col-lg-4 col-sm-6 mb-5">
-					<div class="card p-0 border-primary rounded-0 hover-shadow">
-						<img class="card-img-top rounded-0"
-							src="${pageContext.request.contextPath}/resources/image/404.png" alt="course thumb"
-							style="width: 358px; height: 300px;">
-
-					</div>
+					<div>
+					<c:choose>
+							<c:when test="${b.SAVE_AUC_FILE4=='0'}">
+								<img class="card-img-top rounded-0"
+									src="${pageContext.request.contextPath}/resources/dealupload2/white.jpg"
+									alt="course thumb" style="width: 358px; height: 300px;">
+							</c:when>
+							<c:otherwise>
+								<img class="card-img-top rounded-0"
+									src="${pageContext.request.contextPath}/resources/dealupload1/${b.SAVE_AUC_FILE4}"
+									alt="course thumb" style="width: 358px; height: 300px;">
+							</c:otherwise>
+						</c:choose>
+						</div>
 				</div>
 			</div>
 		</div>
@@ -463,6 +491,27 @@ input.checkbox:checked+label.input-label.radio::before {
 	
 	<!-- Footer 영역  -->
 	<jsp:include page="/WEB-INF/views/sport_comm/footer2.jsp"/>
+	
+	<script>
+		$(function(){
+			$(".buttonA").click(function(){ //로그인창에서 회원가입버튼 클릭 시
+				var num = ${param.num};
+				var b = confirm("입찰 하시겠습니까 ? (입찰단위: " + ${b.AUC_UNIT} + ")");
+				
+				var unit = ${b.AUC_UNIT}
+				
+				
+				
+				
+				if(b==true){	
+					location.href = "${pageContext.request.contextPath}/DealA/bid"
+					 + "?num=" + num ;
+					
+				}
+		     });	
+		})
+	
+	</script>
 
 	<!-- JS here -->
 

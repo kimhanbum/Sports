@@ -130,6 +130,16 @@ public class DealServiceImpl implements DealService {
 			return dao.getSearchAuctionList(map);
 		}
 
+		@Override
+		public DealAuction A_getDetail(int num) {
+			return dao.A_getDetail(num);
+		}
+
+		@Override
+		public int Auction_pricemodi(DealAuction auction) {
+			return dao.Auction_pricemodi(auction);
+		}
+
 
 
 
