@@ -25,11 +25,13 @@ create table Deal_Auction (
 select * from Deal_Auction;
 select * from board;
 select * from member_info;
+drop table deal_auction;
 
 delete from DEAL_AUCTION;
 
 /*추가된 부분 9- 27 */
 create sequence Auc_seq; 
+drop sequence auc_seq;
 /*----------*/
 
 /*추가된 부분 9-30 조회수컬럼*/

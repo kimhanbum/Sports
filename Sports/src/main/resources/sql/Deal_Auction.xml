@@ -71,8 +71,49 @@ select * from
 		where AUC_NUMBER=#{AUC_NUMBER}
 </update>
 
+<update id="readcount" parameterType="int">
+update deal_auction set auc_READCOUNT = auc_READCOUNT +1 
+where auc_number = #{num} 
 
+</update>
 
+<insert id="biding" parameterType="java.util.Map">
+	insert into MY_DEAL
+	(USER_ID, AUC_NUMBER , BUY_BIDDING)
+	VALUES( #{sessionid}  , #{num} , 1 )
+	
+</insert>
+
+<update id="change" parameterType="int">
+update my_deal set 
+BUY_BIDDING = 0 , 
+BUY_BIDFAIL = 1
+where  AUC_NUMBER = #{num} and BUY_BIDDING = 1 
+
+</update>
+
+<select id="bidcheck" resultType="Object"  parameterType="java.util.Map">
+	select * from MY_DEAL WHERE 
+	BUY_BIDDING = 1 AND USER_ID = #{sessionid} AND AUC_NUMBER = #{num}
+</select>
+
+<insert id="pick" parameterType="java.util.Map">
+	insert into MY_DEAL
+	(USER_ID, AUC_NUMBER , PICK)
+	VALUES( #{sessionid}  , #{num} , 1 )
+	
+</insert>
+
+<select id="pickcheck" resultType="Object"  parameterType="java.util.Map">
+	select * from MY_DEAL WHERE 
+	pick = 1 AND USER_ID = #{sessionid} AND AUC_NUMBER = #{num}
+</select>
+
+<insert id="myinsert" parameterType="Auction">
+	insert into my_deal
+	(USER_ID ,AUC_NUMBER, SELL_BIDDING )
+	values(#{USER_ID} , AUC_SEQ.NEXTVAL , 1)
+</insert>
 
 
 </mapper>
