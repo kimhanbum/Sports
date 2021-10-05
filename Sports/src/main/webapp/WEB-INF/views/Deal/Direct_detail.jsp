@@ -467,7 +467,7 @@ input.checkbox:checked+label.input-label.radio::before {
 									<hr></li>
 								<li><b>아이디</b>&emsp;&emsp;${b.USER_ID}
 									<hr></li>
-								<li><b>조회수</b>&emsp;&emsp;${b.USER_ID}
+								<li><b>조회수</b>&emsp;&emsp;${b.DIR_READCOUNT}
 									</li>
 							</ul>
 						</div>

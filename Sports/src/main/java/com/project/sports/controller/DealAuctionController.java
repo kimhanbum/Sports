@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Random;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -45,9 +46,10 @@ public class DealAuctionController {
 			@RequestParam(value="page",defaultValue="1",required=false)int page,
 			@RequestParam(value = "search",
 			defaultValue = "", required = false) String search ,
-			 ModelAndView mv) {
+			 ModelAndView mv
+			 ) {
 		
-	
+		
 		int limit = 6; // 한 화면에 출력할 레코드 갯수
 		
 		
@@ -104,11 +106,40 @@ public class DealAuctionController {
 	@GetMapping(value="/detail")
 	//@RequestMapping(value="/write", method=requestMethod.GET)
 	public ModelAndView Auction_detail(int num, ModelAndView mv,
-			HttpServletRequest request) {
+			HttpServletRequest request,
+			HttpSession session
+			) {
+		
+		
+		
 		DealAuction Auction = DealService.A_getDetail(num);
 		
+		session.setAttribute("session", "admin01");
 		
-		int count = DealService.D_readcount(num);
+		String sessionid = (String) session.getAttribute("session");
+		
+		//찜한물품인지 확인
+		Object pickcheck = DealService.pickcheck(sessionid, num);
+		if(pickcheck == null) {
+			mv.addObject("pickcheck", "possible");
+		}else {
+			mv.addObject("pickcheck", "impossible");
+		}
+		
+		//현재 내아이디로 입찰중인 물푼인지 확인
+		Object bidcheck = DealService.bidcheck(sessionid , num);
+		if(bidcheck == null) {
+			mv.addObject("bidcheck" , "possible");
+			
+		}else {
+			mv.addObject("bidcheck" , "impossible");
+		}
+		
+		
+		logger.info(bidcheck +"   비드 체크");
+		
+		//조회수
+		int count = DealService.A_readcount(num);
 		
 		if(Auction==null) {
 			logger.info("상세보기 실패");
@@ -128,8 +159,10 @@ public class DealAuctionController {
 	
 	@PostMapping("/add")
 	//@RequestMapping(value="/add" , method=RequestMethod.POST)
-	public String Auction_add(DealAuction Auction, HttpServletRequest request)
+	public String Auction_add(DealAuction Auction, HttpServletRequest request ,HttpSession session)
 			throws Exception{
+		
+		
 		
 		MultipartFile uploadfile1 = Auction.getUploadfile1();
 		MultipartFile uploadfile2 = Auction.getUploadfile2();
@@ -225,7 +258,13 @@ public class DealAuctionController {
 		//예비로해놈 9-26 
 		Auction.setUSER_ID("admin01");
 		
+		
+		
+		//글 추가
 		DealService.insert(Auction);	//저장메서드 호출
+		
+		//판매자 내거래내역 판매중 추가
+		DealService.Myinsert(Auction);
 		
 		return "Deal/Auction_write";
 	}
@@ -273,7 +312,16 @@ public class DealAuctionController {
 	//입찰
 	@RequestMapping(value="/bid")
 	public String AuctionBid(RedirectAttributes rattr , 
-			HttpServletRequest request , int num) {
+			HttpServletRequest request , int num,
+			HttpSession session) {
+		
+		
+		int change = DealService.Auction_bidchange(num); 
+		
+		String sessionid = (String) session.getAttribute("session");
+		logger.info("세션2값" + sessionid);
+		
+		DealService.Auction_biding(sessionid , num);
 		
 		DealAuction Auction = DealService.A_getDetail(num);
 		
@@ -284,6 +332,20 @@ public class DealAuctionController {
 		return "Deal/DealD_list"; 
 	}
 	
+	//경매 찜하기
+	@RequestMapping(value="/pick")
+	public String Auctionpick(RedirectAttributes rattr , 
+			HttpServletRequest request , int num,
+			HttpSession session) {
+			
+		String sessionid = (String) session.getAttribute("session");
 	
+		
+		
+		//찜하기 등록
+		DealService.Auction_pick(sessionid , num);
+		
+		return "Deal/DealA_list";
+	}
 	
 }

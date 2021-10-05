@@ -281,16 +281,51 @@ input.checkbox:checked+label.input-label.radio::before {
 	content: "\f058";
 }
 
-.buttonA , .buttonE, .buttonJ {
-	width: 140px;
-	height: 45px;
+.buttonA {
+	width: 200px;
+	height: 60px;
 	font-family: 'Roboto', sans-serif;
-	font-size: 11px;
+	font-size: 17px;
 	text-transform: uppercase;
 	letter-spacing: 2.5px;
 	font-weight: 500;
-	color: #000;
-	background-color: #fff;
+	color: white;
+	background-color: #114da5;
+	border: none;
+	border-radius: 45px;
+	box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+	transition: all 0.3s ease 0s;
+	cursor: pointer;
+	outline: none;
+}
+.buttonE{
+	width: 200px;
+	height: 60px;
+	font-family: 'Roboto', sans-serif;
+	font-size: 17px;
+	text-transform: uppercase;
+	letter-spacing: 2.5px;
+	font-weight: 500;
+	color: white;
+	background-color: #afafaf;
+	border: none;
+	border-radius: 45px;
+	box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+	transition: all 0.3s ease 0s;
+	cursor: pointer;
+	outline: none;
+
+}
+.buttonJ{
+	width: 200px;
+	height: 60px;
+	font-family: 'Roboto', sans-serif;
+	font-size: 17px;
+	text-transform: uppercase;
+	letter-spacing: 2.5px;
+	font-weight: 500;
+	color: white;
+	background-color: #b3a586;
 	border: none;
 	border-radius: 45px;
 	box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
@@ -299,12 +334,25 @@ input.checkbox:checked+label.input-label.radio::before {
 	outline: none;
 }
 
-.buttonA:hover , .buttonE:hover ,.buttonJ:hover{
-	background-color: #2EE59D;
-	box-shadow: 0px 15px 20px rgba(46, 229, 157, 0.4);
+.buttonA:hover{
+	background-color: #1c72f0;
+	box-shadow: 0px 15px 20px #1c72f0;
 	color: #fff;
 	transform: translateY(-7px);
 }
+.buttonE:hover {
+	background-color: #e8e3e3;
+	box-shadow: 0px 15px 20px #e8e3e3;
+	color: #fff;
+	transform: translateY(-7px);
+}
+.buttonJ:hover{
+	background-color: #e6d5af;
+	box-shadow: 0px 15px 20px #e6d5af;
+	color: #fff;
+	transform: translateY(-7px);
+}
+
 
 #mainpic {
 	padding-top: 100px
@@ -380,6 +428,7 @@ input.checkbox:checked+label.input-label.radio::before {
 							<hr>
 							<ul class="list-unstyled">
 								<li><b>경매기간</b>&emsp;${b.AUC_DATE}
+								${session }
 									<hr></li>
 								<li><b>입찰단위</b>&emsp;${b.AUC_UNIT}
 									<hr></li>
@@ -491,24 +540,51 @@ input.checkbox:checked+label.input-label.radio::before {
 	
 	<!-- Footer 영역  -->
 	<jsp:include page="/WEB-INF/views/sport_comm/footer2.jsp"/>
+	<script>
+	$(function(){
+		$(".buttonJ").click(function(){ //찜하기 버튼 클릭
+			
+			var pickcheck ="${pickcheck}";
+ 			var num = ${param.num};
+ 			
+ 			if(pickcheck == "possible"){
+ 				var b = confirm("찜 하시겠습니까 ?");		
+ 				
+ 				if(b==true){	
+ 					location.href = "${pageContext.request.contextPath}/DealA/pick"
+ 					 + "?num=" + num ;
+ 				}
+ 			}else{
+ 				alert("이미 찜한 상품입니다.")
+ 			}
+ 			
+
+		})
+	})
 	
+	</script>
 	<script>
 		$(function(){
 			$(".buttonA").click(function(){ //로그인창에서 회원가입버튼 클릭 시
 				var num = ${param.num};
-				var b = confirm("입찰 하시겠습니까 ? (입찰단위: " + ${b.AUC_UNIT} + ")");
+				var bidcheck ="${bidcheck}";
 				
-				var unit = ${b.AUC_UNIT}
+				console.log("aa" + bidcheck);
 				
-				
-				
-				
-				if(b==true){	
-					location.href = "${pageContext.request.contextPath}/DealA/bid"
-					 + "?num=" + num ;
+				if(bidcheck == "possible"){
+					var b = confirm("입찰 하시겠습니까 ? (입찰단위: " + ${b.AUC_UNIT} + ")");		
 					
+					if(b==true){	
+						location.href = "${pageContext.request.contextPath}/DealA/bid"
+						 + "?num=" + num ;
+						
+					}
+				}else{
+					alert("입찰중인 물품입니다.")
 				}
-		     });	
+				
+		     });
+			
 		})
 	
 	</script>

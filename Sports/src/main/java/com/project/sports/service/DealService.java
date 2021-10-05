@@ -39,6 +39,22 @@ public interface DealService {
 
 	public int Auction_pricemodi(DealAuction auction);
 
+	public int A_readcount(int num);
+
+	public void Auction_biding(String sessionid, int num);
+
+	public int Auction_bidchange(int num);
+
+	public Object bidcheck(String sessionid, int num);
+
+	public void Auction_pick(String sessionid, int num);
+
+	public Object pickcheck(String sessionid, int num);
+
+	public void Myinsert(DealAuction auction);
+
+	
+
 
 
 	

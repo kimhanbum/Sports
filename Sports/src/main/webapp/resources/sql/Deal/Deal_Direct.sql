@@ -17,8 +17,11 @@ create table Deal_Direct (
 	ORI_DIR_FILE4		 VARCHAR2(100), 			-- 진짜사진4
 	SAVE_DIR_FILE4		 VARCHAR2(100) );			-- 저장용사진4
 	
+	DROP TABLE DEAL_DIRECT;
+	
 	/*추가된 부분 9-27*/
 	create sequence Dir_seq; 
+	drop sequence dir_seq;
 	/*-----------*/
 	
 	/*추가된 부분 9-30*/

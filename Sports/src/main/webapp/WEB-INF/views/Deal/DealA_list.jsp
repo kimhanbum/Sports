@@ -303,9 +303,10 @@ background-color
 								</div>
 								<div class="product-img">
 									<img
+										id="imgimg"
 										src="${pageContext.request.contextPath}/resources/dealupload1/${b.SAVE_AUC_MAINFILE}"
 										alt=""
-										style="width: 355px; height: 250px;">
+										style="width: 355px; height: 300px;">
 
 								</div>
 								<div class="product-caption">
@@ -318,7 +319,8 @@ background-color
 										<table class="table">
 											<tr>
 												<th>시작가</th>
-												<td>${b.AUC_SPRICE}원</td>
+												<td>${b.AUC_SPRICE}원${session}</td>
+												
 											</tr>
 											<tr>
 												<th class="discount2">현재가</th>
@@ -352,11 +354,19 @@ background-color
 						 	console.log(datemonth)
 						 	console.log(dateday)
 						 	var number = ${b.AUC_NUMBER}
+						 	var img = "${b.SAVE_AUC_MAINFILE}"
 						 	console.log(number)
 						 	
+						 	
 						 	var timeid = "timeback" + number;
+						 	var imgid = "imgimg" + number;
+						 	
+						 	var imgurl = "${pageContext.request.contextPath}/resources/dealupload1/soldout.jpg"
 						 	
 						 	$("#timeback").attr("id",timeid)
+						 	$("#imgimg").attr("id" , imgid)
+						 	
+						 	
 						 	
 						 	
 						 	
@@ -373,19 +383,23 @@ background-color
 								var sec = parseInt(totalTime % 60, 10);
 								
 								
+
 								
-								
-								var result = hr + " 시 " + min + " 분 " + sec
-										+ " 초";
+								var result = "남은시간 " +  hr + "시 " + min + "분 " + sec
+										+ "초";
 								eval("var count"+number+"=" + "'" + result + "'");
 	
 								document.getElementById(number).innerHTML = result;
 								setTimeout(setClock, 1000);
 								
-								if(eval("count" + number) == "61 시 50 분 30 초"){
-									alert("입찰종료")
+								//if(eval("count" + number) == "14 시 0 분 9 초"){	
+								if(hr <=13 && min <=50 && sec <=0){
+									
 									clearTimeout(setClock);
-									document.getElementById(timeid).innerHTML = "입찰종료";
+									document.getElementById(timeid).innerHTML = 
+										"<div style='background-color:red'>배송시 글이 자동 삭제됩니다.</div>";
+									$(eval("'#imgimg" +number + "'")).attr("src",imgurl );
+
 									//location.href="write"
 									
 									

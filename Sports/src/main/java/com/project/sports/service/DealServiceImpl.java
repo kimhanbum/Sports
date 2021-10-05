@@ -140,6 +140,61 @@ public class DealServiceImpl implements DealService {
 			return dao.Auction_pricemodi(auction);
 		}
 
+		@Override
+		public int A_readcount(int num) {
+			return dao.A_readcount(num);
+		}
+
+		@Override
+		public void Auction_biding(String sessionid, int num) {
+			HashMap<String , Object> map = new HashMap<String,Object>();
+			map.put("sessionid", sessionid);
+			map.put("num", num);
+			dao.Auction_biding(map);
+			
+		}
+
+		@Override
+		public int Auction_bidchange(int num) {
+			return dao.Auction_bidchange(num);
+		}
+
+		@Override
+		public Object bidcheck(String sessionid, int num) {
+			HashMap<String , Object> map = new HashMap<String,Object>();
+			map.put("sessionid", sessionid);
+			map.put("num", num);
+
+			return dao.bidcheck(map);
+		}
+
+		@Override
+		public void Auction_pick(String sessionid, int num) {
+			HashMap<String , Object> map = new HashMap<String,Object>();
+			map.put("sessionid", sessionid);
+			map.put("num", num);
+			
+			dao.Auction_pick(map);
+			
+		}
+
+		@Override
+		public Object pickcheck(String sessionid, int num) {
+			HashMap<String , Object> map = new HashMap<String,Object>();
+			map.put("sessionid", sessionid);
+			map.put("num", num);
+
+			return dao.pickcheck(map);
+		}
+
+		@Override
+		public void Myinsert(DealAuction auction) {
+			dao.Myinsert(auction);
+			
+		}
+
+
+
 
 
 
