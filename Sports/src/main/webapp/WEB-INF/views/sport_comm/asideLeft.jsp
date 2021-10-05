@@ -46,7 +46,7 @@
                   </a>
               </li>
               <li>
-                  <a href="#" class="d-flex">
+                  <a href="${pageContext.request.contextPath}/mypage/mmwriteList" class="d-flex">
                       <p>내 작성 멘티/멘토</p>
                   </a>
               </li>

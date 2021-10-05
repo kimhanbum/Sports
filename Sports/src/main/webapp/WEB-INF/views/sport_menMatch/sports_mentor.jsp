@@ -455,6 +455,29 @@ body .grid {
 } */
 
 
+.icon_img{
+	width:40px;
+	height:40px;
+	margin-bottom: 8px;
+}
+.element_inline{
+	display:inline;
+}
+
+
+#accordion li{
+   list-style-type: circle;
+}
+
+.nav > a{
+	border:none;
+	color:black;
+}
+
+.nav > a:hover{
+	color:blue;
+}
+
 </style>
 
 <body>
@@ -541,7 +564,21 @@ body .grid {
 			<div class="modal-content scroll type2">
 				<div class="container">
 					<br><h4 class=mb-30>수업지역</h4><hr>
-					<h6 style="text-align:left" class=mb-30>서울특별시</h6>
+					<div class="row product-btn d-flex justify-content-between">
+                        <div class="properties_button">
+                            <!--Nav Button  -->
+                            <nav>                                                                                                
+                                <div class="nav" id="nav-tab" role="tablist">
+                                    <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">서울특별시</a>
+                                    <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">경기도</a>
+                                    <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false">부산광역시</a>
+                                    <a class="nav-item nav-link" id="nav-last-tab" data-toggle="tab" href="#nav-last" role="tab" aria-controls="nav-contact" aria-selected="false">대구광역시</a>
+                                </div>
+                            </nav>
+                            <!--End Nav Button  -->
+                        </div>
+                	</div>
+                	<br>
 					<div class="grid">
 						<label class="card">
 							<input class="card__input" type="checkbox"/>
@@ -1578,7 +1615,7 @@ body .grid {
 									</a>
 								</div>
 								<div class="product-caption">
-									<h3><b>modal 테스트</b></h3>
+									<h3><b>러닝 가르칩니다.(MODAL)</b></h3>
 									<div class="price">
 										<table class="table">
 											<tr>
@@ -1746,8 +1783,8 @@ body .grid {
 
 					</div>
 					<div class="pagination">
-						<a href="#" id="paging">&laquo;</a> <a href="#" id="paging">1</a>
-						<a href="#" id="paging">2</a> <a href="#" id="paging">3</a> <a
+						<a class="active" href="#" id="paging">&laquo;</a> <a href="#" id="paging">1</a>
+						<a  href="#" id="paging">2</a> <a href="#" id="paging">3</a> <a
 							href="#" id="paging">4</a> <a href="#" id="paging">5</a> <a
 							href="#" id="paging">&raquo;</a>
 					</div>
@@ -1758,9 +1795,9 @@ body .grid {
 	
    <!-- 상세보기 modal -->
 	<div class="modal" id="detailModal">
-		<div class="modal-dialog">
-			<div class="modal-content scroll type2">
-				<div class="container">
+		<div class="modal-dialog" style="max-width: 800px;">
+			<div class="modal-content">
+				<div class="container" style="padding:0px">
 					<div id="demo" class="carousel slide" data-ride="carousel">
 					
 					  <!-- Indicators -->
@@ -1773,13 +1810,13 @@ body .grid {
 					  <!-- The slideshow -->
 					  <div class="carousel-inner">
 					    <div class="carousel-item active">
-					      <img src="${pageContext.request.contextPath}/resources/image/mmatch/test1.jpg" alt="Los Angeles" width="1100" height="500">
+					      <img src="${pageContext.request.contextPath}/resources/image/mmatch/test1.jpg" alt="Los Angeles" width="800px" height="350px">
 					    </div>
 					    <div class="carousel-item">
-					      <img src="${pageContext.request.contextPath}/resources/image/mmatch/test2.jpg" alt="Chicago" width="1100" height="500">
+					      <img src="${pageContext.request.contextPath}/resources/image/mmatch/test2.jpg" alt="Chicago" width="800px" height="350px">
 					    </div>
 					    <div class="carousel-item">
-					      <img src="${pageContext.request.contextPath}/resources/image/mmatch/test3.jpg" alt="New York" width="1100" height="500">
+					      <img src="${pageContext.request.contextPath}/resources/image/mmatch/test3.jpg" alt="New York" width="800px" height="350px">
 					    </div>
 					  </div>
 					  
@@ -1792,13 +1829,92 @@ body .grid {
 					  </a>
 					</div>				
 				
-					<br><h4 class=mb-30>러닝 가르칩니다.</h4><hr>
-				    <hr>
+					<br><h2 class="mb-30">러닝 가르칩니다.</h2>
+					<div style="text-align:left">
+					   <div id="accordion">
+						    <div class="card" style="border-bottom:none;">
+							      <div class="card-header" style="background-color:white;border-bottom:none;">
+							      	  <div>
+											<img class="icon_img element_inline" src="${pageContext.request.contextPath}/resources/image/mmatch/detail_class.png" alt="">
+											<h4 class="mb-30 element_inline">수업소개</h4>
+											<a class="card-link element_inline" data-toggle="collapse" href="#collapseOne">
+										  		<img class="icon_img element_inline" src="${pageContext.request.contextPath}/resources/image/mmatch/arrow_down.png" alt="">  
+								      		</a>
+									  </div>   
+								  </div>
+								 <div id="collapseOne" class="collapse" data-parent="#accordion">
+								      <div class="card-body" style="padding-top: 0px;">
+								      	<ul style="font-size:20px;padding-left: 20px">
+								      		<li>수업 과목 : <div class="element_inline">러닝</div></li>
+								      		<li>수업 시간 :
+								      		    <div> - 월요일 10:30 ~ 12:30</div>
+								      			<div> - 월요일 10:30 ~ 12:30</div>
+								      			<div> - 화요일 08:30 ~ 10:30</div>
+								      			<div> - 수요일 10:30 ~ 12:30</div>
+								      			<div> - 목요일 08:30 ~ 10:30</div>
+								      			<div> - 금요일 10:30 ~ 12:30</div>
+								      		</li>
+								      		<li>수업 장소 : <div class="element_inline">올림픽 공원</div></li>
+								      		<li>수업 가격 : <div class="element_inline">10만원</div></li>
+								      	</ul>
+								      </div>
+							      </div>
+						    </div>
+						    <div class="card" style="border-bottom:none;">
+							      <div class="card-header" style="background-color:white;border-bottom:none;">
+							      	  <div>
+											<img class="icon_img element_inline" src="${pageContext.request.contextPath}/resources/image/mmatch/detail_person.png" alt="">
+											<h4 class="mb-30 element_inline">멘토소개</h4>
+											<a class="card-link element_inline" data-toggle="collapse" href="#collapseTwo">
+										  		<img class="icon_img element_inline" src="${pageContext.request.contextPath}/resources/image/mmatch/arrow_down.png" alt="">  
+								      		</a>
+									  </div>   
+								  </div>
+								 <div id="collapseTwo" class="collapse" data-parent="#accordion">
+								      <div class="card-body" style="padding-top: 0px;">
+								      	<ul style="font-size:20px;padding-left: 20px">
+								      		<li>멘토 이름 : <div class="element_inline">홍길동</div></li>
+								      		<li>멘토 경력 :
+								      			<div> - xxx상 수상</div>
+								      			<div> - xxx상 수상</div>
+								      			<div> - xxx상 수상</div>
+								      			<div> - xxx상 수상</div>
+								      			<div> - xx학교 졸업</div>
+								      		</li>
+								      	</ul>
+								      </div>
+							      </div>
+						    </div>
+						    <div class="card">
+							      <div class="card-header" style="background-color:white;border-bottom:none;">
+							      	  <div>
+											<img class="icon_img element_inline" src="${pageContext.request.contextPath}/resources/image/mmatch/detail_caution.png" alt="">
+											<h4 class="mb-30 element_inline">주의사항</h4>
+											<a class="card-link element_inline" data-toggle="collapse" href="#collapseThree">
+										  		<img class="icon_img element_inline" src="${pageContext.request.contextPath}/resources/image/mmatch/arrow_down.png" alt="">  
+								      		</a>
+									  </div>   
+								  </div>
+								 <div id="collapseThree" class="collapse" data-parent="#accordion">
+								      <div class="card-body" style="padding-top: 0px;">
+								      	<ul style="font-size:20px;padding-left: 20px">
+								      		<li>저희 수업은 고강도 체력 훈련자를 위한 수업이므로 기초 체력이 안되신 힘들 수 있으니 신청에 주의하세요</li>
+								      	</ul>
+								      </div>
+							      </div>
+						    </div>
+					   </div>
+				    </div>
 				    <div class="mt-40">
-						<button style="width:48%" type="button" class="genric-btn info circle" data-dismiss="modal">검색하기</button>
-						<button style="width:48%" type="button" class="genric-btn danger  circle" data-dismiss="modal">취소하기</button>
+						<button style="width:48%" type="button" class="genric-btn info circle" data-dismiss="modal">신청하기</button>
 					</div>
-					<br>
+					<!-- 				    
+					<div class="mt-40">
+						<button style="width:48%" type="button" class="genric-btn info circle" data-dismiss="modal">수정하기</button>
+						<button style="width:48%" type="button" class="genric-btn danger  circle" data-dismiss="modal">삭제하기</button>
+					</div>
+					-->
+					<br> 
 				</div>
 			</div>
 		</div>
