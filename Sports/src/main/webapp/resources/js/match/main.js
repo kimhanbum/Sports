@@ -15,10 +15,35 @@ document.getElementById("match_Date").setAttribute("min", today);
 $(document).ready(function(){
 	  initJson();//json 파일 가져오는 함수
 	  initPage();//city 세팅해주는 함수
+	  initSport();
+	  logNow(sport_name);
 });
 
 function logNow(logContents){
 	console.log(logContents);
+}
+
+var sport_name= null;
+function initSport(){
+	var sport_num = Number($("#sport_num").text());
+	var sendData = {sports_num: sport_num};
+	
+	$.ajax({
+		type: "POST",
+		contentType: "application/json; charset=utf-8;",
+		async: false,
+		url: "./selSportName",
+		data : JSON.stringify(sendData),
+		success: function (result) {
+			sport_name = result;
+			logNow(sport_name);
+		},
+		error:function(request,status,error){
+			logNow("code:"+request.status+"\n"+
+					"message:"+request.responseText+"\n"+
+					"error:"+error);
+		}
+	});
 }
 
 var address_json = null;//전역으로 사용
@@ -30,8 +55,8 @@ function initJson() {
 	     success: function (result) {//결과가져오기 > object형태임 > 로그보셈
 	    	 address_json = result;
 	    	 logNow(address_json);
-      }
-   });
+	     }
+	  });
 }
 
 function initPage(){//페이지 로딩되면 city 셀렉바 옵션 추가
@@ -99,12 +124,15 @@ function btnClick(){
 
 function btnClick2(){
 	console.log("매칭등록 클릭");
+	var sport =  sport_name;
 	var city = $("#city option:checked").text();
 	var city_detail = $("#city_detail option:checked").text();
 	var date = $("input[name=match_date]").val();
 	var person = $("input[name=person]").val();
 	var skill = $("select[name=skill]").val();
 	
+	
+	$("#RegisterModal #Sport").val(sport);
 	$("#RegisterModal #City").val(city);
 	$("#RegisterModal #Detail").val(city_detail);
 	$("#RegisterModal #Date").val(date);

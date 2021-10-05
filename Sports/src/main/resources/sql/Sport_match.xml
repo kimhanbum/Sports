@@ -17,4 +17,10 @@
 		where rnum &gt;= #{start} and rnum &lt; = #{end}
 	</select>
 	
+	<select id="selSportName" resultType="string" parameterType="java.util.Map">
+		SELECT sports_name 
+		FROM sports 
+		WHERE sports_num = #{sports_num}
+	</select>
+	
 </mapper>

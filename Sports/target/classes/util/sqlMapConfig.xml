@@ -4,15 +4,18 @@
   
 <configuration>
   <typeAliases>
+		<typeAlias alias="member"	type="com.project.sports.domain.Member"/>
 		<typeAlias alias="FR"  		type="com.project.sports.domain.BBS_FR" />
    		<typeAlias alias="FCM" 		type="com.project.sports.domain.BBS_FCM" />
 		<typeAlias alias="auction"	type="com.project.sports.domain.DealAuction"/>
 		<typeAlias alias="direct"	type="com.project.sports.domain.DealDirect"/>
 		<typeAlias alias="Water"	type="com.project.sports.domain.WaterIntake"/>
 		<typeAlias alias="match"	type="com.project.sports.domain.Match"/>
+		<typeAlias alias="sports"	type="com.project.sports.domain.Sports"/>
   </typeAliases>
   
   <mappers>
+	<mapper resource="sql/member.xml"/>
 	<mapper resource="sql/Deal_Auction.xml"/>
 	<mapper resource="sql/Deal_Direct.xml"/>
  	<mapper resource="sql/BBS_FR.xml"/>
