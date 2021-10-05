@@ -1,17 +1,21 @@
 package com.project.sports.controller;
 
-import java.util.List; 
+import java.util.List;
+import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.project.sports.domain.Match;
+import com.project.sports.domain.Sports;
 import com.project.sports.service.MatchService;
  
 @Controller
@@ -23,8 +27,34 @@ public class MatchController {
 	private MatchService matchservice;
 	
 	@RequestMapping(value = "/baseball", method = RequestMethod.GET)
-	public ModelAndView baseball(ModelAndView mv) {
+	public ModelAndView baseball(
+			@RequestParam(value="page",defaultValue="1",required=false) int page, ModelAndView mv) {
+		int limit =5; // 한 화면에 출력할 레코드 갯수
+		
+		int listcount = matchservice.getListCount(); //총 리스트 수를 받아옴
+		
+		//총페이지 수
+		int maxpage = (listcount + limit - 1) / limit;
+		
+		//현재 페이지에 보여줄 시작 페이지 수(1,11,21, 등..)
+		int startpage = ((page -1) /10) *10 +1;
+		
+		//현재 페이지에 보여줄 마지막 페이지 수 (10,20,30 등..)
+		int endpage = startpage + 10 - 1;
+		
+		if(endpage > maxpage)
+		   endpage = maxpage;
+		
+		List<Match> matchlist = matchservice.getMatchList(page, limit);
+		
 		mv.setViewName("sport_match/match_baseball");
+		mv.addObject("page",page);
+		mv.addObject("maxpage",maxpage);
+		mv.addObject("startpage",startpage);
+		mv.addObject("endpage", endpage);
+		mv.addObject("listcount", listcount);
+		mv.addObject("matchlist", matchlist);
+		mv.addObject("limit", limit);
 		return mv;
 	}
 	
@@ -79,7 +109,7 @@ public class MatchController {
 	
 	
 	@RequestMapping(value="/mainPage",method=RequestMethod.GET)
-	public ModelAndView boardList(
+	public ModelAndView mainPage(
 			@RequestParam(value="page",defaultValue="1",required=false) int page, ModelAndView mv) {
 		int limit =5; // 한 화면에 출력할 레코드 갯수
 		
@@ -108,5 +138,11 @@ public class MatchController {
 		mv.addObject("matchlist", matchlist);
 		mv.addObject("limit", limit);
 		return mv;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/selSportName", method = RequestMethod.POST, produces="application/text;charset=utf8")
+	public String selSportName(@RequestBody Sports param) throws Exception {
+		return matchservice.selSportName(param);
 	}
 }

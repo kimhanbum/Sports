@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.project.sports.dao.MatchDAO;
 import com.project.sports.domain.Match;
+import com.project.sports.domain.Sports;
 
 @Service
 public class MatchServiceImpl implements MatchService {
@@ -27,6 +28,18 @@ public class MatchServiceImpl implements MatchService {
 		map.put("start", startrow);
 		map.put("end", endrow);
 		return dao.getMatchList(map);
+	}
+
+	@Override
+	public String selSportName(Sports param) throws Exception {
+		// TODO Auto-generated method stub
+		
+		HashMap<String, Integer> map = new HashMap<String, Integer>();
+		int sports_num = param.getSports_num();
+		map.put("sports_num", sports_num);
+		
+		//return dao.selSportName(param); 이 형태로 보내보기
+		return dao.selSportName(map);
 	}
 	
 }

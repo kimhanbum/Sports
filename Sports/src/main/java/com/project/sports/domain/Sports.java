@@ -10,6 +10,9 @@ public class Sports {
  */
 	private String CAL;				//운동당 소모칼로리
 	private String SPORTS_IMG;		//스포츠이미지
+	
+	private int sports_num;	
+	
 	public int getSPORTS_NUM() {
 		return SPORTS_NUM;
 	}
@@ -39,5 +42,11 @@ public class Sports {
 	}
 	public void setSPORTS_IMG(String sPORTS_IMG) {
 		SPORTS_IMG = sPORTS_IMG;
+	}
+	public int getSports_num() {
+		return sports_num;
+	}
+	public void setSports_num(int sports_num) {
+		this.sports_num = sports_num;
 	}
 }

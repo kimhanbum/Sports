@@ -37,6 +37,7 @@
    	<!-- 헤더 영역  -->
 <jsp:include page="/WEB-INF/views/sport_comm/header.jsp"/>
    <main>
+   		<div id="sport_num" style="display:none;">1</div>
        <!-- slider Area Start -->
        <div class="slider-area ">
        	<div id="icon_box">
@@ -103,7 +104,7 @@
                        <label for="city" style="color:white;  width: 30%">City</label>
                        <div class="rows">
                        	<select id="city" name="city" class="form-control1" onchange="javascript:initAddress();">
-	                       	<option value="" selected>&nbsp;지역&nbsp;</option>
+	                       	<option value="" selected>지역</option>
                        	</select>
                        </div>
                    </div>
@@ -111,7 +112,7 @@
                        <label for="city" style="color:white;  width: 30%">detail</label>
                        <div class="rows">
                        	<select id="city_detail" name="city_detail" class="form-control1">
-                       		<option value="" selected>&nbsp;세부지역&nbsp;&nbsp;</option>
+                       		<option value="" selected>세부지역</option>
                        	</select>
                        </div>
                    </div>
@@ -236,7 +237,7 @@
                         <label class="radio radio-sm">
                             <div class="container">
                                 <div class="label">Sport</div>
-                                 <input class="modal_input" name="Sport" type="text" readonly>
+                                 <input id="Sport" class="modal_input" name="Sport" type="text" readonly>
                             </div>
                         </label>
                          <label>
