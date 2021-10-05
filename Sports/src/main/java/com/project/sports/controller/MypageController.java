@@ -18,4 +18,11 @@ public class MypageController {
 		mv.setViewName("sports_mypage/mypage_home");
 		return mv;
 	}
+	//내 멘티,멘토 글 작성 리스트
+	@RequestMapping(value = "/mmwriteList", method = RequestMethod.GET)
+	public ModelAndView mmwriteList(ModelAndView mv) {
+		mv.setViewName("sports_mypage/mypage_mmwritelist");
+		return mv;
+	}
+	
 }
