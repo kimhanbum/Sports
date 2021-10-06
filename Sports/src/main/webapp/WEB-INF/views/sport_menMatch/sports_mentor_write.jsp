@@ -338,7 +338,7 @@ input.checkbox:checked+label.input-label.radio::before {
 									<h4>수업 시간</h4>
 								</label>
 								<div class="element_inline" id="addTime">
-									<img src="${pageContext.request.contextPath}/resources/image/mmatch/plus_icon.png" alt="">
+									<img style="margin-bottom: 8px" src="${pageContext.request.contextPath}/resources/image/mmatch/plus_icon.png" alt="">
 								</div>
 								<div id="mentor_time_list">
 									<div>
@@ -432,7 +432,9 @@ input.checkbox:checked+label.input-label.radio::before {
 						<div class="row">
 							<div class="col-md-6 form-group">
 								<h4>첨부 사진</h4><br>
-								첨부1<div class="custom-file mb-3"  style="width:1013px;" >
+								첨부1
+								<div style="color:red"class="element_inline">(해당 파일은 공고화면에 표시됩니다.)</div>
+								<div class="custom-file mb-3"  style="width:1013px;" >
       								<input type="file" class="custom-file-input" id="customFile1" name="filename1">
       								<label class="custom-file-label" for="customFile1">Choose file</label>
     							</div>
