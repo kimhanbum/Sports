@@ -11,7 +11,7 @@
                   </a>
               </li>
               <li>
-                  <a href="#" class="d-flex">
+                  <a href="${pageContext.request.contextPath}/pm/list" class="d-flex">
                       <p>당일운동량</p>
                   </a>
               </li>

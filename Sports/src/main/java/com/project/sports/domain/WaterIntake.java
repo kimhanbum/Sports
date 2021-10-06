@@ -1,33 +1,44 @@
 package com.project.sports.domain;
 
+import java.sql.Date;
+
 public class WaterIntake {
-	private int WI_NO;
-	private String USER_ID;
-	private String WI_INTAKE;
-	private String WI_DATE;
-	public int getWI_NO() {
-		return WI_NO;
+	private int wi_no;//시퀀스
+	private String user_id;//로그인한 아이디
+	private String time_start;
+	private String time_end;
+	private String title;
+	
+	public String getTime_start() {
+		return time_start;
 	}
-	public void setWI_NO(int wI_NO) {
-		WI_NO = wI_NO;
+	public void setTime_start(String time_start) {
+		this.time_start = time_start;
 	}
-	public String getUSER_ID() {
-		return USER_ID;
+	public String getTime_end() {
+		return time_end;
 	}
-	public void setUSER_ID(String uSER_ID) {
-		USER_ID = uSER_ID;
+	public void setTime_end(String time_end) {
+		this.time_end = time_end;
 	}
-	public String getWI_INTAKE() {
-		return WI_INTAKE;
+	public int getWi_no() {
+		return wi_no;
 	}
-	public void setWI_INTAKE(String wI_INTAKE) {
-		WI_INTAKE = wI_INTAKE;
+	public void setWi_no(int wi_no) {
+		this.wi_no = wi_no;
 	}
-	public String getWI_DATE() {
-		return WI_DATE;
+	public String getUser_id() {
+		return user_id;
 	}
-	public void setWI_DATE(String wI_DATE) {
-		WI_DATE = wI_DATE;
-	}	
+	public void setUser_id(String user_id) {
+		this.user_id = user_id;
+	}
+	public String getTitle() {
+		return title;
+	}
+	public void setTitle(String title) {
+		this.title = title;
+	}
+	
 	
 }
