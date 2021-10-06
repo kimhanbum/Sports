@@ -3,7 +3,7 @@ package com.project.sports.domain;
 public class Match {
 	private String REGISTER_ID;  
 	private int    REGISTER_NUM; 
-	private int    SPORTS_NUM;  
+	private int    SPORT_NUM;  
 	private int    MATCH_PRS;    
 	private String MATCH_ADR;	 
 	private String MATCH_DTL_ADR;
@@ -24,11 +24,11 @@ public class Match {
 	public void setREGISTER_NUM(int rEGISTER_NUM) {
 		REGISTER_NUM = rEGISTER_NUM;
 	}
-	public int getSPORTS_NUM() {
-		return SPORTS_NUM;
+	public int getSPORT_NUM() {
+		return SPORT_NUM;
 	}
-	public void setSPORTS_NUM(int sPORTS_NUM) {
-		SPORTS_NUM = sPORTS_NUM;
+	public void setSPORT_NUM(int sPORT_NUM) {
+		SPORT_NUM = sPORT_NUM;
 	}
 	public int getMATCH_PRS() {
 		return MATCH_PRS;

@@ -149,4 +149,44 @@ function colseModal(){
 	});
 }
 
+function registerModal(){
+	var REGISTER_ID = $("#modal_id").text();
+	var SPORT_NUM = $("#sport_num").text();
+	var MATCH_ADR = $("#city option:checked").text();
+	var MATCH_DTL_ADR = $("#city_detail option:checked").text();
+	var MATCH_TIME = $("input[name=match_date]").val();
+	var MATCH_PRS = $("input[name=person]").val();
+	var MATCH_SKL = $("select[name=skill]").val();
+	logNow(REGISTER_ID);
+	logNow(SPORT_NUM); //1
+	logNow(MATCH_ADR);	   //부산광역시
+	logNow(MATCH_DTL_ADR);//서구
+	logNow(MATCH_TIME);		//2021-10-06
+	logNow(MATCH_PRS);		//2
+	logNow(MATCH_SKL);		//상
+	addRegi(REGISTER_ID ,SPORT_NUM, MATCH_ADR, MATCH_DTL_ADR, MATCH_TIME, MATCH_PRS, MATCH_SKL);
+}
 
+function addRegi(REGISTER_ID ,SPORT_NUM, MATCH_ADR, MATCH_DTL_ADR, MATCH_TIME, MATCH_PRS, MATCH_SKL){
+	 $.ajax({
+	     async: false,
+	     type: "post",
+	     url: "./Regi",
+	     dataType: "text",
+	     data:{
+	    	   "REGISTER_ID": REGISTER_ID,
+	    	   "SPORT_NUM" : SPORT_NUM,
+	    	   "MATCH_ADR" : MATCH_ADR,
+	    	   "MATCH_DTL_ADR" : MATCH_DTL_ADR,
+	    	   "MATCH_TIME" : MATCH_TIME,
+	    	   "MATCH_PRS" : MATCH_PRS,
+	    	   "MATCH_SKL" : MATCH_SKL
+	     },
+	     success: function (result) {
+	    	alert('등록성공');
+	    	location.reload();
+	     }, error: function(){
+	    	 alert('실패');
+	     }
+	  });
+}

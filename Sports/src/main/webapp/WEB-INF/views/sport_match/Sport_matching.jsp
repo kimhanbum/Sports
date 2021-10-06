@@ -232,7 +232,7 @@
 	<div id="RegisterModal" class="modal hide" style="display: none;">
 	   	 <div class="wrapper">
 	        	<div class="container">
-	            	<div class="row_subject">매칭등록</div><div class="modal_id">ID:admin</div>
+	            	<div class="row_subject">매칭등록</div><div id="modal_id" class="modal_id">${USER_ID}</div>
             		<div class="row1">
                         <label class="radio radio-sm">
                             <div class="container">
@@ -281,7 +281,7 @@
                     <button class="closeModal row btn" onclick="javascript:colseModal();">닫기</button>
                 </div>
                 <div class="modalbutton">
-                    <button class="btnSearch row btn btn-fill btn-blue-light">등록</button>
+                    <button class="btnSearch row btn btn-fill btn-blue-light" onclick="javascript:registerModal()">등록</button>
                 </div>
             </div>
         </div>

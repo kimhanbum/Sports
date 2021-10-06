@@ -17,8 +17,7 @@ create table SPORT_REGISTER(
 select * from SPORT_REGISTER;
 
 create sequence reg_seq;
-
-
+ 
 insert into SPORT_REGISTER(REGISTER_ID,REGISTER_NUM,SPORT_NUM,MATCH_PRS,MATCH_ADR,MATCH_DTL_ADR,MATCH_TIME,MATCH_SKL)
 values('admin01',reg_seq.nextval,1,9,'인천','연수구','09:00','상');
 
@@ -44,7 +43,8 @@ values('user03', reg_seq.nextval, 1, 11, '대구', '중구', '21-11-08', '상');
 insert into SPORT_REGISTER(REGISTER_ID, REGISTER_NUM, SPORT_NUM,MATCH_PRS, MATCH_ADR, MATCH_DTL_ADR, MATCH_TIME, MATCH_SKL)
 values('user03', reg_seq.nextval, 1, 11, '대전', '남구', '21-12-08', '상');
 
-
+insert into SPORT_REGISTER(REGISTER_ID, REGISTER_NUM, SPORT_NUM,MATCH_PRS, MATCH_ADR, MATCH_DTL_ADR, MATCH_TIME, MATCH_SKL)
+values('user12', reg_seq.nextval, 1, 11, '대전', '남구', '21-12-08', '상');
 select * from si;
 create table si(
 	si_num number(20) primary key,

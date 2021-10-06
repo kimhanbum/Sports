@@ -11,6 +11,7 @@
 		<typeAlias alias="direct"	type="com.project.sports.domain.DealDirect"/>
 		<typeAlias alias="Water"	type="com.project.sports.domain.WaterIntake"/>
 		<typeAlias alias="match"	type="com.project.sports.domain.Match"/>
+		<typeAlias alias="sports"	type="com.project.sports.domain.Sports"/>
   </typeAliases>
   
   <mappers>

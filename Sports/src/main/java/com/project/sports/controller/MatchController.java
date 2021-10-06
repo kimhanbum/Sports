@@ -1,7 +1,10 @@
 package com.project.sports.controller;
 
+import java.io.File; 
 import java.util.List;
 import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.project.sports.domain.Match;
@@ -144,5 +148,13 @@ public class MatchController {
 	@RequestMapping(value = "/selSportName", method = RequestMethod.POST, produces="application/text;charset=utf8")
 	public String selSportName(@RequestBody Sports param) throws Exception {
 		return matchservice.selSportName(param);
+	}
+	
+	@RequestMapping(value="/Regi",method=RequestMethod.POST)
+	public String add(Match match, HttpServletRequest request) throws Exception{
+		
+		matchservice.insertMatch(match); // 저장 메서드 호출
+		
+		return "redirect:baseball";
 	}
 }
