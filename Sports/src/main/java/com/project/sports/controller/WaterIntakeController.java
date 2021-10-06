@@ -1,9 +1,12 @@
 package com.project.sports.controller;
 
+import java.sql.Date;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -28,28 +31,31 @@ public class WaterIntakeController {
 	@Autowired
 	private WaterIntakeService WaterService;
 	
-	@RequestMapping(value="/calendar", method = RequestMethod.GET)
-	public String water() {
+	@RequestMapping(value="/calendar")
+	public String water1() {
 		return "sports_water/Water_Calendar";
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/list")
+	public List<WaterIntake> water(String yearMonth ) {
+		logger.info("yearMonth="+yearMonth);//2021-10
+		List<WaterIntake> list = WaterService.getList(yearMonth);
+		return list;
 	} 
 	
 	@PostMapping(value="/wateradd")
-	public String add(WaterIntake water, HttpServletRequest request)
+	@ResponseBody
+	public String add(WaterIntake water, HttpServletRequest request, HttpSession session)
 			throws Exception {
-		String waterintake = water.getWI_INTAKE();
-		logger.info("waterintake:" + waterintake);
-
+		
+		String date = water.getTime_start();
+		logger.info("date:" + date);
+		water.setUser_id((String)session.getAttribute("USER_ID"));
+		
 		WaterService.Waterinsert(water);
 		logger.info("water:" + water);
 		return "redirect:calendar";
 	}
-	/*
-	 * @ResponseBody
-	 * 
-	 * @PostMapping(value="/calendar_ajax") public Map<String,Object> Calendar(
-	 * 
-	 * @RequestParam(value="cup", defaultValue="1",required=false) int cup){
-	 * 
-	 * }
-	 */
+	
 }

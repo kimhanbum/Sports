@@ -7,7 +7,7 @@
 <title>마이페이지>물섭취량</title>
 <meta name="description" content="">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="manifest" href="site.webmanifest">
+<!-- <link rel="manifest" href="site.webmanifest">-->
 <link rel="shortcut icon" type="image/x-icon" href="${pageContext.request.contextPath}/resources/img/favicon.ico">
 <link href='${pageContext.request.contextPath}/resources/calendar/packages/core/main.css' rel='stylesheet' />
 <link href='${pageContext.request.contextPath}/resources/calendar/packages/daygrid/main.css' rel='stylesheet' />
@@ -26,83 +26,97 @@ $(document).ready(function() {
     var month = ('0' + (today.getMonth() + 1)).slice(-2);
     var day = ('0' + today.getDate()).slice(-2);
     var dateString = year + '-' + month  + '-' + day;
-    var yearMonth=year+"/"+month;
+    var yearMonth=year+"-"+month; 
+    
+    getData();
     
 	var calendar = new FullCalendar.Calendar(calendarEl, {
       plugins: [ 'interaction', 'dayGrid'],
       header: {
   	    left:   '',
 	    center: 'title',
-	    right:  ''
+	    right:  '',
       },
       defaultDate:dateString,
-      navLinks: false, // can click day/week names to navigate views
+      //변경
+      navLinks: true, // can click day/week names to navigate views
       selectable: true,
       selectMirror: true,
-      select: function(arg) {  
-        var title = prompt('Event Title:');
+      //INSERT처리(눌렀을 때 반응 처리) 
+      select: function(arg) { 
+    	 console.log(arg);
+    	console.log(arg.startStr);
+        var title = prompt('물 섭취량:');
         if (title) {
-          calendar.addEvent({
+          	calendar.addEvent({
             title: title,
-            start: arg.start,
-            end: arg.end,
-            allDay: arg.allDay
+            start: arg.startStr,
+            end: arg.endStr,
           })
+          
+          //ajax 데이터베이스에 저장
+          $.ajax({
+        	  type: "post",
+        	  url : '${pageContext.request.contextPath}/water/wateradd',
+        	  data: {
+        		  title: title,
+        		  time_start: arg.startStr,
+        		  time_end: arg.endStr
+        	  },
+        	  success:function(){
+        		  console.log("성공");
+        	  }
+          })
+        	  
+   
         }
         calendar.unselect()
       },
       editable: true,
       eventLimit: true, // allow "more" link when too many events
-      events:function(info, successCallback, failureCallback){
-    	  if (calendar === undefined)
-    	  {	
-    		  month = Number(month);
-    		  console.log("calendar is undefined : " + month);
-    		  
-    	  }
-    	  else{
-    		  if(month < 10){
-    			  month = "0"+ month;
-    		  }
-    		  yearMonth=year+"/"+month;
-    		  console.log("calendar is def : " + yearMonth);
-    	  }
-          $.ajax({
-                 url: '${pageContext.request.contextPath}/water/wateradd',
-                 data: {"yearMonth" : yearMonth, 
-                	 	"WI_NO" : $("#WI_NO").val(),
-                	 	"USER_ID" : "admin01",
-                	 	},
-                 type : "post",
-                 dataType: 'json',
-                 success: 
-                     function(result) {
 
-                         var events = [];
-                        
-                         if(result!=null){
-                             
-                                 $.each(result, function(index, element) {
-                                 
-                                  events.push({
-                                         title: element.title,
-                                         start: element.start,
-                                         end: element.end,  
-                                         //color : element.color,
-                                  }); //.push()
-                                              
-                                  
-                             }); //.each()
-                             
-                             console.log(events);
-                             
-                         }//if end                           
-                         successCallback(events);                               
-                     }//success: function end                          
-          }); //ajax end
-      }, //events:function end
       
+     events: items
     });
+	
+	
+	function getData(){
+		 $.ajax({
+             url: '${pageContext.request.contextPath}/water/list',
+             data: {"yearMonth" : yearMonth
+             	 	},
+             dataType: 'json',
+             async:false,
+             
+             success: 
+                 function(result) {
+
+                     items = [];
+                    
+                     if(result!=null){
+                         
+                             $.each(result, function(index, element) {
+                             
+                            	 items.push({
+                                     title: element.title,
+                                     start: element.time_start,
+                                     end: element.time_end,  
+                                     //color : element.color,
+                              }); //.push()
+                                          
+                              
+                         }); //.each()
+                         
+                         console.log(items);
+                         
+                     }//if end                           
+                                                   
+                 }//success: function end                          
+      }); //ajax end 
+      return items;
+	}
+	
+	
 	
     calendar.render();	
     $(".fc-center h2").css("display","none");
@@ -134,6 +148,7 @@ $(document).ready(function() {
     	year=$(".fc-center h2").text().split(" ")[1];
     	$('#yearMonth').text(year+'년 '+month+'월 ');
     });
+ 
   });
 
 
@@ -184,8 +199,14 @@ $(document).ready(function() {
     </div>
     <!-- slider Area End-->
 
-
-	<!-- 마이페이지 중앙 article -->
+<section class="blog_area section-padding">
+  <div class="row">
+    <div class="col-lg-2">
+      <!-- 마이 페이지 좌측 asideLeft 메뉴들 -->
+	  <jsp:include page="/WEB-INF/views/sport_comm/asideLeft.jsp"/>
+    </div>
+    <div class="col-lg-10 mb-5 mb-lg-0">
+    <!-- 마이페이지 중앙 article -->
 	<article class="ftco-section">
 		<div style="border:1px solid black;">
 			<div class="d-flex justify-content-around mb-3" style="margin:16px 0px 0px 0px !important">
@@ -194,25 +215,19 @@ $(document).ready(function() {
 	  			<button id="next" class="p-2 btn btn-dark">다음달</button>
 	  		</div>
 	  		<br>
-	  		<!-- <div id="colorList">
-	  			<div class="color-circle" style="background-color:green;"></div>
-	  			<span class="color-info">&nbsp;아침</span>
-	  			<div class="color-circle" style="background-color:orange;"></div>
-	  			<span class="color-info">&nbsp;점심</span>
-	  			<div class="color-circle" style="background-color:yellow;"></div>
-	  			<span class="color-info">&nbsp;저녁</span>
-	  			<div class="color-circle" style="background-color:blue;"></div>
-	  			<span class="color-info">&nbsp;간식</span>
-	  			<div class="color-circle" style="background-color:pink;"></div>
-	  			<span class="color-info">&nbsp;물</span>
-	  		</div> -->
-  		 	
 	  		<br>
 	  		<div id='calendar'></div>
 	  		<br>
-	  		
+  		 	<!-- <div style="width:40%; float:right; text-align:right">
+				<button style="width:120px; height:40px; vertical-align:middle;
+				font-size:17px; cursor:pointer" onclick="javascript:allSave();">저장</button>
+  		 	</div> -->
   		</div>
-	</article>
+	</article> 
+    </div>
+  </div> 
+</section>
+
 <!-- Footer 영역  -->
 <jsp:include page="/WEB-INF/views/sport_comm/footer.jsp"/>
 </body>

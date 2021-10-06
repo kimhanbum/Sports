@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
-  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+ "http://mybatis.org/dtd/mybatis-3-config.dtd">
   
 <configuration>
   <typeAliases>
@@ -11,7 +11,7 @@
 		<typeAlias alias="direct"	type="com.project.sports.domain.DealDirect"/>
 		<typeAlias alias="Water"	type="com.project.sports.domain.WaterIntake"/>
 		<typeAlias alias="match"	type="com.project.sports.domain.Match"/>
-		<typeAlias alias="sports"	type="com.project.sports.domain.Sports"/>
+		<typeAlias alias="MyInfo"	type="com.project.sports.domain.MyInfo"/>
   </typeAliases>
   
   <mappers>
@@ -22,6 +22,7 @@
  	<mapper resource="sql/BBS_FCM.xml"/>
  	<mapper resource="sql/Water_Intake.xml"/>
  	<mapper resource="sql/Sport_match.xml"/>
+ 	<mapper resource="sql/MyInfo.xml"/>
   </mappers>
   
 </configuration>

@@ -6,12 +6,16 @@
 
 	<insert id="insert" parameterType="Water">
 	<selectKey resultType="int" order="BEFORE"
-					keyProperty="WI_NO">
+					keyProperty="wi_no">
 			select nvl(max(WI_NO),0)+1 from WATER_INTAKE
-		</selectKey>
+	</selectKey>
 		insert into WATER_INTAKE 
-		(WI_NO, USER_ID, WI_INTAKE, WI_DATE) values
-		(#{WI_NO}, #{USER_ID}, #{WI_INTAKE}, sysdate)		
+		(WI_NO, USER_ID, title, time_start, time_end) values
+		(#{wi_no}, #{user_id}, #{title}, #{time_start}, #{time_end})		
 	</insert>
 	
+	<select id="select" resultType="Water" parameterType="String">
+	select * from water_intake
+	where SUBSTR(time_start,1,7) = #{date} 
+	</select>
 </mapper>
