@@ -31,15 +31,17 @@ public class MatchServiceImpl implements MatchService {
 	}
 
 	@Override
-	public String selSportName(Sports param) throws Exception {
-		// TODO Auto-generated method stub
+	public String selSportName(Sports param){
 		
 		HashMap<String, Integer> map = new HashMap<String, Integer>();
 		int sports_num = param.getSports_num();
 		map.put("sports_num", sports_num);
-		
-		//return dao.selSportName(param); 이 형태로 보내보기
 		return dao.selSportName(map);
+	}
+
+	@Override
+	public void insertMatch(Match match) {
+		dao.insertMatch(match);
 	}
 	
 }

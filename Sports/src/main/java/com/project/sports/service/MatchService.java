@@ -12,5 +12,7 @@ public interface MatchService {
 	
 	public List<Match> getMatchList(int page, int limit);
 	
-	public String selSportName(Sports param) throws Exception;
+	public String selSportName(Sports param);
+
+	public void insertMatch(Match match);
 }

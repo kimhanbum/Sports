@@ -27,4 +27,8 @@ public class MatchDAO {
 	public String selSportName(HashMap<String, Integer> param) {
 		return sqlSession.selectOne("Match.selSportName", param);
 	}
+
+	public void insertMatch(Match match) {
+		sqlSession.insert("Match.insert",match);
+	}
 }
