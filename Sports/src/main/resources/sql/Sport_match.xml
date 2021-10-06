@@ -23,4 +23,13 @@
 		WHERE sports_num = #{sports_num}
 	</select>
 	
+	
+	<insert id="insert" parameterType="match">
+		<selectKey keyProperty="REGISTER_NUM" resultType="int" order="BEFORE">
+			select reg_seq.nextval as REGISTER_NUM FROM DUAL
+		</selectKey>
+		insert into SPORT_REGISTER(REGISTER_ID,REGISTER_NUM,SPORT_NUM,MATCH_PRS,MATCH_ADR,MATCH_DTL_ADR,MATCH_TIME,MATCH_SKL)
+		values
+		(#{REGISTER_ID},#{REGISTER_NUM}, #{SPORT_NUM}, #{MATCH_PRS}, #{MATCH_ADR}, #{MATCH_DTL_ADR},#{MATCH_TIME},#{MATCH_SKL})
+	</insert>
 </mapper>

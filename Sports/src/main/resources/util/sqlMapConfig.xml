@@ -12,6 +12,7 @@
 		<typeAlias alias="Water"	type="com.project.sports.domain.WaterIntake"/>
 		<typeAlias alias="match"	type="com.project.sports.domain.Match"/>
 		<typeAlias alias="MyInfo"	type="com.project.sports.domain.MyInfo"/>
+		<typeAlias alias="sports"	type="com.project.sports.domain.Sports"/>
   </typeAliases>
   
   <mappers>
