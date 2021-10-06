@@ -1,7 +1,8 @@
 package com.project.sports.controller;
 
 import java.io.PrintWriter;
-import java.util.List;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -89,9 +90,46 @@ required=true 상태에서 지정한 이름을 가진 쿠키가 존재하지 않으면 스프링 MVC는 익
 		m.setUSER_MOBILE(m.getMOBILE1()+m.getMOBILE2()+m.getMOBILE3());
 		m.setUSER_ADDRESS(m.getDONG()+m.getHOME()+m.getHOMEADDRESS());
 		m.setUSER_JUMIN(m.getJUMIN()+m.getJUMIN1());
-		m.setUSER_EMAIL(m.getUSER_EMAIL()+m.getUSER_EMAILDOMAIN());
+		m.setUSER_EMAIL(m.getUSER_EMAIL()+"@"+m.getUSER_EMAILDOMAIN());
 		m.setUSER_BMI(m.getUSER_PWEIGHT()/(m.getUSER_HEIGHT()*m.getUSER_HEIGHT())*10000);//BMI계산
-		//m.setUSER_BMI();
+		m.setUSER_RMR(Integer.parseInt(m.getJUMIN().substring(0,2)));
+
+		/*
+		LocalDate now = LocalDate.now();
+		// 포맷 정의
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy");
+		// 포맷 적용
+		String formatedNow = now.format(formatter);
+		// 결과 출력
+		System.out.println(formatedNow);
+		if(m.getJUMIN1().substring(0,1)=="1") {
+			m.setUSER_RMR(
+					66.47+(13.75*m.getUSER_PWEIGHT())
+						+(5*m.getUSER_HEIGHT())
+							-(6.75*(121-Integer.parseInt(m.getJUMIN().substring(0,2)+1)))
+					);
+		}else if(m.getJUMIN1().substring(0,1)=="3") {
+			m.setUSER_RMR(
+					66.47+(13.75*m.getUSER_PWEIGHT())
+						+(5*m.getUSER_HEIGHT())
+							-(6.75*(21-Integer.parseInt(m.getJUMIN().substring(0,2)+1)))
+					);
+		}else if(m.getJUMIN1().substring(0,1)=="2") {
+			m.setUSER_RMR(
+					655.1+(9.56*m.getUSER_PWEIGHT())
+						+(1.85*m.getUSER_HEIGHT())
+							-(4.68*(121-Integer.parseInt(m.getJUMIN().substring(0,2)+1)))
+					);
+		}else if(m.getJUMIN1().substring(0,1)=="4") {
+			m.setUSER_RMR(
+					655.1+(9.56*m.getUSER_PWEIGHT())
+						+(1.85*m.getUSER_HEIGHT())
+							-(4.68*(21-Integer.parseInt(m.getJUMIN().substring(0,2)+1)))
+					);
+		}else {m.setUSER_RMR(1);};
+		*/
+		//(남자:66.47+(13.75*현재몸무게)+(5*키)-(6.75*나이)
+		//(여자:655.1+(9.56*현재몸무게)+(1.85*키)-(4.68*나이)
 		int result = memberservice.insert(m);
 		try{
 			int cnt = Integer.parseInt(request.getParameter("cnt"));

@@ -21,22 +21,24 @@ td:first-child{width:110px;}
 
 <script>
 $(function(){
+	//이메일 선택
 	$('#EMAIL2').change(function(){  //이메일 뒷자리 선택
 		if($(this).val()== '1'){
 			$("#EMAIL1").val(''); 
 			$("#EMAIL1").attr("disabled",false); 
 		}else{
 			$("#EMAIL1").val($("#EMAIL2").val());
-			$("#EMAIL1").attr("disabled",true);
+			//$("#EMAIL1").attr("disabled",true);
 		} 
 	});
-
+	//선호운동 최대 3개 선택
 	$('input:checkbox').on('change', function(event) {//선호운동 선택 max값
 	   if($('input:checkbox:checked').length > 3) {
 		   alert("선호운동은 최대 3개 선택할 수 있습니다.");
 		   $('input:checkbox:checked').prop("checked",false); //비활성화
 	   }
 	});
+	//회원가입버튼 클릭 시
 	$("#submit").on("click", function(){
 		if($("#USER_ID").val()==""){
 			alert("아이디를 입력해주세요.");
@@ -50,6 +52,15 @@ $(function(){
 			return false;
 		}
 	});
+	//선호운동 checkbox 값 가져와서 배열 선언 후 담기
+	var chk_arr=[];
+	$("input[name=USER_PSPORTS]:checked").each(function(){
+		var chk=$(this).val();
+		chk_arr.puch(chk);
+	})
+	$("chk_arr").each(function(){
+		
+	})
 	
 })
 
@@ -187,8 +198,8 @@ function Postcode() {//우편번호찾기
                         <option value="019">019</option>
                     </select>
                     -
-                    <input type="text" name="USER_MOBILE" id="MOBILE2" size="4" maxLength="4">-
-                    <input type="text" name="USER_MOBILE" id="MOBILE3" size="4" maxLength="4">
+                    <input type="text" name="MOBILE2" id="MOBILE2" size="4" maxLength="4">-
+                    <input type="text" name="MOBILE3" id="MOBILE3" size="4" maxLength="4">
                 </td>
             </tr>
             <tr>
@@ -198,7 +209,7 @@ function Postcode() {//우편번호찾기
                     <label for="DONG">우편번호</label>
                 </td>
                 <td>
-                    <input type="text" id="DONG" size="6">
+                    <input type="text" name="DONG" id="DONG" size="6">
                     <input type="button" onclick="Postcode()" value="우편번호 찾기">
                 </td>
             </tr>
@@ -223,8 +234,8 @@ function Postcode() {//우편번호찾기
                     <label for="EMAIL">이메일</label>
                 </td>
                 <td>
-                    <input type="text" name="EMAIL" id="EMAIL" size="10">@
-                    <input type="text" name="EMAIL1" id="EMAIL1" style="width:100px">
+                    <input type="text" name="USER_EMAIL" id="EMAIL" size="10">@
+                    <input type="text" name="USER_EMAILDOMAIN" id="EMAIL1" style="width:100px">
                     
                     <select id="EMAIL2" name="EMAIL2">
                         <option value="1">직접입력</option>
@@ -265,29 +276,29 @@ function Postcode() {//우편번호찾기
                 </td>
                 <td>
                 	<label for="sports1">구기운동</label><br>
-                		<input type="checkbox" id="SPORTS_NAME1" name="USER_PSPORTS1" value="풋살">풋살	
-                		<input type="checkbox" id="SPORTS_NAME2" name="USER_PSPORTS1" value="축구">축구	
-                		<input type="checkbox" id="SPORTS_NAME3" name="USER_PSPORTS1" value="야구">야구	
-                		<input type="checkbox" id="SPORTS_NAME4" name="USER_PSPORTS1" value="농구">농구	
-                		<input type="checkbox" id="SPORTS_NAME5" name="USER_PSPORTS1" value="야구">야구	<br>
-                		<input type="checkbox" id="SPORTS_NAME6" name="USER_PSPORTS1" value="배드민턴">배드민턴	
-                		<input type="checkbox" id="SPORTS_NAME7" name="USER_PSPORTS1" value="테니스">테니스	
-                		<input type="checkbox" id="SPORTS_NAME8" name="USER_PSPORTS1" value="탁구">탁구	
-                		<input type="checkbox" id="SPORTS_NAME9" name="USER_PSPORTS1" value="골프">골프<br><br>
+                		<input type="checkbox" id="1" name="USER_PSPORTS1" value="풋살">풋살	
+                		<input type="checkbox" id="2" name="USER_PSPORTS1" value="축구">축구	
+                		<input type="checkbox" id="3" name="USER_PSPORTS1" value="야구">야구	
+                		<input type="checkbox" id="4" name="USER_PSPORTS1" value="농구">농구	
+                		<input type="checkbox" id="5" name="USER_PSPORTS1" value="야구">야구	<br>
+                		<input type="checkbox" id="6" name="USER_PSPORTS1" value="배드민턴">배드민턴	
+                		<input type="checkbox" id="7" name="USER_PSPORTS1" value="테니스">테니스	
+                		<input type="checkbox" id="8" name="USER_PSPORTS1" value="탁구">탁구	
+                		<input type="checkbox" id="9" name="USER_PSPORTS1" value="골프">골프<br><br>
                 	<label for="sports2">기구운동</label><br>
-                		<input type="checkbox" id="SPORTS_NAME10" name="USER_PSPORTS2" value="헬스">헬스	
-                		<input type="checkbox" id="SPORTS_NAME11" name="USER_PSPORTS2" value="크로스핏">크로스핏	
-                		<input type="checkbox" id="SPORTS_NAME12" name="USER_PSPORTS2" value="스피닝">스피닝	
-                		<input type="checkbox" id="SPORTS_NAME13" name="USER_PSPORTS2" value="사이클">사이클	
-                		<input type="checkbox" id="SPORTS_NAME14" name="USER_PSPORTS2" value="서핑">서핑	<br><br>
+                		<input type="checkbox" id="10" name="USER_PSPORTS2" value="헬스">헬스	
+                		<input type="checkbox" id="11" name="USER_PSPORTS2" value="크로스핏">크로스핏	
+                		<input type="checkbox" id="12" name="USER_PSPORTS2" value="스피닝">스피닝	
+                		<input type="checkbox" id="13" name="USER_PSPORTS2" value="사이클">사이클	
+                		<input type="checkbox" id="14" name="USER_PSPORTS2" value="서핑">서핑	<br><br>
                 	<label for="sports3">맨몸운동</label><br>
-                		<input type="checkbox" id="SPORTS_NAME15" name="USER_PSPORTS3" value="요가">요가	
-                		<input type="checkbox" id="SPORTS_NAME16" name="USER_PSPORTS3" value="필라테스">필라테스	
-                		<input type="checkbox" id="SPORTS_NAME17" name="USER_PSPORTS3" value="등산">등산	
-                		<input type="checkbox" id="SPORTS_NAME18" name="USER_PSPORTS3" value="러닝">러닝	
-                		<input type="checkbox" id="SPORTS_NAME19" name="USER_PSPORTS3" value="주짓수">주짓수	
-                		<input type="checkbox" id="SPORTS_NAME20" name="USER_PSPORTS3" value="복싱">복싱	
-                		<input type="checkbox" id="SPORTS_NAME21" name="USER_PSPORTS3" value="태권도">태권도	<br><br>
+                		<input type="checkbox" id="15" name="USER_PSPORTS3" value="요가">요가	
+                		<input type="checkbox" id="16" name="USER_PSPORTS3" value="필라테스">필라테스	
+                		<input type="checkbox" id="17" name="USER_PSPORTS3" value="등산">등산	
+                		<input type="checkbox" id="18" name="USER_PSPORTS3" value="러닝">러닝	
+                		<input type="checkbox" id="19" name="USER_PSPORTS3" value="주짓수">주짓수	
+                		<input type="checkbox" id="20" name="USER_PSPORTS3" value="복싱">복싱	
+                		<input type="checkbox" id="21" name="USER_PSPORTS3" value="태권도">태권도	<br><br>
                 </td>
             </tr>
         </table><br>
