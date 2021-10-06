@@ -51,9 +51,9 @@ select * from
 	DIR_PRICE ,DIR_ADDRESS ,DIR_DATE ,SAVE_DIR_MAINFILE ,DIR_READCOUNT
 		from(
 		select * from deal_direct
-		order by #{view}))
+		order by   <include refid="view" />))
 	 where rnum &gt;= #{start} and rnum  &lt;=  #{end}
-	</select>
+</select>
 	
 <select id="detail" parameterType="int" resultType="Direct">
 	select *
@@ -76,7 +76,7 @@ select * from
 		from(
 		select * from deal_direct
 		where DIR_SUBJECT like #{search_word}
-		order by dir_number desc
+		order by  <include refid="view" />
 		))
 	 where rnum &gt;= #{start} and rnum  &lt;=  #{end}
 	 
@@ -89,6 +89,39 @@ update deal_direct set DIR_READCOUNT = DIR_READCOUNT +1
 where dir_number = #{num} 
 
 </update>
+
+
+<select id="sortlist" parameterType="java.util.Map" resultType="Direct">
+select * from
+	(select rownum rnum , 	DIR_NUMBER , DIR_SUBJECT , 
+	DIR_PRICE ,DIR_ADDRESS ,DIR_DATE ,SAVE_DIR_MAINFILE ,DIR_READCOUNT
+		from(
+		select * from deal_direct
+		order by <include refid="sort" />))
+	 where rnum &gt;= #{start} and rnum  &lt;=  #{end}
+</select>
+
+	<sql id="sort">
+		<if test="view != null">
+			<choose>
+				<when test="view=='DIR_NUMBER desc'">DIR_NUMBER desc</when>
+				<when test="view=='DIR_NUMBER asc'">DIR_NUMBER asc</when>
+				<when test="view=='DIR_READCOUNT desc'">DIR_READCOUNT desc</when>
+				<when test="view=='DIR_PRICE desc'">DIR_PRICE desc</when>
+			</choose>
+		</if>
+	</sql>
+	
+	<sql id="view">
+		<if test="view2 != null">
+			<choose>
+				<when test="view2==1">DIR_NUMBER desc</when>
+				<when test="view2==2">DIR_NUMBER asc</when>
+				<when test="view2==3">DIR_READCOUNT desc</when>
+				<when test="view2==4">DIR_PRICE desc</when>
+			</choose>
+		</if>
+	</sql>
 
 
 

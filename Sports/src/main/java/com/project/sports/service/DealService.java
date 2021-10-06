@@ -1,5 +1,6 @@
 package com.project.sports.service;
 
+import java.util.HashMap;
 import java.util.List;
 
 import com.project.sports.domain.DealAuction;
@@ -21,7 +22,7 @@ public interface DealService {
 
 	public void D_insert(DealDirect direct);
 
-	public List<DealDirect> getDirectList(int page, int limit , String view);
+	public List<DealDirect> getDirectList(int page, int limit , int view2);
 
 	public DealDirect D_getDetail(int num);
 
@@ -29,7 +30,7 @@ public interface DealService {
 
 	public int D_Modify(DealDirect direct);
 
-	public List<DealDirect> getSearchDirecList(int page, int limit, String search, String view);
+	public List<DealDirect> getSearchDirecList(int page, int limit, String search, int view2);
 
 	public int D_readcount(int num);
 
@@ -52,6 +53,19 @@ public interface DealService {
 	public Object pickcheck(String sessionid, int num);
 
 	public void Myinsert(DealAuction auction);
+
+	public List<DealDirect> getDirectList(HashMap<String, Object> map2);
+
+	public List<DealDirect> getSearchDirecList(HashMap<String, Object> map2);
+
+	public void Auction_timeout(int num);
+
+	public void Auction_timeout2(int num);
+
+	public void Auction_timeout3(int num);
+
+	public List<DealDirect> getDirectListsort(HashMap<String, Object> map2);
+
 
 	
 

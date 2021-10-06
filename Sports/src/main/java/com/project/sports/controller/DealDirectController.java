@@ -9,6 +9,7 @@ import java.util.Map;
 import java.util.Random;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -47,15 +48,16 @@ public class DealDirectController {
 			@RequestParam(value = "search",
 			defaultValue = "", required = false) String search ,ModelAndView mv,
 			@RequestParam(value = "view",
-			defaultValue = "1", required = false) String view  )
+			defaultValue = "1", required = false) String view , 
+			@RequestParam(value = "view2",
+			defaultValue = "1", required = false) int view2  )
 			
 	{
 		
 		int limit = 6; // 한 화면에 출력할 레코드 갯수
 		
-		logger.info("뷰뷰" + view);
-		view="2";
-		view="4";
+		logger.info("히드닣딓느히늳ㅎ닣"  + view2);
+		
 		
 		int listcount = DealService.getListCount2(); // 총 리스트 수를 받아옴
 
@@ -73,10 +75,10 @@ public class DealDirectController {
 		
 		List<DealDirect> Direct = new ArrayList<DealDirect>();
 		
-		if(search == "") {
-			Direct = DealService.getDirectList(page, limit,view); //리스트를 받아옴
+		if(search.equals("")) {
+			Direct = DealService.getDirectList(page, limit,view2); //리스트를 받아옴
 		}else {
-			Direct = DealService.getSearchDirecList(page,limit,search,view);
+			Direct = DealService.getSearchDirecList(page,limit,search,view2);
 		}
 		
 	
@@ -88,7 +90,9 @@ public class DealDirectController {
 		mv.addObject("listcount",listcount);
 		mv.addObject("Direct",Direct);
 		mv.addObject("limit",limit);
+		mv.addObject("view2",view2);
 		mv.setViewName("Deal/DealD_list");
+	
 		
 		
 		
@@ -108,7 +112,8 @@ public class DealDirectController {
 				){
 		int limit = 6; // 한 화면에 출력할 레코드 갯수
 		
-		logger.info("뷰" + view);
+		
+		
 		logger.info("page" + page);
 		
 		int listcount = DealService.getListCount2();	//총 리스트 수를 받아옴
@@ -127,15 +132,45 @@ public class DealDirectController {
 		
 		List<DealDirect> Direct = new ArrayList<DealDirect>();
 		
-		//최신순
+	
 		
-			if(search == "") {
-				Direct = DealService.getDirectList(page, limit,view); //리스트를 받아옴
-			}else {
-				Direct = DealService.getSearchDirecList(page,limit,search,view);
-			}
+		//맵으로 합쳐 맵으로 넘겨주기
+		HashMap<String , Object>map2 = new HashMap<String,Object>();
+		int startrow=(page-1)*limit +1; 
+		int endrow = startrow+limit-1;
 		
 
+
+		int view2 = Integer.parseInt(view);
+		
+		if(view2==1) {
+			map2.put("view" , "DIR_NUMBER desc");
+		}
+		if(view2==2) {
+			map2.put("view" , "DIR_NUMBER asc");
+		}
+		if(view2==3) {
+			map2.put("view" , "DIR_READCOUNT desc");
+		}
+		if(view2==4){
+			map2.put("view" , "DIR_PRICE desc");
+		}
+		
+		map2.put("start", startrow);
+		map2.put("end",endrow);
+		map2.put("search_word", search);
+		
+		logger.info("view값" + map2.get("view"));	
+		logger.info("start값 " + map2.get("start"));
+		logger.info("end값 " + map2.get("end"));
+		logger.info("search_word값 " + map2.get("search_word"));
+		
+		
+
+		Direct = DealService.getDirectListsort(map2); //리스트를 받아옴
+
+		
+		logger.info("다이렉트사이즈" + Direct.size());
 		
 		Map<String,Object> map = new HashMap<String,Object>();
 		
@@ -187,7 +222,8 @@ public class DealDirectController {
 
 	@PostMapping("/add")
 	// @RequestMapping(value="/add" , method=RequestMethod.POST)
-	public String Auction_add(DealDirect Direct, HttpServletRequest request) throws Exception {
+	public String Auction_add(DealDirect Direct, HttpServletRequest request,
+			HttpSession session) throws Exception {
 
 		MultipartFile uploadfile1 = Direct.getUploadfile1();
 		MultipartFile uploadfile2 = Direct.getUploadfile2();
@@ -270,8 +306,10 @@ public class DealDirectController {
 
 		logger.info("save폴더" + saveFolder);
 
-		// 예비로해놈 9-26
-		Direct.setUSER_ID("admin01");
+		String sessionid = (String) session.getAttribute("USER_ID");
+		
+		
+		Direct.setUSER_ID(sessionid);
 
 		DealService.D_insert(Direct); // 저장메서드 호출
 

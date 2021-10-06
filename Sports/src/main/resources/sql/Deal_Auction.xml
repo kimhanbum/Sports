@@ -112,8 +112,33 @@ where  AUC_NUMBER = #{num} and BUY_BIDDING = 1
 <insert id="myinsert" parameterType="Auction">
 	insert into my_deal
 	(USER_ID ,AUC_NUMBER, SELL_BIDDING )
-	values(#{USER_ID} , AUC_SEQ.NEXTVAL , 1)
+	values(#{USER_ID} , AUC_SEQ.CURRVAL , 1)
 </insert>
 
+<update id="timeout" parameterType="int">
+UPDATE MY_DEAL
+SET   SELL_BIDDING = 0 ,
+	  SELL_DELIVERY = 1
+WHERE  AUC_NUMBER = #{NUMBER} 
+		AND SELL_BIDDING = 1
 
+</update>
+
+<update id="timeout2" parameterType="int">
+UPDATE MY_DEAL
+SET  BUY_BIDDING=0, 
+	 BUY_BIDCOM = 1
+WHERE  AUC_NUMBER = #{NUMBER}
+	 AND BUY_BIDDING=1
+
+</update>
+
+<delete id="timeout3" parameterType="int">
+delete from my_deal
+where 	
+	AUC_NUMBER = #{NUMBER}
+	AND SELL_BIDDING =0
+	AND BUY_BIDCOM = 0 
+	AND PICK = 1 OR BUY_BIDFAIL = 1
+</delete>
 </mapper>
