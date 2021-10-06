@@ -46,4 +46,8 @@ public class DealDirectDAO {
 		public int D_readcount(int num) {
 			return sqlSession.update("Direct.readcount",num);
 		}
+
+		public List<DealDirect> getDirectListsort(HashMap<String, Object> map2) {
+			return sqlSession.selectList("Direct.sortlist", map2);
+		}
 }

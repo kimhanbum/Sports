@@ -53,28 +53,16 @@ public class DealServiceImpl implements DealService {
 		}
 
 		@Override
-		public List<DealDirect> getDirectList(int page, int limit,String view) {
+		public List<DealDirect> getDirectList(int page, int limit,int view2) {
 			HashMap<String , Object>map = new HashMap<String,Object>();
 			int startrow=(page-1)*limit +1; 
 			int endrow = startrow+limit-1;
 			
 			
-			if(view=="1") {
-				map.put("view" , "DIR_NUMBER desc");
-			}
-			if(view=="2") {
-				map.put("view" , "DIR_NUMBER asc");
-			}
-			if(view=="3") {
-				map.put("view" , "DIR_READCOUNT desc");
-			}
-			if(view=="4"){
-				map.put("view" , "DIR_PRICE desc");
-			}
-			
-			
+
 			map.put("start", startrow);
 			map.put("end",endrow);
+			map.put("view2" , view2);
 			return dao2.getDirectList(map);
 		}
 
@@ -95,22 +83,15 @@ public class DealServiceImpl implements DealService {
 		}
 
 		@Override
-		public List<DealDirect> getSearchDirecList(int page, int limit, String search , String view) {
+		public List<DealDirect> getSearchDirecList(int page, int limit, String search , int view2) {
 			HashMap<String , Object>map = new HashMap<String,Object>();
 			int startrow=(page-1)*limit +1; 
 			int endrow = startrow+limit-1;
-			if(view=="1") {
-				map.put("view" , "DIR_NUMBER desc");
-			}else if(view=="2") {
-				map.put("view" , "DIR_NUMBER asc");
-			}else if(view=="3") {
-				map.put("view" , "AUC_READCOUNT desc");
-			}else {
-				map.put("view" , "AUC_PRICE desc");
-			}
+
 			map.put("start", startrow);
 			map.put("end",endrow);
 			map.put("search_word", "%" + search + "%");
+			map.put("view2", view2);
 			return dao2.getSearchDirectList(map);
 		}
 
@@ -192,6 +173,41 @@ public class DealServiceImpl implements DealService {
 			dao.Myinsert(auction);
 			
 		}
+
+		@Override
+		public List<DealDirect> getDirectList(HashMap<String, Object> map) {
+			return dao2.getDirectList(map);
+		}
+
+		@Override
+		public List<DealDirect> getSearchDirecList(HashMap<String, Object> map) {
+			return dao2.getSearchDirectList(map);
+		}
+
+		@Override
+		public void Auction_timeout(int num) {
+			dao.timeout(num);
+			
+		}
+
+		@Override
+		public void Auction_timeout2(int num) {
+			dao.timeout2(num);
+			
+		}
+
+		@Override
+		public void Auction_timeout3(int num) {
+			dao.timeout3(num);
+			
+		}
+
+		@Override
+		public List<DealDirect> getDirectListsort(HashMap<String, Object> map2) {
+			return dao2.getDirectListsort(map2);
+		}
+
+
 
 
 

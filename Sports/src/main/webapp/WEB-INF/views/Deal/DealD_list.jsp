@@ -274,6 +274,7 @@ background-color
 					
 					<form action="#">
 						<div class="center">
+							<c:if test="${view2 == 1 }">
 							<select name="sources" id="view" class="custom-select sources"
 								placeholder="Source Type" name="view">
 								<option value="1">최신순</option>
@@ -281,6 +282,34 @@ background-color
 								<option value="3">조회순</option>
 								<option value="4">금액순</option>
 							</select>
+							</c:if>
+							<c:if test="${view2 == 2 }">
+							<select name="sources" id="view" class="custom-select sources"
+								placeholder="Source Type" name="view">
+								<option value="1">최신순</option>
+								<option value="2" selected>정확순</option>
+								<option value="3">조회순</option>
+								<option value="4">금액순</option>
+							</select>
+							</c:if>
+							<c:if test="${view2 == 3 }">
+							<select name="sources" id="view" class="custom-select sources"
+								placeholder="Source Type" name="view">
+								<option value="1">최신순</option>
+								<option value="2" >정확순</option>
+								<option value="3" selected>조회순</option>
+								<option value="4">금액순</option>
+							</select>
+							</c:if>
+							<c:if test="${view2 == 4 }">
+							<select name="sources" id="view" class="custom-select sources"
+								placeholder="Source Type" name="view">
+								<option value="1">최신순</option>
+								<option value="2">정확순</option>
+								<option value="3">조회순</option>
+								<option value="4" selected>금액순</option>
+							</select>
+							</c:if>
 						</div>
 					</form>
 				</div>
@@ -350,6 +379,7 @@ background-color
 
 			</div>
 			<hr>
+			<div class="ajax3">
 			<div class="sungjinS">
 				<div class="header-bottom ">
 					<ul
@@ -364,6 +394,7 @@ background-color
 										<i onclick="SubmitForm()" class="fas fa-search special-tag"
 											id="searchB"></i>
 									</div>
+									<input type="hidden" name = "view2" value="${view2}">
 								</form>
 							</div>
 						</li>
@@ -372,6 +403,7 @@ background-color
 
 				</div>
 			</div>
+			</div>
 
 
 			<div id="write-b">
@@ -379,13 +411,15 @@ background-color
 					class="btn header-btn">글쓰기</a>
 
 			</div>
+
+		<div id="ajaxpage">
 			<div class="pagination">
 				<c:if test="${page <= 1 }">
 					<a id="paging">&laquo;</a>
 
 				</c:if>
 				<c:if test="${page > 1 }">
-					<a href="list?page=${page-1}" id="paging">&laquo;</a>
+					<a href="list?page=${page-1}&view2=${view2}" id="paging">&laquo;</a>
 				</c:if>
 
 				<c:forEach var="a" begin="${startpage}" end="${endpage}">
@@ -394,23 +428,25 @@ background-color
 						<a href="#" id="paging">${a}</a>
 					</c:if>
 					<c:if test="${a != page }">
-						<a href="list?page=${a}" id="paging">${a}</a>
+						<a href="list?page=${a}&view2=${view2}" id="paging">${a}</a>
 					</c:if>
 				</c:forEach>
 				<c:if test="${page >= maxpage }">
 					<a id="paging">&raquo;</a>
 				</c:if>
 				<c:if test="${page < maxpage }">
-					<a href="list?page=${page+1}" id="paging">&raquo;</a>
+					<a href="list?page=${page+1}&view2=${view2}" id="paging">&raquo;</a>
 				</c:if>
 			</div>
+		</div>
+		
+		
+		
 
 		</div>
 
 
-		</div>
-		<!-- End Nav Card -->
-		</div>
+
 	</section>
 
 
@@ -484,13 +520,15 @@ background-color
 	function go(page) {
 		var view = $("#view").val(); //최신순부터 값은 1~3
 
-		var data = "view=" + view + "&state=ajax&page=" +page;
+		var data = "view=" + view + "&state=ajax";
+		var data2 = "&view2=" + view; 
+		var data3 = view;
 		console.log("뷰" + view)
 		
 		console.log(page)
 		console.log(data)
 		
-		ajax(data);
+		ajax(data , data2 ,data3);
 	}
 	$(function() {
 		$("#view").change(function() { //최신순, 등록순, 조회순 변경 시
@@ -499,7 +537,7 @@ background-color
 		})
 	})
 
-	function ajax(sdata) {
+	function ajax(sdata , sdata2 ,sdata3) {
 		
 		output = "";
 		$.ajax({
@@ -507,13 +545,48 @@ background-color
 			data:sdata,
 			url : "list_ajax",
 			dataType : "json",
-			success : function(data) {
+			success : function(rdata) {
 				console.log("aa")
 				$("#aa").remove();
+				$(".pagination").remove();
+				$(".sungjinS").remove();
 				var output = '<div class="row" id="aa">';
-				console.log(data)
-				$(data.Direct).each(
+				var outputP = '<div class="pagination">'
+				outputP += '<c:if test="${page <= 1 }"><a id="paging">&laquo;</a>'
+				outputP += '</c:if><c:if test="${page > 1 }">'
+				outputP +='<a href="list?page=${page-1}' + sdata2 + '"id="paging">&laquo;</a>'
+				outputP +='</c:if><c:forEach var="a" begin="${startpage}" end="${endpage}">'
+				outputP +='<c:if test="${a == page }"><a href="#" id="paging">${a}</a>'
+				outputP +='</c:if><c:if test="${a != page }"><a href="list?page=${a}'+ sdata2 + '"id="paging">${a}</a>'
+				outputP +='</c:if></c:forEach><c:if test="${page >= maxpage }">'
+				outputP +='<a id="paging">&raquo;</a></c:if>'
+				outputP +='<c:if test="${page < maxpage }">'
+				outputP +='<a href="list?page=${page+1}' + sdata2 +'"id="paging">&raquo;</a>'
+				outputP +='</c:if></div>'
+				
+				var outputS = '<div class="sungjinS">'
+				outputS += '<div class="header-bottom "> <ul'
+				outputS +='class="header-right f-right d-none d-lg-block d-flex justify-content-between">'
+				outputS +='<li class="d-none d-xl-block" id="sd-none">'
+				outputS +='<div class="form-box f-right ">'
+				outputS +='<form method="get" action="list" name="form1" id="form1">'
+				outputS +='<input type="text" name="search" id="search"'
+				outputS +='placeholder="Search products">'
+				outputS +='<div class="search-icon">'
+				outputS +='<i onclick="SubmitForm()" class="fas fa-search special-tag"id="searchB"></i>'
+				outputS +='</div><input type="hidden" name = "view2" value="'+ sdata3  + '">'
+				outputS +='</form></div></li></ul></div></div>'
+				outputS +="<script>" 
+				outputS += "$('.ajax').html(data).trigger('create')";
+				outputS += "</script"
+				outputS +=">"
+				
+				
+											
+				console.log(rdata)
+				$(rdata.Direct).each(
 						function(index, item) {
+							console.log(item.dir_PRICE + "가격")
 							output+='<div class="col-xl-4 col-lg-4 col-md-6" >'
 							output+='<div class="single-product mb-60">'
 							output+= '<div class="product-img">'
@@ -536,7 +609,15 @@ background-color
 				output +="</div>"
 				console.log(output)
 				
+				console.log(outputP)
+				
+				
+				
 				$('#ajax').append(output) //table 완성
+				$('#ajaxpage').append(outputP) //페이징
+				$('.ajax3').append(outputS)
+				
+				$('.ajax3').trigger("create");
 			},
 			error : function(request, status, error) {
 				console.log(request.status + +"받은 데이터 :"
@@ -544,6 +625,8 @@ background-color
 						+ status + +"error 메시지 : " + error)
 
 			}//error end
+			
+			
 
 		})
 	}

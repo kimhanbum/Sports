@@ -114,9 +114,9 @@ public class DealAuctionController {
 		
 		DealAuction Auction = DealService.A_getDetail(num);
 		
-		session.setAttribute("session", "admin01");
+	
 		
-		String sessionid = (String) session.getAttribute("session");
+		String sessionid = (String) session.getAttribute("USER_ID");
 		
 		//찜한물품인지 확인
 		Object pickcheck = DealService.pickcheck(sessionid, num);
@@ -255,8 +255,8 @@ public class DealAuctionController {
 		logger.info("save폴더" + saveFolder);
 		
 		
-		//예비로해놈 9-26 
-		Auction.setUSER_ID("admin01");
+		String sessionid = (String)session.getAttribute("USER_ID");
+		Auction.setUSER_ID(sessionid);
 		
 		
 		
@@ -315,16 +315,18 @@ public class DealAuctionController {
 			HttpServletRequest request , int num,
 			HttpSession session) {
 		
-		
+		//내거래내역 입찰중이 었던사람 입찰실패로 변경
 		int change = DealService.Auction_bidchange(num); 
 		
-		String sessionid = (String) session.getAttribute("session");
+		String sessionid = (String) session.getAttribute("USER_ID");
 		logger.info("세션2값" + sessionid);
 		
+		// 내거래내역 입찰중 추가 
 		DealService.Auction_biding(sessionid , num);
 		
 		DealAuction Auction = DealService.A_getDetail(num);
 		
+		// 기존 경매가 변경
 		int pricemodify = DealService.Auction_pricemodi(Auction);
 		
 		
@@ -338,7 +340,7 @@ public class DealAuctionController {
 			HttpServletRequest request , int num,
 			HttpSession session) {
 			
-		String sessionid = (String) session.getAttribute("session");
+		String sessionid = (String) session.getAttribute("USER_ID");
 	
 		
 		
@@ -346,6 +348,22 @@ public class DealAuctionController {
 		DealService.Auction_pick(sessionid , num);
 		
 		return "Deal/DealA_list";
+	}
+	
+	//경매 기간 끝났을시
+	@RequestMapping(value="/timeout")
+	public String Auctiontimout(int num ) {
+		
+		//판매자 내거래내역 ( 판매중 -> 배송입력 )
+		DealService.Auction_timeout(num);
+		
+		//구매자 내거래내역 ( 입찰중 -> 입찰완료)
+		DealService.Auction_timeout2(num);
+		
+		//찜,입찰실패 행삭제 
+		DealService.Auction_timeout3(num);
+		
+		return"Deal/DealA_list";
 	}
 	
 }

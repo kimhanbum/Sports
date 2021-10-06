@@ -72,6 +72,23 @@ public class DealAuctionDAO {
 		
 	}
 
+	public void timeout(int num) {
+		sqlSession.update("Auction.timeout", num);
+		
+	}
+
+	public void timeout2(int num) {
+		sqlSession.update("Auction.timeout2",num);
+		
+	}
+
+	public void timeout3(int num) {
+		sqlSession.delete("Auction.timeout3",num);
+		
+	}
+
+
+
 
 
 
