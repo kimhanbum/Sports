@@ -61,33 +61,49 @@
 
 .pagination
 
+
  
 
+
 a
+
+
 
 
 :hover
 
 
+
+
 :not
 
+
  
+
 
 (
 .active
 
+
  
+
 
 )
 {
 background-color
 
 
+
+
 :
+
 
  
 
+
 #ddd
+
+
 
 
 ;
@@ -107,114 +123,129 @@ background-color
 
 /* 정렬 */
 
-
-
 /** Custom Select **/
 .custom-select-wrapper {
-  position: relative;
-  display: inline-block;
-  user-select: none;
+	position: relative;
+	display: inline-block;
+	user-select: none;
 }
-  .custom-select-wrapper select {
-    display: none;
-  }
-  .custom-select {
-    position: relative;
-    display: inline-block;
-  }
-    .custom-select-trigger {
-      position: relative;
-      display: block;
-      width: 130px;
-      padding: 0 84px 0 22px;
-      font-size: 22px;
-      font-weight: 300;
-      color: #fff;
-      line-height: 60px;
-      background: #5c9cd8;
-      border-radius: 4px;
-      cursor: pointer;
-    }
-      .custom-select-trigger:after {
-        position: absolute;
-        display: block;
-        content: '';
-        width: 10px; height: 10px;
-        top: 50%; right: 25px;
-        margin-top: -3px;
-        border-bottom: 1px solid #fff;
-        border-right: 1px solid #fff;
-        transform: rotate(45deg) translateY(-50%);
-        transition: all .4s ease-in-out;
-        transform-origin: 50% 0;
-      }
-      .custom-select.opened .custom-select-trigger:after {
-        margin-top: 3px;
-        transform: rotate(-135deg) translateY(-50%);
-      }
-  .custom-options {
-    position: absolute;
-    display: block;
-    top: 100%; left: 0; right: 0;
-    min-width: 100%;
-    margin: 15px 0;
-    border: 1px solid #b5b5b5;
-    border-radius: 4px;
-    box-sizing: border-box;
-    box-shadow: 0 2px 1px rgba(0,0,0,.07);
-    background: #fff;
-    transition: all .4s ease-in-out;
-    
-    opacity: 0;
-    visibility: hidden;
-    pointer-events: none;
-    transform: translateY(-15px);
-  }
-  .custom-select.opened .custom-options {
-    opacity: 1;
-    visibility: visible;
-    pointer-events: all;
-    transform: translateY(0);
-  }
-    .custom-options:before {
-      position: absolute;
-      display: block;
-      content: '';
-      bottom: 100%; right: 25px;
-      width: 7px; height: 7px;
-      margin-bottom: -4px;
-      border-top: 1px solid #b5b5b5;
-      border-left: 1px solid #b5b5b5;
-      background: #fff;
-      transform: rotate(45deg);
-      transition: all .4s ease-in-out;
-    }
-    .option-hover:before {
-      background: #f9f9f9;
-    }
-    .custom-option {
-      position: relative;
-      display: block;
-      padding: 0 22px;
-      border-bottom: 1px solid #b5b5b5;
-      font-size: 18px;
-      font-weight: 600;
-      color: #b5b5b5;
-      line-height: 47px;
-      cursor: pointer;
-      transition: all .4s ease-in-out;
-    }
-    .custom-option:first-of-type {
-      border-radius: 4px 4px 0 0;
-    }
-    .custom-option:last-of-type {
-      border-bottom: 0;
-      border-radius: 0 0 4px 4px;
-    }
-    .custom-option:hover,
-    .custom-option.selection {
-      background: #f9f9f9;
-    }
+
+.custom-select-wrapper select {
+	display: none;
+}
+
+.custom-select {
+	position: relative;
+	display: inline-block;
+}
+
+.custom-select-trigger {
+	position: relative;
+	display: block;
+	width: 130px;
+	padding: 0 84px 0 22px;
+	font-size: 22px;
+	font-weight: 300;
+	color: #fff;
+	line-height: 60px;
+	background: #5c9cd8;
+	border-radius: 4px;
+	cursor: pointer;
+}
+
+.custom-select-trigger:after {
+	position: absolute;
+	display: block;
+	content: '';
+	width: 10px;
+	height: 10px;
+	top: 50%;
+	right: 25px;
+	margin-top: -3px;
+	border-bottom: 1px solid #fff;
+	border-right: 1px solid #fff;
+	transform: rotate(45deg) translateY(-50%);
+	transition: all .4s ease-in-out;
+	transform-origin: 50% 0;
+}
+
+.custom-select.opened .custom-select-trigger:after {
+	margin-top: 3px;
+	transform: rotate(-135deg) translateY(-50%);
+}
+
+.custom-options {
+	position: absolute;
+	display: block;
+	top: 100%;
+	left: 0;
+	right: 0;
+	min-width: 100%;
+	margin: 15px 0;
+	border: 1px solid #b5b5b5;
+	border-radius: 4px;
+	box-sizing: border-box;
+	box-shadow: 0 2px 1px rgba(0, 0, 0, .07);
+	background: #fff;
+	transition: all .4s ease-in-out;
+	opacity: 0;
+	visibility: hidden;
+	pointer-events: none;
+	transform: translateY(-15px);
+}
+
+.custom-select.opened .custom-options {
+	opacity: 1;
+	visibility: visible;
+	pointer-events: all;
+	transform: translateY(0);
+}
+
+.custom-options:before {
+	position: absolute;
+	display: block;
+	content: '';
+	bottom: 100%;
+	right: 25px;
+	width: 7px;
+	height: 7px;
+	margin-bottom: -4px;
+	border-top: 1px solid #b5b5b5;
+	border-left: 1px solid #b5b5b5;
+	background: #fff;
+	transform: rotate(45deg);
+	transition: all .4s ease-in-out;
+}
+
+.option-hover:before {
+	background: #f9f9f9;
+}
+
+.custom-option {
+	position: relative;
+	display: block;
+	padding: 0 22px;
+	border-bottom: 1px solid #b5b5b5;
+	font-size: 18px;
+	font-weight: 600;
+	color: #b5b5b5;
+	line-height: 47px;
+	cursor: pointer;
+	transition: all .4s ease-in-out;
+}
+
+.custom-option:first-of-type {
+	border-radius: 4px 4px 0 0;
+}
+
+.custom-option:last-of-type {
+	border-bottom: 0;
+	border-radius: 0 0 4px 4px;
+}
+
+.custom-option:hover, .custom-option.selection {
+	background: #f9f9f9;
+}
 </style>
 <body>
 
@@ -271,44 +302,44 @@ background-color
 					<!--End Nav Button  -->
 				</div>
 				<div class="select-this d-flex">
-					
+
 					<form action="#">
 						<div class="center">
 							<c:if test="${view2 == 1 }">
-							<select name="sources" id="view" class="custom-select sources"
-								placeholder="Source Type" name="view">
-								<option value="1">최신순</option>
-								<option value="2">정확순</option>
-								<option value="3">조회순</option>
-								<option value="4">금액순</option>
-							</select>
+								<select name="sources" id="view" class="custom-select sources"
+									placeholder="Source Type" name="view">
+									<option value="1">최신순</option>
+									<option value="2">정확순</option>
+									<option value="3">조회순</option>
+									<option value="4">금액순</option>
+								</select>
 							</c:if>
 							<c:if test="${view2 == 2 }">
-							<select name="sources" id="view" class="custom-select sources"
-								placeholder="Source Type" name="view">
-								<option value="1">최신순</option>
-								<option value="2" selected>정확순</option>
-								<option value="3">조회순</option>
-								<option value="4">금액순</option>
-							</select>
+								<select name="sources" id="view" class="custom-select sources"
+									placeholder="Source Type" name="view">
+									<option value="1">최신순</option>
+									<option value="2" selected>정확순</option>
+									<option value="3">조회순</option>
+									<option value="4">금액순</option>
+								</select>
 							</c:if>
 							<c:if test="${view2 == 3 }">
-							<select name="sources" id="view" class="custom-select sources"
-								placeholder="Source Type" name="view">
-								<option value="1">최신순</option>
-								<option value="2" >정확순</option>
-								<option value="3" selected>조회순</option>
-								<option value="4">금액순</option>
-							</select>
+								<select name="sources" id="view" class="custom-select sources"
+									placeholder="Source Type" name="view">
+									<option value="1">최신순</option>
+									<option value="2">정확순</option>
+									<option value="3" selected>조회순</option>
+									<option value="4">금액순</option>
+								</select>
 							</c:if>
 							<c:if test="${view2 == 4 }">
-							<select name="sources" id="view" class="custom-select sources"
-								placeholder="Source Type" name="view">
-								<option value="1">최신순</option>
-								<option value="2">정확순</option>
-								<option value="3">조회순</option>
-								<option value="4" selected>금액순</option>
-							</select>
+								<select name="sources" id="view" class="custom-select sources"
+									placeholder="Source Type" name="view">
+									<option value="1">최신순</option>
+									<option value="2">정확순</option>
+									<option value="3">조회순</option>
+									<option value="4" selected>금액순</option>
+								</select>
 							</c:if>
 						</div>
 					</form>
@@ -321,57 +352,57 @@ background-color
 				<div class="tab-pane fade show active" id="nav-home" role="tabpanel"
 					aria-labelledby="nav-home-tab">
 					<div id="ajax">
-					<div class="row" id="aa">
-					
-						<c:forEach var="b" items="${Direct}">
-							<div class="col-xl-4 col-lg-4 col-md-6" >
-								<div class="single-product mb-60">
-									<div class="product-img">
-										<img
-											src="${pageContext.request.contextPath}/resources/dealupload2/${b.SAVE_DIR_MAINFILE}"
-											alt="" style="width: 300px; height: 250px;">
+						<div class="row" id="aa">
 
-									</div>
-									<div class="product-caption">
+							<c:forEach var="b" items="${Direct}">
+								<div class="col-xl-4 col-lg-4 col-md-6">
+									<div class="single-product mb-60">
+										<div class="product-img">
+											<img
+												src="${pageContext.request.contextPath}/resources/dealupload2/${b.SAVE_DIR_MAINFILE}"
+												alt="" style="width: 300px; height: 250px;">
 
-										<h4>
-											<a
-												href="${pageContext.request.contextPath}/DealD/detail?num=${b.DIR_NUMBER}">
-												<b>${b.DIR_SUBJECT}</b>
-											</a>
-										</h4>
-										<div class="price">
-											<table class="table">
-												<tr>
-													<th>금액</th>
-													<td>${b.DIR_PRICE}원</td>
+										</div>
+										<div class="product-caption">
 
-												</tr>
-												<tr>
-													<th>거래지역</th>
-													<td>${b.DIR_ADDRESS}</td>
-												</tr>
-												<tr>
-													<th>올리시간</th>
-													<td>${b.DIR_DATE}</td>
-												</tr>
-												<tr>
-													<th>조회수</th>
-													<td>${b.DIR_READCOUNT}</td>
-												</tr>
+											<h4>
+												<a
+													href="${pageContext.request.contextPath}/DealD/detail?num=${b.DIR_NUMBER}">
+													<b>${b.DIR_SUBJECT}</b>
+												</a>
+											</h4>
+											<div class="price">
+												<table class="table">
+													<tr>
+														<th>금액</th>
+														<td>${b.DIR_PRICE}원</td>
 
-											</table>
+													</tr>
+													<tr>
+														<th>거래지역</th>
+														<td>${b.DIR_ADDRESS}</td>
+													</tr>
+													<tr>
+														<th>올리시간</th>
+														<td>${b.DIR_DATE}</td>
+													</tr>
+													<tr>
+														<th>조회수</th>
+														<td>${b.DIR_READCOUNT}</td>
+													</tr>
 
+												</table>
+
+											</div>
 										</div>
 									</div>
 								</div>
-							</div>
-						</c:forEach>
-
-						
+							</c:forEach>
 
 
-					</div>
+
+
+						</div>
 					</div>
 
 
@@ -380,29 +411,29 @@ background-color
 			</div>
 			<hr>
 			<div class="ajax3">
-			<div class="sungjinS">
-				<div class="header-bottom ">
-					<ul
-						class="header-right f-right d-none d-lg-block d-flex justify-content-between">
-						<li class="d-none d-xl-block" id="sd-none">
-							<div class="form-box f-right ">
-								<form method="get" action="list" name="form1" id="form1">
-									<input type="text" name="search" id="search"
-										placeholder="Search products">
+				<div class="sungjinS">
+					<div class="header-bottom ">
+						<ul
+							class="header-right f-right d-none d-lg-block d-flex justify-content-between">
+							<li class="d-none d-xl-block" id="sd-none">
+								<div class="form-box f-right ">
+									<form method="get" action="list" name="form1" id="form1">
+										<input type="text" name="search" id="search"
+											placeholder="Search products">
 
-									<div class="search-icon">
-										<i onclick="SubmitForm()" class="fas fa-search special-tag"
-											id="searchB"></i>
-									</div>
-									<input type="hidden" name = "view2" value="${view2}">
-								</form>
-							</div>
-						</li>
+										<div class="search-icon">
+											<i onclick="SubmitForm()" class="fas fa-search special-tag"
+												id="searchB"></i>
+										</div>
+										<input type="hidden" name="view2" value="${view2}">
+									</form>
+								</div>
+							</li>
 
-					</ul>
+						</ul>
 
+					</div>
 				</div>
-			</div>
 			</div>
 
 
@@ -412,36 +443,36 @@ background-color
 
 			</div>
 
-		<div id="ajaxpage">
-			<div class="pagination">
-				<c:if test="${page <= 1 }">
-					<a id="paging">&laquo;</a>
+			<div id="ajaxpage">
+				<div class="pagination">
+					<c:if test="${page <= 1 }">
+						<a id="paging">&laquo;</a>
 
-				</c:if>
-				<c:if test="${page > 1 }">
-					<a href="list?page=${page-1}&view2=${view2}" id="paging">&laquo;</a>
-				</c:if>
-
-				<c:forEach var="a" begin="${startpage}" end="${endpage}">
-
-					<c:if test="${a == page }">
-						<a href="#" id="paging">${a}</a>
 					</c:if>
-					<c:if test="${a != page }">
-						<a href="list?page=${a}&view2=${view2}" id="paging">${a}</a>
+					<c:if test="${page > 1 }">
+						<a href="list?page=${page-1}&view2=${view2}" id="paging">&laquo;</a>
 					</c:if>
-				</c:forEach>
-				<c:if test="${page >= maxpage }">
-					<a id="paging">&raquo;</a>
-				</c:if>
-				<c:if test="${page < maxpage }">
-					<a href="list?page=${page+1}&view2=${view2}" id="paging">&raquo;</a>
-				</c:if>
+
+					<c:forEach var="a" begin="${startpage}" end="${endpage}">
+
+						<c:if test="${a == page }">
+							<a href="#" id="paging">${a}</a>
+						</c:if>
+						<c:if test="${a != page }">
+							<a href="list?page=${a}&view2=${view2}" id="paging">${a}</a>
+						</c:if>
+					</c:forEach>
+					<c:if test="${page >= maxpage }">
+						<a id="paging">&raquo;</a>
+					</c:if>
+					<c:if test="${page < maxpage }">
+						<a href="list?page=${page+1}&view2=${view2}" id="paging">&raquo;</a>
+					</c:if>
+				</div>
 			</div>
-		</div>
-		
-		
-		
+
+
+
 
 		</div>
 
@@ -513,123 +544,148 @@ background-color
 		</div>
 	</div>
 	<script>
-	function SubmitForm() {
+		function getParameterByName(name) {
+			name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+			var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"), results = regex
+					.exec(location.search);
+			return results == null ? "" : decodeURIComponent(results[1]
+					.replace(/\+/g, " "));
+		}
 
-		form1.submit();
-	}
-	function go(page) {
-		var view = $("#view").val(); //최신순부터 값은 1~3
-
-		var data = "view=" + view + "&state=ajax";
-		var data2 = "&view2=" + view; 
-		var data3 = view;
-		console.log("뷰" + view)
 		
-		console.log(page)
-		console.log(data)
-		
-		ajax(data , data2 ,data3);
-	}
-	$(function() {
-		$("#view").change(function() { //최신순, 등록순, 조회순 변경 시
-			go(1);
+		function SubmitForm() {
 
+			form1.submit();
+		}
+		function go(page) {
+			var view = $("#view").val(); //최신순부터 값은 1~3
+			
+			if(page==null){
+				var data = "view=" + view + "&state=ajax";
+			}else{
+				var data = "view=" + view + "&state=ajax" + "&page=" + page;
+			}
+			
+			var data2 = "&view2=" + view;
+			var data3 = view;
+			console.log("뷰" + view)
+
+			console.log(page + "페잊")
+			console.log(data)
+
+			ajax(data, data2, data3);
+		}
+		$(function() {
+			var page = getParameterByName("page");
+			$("#view").change(function() { //최신순, 등록순, 조회순 변경 시
+				go(page);
+
+			})
 		})
-	})
 
-	function ajax(sdata , sdata2 ,sdata3) {
-		
-		output = "";
-		$.ajax({
-			type : "post",
-			data:sdata,
-			url : "list_ajax",
-			dataType : "json",
-			success : function(rdata) {
-				console.log("aa")
-				$("#aa").remove();
-				$(".pagination").remove();
-				$(".sungjinS").remove();
-				var output = '<div class="row" id="aa">';
-				var outputP = '<div class="pagination">'
-				outputP += '<c:if test="${page <= 1 }"><a id="paging">&laquo;</a>'
-				outputP += '</c:if><c:if test="${page > 1 }">'
-				outputP +='<a href="list?page=${page-1}' + sdata2 + '"id="paging">&laquo;</a>'
-				outputP +='</c:if><c:forEach var="a" begin="${startpage}" end="${endpage}">'
-				outputP +='<c:if test="${a == page }"><a href="#" id="paging">${a}</a>'
-				outputP +='</c:if><c:if test="${a != page }"><a href="list?page=${a}'+ sdata2 + '"id="paging">${a}</a>'
-				outputP +='</c:if></c:forEach><c:if test="${page >= maxpage }">'
-				outputP +='<a id="paging">&raquo;</a></c:if>'
-				outputP +='<c:if test="${page < maxpage }">'
-				outputP +='<a href="list?page=${page+1}' + sdata2 +'"id="paging">&raquo;</a>'
-				outputP +='</c:if></div>'
-				
-				var outputS = '<div class="sungjinS">'
-				outputS += '<div class="header-bottom "> <ul'
+		function ajax(sdata, sdata2, sdata3) {
+
+			output = "";
+			$
+					.ajax({
+						type : "post",
+						data : sdata,
+						url : "list_ajax",
+						dataType : "json",
+						success : function(rdata) {
+							console.log("aa")
+							$("#aa").remove();
+							$(".pagination").remove();
+							$(".sungjinS").remove();
+							var output = '<div class="row" id="aa">';
+							var outputP = '<div class="pagination">'
+							outputP += '<c:if test="${page <= 1 }"><a id="paging">&laquo;</a>'
+							outputP += '</c:if><c:if test="${page > 1 }">'
+							outputP += '<a href="list?page=${page-1}' + sdata2
+									+ '"id="paging">&laquo;</a>'
+							outputP += '</c:if><c:forEach var="a" begin="${startpage}" end="${endpage}">'
+							outputP += '<c:if test="${a == page }"><a href="#" id="paging">${a}</a>'
+							outputP += '</c:if><c:if test="${a != page }"><a href="list?page=${a}'
+									+ sdata2 + '"id="paging">${a}</a>'
+							outputP += '</c:if></c:forEach><c:if test="${page >= maxpage }">'
+							outputP += '<a id="paging">&raquo;</a></c:if>'
+							outputP += '<c:if test="${page < maxpage }">'
+							outputP += '<a href="list?page=${page+1}' + sdata2
+									+ '"id="paging">&raquo;</a>'
+							outputP += '</c:if></div>'
+
+							var outputS = '<div class="sungjinS">'
+							outputS += '<div class="header-bottom "> <ul '
 				outputS +='class="header-right f-right d-none d-lg-block d-flex justify-content-between">'
-				outputS +='<li class="d-none d-xl-block" id="sd-none">'
-				outputS +='<div class="form-box f-right ">'
-				outputS +='<form method="get" action="list" name="form1" id="form1">'
-				outputS +='<input type="text" name="search" id="search"'
+							outputS += '<li class="d-none d-xl-block" id="sd-none">'
+							outputS += '<div class="form-box f-right ">'
+							outputS += '<form method="get" action="list" name="form1" id="form1">'
+							outputS += '<input type="text" name="search" id="search"'
 				outputS +='placeholder="Search products">'
-				outputS +='<div class="search-icon">'
-				outputS +='<i onclick="SubmitForm()" class="fas fa-search special-tag"id="searchB"></i>'
-				outputS +='</div><input type="hidden" name = "view2" value="'+ sdata3  + '">'
-				outputS +='</form></div></li></ul></div></div>'
-				outputS +="<script>" 
-				outputS += "$('.ajax').html(data).trigger('create')";
-				outputS += "</script"
-				outputS +=">"
-				
-				
-											
-				console.log(rdata)
-				$(rdata.Direct).each(
-						function(index, item) {
-							console.log(item.dir_PRICE + "가격")
-							output+='<div class="col-xl-4 col-lg-4 col-md-6" >'
-							output+='<div class="single-product mb-60">'
-							output+= '<div class="product-img">'
-							output+= '<img src="${pageContext.request.contextPath}/resources/dealupload2/'
+							outputS += '<div class="search-icon">'
+							outputS += '<i onclick="SubmitForm()" class="fas fa-search special-tag"id="searchB"></i>'
+							outputS += '</div><input type="hidden" name = "view2" value="'+ sdata3  + '">'
+							outputS += '</form></div></li></ul></div></div>'
+							outputS += "<script>"
+							outputS += '<link rel="stylesheet"'
+				outputS +=	'href="${pageContext.request.contextPath}/resources/css/style.css">"'
+
+							console.log(rdata)
+							$(rdata.Direct)
+									.each(
+											function(index, item) {
+												console.log(item.dir_PRICE
+														+ "가격")
+												output += '<div class="col-xl-4 col-lg-4 col-md-6" >'
+												output += '<div class="single-product mb-60">'
+												output += '<div class="product-img">'
+												output += '<img src="${pageContext.request.contextPath}/resources/dealupload2/'
 							output+= item.save_DIR_MAINFILE + '"'
 							output+='alt="" style="width: 300px; height: 250px;">'
-							output+='</div>'
-							output+='<div class="product-caption">'
-							output+='<h4> <a href="${pageContext.request.contextPath}/DealD/detail?num='
-							output+= item.dir_NUMBER +'">'
-							output+= '<b>' + item.dir_SUBJECT + '<div class="price"><table class="table">'
-							output+='<tr><th>금액</th><td>' + item.dir_PRICE +'원</td>'
-							output+='<tr><th>거래지역</th><td>' + item.dir_ADDRESS + '</td>'
-							output+= '</tr><tr><th>올린시간</th><td>' + item.dir_DATE + '</td>'
-							output+= '</tr><tr><th>조회수</th><td>' + item.dir_READCOUNT + '</td></tr></table>'
-							output+= '</div></div></div></div>'
+												output += '</div>'
+												output += '<div class="product-caption">'
+												output += '<h4> <a href="${pageContext.request.contextPath}/DealD/detail?num='
+												output += item.dir_NUMBER
+														+ '"> '
+												output += '<b>'
+														+ item.dir_SUBJECT
+														+ '</b></a></h4>'
+												output += '<div class="price"><table class="table">'
+												output += '<tr><th>금액</th><td>'
+														+ item.dir_PRICE
+														+ '원</td>'
+												output += '<tr><th>거래지역</th><td>'
+														+ item.dir_ADDRESS
+														+ '</td>'
+												output += '</tr><tr><th>올린시간</th><td>'
+														+ item.dir_DATE
+														+ '</td>'
+												output += '</tr><tr><th>조회수</th><td>'
+														+ item.dir_READCOUNT
+														+ '</td></tr></table>'
+												output += '</div></div></div></div>'
 
-						}
-				)
-				output +="</div>"
-				console.log(output)
-				
-				console.log(outputP)
-				
-				
-				
-				$('#ajax').append(output) //table 완성
-				$('#ajaxpage').append(outputP) //페이징
-				$('.ajax3').append(outputS)
-				
-				$('.ajax3').trigger("create");
-			},
-			error : function(request, status, error) {
-				console.log(request.status + +"받은 데이터 :"
-						+ request.responseText + +"error status : "
-						+ status + +"error 메시지 : " + error)
+											})
+							output += "</div>"
 
-			}//error end
-			
-			
+							console.log(output)
 
-		})
-	}
+							console.log(outputP)
+
+							$('#ajax').append(output).trigger("create") //table 완성
+							$('#ajaxpage').append(outputP).trigger("create") //페이징
+							$('.ajax3').append(outputS).trigger("create")
+
+						},
+						error : function(request, status, error) {
+							console.log(request.status + +"받은 데이터 :"
+									+ request.responseText + +"error status : "
+									+ status + +"error 메시지 : " + error)
+
+						}//error end
+
+					})
+		}
 	</script> <!-- Gallery End--> </main>
 	<!-- Footer 영역  -->
 

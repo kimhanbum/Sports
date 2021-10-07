@@ -279,9 +279,11 @@ background-color
 							<div class="center">
 							<select name="sources" id="sources" class="custom-select sources"
 								placeholder="Source Type">
-								<option value="profile">Profile</option>
-								<option value="word">Word</option>
-								<option value="hashtag">Hashtag</option>
+								<option value="profile">최신순</option>
+								<option value="word">정확순</option>
+								<option value="hashtag">입찰순</option>
+								<option value="hashtag">시작가순</option>
+								<option value="hashtag">현재가순</option>
 							</select>
 						</div>
 						</div>
