@@ -4,7 +4,7 @@
 <html class="no-js" lang="zxx">
     <head>
         <meta charset="utf-8">
-        <title>eCommerce HTML-5 Template </title>
+        <title>Sport - Soccer </title>
         
      
 <link rel="shortcut icon" type="image/x-icon" href="${pageContext.request.contextPath}/resources/img/favicon.ico">

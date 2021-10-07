@@ -14,6 +14,15 @@ create table SPORT_REGISTER(
 	--모집중 0, 대기중 1, 마감2 (게시글에 대한 상태정보) --
 );
 
+		select * from 
+		(select rownum rnum, b.* 
+		from 
+			(select * from Sport_register
+			where sport_num = 1
+			order by REGISTER_NUM desc) b
+		)
+		where rnum >= 1 and rnum <= 5 
+
 select * from SPORT_REGISTER;
 
 create sequence reg_seq;

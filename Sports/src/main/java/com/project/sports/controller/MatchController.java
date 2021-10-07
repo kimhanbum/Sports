@@ -30,12 +30,14 @@ public class MatchController {
 	@Autowired
 	private MatchService matchservice;
 	
-	@RequestMapping(value = "/baseball", method = RequestMethod.GET)
-	public ModelAndView baseball(
+	
+  @RequestMapping(value = "/baseball", method = RequestMethod.GET) public
+  ModelAndView baseball(
 			@RequestParam(value="page",defaultValue="1",required=false) int page, ModelAndView mv) {
-		int limit =5; // 한 화면에 출력할 레코드 갯수
+		int num = 2;   //sport_num =1
 		
-		int listcount = matchservice.getListCount(); //총 리스트 수를 받아옴
+		int limit = 5; // 한 화면에 출력할 레코드 갯수
+		int listcount = matchservice.getListCount(num); //총 리스트 수를 받아옴
 		
 		//총페이지 수
 		int maxpage = (listcount + limit - 1) / limit;
@@ -49,7 +51,7 @@ public class MatchController {
 		if(endpage > maxpage)
 		   endpage = maxpage;
 		
-		List<Match> matchlist = matchservice.getMatchList(page, limit);
+		List<Match> matchlist = matchservice.getMatchList(page, limit, num);
 		
 		mv.setViewName("sport_match/match_baseball");
 		mv.addObject("page",page);
@@ -115,9 +117,10 @@ public class MatchController {
 	@RequestMapping(value="/mainPage",method=RequestMethod.GET)
 	public ModelAndView mainPage(
 			@RequestParam(value="page",defaultValue="1",required=false) int page, ModelAndView mv) {
-		int limit =5; // 한 화면에 출력할 레코드 갯수
+		int num = 1;   //sport_num =1
 		
-		int listcount = matchservice.getListCount(); //총 리스트 수를 받아옴
+		int limit = 5; // 한 화면에 출력할 레코드 갯수
+		int listcount = matchservice.getListCount(num); //총 리스트 수를 받아옴
 		
 		//총페이지 수
 		int maxpage = (listcount + limit - 1) / limit;
@@ -131,7 +134,7 @@ public class MatchController {
 		if(endpage > maxpage)
 		   endpage = maxpage;
 		
-		List<Match> matchlist = matchservice.getMatchList(page, limit);
+		List<Match> matchlist = matchservice.getMatchList(page, limit, num);
 		
 		mv.setViewName("sport_match/Sport_matching");
 		mv.addObject("page",page);
