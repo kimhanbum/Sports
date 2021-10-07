@@ -281,7 +281,7 @@
                     <button class="closeModal row btn" onclick="javascript:colseModal();">닫기</button>
                 </div>
                 <div class="modalbutton">
-                    <button class="btnSearch row btn btn-fill btn-blue-light">등록</button>
+                    <button class="btnSearch row btn btn-fill btn-blue-light" onclick="javascript:registerModal()">등록</button>
                 </div>
             </div>
         </div>

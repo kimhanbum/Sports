@@ -4,15 +4,18 @@
 
 <mapper namespace="Match">
 	
-	<select id="count" resultType="int">
+	<select id="count" resultType="int" parameterType="int">
 		select count(*) from sport_register
+		where sport_num = #{num}
 	</select>
 	
 	<select id="list" resultType="match" parameterType="java.util.Map">
 		select * from 
 		(select rownum rnum, b.* 
 		from 
-			(select * from Sport_register) b
+			(select * from Sport_register
+			where sport_num = #{num}
+			order by REGISTER_NUM desc) b
 		)
 		where rnum &gt;= #{start} and rnum &lt; = #{end}
 	</select>
