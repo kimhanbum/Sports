@@ -38,8 +38,8 @@
 	  2.Controller에서 @Value을 이용해 값을 가져옵니다.
 	    @value 에노테이션의 주요 용도는 자바코드 외부의 리소스나 환경정보에 담긴 값을 사용하도록 지정해두는데 있습니다.
 -->
-<!-- 	<context:property-placeholder
-			location ="classpath:pro/savefolder.properties"/> -->
+   <context:property-placeholder
+			location ="classpath:pro/savefolder.properties"/>
 			
 	<!-- aop 관련 annotation들을 인식하고 처리해 줍니다. -->
 	<aop:aspectj-autoproxy/>
@@ -48,6 +48,5 @@
 	
 	<!--  주기저인 작업이 있을떄 @Scheduled 애노테이션을 사용하면 쉽게 적용할 수 있습니다. -->
 	<task:annotation-driven/>	
-	
 	
 </beans:beans>

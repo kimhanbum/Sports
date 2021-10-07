@@ -11,8 +11,8 @@
 		<typeAlias alias="direct"	type="com.project.sports.domain.DealDirect"/>
 		<typeAlias alias="Water"	type="com.project.sports.domain.WaterIntake"/>
 		<typeAlias alias="match"	type="com.project.sports.domain.Match"/>
-		<typeAlias alias="MyInfo"	type="com.project.sports.domain.MyInfo"/>
 		<typeAlias alias="sports"	type="com.project.sports.domain.Sports"/>
+		<typeAlias alias="mentor"	type="com.project.sports.domain.Mentor"/>
   </typeAliases>
   
   <mappers>
@@ -23,7 +23,7 @@
  	<mapper resource="sql/BBS_FCM.xml"/>
  	<mapper resource="sql/Water_Intake.xml"/>
  	<mapper resource="sql/Sport_match.xml"/>
- 	<mapper resource="sql/MyInfo.xml"/>
+ 	<mapper resource="sql/mmatch.xml"/>
   </mappers>
   
 </configuration>

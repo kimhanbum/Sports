@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?><!--  SQL 맵퍼 파일은 xml이기 때문에 제일 먼저 xml 선언이 옵니다. -->
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="Mmatches">
+
+<select id="sportList" parameterType="int" resultType="String">
+	select sports_name 
+	from sports 
+	where sports_category=#{selType}
+</select>
+
+<select id="siList" resultType="String">
+	select distinct city 
+	from city
+</select>
+
+<select id="dongList" parameterType="String" resultType="String">
+	select distinct sigungu 
+	from city 
+	where city=#{selType}
+</select>
+     <insert id="insertWMentor" parameterType="mentor">
+		<selectKey resultType="String"  order="BEFORE"
+		           keyProperty="mentor_code">
+		   select 'mr'||(substr(nvl(max(mentor_code),'mr1'),3)+1) as mentor_code from mentor_match
+	   </selectKey>
+       insert into mentor_match
+       values
+       (#{mentor_code}, 
+        #{user_id} , #{mentor_title} , #{sports_name} , 
+        #{city} , #{sigungu}, #{mentor_loc_detail},
+        #{mentor_date}, #{mentor_amount} , #{mentor_number},
+        #{mentor_caution,jdbcType=VARCHAR}, #{mentor_career,jdbcType=VARCHAR}, 
+        #{mentor_pic1,jdbcType=VARCHAR},#{mentor_origin_pic1,jdbcType=VARCHAR}, 
+        #{mentor_pic2,jdbcType=VARCHAR}, #{mentor_origin_pic2,jdbcType=VARCHAR},
+        #{mentor_pic3,jdbcType=VARCHAR}, #{mentor_origin_pic3,jdbcType=VARCHAR})
+    </insert>
+</mapper>

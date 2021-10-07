@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -1778,9 +1778,14 @@ body .grid {
 					</div>
 					<hr>
 					<div id="write-b">
-						<a href="${pageContext.request.contextPath}/mmatch/mentorWrite"
-							class="btn header-btn">글쓰기</a>
-
+						<c:if test="${empty USER_ID}">
+							<a href="${pageContext.request.contextPath}/member/login"
+								class="btn header-btn">글쓰기</a>
+						</c:if>
+						<c:if test="${!empty USER_ID}">
+							<a href="${pageContext.request.contextPath}/mmatch/mentorWrite"
+								class="btn header-btn">글쓰기</a>
+						</c:if>
 					</div>
 					<div class="pagination">
 						<a class="active" href="#" id="paging">&laquo;</a> <a href="#" id="paging">1</a>
