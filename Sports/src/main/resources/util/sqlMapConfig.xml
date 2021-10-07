@@ -12,6 +12,7 @@
 		<typeAlias alias="Water"	type="com.project.sports.domain.WaterIntake"/>
 		<typeAlias alias="match"	type="com.project.sports.domain.Match"/>
 		<typeAlias alias="sports"	type="com.project.sports.domain.Sports"/>
+		<typeAlias alias="mentor"	type="com.project.sports.domain.Mentor"/>
   </typeAliases>
   
   <mappers>
@@ -22,6 +23,6 @@
  	<mapper resource="sql/BBS_FCM.xml"/>
  	<mapper resource="sql/Water_Intake.xml"/>
  	<mapper resource="sql/Sport_match.xml"/>
-  </mappers>
+ 	<mapper resource="sql/mmatch.xml"/>
   
 </configuration>
