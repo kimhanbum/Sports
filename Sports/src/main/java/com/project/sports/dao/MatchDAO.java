@@ -16,8 +16,8 @@ public class MatchDAO {
 	@Autowired
 	private SqlSessionTemplate sqlSession;
 	
-	public int getListCount() {
-		return sqlSession.selectOne("Match.count");
+	public int getListCount(int num) {
+		return sqlSession.selectOne("Match.count", num);
 	}
 	
 	public List<Match> getMatchList(HashMap<String, Integer> map) {

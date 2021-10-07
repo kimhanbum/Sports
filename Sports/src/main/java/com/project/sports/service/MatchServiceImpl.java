@@ -16,17 +16,18 @@ public class MatchServiceImpl implements MatchService {
 	private MatchDAO dao;
 	
 	@Override
-	public int getListCount() {
-		return dao.getListCount();
+	public int getListCount(int num) {
+		return dao.getListCount(num);
 	}
 
 	@Override
-	public List<Match> getMatchList(int page, int limit) {
+	public List<Match> getMatchList(int page, int limit, int num) {
 		HashMap<String, Integer> map = new HashMap<String, Integer>();
 		int startrow = (page-1)*limit +1;
 		int endrow = startrow + limit -1;
 		map.put("start", startrow);
 		map.put("end", endrow);
+		map.put("num", num);
 		return dao.getMatchList(map);
 	}
 

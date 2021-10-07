@@ -24,6 +24,5 @@
  	<mapper resource="sql/Water_Intake.xml"/>
  	<mapper resource="sql/Sport_match.xml"/>
  	<mapper resource="sql/mmatch.xml"/>
-  </mappers>
   
 </configuration>
