@@ -20,20 +20,28 @@
 	from city 
 	where city=#{selType}
 </select>
-     <insert id="insertWMentor" parameterType="mentor">
-		<selectKey resultType="String"  order="BEFORE"
-		           keyProperty="mentor_code">
-		   select 'mr'||(substr(nvl(max(mentor_code),'mr1'),3)+1) as mentor_code from mentor_match
-	   </selectKey>
-       insert into mentor_match
-       values
-       (#{mentor_code}, 
-        #{user_id} , #{mentor_title} , #{sports_name} , 
-        #{city} , #{sigungu}, #{mentor_loc_detail},
-        #{mentor_date}, #{mentor_amount} , #{mentor_number},
-        #{mentor_caution,jdbcType=VARCHAR}, #{mentor_career,jdbcType=VARCHAR}, 
-        #{mentor_pic1,jdbcType=VARCHAR},#{mentor_origin_pic1,jdbcType=VARCHAR}, 
-        #{mentor_pic2,jdbcType=VARCHAR}, #{mentor_origin_pic2,jdbcType=VARCHAR},
-        #{mentor_pic3,jdbcType=VARCHAR}, #{mentor_origin_pic3,jdbcType=VARCHAR})
-    </insert>
+
+<insert id="insertWMentor" parameterType="mentor">
+	<selectKey resultType="String"  order="BEFORE"
+	           keyProperty="mentor_code">
+	   select 'mr'||(substr(nvl(max(mentor_code),'mr1'),3)+1) as mentor_code from mentor_match
+   </selectKey>
+   insert into mentor_match
+   values
+   (#{mentor_code}, 
+    #{user_id} , #{mentor_title} , #{sports_name} , 
+    #{city} , #{sigungu}, #{mentor_loc_detail},
+    #{mentor_date}, #{mentor_amount} , #{mentor_number},
+    #{mentor_caution,jdbcType=VARCHAR}, #{mentor_career,jdbcType=VARCHAR}, 
+    #{mentor_pic1,jdbcType=VARCHAR},#{mentor_origin_pic1,jdbcType=VARCHAR}, 
+    #{mentor_pic2,jdbcType=VARCHAR}, #{mentor_origin_pic2,jdbcType=VARCHAR},
+    #{mentor_pic3,jdbcType=VARCHAR}, #{mentor_origin_pic3,jdbcType=VARCHAR})
+</insert>
+    
+<select id="sportDetailList" parameterType="int" resultType="sports">
+	select sports_name,sports_img
+	from sports 
+	where sports_category=#{selType}
+</select>
+
 </mapper>

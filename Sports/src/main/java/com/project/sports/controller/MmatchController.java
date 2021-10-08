@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.project.sports.domain.Mentor;
+import com.project.sports.domain.Sports;
 import com.project.sports.service.MmatchService;
 
 @Controller
@@ -43,7 +44,7 @@ public class MmatchController {
 		return "sport_menMatch/sports_mentor_write";
 	}
 	
-	//sport 종목 가져오기
+	//sport 종목 가져오기(이름만)
 	@GetMapping("/sportlist")
 	@ResponseBody
 	public List<String> Sportlist(int selType) {
@@ -51,6 +52,19 @@ public class MmatchController {
 		List<String> list = mmatchservice.getSportlist(selType);
 		for(String value : list)
 			logger.info("value :" + value);
+		return list;
+	}
+	
+	//sport 종목 가져오기(이름,img 데이터 response)
+	@GetMapping("/sportDeatilList")
+	@ResponseBody
+	public List<Sports> SportDetailList(int selType) {
+		logger.info("seltype :" + selType);
+		List<Sports> list = mmatchservice.getSportDeatilList(selType);
+		for(Sports sp : list) {
+			logger.info("value :" + sp.getSPORTS_NAME());
+			logger.info("value :" + sp.getSPORTS_IMG());
+		}			
 		return list;
 	}
 	

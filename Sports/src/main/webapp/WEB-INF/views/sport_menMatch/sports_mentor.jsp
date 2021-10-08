@@ -157,13 +157,13 @@ label {
     position: relative;
 }
 
-input[type="radio"]:checked + label {
+input[type="radio"] + label.changed {
     background: #2577fd;
     color: white;
     box-shadow: 0px 0px 20px rgba(0, 216, 255, 0.75);
 }
 
-input[type="radio"]:checked + label::after {
+input[type="radio"] + label.changed::after {
     color: #2577fd;
     font-family: FontAwesome;
     border: 2px solid #2577fd;
@@ -180,12 +180,7 @@ input[type="radio"]:checked + label::after {
     border-radius: 50%;
     background: white;
     box-shadow: 0px 2px 5px -2px rgba(0, 0, 0, 0.25);
-}
-
-input[type="radio"]#control_05:checked + label {
-    background: red;
-    border-color: red;
-}
+}  
 
 p {
     font-weight: 900;
@@ -478,6 +473,10 @@ body .grid {
 	color:blue;
 }
 
+.loc_active{
+	color:red !important;
+}
+
 </style>
 
 <body>
@@ -510,7 +509,7 @@ body .grid {
 				<div class="row">
 					<div class="col-xl-12">
 						<div class="hero-cap text-center">
-							<h2>운동 멘티/멘토 매칭</h2>
+							<h2>운동 멘토 매칭</h2>
 						</div>
 					</div>
 				</div>
@@ -521,34 +520,42 @@ body .grid {
 	
 	<section id="search_section" style="padding-top: 70px; ">	
 		<div class="container">
-			<div style="display:inline !important"><h1 style="display:inline !important">300</h1>명의 멘토가 검색되었습니다.</div>
+			<div style="display:inline !important">
+				<h1 style="display:inline !important">300</h1>명의 멘토가 검색되었습니다.
+				
+				( 키워드 : 
+				<div style="color:red; display:inline !important">성별</div>
+				-
+				<div style="color:red; display:inline !important">남성</div>
+				)
+			</div>
 			<br>
 			<br>
 			<div class="row">
 				<div class="col">
-				  <input type="radio" id="control_01" name="select" value="1" data-toggle="modal" data-target="#addressModal">
-				  <label for="control_01">
+				  <input type="radio" id="location_sel" name="select" value="1" data-toggle="modal" data-target="#addressModal">
+				  <label for="location_sel">
 				    <h2>수업지역</h2>
 				    <img class="icon-xxxl" src="${pageContext.request.contextPath}/resources/image/mmatch/ic_search_filter_location.png">
 				  </label>
 				</div>
 				<div class="col">
-				  <input type="radio" id="control_02" name="select" value="2" data-toggle="modal" data-target="#subjectModal">
-				  <label for="control_02">
+				  <input type="radio" id="subject_sel" name="select" value="2" data-toggle="modal" data-target="#subjectModal">
+				  <label for="subject_sel">
 				    <h2>전체과목</h2>
 				    <img class="icon-xxxl" src="${pageContext.request.contextPath}/resources/image/mmatch/ic_search_filter_class.png">
 				 </label>
 				</div>
 				<div class="col">
-				  <input type="radio" id="control_03" name="select" value="3" data-toggle="modal" data-target="#paymentModal">
-				  <label for="control_03">
+				  <input type="radio" id="money_sel" name="select" value="3" data-toggle="modal" data-target="#paymentModal">
+				  <label for="money_sel">
 				    <h2>전체수업료</h2>
 				    <img class="icon-xxxl" src="${pageContext.request.contextPath}/resources/image/mmatch/ic_search_filter_payment.png">
 				 </label>
 				</div>
 				<div class="col">
-				  <input type="radio" id="control_04" name="select" value="4" data-toggle="modal" data-target="#genderModal">
-				  <label for="control_04">
+				  <input type="radio" id="gender_sel" name="select" value="4" data-toggle="modal" data-target="#genderModal">
+				  <label for="gender_sel">
 				    <h2>전체성별</h2>
 				    <img class="icon-xxxl" src="${pageContext.request.contextPath}/resources/image/mmatch/ic_search_filter_sex.png">
 				 </label>
@@ -568,11 +575,7 @@ body .grid {
                         <div class="properties_button">
                             <!--Nav Button  -->
                             <nav>                                                                                                
-                                <div class="nav" id="nav-tab" role="tablist">
-                                    <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">서울특별시</a>
-                                    <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">경기도</a>
-                                    <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false">부산광역시</a>
-                                    <a class="nav-item nav-link" id="nav-last-tab" data-toggle="tab" href="#nav-last" role="tab" aria-controls="nav-contact" aria-selected="false">대구광역시</a>
+                                <div class="nav" id="nav-tab-si" role="tablist">
                                 </div>
                             </nav>
                             <!--End Nav Button  -->
@@ -580,429 +583,14 @@ body .grid {
                 	</div>
                 	<br>
 					<div class="grid">
-						<label class="card">
-							<input class="card__input" type="checkbox"/>
-				        	<div class="card__body">
-				            	<div class="card__body-cover">
-					            	<img class="card__body-cover-image" src="${pageContext.request.contextPath}/resources/image/mmatch/town_all.png" />
-					            	<span class="card__body-cover-checkbox"> 
-					            		<svg class="card__body-cover-checkbox--svg" viewBox="0 0 12 10">
-					                		<polyline points="1.5 6 4.5 9 10.5 1"></polyline>
-					                    </svg>
-					                 </span>
-				                </div>
-					            <header class="card__body-header">
-					                <h2 class="card__body-header-title">전체</h2>
-					            </header>
-				        	</div>
-				    	</label>
-				    	<label class="card">
-							<input class="card__input" type="checkbox"/>
-				        	<div class="card__body">
-				            	<div class="card__body-cover">
-					            	<img class="card__body-cover-image" src="${pageContext.request.contextPath}/resources/image/mmatch/town_gungu.jpg" />
-					            	<span class="card__body-cover-checkbox"> 
-					            		<svg class="card__body-cover-checkbox--svg" viewBox="0 0 12 10">
-					                		<polyline points="1.5 6 4.5 9 10.5 1"></polyline>
-					                    </svg>
-					                 </span>
-				                </div>
-					            <header class="card__body-header">
-					                <h2 class="card__body-header-title">성북구</h2>
-					            </header>
-				        	</div>
-				    	</label>
-				    	<label class="card">
-							<input class="card__input" type="checkbox"/>
-				        	<div class="card__body">
-				            	<div class="card__body-cover">
-					            	<img class="card__body-cover-image" src="${pageContext.request.contextPath}/resources/image/mmatch/town_gungu.jpg" />
-					            	<span class="card__body-cover-checkbox"> 
-					            		<svg class="card__body-cover-checkbox--svg" viewBox="0 0 12 10">
-					                		<polyline points="1.5 6 4.5 9 10.5 1"></polyline>
-					                    </svg>
-					                 </span>
-				                </div>
-					            <header class="card__body-header">
-					                <h2 class="card__body-header-title">도봉구</h2>
-					            </header>
-				        	</div>
-				    	</label>
-				    	<label class="card">
-							<input class="card__input" type="checkbox"/>
-				        	<div class="card__body">
-				            	<div class="card__body-cover">
-					            	<img class="card__body-cover-image" src="${pageContext.request.contextPath}/resources/image/mmatch/town_gungu.jpg" />
-					            	<span class="card__body-cover-checkbox"> 
-					            		<svg class="card__body-cover-checkbox--svg" viewBox="0 0 12 10">
-					                		<polyline points="1.5 6 4.5 9 10.5 1"></polyline>
-					                    </svg>
-					                 </span>
-				                </div>
-					            <header class="card__body-header">
-					                <h2 class="card__body-header-title">서대문구</h2>
-					            </header>
-				        	</div>
-				    	</label>
-				    	<label class="card">
-							<input class="card__input" type="checkbox"/>
-				        	<div class="card__body">
-				            	<div class="card__body-cover">
-					            	<img class="card__body-cover-image" src="${pageContext.request.contextPath}/resources/image/mmatch/town_gungu.jpg" />
-					            	<span class="card__body-cover-checkbox"> 
-					            		<svg class="card__body-cover-checkbox--svg" viewBox="0 0 12 10">
-					                		<polyline points="1.5 6 4.5 9 10.5 1"></polyline>
-					                    </svg>
-					                 </span>
-				                </div>
-					            <header class="card__body-header">
-					                <h2 class="card__body-header-title">영등포구</h2>
-					            </header>
-				        	</div>
-				    	</label>
-				    	<label class="card">
-							<input class="card__input" type="checkbox"/>
-				        	<div class="card__body">
-				            	<div class="card__body-cover">
-					            	<img class="card__body-cover-image" src="${pageContext.request.contextPath}/resources/image/mmatch/town_gungu.jpg" />
-					            	<span class="card__body-cover-checkbox"> 
-					            		<svg class="card__body-cover-checkbox--svg" viewBox="0 0 12 10">
-					                		<polyline points="1.5 6 4.5 9 10.5 1"></polyline>
-					                    </svg>
-					                 </span>
-				                </div>
-					            <header class="card__body-header">
-					                <h2 class="card__body-header-title">강북구</h2>
-					            </header>
-				        	</div>
-				    	</label>
-				    					    	<label class="card">
-							<input class="card__input" type="checkbox"/>
-				        	<div class="card__body">
-				            	<div class="card__body-cover">
-					            	<img class="card__body-cover-image" src="${pageContext.request.contextPath}/resources/image/mmatch/town_gungu.jpg" />
-					            	<span class="card__body-cover-checkbox"> 
-					            		<svg class="card__body-cover-checkbox--svg" viewBox="0 0 12 10">
-					                		<polyline points="1.5 6 4.5 9 10.5 1"></polyline>
-					                    </svg>
-					                 </span>
-				                </div>
-					            <header class="card__body-header">
-					                <h2 class="card__body-header-title">마포구</h2>
-					            </header>
-				        	</div>
-				    	</label>
-				    	<label class="card">
-							<input class="card__input" type="checkbox"/>
-				        	<div class="card__body">
-				            	<div class="card__body-cover">
-					            	<img class="card__body-cover-image" src="${pageContext.request.contextPath}/resources/image/mmatch/town_gungu.jpg" />
-					            	<span class="card__body-cover-checkbox"> 
-					            		<svg class="card__body-cover-checkbox--svg" viewBox="0 0 12 10">
-					                		<polyline points="1.5 6 4.5 9 10.5 1"></polyline>
-					                    </svg>
-					                 </span>
-				                </div>
-					            <header class="card__body-header">
-					                <h2 class="card__body-header-title">중구</h2>
-					            </header>
-				        	</div>
-				    	</label>
-				    	<label class="card">
-							<input class="card__input" type="checkbox"/>
-				        	<div class="card__body">
-				            	<div class="card__body-cover">
-					            	<img class="card__body-cover-image" src="${pageContext.request.contextPath}/resources/image/mmatch/town_gungu.jpg" />
-					            	<span class="card__body-cover-checkbox"> 
-					            		<svg class="card__body-cover-checkbox--svg" viewBox="0 0 12 10">
-					                		<polyline points="1.5 6 4.5 9 10.5 1"></polyline>
-					                    </svg>
-					                 </span>
-				                </div>
-					            <header class="card__body-header">
-					                <h2 class="card__body-header-title">강서구</h2>
-					            </header>
-				        	</div>
-				    	</label>
-				    					    	<label class="card">
-							<input class="card__input" type="checkbox"/>
-				        	<div class="card__body">
-				            	<div class="card__body-cover">
-					            	<img class="card__body-cover-image" src="${pageContext.request.contextPath}/resources/image/mmatch/town_gungu.jpg" />
-					            	<span class="card__body-cover-checkbox"> 
-					            		<svg class="card__body-cover-checkbox--svg" viewBox="0 0 12 10">
-					                		<polyline points="1.5 6 4.5 9 10.5 1"></polyline>
-					                    </svg>
-					                 </span>
-				                </div>
-					            <header class="card__body-header">
-					                <h2 class="card__body-header-title">관악구</h2>
-					            </header>
-				        	</div>
-				    	</label>
-				    	<label class="card">
-							<input class="card__input" type="checkbox"/>
-				        	<div class="card__body">
-				            	<div class="card__body-cover">
-					            	<img class="card__body-cover-image" src="${pageContext.request.contextPath}/resources/image/mmatch/town_gungu.jpg" />
-					            	<span class="card__body-cover-checkbox"> 
-					            		<svg class="card__body-cover-checkbox--svg" viewBox="0 0 12 10">
-					                		<polyline points="1.5 6 4.5 9 10.5 1"></polyline>
-					                    </svg>
-					                 </span>
-				                </div>
-					            <header class="card__body-header">
-					                <h2 class="card__body-header-title">구로구</h2>
-					            </header>
-				        	</div>
-				    	</label>
-				    	<label class="card">
-							<input class="card__input" type="checkbox"/>
-				        	<div class="card__body">
-				            	<div class="card__body-cover">
-					            	<img class="card__body-cover-image" src="${pageContext.request.contextPath}/resources/image/mmatch/town_gungu.jpg" />
-					            	<span class="card__body-cover-checkbox"> 
-					            		<svg class="card__body-cover-checkbox--svg" viewBox="0 0 12 10">
-					                		<polyline points="1.5 6 4.5 9 10.5 1"></polyline>
-					                    </svg>
-					                 </span>
-				                </div>
-					            <header class="card__body-header">
-					                <h2 class="card__body-header-title">동작구</h2>
-					            </header>
-				        	</div>
-				    	</label>
-				    					    	<label class="card">
-							<input class="card__input" type="checkbox"/>
-				        	<div class="card__body">
-				            	<div class="card__body-cover">
-					            	<img class="card__body-cover-image" src="${pageContext.request.contextPath}/resources/image/mmatch/town_gungu.jpg" />
-					            	<span class="card__body-cover-checkbox"> 
-					            		<svg class="card__body-cover-checkbox--svg" viewBox="0 0 12 10">
-					                		<polyline points="1.5 6 4.5 9 10.5 1"></polyline>
-					                    </svg>
-					                 </span>
-				                </div>
-					            <header class="card__body-header">
-					                <h2 class="card__body-header-title">송파구</h2>
-					            </header>
-				        	</div>
-				    	</label>
-				    	<label class="card">
-							<input class="card__input" type="checkbox"/>
-				        	<div class="card__body">
-				            	<div class="card__body-cover">
-					            	<img class="card__body-cover-image" src="${pageContext.request.contextPath}/resources/image/mmatch/town_gungu.jpg" />
-					            	<span class="card__body-cover-checkbox"> 
-					            		<svg class="card__body-cover-checkbox--svg" viewBox="0 0 12 10">
-					                		<polyline points="1.5 6 4.5 9 10.5 1"></polyline>
-					                    </svg>
-					                 </span>
-				                </div>
-					            <header class="card__body-header">
-					                <h2 class="card__body-header-title">노원구</h2>
-					            </header>
-				        	</div>
-				    	</label>
-				    	<label class="card">
-							<input class="card__input" type="checkbox"/>
-				        	<div class="card__body">
-				            	<div class="card__body-cover">
-					            	<img class="card__body-cover-image" src="${pageContext.request.contextPath}/resources/image/mmatch/town_gungu.jpg" />
-					            	<span class="card__body-cover-checkbox"> 
-					            		<svg class="card__body-cover-checkbox--svg" viewBox="0 0 12 10">
-					                		<polyline points="1.5 6 4.5 9 10.5 1"></polyline>
-					                    </svg>
-					                 </span>
-				                </div>
-					            <header class="card__body-header">
-					                <h2 class="card__body-header-title">양천구</h2>
-					            </header>
-				        	</div>
-				    	</label>
-				    					    	<label class="card">
-							<input class="card__input" type="checkbox"/>
-				        	<div class="card__body">
-				            	<div class="card__body-cover">
-					            	<img class="card__body-cover-image" src="${pageContext.request.contextPath}/resources/image/mmatch/town_gungu.jpg" />
-					            	<span class="card__body-cover-checkbox"> 
-					            		<svg class="card__body-cover-checkbox--svg" viewBox="0 0 12 10">
-					                		<polyline points="1.5 6 4.5 9 10.5 1"></polyline>
-					                    </svg>
-					                 </span>
-				                </div>
-					            <header class="card__body-header">
-					                <h2 class="card__body-header-title">은평구</h2>
-					            </header>
-				        	</div>
-				    	</label>
-				    	<label class="card">
-							<input class="card__input" type="checkbox"/>
-				        	<div class="card__body">
-				            	<div class="card__body-cover">
-					            	<img class="card__body-cover-image" src="${pageContext.request.contextPath}/resources/image/mmatch/town_gungu.jpg" />
-					            	<span class="card__body-cover-checkbox"> 
-					            		<svg class="card__body-cover-checkbox--svg" viewBox="0 0 12 10">
-					                		<polyline points="1.5 6 4.5 9 10.5 1"></polyline>
-					                    </svg>
-					                 </span>
-				                </div>
-					            <header class="card__body-header">
-					                <h2 class="card__body-header-title">강남구</h2>
-					            </header>
-				        	</div>
-				    	</label>
-				    	<label class="card">
-							<input class="card__input" type="checkbox"/>
-				        	<div class="card__body">
-				            	<div class="card__body-cover">
-					            	<img class="card__body-cover-image" src="${pageContext.request.contextPath}/resources/image/mmatch/town_gungu.jpg" />
-					            	<span class="card__body-cover-checkbox"> 
-					            		<svg class="card__body-cover-checkbox--svg" viewBox="0 0 12 10">
-					                		<polyline points="1.5 6 4.5 9 10.5 1"></polyline>
-					                    </svg>
-					                 </span>
-				                </div>
-					            <header class="card__body-header">
-					                <h2 class="card__body-header-title">용산구</h2>
-					            </header>
-				        	</div>
-				    	</label>
-				    					    	<label class="card">
-							<input class="card__input" type="checkbox"/>
-				        	<div class="card__body">
-				            	<div class="card__body-cover">
-					            	<img class="card__body-cover-image" src="${pageContext.request.contextPath}/resources/image/mmatch/town_gungu.jpg" />
-					            	<span class="card__body-cover-checkbox"> 
-					            		<svg class="card__body-cover-checkbox--svg" viewBox="0 0 12 10">
-					                		<polyline points="1.5 6 4.5 9 10.5 1"></polyline>
-					                    </svg>
-					                 </span>
-				                </div>
-					            <header class="card__body-header">
-					                <h2 class="card__body-header-title">종로구</h2>
-					            </header>
-				        	</div>
-				    	</label>
-				    	<label class="card">
-							<input class="card__input" type="checkbox"/>
-				        	<div class="card__body">
-				            	<div class="card__body-cover">
-					            	<img class="card__body-cover-image" src="${pageContext.request.contextPath}/resources/image/mmatch/town_gungu.jpg" />
-					            	<span class="card__body-cover-checkbox"> 
-					            		<svg class="card__body-cover-checkbox--svg" viewBox="0 0 12 10">
-					                		<polyline points="1.5 6 4.5 9 10.5 1"></polyline>
-					                    </svg>
-					                 </span>
-				                </div>
-					            <header class="card__body-header">
-					                <h2 class="card__body-header-title">강동구</h2>
-					            </header>
-				        	</div>
-				    	</label>
-				    	<label class="card">
-							<input class="card__input" type="checkbox"/>
-				        	<div class="card__body">
-				            	<div class="card__body-cover">
-					            	<img class="card__body-cover-image" src="${pageContext.request.contextPath}/resources/image/mmatch/town_gungu.jpg" />
-					            	<span class="card__body-cover-checkbox"> 
-					            		<svg class="card__body-cover-checkbox--svg" viewBox="0 0 12 10">
-					                		<polyline points="1.5 6 4.5 9 10.5 1"></polyline>
-					                    </svg>
-					                 </span>
-				                </div>
-					            <header class="card__body-header">
-					                <h2 class="card__body-header-title">광진구</h2>
-					            </header>
-				        	</div>
-				    	</label>
-				    					    	<label class="card">
-							<input class="card__input" type="checkbox"/>
-				        	<div class="card__body">
-				            	<div class="card__body-cover">
-					            	<img class="card__body-cover-image" src="${pageContext.request.contextPath}/resources/image/mmatch/town_gungu.jpg" />
-					            	<span class="card__body-cover-checkbox"> 
-					            		<svg class="card__body-cover-checkbox--svg" viewBox="0 0 12 10">
-					                		<polyline points="1.5 6 4.5 9 10.5 1"></polyline>
-					                    </svg>
-					                 </span>
-				                </div>
-					            <header class="card__body-header">
-					                <h2 class="card__body-header-title">금천구</h2>
-					            </header>
-				        	</div>
-				    	</label>
-				    	<label class="card">
-							<input class="card__input" type="checkbox"/>
-				        	<div class="card__body">
-				            	<div class="card__body-cover">
-					            	<img class="card__body-cover-image" src="${pageContext.request.contextPath}/resources/image/mmatch/town_gungu.jpg" />
-					            	<span class="card__body-cover-checkbox"> 
-					            		<svg class="card__body-cover-checkbox--svg" viewBox="0 0 12 10">
-					                		<polyline points="1.5 6 4.5 9 10.5 1"></polyline>
-					                    </svg>
-					                 </span>
-				                </div>
-					            <header class="card__body-header">
-					                <h2 class="card__body-header-title">서초구</h2>
-					            </header>
-				        	</div>
-				    	</label>
-				    	<label class="card">
-							<input class="card__input" type="checkbox"/>
-				        	<div class="card__body">
-				            	<div class="card__body-cover">
-					            	<img class="card__body-cover-image" src="${pageContext.request.contextPath}/resources/image/mmatch/town_gungu.jpg" />
-					            	<span class="card__body-cover-checkbox"> 
-					            		<svg class="card__body-cover-checkbox--svg" viewBox="0 0 12 10">
-					                		<polyline points="1.5 6 4.5 9 10.5 1"></polyline>
-					                    </svg>
-					                 </span>
-				                </div>
-					            <header class="card__body-header">
-					                <h2 class="card__body-header-title">동대문구</h2>
-					            </header>
-				        	</div>
-				    	</label>
-				    					    	<label class="card">
-							<input class="card__input" type="checkbox"/>
-				        	<div class="card__body">
-				            	<div class="card__body-cover">
-					            	<img class="card__body-cover-image" src="${pageContext.request.contextPath}/resources/image/mmatch/town_gungu.jpg" />
-					            	<span class="card__body-cover-checkbox"> 
-					            		<svg class="card__body-cover-checkbox--svg" viewBox="0 0 12 10">
-					                		<polyline points="1.5 6 4.5 9 10.5 1"></polyline>
-					                    </svg>
-					                 </span>
-				                </div>
-					            <header class="card__body-header">
-					                <h2 class="card__body-header-title">성동구</h2>
-					            </header>
-				        	</div>
-				    	</label>
-				    	<label class="card">
-							<input class="card__input" type="checkbox"/>
-				        	<div class="card__body">
-				            	<div class="card__body-cover">
-					            	<img class="card__body-cover-image" src="${pageContext.request.contextPath}/resources/image/mmatch/town_gungu.jpg" />
-					            	<span class="card__body-cover-checkbox"> 
-					            		<svg class="card__body-cover-checkbox--svg" viewBox="0 0 12 10">
-					                		<polyline points="1.5 6 4.5 9 10.5 1"></polyline>
-					                    </svg>
-					                 </span>
-				                </div>
-					            <header class="card__body-header">
-					                <h2 class="card__body-header-title">중랑구</h2>
-					            </header>
-				        	</div>
-				    	</label>
-
 				    </div>
 				    <hr>
+				    <input type="hidden" value="location_sel">
 				    <div class="mt-40">
-						<button style="width:48%" type="button" class="genric-btn info circle" data-dismiss="modal">검색하기</button>
-						<button style="width:48%" type="button" class="genric-btn danger  circle" data-dismiss="modal">취소하기</button>
+						<button style="width:48%" type="button" class="genric-btn info circle" data-dismiss="modal" onclick="javascript:search();">검색하기</button>
+						<button style="width:48%" type="button" class="genric-btn danger  circle" data-dismiss="modal" onclick="javascript:searchCancel();">취소하기</button>
 					</div>
+					
 					<br>
 				</div>
 			</div>
@@ -1010,355 +598,36 @@ body .grid {
 	</div> 
 	
 	
-	
 	<!-- 과목 필터 modal -->
-	<div class="modal" id="subjectModal">
+  	<div class="modal" id="subjectModal">
 		<div class="modal-dialog">
 			<div class="modal-content scroll type2">
 				<div class="container">
 					<br><h4 class=mb-30>과목</h4><hr>
-					<h6 style="text-align:left" class=mb-30>구기운동</h6>
+					<div class="row product-btn d-flex justify-content-between">
+                        <div class="properties_button">
+                            <nav>                                                                                                
+                                <div class="nav" id="nav-tab-lgsubject" role="tablist">
+                                </div>
+                            </nav>
+                        </div>
+                	</div>
+                	<br>
 					<div class="grid">
-						<label class="card">
-							<input class="card__input" type="checkbox"/>
-				        	<div class="card__body">
-				            	<div class="card__body-cover">
-					            	<img class="card__body-cover-image" src="${pageContext.request.contextPath}/resources/image/mmatch/category_footsal.jpg" />
-					            	<span class="card__body-cover-checkbox"> 
-					            		<svg class="card__body-cover-checkbox--svg" viewBox="0 0 12 10">
-					                		<polyline points="1.5 6 4.5 9 10.5 1"></polyline>
-					                    </svg>
-					                 </span>
-				                </div>
-					            <header class="card__body-header">
-					                <h2 class="card__body-header-title">풋살</h2>
-					            </header>
-				        	</div>
-				    	</label>
-				    	<label class="card">
-							<input class="card__input" type="checkbox"/>
-				        	<div class="card__body">
-				            	<div class="card__body-cover">
-					            	<img class="card__body-cover-image" src="${pageContext.request.contextPath}/resources/image/mmatch/category_soccer.jpg"/>
-					            	<span class="card__body-cover-checkbox"> 
-					            		<svg class="card__body-cover-checkbox--svg" viewBox="0 0 12 10">
-					                		<polyline points="1.5 6 4.5 9 10.5 1"></polyline>
-					                    </svg>
-					                 </span>
-				                </div>
-					            <header class="card__body-header">
-					                <h2 class="card__body-header-title">축구</h2>
-					            </header>
-				        	</div>
-				    	</label>
-				    	<label class="card">
-							<input class="card__input" type="checkbox"/>
-				        	<div class="card__body">
-				            	<div class="card__body-cover">
-					            	<img class="card__body-cover-image" src="${pageContext.request.contextPath}/resources/image/mmatch/category_baseball.jpg" />
-					            	<span class="card__body-cover-checkbox"> 
-					            		<svg class="card__body-cover-checkbox--svg" viewBox="0 0 12 10">
-					                		<polyline points="1.5 6 4.5 9 10.5 1"></polyline>
-					                    </svg>
-					                 </span>
-				                </div>
-					            <header class="card__body-header">
-					                <h2 class="card__body-header-title">야구</h2>
-					            </header>
-				        	</div>
-				    	</label>
-				    	<label class="card">
-							<input class="card__input" type="checkbox"/>
-				        	<div class="card__body">
-				            	<div class="card__body-cover">
-					            	<img class="card__body-cover-image" src="${pageContext.request.contextPath}/resources/image/mmatch/category_basktball.jpg" />
-					            	<span class="card__body-cover-checkbox"> 
-					            		<svg class="card__body-cover-checkbox--svg" viewBox="0 0 12 10">
-					                		<polyline points="1.5 6 4.5 9 10.5 1"></polyline>
-					                    </svg>
-					                 </span>
-				                </div>
-					            <header class="card__body-header">
-					                <h2 class="card__body-header-title">농구</h2>
-					            </header>
-				        	</div>
-				    	</label>
-				    	<label class="card">
-							<input class="card__input" type="checkbox"/>
-				        	<div class="card__body">
-				            	<div class="card__body-cover">
-					            	<img class="card__body-cover-image" src="${pageContext.request.contextPath}/resources/image/mmatch/category_badminton.jpg" />
-					            	<span class="card__body-cover-checkbox"> 
-					            		<svg class="card__body-cover-checkbox--svg" viewBox="0 0 12 10">
-					                		<polyline points="1.5 6 4.5 9 10.5 1"></polyline>
-					                    </svg>
-					                 </span>
-				                </div>
-					            <header class="card__body-header">
-					                <h2 class="card__body-header-title">배드민턴</h2>
-					            </header>
-				        	</div>
-				    	</label>
-				    	<label class="card">
-							<input class="card__input" type="checkbox"/>
-				        	<div class="card__body">
-				            	<div class="card__body-cover">
-					            	<img class="card__body-cover-image" src="${pageContext.request.contextPath}/resources/image/mmatch/category_tennis.jpg" />
-					            	<span class="card__body-cover-checkbox"> 
-					            		<svg class="card__body-cover-checkbox--svg" viewBox="0 0 12 10">
-					                		<polyline points="1.5 6 4.5 9 10.5 1"></polyline>
-					                    </svg>
-					                 </span>
-				                </div>
-					            <header class="card__body-header">
-					                <h2 class="card__body-header-title">테니스</h2>
-					            </header>
-				        	</div>
-				    	</label>
-				    	<label class="card">
-							<input class="card__input" type="checkbox"/>
-				        	<div class="card__body">
-				            	<div class="card__body-cover">
-					            	<img class="card__body-cover-image" src="${pageContext.request.contextPath}/resources/image/mmatch/category_pingpong.jpg" />
-					            	<span class="card__body-cover-checkbox"> 
-					            		<svg class="card__body-cover-checkbox--svg" viewBox="0 0 12 10">
-					                		<polyline points="1.5 6 4.5 9 10.5 1"></polyline>
-					                    </svg>
-					                 </span>
-				                </div>
-					            <header class="card__body-header">
-					                <h2 class="card__body-header-title">탁구</h2>
-					            </header>
-				        	</div>
-				    	</label>
-				    	<label class="card">
-							<input class="card__input" type="checkbox"/>
-				        	<div class="card__body">
-				            	<div class="card__body-cover">
-					            	<img class="card__body-cover-image" src="${pageContext.request.contextPath}/resources/image/mmatch/category_golf.jpg" />
-					            	<span class="card__body-cover-checkbox"> 
-					            		<svg class="card__body-cover-checkbox--svg" viewBox="0 0 12 10">
-					                		<polyline points="1.5 6 4.5 9 10.5 1"></polyline>
-					                    </svg>
-					                 </span>
-				                </div>
-					            <header class="card__body-header">
-					                <h2 class="card__body-header-title">골프</h2>
-					            </header>
-				        	</div>
-				    	</label>
 				    </div>
 				    <hr>
-				    <h6 style="text-align:left" class=mb-30>기구운동</h6>
-					<div class="grid">
-						<label class="card">
-							<input class="card__input" type="checkbox"/>
-				        	<div class="card__body">
-				            	<div class="card__body-cover">
-					            	<img class="card__body-cover-image" src="${pageContext.request.contextPath}/resources/image/mmatch/category_health.jpg" />
-					            	<span class="card__body-cover-checkbox"> 
-					            		<svg class="card__body-cover-checkbox--svg" viewBox="0 0 12 10">
-					                		<polyline points="1.5 6 4.5 9 10.5 1"></polyline>
-					                    </svg>
-					                 </span>
-				                </div>
-					            <header class="card__body-header">
-					                <h2 class="card__body-header-title">헬스</h2>
-					            </header>
-				        	</div>
-				    	</label>
-				    	<label class="card">
-							<input class="card__input" type="checkbox"/>
-				        	<div class="card__body">
-				            	<div class="card__body-cover">
-					            	<img class="card__body-cover-image" src="${pageContext.request.contextPath}/resources/image/mmatch/category_crossfit.jpg" />
-					            	<span class="card__body-cover-checkbox"> 
-					            		<svg class="card__body-cover-checkbox--svg" viewBox="0 0 12 10">
-					                		<polyline points="1.5 6 4.5 9 10.5 1"></polyline>
-					                    </svg>
-					                 </span>
-				                </div>
-					            <header class="card__body-header">
-					                <h2 class="card__body-header-title">크로스핏</h2>
-					            </header>
-				        	</div>
-				    	</label>
-				    	<label class="card">
-							<input class="card__input" type="checkbox"/>
-				        	<div class="card__body">
-				            	<div class="card__body-cover">
-					            	<img class="card__body-cover-image" src="${pageContext.request.contextPath}/resources/image/mmatch/category_spinning.jpg" />
-					            	<span class="card__body-cover-checkbox"> 
-					            		<svg class="card__body-cover-checkbox--svg" viewBox="0 0 12 10">
-					                		<polyline points="1.5 6 4.5 9 10.5 1"></polyline>
-					                    </svg>
-					                 </span>
-				                </div>
-					            <header class="card__body-header">
-					                <h2 class="card__body-header-title">스피닝</h2>
-					            </header>
-				        	</div>
-				    	</label>
-				    	<label class="card">
-							<input class="card__input" type="checkbox"/>
-				        	<div class="card__body">
-				            	<div class="card__body-cover">
-					            	<img class="card__body-cover-image" src="${pageContext.request.contextPath}/resources/image/mmatch/category_cycle.jpg" />
-					            	<span class="card__body-cover-checkbox"> 
-					            		<svg class="card__body-cover-checkbox--svg" viewBox="0 0 12 10">
-					                		<polyline points="1.5 6 4.5 9 10.5 1"></polyline>
-					                    </svg>
-					                 </span>
-				                </div>
-					            <header class="card__body-header">
-					                <h2 class="card__body-header-title">사이클</h2>
-					            </header>
-				        	</div>
-				    	</label>
-				    	<label class="card">
-							<input class="card__input" type="checkbox"/>
-				        	<div class="card__body">
-				            	<div class="card__body-cover">
-					            	<img class="card__body-cover-image" src="${pageContext.request.contextPath}/resources/image/mmatch/category_surfing.jpg" />
-					            	<span class="card__body-cover-checkbox"> 
-					            		<svg class="card__body-cover-checkbox--svg" viewBox="0 0 12 10">
-					                		<polyline points="1.5 6 4.5 9 10.5 1"></polyline>
-					                    </svg>
-					                 </span>
-				                </div>
-					            <header class="card__body-header">
-					                <h2 class="card__body-header-title">서핑</h2>
-					            </header>
-				        	</div>
-				    	</label>
-				    </div>
-				    <hr>
-				    <h6 style="text-align:left" class=mb-30>맨몸운동</h6>
-					<div class="grid">
-						<label class="card">
-							<input class="card__input" type="checkbox"/>
-				        	<div class="card__body">
-				            	<div class="card__body-cover">
-					            	<img class="card__body-cover-image" src="${pageContext.request.contextPath}/resources/image/mmatch/category_yoga.jpg" />
-					            	<span class="card__body-cover-checkbox"> 
-					            		<svg class="card__body-cover-checkbox--svg" viewBox="0 0 12 10">
-					                		<polyline points="1.5 6 4.5 9 10.5 1"></polyline>
-					                    </svg>
-					                 </span>
-				                </div>
-					            <header class="card__body-header">
-					                <h2 class="card__body-header-title">요가</h2>
-					            </header>
-				        	</div>
-				    	</label>
-				    	<label class="card">
-							<input class="card__input" type="checkbox"/>
-				        	<div class="card__body">
-				            	<div class="card__body-cover">
-					            	<img class="card__body-cover-image" src="${pageContext.request.contextPath}/resources/image/mmatch/category_pilates.jpg" />
-					            	<span class="card__body-cover-checkbox"> 
-					            		<svg class="card__body-cover-checkbox--svg" viewBox="0 0 12 10">
-					                		<polyline points="1.5 6 4.5 9 10.5 1"></polyline>
-					                    </svg>
-					                 </span>
-				                </div>
-					            <header class="card__body-header">
-					                <h2 class="card__body-header-title">필라테스</h2>
-					            </header>
-				        	</div>
-				    	</label>
-				    	<label class="card">
-							<input class="card__input" type="checkbox"/>
-				        	<div class="card__body">
-				            	<div class="card__body-cover">
-					            	<img class="card__body-cover-image" src="${pageContext.request.contextPath}/resources/image/mmatch/category_climbing.jpg" />
-					            	<span class="card__body-cover-checkbox"> 
-					            		<svg class="card__body-cover-checkbox--svg" viewBox="0 0 12 10">
-					                		<polyline points="1.5 6 4.5 9 10.5 1"></polyline>
-					                    </svg>
-					                 </span>
-				                </div>
-					            <header class="card__body-header">
-					                <h2 class="card__body-header-title">등산</h2>
-					            </header>
-				        	</div>
-				    	</label>
-				    	<label class="card">
-							<input class="card__input" type="checkbox"/>
-				        	<div class="card__body">
-				            	<div class="card__body-cover">
-					            	<img class="card__body-cover-image" src="${pageContext.request.contextPath}/resources/image/mmatch/category_running.jpg" />
-					            	<span class="card__body-cover-checkbox"> 
-					            		<svg class="card__body-cover-checkbox--svg" viewBox="0 0 12 10">
-					                		<polyline points="1.5 6 4.5 9 10.5 1"></polyline>
-					                    </svg>
-					                 </span>
-				                </div>
-					            <header class="card__body-header">
-					                <h2 class="card__body-header-title">런닝</h2>
-					            </header>
-				        	</div>
-				    	</label>
-				    	<label class="card">
-							<input class="card__input" type="checkbox"/>
-				        	<div class="card__body">
-				            	<div class="card__body-cover">
-					            	<img class="card__body-cover-image" src="${pageContext.request.contextPath}/resources/image/mmatch/category_jiujitsu.jpg" />
-					            	<span class="card__body-cover-checkbox"> 
-					            		<svg class="card__body-cover-checkbox--svg" viewBox="0 0 12 10">
-					                		<polyline points="1.5 6 4.5 9 10.5 1"></polyline>
-					                    </svg>
-					                 </span>
-				                </div>
-					            <header class="card__body-header">
-					                <h2 class="card__body-header-title">주짓수</h2>
-					            </header>
-				        	</div>
-				    	</label>
-				    	<label class="card">
-							<input class="card__input" type="checkbox"/>
-				        	<div class="card__body">
-				            	<div class="card__body-cover">
-					            	<img class="card__body-cover-image" src="${pageContext.request.contextPath}/resources/image/mmatch/category_boxing.jpg" />
-					            	<span class="card__body-cover-checkbox"> 
-					            		<svg class="card__body-cover-checkbox--svg" viewBox="0 0 12 10">
-					                		<polyline points="1.5 6 4.5 9 10.5 1"></polyline>
-					                    </svg>
-					                 </span>
-				                </div>
-					            <header class="card__body-header">
-					                <h2 class="card__body-header-title">복싱</h2>
-					            </header>
-				        	</div>
-				    	</label>
-				    	<label class="card">
-							<input class="card__input" type="checkbox"/>
-				        	<div class="card__body">
-				            	<div class="card__body-cover">
-					            	<img class="card__body-cover-image" src="${pageContext.request.contextPath}/resources/image/mmatch/category_taekwondo.jpg" />
-					            	<span class="card__body-cover-checkbox"> 
-					            		<svg class="card__body-cover-checkbox--svg" viewBox="0 0 12 10">
-					                		<polyline points="1.5 6 4.5 9 10.5 1"></polyline>
-					                    </svg>
-					                 </span>
-				                </div>
-					            <header class="card__body-header">
-					                <h2 class="card__body-header-title">태권도</h2>
-					            </header>
-				        	</div>
-				    	</label>
-				    </div>
-				    <hr>
+				    <input type="hidden" value="subject_sel">
 				    <div class="mt-40">
-						<button style="width:48%" type="button" class="genric-btn info circle" data-dismiss="modal">검색하기</button>
-						<button style="width:48%" type="button" class="genric-btn danger  circle" data-dismiss="modal">취소하기</button>
+						<button style="width:48%" type="button" class="genric-btn info circle" data-dismiss="modal" onclick="javascript:search();">검색하기</button>
+						<button style="width:48%" type="button" class="genric-btn danger  circle" data-dismiss="modal" onclick="javascript:searchCancel();">취소하기</button>
 					</div>
+					
 					<br>
 				</div>
 			</div>
 		</div>
-	</div> 
-	
+	</div>  
+
 	<!-- 수업료 필터 modal -->
 	<div class="modal" id="paymentModal">
 		<div class="modal-dialog">
@@ -1366,38 +635,6 @@ body .grid {
 				<div class="container">
 					<br><h4 class=mb-30>수업료</h4><hr>
 					<div class="grid">
-						<label class="card">
-							<input class="card__input" type="checkbox"/>
-				        	<div class="card__body">
-				            	<div class="card__body-cover">
-					            	<img class="card__body-cover-image" src="${pageContext.request.contextPath}/resources/image/mmatch/money_all.png" />
-					            	<span class="card__body-cover-checkbox"> 
-					            		<svg class="card__body-cover-checkbox--svg" viewBox="0 0 12 10">
-					                		<polyline points="1.5 6 4.5 9 10.5 1"></polyline>
-					                    </svg>
-					                 </span>
-				                </div>
-					            <header class="card__body-header">
-					                <h2 class="card__body-header-title">전체</h2>
-					            </header>
-				        	</div>
-				    	</label>
-				    	<label class="card">
-							<input class="card__input" type="checkbox"/>
-				        	<div class="card__body">
-				            	<div class="card__body-cover">
-					            	<img class="card__body-cover-image" src="${pageContext.request.contextPath}/resources/image/mmatch/money_no.png" />
-					            	<span class="card__body-cover-checkbox"> 
-					            		<svg class="card__body-cover-checkbox--svg" viewBox="0 0 12 10">
-					                		<polyline points="1.5 6 4.5 9 10.5 1"></polyline>
-					                    </svg>
-					                 </span>
-				                </div>
-					            <header class="card__body-header">
-					                <h2 class="card__body-header-title">재능기부</h2>
-					            </header>
-				        	</div>
-				    	</label>
 				    	<label class="card">
 							<input class="card__input" type="checkbox"/>
 				        	<div class="card__body">
@@ -1414,9 +651,6 @@ body .grid {
 					            </header>
 				        	</div>
 				    	</label>
-				    </div>
-				    <hr>
-				    <div class="grid">
 						<label class="card">
 							<input class="card__input" type="checkbox"/>
 				        	<div class="card__body">
@@ -1465,9 +699,6 @@ body .grid {
 					            </header>
 				        	</div>
 				    	</label>
-				    </div>
-				    <hr>
-				    <div class="grid">
 						<label class="card">
 							<input class="card__input" type="checkbox"/>
 				        	<div class="card__body">
@@ -1517,18 +748,18 @@ body .grid {
 				        	</div>
 				    	</label>
 				    </div>
-				    <hr>
+
+				    <hr>  
+				    <input type="hidden" value="money_sel">  
 				    <div class="mt-40">
-						<button style="width:48%" type="button" class="genric-btn info circle" data-dismiss="modal">검색하기</button>
-						<button style="width:48%" type="button" class="genric-btn danger  circle" data-dismiss="modal">취소하기</button>
+						<button style="width:48%" type="button" class="genric-btn info circle" data-dismiss="modal" onclick="javascript:search();">검색하기</button>
+						<button style="width:48%" type="button" class="genric-btn danger  circle" data-dismiss="modal" onclick="javascript:searchCancel();">취소하기</button>
 					</div>
 					<br>
 				</div>
 			</div>
 		</div>
 	</div> 
-	
-	
 	
 	<!-- 성별 필터 modal -->
 	<div class="modal" id="genderModal">
@@ -1537,22 +768,6 @@ body .grid {
 				<div class="container">
 					<br><h4 class=mb-30>성별</h4><hr>
 					<div class="grid">
-						<label class="card">
-							<input class="card__input" type="checkbox"/>
-				        	<div class="card__body">
-				            	<div class="card__body-cover">
-					            	<img class="card__body-cover-image" src="${pageContext.request.contextPath}/resources/image/mmatch/gender_all.jpg" />
-					            	<span class="card__body-cover-checkbox"> 
-					            		<svg class="card__body-cover-checkbox--svg" viewBox="0 0 12 10">
-					                		<polyline points="1.5 6 4.5 9 10.5 1"></polyline>
-					                    </svg>
-					                 </span>
-				                </div>
-					            <header class="card__body-header">
-					                <h2 class="card__body-header-title">전체 성별</h2>
-					            </header>
-				        	</div>
-				    	</label>
 				    	<label class="card">
 							<input class="card__input" type="checkbox"/>
 				        	<div class="card__body">
@@ -1587,9 +802,10 @@ body .grid {
 				    	</label>
 				    </div>
 				    <hr>
+				    <input type="hidden" value="gender_sel">  
 				    <div class="mt-40">
-						<button style="width:48%" type="button" class="genric-btn info circle" data-dismiss="modal">검색하기</button>
-						<button style="width:48%" type="button" class="genric-btn danger  circle" data-dismiss="modal">취소하기</button>
+						<button style="width:48%" type="button" class="genric-btn info circle" data-dismiss="modal" onclick="javascript:search();">검색하기</button>
+						<button style="width:48%" type="button" class="genric-btn danger circle" data-dismiss="modal" onclick="javascript:searchCancel();">취소하기</button>
 					</div>
 					<br>
 				</div>
@@ -1599,7 +815,6 @@ body .grid {
 	
 	<!-- Latest Products Start -->
 	<section class="latest-product-area latest-padding" style="padding-top: 70px;">
-		
 		<div class="container">
 			<hr><br><br><br>
 			<div class="tab-content" id="nav-tabContent">
@@ -1925,22 +1140,265 @@ body .grid {
 		</div>
 	</div> 
 	
-	
-	
 	</main>
 	<!-- Footer 영역  -->
 	<jsp:include page="/WEB-INF/views/sport_comm/footer.jsp"/>
 	
-
-	
     <script>
-      	$('#sel1125 > p').click(function(){
-      		console.log($(this).text());
-      		$('#sel1125').css("display","none");
-      		$('#sel1126').text($(this).text());
-      	});
-      	
-      	
+	    $(function(){
+	    	//페이지로딩시 수업지역검색 modal의 기본 표시는 [서울특별시]이므로 서울 관련 모달 화면을 구성
+	    	getCityList();
+	    	getGunguList($('#nav-tab-si').children().eq(0).text());
+	    	
+	    	//페이지로딩시 전체과목검색 modal의 기본 표시는 [구기종목]이므로 구기종목 관련 모달 화면을 구성
+	    	getlgSubjectList();
+	    	getsubjectList($('#nav-tab-lgsubject').children().eq(0).text());
+
+	    	//수업지역검색 modal에서 시를 선택시 선택색상변경(red)
+			$('#nav-tab-si').on('click','a',function(){
+		    	$('#nav-tab-si > a').removeClass("loc_active");  //미션택 도시 대항목 black색
+		    	$(this).addClass("loc_active");					 //선택된 도시 대항목 red색
+		    	getGunguList($(this).text());					 //선택된 도시 대항목에 대한 modal화면 재구성(ajax)
+		    	$(select).next().removeClass("changed");		 //검색 종류 radio에  파란색 윤곽선이 있으면 제거 
+		    }); 
+	    	
+	    	//전체과목검색 modal에서 대항목을 선택시 선택색상변경(red)
+			$('#nav-tab-lgsubject').on('click','a',function(){
+		    	$('#nav-tab-lgsubject > a').removeClass("loc_active");	//미션택 과목 대항목 black색
+		    	$(this).addClass("loc_active");							//선택돤 과목 대항목 red색
+		    	getsubjectList($(this).text());							//선택된 과목 대항목에 대한 modal화면 재구성(ajax)
+		    	$(select).next().removeClass("changed");				//검색 종류 radio에 파란색 윤곽선이 있으면 제거 
+		    }); 
+	    	
+	    	//검색 조건 modal의 체크박스 클릭 이벤트 처리
+			$('body').on('click', 'input[type=checkbox]',function () {
+				//현재 체크박스가 속한 검색종류 radio를 구함
+				select="#"+$(this).parent().parent().nextAll('input[type=hidden]').val();
+				console.log(select);
+				
+				//체크박스 유무에 따라 radio에 푸른 윤곽선 임팩트 적용
+				if($(this).is(":checked")){
+					console.log("check");
+					$('input[type="radio"] + label').removeClass('changed');
+					$(select).next().addClass("changed");
+					
+					//검색 조건 modal의 checkbox클릭시 다른 checkbox는 전부 false 시킴
+				    $('.modal').find('input[type=checkbox]').not(this).prop("checked",false);
+				}
+				else{
+					console.log("uncheck");
+					$(select).next().removeClass("changed");
+					select ='';
+				}
+			}); 
+/* 	    	
+			$("input[type=hidden] + div > button").on("click", function() { //파일 선택 처리
+				console.log("버튼클릭");
+				$('#genderModal').modal("hide"); //닫기 
+			});
+			
+	    	
+	    	
+ 	    	//modal 창을 닫을 경우 modal을 초기화 시킴
+			$('.modal').on('hidden.bs.modal', function (e) {
+				
+			    console.log('modal close');
+			    //$('.modal').find('input[type=checkbox]').prop("checked",false);
+			});  */
+	    	
+		});
+
+	    
+	    //페이지 로딩되면 지역검색에 대한 시 항목 가져옴 
+		function getCityList(){
+			$.ajax({
+				url : "siList",
+				type : "get", 
+				cache : false,
+				async : false,
+				success : function(data){
+					if(data.length > 0){
+						var output="";
+						
+						//ajax로 가져온 list로 option 구성
+						$(data).each(function(index,item){
+							output +='<a class="nav-item nav-link ';
+							if(index == 0){
+								output+='loc_active';
+							}
+							output +='" id="nav-home-tab"'
+							       	+'   data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home"'
+							       	+'   aria-selected="true">'+item+'</a>';
+                            
+						})
+						
+						//구성한 option을 append
+						$("#nav-tab-si").append(output);
+					}
+				},
+				error : function(){
+					console.log('에러');
+				}
+			});
+		}
+	    
+		//지역검색에 시항목에 해당되는 군/구 정보를 가져옴
+		function getGunguList(selType){
+			console.log("selectType : " + selType);
+			$.ajax({
+				url : "dongList",
+				type : "get", 
+				data : {"selType":selType},
+				dataType : "json",
+				cache : false,
+				async : false,
+				success : function(data){
+					if(data.length > 0){
+						 //기존 군/구 화면을 제거
+						$('#addressModal .grid>label').remove()
+						 
+						var output="";
+						
+						//ajax로 가져온 list로 화면 구성
+						$(data).each(function(index,item){
+							output+='<label class="card">'
+							      +'  <input class="card__input" type="checkbox"/>'
+					        	  +'  <div class="card__body">'
+					              +'    <div class="card__body-cover">'
+						          +'      <img class="card__body-cover-image" src="${pageContext.request.contextPath}/resources/image/mmatch/town_gungu.jpg"/>'
+						          +'      <span class="card__body-cover-checkbox">'
+						          +'  		 <svg class="card__body-cover-checkbox--svg" viewBox="0 0 12 10">'
+						          +'      		<polyline points="1.5 6 4.5 9 10.5 1"></polyline>'
+						          +'         </svg>'
+						          +'      </span>'
+						          +'    </div>'
+						          +'    <header class="card__body-header">'
+						          +'        <h4 class="card__body-header-title">'+item+'</h4>'
+						          +'    </header>'
+						          +'  </div>'
+						          +'</label>';
+						}) 
+						
+						//구성한 요소들을 append
+						$('#addressModal .grid').append(output)
+					}
+				},
+				error : function(){
+					console.log('에러');
+				}
+			});
+		}
+		
+	    //페이지 로딩되면 종목검색에 대한 대항목(구기운동/기구운동/맨몸운동)을가져옴 
+    	function getlgSubjectList(){
+	   		$.ajax({
+   			     async: false,
+   			     dataType: "json",
+   			     url: "../resources/json/mmatch.json",
+   			     success: function (result) {
+   			    	var sport_json = result.sports;
+   			    	var output="";
+   			   		for(var i = 0; i < sport_json.length; i++){
+	   			   		output +='<a class="nav-item nav-link ';
+						if(i == 0){
+							output+='loc_active';
+						}
+						output +='" id="nav-home-tab"'
+						       	+'   data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home"'
+						       	+'   aria-selected="true">'+sport_json[i]+'</a>';
+   			   		}
+   			   		$("#nav-tab-lgsubject").append(output);
+   			     }
+	   		});
+    	}
+	    
+    	//종목검색에 대항목에 해당되는 운동정보(ex-구기운동:축구,야구,농구등등)를 가져옴
+    	function getsubjectList(subject_sel){
+    		var selType;
+    		if(subject_sel =="구기운동"){
+    			selType = 1;
+    		}else if(subject_sel =="기구운동"){
+    			selType = 2;
+    		}else if(subject_sel =="맨몸운동"){
+    			selType = 3;
+    		}
+    		
+    		console.log("종목 Type : " + subject_sel);
+    		console.log("종목 int : " + selType);
+    		$.ajax({
+    			url : "sportDeatilList",
+    			type : "get", 
+    			data : {"selType":selType},
+    			dataType : "json",
+    			cache : false,
+    			success : function(data){
+    				if(data.length > 0){
+						 //기존 종목 화면 제거
+						$('#subjectModal .grid>label').remove()
+						 
+						var output="";
+						
+						//ajax로 가져온 list로 화면 구성
+						$(data).each(function(index,item){
+							output+='<label class="card">'
+							      +'  <input class="card__input" type="checkbox"/>'
+					        	  +'  <div class="card__body">'
+					              +'    <div class="card__body-cover">'
+						          +'      <img class="card__body-cover-image"'
+						          +'             src="${pageContext.request.contextPath}/resources/image/mmatch/'+ item.sports_IMG+'"/>'
+						          +'      <span class="card__body-cover-checkbox">'
+						          +'  		 <svg class="card__body-cover-checkbox--svg" viewBox="0 0 12 10">'
+						          +'      		<polyline points="1.5 6 4.5 9 10.5 1"></polyline>'
+						          +'         </svg>'
+						          +'      </span>'
+						          +'    </div>'
+						          +'    <header class="card__body-header">'
+						          +'        <h2 class="card__body-header-title">'+item.sports_NAME+'</h2>'
+						          +'    </header>'
+						          +'  </div>'
+						          +'</label>';
+						}) 
+							
+	
+						//구성한 요소들을 append
+						$('#subjectModal .grid').append(output)
+    				}
+    			},
+    			error : function(){
+    				console.log('에러');
+    			}
+    		});
+    	}
+    	
+    	
+	    //검색 버튼 클릭시 이벤트
+	    function search(){
+			console.log("검색 클릭");
+			switch(select) {
+			  case '#location_sel':
+					console.log("지역검색 : " + $('#nav-tab-si > a.loc_active').text());
+					console.log($("input[type='checkbox']:checked+div h4").text());
+				    break;
+			  case '#subject_sel':
+					console.log("과목검색");
+					console.log($("input[type='checkbox']:checked+div h2").text());
+				    break;
+			  case '#money_sel':
+					console.log("금액검색");
+					console.log($("input[type='checkbox']:checked+div h2").text());
+				    break;
+			  case '#gender_sel':
+					console.log("성별검색");
+					console.log($("input[type='checkbox']:checked+div h2").text());
+				    break;
+			}
+			
+		}
+	    
+	    //검색 취소 버튼 클릭시 이벤트
+	    function searchCancel(){
+			console.log("검색 취소");
+		}
     </script>
 </body>
 </html>
