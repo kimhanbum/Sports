@@ -16,7 +16,7 @@ public class MydealController {
 			@RequestParam(value="page",defaultValue="1",required=false)int page,
 			 ModelAndView mv) {
 		
-		mv.setViewName("MyDeal/MyDeal_main");
+		mv.setViewName("sports_mypage/mypage_mydeal_main");
 		
 		return mv;
 		

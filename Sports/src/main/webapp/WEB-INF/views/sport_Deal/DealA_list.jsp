@@ -228,7 +228,7 @@ background-color
 				<div class="preloader-circle"></div>
 				<div class="preloader-img pere-text">
 					<img
-						src="${pageContext.request.contextPath}/resources/img/logo/logo.png"
+						src="${pageContext.request.contextPath}/resources/image/logo/sports_logo.png"
 						alt="">
 				</div>
 			</div>
@@ -239,6 +239,7 @@ background-color
 	<!-- 헤더 영역  -->
 	<jsp:include page="/WEB-INF/views/sport_comm/header.jsp" />
 
+	<!-- Preloader Start -->
 	<main> <!-- slider Area Start-->
 	<div class="slider-area ">
 		<!-- Mobile Menu -->
@@ -277,13 +278,45 @@ background-color
 					<form action="#">
 						<div class="select-itms">
 							<div class="center">
-							<select name="sources" id="sources" class="custom-select sources"
-								placeholder="Source Type">
-								<option value="profile">최신순</option>
-								<option value="word">정확순</option>
-								<option value="hashtag">입찰순</option>
-								<option value="hashtag">시작가순</option>
-								<option value="hashtag">현재가순</option>
+							<select name="sources" id="view" 
+							class="custom-select sources"
+								placeholder="Source Type" name="view">
+								<c:if test="${view2 == 1 }">
+								<option value="1">최신순</option>
+								<option value="2">정확순</option>
+								<option value="3">입찰순</option>
+								<option value="4">시작가순</option>
+								<option value="5">현재가순</option>
+								</c:if>
+								<c:if test="${view2 == 2 }">
+								<option value="1">최신순</option>
+								<option value="2" selected>정확순</option>
+								<option value="3">입찰순</option>
+								<option value="4">시작가순</option>
+								<option value="5">현재가순</option>
+								</c:if>
+								<c:if test="${view2 == 3 }">
+								<option value="1">최신순</option>
+								<option value="2">정확순</option>
+								<option value="3" selected>입찰순</option>
+								<option value="4">시작가순</option>
+								<option value="5">현재가순</option>
+								</c:if>
+								<c:if test="${view2 == 4 }">
+								<option value="1">최신순</option>
+								<option value="2">정확순</option>
+								<option value="3">입찰순</option>
+								<option value="4" selected>시작가순</option>
+								<option value="5">현재가순</option>
+								</c:if>
+								<c:if test="${view2 == 5 }">
+								<option value="1">최신순</option>
+								<option value="2">정확순</option>
+								<option value="3">입찰순</option>
+								<option value="4">시작가순</option>
+								<option value="5" selected>현재가순</option>
+								</c:if>
+								
 							</select>
 						</div>
 						</div>
@@ -334,7 +367,7 @@ background-color
 											</tr>
 											<tr>
 												<th>올린시간</th>
-												<td>${b.AUC_DATE}</td>
+												<td>${b.AUC_NOWDATE}</td>
 											</tr>
 
 										</table>
@@ -348,16 +381,14 @@ background-color
 						 $(function() {
 														
 						 	var aucdate = '${b.AUC_DATE}';
-						 	console.log(aucdate)
+						 	
 						 	var dateyear = aucdate.substring(0,4)
 						 	var datemonth = aucdate.substring(5,7)
 						 	var dateday = aucdate.substring(8,10)
-						 	console.log(dateyear)
-						 	console.log(datemonth)
-						 	console.log(dateday)
+						 	
 						 	var number = ${b.AUC_NUMBER}
 						 	var img = "${b.SAVE_AUC_MAINFILE}"
-						 	console.log(number)
+						 	
 						 	
 						 	
 						 	var timeid = "timeback" + number;
@@ -456,23 +487,23 @@ background-color
 
 				</c:if>
 				<c:if test="${page > 1 }">
-					<a href="list?page=${page-1}" id="paging">&laquo;</a>
+					<a href="list?page=${page-1}&view2=${view2}" id="paging">&laquo;</a>
 				</c:if>
 
 				<c:forEach var="a" begin="${startpage}" end="${endpage}">
 
 					<c:if test="${a == page }">
-						<a href="#" id="paging">${a}</a>
+						<a href="#" id="paging1">${a}</a>
 					</c:if>
 					<c:if test="${a != page }">
-						<a href="list?page=${a}" id="paging">${a}</a>
+						<a href="list?page=${a}&view2=${view2}" id="paging2">${a}</a>
 					</c:if>
 				</c:forEach>
 				<c:if test="${page >= maxpage }">
 					<a id="paging">&raquo;</a>
 				</c:if>
 				<c:if test="${page < maxpage }">
-					<a href="list?page=${page+1}" id="paging">&raquo;</a>
+					<a href="list?page=${page+1}&view2=${view2}" id="paging3">&raquo;</a>
 				</c:if>
 					</div>
 
@@ -485,75 +516,37 @@ background-color
 	</section>
 
 
-	> <!-- Latest Offers End --> <!-- Shop Method Start-->
-	<div class="shop-method-area section-padding30">
-		<div class="container">
-			<div class="row d-flex justify-content-between">
-				<div class="col-xl-3 col-lg-3 col-md-6">
-					<div class="single-method mb-40">
-						<i class="ti-package"></i>
-						<h6>Free Shipping Method</h6>
-						<p>aorem ixpsacdolor sit ameasecur adipisicing elitsf edasd.</p>
-					</div>
-				</div>
-				<div class="col-xl-3 col-lg-3 col-md-6">
-					<div class="single-method mb-40">
-						<i class="ti-unlock"></i>
-						<h6>Secure Payment System</h6>
-						<p>aorem ixpsacdolor sit ameasecur adipisicing elitsf edasd.</p>
-					</div>
-				</div>
-				<div class="col-xl-3 col-lg-3 col-md-6">
-					<div class="single-method mb-40">
-						<i class="ti-reload"></i>
-						<h6>Secure Payment System</h6>
-						<p>aorem ixpsacdolor sit ameasecur adipisicing elitsf edasd.</p>
-					</div>
-				</div>
-			</div>
-		</div>
+	
+	
+		
 		<script>
+		function getParameterByName(name) {
+			name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+			var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"), results = regex
+					.exec(location.search);
+			return results == null ? "" : decodeURIComponent(results[1]
+					.replace(/\+/g, " "));
+		}
+
 		function SubmitForm()
         {
 
             form1.submit();
+           
         }
+		
+		$(function() {
+			var page = getParameterByName("page");
+			$("#view").change(function() { //최신순, 등록순, 조회순 변경 시
+				var view = $("#view").val();
+				location.href="list?page="+page +"&view2=" + view;
+				
+			})
+			
+		})
 		</script>
-	</div>
-	<!-- Shop Method End--> <!-- Gallery Start-->
-	<div class="gallery-wrapper lf-padding">
-		<div class="gallery-area">
-			<div class="container-fluid">
-				<div class="row">
-					<div class="gallery-items">
-						<img
-							src="${pageContext.request.contextPath}/resources/img/gallery/gallery1.jpg"
-							alt="">
-					</div>
-					<div class="gallery-items">
-						<img
-							src="${pageContext.request.contextPath}/resources/img/gallery/gallery2.jpg"
-							alt="">
-					</div>
-					<div class="gallery-items">
-						<img
-							src="${pageContext.request.contextPath}/resources/img/gallery/gallery3.jpg"
-							alt="">
-					</div>
-					<div class="gallery-items">
-						<img
-							src="${pageContext.request.contextPath}/resources/img/gallery/gallery4.jpg"
-							alt="">
-					</div>
-					<div class="gallery-items">
-						<img
-							src="${pageContext.request.contextPath}/resources/img/gallery/gallery5.jpg"
-							alt="">
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+	
+	
 	<!-- Gallery End--> </main>
 	<!-- Footer 영역  -->
 	<jsp:include page="/WEB-INF/views/sport_comm/footer2.jsp" />

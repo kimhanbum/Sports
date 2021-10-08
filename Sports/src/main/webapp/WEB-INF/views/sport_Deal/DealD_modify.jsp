@@ -6,6 +6,7 @@
 <head>
 <meta charset="utf-8">
 <meta http-equiv="x-ua-compatible" content="ie=edge">
+<script src = "http://code.jquery.com/jquery-latest.js"></script>
 <title>직거래 글쓰기</title>
 <meta name="description" content="">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -219,7 +220,7 @@ input.checkbox:checked+label.input-label.radio::before {
 			<div class="preloader-inner position-relative">
 				<div class="preloader-circle"></div>
 				<div class="preloader-img pere-text">
-					<img src="${pageContext.request.contextPath}/resources/img/logo/logo.png" alt="">
+					<img src="${pageContext.request.contextPath}/resources/image/logo/sports_logo.png" alt="">
 				</div>
 			</div>
 		</div>
@@ -392,9 +393,10 @@ input.checkbox:checked+label.input-label.radio::before {
 										<input type="submit" value="Submit"
 											class="btn btn-primary py-3 px-5"
 											style="background-color: black; height: 50px"> &emsp;
-										<input type="submit" value="Cancel"
+										<input type="button" value="Cancel"
 											class="btn btn-primary py-3 px-5"
-											style="background-color: gray; height: 50px">
+											style="background-color: gray; height: 50px"
+											id="cancel">
 									</div>
 									<br> <br> <br> <br> <br> <br> <br>
 
@@ -412,7 +414,11 @@ input.checkbox:checked+label.input-label.radio::before {
 		</div>
 
 
-
+<script>
+$("#cancel").click(function(){
+	history.back();
+})
+</script>
 
 
 

@@ -257,7 +257,7 @@ background-color
 				<div class="preloader-circle"></div>
 				<div class="preloader-img pere-text">
 					<img
-						src="${pageContext.request.contextPath}/resources/img/logo/logo.png"
+						src="${pageContext.request.contextPath}/resources/image/logo/sports_logo.png"
 						alt="">
 				</div>
 			</div>
@@ -481,68 +481,8 @@ background-color
 	</section>
 
 
-	> <!-- Latest Offers End --> <!-- Shop Method Start-->
-	<div class="shop-method-area section-padding30">
-		<div class="container">
-			<div class="row d-flex justify-content-between">
-				<div class="col-xl-3 col-lg-3 col-md-6">
-					<div class="single-method mb-40">
-						<i class="ti-package"></i>
-						<h6>Free Shipping Method</h6>
-						<p>aorem ixpsacdolor sit ameasecur adipisicing elitsf edasd.</p>
-					</div>
-				</div>
-				<div class="col-xl-3 col-lg-3 col-md-6">
-					<div class="single-method mb-40">
-						<i class="ti-unlock"></i>
-						<h6>Secure Payment System</h6>
-						<p>aorem ixpsacdolor sit ameasecur adipisicing elitsf edasd.</p>
-					</div>
-				</div>
-				<div class="col-xl-3 col-lg-3 col-md-6">
-					<div class="single-method mb-40">
-						<i class="ti-reload"></i>
-						<h6>Secure Payment System</h6>
-						<p>aorem ixpsacdolor sit ameasecur adipisicing elitsf edasd.</p>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	<!-- Shop Method End--> <!-- Gallery Start-->
-	<div class="gallery-wrapper lf-padding">
-		<div class="gallery-area">
-			<div class="container-fluid">
-				<div class="row">
-					<div class="gallery-items">
-						<img
-							src="${pageContext.request.contextPath}/resources/img/gallery/gallery1.jpg"
-							alt="">
-					</div>
-					<div class="gallery-items">
-						<img
-							src="${pageContext.request.contextPath}/resources/img/gallery/gallery2.jpg"
-							alt="">
-					</div>
-					<div class="gallery-items">
-						<img
-							src="${pageContext.request.contextPath}/resources/img/gallery/gallery3.jpg"
-							alt="">
-					</div>
-					<div class="gallery-items">
-						<img
-							src="${pageContext.request.contextPath}/resources/img/gallery/gallery4.jpg"
-							alt="">
-					</div>
-					<div class="gallery-items">
-						<img
-							src="${pageContext.request.contextPath}/resources/img/gallery/gallery5.jpg"
-							alt="">
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+
+
 	<script>
 		function getParameterByName(name) {
 			name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");

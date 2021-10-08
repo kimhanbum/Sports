@@ -16,7 +16,7 @@ public interface DealService {
 	public int getListCount2();
 	
 	// 글 목록 보기
-	public List<DealAuction> getAuctionList(int page, int limit);
+	public List<DealAuction> getAuctionList(int page, int limit , int view2);
 
 	public void insert(DealAuction auction);
 
@@ -34,7 +34,7 @@ public interface DealService {
 
 	public int D_readcount(int num);
 
-	public List<DealAuction> getSearchAuctionList(int page, int limit, String search);
+	public List<DealAuction> getSearchAuctionList(int page, int limit, String search,int view2);
 
 	public DealAuction A_getDetail(int num);
 

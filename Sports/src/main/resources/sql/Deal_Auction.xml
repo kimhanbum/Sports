@@ -35,10 +35,10 @@
 <select id="list" parameterType="java.util.Map" resultType="Auction">
 select * from
 	(select rownum rnum , 	AUC_NUMBER , AUC_SUBJECT , AUC_DATE
-	AUC_PRICE ,AUC_COUNT ,SAVE_AUC_MAINFILE  ,AUC_SPRICE
+	AUC_PRICE ,AUC_COUNT ,SAVE_AUC_MAINFILE  ,AUC_SPRICE , AUC_NOWDATE
 		from(
 		select * from Deal_Auction
-		order by AUC_NUMBER desc))
+		order by <include refid="view" />))
 	 where rnum &gt;= #{start} and rnum  &lt;=  #{end}
 	</select>
 
@@ -46,11 +46,11 @@ select * from
 	resultType="Auction">
 select * from
 	(select rownum rnum , 	AUC_NUMBER , AUC_SUBJECT , 
-	AUC_DATE ,AUC_PRICE ,AUC_COUNT ,SAVE_AUC_MAINFILE , AUC_SPRICE
+	AUC_DATE ,AUC_PRICE ,AUC_COUNT ,SAVE_AUC_MAINFILE , AUC_SPRICE , AUC_NOWDATE
 		from(
 		select * from Deal_Auction
 		where AUC_SUBJECT like #{search_word}
-		order by AUC_NUMBER desc
+		order by <include refid="view" />
 		))
 	 where rnum &gt;= #{start} and rnum  &lt;=  #{end}
 	 
@@ -141,4 +141,16 @@ where
 	AND BUY_BIDCOM = 0 
 	AND PICK = 1 OR BUY_BIDFAIL = 1
 </delete>
+
+<sql id="view">
+		<if test="view2 != null">
+			<choose>
+				<when test="view2==1">AUC_NUMBER desc</when>
+				<when test="view2==2">AUC_NUMBER asc</when>
+				<when test="view2==3">AUC_COUNT desc</when>
+				<when test="view2==4">AUC_SPRICE asc</when>
+				<when test="view2==5">AUC_PRICE asc</when>
+			</choose>
+		</if>
+	</sql>
 </mapper>

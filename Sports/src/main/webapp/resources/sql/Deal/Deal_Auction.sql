@@ -23,6 +23,7 @@ create table Deal_Auction (
 	
 	
 select * from Deal_Auction;
+select auc_nowdate from deal_auction;
 select * from board;
 select * from member_info;
 drop table deal_auction;
@@ -50,3 +51,8 @@ drop sequence auc_seq;
 	ALTER TABLE DEAL_AUCTION DROP COLUMN AUC_COUNT;
 	ALTER TABLE DEAL_AUCTION ADD AUC_COUNT number  DEFAULT 0; 
 /*----------------------------*/
+	
+/*-추가된 부분 10-07 올린날짜 컬럼 추가 */
+	ALTER TABLE DEAL_AUCTION ADD AUC_NOWDATE date DEFAULT sysdate;
+
+/*-----------------------------*/

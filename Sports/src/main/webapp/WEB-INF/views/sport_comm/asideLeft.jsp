@@ -31,7 +31,7 @@
                   </a>
               </li>
               <li>
-                  <a href="#" class="d-flex">
+                  <a  href="${pageContext.request.contextPath}/Mydeal/main" class="d-flex">
                       <p>내 거래 내역</p>
                   </a>
               </li>
