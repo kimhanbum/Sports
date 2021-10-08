@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import com.project.sports.dao.MmatchDAO;
 import com.project.sports.domain.Mentor;
+import com.project.sports.domain.Sports;
 
 
 @Service
@@ -31,5 +32,10 @@ public class MmatchServiceImpl implements MmatchService {
 	@Override
 	public void insertMentorWriting(Mentor mentor) {
 		dao.insertMentorWriting(mentor);
+	}
+
+	@Override
+	public List<Sports> getSportDeatilList(int selType) {
+		return dao.getSportDeatilList(selType);
 	}
 }

@@ -81,7 +81,6 @@
 						        	  <li class="d-none d-lg-block"> <a href="${pageContext.request.contextPath}/mypage/main" class="btn header-btn">마이페이지</a></li>
 						              <li class="d-none d-lg-block"> <a href="${pageContext.request.contextPath}/member/logout" class="btn header-btn">로그아웃</a></li>
 						        </c:if>
-						        <li class="d-none d-lg-block"> <a href="${pageContext.request.contextPath}/mypage/main" class="btn header-btn">마이페이지</a></li>
                             </ul>
                         </div>
                         <!-- Mobile Menu -->

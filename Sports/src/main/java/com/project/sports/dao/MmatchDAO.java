@@ -33,4 +33,7 @@ public class MmatchDAO {
 	public void insertMentorWriting(Mentor mentor) {
 		sqlSession.insert("Mmatches.insertWMentor",mentor);
 	}
+	public List<Sports> getSportDeatilList(int selType){
+		return sqlSession.selectList("Mmatches.sportDetailList",selType);
+	}
 }

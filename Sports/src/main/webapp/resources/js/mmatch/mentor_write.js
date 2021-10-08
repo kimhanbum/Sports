@@ -79,7 +79,7 @@ $(function(){
 		      +'  &nbsp;&nbsp;&nbsp;종료시간 &nbsp;'
 		      +'  <input name="mentor_endTime" class="element_inline" style="width:140px;" type="time" class="form-control"/>'
 		      +'  <div class="element_inline" id="deleteTime">'
-			  +'     <img src="${pageContext.request.contextPath}/resources/image/mmatch/minus_icon.png" alt="">'							
+			  +'     <img src="/sports/resources/image/mmatch/minus_icon.png" alt="">'							
 		      +'  </div>'
 		      +'</div>';
 		$('#mentor_time_list').append(output);
