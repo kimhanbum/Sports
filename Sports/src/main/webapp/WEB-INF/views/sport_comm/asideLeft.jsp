@@ -36,13 +36,8 @@
                   </a>
               </li>
               <li>
-                  <a href="#" class="d-flex">
-                      <p>팀 등록</p>
-                  </a>
-              </li>
-              <li>
-                  <a href="#" class="d-flex">
-                      <p>팀 매칭 정보</p>
+                  <a href="${pageContext.request.contextPath}/mypage/mymatching" class="d-flex">
+                      <p>내 매칭 정보</p>
                   </a>
               </li>
               <li>
