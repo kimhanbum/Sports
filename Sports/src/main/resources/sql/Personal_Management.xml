@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="Pm">
+
+	<insert id="insert" parameterType="pm">
+			<selectKey resultType="int" order="BEFORE"
+						keyProperty="PM_NO">
+			select nvl(max(PM_NO),0)+1 from PERSONAL_MANAGEMENT
+			</selectKey>
+		insert into PERSONAL_MANAGEMENT(PM_NO, USER_ID, PM_KCAL, PM_DATE,SPORTS_NAME)
+		values(#{PM_NO}, #{USER_ID}, #{PM_KCAL}, sysdate, #{SPORTS_NAME}) 
+	</insert>
+
+	<select id="select" parameterType="String" resultType="sports">
+		 SELECT SPORTS_NAME, CAL
+		 FROM SPORTS
+	 	<if test='_parameter != ""'>
+	 	where sports_name = #{sports}
+		</if>
+	</select>
+
+	<select id="selectdate" parameterType="pm" resultType="map">
+		select pm_no, sports_name, pm_kcal from PERSONAL_MANAGEMENT
+		where to_char(pm_date, 'YYYYMMDD') = to_char(sysdate, 'YYYYMMDD')
+		and USER_ID = #{USER_ID}
+	</select>
+
+	<delete id="delete" parameterType="int">
+		delete PERSONAL_MANAGEMENT 
+		where PM_NO = #{num}
+	</delete>
+</mapper>

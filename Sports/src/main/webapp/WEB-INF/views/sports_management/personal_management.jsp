@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page import="java.util.*" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -25,17 +26,18 @@
 <body>
     
     <!-- Preloader Start -->
-    <div id="preloader-active">
-        <div class="preloader d-flex align-items-center justify-content-center">
-            <div class="preloader-inner position-relative">
-                <div class="preloader-circle"></div>
-                <div class="preloader-img pere-text">
-                    <img src="assets/img/logo/logo.png" alt="">
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Preloader Start-->
+	<div id="preloader-active">
+		<div
+			class="preloader d-flex align-items-center justify-content-center">
+			<div class="preloader-inner position-relative">
+				<div class="preloader-circle"></div>
+				<div class="preloader-img pere-text">
+                    <img src="${pageContext.request.contextPath}/resources/image/logo/sports_logo.png" alt="">
+				</div>
+			</div>
+		</div>
+	</div>
+    <!-- Preloader end-->
 
   	<!-- 헤더 영역  -->
 	<jsp:include page="/WEB-INF/views/sport_comm/header.jsp"/>
@@ -57,45 +59,39 @@
     </div>
     <!-- slider Area End-->
 
-    <section class="blog_area section-padding">
-            <div class="row">
-            	<div class="col-lg-2">
-            		<!-- 마이 페이지 좌측 asideLeft 메뉴들 -->
-					<jsp:include page="/WEB-INF/views/sport_comm/asideLeft.jsp"/>
-                </div>
-                <div class="col-lg-10 mb-5 mb-lg-0">
-                	<div class="page-content page-container" id="page-content">
-    <div class="padding">
-        <div class="row container d-flex justify-content-center">
-            <div class="col-md-8">
-                <div class="card px-3">
-                    <div class="card-body">
-                        <h4 class="card-title">당일 운동 종목</h4>
-                        <div class="add-items d-flex"> 
-                       <!--  <select id="sports" name="sports">
-                        <option value="1">축구</option>
-                        <option value="2">걷기</option>
-                        <option value="3">배구</option>
-                        </select> -->
-                        <input type="text" id="inputsprots" class="form-control todo-list-input" placeholder="운동종목을 입력하세요"> 
-                        <button class="add btn btn-primary font-weight-bold todo-list-add-btn">Add</button> 
-                        </div>
-                        <div class="list-wrapper">
-                            <ul class="d-flex flex-column-reverse todo-list">
-                            </ul>
-                        </div>
-                    </div>
-                </div>
+<section class="blog_area section-padding">
+<div class="row">
+     <div class="col-lg-2">
+        <!-- 마이 페이지 좌측 asideLeft 메뉴들 -->
+		<jsp:include page="/WEB-INF/views/sport_comm/asideLeft.jsp"/>
+     </div>
+<!-- 당일 운동 -->
+<div class="col-lg-10 mb-5 mb-lg-0">
+   <div class="page-content page-container" id="page-content">
+   <!--  <div class="padding">  // 왼쪽 공백--> 
+       <div class="col-md-6">
+       <!--    <div class="card px-3">
+              <div class="card-body"> -->
+                <h4 class="card-title">당일 운동 종목</h4>
+                  <div class="add-items d-flex"> 
+                   <select class="form-control sports_name" id="sports_name" name="sports_name">
+                    <option selected value="">-- 선택 --</option>
+                   </select>
+		           <input type="text" id="time" name="SPORTS_TIME" class="form-control SPORTS_TIME" placeholder="운동시간 ">
+                   <button class="add btn btn-primary font-weight-bold add-btn">Add</button> 
+                 </div>
+                 <div class="list-wrapper">
+                    <ul class="d-flex flex-column-reverse kcal-list" id="kcal_list"></ul>
+                 </div>
+               </div>
             </div>
-        </div>
-    </div>
+         </div>
+       </div>
+ <!--    </div> -->
 </div>
-                </div> 
-        </div>
-    </section>
-
+</div>
+</section>
 	<!-- Footer 영역  -->
 	<jsp:include page="/WEB-INF/views/sport_comm/footer.jsp"/>
-  
 </body>
 </html>

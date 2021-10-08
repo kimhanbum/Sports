@@ -4,8 +4,9 @@ public class PersonalManagement {
 
 	private int 	PM_NO;
 	private String 	USER_ID;
-	private String 	PM_KCAL;
+	private int 	PM_KCAL;
 	private String	PM_DATE;
+	private String  SPORTS_NAME;
 	
 	public int getPM_NO() {
 		return PM_NO;
@@ -19,10 +20,10 @@ public class PersonalManagement {
 	public void setUSER_ID(String uSER_ID) {
 		USER_ID = uSER_ID;
 	}
-	public String getPM_KCAL() {
+	public int getPM_KCAL() {
 		return PM_KCAL;
 	}
-	public void setPM_KCAL(String pM_KCAL) {
+	public void setPM_KCAL(int pM_KCAL) {
 		PM_KCAL = pM_KCAL;
 	}
 	public String getPM_DATE() {
@@ -37,6 +38,5 @@ public class PersonalManagement {
 	public void setSPORTS_NAME(String sPORTS_NAME) {
 		SPORTS_NAME = sPORTS_NAME;
 	}
-	private String	SPORTS_NAME;
 	
 }
