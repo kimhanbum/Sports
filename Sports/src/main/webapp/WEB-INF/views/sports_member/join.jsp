@@ -277,26 +277,25 @@ function Postcode() {//우편번호찾기
                 		<input type="checkbox" id="1" name="USER_PSPORTS" value="풋살">풋살	
                 		<input type="checkbox" id="2" name="USER_PSPORTS" value="축구">축구	
                 		<input type="checkbox" id="3" name="USER_PSPORTS" value="야구">야구	
-                		<input type="checkbox" id="4" name="USER_PSPORTS" value="농구">농구	
-                		<input type="checkbox" id="5" name="USER_PSPORTS" value="야구">야구	<br>
-                		<input type="checkbox" id="6" name="USER_PSPORTS" value="배드민턴">배드민턴	
-                		<input type="checkbox" id="7" name="USER_PSPORTS" value="테니스">테니스	
-                		<input type="checkbox" id="8" name="USER_PSPORTS" value="탁구">탁구	
-                		<input type="checkbox" id="9" name="USER_PSPORTS" value="골프">골프<br><br>
+                		<input type="checkbox" id="4" name="USER_PSPORTS" value="농구">농구	<br>
+                		<input type="checkbox" id="5" name="USER_PSPORTS" value="배드민턴">배드민턴	
+                		<input type="checkbox" id="6" name="USER_PSPORTS" value="테니스">테니스	
+                		<input type="checkbox" id="7" name="USER_PSPORTS" value="탁구">탁구	
+                		<input type="checkbox" id="8" name="USER_PSPORTS" value="골프">골프<br><br>
                 	<label for="sports2">기구운동</label><br>
-                		<input type="checkbox" id="10" name="USER_PSPORTS" value="헬스">헬스	
-                		<input type="checkbox" id="11" name="USER_PSPORTS" value="크로스핏">크로스핏	
-                		<input type="checkbox" id="12" name="USER_PSPORTS" value="스피닝">스피닝	
-                		<input type="checkbox" id="13" name="USER_PSPORTS" value="사이클">사이클	
-                		<input type="checkbox" id="14" name="USER_PSPORTS" value="서핑">서핑	<br><br>
+                		<input type="checkbox" id="9" name="USER_PSPORTS" value="헬스">헬스	
+                		<input type="checkbox" id="10" name="USER_PSPORTS" value="크로스핏">크로스핏	
+                		<input type="checkbox" id="11" name="USER_PSPORTS" value="스피닝">스피닝	
+                		<input type="checkbox" id="12" name="USER_PSPORTS" value="사이클">사이클	
+                		<input type="checkbox" id="13" name="USER_PSPORTS" value="서핑">서핑	<br><br>
                 	<label for="sports3">맨몸운동</label><br>
-                		<input type="checkbox" id="15" name="USER_PSPORTS" value="요가">요가	
-                		<input type="checkbox" id="16" name="USER_PSPORTS" value="필라테스">필라테스	
-                		<input type="checkbox" id="17" name="USER_PSPORTS" value="등산">등산	
-                		<input type="checkbox" id="18" name="USER_PSPORTS" value="러닝">러닝	
-                		<input type="checkbox" id="19" name="USER_PSPORTS" value="주짓수">주짓수	
-                		<input type="checkbox" id="20" name="USER_PSPORTS" value="복싱">복싱	
-                		<input type="checkbox" id="21" name="USER_PSPORTS" value="태권도">태권도	<br><br>
+                		<input type="checkbox" id="14" name="USER_PSPORTS" value="요가">요가	
+                		<input type="checkbox" id="15" name="USER_PSPORTS" value="필라테스">필라테스	
+                		<input type="checkbox" id="16" name="USER_PSPORTS" value="등산">등산	
+                		<input type="checkbox" id="17" name="USER_PSPORTS" value="러닝">러닝	
+                		<input type="checkbox" id="18" name="USER_PSPORTS" value="주짓수">주짓수	
+                		<input type="checkbox" id="19" name="USER_PSPORTS" value="복싱">복싱	
+                		<input type="checkbox" id="20" name="USER_PSPORTS" value="태권도">태권도	<br><br>
                 <c:if test="${chk_arr!=null}">
                 	<c:forEach items="${chk_arr}">
                 		<span id="checkvalue">${chk_arr}</span>
