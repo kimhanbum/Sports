@@ -34,10 +34,24 @@
 </style>
   </head>
   <body>
+  
+      <!-- Preloader Start -->
+    <div id="preloader-active">
+        <div class="preloader d-flex align-items-center justify-content-center">
+            <div class="preloader-inner position-relative">
+                <div class="preloader-circle"></div>
+                <div class="preloader-img pere-text">
+                    <img src="${pageContext.request.contextPath}/resources/image/logo/sports_logo.png" alt="">
+                </div>
+            </div>
+        </div>
+    </div>
+    
    	<!-- 헤더 영역  -->
 <jsp:include page="/WEB-INF/views/sport_comm/header.jsp"/>
    <main>
    		<div id="sport_num" style="display:none;">1</div>
+   		<div id="user_id" style="display:none;">${USER_ID}</div>
        <!-- slider Area Start -->
        <div class="slider-area ">
        	<div id="icon_box">
@@ -87,7 +101,7 @@
                          <div class="hero__caption">
                              <h1 id="text" data-animation="fadeInRight" data-delay=".6s" style="color: white; font-size: 90px">Social<br>Match<br></h1>
                              <div class="hero__btn" data-animation="fadeInRight" data-delay="1s">
-                                 <a href="industries.html" class="btn hero-btn">Login Now</a>
+                                 <a href="#" class="btn hero-btn">Play now</a>
                              </div>
                          </div>
                      </div>
@@ -140,10 +154,12 @@
 	                   	</select>
 	                   </div>
                    </div>
+                   <c:if test="${empty USER_ID}">
+                    <div id="btnSubmit" onclick="location.href='${pageContext.request.contextPath}/member/login'" class="submit ibx">Search&nbsp;&nbsp;</div>
+                	</c:if>
+                	<c:if test="${!empty USER_ID}">
                    <div id="btnSubmit" onclick="javascript:btnClick();" class="submit ibx">Search&nbsp;&nbsp;</div>
-                   <!-- <div class="form-submit">
-                       <input type="submit" id="submit" class="submit" value="Search now" />
-                   </div> -->
+                   </c:if>
                </div>
            </form>
        </div>
@@ -154,28 +170,30 @@
 			<table class="table table-striped">
 				<thead>
 					<tr>
-					   <th colspan="3">Matching list</th>
-					   <th colspan="2">
+					   <th colspan="4">Matching list</th>
+					   <th colspan="4">
 							<font size=3>Total : ${listcount}</font>
 					   </th>
 					</tr>
 					<tr>
-						<th><div>지역</div></th>
-						<th><div>세부지역</div></th>
-						<th><div>날짜</div></th>
-						<th><div>인원</div></th>
-						<th><div>실력</div></th>
+						<th><div class="classalign">지역</div></th>
+						<th><div class="classalign">세부지역</div></th>
+						<th><div class="classalign">날짜</div></th>
+						<th><div class="classalign">인원</div></th>
+						<th><div class="classalign">실력</div></th>
+						<th><div class="classalign">신청</div></th>
 					</tr>	
 				</thead>
 				<tbody>
 					<c:set var="num" value="${listcount-(page-1)*limit}"/>	
 					<c:forEach var="m" items="${matchlist}">	
 						<tr>
-							<td><div>${m.MATCH_ADR}</div></td>
-							<td><div>${m.MATCH_DTL_ADR}</div></td>	
-							<td><div>${m.MATCH_TIME}</div></td>
-							<td><div>${m.MATCH_PRS}</div></td>
-							<td><div>${m.MATCH_SKL}</div></td>
+							<td><div class="classalign">${m.MATCH_ADR}</div></td>
+							<td><div class="classalign">${m.MATCH_DTL_ADR}</div></td>	
+							<td><div class="classalign">${m.MATCH_TIME}</div></td>
+							<td><div class="classalign">${m.MATCH_PRS}</div></td>
+							<td><div class="classalign">${m.MATCH_SKL}</div></td>
+							<td><div id="btnSubmit2" onclick="javascript:btnApply();" class="submit2">Apply&nbsp;&nbsp;</div></td>
 						</tr>
 					</c:forEach>
 				 </tbody>	
@@ -228,7 +246,7 @@
 			</c:if>
 	</div>
 	
-	<!--  모달 영역 -->
+	<!--  등록모달 영역 -->
 	<div id="RegisterModal" class="modal hide" style="display: none;">
 	   	 <div class="wrapper">
 	        	<div class="container">
@@ -278,16 +296,74 @@
          		</div>
             <div class="modal_row">
                 <div class="modalbutton">
-                    <button class="closeModal row btn" onclick="javascript:colseModal();">닫기</button>
+                    <button class="closeModal row btn" onclick="javascript:closeModal1();">닫기</button>
                 </div>
                 <div class="modalbutton">
-                    <button class="btnSearch row btn btn-fill btn-blue-light" onclick="javascript:registerModal()">등록</button>
+                    	<button class="btnSearch row btn btn-fill btn-blue-light" onclick="javascript:registerModal()">등록</button>
                 </div>
             </div>
         </div>
     </div>
-	
-    <script src="${pageContext.request.contextPath}/resources/js/match/jquery.min.js"></script>
+    
+    <!-- 신청 모달 -->
+    <div id="ApplyModal" class="modal hide" style="display: none;">
+	   	 <div class="wrapper">
+	        	<div class="container">
+	            	<div class="row_subject">매칭신청</div><div id="modal_id" class="modal_id">${USER_ID}</div>
+            		<div class="row1">
+                        <label class="radio radio-sm">
+                            <div class="container">
+                                <div class="label">Sport</div>
+                                 <input id="Sport" class="modal_input" name="Sport" type="text" value="${SPORT_NUM}" readonly>
+                            </div>
+                        </label>
+                         <label>
+                            <div class="container ">
+                                <div class="label">Skill</div>
+                                 <input id="Skill" class="modal_input" name="Skill" type="text" value="${MATCH_SKL}" readonly>
+                            </div>
+                        </label>
+                    </div>
+                    <div class="row1">
+                        <label class="radio radio-sm">
+                            <div class="container">
+                                <div class="label">City</div>
+                                 <input id="City" class="modal_input" name="City" type="text"  value="${MATCH_ADR}" readonly>
+                            </div>
+                        </label>
+                         <label>
+                            <div class="container ">
+                                <div class="label">detail</div>
+                                 <input id="Detail" class="modal_input" name="detail" type="text" value="${MATCH_DTL_ADR}" readonly>
+                            </div>
+                        </label>
+                    </div>
+                     <div class="row1">
+                        <label>
+                            <div class="container">
+                                <div class="label">Date</div>
+                                 <input id="Date" class="modal_input" name="Date" type="text" value="${MATCH_TIME}" readonly>
+                            </div>
+                        </label>
+                         <label>
+                            <div class="container">
+                                <div class="label">Person</div>
+                                 <input id="Person" class="modal_input" name="Person" type="text" value="${MATCH_PRS}" readonly>
+                            </div>
+                        </label>
+                    </div>
+         		</div>
+            <div class="modal_row">
+                <div class="modalbutton">
+                    <button class="closeModal row btn" onclick="javascript:closeModal2();">닫기</button>
+                </div>
+                <div class="modalbutton">
+                    	<button class="btnSearch row btn btn-fill btn-blue-light" onclick="javascript:ApplyModal()">신청</button>
+                </div>
+            </div>
+        </div>
+    </div>
+   <script src="${pageContext.request.contextPath}/resources/js/match/jquery.min.js"></script>
    <script src="${pageContext.request.contextPath}/resources/js/match/jquery-ui.min.js"></script>
    <script src="${pageContext.request.contextPath}/resources/js/match/main.js"></script>
    </main>

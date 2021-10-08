@@ -1,3 +1,4 @@
+
 var today = new Date();
 var dd = today.getDate();
 var mm = today.getMonth()+1;
@@ -12,18 +13,19 @@ if(mm<10){
 today = yyyy+'-'+mm+'-'+dd;
 document.getElementById("match_Date").setAttribute("min", today);
 
+var sport_name= null;
+
 $(document).ready(function(){
 	  initJson();//json 파일 가져오는 함수
 	  initPage();//city 세팅해주는 함수
 	  initSport();
-	  logNow(sport_name);
 });
 
 function logNow(logContents){
 	console.log(logContents);
 }
 
-var sport_name= null;
+
 function initSport(){
 	var sport_num = Number($("#sport_num").text());
 	var sendData = {sports_num: sport_num};
@@ -98,7 +100,7 @@ function showSocialMatching(){
 
 function showMatchingRegi(){
 	console.log("매칭등록");
-	$("#container").hide();
+	$("#container").hide(); //게시판 
 	$("#btnSubmit").attr("onclick", "btnClick2();");
 	$("#text").html("Match<br>Reigster<br>");
 	$("#btnSubmit").html("Reigster");
@@ -110,46 +112,145 @@ function showMatchingRegi(){
 	$("#person").find('input[type=number]').each(function(){
 		$(this).val(0);
 	});
-	$("#skill option:eq(0)").prop("selected", true);
+	$("#skill option:eq(0)").prop("selected", true);  //초기값 설정
 }
 
 function btnClick(){
-	console.log("소셜매칭 클릭");
-	var string = "";
-	string += $("select[name=city]").val() + " / ";
-	string += $("select[name=city_detail]").val();
-	console.log("주소 : " + string);
+	var user_id = $("#user_id").text();
+	if(user_id == ""){
+		location.href="/sports/member/login";
+	}else{
+		console.log("소셜매칭 클릭");
+		var string = "";
+		string += $("select[name=city]").val() + " / ";
+		string += $("select[name=city_detail]").val();
+		console.log("주소 : " + string);
 	//기능구현
+	}
 }
 
 function btnClick2(){
-	console.log("매칭등록 클릭");
-	var sport =  sport_name;
-	var city = $("#city option:checked").text();
-	var city_detail = $("#city_detail option:checked").text();
-	var date = $("input[name=match_date]").val();
-	var person = $("input[name=person]").val();
-	var skill = $("select[name=skill]").val();
-	
-	
-	$("#RegisterModal #Sport").val(sport);
-	$("#RegisterModal #City").val(city);
-	$("#RegisterModal #Detail").val(city_detail);
-	$("#RegisterModal #Date").val(date);
-	$("#RegisterModal #Skill").val(skill);
-	$("#RegisterModal #Person").val(person);
-	$("#RegisterModal").css({
-		"display" :"block"
-	});
+	var user_id = $("#user_id").text();
+	if(user_id == ""){
+		location.href="/sports/member/login";
+	}else{
+		console.log("매칭등록 클릭");
+		var sport =  sport_name;
+		var city = $("#city option:checked").text();
+		var city_detail = $("#city_detail option:checked").text();
+		var date = $("input[name=match_date]").val();
+		var person = $("input[name=person]").val();
+		var skill = $("select[name=skill]").val();
+		
+		$("#RegisterModal #Sport").val(sport);
+		$("#RegisterModal #City").val(city);
+		$("#RegisterModal #Detail").val(city_detail);
+		$("#RegisterModal #Date").val(date);
+		$("#RegisterModal #Skill").val(skill);
+		$("#RegisterModal #Person").val(person);
+		$("#RegisterModal").css({
+			"display" :"block"
+		});
+	}
 }
 
-function colseModal(){
+function btnApply(){
+	var user_id = $("#user_id").text();
+	if(user_id == ""){
+		location.href="/sports/member/login";
+	}else{
+		$("#ApplyModal").css({
+			"display" :"block"
+		});
+	}
+}
+
+function closeModal1(){
 	$("#RegisterModal").css({
 		"display" :"none"
 	});
 }
 
-function registerModal(){
+function closeModal2(){
+	$("#ApplyModal").css({
+		"display" :"none"
+	});
+}
+
+function registerModal(){ //레지스터모달(모달등록버튼) 눌렀을때 이벤트
+	var REGISTER_ID = $("#modal_id").text();
+	var SPORT_NUM = $("#sport_num").text();
+	var MATCH_ADR = $("#city option:checked").text();
+	var MATCH_DTL_ADR = $("#city_detail option:checked").text();
+	var MATCH_TIME = $("input[name=match_date]").val();
+	var MATCH_PRS = $("input[name=person]").val();
+	var MATCH_SKL = $("select[name=skill]").val();
+	
+	if($.trim($("#city option:checked").text())=="지역"){
+		alert("지역을 선택하세요.");
+		$("#RegisterModal").css({
+			"display" :"none"
+		});
+		return false;
+	}
+	
+	if($.trim($("#city_detail option:checked").text())=="세부지역"){
+		alert("세부지역을 선택하세요.");
+		$("#RegisterModal").css({
+			"display" :"none"
+		});
+		return false;
+	}
+	
+	if($.trim($("input[name=match_date]").val())==""){
+		alert("날짜를 선택하세요.");
+		$("#RegisterModal").css({
+			"display" :"none"
+		});
+		return false;
+	}
+	
+	if($.trim($("input[name=person]").val())=="0"){
+		alert("1명이상 입력하세요.");
+		$("#RegisterModal").css({
+			"display" :"none"
+		});
+		return false;
+	}
+	
+	if($.trim($("select[name=skill]").val())==""){
+		alert("실력을 선택하세요.");
+		$("#RegisterModal").css({
+			"display" :"none"
+		});
+		return false;
+	}
+	
+	$.ajax({
+		async: false,
+		type: "post",
+		url: "./Regi",
+		dataType: "text",
+		data:{
+    	   "REGISTER_ID": REGISTER_ID,
+    	   "SPORT_NUM" : SPORT_NUM,
+    	   "MATCH_ADR" : MATCH_ADR,
+    	   "MATCH_DTL_ADR" : MATCH_DTL_ADR,
+    	   "MATCH_TIME" : MATCH_TIME,
+    	   "MATCH_PRS" : MATCH_PRS,
+    	   "MATCH_SKL" : MATCH_SKL
+		},
+		success: function (result) {
+			alert('매칭이 등록되었습니다.');
+			location.reload();
+		}, error: function(){
+			alert('이미 등록된 매칭이 있습니다.');
+		}
+	});
+	
+}
+
+function ApplyModal(){
 	var REGISTER_ID = $("#modal_id").text();
 	var SPORT_NUM = $("#sport_num").text();
 	var MATCH_ADR = $("#city option:checked").text();

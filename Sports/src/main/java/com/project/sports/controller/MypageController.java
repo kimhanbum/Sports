@@ -25,4 +25,10 @@ public class MypageController {
 		return mv;
 	}
 	
+	@RequestMapping(value = "/mymatching", method = RequestMethod.GET)
+	public ModelAndView mymatching(ModelAndView mv) {
+		mv.setViewName("sports_mypage/mypage_mymatching");
+		return mv;
+	}
+	
 }

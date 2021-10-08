@@ -4,15 +4,18 @@
 
 <mapper namespace="Match">
 	
-	<select id="count" resultType="int">
+	<select id="count" resultType="int" parameterType="int">
 		select count(*) from sport_register
+		where sport_num = #{num}
 	</select>
 	
 	<select id="list" resultType="match" parameterType="java.util.Map">
 		select * from 
 		(select rownum rnum, b.* 
 		from 
-			(select * from Sport_register) b
+			(select * from Sport_register
+			where sport_num = #{num}
+			order by REGISTER_NUM desc) b
 		)
 		where rnum &gt;= #{start} and rnum &lt; = #{end}
 	</select>
@@ -23,4 +26,13 @@
 		WHERE sports_num = #{sports_num}
 	</select>
 	
+	
+	<insert id="insert" parameterType="match">
+		<selectKey keyProperty="REGISTER_NUM" resultType="int" order="BEFORE">
+			select reg_seq.nextval as REGISTER_NUM FROM DUAL
+		</selectKey>
+		insert into SPORT_REGISTER(REGISTER_ID,REGISTER_NUM,SPORT_NUM,MATCH_PRS,MATCH_ADR,MATCH_DTL_ADR,MATCH_TIME,MATCH_SKL)
+		values
+		(#{REGISTER_ID},#{REGISTER_NUM}, #{SPORT_NUM}, #{MATCH_PRS}, #{MATCH_ADR}, #{MATCH_DTL_ADR},#{MATCH_TIME},#{MATCH_SKL})
+	</insert>
 </mapper>

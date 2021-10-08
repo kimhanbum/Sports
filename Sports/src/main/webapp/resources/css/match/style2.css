@@ -22,15 +22,31 @@
   
   
   .submit {
-  background: #f8ba0f;
+  background: #2577fd;
   color: #fff;
   font-size: 14px;
   margin-top: 26px;
   padding: 12.4px 60px;
   cursor: pointer; }
   
+   .submit2 {
+  background: #2577fd;
+  color: #fff;
+  font-size: 12px;
+  text-align: center;
+  cursor: pointer; 
+  margin-bottom:1px;
+  }
+  .classalign{
+  	text-align: center;
+  }
+  
   .submit:hover {
-    background-color: #ce9906; }
+    background-color: #00b1ff;
+     }
+   .submit2:hover {
+    background-color: #00b1ff;
+     }
 
 label {
   font-size: 12px;
@@ -77,6 +93,10 @@ input {
 		         }
   
 #btnSubmit{
+			border-radius: 5px;
+}  
+
+#btnSubmit2{
 			border-radius: 5px;
 }  
 
@@ -144,7 +164,12 @@ select {
 		-o-transform: translate(-50%, -50%);
 		transform: translate(-50%, -50%);
 }
-
+.btnRegi{
+		background: #2577fd;
+		padding: 10px 10px;
+  		border-radius: 25px;
+ 		margin: 10px;
+}
 .container{
 	
   line-height: 1.8;
