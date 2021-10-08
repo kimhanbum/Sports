@@ -380,7 +380,7 @@ input.checkbox:checked+label.input-label.radio::before {
 			<div class="preloader-inner position-relative">
 				<div class="preloader-circle"></div>
 				<div class="preloader-img pere-text">
-					<img src="${pageContext.request.contextPath}/resources/img/logo/logo.png" alt="">
+					<img src="${pageContext.request.contextPath}/resources/image/logo/sports_logo.png" alt="">
 				</div>
 			</div>
 		</div>
@@ -428,7 +428,7 @@ input.checkbox:checked+label.input-label.radio::before {
 							<hr>
 							<ul class="list-unstyled">
 								<li><b>경매기간</b>&emsp;${b.AUC_DATE}
-								${session }
+							
 									<hr></li>
 								<li><b>입찰단위</b>&emsp;${b.AUC_UNIT}
 									<hr></li>
@@ -547,16 +547,30 @@ input.checkbox:checked+label.input-label.radio::before {
 			var pickcheck ="${pickcheck}";
  			var num = ${param.num};
  			
- 			if(pickcheck == "possible"){
- 				var b = confirm("찜 하시겠습니까 ?");		
- 				
- 				if(b==true){	
- 					location.href = "${pageContext.request.contextPath}/DealA/pick"
- 					 + "?num=" + num ;
- 				}
- 			}else{
- 				alert("이미 찜한 상품입니다.")
- 			}
+ 			var writeid = "${b.USER_ID}"
+				var sessionid = "${USER_ID}"
+ 			
+				
+			if(sessionid ==""){
+				alert("로그인후 이용해주세요")
+				location.href = "${pageContext.request.contextPath}/member/login"
+			}else{
+				if(writeid==sessionid){
+					alert("본인이 올린글 입니다.")
+				}else{
+					if(pickcheck == "possible"){
+		 				var b = confirm("찜 하시겠습니까 ?");		
+		 				
+		 				if(b==true){	
+		 					location.href = "${pageContext.request.contextPath}/DealA/pick"
+		 					 + "?num=" + num ;
+		 				}
+		 			}else{
+		 				alert("이미 찜한 상품입니다.")
+		 			}
+				}
+			}
+				
  			
 
 		})
@@ -569,19 +583,33 @@ input.checkbox:checked+label.input-label.radio::before {
 				var num = ${param.num};
 				var bidcheck ="${bidcheck}";
 				
+				var writeid = "${b.USER_ID}"
+				var sessionid = "${USER_ID}"
+				
 				console.log("aa" + bidcheck);
 				
-				if(bidcheck == "possible"){
-					var b = confirm("입찰 하시겠습니까 ? (입찰단위: " + ${b.AUC_UNIT} + ")");		
-					
-					if(b==true){	
-						location.href = "${pageContext.request.contextPath}/DealA/bid"
-						 + "?num=" + num ;
-						
-					}
+				if(sessionid ==""){
+					alert("로그인후 이용해주세요")
+					location.href = "${pageContext.request.contextPath}/member/login"
 				}else{
-					alert("입찰중인 물품입니다.")
+					if(writeid==sessionid){
+						alert("본인이 올린글 입니다.")
+					}else{
+						if(bidcheck == "possible"){
+							var b = confirm("입찰 하시겠습니까 ? (입찰단위: " + ${b.AUC_UNIT} + ")");		
+							
+							if(b==true){	
+								location.href = "${pageContext.request.contextPath}/DealA/bid"
+								 + "?num=" + num ;
+								
+							}
+						}else{
+							alert("입찰중인 물품입니다.")
+						}
+					}
 				}
+				
+				
 				
 		     });
 			

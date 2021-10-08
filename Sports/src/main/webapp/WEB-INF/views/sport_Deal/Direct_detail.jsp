@@ -402,7 +402,7 @@ input.checkbox:checked+label.input-label.radio::before {
 				<div class="preloader-circle"></div>
 				<div class="preloader-img pere-text">
 					<img
-						src="${pageContext.request.contextPath}/resources/img/logo/logo.png"
+						src="${pageContext.request.contextPath}/resources/image/logo/sports_logo.png"
 						alt="">
 				</div>
 			</div>

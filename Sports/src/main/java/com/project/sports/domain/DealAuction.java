@@ -25,6 +25,7 @@ public class DealAuction {
 	private String	SAVE_AUC_FILE4;
 	private int AUC_READCOUNT;			//글 조회수 (9-30 추가)
 	private int AUC_SPRICE;				//경매 시작값 (10-03 추가)
+	private String AUC_NOWDATE;			//올린시간 (10-07추가)
 	
 	private MultipartFile uploadfile1;
 	private MultipartFile uploadfile2;
@@ -187,6 +188,12 @@ public class DealAuction {
 	}
 	public void setAUC_SPRICE(int aUC_SPRICE) {
 		AUC_SPRICE = aUC_SPRICE;
+	}
+	public String getAUC_NOWDATE() {
+		return AUC_NOWDATE;
+	}
+	public void setAUC_NOWDATE(String aUC_NOWDATE) {
+		AUC_NOWDATE = aUC_NOWDATE.substring(0,10).replace("-", " ");
 	}
    
 	

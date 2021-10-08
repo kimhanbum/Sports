@@ -31,12 +31,13 @@ public class DealServiceImpl implements DealService {
 		} 
 
 		@Override
-		public List<DealAuction> getAuctionList(int page, int limit) {
+		public List<DealAuction> getAuctionList(int page, int limit , int view2) {
 			HashMap<String , Integer>map = new HashMap<String,Integer>();
 			int startrow=(page-1)*limit +1; 
 			int endrow = startrow+limit-1;
 			map.put("start", startrow);
 			map.put("end",endrow);
+			map.put("view2" , view2);
 			return dao.getAuctionList(map);
 		}
 
@@ -101,13 +102,15 @@ public class DealServiceImpl implements DealService {
 		}
 
 		@Override
-		public List<DealAuction> getSearchAuctionList(int page, int limit, String search) {
+		public List<DealAuction> getSearchAuctionList(int page, int limit, String search , int view2) {
 			HashMap<String , Object>map = new HashMap<String,Object>();
 			int startrow=(page-1)*limit +1; 
 			int endrow = startrow+limit-1;
 			map.put("start", startrow);
 			map.put("end",endrow);
 			map.put("search_word", "%" + search + "%");
+			map.put("view2",view2);
+
 			return dao.getSearchAuctionList(map);
 		}
 

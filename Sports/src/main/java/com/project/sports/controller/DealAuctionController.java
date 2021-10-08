@@ -46,7 +46,9 @@ public class DealAuctionController {
 			@RequestParam(value="page",defaultValue="1",required=false)int page,
 			@RequestParam(value = "search",
 			defaultValue = "", required = false) String search ,
-			 ModelAndView mv
+			@RequestParam(value = "view2",
+			defaultValue = "1", required = false) int view2,
+			 ModelAndView mv 
 			 ) {
 		
 		
@@ -72,15 +74,15 @@ public class DealAuctionController {
 		List<DealAuction> Auction = new ArrayList<DealAuction>();
 		
 		if(search == "") {
-			Auction = DealService.getAuctionList(page, limit); //리스트를 받아옴
+			Auction = DealService.getAuctionList(page, limit,view2); //리스트를 받아옴
 		}else {
-			Auction = DealService.getSearchAuctionList(page,limit,search);
+			Auction = DealService.getSearchAuctionList(page,limit,search,view2);
 		}
 		
 
 		 
 		
-		mv.setViewName("Deal/DealA_list");
+		mv.setViewName("sport_Deal/DealA_list");
 		mv.addObject("page",page);
 		mv.addObject("maxpage",maxpage);
 		mv.addObject("startpage",startpage);
@@ -88,6 +90,7 @@ public class DealAuctionController {
 		mv.addObject("listcount",listcount);
 		mv.addObject("Auction",Auction);
 		mv.addObject("limit",limit);
+		mv.addObject("view2",view2);
 		
 		
 		
@@ -99,7 +102,8 @@ public class DealAuctionController {
 	@GetMapping(value="/write")
 	//@RequestMapping(value="/write", method=requestMethod.GET)
 	public String Auction_write() {
-		return "Deal/Auction_write";
+		return "sport_Deal/Auction_write";
+		
 	}
 	
 	// 상세 페이지
@@ -115,28 +119,36 @@ public class DealAuctionController {
 		DealAuction Auction = DealService.A_getDetail(num);
 		
 	
-		
+	
 		String sessionid = (String) session.getAttribute("USER_ID");
 		
-		//찜한물품인지 확인
-		Object pickcheck = DealService.pickcheck(sessionid, num);
-		if(pickcheck == null) {
-			mv.addObject("pickcheck", "possible");
-		}else {
-			mv.addObject("pickcheck", "impossible");
-		}
+		logger.info("세션아아디" + sessionid);
 		
-		//현재 내아이디로 입찰중인 물푼인지 확인
-		Object bidcheck = DealService.bidcheck(sessionid , num);
-		if(bidcheck == null) {
-			mv.addObject("bidcheck" , "possible");
+		
+		if(sessionid !=null) {
+			//찜한물품인지 확인
+			Object pickcheck = DealService.pickcheck(sessionid, num);
+			if(pickcheck == null) {
+				mv.addObject("pickcheck", "possible");
+			}else {
+				mv.addObject("pickcheck", "impossible");
+			}
 			
-		}else {
-			mv.addObject("bidcheck" , "impossible");
+			//현재 내아이디로 입찰중인 물푼인지 확인
+			Object bidcheck = DealService.bidcheck(sessionid , num);
+			if(bidcheck == null) {
+				mv.addObject("bidcheck" , "possible");
+				
+			}else {
+				mv.addObject("bidcheck" , "impossible");
+			}
 		}
 		
 		
-		logger.info(bidcheck +"   비드 체크");
+		
+		
+		
+		
 		
 		//조회수
 		int count = DealService.A_readcount(num);
@@ -148,7 +160,7 @@ public class DealAuctionController {
 			mv.addObject("message", "상세보기 실패 입니다.");
 		}else {
 			logger.info("상세보기 성공");
-			mv.setViewName("Deal/Auction_detail");
+			mv.setViewName("sport_Deal/Auction_detail");
 			logger.info("파일" + Auction.getSAVE_AUC_FILE2());
 			mv.addObject("b" ,Auction);
 			
@@ -159,7 +171,8 @@ public class DealAuctionController {
 	
 	@PostMapping("/add")
 	//@RequestMapping(value="/add" , method=RequestMethod.POST)
-	public String Auction_add(DealAuction Auction, HttpServletRequest request ,HttpSession session)
+	public String Auction_add(DealAuction Auction, HttpServletRequest request 
+			,HttpSession session,ModelAndView mv)
 			throws Exception{
 		
 		
@@ -266,7 +279,8 @@ public class DealAuctionController {
 		//판매자 내거래내역 판매중 추가
 		DealService.Myinsert(Auction);
 		
-		return "Deal/Auction_write";
+		
+		return "redirect:list";
 	}
 	
 	private String fileDBName(String fileName , String saveFolder) {
@@ -331,7 +345,7 @@ public class DealAuctionController {
 		
 		
 		
-		return "Deal/DealD_list"; 
+		return "redirect:list"; 
 	}
 	
 	//경매 찜하기
@@ -347,7 +361,7 @@ public class DealAuctionController {
 		//찜하기 등록
 		DealService.Auction_pick(sessionid , num);
 		
-		return "Deal/DealA_list";
+		return "redirect:list";
 	}
 	
 	//경매 기간 끝났을시
@@ -363,7 +377,7 @@ public class DealAuctionController {
 		//찜,입찰실패 행삭제 
 		DealService.Auction_timeout3(num);
 		
-		return"Deal/DealA_list";
+		return"sport_Deal/DealA_list";
 	}
 	
 }

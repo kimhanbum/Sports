@@ -91,7 +91,7 @@ public class DealDirectController {
 		mv.addObject("Direct",Direct);
 		mv.addObject("limit",limit);
 		mv.addObject("view2",view2);
-		mv.setViewName("Deal/DealD_list");
+		mv.setViewName("sport_Deal/DealD_list");
 	
 		
 		
@@ -192,7 +192,7 @@ public class DealDirectController {
 	@GetMapping(value = "/write")
 	// @RequestMapping(value="/write", method=requestMethod.GET)
 	public String Direct_write() {
-		return "Deal/Direct_write";
+		return "sport_Deal/Direct_write";
 	}
 
 	// 상세 페이지
@@ -212,7 +212,7 @@ public class DealDirectController {
 			mv.addObject("message", "상세보기 실패 입니다.");
 		}else {
 			logger.info("상세보기 성공");
-			mv.setViewName("Deal/Direct_detail");
+			mv.setViewName("sport_Deal/Direct_detail");
 			logger.info("파일" + Direct.getSAVE_DIR_FILE2());
 			mv.addObject("b" ,Direct);
 		}
@@ -313,7 +313,7 @@ public class DealDirectController {
 
 		DealService.D_insert(Direct); // 저장메서드 호출
 
-		return "Deal/Direct_write";
+		return "redirect:list";
 	}
 
 	private String fileDBName(String fileName, String saveFolder) {
@@ -402,7 +402,7 @@ public class DealDirectController {
 		mv.addObject("d", Direct);
 		logger.info("성진" + Direct.getORI_DIR_FILE2());
 		//글 수정 폼 페이지로 이도아기위해 경로를 설정합니다.
-		mv.setViewName("Deal/DealD_modify");
+		mv.setViewName("sport_Deal/DealD_modify");
 		
 		return mv;
 	}
