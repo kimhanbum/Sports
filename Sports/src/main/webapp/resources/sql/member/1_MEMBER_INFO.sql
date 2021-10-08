@@ -16,15 +16,11 @@ USER_RMR		 NUMBER,					--회원기초대사량
 											--(여자:655.1+(9.56*현재몸무게)+(1.85*키)-(4.68*나이)
 USER_WATER		 VARCHAR2(10),				--회원물섭취량
 USER_IMAGE		 VARCHAR2(150),				--회원 프로필
-USER_PSPORTS1	 VARCHAR2(15),				--선호운동1
-USER_PSPORTS2	 VARCHAR2(15),				--선호운동2
-USER_PSPORTS3	 VARCHAR2(15)				--선호운동3
+USER_PSPORTS	 VARCHAR2(50)				--선호운동
 );
 
 SELECT * FROM MEMBER_INFO;--MEMBER_INFO 조회
 delete from MEMBER_INFO where USER_ID='admin';
-INSERT INTO MEMBER_INFO VALUES('admin','1234','1조','9009091234567','01032905515','사랑시 고백구 행복동','niggo0803@gmail.com',200,100,90,25,1831.3,1,'0','축구','스피닝','헬스');
-INSERT INTO MEMBER_INFO VALUES('admin02','1234','2조','9009091234567','01032905515','사랑시 고백구 행복동','niggo0803@gmail.com',200,100,90,25,1831.3,1,'','','','');
 
 DROP TABLE MEMBER_INFO CASCADE CONSTRAINTS;--MEMBER_INFO 삭제
 
