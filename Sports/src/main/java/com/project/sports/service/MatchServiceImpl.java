@@ -44,5 +44,16 @@ public class MatchServiceImpl implements MatchService {
 	public void insertMatch(Match match) {
 		dao.insertMatch(match);
 	}
+
+	@Override
+	public List<Match> getSearchList(int page, int limit, int num, Match match) {
+		HashMap<String, Integer> map = new HashMap<String, Integer>();
+		int startrow = (page-1)*limit +1;
+		int endrow = startrow + limit -1;
+		map.put("start", startrow);
+		map.put("end", endrow);
+		map.put("num", num);
+		return dao.getMatchList(map);
+	}
 	
 }

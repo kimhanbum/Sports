@@ -30,15 +30,9 @@ public class MatchController {
 	@Autowired
 	private MatchService matchservice;
 	
-	
-  @RequestMapping(value = "/baseball", method = RequestMethod.GET) public
-  ModelAndView baseball(
-			@RequestParam(value="page",defaultValue="1",required=false) int page, ModelAndView mv) {
-		int num = 2;   //sport_num =1
-		
+	private ModelAndView pageSet(int num, int page, String page_name) {
 		int limit = 5; // 한 화면에 출력할 레코드 갯수
 		int listcount = matchservice.getListCount(num); //총 리스트 수를 받아옴
-		
 		//총페이지 수
 		int maxpage = (listcount + limit - 1) / limit;
 		
@@ -53,7 +47,9 @@ public class MatchController {
 		
 		List<Match> matchlist = matchservice.getMatchList(page, limit, num);
 		
-		mv.setViewName("sport_match/match_baseball");
+		ModelAndView mv = new ModelAndView();
+		
+		mv.setViewName(page_name);
 		mv.addObject("page",page);
 		mv.addObject("maxpage",maxpage);
 		mv.addObject("startpage",startpage);
@@ -64,10 +60,21 @@ public class MatchController {
 		return mv;
 	}
 	
+	
+  @RequestMapping(value = "/baseball", method = RequestMethod.GET) public
+  ModelAndView baseball(
+			@RequestParam(value="page",defaultValue="1",required=false) int page, ModelAndView mv) {
+		int num = 2;   //sport_num =1
+		String page_name = "sport_match/match_baseball";
+		return pageSet(num, page, page_name);
+		
+	}
+	
 	@RequestMapping(value = "/football", method = RequestMethod.GET)
-	public ModelAndView football(ModelAndView mv) {
-		mv.setViewName("sport_match/match_football");
-		return mv;
+	public ModelAndView football(@RequestParam(value="page",defaultValue="1",required=false) int page, ModelAndView mv) {
+		int num=3;
+		String page_name ="sport_match/match_football";
+		return pageSet(num, page, page_name);
 	}
 	
 	@RequestMapping(value = "/basketball", method = RequestMethod.GET)
@@ -108,15 +115,36 @@ public class MatchController {
 	}
 	
 	@RequestMapping(value = "/volleyball", method = RequestMethod.GET)
-	public ModelAndView vallyball(ModelAndView mv) {
-		mv.setViewName("sport_match/match_volleyball");
-		return mv;
+	public ModelAndView vallyball(@RequestParam(value="page",defaultValue="1",required=false) int page,
+			ModelAndView mv) {
+		int num = 8;   //sport_num 확인
+		String page_name = "sport_match/match_volleyball";
+		return pageSet(num, page, page_name);
 	}
-	
 	
 	@RequestMapping(value="/mainPage",method=RequestMethod.GET)
 	public ModelAndView mainPage(
 			@RequestParam(value="page",defaultValue="1",required=false) int page, ModelAndView mv) {
+		int num = 1;   //sport_num =1
+		String page_name = "sport_match/Sport_matching";
+		return pageSet(num, page, page_name);
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/selSportName", method = RequestMethod.POST, produces="application/text;charset=utf8")
+	public String selSportName(@RequestBody Sports param) throws Exception {
+		return matchservice.selSportName(param);
+	}
+	
+	@RequestMapping(value="/Regi",method=RequestMethod.POST)
+	public String add(Match match, HttpServletRequest request) throws Exception{
+		matchservice.insertMatch(match); // 저장 메서드 호출
+		return "redirect:baseball";
+	}
+	
+	@RequestMapping(value="/SearchList",method=RequestMethod.GET)
+	public ModelAndView search(
+			@RequestParam(value="page",defaultValue="1",required=false) int page, Match match, ModelAndView mv) {
 		int num = 1;   //sport_num =1
 		
 		int limit = 5; // 한 화면에 출력할 레코드 갯수
@@ -134,7 +162,7 @@ public class MatchController {
 		if(endpage > maxpage)
 		   endpage = maxpage;
 		
-		List<Match> matchlist = matchservice.getMatchList(page, limit, num);
+		List<Match> matchlist = matchservice.getSearchList(page, limit, num, match);
 		
 		mv.setViewName("sport_match/Sport_matching");
 		mv.addObject("page",page);
@@ -147,17 +175,4 @@ public class MatchController {
 		return mv;
 	}
 	
-	@ResponseBody
-	@RequestMapping(value = "/selSportName", method = RequestMethod.POST, produces="application/text;charset=utf8")
-	public String selSportName(@RequestBody Sports param) throws Exception {
-		return matchservice.selSportName(param);
-	}
-	
-	@RequestMapping(value="/Regi",method=RequestMethod.POST)
-	public String add(Match match, HttpServletRequest request) throws Exception{
-		
-		matchservice.insertMatch(match); // 저장 메서드 호출
-		
-		return "redirect:baseball";
-	}
 }
