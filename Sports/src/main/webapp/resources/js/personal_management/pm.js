@@ -37,7 +37,7 @@ $(function (){
    });//click
    
    $(".add").click(function(){
-	   
+	   console.log("time"+time);
 	   var data = $('#sports_name').val().split(" ");
 	   
 	   $.ajax({
@@ -82,15 +82,18 @@ function getList(){
 	$.ajax({
 		url: "../pm/list",
 		success : function(rdata){//rdata = object
-			$(".kcal-list >li").remove();
+			$("#kcal_list tbody").remove();
 			var output = '';
         	$(rdata).each(function(index,item){
-			output += "<li>" + "소모 칼로리:" +item.SPORTS_NAME + item.PM_KCAL  + "KCAL" + "<i id='remove' class='remove mdi mdi-close-circle-outline'></i>"; 
+        	console.log("종목="+item.SPORTS_NAME)
+			output += "<tr><td>  이미지 "; 
   			output += "<input id='num' type='hidden' value=" + item.PM_NO + ">";
-  			output+= "</li>";
-			/*console.log("PM_NO" + item.PM_NO);*/
+  			output+= "</td>";
+			output+= "<td>" + item.SPORTS_NAME +"</td>";
+			output+= "<td>" + item.PM_KCAL + "</td>"
+  			/*console.log("PM_NO" + item.PM_NO);*/
 		})//each
-        	$(".kcal-list").append(output);
+        	$("#kcal_list tbody").append(output);
         	/*var pm_no = $('#num').val();
 			console.log(pm_no);*/
 		}
