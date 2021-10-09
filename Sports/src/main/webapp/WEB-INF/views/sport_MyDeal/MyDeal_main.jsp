@@ -82,6 +82,7 @@
 					<div class="col-xl-12">
 						<div class="hero-cap text-center">
 							<h2>직거래 물품 상세</h2>
+							<i class="fab fa-accusoft"></i>
 						</div>
 					</div>
 				</div>

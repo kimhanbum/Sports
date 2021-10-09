@@ -323,16 +323,16 @@ input.checkbox:checked+label.input-label.radio::before {
 	content: "\f058";
 }
 
-.buttonM {
-	width: 140px;
-	height: 45px;
+.buttonM , .buttonJ{
+	width: 200px;
+	height: 60px;
 	font-family: 'Roboto', sans-serif;
-	font-size: 11px;
+	font-size: 17px;
 	text-transform: uppercase;
 	letter-spacing: 2.5px;
 	font-weight: 500;
-	color: #000;
-	background-color: #fff;
+	color: white;
+	background-color: #114da5;
 	border: none;
 	border-radius: 45px;
 	box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
@@ -341,22 +341,22 @@ input.checkbox:checked+label.input-label.radio::before {
 	outline: none;
 }
 
-.buttonM:hover {
-	background-color: #2EE59D;
-	box-shadow: 0px 15px 20px rgba(46, 229, 157, 0.4);
+.buttonM:hover , .buttonJ:hover {
+	background-color: #1c72f0;
+	box-shadow: 0px 15px 20px #1c72f0;
 	color: #fff;
 	transform: translateY(-7px);
 }
-.buttonD {
-	width: 140px;
-	height: 45px;
+.buttonD , .buttonE{
+	width: 200px;
+	height: 60px;
 	font-family: 'Roboto', sans-serif;
-	font-size: 11px;
+	font-size: 17px;
 	text-transform: uppercase;
 	letter-spacing: 2.5px;
 	font-weight: 500;
-	color: #000;
-	background-color: #fff;
+	color: white;
+	background-color: #afafaf;
 	border: none;
 	border-radius: 45px;
 	box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
@@ -365,9 +365,9 @@ input.checkbox:checked+label.input-label.radio::before {
 	outline: none;
 }
 
-.buttonD:hover {
-	background-color: #2EE59D;
-	box-shadow: 0px 15px 20px rgba(46, 229, 157, 0.4);
+.buttonD:hover , .buttonE:hover{
+	background-color: #e8e3e3;
+	box-shadow: 0px 15px 20px #e8e3e3;
 	color: #fff;
 	transform: translateY(-7px);
 }
@@ -475,14 +475,20 @@ input.checkbox:checked+label.input-label.radio::before {
 						<div class="col-md-6">
 							<h4 class="mb-4">Button Group</h4>
 							<hr>
+							<div id="bubu">
 							<ul class="list-unstyled" id="buttonG">
 								<li class="mb-3" id="modifyB">
 									<button class="buttonM">수정</button>
+									
 								</li>
 								<li class="mb-3" id="mon2">
 									<button class="buttonD">삭제</button>
+									
 								</li>
 							</ul>
+							</div>
+							
+							
 						</div>
 					</div>
 				</div>
@@ -565,8 +571,30 @@ input.checkbox:checked+label.input-label.radio::before {
 	<jsp:include page="/WEB-INF/views/sport_comm/footer2.jsp" />
 	<!-- JS here -->
 <script>
+$(function(){
+	
+	var id = "${b.USER_ID}";
+	var sessionid = "${USER_ID}";
+	var output ='<ul class="list-unstyled" id="buttonG">'
+		output +='<li class="mb-3" id="modifyB">';
+		output +='<button class="buttonJ">찜 하기</button></li>'
+		
+		output +='</li><li class="mb-3" id="mon2">'
+		output +='<button class="buttonE">문의하기</button></li></ul>'
+		
+	if(id != sessionid){
+		$("#buttonG").remove();
+		$("#bubu").append(output)
+	}
+})
+</script>
+<script>
 
 $(function(){
+	
+
+		
+		
 	//삭제버튼 클릭시
 	$(".buttonD").click(function(){ //로그인창에서 회원가입버튼 클릭 시
 		var a = ${param.num};
@@ -584,7 +612,18 @@ $(function(){
 			 + "?num=" + a;
 		
      });
+
+		
+
+		
+	
+	
 })
+
+		
+</script>
+<script>
+
 </script>
 	<!-- All JS Custom Plugins Link Here here -->
 	<script src="./assets/js/vendor/modernizr-3.5.0.min.js"></script>
