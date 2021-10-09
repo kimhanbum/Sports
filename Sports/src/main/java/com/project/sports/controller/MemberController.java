@@ -81,19 +81,17 @@ required=true 상태에서 지정한 이름을 가진 쿠키가 존재하지 않으면 스프링 MVC는 익
 		PrintWriter out = response.getWriter();
 		out.print(result);
 	}
-	
+
 	//회원가입 유저 정보 저장
 	@RequestMapping(value="/joinProcess", method=RequestMethod.POST)
 	public String joinProcess(Member m,//Member : command 객체
-			RedirectAttributes rattr, Model model,
+			RedirectAttributes rattr, Model model,String[] USER_PSPORTS,
 			HttpServletRequest request) throws Exception{
 		m.setUSER_MOBILE(m.getMOBILE1()+m.getMOBILE2()+m.getMOBILE3());
 		m.setUSER_ADDRESS(m.getDONG()+m.getHOME()+m.getHOMEADDRESS());
 		m.setUSER_JUMIN(m.getJUMIN()+m.getJUMIN1());
 		m.setUSER_EMAIL(m.getUSER_EMAIL()+"@"+m.getUSER_EMAILDOMAIN());
 		m.setUSER_BMI(m.getUSER_PWEIGHT()/(m.getUSER_HEIGHT()*m.getUSER_HEIGHT())*10000);//BMI계산
-		m.setUSER_RMR(Integer.parseInt(m.getJUMIN().substring(0,2)));
-
 		/*
 		LocalDate now = LocalDate.now();
 		// 포맷 정의
@@ -102,32 +100,32 @@ required=true 상태에서 지정한 이름을 가진 쿠키가 존재하지 않으면 스프링 MVC는 익
 		String formatedNow = now.format(formatter);
 		// 결과 출력
 		System.out.println(formatedNow);
-		if(m.getJUMIN1().substring(0,1)=="1") {
+		*/
+		if(m.getJUMIN1().substring(0,1).equals("1")) {
 			m.setUSER_RMR(
 					66.47+(13.75*m.getUSER_PWEIGHT())
 						+(5*m.getUSER_HEIGHT())
 							-(6.75*(121-Integer.parseInt(m.getJUMIN().substring(0,2)+1)))
 					);
-		}else if(m.getJUMIN1().substring(0,1)=="3") {
+		}else if(m.getJUMIN1().substring(0,1).equals("3")) {
 			m.setUSER_RMR(
 					66.47+(13.75*m.getUSER_PWEIGHT())
 						+(5*m.getUSER_HEIGHT())
 							-(6.75*(21-Integer.parseInt(m.getJUMIN().substring(0,2)+1)))
 					);
-		}else if(m.getJUMIN1().substring(0,1)=="2") {
+		}else if(m.getJUMIN1().substring(0,1).equals("2")) {
 			m.setUSER_RMR(
 					655.1+(9.56*m.getUSER_PWEIGHT())
 						+(1.85*m.getUSER_HEIGHT())
 							-(4.68*(121-Integer.parseInt(m.getJUMIN().substring(0,2)+1)))
 					);
-		}else if(m.getJUMIN1().substring(0,1)=="4") {
+		}else if(m.getJUMIN1().substring(0,1).equals("4")) {
 			m.setUSER_RMR(
 					655.1+(9.56*m.getUSER_PWEIGHT())
 						+(1.85*m.getUSER_HEIGHT())
 							-(4.68*(21-Integer.parseInt(m.getJUMIN().substring(0,2)+1)))
 					);
 		}else {m.setUSER_RMR(1);};
-		*/
 		//(남자:66.47+(13.75*현재몸무게)+(5*키)-(6.75*나이)
 		//(여자:655.1+(9.56*현재몸무게)+(1.85*키)-(4.68*나이)
 		int result = memberservice.insert(m);
@@ -142,13 +140,13 @@ required=true 상태에서 지정한 이름을 가진 쿠키가 존재하지 않으면 스프링 MVC는 익
 		} catch(Exception e){
 			e.printStackTrace();
 		}
-/*
-스프링에서 제공하는 RedirectAttributes는 기존의 Serlvet에서 사용되던
-response.sendRedirect()를 사용할 때와 동일한 용도로 사용합니다.
-리다이렉트로 전송하면 파라미터를 전달하고자 할 때 addAttribute()나 addFlashAttribute()를 사용합니다.
-예) response.sendRedirect("/test?result=1");
-	=> rattr.addAttribute("result",1)
- */
+		//선호운동 값 가져오기
+		String prefer = USER_PSPORTS[0];
+		for(int i=1; i<USER_PSPORTS.length; i++) {
+			System.out.println(USER_PSPORTS[i]);
+			prefer += "," + USER_PSPORTS[i];
+			m.setUSER_PSPORTS(prefer);
+		}
 		//삽입이 된 경우
 		if(result==1) {
 			rattr.addFlashAttribute("result","joinSuccess");
@@ -190,13 +188,32 @@ response.sendRedirect()를 사용할 때와 동일한 용도로 사용합니다.
 		
 	}
 	
-/*
-1. header.jsp에서 이동하는 경우
-	href="${pageContext.request.contextPath}/member/list"
-2. member_list.jsp에서 이동하는 경우
-	<a href="list?page=2&search_field=-1&search_word=" class="page-link">2</a>
- */
-	
+	@RequestMapping(value="/update", method=RequestMethod.GET)
+	public ModelAndView member_update(HttpSession session,
+			ModelAndView mv) {
+		String id = (String) session.getAttribute("id");
+		if(id==null) {
+			mv.setViewName("redirect:login");
+		}else {
+			Member m = memberservice.member_info(id);
+			mv.setViewName("sports_member/update");
+			mv.addObject("memberinfo",m);
+		}
+		return mv;
+	}
+	@RequestMapping(value="/updateProcess", method=RequestMethod.POST)
+	public String updateProcess(Member member, Model model,
+			HttpServletRequest request, RedirectAttributes rattr) {
+		int result = memberservice.update(member);
+		if(result==1) {
+			rattr.addFlashAttribute("result","updateSuccess");
+			return "redirect:/board/list";
+		}else {
+			model.addAttribute("url",request.getRequestURI());
+			model.addAttribute("message","정보 수정 실패");
+			return "error/error";
+		}
+	}
 	
 	@RequestMapping(value="/logout",method=RequestMethod.GET)
 	public String loginout(HttpSession session) {
