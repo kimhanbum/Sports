@@ -312,7 +312,8 @@ public class DealDirectController {
 		Direct.setUSER_ID(sessionid);
 
 		DealService.D_insert(Direct); // 저장메서드 호출
-
+		
+		
 		return "redirect:list";
 	}
 
