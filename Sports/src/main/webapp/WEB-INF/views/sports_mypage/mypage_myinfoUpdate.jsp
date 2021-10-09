@@ -126,10 +126,9 @@ function Postcode() {//우편번호찾기
 
 </head>
 <body>
-    
     <!-- 헤더 영역  -->
 	<jsp:include page="/WEB-INF/views/sport_comm/header.jsp"/>
-    <form method="post" name="joinform" action="joinProcess">
+    <form method="post" name="updateform" action="updateProcess">
         <table>
             <tr>
                 <td>
@@ -289,7 +288,7 @@ function Postcode() {//우편번호찾기
             </tr>
             
         </table><br>
-        <input type="submit" id="join" value="회원가입" >
+        <input type="submit" id="update" value="수정" >
     </form>
     <!-- Footer 영역  -->
 	<jsp:include page="/WEB-INF/views/sport_comm/footer.jsp"/>
