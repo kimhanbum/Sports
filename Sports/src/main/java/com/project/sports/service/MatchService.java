@@ -15,4 +15,7 @@ public interface MatchService {
 	public String selSportName(Sports param);
 
 	public void insertMatch(Match match);
+
+	public List<Match> getSearchList(int page, int limit, int num, Match match);
+
 }

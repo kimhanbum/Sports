@@ -9,12 +9,29 @@
 		where sport_num = #{num}
 	</select>
 	
+	<select id="searchlist" resultType="match" parameterType="java.util.Map">
+		select * 
+		from Sport_register
+		<where>
+			<if test='MATCH_TIME!=""'>
+				MATCH_TIME =#{MATCH_TIME}
+			</if>
+			<if test='MATCH_PRS!=""'>
+				and MATCH_PRS =#{MATCH_PRS}
+			</if>
+			<if test='MATCH_SKL!=""'>
+				and MATCH_SKL =#{MATCH_SKL}
+			</if>
+		</where>
+		and sport_num =#{num}
+	</select>
+	
 	<select id="list" resultType="match" parameterType="java.util.Map">
 		select * from 
 		(select rownum rnum, b.* 
 		from 
 			(select * from Sport_register
-			where sport_num = #{num}
+			where sport_num = #{num} and REGISTER_STUS = 0
 			order by REGISTER_NUM desc) b
 		)
 		where rnum &gt;= #{start} and rnum &lt; = #{end}

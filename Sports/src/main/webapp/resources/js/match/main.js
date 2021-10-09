@@ -122,10 +122,29 @@ function btnClick(){
 	}else{
 		console.log("소셜매칭 클릭");
 		var string = "";
-		string += $("select[name=city]").val() + " / ";
-		string += $("select[name=city_detail]").val();
-		console.log("주소 : " + string);
-	//기능구현
+		var MATCH_TIME = $("input[name=match_date]").val();
+		var MATCH_PRS = $("input[name=person]").val();
+		var MATCH_SKL = $("select[name=skill]").val();
+		
+		$.ajax({
+			async: false,
+			type: "post",
+			url: "./SearchList",
+			dataType: "text",
+			data:{
+	    	/*   "MATCH_ADR" : MATCH_ADR,
+	    	   "MATCH_DTL_ADR" : MATCH_DTL_ADR,*/
+	    	   "MATCH_TIME" : MATCH_TIME,
+	    	   "MATCH_PRS" : MATCH_PRS,
+	    	   "MATCH_SKL" : MATCH_SKL
+			},
+			success: function (result) {
+				alert('조회성공');
+				location.reload();
+			}, error: function(){
+				alert('실패');
+			}
+		});
 	}
 }
 
