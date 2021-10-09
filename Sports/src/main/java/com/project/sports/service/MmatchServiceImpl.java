@@ -1,4 +1,5 @@
 package com.project.sports.service;
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,5 +38,20 @@ public class MmatchServiceImpl implements MmatchService {
 	@Override
 	public List<Sports> getSportDeatilList(int selType) {
 		return dao.getSportDeatilList(selType);
+	}
+	
+	@Override
+	public int getMentorListCount() {
+		return dao.getMentorListCount();
+	}
+
+	@Override
+	public List<Mentor> getMentorList(int page, int limit) {
+		HashMap <String,Integer> map = new HashMap <String,Integer>();
+		int startrow =(page-1)*limit +1;
+		int endrow=startrow+limit-1;
+		map.put("start",startrow);
+		map.put("end",endrow);
+		return dao.getMentorList(map);
 	}
 }

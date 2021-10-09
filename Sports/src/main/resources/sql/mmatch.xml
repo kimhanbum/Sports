@@ -44,4 +44,19 @@
 	where sports_category=#{selType}
 </select>
 
+<select id="MentorCount" resultType="int">
+	select count(*)
+	from mentor_match
+</select>
+
+<select id="Mentorlist" parameterType="Map" resultType="mentor">
+   SELECT * FROM 
+   (SELECT ROWNUM RNUM, m.*
+    FROM
+         (SELECT * FROM mentor_match 
+          ORDER BY MENTOR_CODE DESC) m
+   )
+   WHERE RNUM <![CDATA[>=]]> #{start} AND RNUM <![CDATA[<=]]> #{end}
+</select>
+
 </mapper>

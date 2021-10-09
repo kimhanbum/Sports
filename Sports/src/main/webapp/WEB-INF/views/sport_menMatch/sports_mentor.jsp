@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@	taglib uri="http://www.springframework.org/tags" prefix="spring"%> 
 <!DOCTYPE html>
 <html>
 <head>
@@ -18,11 +19,6 @@
 <style>
 #paging {
 	color: black;
-}
-
-.pagination {
-	position: absolute;
-	left: 40%;
 }
 
 .pagination a {
@@ -476,7 +472,9 @@ body .grid {
 .loc_active{
 	color:red !important;
 }
-
+.gray{
+  color:gray !important;
+}
 </style>
 
 <body>
@@ -518,15 +516,15 @@ body .grid {
 	</div>
 	<!-- slider Area End--> 
 	
+	<!-- 검색 모달 open 영역 -->
 	<section id="search_section" style="padding-top: 70px; ">	
 		<div class="container">
 			<div style="display:inline !important">
-				<h1 style="display:inline !important">300</h1>명의 멘토가 검색되었습니다.
-				
+				<h1 style="display:inline !important">${listcount}</h1>명의 멘토가 검색되었습니다.
 				( 키워드 : 
-				<div style="color:red; display:inline !important">성별</div>
+				<div style="color:red; display:inline !important">테스트1</div>
 				-
-				<div style="color:red; display:inline !important">남성</div>
+				<div style="color:red; display:inline !important">테스트2</div>
 				)
 			</div>
 			<br>
@@ -596,7 +594,6 @@ body .grid {
 			</div>
 		</div>
 	</div> 
-	
 	
 	<!-- 과목 필터 modal -->
   	<div class="modal" id="subjectModal">
@@ -813,7 +810,8 @@ body .grid {
 		</div>
 	</div> 
 	
-	<!-- Latest Products Start -->
+	
+	<!-- mentor 공고글 리스트 -->
 	<section class="latest-product-area latest-padding" style="padding-top: 70px;">
 		<div class="container">
 			<hr><br><br><br>
@@ -822,174 +820,46 @@ body .grid {
 				<div class="tab-pane fade show active" id="nav-home" role="tabpanel"
 					aria-labelledby="nav-home-tab">
 					<div class="row">
-						<div class="col-xl-4 col-lg-4 col-md-6">
-							<div class="single-product mb-60" style="border: 2px solid black;">
-								<div class="product-img">
-									<a href="#" data-toggle="modal" data-target="#detailModal">
-										<img src="${pageContext.request.contextPath}/resources/img/categori/product1.png" alt="">
-									</a>
-								</div>
-								<div class="product-caption">
-									<h3><b>러닝 가르칩니다.(MODAL)</b></h3>
-									<div class="price">
-										<table class="table">
-											<tr>
-												<th>종목</th>
-												<td>러닝</td>
-											</tr>
-											<tr>
-												<th>장소</th>
-												<td>서울시 종로구 종로3가</td>
-											</tr>
-											<tr>
-												<th>인원</th>
-												<td>3명</td>
-											</tr>
-										</table>
+						<c:if test="${listcount > 0 }">
+							<c:forEach var="mentor" items="${mentorlist}">
+								<div class="col-xl-4 col-lg-4 col-md-6">
+									<div class="single-product mb-60" style="border: 2px solid black;">
+										<div class="product-img">
+											<a href="#" data-toggle="modal" data-target="#detailModal">
+												<c:if test="${mentor.mentor_pic1 == null}">
+													<img src="${pageContext.request.contextPath}/resources/image/mmatch/default.jpg" alt="">
+												</c:if>
+												<c:if test="${mentor.mentor_pic1 != null}">
+													<img style="height:250px"src="<spring:url value='/matchupload${mentor.mentor_pic1}'/>" alt=""/>
+												</c:if>
+											</a>
+										</div>
+										<div class="product-caption">
+											<h3><b>${mentor.mentor_title}</b></h3>
+											<div class="price">
+												<table class="table">
+													<tr>
+														<th>종목</th>
+														<td>${mentor.sports_name}</td>
+													</tr>
+													<tr>
+														<th>장소</th>
+														<td>${mentor.city}&nbsp;${mentor.sigungu}</td>
+													</tr>
+													<tr>
+														<th>인원</th>
+														<td>${mentor.mentor_number}명</td>
+													</tr>
+												</table>
+											</div>
+										</div>
 									</div>
 								</div>
-							</div>
-						</div>
-						<div class="col-xl-4 col-lg-4 col-md-6">
-							<div class="single-product mb-60" style="border: 2px solid black;">
-								<div class="product-img">
-									<a href="#" data-toggle="modal" data-target="#detailModal">
-									<img src="${pageContext.request.contextPath}/resources/img/categori/product1.png" alt="">
-									</a>
-								</div>
-								<div class="product-caption">
-									<h3><b>러닝 가르쳐 드립니다.</b></h3>
-									<div class="price">
-										<table class="table">
-											<tr>
-												<th>종목</th>
-												<td>러닝</td>
-											</tr>
-											<tr>
-												<th>장소</th>
-												<td>서울시 종로구 종로3가</td>
-											</tr>
-											<tr>
-												<th>인원</th>
-												<td>3명</td>
-											</tr>
-										</table>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-xl-4 col-lg-4 col-md-6">
-							<div class="single-product mb-60" style="border: 2px solid black;">
-								<div class="product-img">
-									<a href="#" data-toggle="modal" data-target="#detailModal">
-									<img src="${pageContext.request.contextPath}/resources/img/categori/product1.png" alt="">
-									</a>
-								</div>
-								<div class="product-caption">
-									<h3><b>러닝 가르쳐 드립니다.</b></h3>
-									<div class="price">
-										<table class="table">
-											<tr>
-												<th>종목</th>
-												<td>러닝</td>
-											</tr>
-											<tr>
-												<th>장소</th>
-												<td>서울시 종로구 종로3가</td>
-											</tr>
-											<tr>
-												<th>인원</th>
-												<td>3명</td>
-											</tr>
-										</table>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-xl-4 col-lg-4 col-md-6">
-							<div class="single-product mb-60" style="border: 2px solid black;">
-								<div class="product-img">
-									<a href="#" data-toggle="modal" data-target="#detailModal">
-									<img src="${pageContext.request.contextPath}/resources/img/categori/product1.png" alt="">
-									</a>
-								</div>
-								<div class="product-caption">
-									<h3><b>러닝 가르쳐 드립니다.</b></h3>
-									<div class="price">
-										<table class="table">
-											<tr>
-												<th>종목</th>
-												<td>러닝</td>
-											</tr>
-											<tr>
-												<th>장소</th>
-												<td>서울시 종로구 종로3가</td>
-											</tr>
-											<tr>
-												<th>인원</th>
-												<td>3명</td>
-											</tr>
-										</table>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-xl-4 col-lg-4 col-md-6">
-							<div class="single-product mb-60" style="border: 2px solid black;">
-								<div class="product-img">
-									<a href="#" data-toggle="modal" data-target="#detailModal">
-									<img src="${pageContext.request.contextPath}/resources/img/categori/product1.png" alt="">
-									</a>
-								</div>
-								<div class="product-caption">
-									<h3><b>러닝 가르쳐 드립니다.</b></h3>
-									<div class="price">
-										<table class="table">
-											<tr>
-												<th>종목</th>
-												<td>러닝</td>
-											</tr>
-											<tr>
-												<th>장소</th>
-												<td>서울시 종로구 종로3가</td>
-											</tr>
-											<tr>
-												<th>인원</th>
-												<td>3명</td>
-											</tr>
-										</table>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-xl-4 col-lg-4 col-md-6">
-							<div class="single-product mb-60" style="border: 2px solid black;">
-								<div class="product-img">
-									<a href="#" data-toggle="modal" data-target="#detailModal">
-									<img src="${pageContext.request.contextPath}/resources/img/categori/product1.png" alt="">
-									</a>
-								</div>
-								<div class="product-caption">
-									<h3><b>러닝 가르쳐 드립니다.</b></h3>
-									<div class="price">
-										<table class="table">
-											<tr>
-												<th>종목</th>
-												<td>러닝</td>
-											</tr>
-											<tr>
-												<th>장소</th>
-												<td>서울시 종로구 종로3가</td>
-											</tr>
-											<tr>
-												<th>인원</th>
-												<td>3명</td>
-											</tr>
-										</table>
-									</div>
-								</div>
-							</div>
-						</div>
+							</c:forEach>
+						</c:if>
+						<c:if test="${listcount == 0 }">
+							<font size=5>등록된 글이 없습니다.</font>
+						</c:if>
 					</div>
 					<hr>
 					<div id="write-b">
@@ -1002,11 +872,27 @@ body .grid {
 								class="btn header-btn">글쓰기</a>
 						</c:if>
 					</div>
-					<div class="pagination">
-						<a class="active" href="#" id="paging">&laquo;</a> <a href="#" id="paging">1</a>
-						<a  href="#" id="paging">2</a> <a href="#" id="paging">3</a> <a
-							href="#" id="paging">4</a> <a href="#" id="paging">5</a> <a
-							href="#" id="paging">&raquo;</a>
+					<div class="pagination justify-content-center">
+						<c:if test="${page <= 1 }">
+							<a class="gray" href="#" id="paging">&laquo;</a> 
+						</c:if>
+						<c:if test="${page > 1 }">	
+							<a href="#" id="paging">&laquo;</a> 		
+						</c:if>
+						<c:forEach var="a" begin="${startpage}" end="${endpage}">
+							<c:if test="${a == page }">
+								<a class="active" href="#" id="paging">${a}</a>	
+							</c:if>
+							<c:if test="${a != page }">
+								<a href="#" id="paging">${a}</a>
+							</c:if>
+						</c:forEach>
+						<c:if test="${page >= maxpage }">
+							<a class="gray" href="#" id="paging">&raquo;</a>
+						</c:if>
+						<c:if test="${page < maxpage }">
+							<a href="#" id="paging">&raquo;</a>
+						</c:if>					
 					</div>
 			   </div>
 		   </div>
