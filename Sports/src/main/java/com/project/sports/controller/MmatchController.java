@@ -14,8 +14,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.project.sports.domain.Mentor;
 import com.project.sports.domain.Sports;
@@ -31,17 +33,65 @@ public class MmatchController {
 	
 	@Value("${savefoldername}")
 	private String saveFolder;
-	
-	//멘토 글 리스트 보기
-	@RequestMapping(value = "/mentorPage", method = RequestMethod.GET)
-	public String metorMainPage() {
-		return "sport_menMatch/sports_mentor";
-	}
+
+	/*
+	 * //멘토 글 리스트 보기
+	 * 
+	 * @RequestMapping(value = "/mentorPage", method = RequestMethod.GET) public
+	 * String metorMainPage() { return "sport_menMatch/sports_mentor"; }
+	 */
 	
 	//멘토 글 작성
 	@RequestMapping(value = "/mentorWrite", method = RequestMethod.GET)
 	public String mentorWrite() {
 		return "sport_menMatch/sports_mentor_write";
+	}
+	
+	//멘토 글 리스트 보기
+	@RequestMapping(value = "/mentorPage", method = RequestMethod.GET)
+	public ModelAndView mentorlist(
+			@RequestParam(value="page" ,defaultValue="1", required=false) int page,
+			ModelAndView mv)
+	{
+	    int limit = 6; //한 화면에 출력할 레코드 갯수(고정)
+	    
+	    int listcount = mmatchservice.getMentorListCount(); //총 리스트 수를 받아옴
+	    //총 페이지 수
+	    int maxpage = (listcount + limit - 1) /limit;
+	    
+	    //현재 페이지에 보여줄 시작 페이지 수 (1,11,21 등등)
+	    int startpage = ((page-1) / 10) * 10 + 1;
+	    
+	    //현재 페이지에 보내줄 마지막 페이지 수 (10,20.30 등등)
+	    int endpage = startpage + 10 -1;
+	    
+	    if(endpage > maxpage)
+	    	endpage = maxpage;
+	    
+	    List<Mentor> mentorlist = mmatchservice.getMentorList(page, limit); //리스트를 받아옴
+	    
+	    mv.setViewName("sport_menMatch/sports_mentor");
+	    mv.addObject("page",page);
+	    mv.addObject("maxpage",maxpage);
+	    mv.addObject("startpage",startpage);
+	    mv.addObject("endpage",endpage);
+	    mv.addObject("listcount",listcount);
+	    mv.addObject("mentorlist",mentorlist);
+	    mv.addObject("saveFolder",saveFolder);
+	    logger.info("page : " +page);
+	    logger.info("maxpage : " +maxpage);
+	    logger.info("startpage : " +startpage);
+	    logger.info("endpage : " +endpage);
+	    logger.info("listcount : " +listcount);
+	    for(Mentor m : mentorlist) {
+	    	logger.info("사진 : " +m.getMentor_pic1());	    	
+	    	logger.info("종목 : " +m.getSports_name());	
+	    	logger.info("시 : " +m.getCity());	
+	    	logger.info("군구 : " +m.getSigungu());	
+	    	logger.info("인원 : " +m.getMentor_number());	
+	    }
+	    logger.info("saveFolder : " +saveFolder);
+		return mv;
 	}
 	
 	//sport 종목 가져오기(이름만)
@@ -151,8 +201,8 @@ public class MmatchController {
 		 * mentor.getMentor_number()); logger.info(mentor.getMentor_caution());
 		 * logger.info(mentor.getMentor_career()); logger.info(mentor.getMentor_date());
 		 */
-		
 		mmatchservice.insertMentorWriting(mentor);
+		//Thread.sleep(3000); //2초 대기
 		return "redirect:mentorPage";
 	}
 	

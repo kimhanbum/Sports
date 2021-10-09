@@ -11,4 +11,6 @@ public interface MmatchService {
 	public List<String> getDonglist(String selType);
 	public void insertMentorWriting(Mentor mentor);
 	public List<Sports> getSportDeatilList(int selType);
+    public int getMentorListCount();
+    public List<Mentor> getMentorList(int page, int limit);
 }

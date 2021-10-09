@@ -2,13 +2,11 @@ package com.project.sports.dao;
 
 import java.util.HashMap; 
 import java.util.List;
-import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import com.project.sports.domain.Match;
-import com.project.sports.domain.Member;
+
 import com.project.sports.domain.Mentor;
 import com.project.sports.domain.Sports;
 
@@ -35,5 +33,11 @@ public class MmatchDAO {
 	}
 	public List<Sports> getSportDeatilList(int selType){
 		return sqlSession.selectList("Mmatches.sportDetailList",selType);
+	}
+	public int getMentorListCount() {
+		return sqlSession.selectOne("Mmatches.MentorCount");
+	}
+	public List<Mentor> getMentorList(HashMap <String,Integer> map) {
+		return sqlSession.selectList("Mmatches.Mentorlist",map);
 	}
 }
