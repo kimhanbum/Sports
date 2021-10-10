@@ -479,22 +479,6 @@ body .grid {
 
 <body>
 
-	<!-- Preloader Start -->
-	<div id="preloader-active">
-		<div
-			class="preloader d-flex align-items-center justify-content-center">
-			<div class="preloader-inner position-relative">
-				<div class="preloader-circle"></div>
-				<div class="preloader-img pere-text">
-					<img
-						src="${pageContext.request.contextPath}/resources/image/logo/sports_logo.png"
-						alt="">
-				</div>
-			</div>
-		</div>
-	</div>
-	<!-- Preloader Start -->
-
 	<!-- 헤더 영역  -->
 	<jsp:include page="/WEB-INF/views/sport_comm/header.jsp"/>
 
@@ -520,11 +504,14 @@ body .grid {
 	<section id="search_section" style="padding-top: 70px; ">	
 		<div class="container">
 			<div style="display:inline !important">
-				<h1 style="display:inline !important">${listcount}</h1>명의 멘토가 검색되었습니다.
+				<h1 id="writingcount" style="display:inline !important">${listcount}</h1>명의 멘토가 검색되었습니다.
 				( 키워드 : 
-				<div style="color:red; display:inline !important">테스트1</div>
-				-
-				<div style="color:red; display:inline !important">테스트2</div>
+				<c:if test="${!empty search_field}">
+					<div id="searchkeyword" style="color:red; display:inline !important">${search_field}-${search_word}</div>
+				</c:if>
+				<c:if test="${empty search_field}">
+					<div id="searchkeyword" style="color:red; display:inline !important">전체 검색</div>
+				</c:if>
 				)
 			</div>
 			<br>
@@ -766,7 +753,7 @@ body .grid {
 					<br><h4 class=mb-30>성별</h4><hr>
 					<div class="grid">
 				    	<label class="card">
-							<input class="card__input" type="checkbox"/>
+							<input value="남" class="card__input" type="checkbox"/>
 				        	<div class="card__body">
 				            	<div class="card__body-cover">
 					            	<img class="card__body-cover-image" src="${pageContext.request.contextPath}/resources/image/mmatch/gender_male.jpg" />
@@ -782,7 +769,7 @@ body .grid {
 				        	</div>
 				    	</label>
 				    	<label class="card">
-							<input class="card__input" type="checkbox"/>
+							<input value="여" class="card__input" type="checkbox"/>
 				        	<div class="card__body">
 				            	<div class="card__body-cover">
 					            	<img class="card__body-cover-image" src="${pageContext.request.contextPath}/resources/image/mmatch/gender_female.jpg" />
@@ -793,7 +780,7 @@ body .grid {
 					                 </span>
 				                </div>
 					            <header class="card__body-header">
-					                <h2 class="card__body-header-title">여성</h2>
+					                <h2 class="card__body-header-title">여자</h2>
 					            </header>
 				        	</div>
 				    	</label>
@@ -825,12 +812,12 @@ body .grid {
 								<div class="col-xl-4 col-lg-4 col-md-6">
 									<div class="single-product mb-60" style="border: 2px solid black;">
 										<div class="product-img">
-											<a href="#" data-toggle="modal" data-target="#detailModal">
+											<a href="javascript:detail('${mentor.mentor_code}');" >
 												<c:if test="${mentor.mentor_pic1 == null}">
-													<img src="${pageContext.request.contextPath}/resources/image/mmatch/default.jpg" alt="">
+													<img data-toggle="modal" data-target="#detailModal" style="height:250px" src="${pageContext.request.contextPath}/resources/image/mmatch/default.jpg" alt="">
 												</c:if>
 												<c:if test="${mentor.mentor_pic1 != null}">
-													<img style="height:250px"src="<spring:url value='/matchupload${mentor.mentor_pic1}'/>" alt=""/>
+													<img data-toggle="modal" data-target="#detailModal" style="height:250px" src="<spring:url value='/matchupload${mentor.mentor_pic1}'/>" alt=""/>
 												</c:if>
 											</a>
 										</div>
@@ -858,7 +845,7 @@ body .grid {
 							</c:forEach>
 						</c:if>
 						<c:if test="${listcount == 0 }">
-							<font size=5>등록된 글이 없습니다.</font>
+							<font style="padding-left:10px;" size=5>등록된 글이 없습니다.</font>
 						</c:if>
 					</div>
 					<hr>
@@ -874,24 +861,24 @@ body .grid {
 					</div>
 					<div class="pagination justify-content-center">
 						<c:if test="${page <= 1 }">
-							<a class="gray" href="#" id="paging">&laquo;</a> 
+							<a class="gray" href="javascript:go(${page -1});" id="paging">&laquo;</a> 
 						</c:if>
 						<c:if test="${page > 1 }">	
 							<a href="#" id="paging">&laquo;</a> 		
 						</c:if>
 						<c:forEach var="a" begin="${startpage}" end="${endpage}">
 							<c:if test="${a == page }">
-								<a class="active" href="#" id="paging">${a}</a>	
+								<a class="active" id="paging">${a}</a>	
 							</c:if>
 							<c:if test="${a != page }">
-								<a href="#" id="paging">${a}</a>
+								<a href="javascript:go(${a});" id="paging">${a}</a>
 							</c:if>
 						</c:forEach>
 						<c:if test="${page >= maxpage }">
-							<a class="gray" href="#" id="paging">&raquo;</a>
+							<a class="gray" id="paging">&raquo;</a>
 						</c:if>
 						<c:if test="${page < maxpage }">
-							<a href="#" id="paging">&raquo;</a>
+							<a href="javascript:go(${page+1});" id="paging">&raquo;</a>
 						</c:if>					
 					</div>
 			   </div>
@@ -900,7 +887,7 @@ body .grid {
 	</section>
 	
    <!-- 상세보기 modal -->
-	<div class="modal" id="detailModal">
+   <div class="modal" id="detailModal">
 		<div class="modal-dialog" style="max-width: 800px;">
 			<div class="modal-content">
 				<div class="container" style="padding:0px">
@@ -914,16 +901,16 @@ body .grid {
 					  </ul>
 					  
 					  <!-- The slideshow -->
-					  <div class="carousel-inner">
-					    <div class="carousel-item active">
-					      <img src="${pageContext.request.contextPath}/resources/image/mmatch/test1.jpg" alt="Los Angeles" width="800px" height="350px">
-					    </div>
-					    <div class="carousel-item">
-					      <img src="${pageContext.request.contextPath}/resources/image/mmatch/test2.jpg" alt="Chicago" width="800px" height="350px">
-					    </div>
-					    <div class="carousel-item">
-					      <img src="${pageContext.request.contextPath}/resources/image/mmatch/test3.jpg" alt="New York" width="800px" height="350px">
-					    </div>
+					  <div id="slidePic" class="carousel-inner">
+						<div class="carousel-item active">
+						  <img src="${pageContext.request.contextPath}/resources/image/mmatch/test1.jpg" alt="Los Angeles" width="800px" height="350px">
+						</div>
+						<div class="carousel-item">
+						  <img src="${pageContext.request.contextPath}/resources/image/mmatch/test2.jpg" alt="Chicago" width="800px" height="350px">
+						</div>
+						<div class="carousel-item">
+						  <img src="${pageContext.request.contextPath}/resources/image/mmatch/test3.jpg" alt="New York" width="800px" height="350px">
+						</div>
 					  </div>
 					  
 					  <!-- Left and right controls -->
@@ -935,7 +922,7 @@ body .grid {
 					  </a>
 					</div>				
 				
-					<br><h2 class="mb-30">러닝 가르칩니다.</h2>
+					<br><h2 id="detail_title" class="mb-30">러닝 가르칩니다.</h2>
 					<div style="text-align:left">
 					   <div id="accordion">
 						    <div class="card" style="border-bottom:none;">
@@ -951,17 +938,19 @@ body .grid {
 								 <div id="collapseOne" class="collapse" data-parent="#accordion">
 								      <div class="card-body" style="padding-top: 0px;">
 								      	<ul style="font-size:20px;padding-left: 20px">
-								      		<li>수업 과목 : <div class="element_inline">러닝</div></li>
+								      		<li>수업 과목 : <div id="detail_subject" class="element_inline">러닝</div></li>
 								      		<li>수업 시간 :
-								      		    <div> - 월요일 10:30 ~ 12:30</div>
-								      			<div> - 월요일 10:30 ~ 12:30</div>
-								      			<div> - 화요일 08:30 ~ 10:30</div>
-								      			<div> - 수요일 10:30 ~ 12:30</div>
-								      			<div> - 목요일 08:30 ~ 10:30</div>
-								      			<div> - 금요일 10:30 ~ 12:30</div>
+								      			<div id="detail_time">
+									      		    <div> - 월요일 10:30 ~ 12:30</div>
+									      			<div> - 월요일 10:30 ~ 12:30</div>
+									      			<div> - 화요일 08:30 ~ 10:30</div>
+									      			<div> - 수요일 10:30 ~ 12:30</div>
+									      			<div> - 목요일 08:30 ~ 10:30</div>
+									      			<div> - 금요일 10:30 ~ 12:30</div>
+								      			</div>
 								      		</li>
-								      		<li>수업 장소 : <div class="element_inline">올림픽 공원</div></li>
-								      		<li>수업 가격 : <div class="element_inline">10만원</div></li>
+								      		<li>수업 장소 : <div id="detail_loc" class="element_inline">올림픽 공원</div></li>
+								      		<li>수업 가격 : <div id="detila_amount" class="element_inline">10</div>만원</li>
 								      	</ul>
 								      </div>
 							      </div>
@@ -979,13 +968,11 @@ body .grid {
 								 <div id="collapseTwo" class="collapse" data-parent="#accordion">
 								      <div class="card-body" style="padding-top: 0px;">
 								      	<ul style="font-size:20px;padding-left: 20px">
-								      		<li>멘토 이름 : <div class="element_inline">홍길동</div></li>
+								      		<li>멘토 이름 : <div id="deatil_name" class="element_inline">홍길동</div></li>
 								      		<li>멘토 경력 :
-								      			<div> - xxx상 수상</div>
-								      			<div> - xxx상 수상</div>
-								      			<div> - xxx상 수상</div>
-								      			<div> - xxx상 수상</div>
-								      			<div> - xx학교 졸업</div>
+								      			<div id="detail_career">
+								      				테스트1234
+								      			</div>
 								      		</li>
 								      	</ul>
 								      </div>
@@ -1004,7 +991,7 @@ body .grid {
 								 <div id="collapseThree" class="collapse" data-parent="#accordion">
 								      <div class="card-body" style="padding-top: 0px;">
 								      	<ul style="font-size:20px;padding-left: 20px">
-								      		<li>저희 수업은 고강도 체력 훈련자를 위한 수업이므로 기초 체력이 안되신 힘들 수 있으니 신청에 주의하세요</li>
+								      		<li id="detail_caution">저희 수업은 고강도 체력 훈련자를 위한 수업이므로 기초 체력이 안되신 힘들 수 있으니 신청에 주의하세요</li>
 								      	</ul>
 								      </div>
 							      </div>
@@ -1031,6 +1018,13 @@ body .grid {
 	<jsp:include page="/WEB-INF/views/sport_comm/footer.jsp"/>
 	
     <script>
+    	var search_field='';
+    	var search_word='';
+    	var select='';
+    	var result="${result}";
+		if(result == 'writeSuccess'){
+			alert("글 작성을 완료했습니다.");
+		}
 	    $(function(){
 	    	//페이지로딩시 수업지역검색 modal의 기본 표시는 [서울특별시]이므로 서울 관련 모달 화면을 구성
 	    	getCityList();
@@ -1046,6 +1040,7 @@ body .grid {
 		    	$(this).addClass("loc_active");					 //선택된 도시 대항목 red색
 		    	getGunguList($(this).text());					 //선택된 도시 대항목에 대한 modal화면 재구성(ajax)
 		    	$(select).next().removeClass("changed");		 //검색 종류 radio에  파란색 윤곽선이 있으면 제거 
+		    	select='';
 		    }); 
 	    	
 	    	//전체과목검색 modal에서 대항목을 선택시 선택색상변경(red)
@@ -1054,6 +1049,7 @@ body .grid {
 		    	$(this).addClass("loc_active");							//선택돤 과목 대항목 red색
 		    	getsubjectList($(this).text());							//선택된 과목 대항목에 대한 modal화면 재구성(ajax)
 		    	$(select).next().removeClass("changed");				//검색 종류 radio에 파란색 윤곽선이 있으면 제거 
+		    	select='';
 		    }); 
 	    	
 	    	//검색 조건 modal의 체크박스 클릭 이벤트 처리
@@ -1256,29 +1252,240 @@ body .grid {
     		});
     	}
     	
+    	//상세정보 보기
+    	function detail(code){
+    		console.log("code : "+ code);
+    		$.ajax({
+    			url : "sportDetail",
+    			type : "get", 
+    			data : {"code":code},
+    			dataType : "json",
+    			cache : false,
+    			success : function(data){
+    				var output='';
+    				console.log("성공");
+    				
+    				$('#detail_title').text(data.mentor_title);  //수업 타이틀 
+    				$('#detail_subject').text(data.sports_name); //수업 종목 
+    				$('#detail_loc').text(data.city+" "+data.sigungu+" "+data.mentor_loc_detail); //수업 장소
+    				$('#detila_amount').text(data.mentor_amount); //수업 금액
+    				$('#deatil_name').text(data.mentor_name);	  //멘토 이름
+    				$('#detail_caution').text(data.mentor_caution); //수업 주의사항
+    				
+    				//수업 시간 
+    				var times=data.mentor_date.split(",");
+    				$('#detail_time').empty();
+    				for(var i=0;i<times.length;i++){
+    					var detailTimes=times[i].split("/");
+            			output+="<div> - "+detailTimes[0]+"&nbsp;"+detailTimes[1]+"~"+detailTimes[2]+"</div>"
+    				}
+    				$('#detail_time').append(output);
+    				
+     				output='';
+    				$('#slidePic').empty();
+    				
+    				if(data.mentor_pic1 == null){
+    					output+='<div class="carousel-item active">';
+    					output+='<img src="${pageContext.request.contextPath}/resources/image/mmatch/default.jpg" alt="no img" width="800px" height="350px">';
+    					output+='</div>';
+    				}else{
+    					var spingurl = "<spring:url value='/matchupload"+data.mentor_pic1+"'/>"; 	
+    					output+='<div class="carousel-item active">';
+						output+='<img src="';
+						output+=spingurl;
+						output+='" alt="no img" width="800px" height="350px"/>';
+    					output+='</div>';
+    				}
+    				
+    				if(data.mentor_pic2 == null){
+    					output+='<div class="carousel-item">';
+    					output+='<img src="${pageContext.request.contextPath}/resources/image/mmatch/default.jpg" alt="no img" width="800px" height="350px">';
+    					output+='</div>';
+    				}else{
+    					var spingurl = "<spring:url value='/matchupload"+data.mentor_pic2+"'/>"; 	
+    					output+='<div class="carousel-item">';
+						output+='<img src="';
+						output+=spingurl;
+						output+='" alt="no img" width="800px" height="350px"/>';
+    					output+='</div>';
+    				}
+    				
+    				if(data.mentor_pic3 == null){
+    					output+='<div class="carousel-item">';
+    					output+='<img src="${pageContext.request.contextPath}/resources/image/mmatch/default.jpg" alt="no img" width="800px" height="350px">';
+    					output+='</div>';
+    				}else{
+    					var spingurl = "<spring:url value='/matchupload"+data.mentor_pic3+"'/>"; 	
+    					output+='<div class="carousel-item">';
+						output+='<img src="';
+						output+=spingurl;
+						output+='" alt="no img" width="800px" height="350px"/>';
+    					output+='</div>';
+    				}
+    				$('#slidePic').append(output);  
+    				
+    			},
+    			error : function(){
+    				console.log('에러');
+    			}
+    		});
+    	}
+    	
+    	//ajax 화면 처리를 위한 최상위 메소드
+    	function go(page){
+  			//출력 페이지,검색항목,검색키워드로 쿼리스트링 작성
+    		var data = "page="+page+"&search_field="+search_field+"&search_word="+search_word;
+    		ajax(data);
+    	}
+    	//페이지네이션 화면 출력 메서드
+    	function setPaging(href,digit){
+    		var output='<a ';
+    		if(href==""){
+    			output+='class="gray" ';
+    		}
+    		output+= href + ' id="paging">' + digit + "</a>";
+    		return output;
+    	}
+    	//화면처리 ajax
+    	function ajax(sdata){
+    		console.log(sdata);
+    		output = "";
+    		$.ajax({
+    			url : "mentorPage_ajax",
+    			type : "get", 
+    			data : sdata,
+    			dataType : "json",
+    			cache : false,
+    			success : function(data){
+    				//멘토 게시글 컨텐츠 삭제
+    				$('#nav-home > .row').empty(); 
+    				
+    				//pagination 삭제
+    				$(".pagination").empty();
+    				
+    				//검색 결과 갯수와 검색키워드 표시
+    				$('#writingcount').text(data.listcount);
+    				if(data.search_field != ''){  //검색 키워드가 있으면 
+        				$('#searchkeyword').text(data.search_field+'-'+data.search_word);
+    				}else{ 						  //검색 키워드가 없으면
+    					$('#searchkeyword').text("전체 검색");
+    				}
+					
+    				
+    				if(data.listcount > 0 ){
+    					var output='';
+    					//ajax로 가져온 list로 col 구성 
+    					$(data.mentorlist).each(function(index,item){
+    					  output+='<div class="col-xl-4 col-lg-4 col-md-6">'
+    						     +  '<div class="single-product mb-60" style="border: 2px solid black;">'
+								 +    '<div class="product-img">'
+								 +      '<a href="javascript:detail('+"'"+ item.mentor_code+"'" +');">';
+						  if(item.mentor_pic1 == null){ //사진이없으면 default 사진을 출력
+						    output+=       '<img data-toggle="modal" data-target="#detailModal" style="height:250px" src="${pageContext.request.contextPath}/resources/image/mmatch/default.jpg" alt="">';
+						  }else{  //사진이 있으면 해당 사진으로 출력
+						    output+=       '<img data-toggle="modal" data-target="#detailModal" style="height:250px" src="<spring:url value="/matchupload'+item.mentor_pic1+'"/>" alt=""/>'; 
+						  }
+						 output+='       </a>'
+								 +    '</div>'
+								 +    '<div class="product-caption">'
+								 +	    '<h3><b>'+item.mentor_title+'</b></h3>'
+								 +	    '<div class="price">'
+								 +		   '<table class="table">'
+								 +			  '<tr><th>종목</th><td>'+item.sports_name+'</td></tr>'
+								 +			  '<tr><th>장소</th><td>'+item.city+'&nbsp;'+item.sigungu+'</td></tr>'
+								 +			  '<tr><th>인원</th><td>'+item.mentor_number+'명</td></tr>'
+								 +		   '</table>'
+								 +	    '</div>'
+								 +    '</div>'
+							     +  '</div>'
+						         +'</div>';
+    					});
+    					//해당 결과를 append
+    					$('#nav-home > .row').append(output); 
+    					
+    					
+    					//pagination 시작
+    					output = "";
+    					
+    					digit = '&laquo;';
+    					href="";
+    					if(data.page > 1){
+    						href = 'href=javascript:go('+(data.page-1) + ')';
+    					}
+    					output += setPaging(href,digit);
+    					
+    					for(var i = data.startpage; i<=data.endpage; i++){
+    						digit=i;
+    						href="";
+    						if(i !=data.page){
+    							href='href=javascript:go('+i+')';
+    						}
+    						else{
+    							href='class="active"';
+    						}
+    						output += setPaging(href,digit);
+    					}
+    					
+    					digit = '&raquo;';
+    					href="";
+    					if(data.page < data.maxpage){
+    						href = 'href=javascript:go('+(data.page+1) + ')';
+    					}
+    					output += setPaging(href,digit);
+    					$('.pagination').append(output);
+    				}
+    				else{
+    					//등록글 없음 표시 붙이기
+    					output='<font style="padding-left:10px;" size=5>등록된 글이 없습니다.</font>';
+        				$('#nav-home > .row').append(output); 
+    				}
+    			},
+    			error : function(){
+    				console.log('에러');
+    			}
+    		});
+    	}
+    	
+    	
     	
 	    //검색 버튼 클릭시 이벤트
 	    function search(){
 			console.log("검색 클릭");
 			switch(select) {
 			  case '#location_sel':
-					console.log("지역검색 : " + $('#nav-tab-si > a.loc_active').text());
-					console.log($("input[type='checkbox']:checked+div h4").text());
+					//넘기는 형태 ex)"지역" ,"서울특별시,강남구"
+				    var si =$('#nav-tab-si > a.loc_active').text();
+				    var gungu = $("input[type='checkbox']:checked+div h4").text();
+			    	search_field='지역';
+			    	search_word=si+','+gungu;
+					console.log("field : "+search_field+", word : " +search_word);
+			    	go(1);
 				    break;
 			  case '#subject_sel':
-					console.log("과목검색");
-					console.log($("input[type='checkbox']:checked+div h2").text());
+					//넘기는 형태 ex)"과목",'"축구"
+			    	search_field='과목';
+			    	search_word=$("input[type='checkbox']:checked+div h2").text();
+			    	console.log("field : "+search_field+", word : " +search_word);
+				  	go(1);
 				    break;
 			  case '#money_sel':
-					console.log("금액검색");
-					console.log($("input[type='checkbox']:checked+div h2").text());
+					//넘기는 형태 ex)"수업료","10만미만"
+			    	search_field='수업료';
+			    	search_word=$("input[type='checkbox']:checked+div h2").text();
+			    	console.log("field : "+search_field+", word : " +search_word);
+			    	go(1);
 				    break;
 			  case '#gender_sel':
-					console.log("성별검색");
-					console.log($("input[type='checkbox']:checked+div h2").text());
+				  	//넘기는 형태 ex)"성별",'남'
+			    	search_field='성별';
+			    	search_word=$("input[type='checkbox']:checked").val();
+			    	console.log("field : "+search_field+", word : " +search_word);
+			    	go(1);
 				    break;
+			  default:
+				    alert("검색 키워드 선택해주세요");
+			  		break;
 			}
-			
 		}
 	    
 	    //검색 취소 버튼 클릭시 이벤트

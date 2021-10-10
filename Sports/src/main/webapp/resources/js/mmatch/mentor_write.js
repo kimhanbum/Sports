@@ -150,9 +150,31 @@ $(function(){
 			$("#mentor_price").focus();
 			return false;
 		}
+		if(Number($("#mentor_price").val()) > 500000){
+			alert("수업 가격은 50만 이하로 입력하세요");
+			$("#mentor_price").focus();
+			return false
+		}
 		if($.trim($("#mentor_member_cnt").val()) ==""){
 			alert("수업 인원을 입력해주세요.");
 			$("#mentor_member_cnt").focus();
+			return false;
+		}
+		if(Number($("#mentor_member_cnt").val()) >= 100){
+			alert("수업 가격은 100명 미만으로 입력하세요");
+			$("#mentor_member_cnt").focus();
+			return false
+		}
+		
+		//멘토 이름 입력 체크
+		if($.trim($("#mentor_name").val()) ==""){
+			alert("멘토 이름을 입력해주세요");
+			$("#mentor_name").focus();
+			return false;
+		}
+		//멘토 성별 입력 체크
+		if($("#mentor_gender").val() =="-- 선택 --"){
+			alert("성별을 선택해주세요");
 			return false;
 		}
 		

@@ -2,8 +2,11 @@ package com.project.sports.controller;
 
 import java.io.File;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
+
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.project.sports.domain.Mentor;
 import com.project.sports.domain.Sports;
@@ -94,6 +98,58 @@ public class MmatchController {
 		return mv;
 	}
 	
+	//멘토 글 리스트 보기(ajax)
+	@RequestMapping(value = "/mentorPage_ajax", method = RequestMethod.GET)
+	@ResponseBody
+	public Map<String,Object> mentorlistAjax(int page,
+			@RequestParam(value="search_field" ,defaultValue="") String search_field,
+			@RequestParam(value="search_word" ,defaultValue="") String search_word)
+	{
+	    int limit = 6; //한 화면에 출력할 레코드 갯수(고정)
+	    
+	    int listcount = mmatchservice.getSearchMentorListCount(search_field,search_word); //총 리스트 수를 받아옴
+	    //총 페이지 수
+	    int maxpage = (listcount + limit - 1) /limit;
+	    
+	    //현재 페이지에 보여줄 시작 페이지 수 (1,11,21 등등)
+	    int startpage = ((page-1) / 10) * 10 + 1;
+	    
+	    //현재 페이지에 보내줄 마지막 페이지 수 (10,20.30 등등)
+	    int endpage = startpage + 10 -1;
+	    
+	    if(endpage > maxpage)
+	    	endpage = maxpage;
+	    
+	    List<Mentor> mentorlist = mmatchservice.getSearchMentorList(page, limit,search_field,search_word); //리스트를 받아옴
+	    
+	    
+	    Map<String,Object> map = new HashMap<String,Object>();
+
+	    map.put("page",page);
+	    map.put("maxpage",maxpage);
+	    map.put("startpage",startpage);
+	    map.put("endpage",endpage);
+	    map.put("listcount",listcount);
+	    map.put("mentorlist",mentorlist);
+	    map.put("saveFolder",saveFolder);
+	    map.put("search_field",search_field);
+	    map.put("search_word",search_word);
+	    logger.info("page : " +page);
+	    logger.info("maxpage : " +maxpage);
+	    logger.info("startpage : " +startpage);
+	    logger.info("endpage : " +endpage);
+	    logger.info("listcount : " +listcount);
+	    for(Mentor m : mentorlist) {
+	    	logger.info("사진 : " +m.getMentor_pic1());	    	
+	    	logger.info("종목 : " +m.getSports_name());	
+	    	logger.info("시 : " +m.getCity());	
+	    	logger.info("군구 : " +m.getSigungu());	
+	    	logger.info("인원 : " +m.getMentor_number());	
+	    }
+	    logger.info("saveFolder : " +saveFolder);
+	    return map;
+	}
+	
 	//sport 종목 가져오기(이름만)
 	@GetMapping("/sportlist")
 	@ResponseBody
@@ -143,8 +199,9 @@ public class MmatchController {
 	//멘토 작성 글 추가
 	@PostMapping("/addWMentor")
 	public String addMetorWriting(Mentor mentor,String[] mentor_yoil,
-			String[] mentor_startTime,String[] mentor_endTime) throws Exception{
-		
+			String[] mentor_startTime,String[] mentor_endTime,
+			RedirectAttributes rattr) throws Exception{
+
 		MultipartFile uploadfile1 =mentor.getUploadfile1();
 		MultipartFile uploadfile2 =mentor.getUploadfile2();
 		MultipartFile uploadfile3 =mentor.getUploadfile3();
@@ -189,7 +246,9 @@ public class MmatchController {
 			mentor.setMentor_pic3(fileDBName);
 		}
 		for(int i=0; i<mentor_yoil.length; i++) {
-			mentorDate += mentor_yoil[i]+"/"+ mentor_startTime[i]+"/"+mentor_endTime[i]+",";
+			mentorDate += mentor_yoil[i]+"/"+ mentor_startTime[i]+"/"+mentor_endTime[i];
+			if((i+1) < mentor_yoil.length)
+				mentorDate += ",";
 		}
 		mentor.setMentor_date(mentorDate);
 		
@@ -201,7 +260,10 @@ public class MmatchController {
 		 * mentor.getMentor_number()); logger.info(mentor.getMentor_caution());
 		 * logger.info(mentor.getMentor_career()); logger.info(mentor.getMentor_date());
 		 */
-		mmatchservice.insertMentorWriting(mentor);
+		int result = mmatchservice.insertMentorWriting(mentor);
+		if(result == 1 ) {
+			rattr.addFlashAttribute("result","writeSuccess");
+		}
 		//Thread.sleep(3000); //2초 대기
 		return "redirect:mentorPage";
 	}
@@ -247,5 +309,12 @@ public class MmatchController {
 		logger.info("fileDBName = " + fileDBName);
 		return fileDBName;
 		
+	}
+	
+	//특정 글 상세보기
+	@GetMapping("/sportDetail")
+	@ResponseBody
+	public Mentor Detail(String code){
+		return mmatchservice.getMentorDetail(code);
 	}
 }
