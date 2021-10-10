@@ -7,7 +7,14 @@ public class PersonalManagement {
 	private int 	PM_KCAL;
 	private String	PM_DATE;
 	private String  SPORTS_NAME;
+	private String  SPORTS_IMG;
 	
+	public String getSPORTS_IMG() {
+		return SPORTS_IMG;
+	}
+	public void setSPORTS_IMG(String sPORTS_IMG) {
+		SPORTS_IMG = sPORTS_IMG;
+	}
 	public int getPM_NO() {
 		return PM_NO;
 	}
