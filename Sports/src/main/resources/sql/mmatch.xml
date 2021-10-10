@@ -32,7 +32,8 @@
     #{user_id} , #{mentor_title} , #{sports_name} , 
     #{city} , #{sigungu}, #{mentor_loc_detail},
     #{mentor_date}, #{mentor_amount} , #{mentor_number},
-    #{mentor_caution,jdbcType=VARCHAR}, #{mentor_career,jdbcType=VARCHAR}, 
+    #{mentor_caution,jdbcType=VARCHAR}, #{mentor_gender},
+    #{mentor_name},#{mentor_career,jdbcType=VARCHAR}, 
     #{mentor_pic1,jdbcType=VARCHAR},#{mentor_origin_pic1,jdbcType=VARCHAR}, 
     #{mentor_pic2,jdbcType=VARCHAR}, #{mentor_origin_pic2,jdbcType=VARCHAR},
     #{mentor_pic3,jdbcType=VARCHAR}, #{mentor_origin_pic3,jdbcType=VARCHAR})
@@ -44,9 +45,27 @@
 	where sports_category=#{selType}
 </select>
 
-<select id="MentorCount" resultType="int">
+<select id="MentorCount" parameterType="Map" resultType="int" >
 	select count(*)
 	from mentor_match
+    <where>
+    	<if test='search_field !=""'>
+        	<choose>
+	        	<when test='search_field == "지역"'>
+	        		city = #{search_word} and sigungu =#{search_addword} 
+	        	</when>
+	        	<when test='search_field == "과목"'>
+	        		sports_name = #{search_word}
+	        	</when>
+	        	<when test='search_field == "수업료"'>
+	        		mentor_amount <![CDATA[<=]]>  #{search_word}
+	        	</when>
+	        	<when test='search_field == "성별"'>
+	        		mentor_gender = #{search_word}
+	        	</when>
+        	</choose>
+        </if>
+    </where>  
 </select>
 
 <select id="Mentorlist" parameterType="Map" resultType="mentor">
@@ -54,9 +73,37 @@
    (SELECT ROWNUM RNUM, m.*
     FROM
          (SELECT * FROM mentor_match 
+          <include refid="search"/>
           ORDER BY MENTOR_CODE DESC) m
    )
    WHERE RNUM <![CDATA[>=]]> #{start} AND RNUM <![CDATA[<=]]> #{end}
 </select>
 
+<select id="MentorDetail" parameterType="String" resultType="mentor">
+	select * 
+	from mentor_match 
+	where mentor_code=#{code}
+</select>
+
+
+<sql id="search">
+    <where>
+    	<if test='search_field !=""'>
+        	<choose>
+	        	<when test='search_field == "지역"'>
+	        		city = #{search_word} and sigungu =#{search_addword} 
+	        	</when>
+	        	<when test='search_field == "과목"'>
+	        		sports_name = #{search_word}
+	        	</when>
+	        	<when test='search_field == "수업료"'>
+	        		mentor_amount <![CDATA[<=]]>  #{search_word}
+	        	</when>
+	        	<when test='search_field == "성별"'>
+	        		mentor_gender = #{search_word}
+	        	</when>
+        	</choose>
+        </if>
+    </where> 
+</sql>
 </mapper>

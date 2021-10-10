@@ -14,6 +14,8 @@ public class Mentor {
 	private int mentor_amount;
 	private int mentor_number;
 	private String mentor_caution;
+	private String mentor_gender;
+	private String mentor_name;
 	private String mentor_career;
 	private String mentor_pic1;
 	private String mentor_origin_pic1;	
@@ -108,6 +110,18 @@ public class Mentor {
 	}
 	public void setMentor_caution(String mentor_caution) {
 		this.mentor_caution = mentor_caution;
+	}
+	public String getMentor_gender() {
+		return mentor_gender;
+	}
+	public void setMentor_gender(String mentor_gender) {
+		this.mentor_gender = mentor_gender;
+	}
+	public String getMentor_name() {
+		return mentor_name;
+	}
+	public void setMentor_name(String mentor_name) {
+		this.mentor_name = mentor_name;
 	}
 	public String getMentor_career() {
 		return mentor_career;

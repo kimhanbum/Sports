@@ -14,22 +14,6 @@
 <body data-spy="scroll" data-target=".site-navbar-target"
 	data-offset="300">
 
-	<!-- Preloader Start -->
-	<div id="preloader-active">
-		<div
-			class="preloader d-flex align-items-center justify-content-center">
-			<div class="preloader-inner position-relative">
-				<div class="preloader-circle"></div>
-				<div class="preloader-img pere-text">
-					<img
-						src="${pageContext.request.contextPath}/resources/image/logo/sports_logo.png"
-						alt="">
-				</div>
-			</div>
-		</div>
-	</div>
-	<!-- Preloader Start -->
-
 	<!-- 헤더 영역  -->
 	<jsp:include page="/WEB-INF/views/sport_comm/header.jsp" />
 
@@ -155,7 +139,25 @@
 								</div>
 							</div>
 							<br>
-													
+								
+							<!-- 수업 정보1:성별,이름 -->	
+							<div class="row">
+								<div class="col form-group">
+									<h4>멘토 성별/멘토 이름</h4>
+									이름&nbsp;
+									<input type="text" id="mentor_name" name="mentor_name"
+											style="width: 140px;text-align:right;"
+											>
+									&nbsp;&nbsp;&nbsp;&nbsp;성별&nbsp;
+									<select name='mentor_gender' id="mentor_gender">
+										<option selected>-- 선택 --</option>
+										<option value="남">남자</option>
+										<option value="여">여자</option>
+									</select>
+								</div>
+							</div>
+							<br>	
+												
 							<!-- 멘토 소개-->
 							<div class="row">
 								<div class="col-md-11 form-group">

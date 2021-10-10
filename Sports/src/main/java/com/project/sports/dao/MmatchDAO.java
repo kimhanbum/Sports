@@ -28,8 +28,8 @@ public class MmatchDAO {
 		return sqlSession.selectList("Mmatches.dongList",selType);
 	}
 	
-	public void insertMentorWriting(Mentor mentor) {
-		sqlSession.insert("Mmatches.insertWMentor",mentor);
+	public int insertMentorWriting(Mentor mentor) {
+		return sqlSession.insert("Mmatches.insertWMentor",mentor);
 	}
 	public List<Sports> getSportDeatilList(int selType){
 		return sqlSession.selectList("Mmatches.sportDetailList",selType);
@@ -40,4 +40,14 @@ public class MmatchDAO {
 	public List<Mentor> getMentorList(HashMap <String,Integer> map) {
 		return sqlSession.selectList("Mmatches.Mentorlist",map);
 	}
+	public int getSearchMentorListCount(HashMap <String,Object> map) {
+		return sqlSession.selectOne("Mmatches.MentorCount",map);
+	}
+	public List<Mentor> getSearchMentorList(HashMap <String,Object> map) {
+		return sqlSession.selectList("Mmatches.Mentorlist",map);
+	}
+	public Mentor getMentorDetail(String code) {
+		return sqlSession.selectOne("Mmatches.MentorDetail",code);
+	}
+	
 }
