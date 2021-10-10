@@ -45,15 +45,18 @@ public class MatchServiceImpl implements MatchService {
 		dao.insertMatch(match);
 	}
 
+
 	@Override
-	public List<Match> getSearchList(int page, int limit, int num, Match match) {
-		HashMap<String, Integer> map = new HashMap<String, Integer>();
-		int startrow = (page-1)*limit +1;
-		int endrow = startrow + limit -1;
-		map.put("start", startrow);
-		map.put("end", endrow);
+	public List<Match> getSearchList(int num, String MATCH_ADR, String MATCH_DTL_ADR, String MATCH_TIME,
+			int MATCH_PRS, String MATCH_SKL) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("num", num);
-		return dao.getMatchList(map);
+		map.put("MATCH_ADR", MATCH_ADR);
+		map.put("MATCH_DTL_ADR", MATCH_DTL_ADR);
+		map.put("MATCH_TIME", MATCH_TIME);
+		map.put("MATCH_PRS", MATCH_PRS);
+		map.put("MATCH_SKL", MATCH_SKL);
+		return dao.getSearchList(map);
 	}
 	
 }

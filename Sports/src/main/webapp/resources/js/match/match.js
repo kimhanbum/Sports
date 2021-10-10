@@ -38,12 +38,8 @@ function initSport(){
 		data : JSON.stringify(sendData),
 		success: function (result) {
 			sport_name = result;
-			logNow(sport_name);
 		},
-		error:function(request,status,error){
-			logNow("code:"+request.status+"\n"+
-					"message:"+request.responseText+"\n"+
-					"error:"+error);
+		error:function(){
 		}
 	});
 }
@@ -56,7 +52,6 @@ function initJson() {
 	     url: "../resources/json/address.json",//이 주소에서
 	     success: function (result) {//결과가져오기 > object형태임 > 로그보셈
 	    	 address_json = result;
-	    	 logNow(address_json);
 	     }
 	  });
 }
@@ -84,7 +79,7 @@ function initAddress(){//선택된 city에 해당하는 디테일 주소 초기�
 function showSocialMatching(){
 	console.log("소셜매칭");
 	$("#container").show();
-	$("#btnSubmit").attr("onclick", "btnClick();");
+	$("#btnSubmit").attr("onclick", "SearchClick();");
 	$("#text").html("Social<br>Match<br>");
 	$("#btnSubmit").html("Search&nbsp&nbsp;");
 	$("#city option:eq(0)").prop("selected", true); //값이 1인 option 선택
@@ -101,7 +96,7 @@ function showSocialMatching(){
 function showMatchingRegi(){
 	console.log("매칭등록");
 	$("#container").hide(); //게시판 
-	$("#btnSubmit").attr("onclick", "btnClick2();");
+	$("#btnSubmit").attr("onclick", "RegiClick();");
 	$("#text").html("Match<br>Reigster<br>");
 	$("#btnSubmit").html("Reigster");
 	$("#city option:eq(0)").prop("selected", true); //값이 1인 option 선택
@@ -115,32 +110,38 @@ function showMatchingRegi(){
 	$("#skill option:eq(0)").prop("selected", true);  //초기값 설정
 }
 
-function btnClick(){
-	var user_id = $("#user_id").text();
+var m_search_list;
+function SearchClick(){
+	var user_id = $("#user_id").text();   //로그인 유효성검사
 	if(user_id == ""){
 		location.href="/sports/member/login";
 	}else{
 		console.log("소셜매칭 클릭");
-		var string = "";
+		var String ="";
+		var SPORT_NUM = Number($("#sport_num").text());
+		var MATCH_ADR = $("#city option:checked").text();
+		var MATCH_DTL_ADR = $.trim($("#city_detail option:checked").text());
 		var MATCH_TIME = $("input[name=match_date]").val();
 		var MATCH_PRS = $("input[name=person]").val();
 		var MATCH_SKL = $("select[name=skill]").val();
-		
+		String += (SPORT_NUM +"/" + MATCH_ADR +"/" + MATCH_DTL_ADR +"/" + MATCH_TIME + "/" + MATCH_PRS +"/" +MATCH_SKL);
+		console.log(String);
 		$.ajax({
 			async: false,
-			type: "post",
+			type: "get",
 			url: "./SearchList",
-			dataType: "text",
+			dataType:"json",
 			data:{
-	    	/*   "MATCH_ADR" : MATCH_ADR,
-	    	   "MATCH_DTL_ADR" : MATCH_DTL_ADR,*/
+			   "SPORT_NUM" : SPORT_NUM,
+	    	   "MATCH_ADR" : MATCH_ADR,
+	    	   "MATCH_DTL_ADR" : MATCH_DTL_ADR,
 	    	   "MATCH_TIME" : MATCH_TIME,
 	    	   "MATCH_PRS" : MATCH_PRS,
 	    	   "MATCH_SKL" : MATCH_SKL
 			},
 			success: function (result) {
-				alert('조회성공');
-				location.reload();
+				m_search_list = result;
+				showSearchList(1);
 			}, error: function(){
 				alert('실패');
 			}
@@ -148,7 +149,88 @@ function btnClick(){
 	}
 }
 
-function btnClick2(){
+function showSearchList(page){
+	$("#all_cnt").text(m_search_list.length);
+	$("#center-block").html(""); //좀따 위치 수정 요망
+	$("#search_list").html("");
+	
+	var start = ((page - 1) * 5); //Array는 0부터 시작 
+	var end =  (page * 5) - 1;
+	if (end > m_search_list.length) end = m_search_list.length - 1;
+	
+	var table_string = "";
+	for(var i = start; i <= end; i++){
+		table_string += 
+			'<tr>'+
+				'<td><div class="classalign">'+ m_search_list[i]["match_ADR"] +'</div></td>'+
+				'<td><div class="classalign">'+ m_search_list[i]["match_DTL_ADR"] +'</div></td>'+	
+				'<td><div class="classalign">'+ m_search_list[i]["match_TIME"] +'</div></td>'+
+				'<td><div class="classalign">'+ m_search_list[i]["match_PRS"] +'</div></td>'+
+				'<td><div class="classalign">'+ m_search_list[i]["match_SKL"] +'</div></td>'+
+				'<td><div id="btnSubmit2" onclick="javascript:btnApply();" class="submit2">Apply&nbsp;&nbsp;</div></td>'+
+			'</tr>';
+	}
+	$("#search_list").html(table_string);
+	pageNavigation(m_search_list.length, page);
+}
+
+function pageNavigation(listcount, page){
+	var limit = 5; // 한 화면에 출력할 레코드 갯수
+	var maxpage = Math.floor((listcount + limit - 1) / limit); //총페이지 수
+	var startpage = (Math.floor((page - 1) /5))* 5 + 1; //현재 페이지에 보여줄 시작 페이지 수(1,6,11, 등..)
+	var endpage = startpage + 5 - 1; //현재 페이지에 보여줄 마지막 페이지 수 (5,10,maxpage 등..)
+	if(endpage > maxpage) endpage = maxpage;
+	
+	var html_string = "";
+	if(listcount >0){
+		html_string += 
+			'<ul class="pagination justify-content-center">';
+			if(page <= 1 ){
+				html_string +=
+					'<li class="page-item">'+
+						'<a class="page-link gray">이전&nbsp;</a>'+
+					'</li>';
+			}else{
+				html_string +=
+					'<li class="page-item">'+
+						'<a href="javascript:showSearchList('+ (page-1) +')" class="page-link">이전&nbsp;</a>'+
+					'</li>';
+			}
+			for(var a = startpage; a <= endpage; a++){
+				if(a == page){
+					html_string +=
+						'<li class="page-item " >'+
+							'<a class="page-link gray">'+ a +'</a>'+
+						'</li>';
+				}else{
+					html_string +=
+						'<li class="page-item">'+
+						  	'<a href="javascript:showSearchList('+ a +')" class="page-link">'+ a +'</a>'+
+					    '</li>';
+				}
+					
+			}
+			if(page >= maxpage){
+				html_string +=
+					'<li class="page-item">'+
+					   	'<a class="page-link gray">&nbsp;다음</a>'+
+					'</li>';
+			}else{
+				html_string +=
+					'<li class="page-item">'+
+				  		'<a href="javascript:showSearchList('+ (page+1) +')" class="page-link">&nbsp;다음</a>'+
+				  	'</li>';
+			}
+			html_string += '</ul>';
+	}else{
+		html_string += 
+			'<font size=5 style="text-align:center">등록된 글이 없습니다.</font>'
+	}	
+	$("#center-block").html(html_string);
+}
+
+
+function RegiClick(){
 	var user_id = $("#user_id").text();
 	if(user_id == ""){
 		location.href="/sports/member/login";
@@ -178,6 +260,10 @@ function btnApply(){
 	if(user_id == ""){
 		location.href="/sports/member/login";
 	}else{
+		console.log("여기는 Apply");
+		var sport =  sport_name;
+		$("#ApplyModal #Sport").val(sport);
+		
 		$("#ApplyModal").css({
 			"display" :"block"
 		});
@@ -269,7 +355,7 @@ function registerModal(){ //레지스터모달(모달등록버튼) 눌렀을때 
 	
 }
 
-function ApplyModal(){
+function ApplyModal(){ //ApplyModal창에서 신청버튼 클릭시 이벤트
 	var REGISTER_ID = $("#modal_id").text();
 	var SPORT_NUM = $("#sport_num").text();
 	var MATCH_ADR = $("#city option:checked").text();

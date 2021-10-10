@@ -31,4 +31,8 @@ public class MatchDAO {
 	public void insertMatch(Match match) {
 		sqlSession.insert("Match.insert",match);
 	}
+
+	public List<Match> getSearchList(HashMap<String, Object> map) {
+		return sqlSession.selectList("Match.searchlist",map);
+	}
 }

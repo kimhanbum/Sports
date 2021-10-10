@@ -1,23 +1,16 @@
-DROP TABLE SPORT_DEADLINE cascade constraints purge;
+DROP TABLE SPORT_APPLY cascade constraints purge;
 
-select * from SPORT_DEADLINE
-create table SPORT_DEADLINE(
-	REGISTER_ID references SPORT_REGISTER(REGISTER_ID) on delete cascade,
-	APPLY_ID references SPORT_APPLY(APPLY_ID) on delete cascade,
-	DEADLINE_NUM NUMBER primary key,
-	SPORT_NUM references SPORTS(SPORTS_NUM)
+create table SPORT_APPLY(
+	APPLY_ID VARCHAR2(60) references MEMBER_INFO(USER_ID),
+	APPLY_NUM  NUMBER(20) primary key, --seq
+	REGISTER_NUM references SPORT_REGISTER(REGISTER_NUM),
+	APPLY_STUS NUMBER(20) default 0
 );
 
-create sequence dead_seq;
+create sequence aply_seq;
 
-
-insert into SPORT_DEADLINE(REGISTER_ID, APPLY_ID, DEADLINE_NUM, SPORT_NUM)
-values('admin01', 'admin03', dead_seq.nextval, 1);
-
-insert into SPORT_DEADLINE(REGISTER_ID, APPLY_ID, DEADLINE_NUM, SPORT_NUM)
-values('admin02', 'admin01', dead_seq.nextval, 2);
-
-insert into SPORT_DEADLINE(REGISTER_ID, APPLY_ID, DEADLINE_NUM, SPORT_NUM)
-values('admin03', 'admin02', dead_seq.nextval, 3);
-
+select * from SPORT_APPLY;
+insert into SPORT_APPLY(APPLY_ID, APPLY_NUM , REGISTER_NUM) values('admin01', aply_seq.nextval, 2);
+insert into SPORT_APPLY(APPLY_ID, APPLY_NUM , REGISTER_NUM) values('admin02', aply_seq.nextval, 3);
+insert into SPORT_APPLY(APPLY_ID, APPLY_NUM , REGISTER_NUM) values('admin03', aply_seq.nextval, 4);
 

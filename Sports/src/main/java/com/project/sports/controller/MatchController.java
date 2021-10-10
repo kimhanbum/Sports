@@ -1,6 +1,7 @@
 package com.project.sports.controller;
 
-import java.io.File; 
+import java.io.File;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -31,6 +32,8 @@ public class MatchController {
 	private MatchService matchservice;
 	
 	private ModelAndView pageSet(int num, int page, String page_name) {
+		System.out.println("!---pageSet");
+		
 		int limit = 5; // 한 화면에 출력할 레코드 갯수
 		int listcount = matchservice.getListCount(num); //총 리스트 수를 받아옴
 		//총페이지 수
@@ -143,36 +146,20 @@ public class MatchController {
 	}
 	
 	@RequestMapping(value="/SearchList",method=RequestMethod.GET)
-	public ModelAndView search(
-			@RequestParam(value="page",defaultValue="1",required=false) int page, Match match, ModelAndView mv) {
-		int num = 1;   //sport_num =1
+	@ResponseBody
+	public List<Match> search(
+			@RequestParam(value="SPORT_NUM",defaultValue="1")int num,
+			@RequestParam(value="MATCH_ADR",defaultValue="지역",required=false)String MATCH_ADR,
+			@RequestParam(value="MATCH_DTL_ADR",defaultValue="세부지역",required=false)String MATCH_DTL_ADR,
+			@RequestParam(value="MATCH_TIME",defaultValue="",required=false)String MATCH_TIME,
+			@RequestParam(value="MATCH_PRS",defaultValue="0",required=false)int MATCH_PRS,
+			@RequestParam(value="MATCH_SKL",defaultValue="",required=false)String MATCH_SKL
+			) {
+		System.out.println("!---SearchList");
 		
-		int limit = 5; // 한 화면에 출력할 레코드 갯수
-		int listcount = matchservice.getListCount(num); //총 리스트 수를 받아옴
+		List<Match> matchlist = matchservice.getSearchList(num, MATCH_ADR, MATCH_DTL_ADR, MATCH_TIME, MATCH_PRS, MATCH_SKL);
 		
-		//총페이지 수
-		int maxpage = (listcount + limit - 1) / limit;
-		
-		//현재 페이지에 보여줄 시작 페이지 수(1,11,21, 등..)
-		int startpage = ((page -1) /10) *10 +1;
-		
-		//현재 페이지에 보여줄 마지막 페이지 수 (10,20,30 등..)
-		int endpage = startpage + 10 - 1;
-		
-		if(endpage > maxpage)
-		   endpage = maxpage;
-		
-		List<Match> matchlist = matchservice.getSearchList(page, limit, num, match);
-		
-		mv.setViewName("sport_match/Sport_matching");
-		mv.addObject("page",page);
-		mv.addObject("maxpage",maxpage);
-		mv.addObject("startpage",startpage);
-		mv.addObject("endpage", endpage);
-		mv.addObject("listcount", listcount);
-		mv.addObject("matchlist", matchlist);
-		mv.addObject("limit", limit);
-		return mv;
+		return matchlist;
 	}
 	
 }

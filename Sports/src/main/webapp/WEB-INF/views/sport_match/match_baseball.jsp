@@ -289,7 +289,7 @@
 	
     <script src="${pageContext.request.contextPath}/resources/js/match/jquery.min.js"></script>
    <script src="${pageContext.request.contextPath}/resources/js/match/jquery-ui.min.js"></script>
-   <script src="${pageContext.request.contextPath}/resources/js/match/main.js"></script>
+   <script src="${pageContext.request.contextPath}/resources/js/match/match.js"></script>
    </main>
 <!-- Footer 영역  -->
 <jsp:include page="/WEB-INF/views/sport_comm/footer.jsp"/>

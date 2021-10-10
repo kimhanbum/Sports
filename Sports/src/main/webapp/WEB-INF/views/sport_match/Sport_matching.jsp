@@ -35,18 +35,6 @@
   </head>
   <body>
   
-      <!-- Preloader Start -->
-    <div id="preloader-active">
-        <div class="preloader d-flex align-items-center justify-content-center">
-            <div class="preloader-inner position-relative">
-                <div class="preloader-circle"></div>
-                <div class="preloader-img pere-text">
-                    <img src="${pageContext.request.contextPath}/resources/image/logo/sports_logo.png" alt="">
-                </div>
-            </div>
-        </div>
-    </div>
-    
    	<!-- 헤더 영역  -->
 <jsp:include page="/WEB-INF/views/sport_comm/header.jsp"/>
    <main>
@@ -158,7 +146,7 @@
                     <div id="btnSubmit" onclick="location.href='${pageContext.request.contextPath}/member/login'" class="submit ibx">Search&nbsp;&nbsp;</div>
                 	</c:if>
                 	<c:if test="${!empty USER_ID}">
-                   <div id="btnSubmit" onclick="javascript:btnClick();" class="submit ibx">Search&nbsp;&nbsp;</div>
+                   <div id="btnSubmit" onclick="javascript:SearchClick();" class="submit ibx">Search&nbsp;&nbsp;</div>
                    </c:if>
                </div>
            </form>
@@ -172,7 +160,7 @@
 					<tr>
 					   <th colspan="4">Matching list</th>
 					   <th colspan="4">
-							<font size=3>Total : ${listcount}</font>
+							<font size=3>Total : <a id="all_cnt">${listcount}</a></font>
 					   </th>
 					</tr>
 					<tr>
@@ -184,7 +172,7 @@
 						<th><div class="classalign">신청</div></th>
 					</tr>	
 				</thead>
-				<tbody>
+				<tbody id="search_list">
 					<c:set var="num" value="${listcount-(page-1)*limit}"/>	
 					<c:forEach var="m" items="${matchlist}">	
 						<tr>
@@ -193,12 +181,12 @@
 							<td><div class="classalign">${m.MATCH_TIME}</div></td>
 							<td><div class="classalign">${m.MATCH_PRS}</div></td>
 							<td><div class="classalign">${m.MATCH_SKL}</div></td>
-							<td><div id="btnSubmit2" onclick="javascript:btnApply();" class="submit2">Apply&nbsp;&nbsp;</div></td>
+							<td><div id="btnSubmit2" onclick="javascript:btnApply();" class="submit2">Apply</div></td>
 						</tr>
 					</c:forEach>
 				 </tbody>	
 			</table>
-				<div class="center-block">
+				<div id="center-block" class="center-block">
 					  <ul class="pagination justify-content-center">		
 						 <c:if test="${page <= 1 }">
 							<li class="page-item">
@@ -242,7 +230,7 @@
 			</c:if>
 			<%-- 게시글이 없는 경우--%>
 			<c:if test="${listcount == 0 }">
-				<font size=5>등록된 글이 없습니다.</font>
+				<font size=5 style="text-align:center">등록된 글이 없습니다.</font>
 			</c:if>
 	</div>
 	
@@ -314,7 +302,7 @@
                         <label class="radio radio-sm">
                             <div class="container">
                                 <div class="label">Sport</div>
-                                 <input id="Sport" class="modal_input" name="Sport" type="text" value="${SPORT_NUM}" readonly>
+                                 <input id="Sport" class="modal_input" name="Sport" type="text" value="" readonly>
                             </div>
                         </label>
                          <label>
@@ -365,7 +353,7 @@
     </div>
    <script src="${pageContext.request.contextPath}/resources/js/match/jquery.min.js"></script>
    <script src="${pageContext.request.contextPath}/resources/js/match/jquery-ui.min.js"></script>
-   <script src="${pageContext.request.contextPath}/resources/js/match/main.js"></script>
+   <script src="${pageContext.request.contextPath}/resources/js/match/match.js"></script>
    </main>
 <!-- Footer 영역  -->
 <jsp:include page="/WEB-INF/views/sport_comm/footer.jsp"/>
