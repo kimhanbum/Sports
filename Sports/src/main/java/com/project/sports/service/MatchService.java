@@ -16,6 +16,7 @@ public interface MatchService {
 
 	public void insertMatch(Match match);
 
-	public List<Match> getSearchList(int page, int limit, int num, Match match);
+	public List<Match> getSearchList(int num, String MATCH_ADR, String mATCH_DTL_ADR, String mATCH_TIME,
+			int mATCH_PRS, String mATCH_SKL);
 
 }

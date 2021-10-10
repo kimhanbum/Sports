@@ -13,10 +13,16 @@
 		select * 
 		from Sport_register
 		<where>
-			<if test='MATCH_TIME!=""'>
-				MATCH_TIME =#{MATCH_TIME}
+			<if test='MATCH_ADR!="지역"'>
+				MATCH_ADR =#{MATCH_ADR}
 			</if>
-			<if test='MATCH_PRS!=""'>
+			<if test='MATCH_DTL_ADR!="세부지역"'>
+				and MATCH_DTL_ADR =#{MATCH_DTL_ADR}
+			</if>
+			<if test='MATCH_TIME!=""'>
+				and MATCH_TIME =#{MATCH_TIME}
+			</if>
+			<if test='MATCH_PRS!="0"'>
 				and MATCH_PRS =#{MATCH_PRS}
 			</if>
 			<if test='MATCH_SKL!=""'>
@@ -24,6 +30,7 @@
 			</if>
 		</where>
 		and sport_num =#{num}
+		and REGISTER_STUS = 0
 	</select>
 	
 	<select id="list" resultType="match" parameterType="java.util.Map">
