@@ -10,6 +10,13 @@
 		</layout>
 	</appender>
 	
+	<logger name="Auction">
+		<level value="trace" />
+	</logger>
+	<logger name="Direct">
+		<level value="trace" />
+	</logger>
+	
 	<!-- Application Loggers -->
 	<logger name="com.project.sports">
 		<level value="info" />

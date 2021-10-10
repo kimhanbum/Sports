@@ -122,8 +122,19 @@ select * from
 			</choose>
 		</if>
 	</sql>
+	
+	
+<select id="pickcheck" resultType="Object"  parameterType="java.util.Map">
+	select * from MY_DEAL WHERE 
+	pick = 1 AND USER_ID = #{sessionid} AND AUC_NUMBER = #{num} AND DEAL_CSFC = 2
+</select>
 
-
+<insert id="pick" parameterType="java.util.Map">
+	insert into MY_DEAL
+	(USER_ID, AUC_NUMBER , PICK , DEAL_CSFC)
+	VALUES( #{sessionid}  , #{num} , 1 , 2 )
+	
+</insert>
 
 
 

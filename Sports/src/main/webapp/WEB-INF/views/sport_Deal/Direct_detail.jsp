@@ -586,6 +586,8 @@ $(function(){
 		$("#buttonG").remove();
 		$("#bubu").append(output)
 	}
+	
+		
 })
 </script>
 <script>
@@ -612,6 +614,40 @@ $(function(){
 			 + "?num=" + a;
 		
      });
+	
+	
+	$(".buttonJ").click(function(){ //찜하기 버튼 클릭
+		
+		var pickcheck ="${pickcheck}";
+			var num = ${param.num};
+			
+			var writeid = "${b.USER_ID}"
+		var sessionid = "${USER_ID}"
+			
+			
+		if(sessionid ==""){
+			alert("로그인후 이용해주세요")
+			location.href = "${pageContext.request.contextPath}/member/login"
+		}else{
+			if(writeid==sessionid){
+				alert("본인이 올린글 입니다.")
+			}else{
+				if(pickcheck == "possible"){
+	 				var b = confirm("찜 하시겠습니까 ?");		
+	 				
+	 				if(b==true){	
+	 					location.href = "${pageContext.request.contextPath}/DealD/pick"
+	 					 + "?num=" + num ;
+	 				}
+	 			}else{
+	 				alert("이미 찜한 상품입니다.")
+	 			}
+			}
+		}
+			
+			
+
+	})
 
 		
 

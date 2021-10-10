@@ -50,4 +50,13 @@ public class DealDirectDAO {
 		public List<DealDirect> getDirectListsort(HashMap<String, Object> map2) {
 			return sqlSession.selectList("Direct.sortlist", map2);
 		}
+
+		public Object pickcheck(HashMap<String, Object> map) {
+			return sqlSession.selectOne("Direct.pickcheck" , map);
+		}
+
+		public Object Direct_pick(HashMap<String, Object> map) {
+			return sqlSession.insert("Direct.pick" , map);
+			
+		}
 }

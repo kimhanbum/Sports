@@ -199,10 +199,25 @@ public class DealDirectController {
 	@GetMapping(value = "/detail")
 	// @RequestMapping(value="/write", method=requestMethod.GET)
 	public ModelAndView Direct_detail(int num, ModelAndView mv,
-			HttpServletRequest request) {
+			HttpServletRequest request,
+			HttpSession session) {
+		
 		DealDirect Direct = DealService.D_getDetail(num);
 		
+		//찜했던 물품인지 확인
+		String sessionid = (String) session.getAttribute("USER_ID");
+		if(sessionid !=null) {
+			//찜한물품인지 확인
+			Object pickcheck = DealService.pickcheck2(sessionid, num);
+			if(pickcheck == null) {
+				mv.addObject("pickcheck", "possible");
+			}else {
+				mv.addObject("pickcheck", "impossible");
+			}
+		}
 		
+		
+		//조회수
 		int count = DealService.D_readcount(num);
 		
 		if(Direct==null) {
@@ -216,6 +231,7 @@ public class DealDirectController {
 			logger.info("파일" + Direct.getSAVE_DIR_FILE2());
 			mv.addObject("b" ,Direct);
 		}
+		
 		return mv;
 	}
 
@@ -586,6 +602,22 @@ public class DealDirectController {
 		
 		}
 		return url;
+	}
+	
+	//직거래 찜하기
+	@RequestMapping(value="/pick")
+	public String Auctionpick(RedirectAttributes rattr , 
+			HttpServletRequest request , int num,
+			HttpSession session) {
+				
+		String sessionid = (String) session.getAttribute("USER_ID");
+		
+			
+			
+		//찜하기 등록
+		DealService.Direct_pick(sessionid , num);
+			
+		return "redirect:list";
 	}
 
 }

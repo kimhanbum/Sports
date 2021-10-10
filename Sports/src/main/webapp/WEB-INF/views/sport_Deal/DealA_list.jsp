@@ -426,7 +426,7 @@ background-color
 								setTimeout(setClock, 1000);
 								
 								//if(eval("count" + number) == "14 시 0 분 9 초"){	
-								if(hr <=0 && min <=39 && sec <=55){
+								if(hr ==595 && min ==58 && sec ==48){
 									
 									clearTimeout(setClock);
 									document.getElementById(timeid).innerHTML = 
@@ -437,7 +437,7 @@ background-color
 									
 									
 								}
-								if(hr == 64 && min ==26 && sec ==8){
+								if(hr == 570 && min ==4 && sec ==15){
 									location.href="timeout?num=" + number	
 								}
 								
