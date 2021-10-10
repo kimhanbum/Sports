@@ -290,6 +290,23 @@ input.checkbox:checked+label.input-label.radio::before {
 	letter-spacing: 2.5px;
 	font-weight: 500;
 	color: white;
+	background-color: #070d17;
+	border: none;
+	border-radius: 45px;
+	box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+	transition: all 0.3s ease 0s;
+	cursor: pointer;
+	outline: none;
+}
+.buttonS {
+	width: 200px;
+	height: 60px;
+	font-family: 'Roboto', sans-serif;
+	font-size: 17px;
+	text-transform: uppercase;
+	letter-spacing: 2.5px;
+	font-weight: 500;
+	color: white;
 	background-color: #114da5;
 	border: none;
 	border-radius: 45px;
@@ -335,6 +352,12 @@ input.checkbox:checked+label.input-label.radio::before {
 }
 
 .buttonA:hover{
+	background-color: #070d17b5;
+	box-shadow: 0px 15px 20px #070d17b5;
+	color: #fff;
+	transform: translateY(-7px);
+}
+.buttonS:hover{
 	background-color: #1c72f0;
 	box-shadow: 0px 15px 20px #1c72f0;
 	color: #fff;
@@ -366,9 +389,7 @@ input.checkbox:checked+label.input-label.radio::before {
 	padding-top: 50px
 }
 
-#mon2 {
-	padding-top: 50px
-}
+
 </style>
 <body data-spy="scroll" data-target=".site-navbar-target"
 	data-offset="300">
@@ -452,6 +473,9 @@ input.checkbox:checked+label.input-label.radio::before {
 							<ul class="list-unstyled" id="buttonG">
 								<li class="mb-3">
 									<button class="buttonA">입찰하기</button>
+								</li>
+								<li class="mb-3">
+									<button class="buttonS">즉시구매</button>
 								</li>
 								<li class="mb-3" id="zzim">
 									<button class="buttonJ">찜하기</button>
@@ -548,7 +572,7 @@ input.checkbox:checked+label.input-label.radio::before {
  			var num = ${param.num};
  			
  			var writeid = "${b.USER_ID}"
-				var sessionid = "${USER_ID}"
+			var sessionid = "${USER_ID}"
  			
 				
 			if(sessionid ==""){
@@ -596,7 +620,7 @@ input.checkbox:checked+label.input-label.radio::before {
 						alert("본인이 올린글 입니다.")
 					}else{
 						if(bidcheck == "possible"){
-							var b = confirm("입찰 하시겠습니까 ? (입찰단위: " + ${b.AUC_UNIT} + ")");		
+							var b = confirm("입찰 하시겠습니까 ? (현재금액: " + ${b.AUC_SPRICE} + " 입찰단위: " + ${b.AUC_UNIT} + ") ");		
 							
 							if(b==true){	
 								location.href = "${pageContext.request.contextPath}/DealA/bid"
@@ -612,6 +636,27 @@ input.checkbox:checked+label.input-label.radio::before {
 				
 				
 		     });
+			
+			$(".buttonS").click(function(){
+				var num = ${param.num};
+				var writeid = "${b.USER_ID}"
+				var sessionid = "${USER_ID}"
+				
+				if(sessionid ==""){
+					alert("로그인후 이용해주세요")
+					location.href = "${pageContext.request.contextPath}/member/login"
+				}else{
+					if(writeid==sessionid){
+						alert("본인이 올린글 입니다.")
+					}else{
+						var s = confirm("즉시구매 하시겠습니까? (즉시구매가: " + ${b.AUC_LPRICE} + "원)")						
+						if(s==true){
+							location.href = "${pageContext.request.contextPath}/DealA/buynow" 
+								 + "?num=" + num ;
+						}
+					}
+				}
+			})
 			
 		})
 	

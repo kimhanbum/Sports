@@ -145,11 +145,6 @@ public class DealAuctionController {
 		}
 		
 		
-		
-		
-		
-		
-		
 		//조회수
 		int count = DealService.A_readcount(num);
 		
@@ -368,6 +363,8 @@ public class DealAuctionController {
 	@RequestMapping(value="/timeout")
 	public String Auctiontimout(int num ) {
 		
+		
+		
 		//판매자 내거래내역 ( 판매중 -> 배송입력 )
 		DealService.Auction_timeout(num);
 		
@@ -377,7 +374,31 @@ public class DealAuctionController {
 		//찜,입찰실패 행삭제 
 		DealService.Auction_timeout3(num);
 		
-		return"sport_Deal/DealA_list";
+		return"redirect:list";
+	}
+	
+	//즉시 구매
+	@RequestMapping(value="/buynow")
+	public String Auctionbuynow(int num , 
+			HttpSession session) {
+		
+		String sessionid = (String) session.getAttribute("USER_ID");
+		
+		logger.info("즉시구매" + num);
+		
+		//즉시구매 완료 이미지로 바꿔주기
+		DealService.Auction_imgchan(num);
+		
+		//판매자 내거래내역 ( 판매중 -> 배송입력 )
+		DealService.Auction_timeout(num);
+		
+		//구매자 내거래내역 ( 입찰완료) - insert
+		DealService.Auction_buynow1(num, sessionid);
+	
+		//찜,입찰실패,입찰중 행삭제 
+		DealService.Auction_buynow2(num);
+		
+		return"redirect:list";
 	}
 	
 }

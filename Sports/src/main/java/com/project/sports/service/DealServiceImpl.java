@@ -210,6 +210,46 @@ public class DealServiceImpl implements DealService {
 			return dao2.getDirectListsort(map2);
 		}
 
+		@Override
+		public Object pickcheck2(String sessionid, int num) {
+			HashMap<String , Object> map = new HashMap<String,Object>();
+			map.put("sessionid", sessionid);
+			map.put("num", num);
+
+			return dao2.pickcheck(map);
+		}
+
+		@Override
+		public void Direct_pick(String sessionid, int num) {
+			HashMap<String , Object> map = new HashMap<String,Object>();
+			map.put("sessionid", sessionid);
+			map.put("num", num);
+			
+			dao2.Direct_pick(map);
+			
+		}
+
+		@Override
+		public void Auction_buynow1(int num, String sessionid) {
+			HashMap<String , Object> map = new HashMap<String,Object>();
+			map.put("sessionid", sessionid);
+			map.put("num", num);
+			dao.Auction_buynow1(map);
+			
+		}
+
+		@Override
+		public void Auction_buynow2(int num) {
+			dao.Auction_buynow2(num);
+			
+		}
+
+		@Override
+		public void Auction_imgchan(int num) {
+			dao.Auction_imgchan(num);
+			
+		}
+
 
 
 

@@ -66,6 +66,16 @@ public interface DealService {
 
 	public List<DealDirect> getDirectListsort(HashMap<String, Object> map2);
 
+	public Object pickcheck2(String sessionid, int num);
+
+	public void Direct_pick(String sessionid, int num);
+
+	public void Auction_buynow1(int num, String sessionid);
+
+	public void Auction_buynow2(int num);
+
+	public void Auction_imgchan(int num);
+
 
 	
 

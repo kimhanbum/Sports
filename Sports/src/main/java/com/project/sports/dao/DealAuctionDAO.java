@@ -87,6 +87,23 @@ public class DealAuctionDAO {
 		
 	}
 
+	public void Auction_buynow1(HashMap<String, Object> map) {
+		sqlSession.delete("Auction.buynow1",map);
+		
+	}
+
+	public void Auction_buynow2(int num) {
+		sqlSession.delete("Auction.buynow2",num);
+		
+	}
+
+	public void Auction_imgchan(int num) {
+		sqlSession.update("Auction.imgchan", num);
+		
+	}
+
+
+
 
 
 

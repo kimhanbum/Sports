@@ -79,8 +79,8 @@ where auc_number = #{num}
 
 <insert id="biding" parameterType="java.util.Map">
 	insert into MY_DEAL
-	(USER_ID, AUC_NUMBER , BUY_BIDDING)
-	VALUES( #{sessionid}  , #{num} , 1 )
+	(USER_ID, AUC_NUMBER , BUY_BIDDING , DEAL_CSFC)
+	VALUES( #{sessionid}  , #{num} , 1  , 1)
 	
 </insert>
 
@@ -99,20 +99,20 @@ where  AUC_NUMBER = #{num} and BUY_BIDDING = 1
 
 <insert id="pick" parameterType="java.util.Map">
 	insert into MY_DEAL
-	(USER_ID, AUC_NUMBER , PICK)
-	VALUES( #{sessionid}  , #{num} , 1 )
+	(USER_ID, AUC_NUMBER , PICK , DEAL_CSFC)
+	VALUES( #{sessionid}  , #{num} , 1 , 1 )
 	
 </insert>
 
 <select id="pickcheck" resultType="Object"  parameterType="java.util.Map">
 	select * from MY_DEAL WHERE 
-	pick = 1 AND USER_ID = #{sessionid} AND AUC_NUMBER = #{num}
+	pick = 1 AND USER_ID = #{sessionid} AND AUC_NUMBER = #{num} AND DEAL_CSFC = 1
 </select>
 
 <insert id="myinsert" parameterType="Auction">
 	insert into my_deal
-	(USER_ID ,AUC_NUMBER, SELL_BIDDING )
-	values(#{USER_ID} , AUC_SEQ.CURRVAL , 1)
+	(USER_ID ,AUC_NUMBER, SELL_BIDDING , DEAL_CSFC)
+	values(#{USER_ID} , AUC_SEQ.CURRVAL , 1 , 1 )
 </insert>
 
 <update id="timeout" parameterType="int">
@@ -139,6 +139,7 @@ where
 	AUC_NUMBER = #{NUMBER}
 	AND SELL_BIDDING =0
 	AND BUY_BIDCOM = 0 
+	AND DEAL_CSFC = 1 
 	AND PICK = 1 OR BUY_BIDFAIL = 1
 </delete>
 
@@ -153,4 +154,29 @@ where
 			</choose>
 		</if>
 	</sql>
+	
+<insert id="buynow1" parameterType="java.util.Map">
+	insert into my_deal
+	(USER_ID ,AUC_NUMBER, BUY_BIDCOM , DEAL_CSFC)
+	values(#{sessionid} , #{num} , 1 , 1)
+</insert>
+
+<delete id="buynow2" parameterType="int">
+delete from my_deal
+where 	
+	AUC_NUMBER = #{num}
+	AND SELL_BIDDING =0
+	AND BUY_BIDCOM = 0 
+	AND DEAL_CSFC = 1 
+	AND PICK = 1 OR BUY_BIDFAIL = 1 or BUY_BIDDING = 1
+</delete>
+
+<update id="imgchan" parameterType="int">
+UPDATE  Deal_Auction
+SET   SAVE_AUC_MAINFILE='buynow.jpg',
+   AUC_DATE = TO_DATE('2099/01/01 10:00', 'YYYY.MM.DD HH24:MI')
+ WHERE   AUC_NUMBER =  #{num}
+
+</update>
+
 </mapper>
