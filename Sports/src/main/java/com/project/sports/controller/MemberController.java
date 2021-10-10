@@ -187,17 +187,38 @@ required=true 상태에서 지정한 이름을 가진 쿠키가 존재하지 않으면 스프링 MVC는 익
 		}
 		
 	}
-	
+	//회원 개인정보
+	@RequestMapping(value="/info", method=RequestMethod.GET)
+	public ModelAndView member_info(@RequestParam("USER_ID") String id,//파라미터로 넘어온 이름 중 id라는 이름을 갖고 있는 값
+			ModelAndView mv, HttpServletRequest request) {//delete?id=
+		Member m = memberservice.member_info(id);
+		//m=null;	//오류 확인하는 값
+		if(m!=null) {
+			mv.setViewName("sports_mypage/mypage_info");
+			mv.addObject("mypage_info",m);
+		}else {
+			mv.addObject("url",request.getRequestURI());
+			mv.addObject("message","해당 정보가 없습니다.");
+			mv.setViewName("error/error");
+		}
+		return mv;
+	}
+
+	@RequestMapping(value="/delete", method=RequestMethod.GET)
+	public String member_delete(String id) {
+		memberservice.delete(id);
+		return "redirect:list";
+	}
 	@RequestMapping(value="/update", method=RequestMethod.GET)
 	public ModelAndView member_update(HttpSession session,
 			ModelAndView mv) {
-		String id = (String) session.getAttribute("id");
+		String id = (String) session.getAttribute("USER_ID");
 		if(id==null) {
 			mv.setViewName("redirect:login");
 		}else {
 			Member m = memberservice.member_info(id);
 			mv.setViewName("sports_member/update");
-			mv.addObject("memberinfo",m);
+			mv.addObject("mypage_info",m);
 		}
 		return mv;
 	}
