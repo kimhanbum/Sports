@@ -53,10 +53,13 @@ public class PersonalManagementController {
 					 @RequestParam(value="sports_name", required=false)
 					  String sports_name,
 					 @RequestParam(value="cal", required=false) 
-						int cal){
+					  int cal,
+					 @RequestParam(value="sports_img", required=false)
+					  String sports_img){
 		
 			pm.setSPORTS_NAME(sports_name);
 			pm.setPM_KCAL(cal * time);
+			pm.setSPORTS_IMG(sports_img);
 			pm.setUSER_ID((String)session.getAttribute("USER_ID"));
 			pmService.insertPM(pm);
 			

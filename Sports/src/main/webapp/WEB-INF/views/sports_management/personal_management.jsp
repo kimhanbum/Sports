@@ -1,25 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- SITE TITTLE -->
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-<!-- Bootstrap -->
-  <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/personal_management/bootstrap/css/bootstrap.min.css">
-  <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/personal_management/bootstrap/css/bootstrap-slider.css">
-  <!-- Font Awesome -->
-  <link href="${pageContext.request.contextPath}/resources/personal_management/font-awesome/css/font-awesome.min.css" rel="stylesheet">
-  <!-- Owl Carousel -->
-  <link href="${pageContext.request.contextPath}/resources/personal_management/slick-carousel/slick/slick.css" rel="stylesheet">
-  <link href="${pageContext.request.contextPath}/resources/personal_management/slick-carousel/slick/slick-theme.css" rel="stylesheet">
-  <!-- Fancy Box -->
-  <link href="${pageContext.request.contextPath}/resources/personal_management/fancybox/jquery.fancybox.pack.css" rel="stylesheet">
-  <link href="${pageContext.request.contextPath}/resources/personal_management/jquery-nice-select/css/nice-select.css" rel="stylesheet">
-  <!-- CUSTOM CSS -->
-  <link href="${pageContext.request.contextPath}/resources/personal_management/css/style.css" rel="stylesheet">
-  		
+<title>당일 운동량</title>
 		<script src="${pageContext.request.contextPath}/resources/js/jquery-3.6.0.js"></script>
 		<script src="${pageContext.request.contextPath}/resources/js/personal_management/pm.js" charset="utf-8"></script> 		
 		<script src="${pageContext.request.contextPath}/resources/js/personal_management/date.js" charset="utf-8"></script> 		
@@ -33,7 +17,9 @@
   color:black;
   text-align:center;
 }
-
+#sports_img {
+	border-radius: 70%;
+}
 </style>
 </head>
 
@@ -80,15 +66,10 @@
 		<jsp:include page="/WEB-INF/views/sport_comm/asideLeft.jsp"/>
      </div>
 <!-- 당일 운동 -->
-
-
-
-	
 	<div class="col-md-10 offset-md-1 col-lg-8 offset-lg-0">
 	<div class="container">
 	 <div id="daten"> Date</div>
-				<h4 class="card-title">당일 운동 종목</h4>
-                  <div class="add-items d-flex">
+                  <div class="add-items d-flex col-md-6">
                    <select class="form-control sports_name" id="sports_name" name="sports_name">
                     <option selected value="">-- 선택 --</option>
                    </select>
@@ -96,14 +77,16 @@
                    <button class="add btn btn-primary font-weight-bold add-btn">Add</button> 	
                  </div> 
 				<!-- Recently Favorited -->
-				<div class="widget dashboard-container my-adslist" id="kcal_list">
-					<table class="table table-responsive product-dashboard-table">
+				<div style="width:50%" class="widget dashboard-container my-adslist" id="kcal_list">
+					<h3 class="widget-header">당일 운동량</h3>
+					<table class="table table-responsive product-dashboard-table table-striped">
 						<thead>
 							<tr>
-								<th>운동 종목</th>
+								<th>운동종목</th>
+								<th></th>
 								<th colspan="1"></th>
 								<th class="text-center">칼로리</th>
-								<th class="text-center">삭제</th>
+								<th class="text-center" >삭제</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -118,37 +101,37 @@
 <!-- Row End -->
 <!-- Container End -->
 </section>
-
+<%-- <div>
+ 	  <ul class="pagination justify-content-center">
+ 	  	<c:if test="${page <= 1 }">
+				<a href="#" id="paging">&laquo;</a>
+ 	  	</c:if>
+ 	  	<c:if test="${page > 1 }">
+			 <a href="list?page=${page-1}"
+	  			id="paging">&laquo;</a>	
+		</c:if>
+		
+		<c:forEach var="a" begin="${startpage}" end="${endpage}">
+			<c:if test ="${a == page }">
+						 <a href="#" id="paging">${a}</a>	
+			</c:if>
+		<c:if test="${a != page }">
+			 <a href="list?page=${a}"
+				id="paging">${a}</a>	
+		</c:if>
+		</c:forEach>
+		
+		<c:if test="${page >= maxpage}">
+			<a href="#" id="paging">&raquo;</a>
+		</c:if>
+		<c:if test="${page < maxpage }">
+			<a href="list?page=${page+1}"
+			   id="paging">&raquo;</a>
+		</c:if>
+ 	  </ul>
+ </div> --%>
 </body>
 
-
-
-
-
-
-<!-- <div class="col-lg-10 mb-5 mb-lg-0">
-   <div class="page-content page-container" id="page-content">
-    <div class="padding">  // 왼쪽 공백 
-   <div id="daten"> Date</div>
-       <div class="col-md-4">
-          <div class="card px-3">
-              <div class="card-body">
-                <h4 class="card-title">당일 운동 종목</h4>
-                  <div class="add-items d-flex"> 
-                   <select class="form-control sports_name" id="sports_name" name="sports_name">
-                    <option selected value="">-- 선택 --</option>
-                   </select>
-		           <input type="text" id="time" name="SPORTS_TIME" class="form-control SPORTS_TIME" placeholder="운동시간 ">
-                   <button class="add btn btn-primary font-weight-bold add-btn">Add</button> 	
-                 </div>
-                 <div class="list-wrapper">
-                    <ul class="d-flex flex-column-reverse kcal-list" id="kcal_list"></ul>
-                 </div>
-               </div>
-            </div>
-         </div>
-    </div>
-</section> -->
 	<!-- Footer 영역  -->
 	<jsp:include page="/WEB-INF/views/sport_comm/footer.jsp"/>
 </body>

@@ -17,7 +17,7 @@ $(function (){
             	
             	//ajax로 가져온 select option구성
             	$(rdata).each(function(index,item){
-            		value = '"' +  item.sports_NAME  + ' ' + item.cal +  '"' ; 
+            		value = '"' +  item.sports_NAME  + ' ' + item.cal + ' ' + item.sports_IMG + '"' ; 
             		output += '<option value=' +  value +'>'+item.sports_NAME+'</option>'
             	})
             	
@@ -47,10 +47,13 @@ $(function (){
 		   data:{
 			   cal : data[1],
 			   sports_name : data[0],
+			   sports_img : data[2],
 			   time : $("#time").val()
 		   },
 		   success : function(){
 			console.log("성공")
+			$("#sports_name").empty();
+			$("input").attr("placeholder", "운동 시간");
 		   }
 			   
 	   })//ajax end
@@ -82,27 +85,27 @@ function getList(){
 	$.ajax({
 		url: "../pm/list",
 		success : function(rdata){//rdata = object
-			$("#kcal_list tbody").remove();
+			$("#kcal_list>thead tbody").remove();
 			var output = '';
         	$(rdata).each(function(index,item){
-        	console.log("종목="+item.SPORTS_NAME)
-			output += "<tr><td>  이미지 "; 
-  			output += "<input id='num' type='hidden' value=" + item.PM_NO + ">";
-  			output+= "</td>";
-			output+= "<td>" + item.SPORTS_NAME +"</td>";
-			output+= "<td>" + item.PM_KCAL + "</td>"
+        	var img = item.SPORTS_IMG;
+        	console.log(img);
+        	var src ='../resources/image/mmatch/' +img;
+        	console.log("칼로리="+item.PM_KCAL)
+			output += "<tr><td class='product-thumb'><img  src=" + src +" alt='사진' width='50 height='50' id='sports_img'>"; 
+  			output += "</td><td></td>";
+			output += "<td colspan='1' class='product-category'>" + item.SPORTS_NAME +"</td>";
+			output += "<td class='text-center'>" + item.PM_KCAL + "</td>";
+			output += "<td class='action' data-title='Action'><div class=''><ul class='list-inline justify-content-center'><li class='list-inline-item'><a data-toggle='tooltip' data-placement='top' title='Delete' class='delete'>";
+			output += "<i id='remove' class='fa fa-trash'></i><input id='num' type='hidden' value=" + item.PM_NO + "></a></li></ul>";
+			output += "</div></td></tr>";
   			/*console.log("PM_NO" + item.PM_NO);*/
 		})//each
-        	$("#kcal_list tbody").append(output);
-        	/*var pm_no = $('#num').val();
+       /* 	var pm_no = $('#num').val();
 			console.log(pm_no);*/
+		$("#kcal_list tbody").empty(output);
+		$("#kcal_list tbody").append(output);
 		}
 	})//ajax
-	
 }//getList function end
-
-
-
-
-
 
