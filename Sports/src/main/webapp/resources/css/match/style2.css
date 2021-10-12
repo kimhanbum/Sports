@@ -37,6 +37,16 @@
   cursor: pointer; 
   margin-bottom:1px;
   }
+  
+  .submit3 {
+  background: #6e7175;
+  color: #fff;
+  font-size: 12px;
+  text-align: center;
+  cursor: pointer; 
+  margin-bottom:1px;
+  }
+  
   .classalign{
   	text-align: center;
   }

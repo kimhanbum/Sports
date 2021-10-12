@@ -19,4 +19,11 @@ public interface MatchService {
 	public List<Match> getSearchList(int num, String MATCH_ADR, String mATCH_DTL_ADR, String mATCH_TIME,
 			int mATCH_PRS, String mATCH_SKL);
 
+	public List<Match> selRegi(int REGISTER_NUM);
+
+	public int RegiupdateMatch(int REGISTER_NUM);
+
+	public String getemail(String rEGISTER_ID);
+
+
 }

@@ -7,6 +7,7 @@
 	<select id="count" resultType="int" parameterType="int">
 		select count(*) from sport_register
 		where sport_num = #{num}
+			and REGISTER_STUS = 0
 	</select>
 	
 	<select id="searchlist" resultType="match" parameterType="java.util.Map">
@@ -50,6 +51,11 @@
 		WHERE sports_num = #{sports_num}
 	</select>
 	
+	<select id="selRegi" resultType="match" parameterType="java.util.Map">
+		select * from Sport_register
+		where REGISTER_NUM =#{REGISTER_NUM}
+	</select>
+	
 	
 	<insert id="insert" parameterType="match">
 		<selectKey keyProperty="REGISTER_NUM" resultType="int" order="BEFORE">
@@ -59,4 +65,17 @@
 		values
 		(#{REGISTER_ID},#{REGISTER_NUM}, #{SPORT_NUM}, #{MATCH_PRS}, #{MATCH_ADR}, #{MATCH_DTL_ADR},#{MATCH_TIME},#{MATCH_SKL})
 	</insert>
+	
+	<update id="Regiupdate" parameterType="match">
+		update Sport_register
+		set REGISTER_STUS =1
+		where REGISTER_NUM = #{REGISTER_NUM}
+	</update>
+	
+	<select id="getemail" resultType="string" parameterType="string">
+		select USER_EMAIL
+		from MEMBER_INFO
+		where USER_ID = #{REGISTER_ID}
+	</select>
+	
 </mapper>

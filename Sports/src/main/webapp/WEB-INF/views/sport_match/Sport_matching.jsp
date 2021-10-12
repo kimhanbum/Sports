@@ -164,6 +164,7 @@
 					   </th>
 					</tr>
 					<tr>
+						<th><div class="classalign">작성자</div></th>
 						<th><div class="classalign">지역</div></th>
 						<th><div class="classalign">세부지역</div></th>
 						<th><div class="classalign">날짜</div></th>
@@ -176,13 +177,20 @@
 					<c:set var="num" value="${listcount-(page-1)*limit}"/>	
 					<c:forEach var="m" items="${matchlist}">	
 						<tr>
+							<td><div id="Regi_ID"class="classalign">${m.REGISTER_ID}</div></td>
 							<td><div class="classalign">${m.MATCH_ADR}</div></td>
 							<td><div class="classalign">${m.MATCH_DTL_ADR}</div></td>	
 							<td><div class="classalign">${m.MATCH_TIME}</div></td>
 							<td><div class="classalign">${m.MATCH_PRS}</div></td>
 							<td><div class="classalign">${m.MATCH_SKL}</div></td>
-							<td><div id="btnSubmit2" onclick="javascript:btnApply();" class="submit2">Apply</div></td>
+						<c:if test="${m.REGISTER_ID == USER_ID}">
+							<td><div id="btnSubmit2" onclick="javascript:alertApply()" class="submit3">Apply</div></td>
+						</c:if>
+						<c:if test="${m.REGISTER_ID != USER_ID}">
+							<td><div id="btnSubmit2" onclick="javascript:btnApply(${m.REGISTER_NUM});" class="submit2">Apply</div></td>
+						</c:if>
 						</tr>
+							
 					</c:forEach>
 				 </tbody>	
 			</table>
@@ -298,6 +306,7 @@
 	   	 <div class="wrapper">
 	        	<div class="container">
 	            	<div class="row_subject">매칭신청</div><div id="modal_id" class="modal_id">${USER_ID}</div>
+	            	<div id="regi_num" style="display:none;"></div>
             		<div class="row1">
                         <label class="radio radio-sm">
                             <div class="container">
