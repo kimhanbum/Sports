@@ -1,6 +1,6 @@
 package com.project.sports.controller;
 
-import java.io.File;
+import java.io.File; 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -19,9 +19,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.project.sports.domain.MailVO;
 import com.project.sports.domain.Match;
+import com.project.sports.domain.Member;
 import com.project.sports.domain.Sports;
 import com.project.sports.service.MatchService;
+import com.project.sports.task.SendMail;
  
 @Controller
 @RequestMapping(value="/match")
@@ -31,19 +34,15 @@ public class MatchController {
 	@Autowired
 	private MatchService matchservice;
 	
+	@Autowired
+	private SendMail sendMail;
+	
 	private ModelAndView pageSet(int num, int page, String page_name) {
-		System.out.println("!---pageSet");
-		
 		int limit = 5; // 한 화면에 출력할 레코드 갯수
 		int listcount = matchservice.getListCount(num); //총 리스트 수를 받아옴
-		//총페이지 수
-		int maxpage = (listcount + limit - 1) / limit;
-		
-		//현재 페이지에 보여줄 시작 페이지 수(1,11,21, 등..)
-		int startpage = ((page -1) /10) *10 +1;
-		
-		//현재 페이지에 보여줄 마지막 페이지 수 (10,20,30 등..)
-		int endpage = startpage + 10 - 1;
+		int maxpage = (listcount + limit - 1) / limit; //총페이지 수
+		int startpage = ((page -1) /10) *10 +1; //현재 페이지에 보여줄 시작 페이지 수(1,11,21, 등..)
+		int endpage = startpage + 10 - 1; //현재 페이지에 보여줄 마지막 페이지 수 (10,20,30 등..)
 		
 		if(endpage > maxpage)
 		   endpage = maxpage;
@@ -60,6 +59,8 @@ public class MatchController {
 		mv.addObject("listcount", listcount);
 		mv.addObject("matchlist", matchlist);
 		mv.addObject("limit", limit);
+		
+		logger.info("" + matchlist);
 		return mv;
 	}
 	
@@ -133,10 +134,18 @@ public class MatchController {
 		return pageSet(num, page, page_name);
 	}
 	
-	@ResponseBody
+	
 	@RequestMapping(value = "/selSportName", method = RequestMethod.POST, produces="application/text;charset=utf8")
+	@ResponseBody
 	public String selSportName(@RequestBody Sports param) throws Exception {
 		return matchservice.selSportName(param);
+	}
+	
+	@RequestMapping(value = "/selRegi", method = RequestMethod.POST)
+	@ResponseBody
+	public List<Match> selRegi(@RequestParam(value="REGISTER_NUM",defaultValue="1")int REGISTER_NUM) throws Exception {
+		logger.info("register_num" + REGISTER_NUM);
+		return matchservice.selRegi(REGISTER_NUM);
 	}
 	
 	@RequestMapping(value="/Regi",method=RequestMethod.POST)
@@ -155,11 +164,32 @@ public class MatchController {
 			@RequestParam(value="MATCH_PRS",defaultValue="0",required=false)int MATCH_PRS,
 			@RequestParam(value="MATCH_SKL",defaultValue="",required=false)String MATCH_SKL
 			) {
-		System.out.println("!---SearchList");
+		System.out.println("SearchList");
 		
 		List<Match> matchlist = matchservice.getSearchList(num, MATCH_ADR, MATCH_DTL_ADR, MATCH_TIME, MATCH_PRS, MATCH_SKL);
 		
 		return matchlist;
 	}
 	
+	@RequestMapping(value="/RegiUpdate",method=RequestMethod.POST)
+	@ResponseBody
+	public String Regiupdate(@RequestParam(value="REGISTER_ID") String REGISTER_ID, @RequestParam(value="REGISTER_NUM",defaultValue="1")int REGISTER_NUM) throws Exception{
+		int result =  matchservice.RegiupdateMatch(REGISTER_NUM);
+		String email = matchservice.getemail(REGISTER_ID);
+		if(result ==0) {
+		logger.info("신청실패");
+			return "0";
+		}
+		else {
+		logger.info("신청성공");
+		MailVO vo = new MailVO();
+		vo.setTo(email);
+		vo.setSubject("[운동챙기조]" + REGISTER_ID + "님 등록하신 매칭에 신청내역이 있습니다.");
+		logger.info("email"+email);
+		vo.setContent(REGISTER_ID + "님 등록하신 매칭에 신청내역이 있습니다.");
+		logger.info("email"+REGISTER_ID );
+		sendMail.sendMail(vo);
+		return "1";
+		}
+	}
 }

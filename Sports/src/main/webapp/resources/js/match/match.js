@@ -124,8 +124,6 @@ function SearchClick(){
 		var MATCH_TIME = $("input[name=match_date]").val();
 		var MATCH_PRS = $("input[name=person]").val();
 		var MATCH_SKL = $("select[name=skill]").val();
-		String += (SPORT_NUM +"/" + MATCH_ADR +"/" + MATCH_DTL_ADR +"/" + MATCH_TIME + "/" + MATCH_PRS +"/" +MATCH_SKL);
-		console.log(String);
 		$.ajax({
 			async: false,
 			type: "get",
@@ -141,9 +139,10 @@ function SearchClick(){
 			},
 			success: function (result) {
 				m_search_list = result;
+				console.log(m_search_list);
 				showSearchList(1);
 			}, error: function(){
-				alert('실패');
+				alert('하나 이상의 검색어를 선택해주세요.');
 			}
 		});
 	}
@@ -153,22 +152,29 @@ function showSearchList(page){
 	$("#all_cnt").text(m_search_list.length);
 	$("#center-block").html(""); //좀따 위치 수정 요망
 	$("#search_list").html("");
-	
+	var user_id = $("#user_id").text();
 	var start = ((page - 1) * 5); //Array는 0부터 시작 
 	var end =  (page * 5) - 1;
-	if (end > m_search_list.length) end = m_search_list.length - 1;
-	
+	if (end >= m_search_list.length) end = m_search_list.length - 1;
 	var table_string = "";
 	for(var i = start; i <= end; i++){
 		table_string += 
 			'<tr>'+
+				'<td><div class="classalign">'+ m_search_list[i]["register_ID"] +'</div></td>'+
 				'<td><div class="classalign">'+ m_search_list[i]["match_ADR"] +'</div></td>'+
 				'<td><div class="classalign">'+ m_search_list[i]["match_DTL_ADR"] +'</div></td>'+	
 				'<td><div class="classalign">'+ m_search_list[i]["match_TIME"] +'</div></td>'+
 				'<td><div class="classalign">'+ m_search_list[i]["match_PRS"] +'</div></td>'+
-				'<td><div class="classalign">'+ m_search_list[i]["match_SKL"] +'</div></td>'+
-				'<td><div id="btnSubmit2" onclick="javascript:btnApply();" class="submit2">Apply&nbsp;&nbsp;</div></td>'+
-			'</tr>';
+				'<td><div class="classalign">'+ m_search_list[i]["match_SKL"] +'</div></td>';
+		if([i]["register_ID"]==user_id){
+			table_string +=
+				'<td><div id="btnSubmit2" onclick="javascript:alertApply();" class="submit3">Apply</div></td>';
+			//비활성화
+		}else{
+			table_string +=
+				'<td><div id="btnSubmit2" onclick="javascript:btnApply('+m_search_list[i]["register_NUM"]+');" class="submit2">Apply</div></td>';
+		}
+		table_string += '</tr>';
 	}
 	$("#search_list").html(table_string);
 	pageNavigation(m_search_list.length, page);
@@ -255,19 +261,53 @@ function RegiClick(){
 	}
 }
 
-function btnApply(){
+function btnApply(Regi_num){
+	console.log(Regi_num);
 	var user_id = $("#user_id").text();
 	if(user_id == ""){
 		location.href="/sports/member/login";
 	}else{
-		console.log("여기는 Apply");
+		$.ajax({
+			async: false,
+			type: "post",
+			url: "./selRegi",
+			dataType: "json",
+			data:{
+				"REGISTER_NUM": Regi_num
+			},
+			success: function (result) {
+				console.log(result);
+				var num = result[0]["register_NUM"];
+				var city =result[0]["match_ADR"];
+				var city_detail =result[0]["match_DTL_ADR"];
+				var person =result[0]["match_PRS"];
+				var date =result[0]["match_TIME"];
+				var skill =result[0]["match_SKL"];
+				$("#ApplyModal #regi_num").val(num);
+				$("#ApplyModal #City").val(city);
+				$("#ApplyModal #Detail").val(city_detail);
+				$("#ApplyModal #Date").val(date);
+				$("#ApplyModal #Skill").val(skill);
+				$("#ApplyModal #Person").val(person);
+				//ApplyModal(num);
+			}, 
+			error: function(){
+				alert("Apply실패");
+			}
+		});
+		
 		var sport =  sport_name;
 		$("#ApplyModal #Sport").val(sport);
+		
 		
 		$("#ApplyModal").css({
 			"display" :"block"
 		});
 	}
+}
+
+function alertApply(){
+	alert("자신이 등록한 글입니다.");
 }
 
 function closeModal1(){
@@ -356,34 +396,25 @@ function registerModal(){ //레지스터모달(모달등록버튼) 눌렀을때 
 }
 
 function ApplyModal(){ //ApplyModal창에서 신청버튼 클릭시 이벤트
-	var REGISTER_ID = $("#modal_id").text();
-	var SPORT_NUM = $("#sport_num").text();
-	var MATCH_ADR = $("#city option:checked").text();
-	var MATCH_DTL_ADR = $("#city_detail option:checked").text();
-	var MATCH_TIME = $("input[name=match_date]").val();
-	var MATCH_PRS = $("input[name=person]").val();
-	var MATCH_SKL = $("select[name=skill]").val();
-	
+	var Regi_num = JSON.parse($("#ApplyModal #regi_num").val());
+	var Regi_ID = $("#Regi_ID").text();
+	console.log(Regi_num);
+	console.log(Regi_ID);
 	$.ajax({
 		async: false,
 		type: "post",
-		url: "./Regi",
-		dataType: "text",
+		url: "./RegiUpdate",
+		dataType: "json",
 		data:{
-    	   "REGISTER_ID": REGISTER_ID,
-    	   "SPORT_NUM" : SPORT_NUM,
-    	   "MATCH_ADR" : MATCH_ADR,
-    	   "MATCH_DTL_ADR" : MATCH_DTL_ADR,
-    	   "MATCH_TIME" : MATCH_TIME,
-    	   "MATCH_PRS" : MATCH_PRS,
-    	   "MATCH_SKL" : MATCH_SKL
+    	   "REGISTER_NUM": Regi_num,
+    	   "REGISTER_ID" : Regi_ID
 		},
 		success: function (result) {
-			alert('등록성공');
-			location.reload();
-		}, error: function(){
-			alert('실패');
-		}
+				alert('신청 되었습니다.');
+				location.reload();
+		}, error:function(request,status,error){
+	        console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+	       }
 	});
 }
 

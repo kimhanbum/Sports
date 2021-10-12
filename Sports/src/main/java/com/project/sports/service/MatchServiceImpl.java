@@ -1,6 +1,6 @@
 package com.project.sports.service;
 
-import java.util.HashMap;
+import java.util.HashMap; 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,7 +45,6 @@ public class MatchServiceImpl implements MatchService {
 		dao.insertMatch(match);
 	}
 
-
 	@Override
 	public List<Match> getSearchList(int num, String MATCH_ADR, String MATCH_DTL_ADR, String MATCH_TIME,
 			int MATCH_PRS, String MATCH_SKL) {
@@ -58,5 +57,23 @@ public class MatchServiceImpl implements MatchService {
 		map.put("MATCH_SKL", MATCH_SKL);
 		return dao.getSearchList(map);
 	}
+
+	@Override
+	public List<Match> selRegi(int REGISTER_NUM) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("REGISTER_NUM", REGISTER_NUM);
+		return dao.selRegi(map);
+	}
+
+	@Override
+	public int RegiupdateMatch(int REGISTER_NUM) {
+		return dao.RegiupdateMatch(REGISTER_NUM);
+	}
+
+	@Override
+	public String getemail(String REGISTER_ID) {
+		return dao.getemail(REGISTER_ID);
+	}
+
 	
 }
