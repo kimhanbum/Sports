@@ -24,7 +24,7 @@
 <insert id="insertWMentor" parameterType="mentor">
 	<selectKey resultType="String"  order="BEFORE"
 	           keyProperty="mentor_code">
-	   select 'mr'||(substr(nvl(max(mentor_code),'mr1'),3)+1) as mentor_code from mentor_match
+	   select 'mr'||LPAD((substr(nvl(max(mentor_code),'mr01'),3)+1),2,0) as mentor_code from mentor_match
    </selectKey>
    insert into mentor_match
    values
@@ -48,6 +48,156 @@
 <select id="MentorCount" parameterType="Map" resultType="int" >
 	select count(*)
 	from mentor_match
+	<include refid="search_mentor"/>	
+</select>
+
+<select id="Mentorlist" parameterType="Map" resultType="mentor">
+   SELECT * FROM 
+   (SELECT ROWNUM RNUM, m.*
+    FROM
+         (SELECT * FROM mentor_match 
+          <include refid="search_mentor"/>
+          ORDER BY MENTOR_CODE DESC) m
+   )
+   WHERE RNUM <![CDATA[>=]]> #{start} AND RNUM <![CDATA[<=]]> #{end}
+</select>
+
+<select id="MentorDetail" parameterType="String" resultType="mentor">
+	select * 
+	from mentor_match 
+	where mentor_code=#{code}
+</select>
+
+<insert id="insertMentorApply" parameterType="Map">
+	<selectKey resultType="int"  order="BEFORE"
+	           keyProperty="match_no">
+	   select (nvl(max(match_no),1)+1) as match_no from match_info
+   </selectKey>
+   insert into match_info
+   values
+   (#{match_no},#{id},#{code},1)
+</insert>
+
+<select id="checkApply" parameterType="Map" resultType="int">
+	select count(*)
+	from match_info 
+	where user_id=#{id} and match_code=#{code}
+</select>
+
+<delete id="deleteWMetor" parameterType="String">
+	delete from mentor_match 
+	where mentor_code=#{code}
+</delete>
+
+<select id="getSports" parameterType="String" resultType="int">
+	select SPORTS_CATEGORY
+	from sports 
+	where sports_name = #{subject}
+</select>
+
+<update id="modifyWMentor" parameterType="mentor">
+   update mentor_match 
+   set 
+   user_id = #{user_id},
+   mentor_title = #{mentor_title},
+   sports_name = #{sports_name},
+   city = #{city},
+   sigungu = #{sigungu},
+   mentor_loc_detail = #{mentor_loc_detail},
+   mentor_date = #{mentor_date},
+   mentor_amount = #{mentor_amount},
+   mentor_number = #{mentor_number},
+   mentor_caution = #{mentor_caution},
+   mentor_gender = #{mentor_gender},
+   mentor_name = #{mentor_name},
+   mentor_career = #{mentor_career},
+   mentor_pic1 = #{mentor_pic1,jdbcType=VARCHAR},
+   mentor_origin_pic1 = #{mentor_origin_pic1,jdbcType=VARCHAR},
+   mentor_pic2 = #{mentor_pic2,jdbcType=VARCHAR},
+   mentor_origin_pic2 = #{mentor_origin_pic2,jdbcType=VARCHAR},
+   mentor_pic3 = #{mentor_pic3,jdbcType=VARCHAR},
+   mentor_origin_pic3 = #{mentor_origin_pic3,jdbcType=VARCHAR}
+   where mentor_code = #{mentor_code}
+</update>	
+
+<update id="chgApplyState" parameterType="matchinfo">
+   update match_info 
+   set match_state = #{match_state}
+   where match_state = 1 and match_code = #{match_code}
+</update>	
+
+
+<insert id="insertWMentee" parameterType="mentee">
+	<selectKey resultType="String"  order="BEFORE"
+	           keyProperty="mentee_code">
+	   select 'me'||LPAD((substr(nvl(max(mentee_code),'me01'),3)+1),2,0) as mentee_code from mentee_match
+   </selectKey>
+   insert into mentee_match
+   values
+   (#{mentee_code}, 
+    #{user_id} , #{mentee_title} , #{sports_name} , 
+    #{city} , #{sigungu}, #{mentee_loc_detail},
+    #{mentee_date}, #{mentee_amount} ,#{mentee_gender},
+    #{mentee_req,jdbcType=VARCHAR},
+    #{mentee_pic1,jdbcType=VARCHAR},#{mentee_origin_pic1,jdbcType=VARCHAR})
+</insert>
+    
+<select id="MenteeCount" parameterType="Map" resultType="int" >
+	select count(*)
+	from mentee_match
+	<include refid="search_mentee"/>	
+</select>
+
+<select id="Menteelist" parameterType="Map" resultType="mentee">
+   SELECT * FROM 
+   (SELECT ROWNUM RNUM, m.*
+    FROM
+         (SELECT * FROM mentee_match 
+          <include refid="search_mentee"/>
+          ORDER BY MENTEE_CODE DESC) m
+   )
+   WHERE RNUM <![CDATA[>=]]> #{start} AND RNUM <![CDATA[<=]]> #{end}
+</select>
+
+<select id="MenteeDetail" parameterType="String" resultType="mentee">
+	select * 
+	from mentee_match 
+	where mentee_code=#{code}
+</select>
+
+<insert id="insertMenteeApply" parameterType="Map">
+	<selectKey resultType="int"  order="BEFORE"
+	           keyProperty="match_no">
+	   select (nvl(max(match_no),1)+1) as match_no from match_info
+   </selectKey>
+   insert into match_info
+   values
+   (#{match_no},#{id},#{code},1)
+</insert>
+
+<delete id="deleteWMetee" parameterType="String">
+	delete from mentee_match 
+	where mentee_code=#{code}
+</delete>
+
+<update id="modifyWMentee" parameterType="mentee">
+   update mentee_match 
+   set 
+   user_id = #{user_id},
+   mentee_title = #{mentee_title},
+   sports_name = #{sports_name},
+   city = #{city},
+   sigungu = #{sigungu},
+   mentee_loc_detail = #{mentee_loc_detail},
+   mentee_date = #{mentee_date},
+   mentee_amount = #{mentee_amount},
+   mentee_gender = #{mentee_gender},
+   mentee_req = #{mentee_req},
+   mentee_pic1 = #{mentee_pic1,jdbcType=VARCHAR},
+   mentee_origin_pic1 = #{mentee_origin_pic1,jdbcType=VARCHAR}
+   where mentee_code = #{mentee_code}
+</update>	
+<sql id="search_mentor">
     <where>
     	<if test='search_field !=""'>
         	<choose>
@@ -65,28 +215,10 @@
 	        	</when>
         	</choose>
         </if>
-    </where>  
-</select>
+    </where> 
+</sql>
 
-<select id="Mentorlist" parameterType="Map" resultType="mentor">
-   SELECT * FROM 
-   (SELECT ROWNUM RNUM, m.*
-    FROM
-         (SELECT * FROM mentor_match 
-          <include refid="search"/>
-          ORDER BY MENTOR_CODE DESC) m
-   )
-   WHERE RNUM <![CDATA[>=]]> #{start} AND RNUM <![CDATA[<=]]> #{end}
-</select>
-
-<select id="MentorDetail" parameterType="String" resultType="mentor">
-	select * 
-	from mentor_match 
-	where mentor_code=#{code}
-</select>
-
-
-<sql id="search">
+<sql id="search_mentee">
     <where>
     	<if test='search_field !=""'>
         	<choose>
@@ -97,10 +229,10 @@
 	        		sports_name = #{search_word}
 	        	</when>
 	        	<when test='search_field == "수업료"'>
-	        		mentor_amount <![CDATA[<=]]>  #{search_word}
+	        		mentee_amount <![CDATA[<=]]>  #{search_word}
 	        	</when>
 	        	<when test='search_field == "성별"'>
-	        		mentor_gender = #{search_word}
+	        		mentee_gender = #{search_word}
 	        	</when>
         	</choose>
         </if>

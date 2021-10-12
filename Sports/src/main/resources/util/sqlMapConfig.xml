@@ -14,6 +14,8 @@
 		<typeAlias alias="sports"	type="com.project.sports.domain.Sports"/>
 		<typeAlias alias="mentor"	type="com.project.sports.domain.Mentor"/>
 		<typeAlias alias="pm"		type="com.project.sports.domain.PersonalManagement"/>
+		<typeAlias alias="matchinfo" type="com.project.sports.domain.MatchInfo"/>	
+		<typeAlias alias="mentee"	type="com.project.sports.domain.Mentee"/>	
   </typeAliases>
   
   <mappers>

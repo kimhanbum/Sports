@@ -30,7 +30,7 @@
 				<div class="row">
 					<div class="col-xl-12">
 						<div class="hero-cap text-center">
-							<h2>운동 멘토 매칭</h2>
+							<h2>운동 멘티 매칭</h2>
 						</div>
 					</div>
 				</div>
@@ -43,7 +43,7 @@
 	<section id="search_section" style="padding-top: 70px; ">	
 		<div class="container">
 			<div style="display:inline !important">
-				<h1 id="writingcount" style="display:inline !important">${listcount}</h1>명의 멘토가 검색되었습니다.
+				<h1 id="writingcount" style="display:inline !important">${listcount}</h1>명의 멘티가 검색되었습니다.
 				( 키워드 : 
 				<c:if test="${!empty search_field}">
 					<div id="searchkeyword" style="color:red; display:inline !important">${search_field}-${search_word}</div>
@@ -337,7 +337,7 @@
 	</div> 
 	
 	
-	<!-- mentor 공고글 리스트 -->
+	<!-- mentee 공고글 리스트 -->
 	<section class="latest-product-area latest-padding" style="padding-top: 70px;">
 		<div class="container">
 			<hr><br><br><br>
@@ -347,34 +347,34 @@
 					aria-labelledby="nav-home-tab">
 					<div class="row">
 						<c:if test="${listcount > 0 }">
-							<c:forEach var="mentor" items="${mentorlist}">
+							<c:forEach var="mentee" items="${menteelist}">
 								<div class="col-xl-4 col-lg-4 col-md-6">
 									<div class="single-product mb-60" style="border: 2px solid black;">
 										<div class="product-img">
-											<a href="javascript:detail('${mentor.mentor_code}');" >
-												<c:if test="${mentor.mentor_pic1 == null}">
+											<a href="javascript:detail('${mentee.mentee_code}');" >
+												<c:if test="${mentee.mentee_pic1 == null}">
 													<img data-toggle="modal" data-target="#detailModal" style="height:250px" src="${pageContext.request.contextPath}/resources/image/mmatch/default.jpg" alt="">
 												</c:if>
-												<c:if test="${mentor.mentor_pic1 != null}">
-													<img data-toggle="modal" data-target="#detailModal" style="height:250px" src="<spring:url value='/matchupload${mentor.mentor_pic1}'/>" alt=""/>
+												<c:if test="${mentee.mentee_pic1 != null}">
+													<img data-toggle="modal" data-target="#detailModal" style="height:250px" src="<spring:url value='/matchupload${mentee.mentee_pic1}'/>" alt=""/>
 												</c:if>
 											</a>
 										</div>
 										<div class="product-caption">
-											<h4><b>${mentor.mentor_title}</b></h4>
+											<h4><b>${mentee.mentee_title}</b></h4>
 											<div class="price">
 												<table class="table">
 													<tr>
 														<th>종목</th>
-														<td>${mentor.sports_name}</td>
+														<td>${mentee.sports_name}</td>
 													</tr>
 													<tr>
 														<th>장소</th>
-														<td>${mentor.city}&nbsp;${mentor.sigungu}</td>
+														<td>${mentee.city}&nbsp;${mentee.sigungu}</td>
 													</tr>
 													<tr>
-														<th>인원</th>
-														<td>${mentor.mentor_number}명</td>
+														<th>금액</th>
+														<td>${mentee.mentee_amount}원</td>
 													</tr>
 												</table>
 											</div>
@@ -396,7 +396,7 @@
 								class="btn header-btn">글쓰기</a>
 						</c:if>
 						<c:if test="${!empty USER_ID}">
-							<a href="${pageContext.request.contextPath}/mmatch/mentorWrite"
+							<a href="${pageContext.request.contextPath}/mmatch/menteeWrite"
 								class="btn header-btn">글쓰기</a>
 						</c:if>
 					</div>
@@ -434,13 +434,6 @@
 				<div class="container" style="padding:0px">
 					<div id="demo" class="carousel slide" data-ride="carousel">
 					
-					  <!-- Indicators -->
-					  <ul class="carousel-indicators">
-					    <li data-target="#demo" data-slide-to="0" class="active"></li>
-					    <li data-target="#demo" data-slide-to="1"></li>
-					    <li data-target="#demo" data-slide-to="2"></li>
-					  </ul>
-					  
 					  <!-- The slideshow -->
 					  <div id="slidePic" class="carousel-inner">
 						<div class="carousel-item active">
@@ -454,23 +447,16 @@
 						</div>
 					  </div>
 					  
-					  <!-- Left and right controls -->
-					  <a class="carousel-control-prev" href="#demo" data-slide="prev">
-					    <span class="carousel-control-prev-icon"></span>
-					  </a>
-					  <a class="carousel-control-next" href="#demo" data-slide="next">
-					    <span class="carousel-control-next-icon"></span>
-					  </a>
 					</div>				
 				
-					<br><h2 id="detail_title" class="mb-30">러닝 가르칩니다.</h2>
+					<br><h2 id="detail_title" class="mb-30">러닝 배웁니다.</h2>
 					<div style="text-align:left">
 					   <div id="accordion">
 						    <div class="card" style="border-bottom:none;">
 							      <div class="card-header" style="background-color:white;border-bottom:none;">
 							      	  <div>
 											<img class="icon_img element_inline" src="${pageContext.request.contextPath}/resources/image/mmatch/detail_class.png" alt="">
-											<h4 class="mb-30 element_inline">수업소개</h4>
+											<h4 class="mb-30 element_inline">요청 수업조건</h4>
 											<a class="card-link element_inline" data-toggle="collapse" href="#collapseOne">
 										  		<img class="icon_img element_inline" src="${pageContext.request.contextPath}/resources/image/mmatch/arrow_down.png" alt="">  
 								      		</a>
@@ -479,8 +465,8 @@
 								 <div id="collapseOne" class="collapse" data-parent="#accordion">
 								      <div class="card-body" style="padding-top: 0px;">
 								      	<ul style="font-size:20px;padding-left: 20px">
-								      		<li>수업 과목 : <div id="detail_subject" class="element_inline">러닝</div></li>
-								      		<li>수업 시간 :
+								      		<li>요청 과목 : <div id="detail_subject" class="element_inline">러닝</div></li>
+								      		<li>요청 시간 :
 								      			<div id="detail_time">
 									      		    <div> - 월요일 10:30 ~ 12:30</div>
 									      			<div> - 월요일 10:30 ~ 12:30</div>
@@ -490,31 +476,9 @@
 									      			<div> - 금요일 10:30 ~ 12:30</div>
 								      			</div>
 								      		</li>
-								      		<li>수업 장소 : <div id="detail_loc" class="element_inline">올림픽 공원</div></li>
-								      		<li>수업 가격 : <div id="detila_amount" class="element_inline">10</div>원</li>
-								      	</ul>
-								      </div>
-							      </div>
-						    </div>
-						    <div class="card" style="border-bottom:none;">
-							      <div class="card-header" style="background-color:white;border-bottom:none;">
-							      	  <div>
-											<img class="icon_img element_inline" src="${pageContext.request.contextPath}/resources/image/mmatch/detail_person.png" alt="">
-											<h4 class="mb-30 element_inline">멘토소개</h4>
-											<a class="card-link element_inline" data-toggle="collapse" href="#collapseTwo">
-										  		<img class="icon_img element_inline" src="${pageContext.request.contextPath}/resources/image/mmatch/arrow_down.png" alt="">  
-								      		</a>
-									  </div>   
-								  </div>
-								 <div id="collapseTwo" class="collapse" data-parent="#accordion">
-								      <div class="card-body" style="padding-top: 0px;">
-								      	<ul style="font-size:20px;padding-left: 20px">
-								      		<li>멘토 이름 : <div id="deatil_name" class="element_inline">홍길동</div></li>
-								      		<li>멘토 경력 :
-								      			<div id="detail_career">
-								      				테스트1234
-								      			</div>
-								      		</li>
+								      		<li>요청 장소 : <div id="detail_loc" class="element_inline">올림픽 공원</div></li>
+								      		<li>요청 가격 : <div id="detila_amount" class="element_inline">10</div>원</li>
+								      		<li>요청 성별 : <div id="detila_gender" class="element_inline">남</div></li>
 								      	</ul>
 								      </div>
 							      </div>
@@ -523,7 +487,7 @@
 							      <div class="card-header" style="background-color:white;border-bottom:none;">
 							      	  <div>
 											<img class="icon_img element_inline" src="${pageContext.request.contextPath}/resources/image/mmatch/detail_caution.png" alt="">
-											<h4 class="mb-30 element_inline">주의사항</h4>
+											<h4 class="mb-30 element_inline">기타 요구사항</h4>
 											<a class="card-link element_inline" data-toggle="collapse" href="#collapseThree">
 										  		<img class="icon_img element_inline" src="${pageContext.request.contextPath}/resources/image/mmatch/arrow_down.png" alt="">  
 								      		</a>
@@ -532,7 +496,7 @@
 								 <div id="collapseThree" class="collapse" data-parent="#accordion">
 								      <div class="card-body" style="padding-top: 0px;">
 								      	<ul style="font-size:20px;padding-left: 20px">
-								      		<li id="detail_caution">저희 수업은 고강도 체력 훈련자를 위한 수업이므로 기초 체력이 안되신 힘들 수 있으니 신청에 주의하세요</li>
+								      		<li id="detail_req">부분 조건만 맞아도 가능합니다. 많이 신청 주세요~</li>
 								      	</ul>
 								      </div>
 							      </div>
@@ -553,7 +517,7 @@
 	</main>
 	<!-- Footer 영역  -->
 	<jsp:include page="/WEB-INF/views/sport_comm/footer.jsp"/>
-	<script src="${pageContext.request.contextPath}/resources/js/mmatch/mentor_main.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/js/mmatch/mentee_main.js"></script>
 	<script>
 		//글 작성 ,글 수정 이벤트 결과를 alert으로 출력 
 		var result="${result}";
@@ -567,7 +531,7 @@
 			console.log(sdata);
 			output = "";
 			$.ajax({
-				url : "mentorPage_ajax",
+				url : "menteePage_ajax",
 				type : "get", 
 				data : sdata,
 				dataType : "json",
@@ -591,25 +555,25 @@
 					if(data.listcount > 0 ){
 						var output='';
 						//ajax로 가져온 list로 col 구성 
-						$(data.mentorlist).each(function(index,item){
+						$(data.menteelist).each(function(index,item){
 						  output+='<div class="col-xl-4 col-lg-4 col-md-6">'
 							     +  '<div class="single-product mb-60" style="border: 2px solid black;">'
 								 +    '<div class="product-img">'
-								 +      '<a href="javascript:detail('+"'"+ item.mentor_code+"'" +');">';
-						  if(item.mentor_pic1 == null){ //사진이없으면 default 사진을 출력
+								 +      '<a href="javascript:detail('+"'"+ item.mentee_code+"'" +');">';
+						  if(item.mentee_pic1 == null){ //사진이없으면 default 사진을 출력
 						    output+=       '<img data-toggle="modal" data-target="#detailModal" style="height:250px" src="/sports/resources/image/mmatch/default.jpg" alt="">';
 						  }else{  //사진이 있으면 해당 사진으로 출력
-						    output+=       '<img data-toggle="modal" data-target="#detailModal" style="height:250px" src="<spring:url value="/matchupload'+item.mentor_pic1+'"/>" alt=""/>'; 
+						    output+=       '<img data-toggle="modal" data-target="#detailModal" style="height:250px" src="<spring:url value="/matchupload'+item.mentee_pic1+'"/>" alt=""/>'; 
 						  }
 						 output+='       </a>'
 								 +    '</div>'
 								 +    '<div class="product-caption">'
-								 +	    '<h4><b>'+item.mentor_title+'</b></h4>'
+								 +	    '<h4><b>'+item.mentee_title+'</b></h4>'
 								 +	    '<div class="price">'
 								 +		   '<table class="table">'
 								 +			  '<tr><th>종목</th><td>'+item.sports_name+'</td></tr>'
 								 +			  '<tr><th>장소</th><td>'+item.city+'&nbsp;'+item.sigungu+'</td></tr>'
-								 +			  '<tr><th>인원</th><td>'+item.mentor_number+'명</td></tr>'
+								 +			  '<tr><th>금액</th><td>'+item.mentee_amount+'원</td></tr>'
 								 +		   '</table>'
 								 +	    '</div>'
 								 +    '</div>'
@@ -666,7 +630,7 @@
 		function detail(code){
 			console.log("code : "+ code);
 			$.ajax({
-				url : "sportDetail",
+				url : "menteeDetail",
 				type : "get", 
 				data : {"code":code},
 				dataType : "json",
@@ -675,15 +639,16 @@
 					var output='';
 					console.log("성공");
 					
-					$('#detail_title').text(data.mentor_title);  //수업 타이틀 
-					$('#detail_subject').text(data.sports_name); //수업 종목 
-					$('#detail_loc').text(data.city+" "+data.sigungu+" "+data.mentor_loc_detail); //수업 장소
-					$('#detila_amount').text(data.mentor_amount); //수업 금액
-					$('#deatil_name').text(data.mentor_name);	  //멘토 이름
-					$('#detail_caution').text(data.mentor_caution); //수업 주의사항
+					$('#detail_title').text(data.mentee_title);  //수업 타이틀 
+					$('#detail_subject').text(data.sports_name); //요청 종목 
+					$('#detail_loc').text(data.city+" "+data.sigungu+" "+data.mentee_loc_detail); //요청 장소
+					$('#detila_amount').text(data.mentee_amount); //요청 금액
+					$('#detail_req').text(data.mentee_req); 	//요청 요구사항
+					$('#detila_gender').text(data.mentee_gender); //요청 성별
 					
-					//수업 시간 
-					var times=data.mentor_date.split(",");
+					
+					//요청 수업 시간 
+					var times=data.mentee_date.split(",");
 					$('#detail_time').empty();
 					for(var i=0;i<times.length;i++){
 						var detailTimes=times[i].split("/");
@@ -695,39 +660,13 @@
 					//업로드 사진 슬라이드 출력
 					output='';
 					$('#slidePic').empty();
-					if(data.mentor_pic1 == null){
+					if(data.mentee_pic1 == null){
 						output+='<div class="carousel-item active">';
 						output+='<img src="/sports/resources/image/mmatch/default.jpg" alt="no img" width="800px" height="350px">';
 						output+='</div>';
 					}else{
-						var spingurl = "<spring:url value='/matchupload"+data.mentor_pic1+"'/>"; 	
+						var spingurl = "<spring:url value='/matchupload"+data.mentee_pic1+"'/>"; 	
 						output+='<div class="carousel-item active">';
-						output+='<img src="';
-						output+=spingurl;
-						output+='" alt="no img" width="800px" height="350px"/>';
-						output+='</div>';
-					}
-					
-					if(data.mentor_pic2 == null){
-						output+='<div class="carousel-item">';
-						output+='<img src="/sports/resources/image/mmatch/default.jpg" alt="no img" width="800px" height="350px">';
-						output+='</div>';
-					}else{
-						var spingurl = "<spring:url value='/matchupload"+data.mentor_pic2+"'/>"; 	
-						output+='<div class="carousel-item">';
-						output+='<img src="';
-						output+=spingurl;
-						output+='" alt="no img" width="800px" height="350px"/>';
-						output+='</div>';
-					}
-					
-					if(data.mentor_pic3 == null){
-						output+='<div class="carousel-item">';
-						output+='<img src="/sports/resources/image/mmatch/default.jpg" alt="no img" width="800px" height="350px">';
-						output+='</div>';
-					}else{
-						var spingurl = "<spring:url value='/matchupload"+data.mentor_pic3+"'/>"; 	
-						output+='<div class="carousel-item">';
 						output+='<img src="';
 						output+=spingurl;
 						output+='" alt="no img" width="800px" height="350px"/>';
@@ -735,26 +674,15 @@
 					}
 					$('#slidePic').append(output);  
 					
-					
-					//멘토 경력 (append 대신 text 사용(context에 태그시 이슈)
-					output="<div></div>";
-					$('#detail_career').empty();
-					var content = data.mentor_career.split(/\n|\r/);
-					for(var i=0; i<content.length; i++){
-						$('#detail_career').append(output);
-						$("#detail_career>div").eq(i).text(content[i]);
-						console.log(content[i]);
-					} 
-					
 					//버튼 표시
 					if($('#user_id').val() != data.user_id){ //작성자가 아니면
 						$('#detail_btn').empty();
-						output='<button style="width:48%" type="button" class="genric-btn info circle" data-dismiss="modal" onclick="javascript:apply('+"'"+data.mentor_code+"'"+');">신청하기</button>';
+						output='<button style="width:48%" type="button" class="genric-btn info circle" data-dismiss="modal" onclick="javascript:apply('+"'"+data.mentee_code+"'"+');">신청하기</button>';
 						$('#detail_btn').append(output);                                                                    
 					}else{ //해당 글의  작성자면
 						$('#detail_btn').empty();
-						output='<button style="width:48%" type="button" class="genric-btn info circle" data-dismiss="modal" onclick="javascript:modify('+"'"+data.mentor_code+"'"+');">수정하기</button>'
-						      +'<button style="width:48%" type="button" class="genric-btn danger  circle" data-dismiss="modal" onclick="javascript:del('+"'"+data.mentor_code+"'"+');">삭제하기</button> ';
+						output='<button style="width:48%" type="button" class="genric-btn info circle" data-dismiss="modal" onclick="javascript:modify('+"'"+data.mentee_code+"'"+');">수정하기</button>'
+						      +'<button style="width:48%" type="button" class="genric-btn danger  circle" data-dismiss="modal" onclick="javascript:del('+"'"+data.mentee_code+"'"+');">삭제하기</button> ';
 						$('#detail_btn').append(output);						
 					}
 					
