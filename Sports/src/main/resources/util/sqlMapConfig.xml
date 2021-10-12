@@ -14,6 +14,7 @@
 		<typeAlias alias="sports"	type="com.project.sports.domain.Sports"/>
 		<typeAlias alias="mentor"	type="com.project.sports.domain.Mentor"/>
 		<typeAlias alias="pm"		type="com.project.sports.domain.PersonalManagement"/>
+  		<typeAlias alias="mydeal"	type="com.project.sports.domain.MyDeal"/>
   </typeAliases>
   
   <mappers>
@@ -26,5 +27,6 @@
  	<mapper resource="sql/Sport_match.xml"/>
  	<mapper resource="sql/mmatch.xml"/>
  	<mapper resource="sql/Personal_Management.xml"/>	
+ 	<mapper resource="sql/MyDeal.xml"/>
   </mappers>
 </configuration>
