@@ -237,9 +237,11 @@
 				</div>
 			</c:if>
 			<%-- 게시글이 없는 경우--%>
+		<div style="text-align:center">
 			<c:if test="${listcount == 0 }">
-				<font size=5 style="text-align:center">등록된 글이 없습니다.</font>
+				<font size=5>등록된 글이 없습니다.</font>
 			</c:if>
+		</div>
 	</div>
 	
 	<!--  등록모달 영역 -->
