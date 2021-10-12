@@ -33,4 +33,18 @@ public interface MyDealService {
 
 	List<DealAuction> MybuyList(int view, int page, int limit ,String sessionid);
 
+	int getListCount2(int view, String sessionid);
+
+	List<DealAuction> MysellList(int view, int page, int limit, String sessionid);
+
+	void postinput1(int num, String sel, String post1);
+
+	void postinput2(int num);
+
+	void postinput3(int num);
+
+	void receipt1(int num);
+
+	void receipt2(int num);
+
 }

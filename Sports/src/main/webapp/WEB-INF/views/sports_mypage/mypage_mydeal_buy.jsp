@@ -100,6 +100,11 @@ background-color
 	text-align: center;
 	margin-top: 0
 }
+#th2{
+	background-color:#9dc15b;
+	color:white
+}
+
 </style>
 <body>
 
@@ -118,7 +123,7 @@ background-color
 				<div class="row">
 					<div class="col-xl-12">
 						<div class="hero-cap text-center">
-							<h2>내 거래 내역 (구매현황)</h2>
+							<h2>내 거래 내역</h2>
 						</div>
 					</div>
 				</div>
@@ -136,7 +141,7 @@ background-color
 			<div class="col-lg-1"></div>
 			<div class="col-lg-6">
 				<form action="list">
-
+				<h2 style = "font-family :'나눔고딕'"><b>구매현황</b></h2>
 					<div class="header-bottom ">
 						<ul
 							class="header-right f-right d-none d-lg-block d-flex justify-content-between">
@@ -182,18 +187,33 @@ background-color
 						<tr>
 							<th colspan="6"><font size=3>글 개수 : ${listcount}</font></th>
 						</tr>
+						<c:if test="${view2 != '4' }">
 						<tr>
-							<th><div>글번호</div></th>
-							<th><div>아이디</div></th>
-							<th><div>제목</div></th>
-							<th><div>시작금액</div></th>
-							<th><div>현재금액</div></th>
-							<th><div>즉시구매가</div></th>
-							<th><div>경매기간</div></th>
+							<th id= "th2"><div>글번호</div></th>
+							<th id= "th2"><div>아이디</div></th>
+							<th id= "th2"><div>제목</div></th>
+							<th id= "th2"><div>시작금액</div></th>
+							<th id= "th2"><div>현재금액</div></th>
+							<th id= "th2"><div>즉시구매가</div></th>
+							<th id= "th2"><div>경매기간</div></th>
 						</tr>
+						</c:if>
+						<c:if test="${view2 == '4' }">
+						<tr>
+							<th id= "th2"><div>글번호</div></th>
+							<th id= "th2"><div>아이디</div></th>
+							<th id= "th2"><div>제목</div></th>
+							<th id= "th2"><div>최종금액</div></th>
+							<th id= "th2"><div>택배사</div></th>
+							<th id= "th2"><div>송장번호</div></th>
+							<th id= "th2"><div>수령확인</div></th>
+							
+						</tr>
+						</c:if>
 					</thead>
 					<tbody>
 					<c:forEach var="b" items="${Auction}">
+						<c:if test="${view2 != '4' }">
 						<tr>
 							<td>${b.AUC_NUMBER}</td>
 							<td>${b.USER_ID}</td>
@@ -206,8 +226,26 @@ background-color
 							<td><div>${b.AUC_LPRICE}원</div></td>
 							<td><div>${b.AUC_DATE}</div></td>
 						</tr>
+						</c:if>
+						<c:if test="${view2 == '4' }">
+						<tr>
+							<td>${b.AUC_NUMBER}</td>
+							<td>${b.USER_ID}</td>
+							<td><div>${b.AUC_SUBJECT}</div></td>
+							
+							<td><div>${b.AUC_PRICE}원</div></td>
+							<td><div>${b.AUC_DELIVERYCOM}원</div></td>
+							<td><div>${b.AUC_DELIVERYNUM}</div></td>
+							<td><button  class="btn btn-success" id="receipt"
+											style="background-color: green;"
+											 onclick="location.href='receipt?num=${b.AUC_NUMBER}'" >수령확인</button></td>
+						</tr>
+						
+						</c:if>
 					</c:forEach>
-
+					
+					
+					
 					</tbody>
 				</table>
 				<div class="pagination">
@@ -249,7 +287,10 @@ background-color
 			
 		})
 		
+	
 	})
+	
+	
 	
 	
 	</script>

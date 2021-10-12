@@ -68,4 +68,34 @@ public class MyDealDAO {
 		return sqlSession.selectList("MyDeal.buylist", map);
 	}
 
+	public int getListCount2(HashMap<String, Object> map) {
+		return sqlSession.selectOne("MyDeal.count2", map);
+	}
+
+	public List<DealAuction> MysellList(HashMap<String, Object> map) {
+		return sqlSession.selectList("MyDeal.selllist", map);
+	}
+
+	public void postinput1(HashMap<String, Object> map) {
+		sqlSession.update("MyDeal.postinput1", map);
+	}
+
+	public void postinput2(int num) {
+		sqlSession.update("MyDeal.postinput2", num);
+		
+	}
+	public void postinput3(int num) {
+		sqlSession.update("MyDeal.postinput3", num);
+		 
+	}
+
+	public void receipt1(int num) {
+		sqlSession.delete("MyDeal.receipt1", num);
+		
+	}
+	public void receipt2(int num) {
+		sqlSession.delete("MyDeal.receipt2", num);
+		
+	}
+
 }

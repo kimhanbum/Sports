@@ -14,7 +14,7 @@ public class DealAuction {
 	private int		AUC_COUNT;			//입찰수
 	private String	AUC_DELIVERY;		//배송방법
 	private String	AUC_DELIVERYCOM;	//택배사
-	private int		AUC_DELIVERYNUM;	//송장번호
+	private String	AUC_DELIVERYNUM;	//송장번호
 	private String	ORI_AUC_MAINFILE;	//메인사진
 	private String	SAVE_AUC_MAINFILE;	//저장용 메인사진
 	private String	ORI_AUC_FILE2;		//사진2
@@ -99,10 +99,10 @@ public class DealAuction {
 	public void setAUC_DELIVERYCOM(String aUC_DELIVERYCOM) {
 		AUC_DELIVERYCOM = aUC_DELIVERYCOM;
 	}
-	public int getAUC_DELIVERYNUM() {
+	public String getAUC_DELIVERYNUM() {
 		return AUC_DELIVERYNUM;
 	}
-	public void setAUC_DELIVERYNUM(int aUC_DELIVERYNUM) {
+	public void setAUC_DELIVERYNUM(String aUC_DELIVERYNUM) {
 		AUC_DELIVERYNUM = aUC_DELIVERYNUM;
 	}
 	public String getORI_AUC_MAINFILE() {

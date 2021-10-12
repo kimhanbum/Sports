@@ -430,7 +430,7 @@ background-color
 								setTimeout(setClock, 1000);
 								
 								//if(eval("count" + number) == "14 시 0 분 9 초"){	
-								if(hr <=0 && min <=0 && sec <= 0){
+								if(hr <=503 && min >=0 && sec >= 0){
 									
 									clearTimeout(setClock);
 // 									document.getElementById(timeid).innerHTML = 
@@ -439,13 +439,19 @@ background-color
 									$(eval("'#timeback" +number + "'")).remove();
 									
 									$(eval("'#imgimg" +number + "'")).attr("src",imgurl );
+									
 
 									//location.href="write"
 									
 									
 								}
-								if(hr == 214 && min ==21 && sec ==40){
+								if(hr == 503 && min ==0 && sec ==20){
 									location.href="timeout?num=" + number	
+								}
+								
+								var imgfile = "${b.SAVE_AUC_MAINFILE}"
+								if(imgfile == 'buynow.jpg'){
+									$(eval("'#timeback" +number + "'")).remove();
 								}
 								
 							}
