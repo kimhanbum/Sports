@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.project.sports.dao.MmatchDAO;
+import com.project.sports.domain.MatchAppReq;
 import com.project.sports.domain.MatchInfo;
 import com.project.sports.domain.Mentee;
 import com.project.sports.domain.Mentor;
@@ -272,4 +273,79 @@ public class MmatchServiceImpl implements MmatchService {
 	public int modifyMenteeWriting(Mentee mentee) {
 		return dao.modifyMenteeWriting(mentee);
 	}
+
+	
+	@Override
+	public int getMyMentorListCount(String id) {
+		return dao.getMyMentorListCount(id);
+	}
+	
+	@Override
+	public int getMyMenteeListCount(String id) {
+		return dao.getMyMenteeListCount(id);
+	}
+	
+	@Override
+	public List<Mentor> getMyMentorList(int page, int limit,String id) {
+		HashMap <String,Object> map = new HashMap <String,Object>();
+		int startrow =(page-1)*limit +1;
+		int endrow=startrow+limit-1;
+		map.put("start",startrow);
+		map.put("end",endrow);
+		map.put("id",id);
+		return dao.getMyMentorList(map);
+	}
+	@Override
+	public List<Mentee> getMyMenteeList(int page, int limit,String id) {
+		HashMap <String,Object> map = new HashMap <String,Object>();
+		int startrow =(page-1)*limit +1;
+		int endrow=startrow+limit-1;
+		map.put("start",startrow);
+		map.put("end",endrow);
+		map.put("id",id);
+		return dao.getMyMenteeList(map);
+	}
+
+	@Override
+	public int getMyMentorAppListCount(String id) {
+		// TODO Auto-generated method stub
+		return dao.getMyMentorAppListCount(id);
+	}
+
+	@Override
+	public int getMyMenteeAppListCount(String id) {
+		// TODO Auto-generated method stub
+		return dao.getMyMenteeAppListCount(id);
+	}
+	
+	@Override
+	public List<MatchAppReq> getMyMentorAppList(int page, int limit, String id) {
+		HashMap <String,Object> map = new HashMap <String,Object>();
+		int startrow =(page-1)*limit +1;
+		int endrow=startrow+limit-1;
+		map.put("start",startrow);
+		map.put("end",endrow);
+		map.put("id",id);
+		return dao.getMyMentorAppList(map);
+	}
+
+	@Override
+	public List<MatchAppReq> getMyMenteeAppList(int page, int limit, String id) {
+		HashMap <String,Object> map = new HashMap <String,Object>();
+		int startrow =(page-1)*limit +1;
+		int endrow=startrow+limit-1;
+		map.put("start",startrow);
+		map.put("end",endrow);
+		map.put("id",id);
+		return dao.getMyMenteeAppList(map);
+	}
+
+	@Override
+	public int cancelApply(String code,String id) {
+		HashMap <String,Object> map = new HashMap <String,Object>();
+		map.put("code",code);
+		map.put("id",id);
+		return dao.cancelApply(map);
+	}
+	
 }

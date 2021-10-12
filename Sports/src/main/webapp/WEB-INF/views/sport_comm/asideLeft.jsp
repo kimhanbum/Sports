@@ -41,13 +41,17 @@
                   </a>
               </li>
               <li>
-                  <a href="${pageContext.request.contextPath}/mypage/mmwriteList" class="d-flex">
-                      <p>내 작성 멘티/멘토</p>
+                  <a href="${pageContext.request.contextPath}/mypage/mentorwriteList" class="d-flex">
+                      <p>내 작성 멘토/멘티</p>
                   </a>
               </li>
               <li>
-                  <a href="#" class="d-flex">
-                      <p>내 신청 멘티/멘토</p>
+                  <p>멘토/멘티 매칭 </p>
+                  <a href="${pageContext.request.contextPath}/mypage/mentorApplyList" class="d-flex">
+                      <p> - 나의 신청 확인</p>
+                  </a>
+                  <a href="${pageContext.request.contextPath}/mypage/requestedList" class="d-flex">
+                      <p> - 수락 요청 확인</p>
                   </a>
               </li>
           </ul>
