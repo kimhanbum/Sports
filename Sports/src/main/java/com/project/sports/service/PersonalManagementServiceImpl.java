@@ -1,5 +1,6 @@
 package com.project.sports.service;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -27,8 +28,19 @@ public class PersonalManagementServiceImpl implements PersonalManagementService{
 	}
 
 	@Override
-	public List<Map<String, Object>> getList(PersonalManagement pm) {
-		return dao.getList(pm);
+	public List<PersonalManagement> getList(String id,int page, int limit) {
+		HashMap<String,Object>map = new HashMap<String, Object>();
+		int startrow=(page-1) * limit + 1;
+		int endrow = startrow + limit -1;
+		map.put("start", startrow);
+		map.put("end", endrow);
+		map.put("id", id);
+		return dao.getList(map);
+	}
+	
+	@Override
+	public int getListCount(String id) {
+		return dao.getListCount(id);
 	}
 
 	@Override
