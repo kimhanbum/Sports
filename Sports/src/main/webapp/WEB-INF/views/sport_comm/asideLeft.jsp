@@ -21,7 +21,7 @@
                   </a>
               </li>
               <li>
-                  <a href="${pageContext.request.contextPath}/member/update" class="d-flex">
+                  <a href="${pageContext.request.contextPath}/member/info" class="d-flex">
                       <p>내 정보</p>
                   </a>
               </li>
