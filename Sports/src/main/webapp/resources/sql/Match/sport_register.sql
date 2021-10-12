@@ -15,14 +15,21 @@ create table SPORT_REGISTER(
 );
 
 delete SPORT_REGISTER where REGISTER_NUM =25;
-select * from SPORT_REGISTER 
 
+select * from SPORT_REGISTER where REGISTER_STUS = 1;
+
+update Sport_register
+		set REGISTER_STUS =1
+		where REGISTER_NUM = 20;
 
 select * from SPORT_REGISTER;
 drop sequence reg_seq;
 drop sequence aply_seq; 
 drop sequence dead_seq;
 create sequence reg_seq;
+
+
+select * from SPORT_REGISTER where REGISTER_NUM=3;
  
 insert into SPORT_REGISTER(REGISTER_ID,REGISTER_NUM,SPORT_NUM,MATCH_PRS,MATCH_ADR,MATCH_DTL_ADR,MATCH_TIME,MATCH_SKL)
 values('admin01',reg_seq.nextval,1,9,'인천광역시','연수구','2021-10-31','상');

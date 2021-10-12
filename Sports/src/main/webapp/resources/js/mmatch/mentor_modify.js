@@ -1,4 +1,5 @@
 var yoil_json;
+var filecheck=[0,0,0]; //파일 변경여부를 체크하는 변수
 $(function(){
 	//select option 정보를 json 파일에서 불러와서 세팅
 	initJson();
@@ -7,6 +8,12 @@ $(function(){
 	
 	//select option 정보를 DB 파일에서 불러와서 세팅
 	initCityList();
+	
+	//modify할 값들을 화면에 표시해준다.
+	setSubject(); 
+	setTime();
+	setLoc();
+	
 	
 	//수업 종목(대항목) 선택시 카테고리(소항목)의 option 정보를 갱신
 	$('#metor_sports_category1').change(function(){
@@ -178,7 +185,72 @@ $(function(){
 			return false;
 		}
 		
+		//파일 체크
+		$(".remove+div > label").each(function(index,item){
+			console.log("filecheck "+ index + ": " + filecheck[index]);
+			if(filecheck[index] == 0 ){
+				/*
+			 	1.파일 첨부를 변경하지 않은 경우
+			 	  파일 첨부를 변경하지 않으면  $('#filevalue').text()의 파일명을
+			 	 check 파라미터에 담아 form에 추가하여 전송
+			 	2.파일 첨부의 remove 이미지를 클릭한 경우
+			 	  파일 첨부의 remove 이미지 클릭하여 파일을 제거하면  
+			 	 check 파라미터에 value 값 '' 을 담아 form에 추가하여 전송
+				 */  
+				value = $(this).text();
+				html = "<input type='hidden' value='"+value+"' name='check'>";
+			}
+			else{
+				html = "<input type='hidden' value='"+'no'+"' name='check'>";
+			}
+			$(this).append(html);
+		});
 	});
+	
+	
+	//파일 유무에 따른 remove 버튼 표시 
+	function show(){
+		//파일 이름이 있는 경우 remove 이미지 표시 
+		//파일 이름이 없는 경우 remove 이미지 미표시
+		$(".remove").next().children('label').each(function(index,item){
+			if($(item).text() == ''){
+				$(this).parent().prev().css('display','none');
+				console.log("none");
+			}
+			else{
+				$(this).parent().prev().css('display','inline');
+				console.log("inline");
+			}
+		});
+	}
+	
+	//파일을 변경한 경우 
+	$("input[type=file]").change(function(){
+		var id = $(this).attr('id');
+		switch(id){
+			case 'customFile1':
+				filecheck[0]+=1;
+				console.log("file 1 change");
+				break;
+			case 'customFile2':
+				filecheck[1]+=1;
+				console.log("file 2 change");
+				break;
+			case 'customFile3':
+				filecheck[2]+=1;
+				console.log("file 3 change");
+				break;
+		}
+		show();
+	});
+	
+	//파일 삭제 이미지 버튼 클릭 이벤트
+	$(".remove").click(function(){
+		$(this).next().children('label').text('');
+		show();
+	});
+	
+	show();
 });
 
 

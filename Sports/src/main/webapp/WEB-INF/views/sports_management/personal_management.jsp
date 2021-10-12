@@ -20,6 +20,33 @@
 #sports_img {
 	border-radius: 70%;
 }
+.add{
+	text-transform: capitalize;
+	background-color: rgb(10 23 92);
+    cursor: pointer;
+    display: inline-block;
+    font-size: 18px;
+    font-weight: 400;
+    letter-spacing: 1px;
+    line-height: 0;
+    margin-bottom: 0;
+    padding: 22px 20px 19px 18px;
+    border-radius: 25px;
+    margin-left: 10px;
+    cursor: pointer;
+    transition: color 0.4s linear;
+    position: relative;
+    z-index: 1;
+    border: 0;
+    overflow: hidden;
+    margin: 0;
+}
+#sports_name{
+background-color: #fbfcfd
+}
+#time{
+background-color: #fbfcfd
+}
 </style>
 </head>
 
@@ -45,12 +72,12 @@
     <!-- slider Area Start-->
     <div class="slider-area ">
         <!-- Mobile Menu -->
-        <div class="single-slider slider-height2 d-flex align-items-center" data-background="${pageContext.request.contextPath}/resources/image/personalmanagement/board_headline.jpg">
+        <div class="single-slider slider-height2 d-flex align-items-center" data-background="${pageContext.request.contextPath}/resources/image/personalmanagement/sports.jpg">
             <div class="container">
                 <div class="row">
                     <div class="col-xl-12">
                         <div class="hero-cap text-center">
-                            <h2>운동 칼로리 계산 및 물 섭취량</h2>
+                            <h2></h2>
                         </div>
                     </div>
                 </div>
@@ -61,6 +88,13 @@
 
 <section class="blog_area section-padding">
 	<div class="row">
+		<div class="col-md-2">
+		</div>
+		<div class="col-md-10 offset-md-1 col-lg-8 offset-lg-0">
+			<div id="daten"> Date</div>
+		</div>
+	</div>
+	<div class="row">
      <div class="col-md-2">
         <!-- 마이 페이지 좌측 asideLeft 메뉴들 -->
 		<jsp:include page="/WEB-INF/views/sport_comm/asideLeft.jsp"/>
@@ -68,13 +102,16 @@
 <!-- 당일 운동 -->
 	<div class="col-md-10 offset-md-1 col-lg-8 offset-lg-0">
 	<div class="container">
-	 <div id="daten"> Date</div>
                   <div class="add-items d-flex col-md-6">
-                   <select class="form-control sports_name" id="sports_name" name="sports_name">
-                    <option selected value="">-- 선택 --</option>
-                   </select>
+                   <div class="select">
+                    <select class="form-control sports_name" id="sports_name" name="sports_name">
+                     <option selected value="">-- 선택 --</option>
+                    </select>
+                   </div>
+                   <div class="input">
 		           <input type="text" id="time" name="SPORTS_TIME" class="form-control SPORTS_TIME" placeholder="운동시간 ">
-                   <button class="add btn btn-primary font-weight-bold add-btn">Add</button> 	
+                   </div>
+                   <button class="add" id="add">Add</button> 	
                  </div> 
 				<!-- Recently Favorited -->
 				<div style="width:50%" class="widget dashboard-container my-adslist" id="kcal_list">
@@ -82,18 +119,59 @@
 					<table class="table table-responsive product-dashboard-table table-striped">
 						<thead>
 							<tr>
-								<th>운동종목</th>
+								<th width="20%">운동종목</th>
 								<th></th>
-								<th colspan="1"></th>
-								<th class="text-center">칼로리</th>
-								<th class="text-center" >삭제</th>
+								<th width="30%"  colspan="1"></th>
+								<th width="25%" class="text-center">칼로리</th>
+								<th width="25%" class="text-center" >삭제</th>
 							</tr>
 						</thead>
 						<tbody>
 							
 						</tbody>
 					</table>
-						<div id="message"></div>
+					
+				<div class="center-block">
+		  <ul class="pagination justify-content-center">		
+			 <c:if test="${page <= 1 }">
+				<li class="page-item">
+				  <a class="page-link gray">이전&nbsp;</a>
+				</li>
+			 </c:if>
+			 <c:if test="${page > 1 }">			
+				<li class="page-item">
+				   <a href="list?page=${page-1}" 
+				      class="page-link">이전&nbsp;</a>
+				</li> 
+			 </c:if>
+					
+			<c:forEach var="a" begin="${startpage}" end="${endpage}">
+				<c:if test="${a == page }">
+					<li class="page-item " >
+					   <a class="page-link gray">${a}</a>
+					</li>
+				</c:if>
+				<c:if test="${a != page }">
+				    <li class="page-item">
+					   <a href="list?page=${a}" 
+					      class="page-link">${a}</a>
+				    </li>	
+				</c:if>
+			</c:forEach>
+			
+			<c:if test="${page >= maxpage }">
+				<li class="page-item">
+				   <a class="page-link gray">&nbsp;다음</a> 
+				</li>
+			</c:if>
+			<c:if test="${page < maxpage }">
+			  <li class="page-item">
+				<a href="list?page=${page+1}" 
+				   class="page-link">&nbsp;다음</a>
+			  </li>	
+			</c:if>
+		 </ul>
+		</div>
 				</div>
 			</div>
 		</div>
@@ -101,35 +179,6 @@
 <!-- Row End -->
 <!-- Container End -->
 </section>
-<%-- <div>
- 	  <ul class="pagination justify-content-center">
- 	  	<c:if test="${page <= 1 }">
-				<a href="#" id="paging">&laquo;</a>
- 	  	</c:if>
- 	  	<c:if test="${page > 1 }">
-			 <a href="list?page=${page-1}"
-	  			id="paging">&laquo;</a>	
-		</c:if>
-		
-		<c:forEach var="a" begin="${startpage}" end="${endpage}">
-			<c:if test ="${a == page }">
-						 <a href="#" id="paging">${a}</a>	
-			</c:if>
-		<c:if test="${a != page }">
-			 <a href="list?page=${a}"
-				id="paging">${a}</a>	
-		</c:if>
-		</c:forEach>
-		
-		<c:if test="${page >= maxpage}">
-			<a href="#" id="paging">&raquo;</a>
-		</c:if>
-		<c:if test="${page < maxpage }">
-			<a href="list?page=${page+1}"
-			   id="paging">&raquo;</a>
-		</c:if>
- 	  </ul>
- </div> --%>
 </body>
 
 	<!-- Footer 영역  -->

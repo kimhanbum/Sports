@@ -7,6 +7,8 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.project.sports.domain.MatchInfo;
+import com.project.sports.domain.Mentee;
 import com.project.sports.domain.Mentor;
 import com.project.sports.domain.Sports;
 
@@ -48,6 +50,51 @@ public class MmatchDAO {
 	}
 	public Mentor getMentorDetail(String code) {
 		return sqlSession.selectOne("Mmatches.MentorDetail",code);
+	}
+	public int ApplyWMentor(HashMap<String,String> map) {
+		return sqlSession.insert("Mmatches.insertMentorApply",map);
+	}	
+	public int checkApply(HashMap<String,String> map) {
+		return sqlSession.selectOne("Mmatches.checkApply",map);
+	}	
+	public int deleteWMentor(String code) {
+		return sqlSession.delete("Mmatches.deleteWMetor",code);
+	}
+	public int getSport(String subject) {
+		return sqlSession.selectOne("Mmatches.getSports",subject);
+	}
+	public int modifyMentorWriting(Mentor mentor) {
+		return sqlSession.update("Mmatches.modifyWMentor",mentor);
+	}
+	public void changeApplyState(MatchInfo matchinfo) {
+		sqlSession.update("Mmatches.chgApplyState",matchinfo);
+	}
+	public int insertMenteeWriting(Mentee mentee) {
+		return sqlSession.insert("Mmatches.insertWMentee",mentee);
+	}
+	public int getMenteeListCount() {
+		return sqlSession.selectOne("Mmatches.MenteeCount");
+	}
+	public List<Mentee> getMenteeList(HashMap <String,Integer> map) {
+		return sqlSession.selectList("Mmatches.Menteelist",map);
+	}
+	public int getSearchMenteeListCount(HashMap <String,Object> map) {
+		return sqlSession.selectOne("Mmatches.MenteeCount",map);
+	}
+	public List<Mentee> getSearchMenteeList(HashMap <String,Object> map) {
+		return sqlSession.selectList("Mmatches.Menteelist",map);
+	}
+	public Mentee getMenteeDetail(String code) {
+		return sqlSession.selectOne("Mmatches.MenteeDetail",code);
+	}
+	public int ApplyWMentee(HashMap<String,String> map) {
+		return sqlSession.insert("Mmatches.insertMenteeApply",map);
+	}	
+	public int deleteWMentee(String code) {
+		return sqlSession.delete("Mmatches.deleteWMetee",code);
+	}
+	public int modifyMenteeWriting(Mentee mentee) {
+		return sqlSession.update("Mmatches.modifyWMentee",mentee);
 	}
 	
 }

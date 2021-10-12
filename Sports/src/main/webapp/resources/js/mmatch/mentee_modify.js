@@ -1,4 +1,5 @@
 var yoil_json;
+var filecheck; //파일 변경여부를 체크하는 변수
 $(function(){
 	//select option 정보를 json 파일에서 불러와서 세팅
 	initJson();
@@ -8,9 +9,15 @@ $(function(){
 	//select option 정보를 DB 파일에서 불러와서 세팅
 	initCityList();
 	
+	//modify할 값들을 화면에 표시해준다.
+	setSubject(); 
+	setTime();
+	setLoc();
+	
+	
 	//수업 종목(대항목) 선택시 카테고리(소항목)의 option 정보를 갱신
-	$('#metor_sports_category1').change(function(){
-		var selType= $("#metor_sports_category1").val();
+	$('#mentee_sports_category1').change(function(){
+		var selType= $("#mentee_sports_category1").val();
 		console.log("selectType : " + selType);
 		$.ajax({
 			url : "sportlist",
@@ -21,7 +28,7 @@ $(function(){
 			success : function(data){
 				if(data.length > 0){
 					//기존 select option을 전부 제거 
-					$('#metor_sports_category2 > option').remove();
+					$('#mentee_sports_category2 > option').remove();
 					output="<option selected>-- 선택 --</option>";
 					
 					//ajax로 가져온 list로 option 구성
@@ -30,7 +37,7 @@ $(function(){
 					})
 					
 					//구성한 option을 append
-					$('#metor_sports_category2').append(output)
+					$('#mentee_sports_category2').append(output)
 				}
 			},
 			error : function(){
@@ -40,8 +47,8 @@ $(function(){
     });
 	
 	//수업 장소(시) 선택시 카테고리(군구)의 option 정보를 갱신
-	$('#mentor_loc_category1').change(function(){
-		var selType= $("#mentor_loc_category1").val();
+	$('#mentee_loc_category1').change(function(){
+		var selType= $("#mentee_loc_category1").val();
 		console.log("selectType : " + selType);
 		$.ajax({
 			url : "dongList",
@@ -52,7 +59,7 @@ $(function(){
 			success : function(data){
 				if(data.length > 0){
 					//기존 select option을 전부 제거 
-					$('#mentor_loc_category2 > option').remove();
+					$('#mentee_loc_category2 > option').remove();
 					output="<option selected>-- 선택 --</option>";
 					
 					//ajax로 가져온 list로 option 구성
@@ -61,7 +68,7 @@ $(function(){
 					})
 					
 					//구성한 option을 append
-					$('#mentor_loc_category2').append(output)
+					$('#mentee_loc_category2').append(output)
 				}
 			},
 			error : function(){
@@ -72,24 +79,24 @@ $(function(){
 	
 	$("#addTime img").click(function(){ //추가 수업날짜 정보 div추가
 		 var output='<div> 요일&nbsp;'
-			  +'  <select name="mentor_yoil">'
+			  +'  <select name="mentee_yoil">'
 			  +'    <option selected>-- 선택 --</option>'
 			  +'  </select> &nbsp;&nbsp;&nbsp;시작시간 &nbsp;'
-		      +'  <input name="mentor_startTime" class="element_inline" style="width:140px;" type="time" class="form-control"/>'
+		      +'  <input name="mentee_startTime" class="element_inline" style="width:140px;" type="time" class="form-control"/>'
 		      +'  &nbsp;&nbsp;&nbsp;종료시간 &nbsp;'
-		      +'  <input name="mentor_endTime" class="element_inline" style="width:140px;" type="time" class="form-control"/>'
+		      +'  <input name="mentee_endTime" class="element_inline" style="width:140px;" type="time" class="form-control"/>'
 		      +'  <div class="element_inline" id="deleteTime">'
 			  +'     <img src="/sports/resources/image/mmatch/minus_icon.png" alt="">'							
 		      +'  </div>'
 		      +'</div>';
-		$('#mentor_time_list').append(output);
+		$('#mentee_time_list').append(output);
 		addYoilList();
 	});
 	
 	//취소 버튼 클릭시 이전 페이지로 이동
 	$("input[type=button]").click(function(){
 		if(confirm("작성을 취소하시겠습니까?")){
-			location.href="mentorPage";
+			location.href="menteePage";
 		}
 	});
 	
@@ -97,26 +104,26 @@ $(function(){
 	$("input[type=submit]").click(function(){
 		
 		console.log("user_id : " + $("#user_id").val()); 
-		//수업 제목 체크
-		if($.trim($("#mentor_title").val()) ==""){
+		//제목 체크
+		if($.trim($("#mentee_title").val()) ==""){
 			alert("수업제목을 입력해주세요.");
-			$("#mentor_title").focus();
+			$("#mentee_title").focus();
 			return false;
 		}
 		
-		//수업 종목 체크
-		if($("#metor_sports_category1").val() =="-- 선택 --"){
+		//종목 체크
+		if($("#mentee_sports_category1").val() =="-- 선택 --"){
 			alert("수업 종목(대항목)을 선택해주세요.");
 			return false;
 		}
-		if($("#metor_sports_category2").val() =="-- 선택 --"){
+		if($("#mentee_sports_category2").val() =="-- 선택 --"){
 			alert("수업 카테고리(소항목)를 선택해주세요.");
 			return false;
 		}
 		
-		//수업시간 체크
+		//시간 체크
 		var timeCheck=true;
-		$("#mentor_time_list>div").each(function(index,item){
+		$("#mentee_time_list>div").each(function(index,item){
 			if($(item).children().eq(0).val() =="-- 선택 --"){
 				timeCheck = false;
 			}
@@ -129,56 +136,80 @@ $(function(){
 			return false;
 		}
 		
-		//수업 장소 체크
-		if($("#mentor_loc_category1").val() =="-- 선택 --"){
+		//장소 체크
+		if($("#mentee_loc_category1").val() =="-- 선택 --"){
 			alert("수업 장소(대항목)을 선택해주세요.");
 			return false;
 		}
-		if($("#mentor_loc_category2").val() =="-- 선택 --"){
+		if($("#mentee_loc_category2").val() =="-- 선택 --"){
 			alert("수업 장소(소항목)을 선택해주세요.");
 			return false;
 		}
-		if($.trim($("#mentor_loc_detail").val()) ==""){
+		if($.trim($("#mentee_loc_detail").val()) ==""){
 			alert("수업 상세 장소를 입력하세요.");
-			$("#mentor_loc_detail").focus();
+			$("#mentee_loc_detail").focus();
 			return false;
 		}
 		
-		//수업가격/수업인원 체크
-		if($.trim($("#mentor_price").val()) ==""){
+		//가격 체크
+		if($.trim($("#mentee_price").val()) ==""){
 			alert("수업 가격을 입력해주세요.");
-			$("#mentor_price").focus();
+			$("#mentee_price").focus();
 			return false;
 		}
-		if(Number($("#mentor_price").val()) > 500000){
+		if(Number($("#mentee_price").val()) > 500000){
 			alert("수업 가격은 50만 이하로 입력하세요");
-			$("#mentor_price").focus();
+			$("#mentee_price").focus();
 			return false
 		}
-		if($.trim($("#mentor_member_cnt").val()) ==""){
-			alert("수업 인원을 입력해주세요.");
-			$("#mentor_member_cnt").focus();
-			return false;
-		}
-		if(Number($("#mentor_member_cnt").val()) >= 100){
-			alert("수업 가격은 100명 미만으로 입력하세요");
-			$("#mentor_member_cnt").focus();
-			return false
-		}
-		
-		//멘토 이름 입력 체크
-		if($.trim($("#mentor_name").val()) ==""){
-			alert("멘토 이름을 입력해주세요");
-			$("#mentor_name").focus();
-			return false;
-		}
-		//멘토 성별 입력 체크
-		if($("#mentor_gender").val() =="-- 선택 --"){
+		//성별 입력 체크
+		if($("#mentee_gender").val() =="-- 선택 --"){
 			alert("성별을 선택해주세요");
 			return false;
 		}
 		
+		//파일 체크
+		if(filecheck == 0 ){
+			/*
+		 	1.파일 첨부를 변경하지 않은 경우
+		 	  파일 첨부를 변경하지 않으면  $('#filevalue').text()의 파일명을
+		 	 check 파라미터에 담아 form에 추가하여 전송
+		 	2.파일 첨부의 remove 이미지를 클릭한 경우
+		 	  파일 첨부의 remove 이미지 클릭하여 파일을 제거하면  
+		 	 check 파라미터에 value 값 '' 을 담아 form에 추가하여 전송
+			 */  
+			value =$(".remove+div > label").text();
+			html = "<input type='hidden' value='"+value+"' name='check'>";
+		}
 	});
+	
+	
+	//파일 유무에 따른 remove 버튼 표시 
+	function show(){
+		//파일 이름이 있는 경우 remove 이미지 표시 
+		//파일 이름이 없는 경우 remove 이미지 미표시
+		if($(".remove+div > label").text() == ''){
+			$(".remove").css('display','none');
+		}
+		else{
+			$(".remove").css('display','inline');
+		}
+	}
+	
+	//파일을 변경한 경우 
+	$("input[type=file]").change(function(){
+		var id = $(this).attr('id');
+		filecheck++;
+		show();
+	});
+	
+	//파일 삭제 이미지 버튼 클릭 이벤트
+	$(".remove").click(function(){
+		$(this).next().children('label').text('');
+		show();
+	});
+	
+	show();
 });
 
 
@@ -211,11 +242,11 @@ function setYoilList(){ //셀렉바 구성 메서드
 }
 function initYoilList(){//초기 구성된 셀렉바에 옵션 추가
 	var output= setYoilList();
-	$("#mentor_time_list select").append(output);
+	$("#mentee_time_list select").append(output);
 }
 function addYoilList(){//추가 구성되는 셀렉바에 옵션 추가
 	var output= setYoilList();
-	$("#mentor_time_list select").last().append(output);
+	$("#mentee_time_list select").last().append(output);
 }
 function initSportList(){//페이지 로딩되면 수업종목의 항목 셀렉바 옵션 추가
 	var sports = yoil_json.sports;
@@ -223,7 +254,7 @@ function initSportList(){//페이지 로딩되면 수업종목의 항목 셀렉�
 	for(var i = 0; i < sports.length; i++){
 		output+='<option value="'+ (i+1) +'">'+ sports[i] +'</option>';
 	}
-	$("#metor_sports_category1").append(output);
+	$("#mentee_sports_category1").append(output);
 }
 
 function initCityList(){//페이지 로딩되면 수업장소의 시에 해당되는 항목 셀렉바 옵션 추가
@@ -231,6 +262,7 @@ function initCityList(){//페이지 로딩되면 수업장소의 시에 해당�
 		url : "siList",
 		type : "get", 
 		cache : false,
+		async: false,
 		success : function(data){
 			if(data.length > 0){
 				var output="";
@@ -241,7 +273,7 @@ function initCityList(){//페이지 로딩되면 수업장소의 시에 해당�
 				})
 				
 				//구성한 option을 append
-				$("#mentor_loc_category1").append(output);
+				$("#mentee_loc_category1").append(output);
 			}
 		},
 		error : function(){

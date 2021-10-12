@@ -35,4 +35,16 @@ public class MatchDAO {
 	public List<Match> getSearchList(HashMap<String, Object> map) {
 		return sqlSession.selectList("Match.searchlist",map);
 	}
+
+	public List<Match> selRegi(HashMap<String, Object> map) {
+		return sqlSession.selectList("Match.selRegi",map);
+	}
+
+	public int RegiupdateMatch(int REGISTER_NUM) {
+		return sqlSession.update("Match.Regiupdate",REGISTER_NUM);	
+	}
+
+	public String getemail(String REGISTER_ID) {
+		return sqlSession.selectOne("Match.getemail",REGISTER_ID);
+	}
 }

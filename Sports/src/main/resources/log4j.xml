@@ -9,7 +9,13 @@
 			<param name="ConversionPattern" value="%-5p: %c - %m%n" />
 		</layout>
 	</appender>
+	<logger name="Pm">
+		<level value="trace" />
+	</logger>
 	
+	<logger name="Water">
+		<level value="trace" />
+	</logger>
 	<logger name="Auction">
 		<level value="trace" />
 	</logger>
@@ -20,6 +26,10 @@
 	<!-- Application Loggers -->
 	<logger name="com.project.sports">
 		<level value="info" />
+	</logger>
+	
+	<logger name="match">
+		<level value="trace" />
 	</logger>
 	
 	<logger name="Mmatches">

@@ -6,7 +6,7 @@
           <h4 class="widget_title">마이페이지</h4>
           <ul>
           	  <li>
-                  <a href="#" class="d-flex">
+                  <a href="${pageContext.request.contextPath}/member/update" class="d-flex">
                       <p>개인정보수정</p>
                   </a>
               </li>
@@ -21,7 +21,7 @@
                   </a>
               </li>
               <li>
-                  <a href="#" class="d-flex">
+                  <a href="${pageContext.request.contextPath}/member/update" class="d-flex">
                       <p>내 정보</p>
                   </a>
               </li>

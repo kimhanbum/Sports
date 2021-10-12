@@ -1,5 +1,6 @@
 package com.project.sports.controller;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -68,10 +69,48 @@ public class PersonalManagementController {
 	
 	@RequestMapping(value="/list")
 	@ResponseBody
-	public List<Map<String, Object>> getList(PersonalManagement pm, HttpSession session){
+	public Map<String, Object> getList(
+				//PersonalManagement pm, 
+				HttpSession session,
+				@RequestParam(value="page",defaultValue="1",required=false) int page,
+				@RequestParam(value="limit",defaultValue="10",required=false) int limit
+				){
+		String id =(String)session.getAttribute("USER_ID");
+		logger.info("id : " + id);
+		limit = 3;	// 한 화면에 출력할 레코드 개수
+		int listcount =pmService.getListCount(id); //총 리스트 수를 받아옴
+		//총 페이지 수
+		int maxpage = (listcount + limit -1) / limit;
+		//현재 페이지에 보여줄 시작 페이지 수(1, 11, 21 등...)
+		int startpage = ((page - 1) / 10) * 10 + 1;
+		//현재 페이지에 보여줄 마지막 페이지 수 (10, 20, 30 등...)
+		int endpage = startpage + 10 - 1;
+		if(endpage > maxpage)
+		  endpage = maxpage;
+		List<PersonalManagement> list = pmService.getList(id,page, limit);
 		
-		pm.setUSER_ID((String)session.getAttribute("USER_ID"));
-		return pmService.getList(pm);
+		Map<String,Object> map =new HashMap<String,Object>();
+		map.put("page",page);
+		map.put("maxpage",maxpage);
+		map.put("startpage",startpage);
+		map.put("endpage",endpage);
+		map.put("listcount",listcount);
+		map.put("list",list);
+		
+		logger.info("page : " + map.get("page"));
+		logger.info("maxpage : " + map.get("maxpage"));
+		logger.info("startpage : " + map.get("startpage"));
+		logger.info("endpage : " + map.get("endpage"));
+		logger.info("listcount : " + map.get("listcount"));
+		for(PersonalManagement p : list) {			
+			logger.info("list : " + p.getPM_KCAL());
+			logger.info("list : " + p.getPM_NO());
+			logger.info("list : " + p.getSPORTS_IMG());
+			logger.info("list : " + p.getSPORTS_NAME());
+			logger.info("list : " + p.getUSER_ID());
+		}
+		//pm.setUSER_ID((String)session.getAttribute("USER_ID"));
+		return map;
 	}
 	
 	@RequestMapping(value="/delete")
