@@ -378,11 +378,8 @@ public class DealDirectController {
 			Model mv, 
 			 HttpServletRequest request)
 				throws Exception{
-		// 글 삭제 명령을 요청한 사용자가 글을 작성한 사용자인지 판단하기 위해 
-		// 입력한 비밀번호와 저장된 비밀번호를 비교하여 일치하면 삭제합니다. 
+	
 		
-		
-		//비밀번호가 일치하는 경우 삭제 처리 합니다. 
 		int result = DealService.D_Delete(num);
 		
 		//삭제 처리 실패한 경우

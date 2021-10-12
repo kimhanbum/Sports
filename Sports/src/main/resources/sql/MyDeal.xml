@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="MyDeal">
+
+<select id="buy_bidding" resultType="int">
+	select count(*) from my_deal where buy_bidding = 1
+   and user_id = #{sessionid}
+</select>
+
+<select id="buy_bidcom" resultType="int">
+	select count(*) from my_deal where buy_bidcom = 1
+   and user_id = #{sessionid}
+</select>
+
+<select id="buy_bidfail" resultType="int">
+	select count(*) from my_deal where buy_bidfail = 1
+   and user_id = #{sessionid}
+</select>
+
+<select id="buy_delivery" resultType="int">
+	select count(*) from my_deal where buy_delivery = 1
+   and user_id = #{sessionid}
+</select>
+
+<select id="sell_bidding" resultType="int">
+	select count(*) from my_deal where sell_bidding = 1
+   and user_id = #{sessionid}
+</select>
+
+<select id="sell_bidcom" resultType="int">
+	select count(*) from my_deal where sell_bidcom = 1
+   and user_id = #{sessionid}
+</select>
+
+<select id="sell_delivery" resultType="int">
+	select count(*) from my_deal where sell_delivery = 1
+   and user_id = #{sessionid}
+</select>
+
+<select id="auccart" parameterType="java.util.Map" resultType="Auction">
+select deal_auction.AUC_NUMBER , AUC_SUBJECT, AUC_CONTENT , DEAL_AUCTION.USER_ID ,
+AUC_DATE , AUC_PRICE , AUC_UNIT , AUC_LPRICE , AUC_COUNT , AUC_DELIVERY , AUC_DELIVERYCOM , AUC_DELIVERYNUM ,
+AUC_READCOUNT , AUC_NOWDATE , AUC_SPRICE
+from  deal_auction inner join my_deal
+on deal_auction.auc_number = deal_auction.auc_number 
+where deal_csfc = 1 and pick =1 and my_deal.user_id = #{sessionid}
+and DEAL_AUCTION.auc_number = my_deal.auc_number
+</select>
+
+<delete id="cartdel" parameterType="java.util.Map">
+delete from my_deal
+where 	
+	auc_number = #{num} 
+	and user_id = #{sessionid}
+	and pick = 1
+	and deal_csfc = 1 
+</delete>
+
+<select id="dircart" parameterType="java.util.Map" resultType="Direct">
+select DIR_NUMBER , DIR_SUBJECT, DIR_CONTENT , Deal_Direct.USER_ID ,DIR_ADDRESS,
+DIR_DATE , DIR_PRICE , DIR_PHONE , DIR_READCOUNT
+from  Deal_Direct inner join my_deal
+on DIR_NUMBER = auc_number 
+where deal_csfc = 2 and pick =1 and my_deal.user_id = #{sessionid}
+and DIR_NUMBER = auc_number
+</select>
+
+<delete id="cartdel2" parameterType="java.util.Map">
+delete from my_deal
+where 	
+	auc_number = #{num} 
+	and user_id = #{sessionid}
+	and pick = 1
+	and deal_csfc = 2 
+</delete>
+
+<sql id="view">
+	<if test="view != null">
+			<choose>
+				<when test="view==1">BUY_BIDDING</when>
+				<when test="view==2">BUY_BIDCOM</when>
+				<when test="view==3">BUY_BIDFAIL</when>
+				<when test="view==4">BUY_DELIVERY</when>
+			</choose>
+	</if>
+</sql>
+
+<select id="count" resultType="int" parameterType="java.util.Map">
+select count(*)
+from  deal_auction inner join my_deal
+on deal_auction.auc_number = deal_auction.auc_number 
+where deal_csfc = 1 and <include refid="view" /> =1 and my_deal.user_id = #{sessionid}
+and DEAL_AUCTION.auc_number = my_deal.auc_number
+</select>
+
+<select id="buylist" parameterType="java.util.Map" resultType="Auction">
+select * from
+	(select  rownum rnum , deal_auction.AUC_NUMBER , AUC_SUBJECT, AUC_CONTENT , DEAL_AUCTION.USER_ID ,
+AUC_DATE , AUC_PRICE , AUC_UNIT , AUC_LPRICE , AUC_COUNT , AUC_DELIVERY , AUC_DELIVERYCOM , AUC_DELIVERYNUM ,
+AUC_READCOUNT , AUC_NOWDATE , AUC_SPRICE
+from  deal_auction inner join my_deal
+on deal_auction.auc_number = deal_auction.auc_number 
+where deal_csfc = 1 and <include refid="view" /> =1 and my_deal.user_id = #{sessionid}
+and DEAL_AUCTION.auc_number = my_deal.auc_number)
+ where rnum &gt;= #{start} and rnum  &lt;=  #{end}
+</select>
+
+</mapper>

@@ -366,6 +366,7 @@ background-color
 										<div class="product-caption">
 
 											<h4>
+											<span style="float:left">No.${b.DIR_NUMBER}</span>
 												<a
 													href="${pageContext.request.contextPath}/DealD/detail?num=${b.DIR_NUMBER}">
 													<b>${b.DIR_SUBJECT}</b>

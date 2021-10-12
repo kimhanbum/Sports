@@ -333,9 +333,12 @@ background-color
 					<c:forEach var="b" items="${Auction}">
 						<div class="col-xl-4 col-lg-4 col-md-6">
 							<div class="single-product mb-60">
+								
+								
 								<div id="timeback" class="timeback">
 									 
 								</div>
+						
 								<div class="product-img">
 									<img
 										id="imgimg"
@@ -347,6 +350,7 @@ background-color
 								<div class="product-caption">
 
 									<h4>
+										<span style="float:left">No.${b.AUC_NUMBER}</span>
 										<a href="${pageContext.request.contextPath}
 										/DealA/detail?num=${b.AUC_NUMBER}"><b>${b.AUC_SUBJECT}</b></a>
 									</h4>
@@ -426,18 +430,21 @@ background-color
 								setTimeout(setClock, 1000);
 								
 								//if(eval("count" + number) == "14 시 0 분 9 초"){	
-								if(hr ==595 && min ==58 && sec ==48){
+								if(hr <=0 && min <=0 && sec <= 0){
 									
 									clearTimeout(setClock);
-									document.getElementById(timeid).innerHTML = 
-										"<div style='background-color:red'>배송시 글이 자동 삭제됩니다.</div>";
+// 									document.getElementById(timeid).innerHTML = 
+// 										"<div style='background-color:red'>배송시 글이 자동 삭제됩니다.</div>";
+									$("#timeid").remove();
+									$(eval("'#timeback" +number + "'")).remove();
+									
 									$(eval("'#imgimg" +number + "'")).attr("src",imgurl );
 
 									//location.href="write"
 									
 									
 								}
-								if(hr == 570 && min ==4 && sec ==15){
+								if(hr == 214 && min ==21 && sec ==40){
 									location.href="timeout?num=" + number	
 								}
 								
