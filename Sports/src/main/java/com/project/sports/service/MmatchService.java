@@ -2,6 +2,7 @@ package com.project.sports.service;
 
 import java.util.List;
 
+import com.project.sports.domain.MatchAppReq;
 import com.project.sports.domain.MatchInfo;
 import com.project.sports.domain.Mentee;
 import com.project.sports.domain.Mentor;
@@ -34,4 +35,13 @@ public interface MmatchService {
     public int checkMenteeApply(String id,String code);
     public int deleteMentee(String code);
     public int modifyMenteeWriting(Mentee mentee);
+    public int getMyMentorListCount(String id);
+    public int getMyMenteeListCount(String id);
+    public List<Mentee> getMyMenteeList(int page, int limit,String id);
+    public List<Mentor> getMyMentorList(int page, int limit,String id);
+    public int getMyMentorAppListCount(String id); 
+    public int getMyMenteeAppListCount(String id);
+    public List<MatchAppReq> getMyMentorAppList(int page, int limit,String id);
+    public List<MatchAppReq> getMyMenteeAppList(int page, int limit,String id);
+    public int cancelApply(String code,String id);
 }

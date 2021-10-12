@@ -7,6 +7,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.project.sports.domain.MatchAppReq;
 import com.project.sports.domain.MatchInfo;
 import com.project.sports.domain.Mentee;
 import com.project.sports.domain.Mentor;
@@ -96,5 +97,31 @@ public class MmatchDAO {
 	public int modifyMenteeWriting(Mentee mentee) {
 		return sqlSession.update("Mmatches.modifyWMentee",mentee);
 	}
-	
+	public List<Mentee> getMyMenteeList(HashMap <String,Object> map){
+		return sqlSession.selectList("Mmatches.MyMenteelist",map);
+	}
+	public List<Mentor> getMyMentorList(HashMap <String,Object> map){
+		return sqlSession.selectList("Mmatches.MyMentorlist",map);
+	}
+	public int getMyMentorListCount(String id) {
+		return sqlSession.selectOne("Mmatches.MyMentorCount",id);
+	}
+	public int getMyMenteeListCount(String id) {
+		return sqlSession.selectOne("Mmatches.MyMenteeCount",id);
+	}
+	public int getMyMentorAppListCount(String id) {
+		return sqlSession.selectOne("Mmatches.MyMentorAppCount",id);
+	}
+	public int getMyMenteeAppListCount(String id) {
+		return sqlSession.selectOne("Mmatches.MyMenteeAppCount",id);
+	}
+	public List<MatchAppReq> getMyMentorAppList(HashMap <String,Object> map){
+		return sqlSession.selectList("Mmatches.MyMentorApplist",map);
+	}
+	public List<MatchAppReq> getMyMenteeAppList(HashMap <String,Object> map){
+		return sqlSession.selectList("Mmatches.MyMenteeApplist",map);
+	}
+	public int cancelApply(HashMap <String,Object> map) {
+		return sqlSession.delete("Mmatches.deleteMatchApp",map);
+	}
 }

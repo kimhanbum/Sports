@@ -197,6 +197,83 @@
    mentee_origin_pic1 = #{mentee_origin_pic1,jdbcType=VARCHAR}
    where mentee_code = #{mentee_code}
 </update>	
+
+
+<select id="MyMenteeCount" parameterType="String" resultType="int" >
+	select count(*)
+	from mentee_match
+	where user_id =#{id}	
+</select>
+<select id="MyMenteelist" parameterType="Map" resultType="mentee">
+   SELECT * FROM 
+   (SELECT ROWNUM RNUM, m.*
+    FROM
+         (SELECT * FROM mentee_match 
+          where user_id =#{id}	
+          ORDER BY MENTEE_CODE DESC) m
+   )
+   WHERE RNUM <![CDATA[>=]]> #{start} AND RNUM <![CDATA[<=]]> #{end}
+</select>
+<select id="MyMentorCount" parameterType="String" resultType="int" >
+	select count(*)
+	from mentor_match
+	where user_id =#{id}		
+</select>
+
+<select id="MyMentorlist" parameterType="Map" resultType="mentor">
+   SELECT * FROM 
+   (SELECT ROWNUM RNUM, m.*
+    FROM
+         (SELECT * FROM mentor_match 
+          where user_id =#{id}	
+          ORDER BY MENTOR_CODE DESC) m
+   )
+   WHERE RNUM <![CDATA[>=]]> #{start} AND RNUM <![CDATA[<=]]> #{end}
+</select>
+
+
+
+<select id="MyMentorAppCount" parameterType="String" resultType="int" >
+   select count(*)
+   from match_info,mentor_match
+   where match_info.match_code = mentor_match.mentor_code and match_info.user_id=#{id}		
+</select>
+
+<select id="MyMentorApplist" parameterType="Map" resultType="AR">
+   SELECT * FROM 
+   (SELECT ROWNUM RNUM, m.*
+    FROM
+         (select mentor_title,sports_name,match_state,match_code
+   		  from match_info,mentor_match
+          where match_info.match_code = mentor_match.mentor_code 
+          and match_info.user_id=#{id}
+          ORDER BY MENTOR_CODE DESC) m
+   )
+   WHERE RNUM <![CDATA[>=]]> #{start} AND RNUM <![CDATA[<=]]> #{end}
+</select>
+<select id="MyMenteeAppCount" parameterType="String" resultType="int" >
+   select count(*)
+   from match_info,mentee_match
+   where match_info.match_code = mentee_match.mentee_code and match_info.user_id=#{id}	
+</select>
+<select id="MyMenteeApplist" parameterType="Map" resultType="AR">
+   SELECT * FROM 
+   (SELECT ROWNUM RNUM, m.*
+    FROM
+         (select mentee_title,sports_name,match_state,match_code
+   		  from match_info,mentee_match
+          where match_info.match_code = mentee_match.mentee_code 
+          and match_info.user_id=#{id}
+          ORDER BY MENTEE_CODE DESC) m
+   )
+   WHERE RNUM <![CDATA[>=]]> #{start} AND RNUM <![CDATA[<=]]> #{end}
+</select>
+
+<delete id="deleteMatchApp" parameterType="map">
+	delete from match_info 
+	where user_id=#{id} and match_code=#{code}
+</delete>
+
 <sql id="search_mentor">
     <where>
     	<if test='search_field !=""'>
@@ -217,7 +294,6 @@
         </if>
     </where> 
 </sql>
-
 <sql id="search_mentee">
     <where>
     	<if test='search_field !=""'>
