@@ -16,7 +16,7 @@ form {
 }
 td{border: 1px solid #6bd6d2;}
 td:first-child{width:110px;}
-#join{margin:15px auto; display:block; background-color:lightgreen; width:200px; height:150;}
+#update{margin:15px auto; display:block; background-color:lightgreen; width:200px; height:150;}
 </style>
 
 <script>
@@ -128,6 +128,14 @@ function Postcode() {//우편번호찾기
 <body>
     <!-- 헤더 영역  -->
 	<jsp:include page="/WEB-INF/views/sport_comm/header.jsp"/>
+	<section class="blog_area section-padding">
+            <div class="row">
+            	<div class="col-lg-2">
+            		<!-- 마이 페이지 좌측 asideLeft 메뉴들 -->
+					<jsp:include page="/WEB-INF/views/sport_comm/asideLeft.jsp"/>
+                </div>
+                <div class="col-lg-10 mb-5 mb-lg-0">
+                
     <form method="post" name="updateform" action="updateProcess">
         <table>
             <tr>
@@ -290,6 +298,9 @@ function Postcode() {//우편번호찾기
         </table><br>
         <input type="submit" id="update" value="수정" >
     </form>
+                </div>
+        </div>
+    </section>
     <!-- Footer 영역  -->
 	<jsp:include page="/WEB-INF/views/sport_comm/footer.jsp"/>
 

@@ -55,7 +55,10 @@ table{width:50%}
 			<tr>
 			<td>기초대사량</td><td>${m.USER_RMR}</td>
 			</tr>
-			<tr><td colspan="2"><a href="list">수정하기</a></td></tr>
+			<tr>
+			<td>선호운동</td><td>${m.USER_PSPORTS}</td>
+			</tr>
+			<tr><td colspan="2"><a href="update">수정하기</a></td></tr>
 			</table>
 		</div>
     </form>

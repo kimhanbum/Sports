@@ -217,7 +217,7 @@ required=true 상태에서 지정한 이름을 가진 쿠키가 존재하지 않으면 스프링 MVC는 익
 			mv.setViewName("redirect:login");
 		}else {
 			Member m = memberservice.member_info(id);
-			mv.setViewName("sports_mypage/mypage_info");
+			mv.setViewName("sports_mypage/mypage_myinfoUpdate");
 			mv.addObject("mypage_info",m);
 		}
 		return mv;
@@ -228,7 +228,7 @@ required=true 상태에서 지정한 이름을 가진 쿠키가 존재하지 않으면 스프링 MVC는 익
 		int result = memberservice.update(member);
 		if(result==1) {
 			rattr.addFlashAttribute("result","updateSuccess");
-			return "redirect:/login";
+			return "redirect:mypage_info";
 		}else {
 			model.addAttribute("url",request.getRequestURI());
 			model.addAttribute("message","정보 수정 실패");
