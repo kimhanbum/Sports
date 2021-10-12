@@ -87,6 +87,16 @@ where
 	</if>
 </sql>
 
+<sql id="view2">
+	<if test="view2 != null">
+			<choose>
+				<when test="view2==1">SELL_BIDDING</when>
+				<when test="view2==2">SELL_DELIVERY</when>
+				<when test="view2==3">SELL_BIDCOM</when>
+				
+			</choose>
+	</if>
+</sql>
 <select id="count" resultType="int" parameterType="java.util.Map">
 select count(*)
 from  deal_auction inner join my_deal
@@ -106,5 +116,68 @@ where deal_csfc = 1 and <include refid="view" /> =1 and my_deal.user_id = #{sess
 and DEAL_AUCTION.auc_number = my_deal.auc_number)
  where rnum &gt;= #{start} and rnum  &lt;=  #{end}
 </select>
+
+<select id="count2" resultType="int" parameterType="java.util.Map">
+select count(*)
+from  deal_auction inner join my_deal
+on deal_auction.auc_number = deal_auction.auc_number 
+where deal_csfc = 1 and <include refid="view2" /> =1 and my_deal.user_id = #{sessionid}
+and DEAL_AUCTION.auc_number = my_deal.auc_number
+</select>
+
+<select id="selllist" parameterType="java.util.Map" resultType="Auction">
+select * from
+	(select  rownum rnum , deal_auction.AUC_NUMBER , AUC_SUBJECT, AUC_CONTENT , DEAL_AUCTION.USER_ID ,
+AUC_DATE , AUC_PRICE , AUC_UNIT , AUC_LPRICE , AUC_COUNT , AUC_DELIVERY , AUC_DELIVERYCOM , AUC_DELIVERYNUM ,
+AUC_READCOUNT , AUC_NOWDATE , AUC_SPRICE
+from  deal_auction inner join my_deal
+on deal_auction.auc_number = deal_auction.auc_number 
+where deal_csfc = 1 and <include refid="view2" /> =1 and my_deal.user_id = #{sessionid}
+and DEAL_AUCTION.auc_number = my_deal.auc_number)
+ where rnum &gt;= #{start} and rnum  &lt;=  #{end}
+</select>
+
+
+<update id="postinput1" parameterType="java.util.Map">
+update deal_auction set 
+AUC_DELIVERYCOM = #{sel} , 
+AUC_DELIVERYNUM = #{post1}
+where  AUC_NUMBER = #{num}  
+
+</update>
+
+<update id="postinput2" parameterType="int">
+update my_deal set 
+BUY_BIDCOM= 0 , 
+BUY_DELIVERY = 1
+where  AUC_NUMBER = #{num}  
+and DEAL_CSFC =  1
+and buy_bidcom=1
+</update>
+
+<update id="postinput3" parameterType="int">
+update my_deal set 
+SELL_DELIVERY= 0 , 
+SELL_BIDCOM = 1
+where  AUC_NUMBER = #{num}  
+and DEAL_CSFC =  1 
+and sell_delivery=1
+
+</update>
+
+<delete id="receipt1" parameterType="java.util.Map">
+delete from deal_auction
+where 	
+	auc_number = #{num} 
+ 
+</delete>
+
+<delete id="receipt2" parameterType="java.util.Map">
+delete from my_deal
+where 	
+	auc_number = #{num} 
+	and deal_csfc = 1
+ 
+</delete>
 
 </mapper>

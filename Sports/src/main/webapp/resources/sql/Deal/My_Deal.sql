@@ -7,7 +7,7 @@ create table MY_DEAL(
 	BUY_BIDFAIL	 NUMBER default 0,					--입찰실패(구매)
 	BUY_DELIVERY	 NUMBER default 0,				--배송중(구매)
 	SELL_BIDDING	 NUMBER default 0,				--입찰중(판매)
-	SELL_BIDCOM		 NUMBER default 0,				--입찰완료(판매)
+	SELL_BIDCOM		 NUMBER default 0,				--배송중(판매)
 	SELL_DELIVERY	 NUMBER default 0,				--배송입력(판매)
 	PICK			 NUMBER default 0);	--장바구니
 	

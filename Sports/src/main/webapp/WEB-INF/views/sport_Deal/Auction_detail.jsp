@@ -430,7 +430,7 @@ input.checkbox:checked+label.input-label.radio::before {
 	<!-- slider Area End--> <!-- Latest Products Start --> <!--바디부분 -->
 	<section class="section">
 		<div class="container" id="mainpic">
-			<h3><b>제목</b></h3>
+			<h3><b>${b.AUC_SUBJECT}</b></h3>
 			<h6 class="text-color">Computer Science</h6>
 			<span>Lorem ipsum dolor, sit amet consectetur
 				adipisicing elit. Cumque ac voluptas quae.</span>
@@ -656,6 +656,13 @@ input.checkbox:checked+label.input-label.radio::before {
 						}
 					}
 				}
+			})
+			
+			$(".buttonE").click(function(){
+				var e = prompt("문의할 내용을 남겨주세요\n(답변은 내 거래 내역에서 확인가능)")
+				location.href = "${pageContext.request.contextPath}/DealA/question"
+				+"?num=" +${b.AUC_NUMBER} + "&sub=${b.AUC_SUBJECT}" + "&sellid=${b.USER_ID}" 
+				+"&content=" + e;
 			})
 			
 		})

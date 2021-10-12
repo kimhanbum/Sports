@@ -122,16 +122,18 @@
 										<thead>
 											<tr class="domain-head">
 												<th scope="col">입찰중</th>
-												<th scope="col">입찰완료</th>
+												<th scope="col">배송입력</th>
 												<th scope="col">배송중</th>
+												
 												<th scope="col"></th>
 											</tr>
 										</thead>
 										<tbody>
 											<tr>
 												<td data-label="DOMAIN NAME">${SELL_BIDDING}</td>
-												<td data-label="registration pricing">${SELL_BIDCOM}</td>
 												<td data-label="renewal pricing">${SELL_DELIVERY}</td>
+												<td data-label="registration pricing">${SELL_BIDCOM}</td>
+												
 												<td data-label="transfer-price"></td>
 											</tr>
 

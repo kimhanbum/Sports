@@ -160,16 +160,51 @@ public class MydealController {
 		return mv;
 			
 	}
-	//구매현황 페이지 리스트
-	@RequestMapping(value="/sell",method=RequestMethod.GET)
+	//판매현황 페이지 리스트
+	@RequestMapping(value="/sell" ,method=RequestMethod.GET)
 	public ModelAndView selllist(
 			@RequestParam(value="page",defaultValue="1",required=false)int page,
-			 ModelAndView mv) {
-				
+			@RequestParam(value = "view2",
+			defaultValue = "1", required = false) int view,
+			 ModelAndView mv ,HttpSession session
+			 ) {
+		
+		String sessionid = (String) session.getAttribute("USER_ID");
+		
+		int limit = 5; // 한 화면에 출력할 레코드 갯수
+		
+		int listcount = MyDealService.getListCount2(view,sessionid); // 총 리스트 수를 받아옴
+		logger.info("리스트카운트" + listcount);
+		
+		// 총 페이지 수
+		int maxpage = (listcount + limit - 1) / limit;
+
+		// 현재 페이지에 보여줄 시작 페이지 수 (1, 11, 21 등 ...)
+		int startpage = ((page - 1) / 10) * 10 + 1;
+
+		// 현재 페이지에 보여줄 마지막 페이지 수 (10, 20 ,30 등...)
+		int endpage = startpage + 10 - 1;
+		
+		if (endpage > maxpage)
+			endpage = maxpage;
+		
+		List<DealAuction> Auction = new ArrayList<DealAuction>();
+		
+		Auction = MyDealService.MysellList(view,page,limit,sessionid);
+
+		
+		mv.addObject("view2",view);
+		mv.addObject("Auction",Auction);
+		mv.addObject("page",page);
+		mv.addObject("maxpage",maxpage);
+		mv.addObject("startpage",startpage);
+		mv.addObject("endpage",endpage);
+		mv.addObject("listcount",listcount);
+		mv.addObject("limit",limit);
 		mv.setViewName("sports_mypage/mypage_mydeal_sell");
-				
+			
 		return mv;
-				
+			
 	}
 	
 	@GetMapping("/delete")
@@ -202,6 +237,45 @@ public class MydealController {
 
 
 		return "redirect:main2";
+	}
+	
+	@GetMapping("/postinput")
+	public String postinput(int num ,
+			@RequestParam(value="sel",defaultValue="우체국",required=false)String sel,
+			@RequestParam(value = "post1",
+			defaultValue = "", required = false) String post1)
+				throws Exception{
+	
+		
+		
+		//글정보에 택배사 송장번호 update
+		MyDealService.postinput1(num , sel , post1);
+		
+		//구매자 배송중으로 변경
+		MyDealService.postinput2(num);
+		
+		//판매자 배송중으로 변경
+		MyDealService.postinput3(num);
+
+
+		return "redirect:main";
+	}
+	
+	@GetMapping("/receipt")
+	public String postinput(int num )
+				throws Exception{
+	
+		
+		
+		//글삭제
+		MyDealService.receipt1(num);
+		
+		//내거래내역 위글과 관련된 로우 삭제
+		MyDealService.receipt2(num);
+
+
+
+		return "redirect:main";
 	}
 	
 	

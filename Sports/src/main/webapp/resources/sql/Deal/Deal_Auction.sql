@@ -56,3 +56,7 @@ drop sequence auc_seq;
 	ALTER TABLE DEAL_AUCTION ADD AUC_NOWDATE date DEFAULT sysdate;
 
 /*-----------------------------*/
+	
+/* 10-12일 변경 컬럼속성	변경  */
+ALTER TABLE DEAL_AUCTION MODIFY AUC_DELIVERYNUM VARCHAR2(50);
+/*-------------*/

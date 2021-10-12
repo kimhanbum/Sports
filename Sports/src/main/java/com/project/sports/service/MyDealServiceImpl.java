@@ -102,4 +102,59 @@ public class MyDealServiceImpl implements MyDealService{
 		return dao.MybuyList(map);
 	}
 
+	@Override
+	public int getListCount2(int view, String sessionid) {
+		HashMap<String , Object>map = new HashMap<String,Object>();
+		map.put("sessionid" , sessionid);
+		map.put("view2" , view);
+		return dao.getListCount2(map);
+	}
+
+	@Override
+	public List<DealAuction> MysellList(int view, int page, int limit, String sessionid) {
+		HashMap<String , Object>map = new HashMap<String,Object>();
+		int startrow=(page-1)*limit +1; 
+		int endrow = startrow+limit-1;
+		map.put("start", startrow);
+		map.put("end",endrow);
+		map.put("view2",view);
+		map.put("sessionid" , sessionid);
+
+		return dao.MysellList(map);
+	}
+
+	@Override
+	public void postinput1(int num, String sel, String post1) {
+		HashMap<String , Object>map = new HashMap<String,Object>();
+		map.put("num", num);
+		map.put("sel",sel);
+		map.put("post1",post1);
+		
+		dao.postinput1(map);
+	}
+
+	@Override
+	public void postinput2(int num) {
+		dao.postinput2(num);
+		
+	}
+
+	@Override
+	public void postinput3(int num) {
+		dao.postinput3(num);
+		
+	}
+
+	@Override
+	public void receipt1(int num) {
+		dao.receipt1(num);
+		
+	}
+
+	@Override
+	public void receipt2(int num) {
+		dao.receipt2(num);
+		
+	}
+
 }
