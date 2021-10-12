@@ -10,53 +10,56 @@
 <style>
 tr>td:nth-child(odd){font-weight:bold}
 td{text-align:center}
-.container{width:50%}
+table{width:50%}
 </style>
 </head>
 <body>
-<div class="container">
-	<%--주소 안맞으면 nullpointerException - case쪽이 잘못되었을수도 --%>
-		<p>member Infomation</p>
-		<table class="table table-bordered">
-<%-- memberInfoAction의 request.setAttribute("memberinfo", m); --%>
-		<tr>
-		<td>아이디</td><td>${m.USER_ID}</td><%-- Member클래스의 getId()메소드 호출 --%>
-		</tr>
-		<tr>
-		<td>비밀번호</td><td>${m.USER_PASS}</td>
-		</tr>
-		<tr>
-		<td>이름</td><td>${m.USER_NAME}</td>
-		</tr>
-		<tr>
-		<td>주민번호</td><td>${m.USER_JUMIN}</td>
-		</tr>
-		<tr>
-		<td>휴대폰번호</td><td>${m.USER_MOBILE}</td>
-		</tr>
-		<tr>
-		<td>주소</td><td>${m.USER_ADDRESS}</td>
-		</tr>
-		<tr>
-		<td>이메일</td><td>${m.USER_EMAIL}</td>
-		</tr>
-		<tr>
-		<td>키</td><td>${m.USER_HEIGHT}</td>
-		</tr>
-		<tr>
-		<td>현재 몸무게</td><td>${m.USER_PWEIGHT}</td>
-		</tr>
-		<tr>
-		<td>목표 몸무게</td><td>${m.USER_WWEIGHT}</td>
-		</tr>
-		<tr>
-		<td>BMI</td><td>${m.USER_BMI}</td>
-		</tr>
-		<tr>
-		<td>기초대사량</td><td>${m.USER_RMR}</td>
-		</tr>
-		<tr><td colspan="2"><a href="list">리스트로 돌아가기</a></td></tr><!-- 상대경로 -->
-		</table>
-	</div>
+	<jsp:include page="/WEB-INF/views/sport_comm/header.jsp"/>
+    <form method="get" name="updateform" action="updateProcess">
+		<div class="container">
+			<p>member Infomation</p>
+			<table class="table table-bordered">
+			<tr>
+			<td>아이디</td><td>${m.USER_ID}</td>
+			</tr>
+			<tr>
+			<td>비밀번호</td><td>${m.USER_PASS}</td>
+			</tr>
+			<tr>
+			<td>이름</td><td>${m.USER_NAME}</td>
+			</tr>
+			<tr>
+			<td>주민번호</td><td>${m.USER_JUMIN}</td>
+			</tr>
+			<tr>
+			<td>휴대폰번호</td><td>${m.USER_MOBILE}</td>
+			</tr>
+			<tr>
+			<td>주소</td><td>${m.USER_ADDRESS}</td>
+			</tr>
+			<tr>
+			<td>이메일</td><td>${m.USER_EMAIL}</td>
+			</tr>
+			<tr>
+			<td>키</td><td>${m.USER_HEIGHT}</td>
+			</tr>
+			<tr>
+			<td>현재 몸무게</td><td>${m.USER_PWEIGHT}</td>
+			</tr>
+			<tr>
+			<td>목표 몸무게</td><td>${m.USER_WWEIGHT}</td>
+			</tr>
+			<tr>
+			<td>BMI</td><td>${m.USER_BMI}</td>
+			</tr>
+			<tr>
+			<td>기초대사량</td><td>${m.USER_RMR}</td>
+			</tr>
+			<tr><td colspan="2"><a href="list">수정하기</a></td></tr>
+			</table>
+		</div>
+    </form>
+    <!-- Footer 영역  -->
+	<jsp:include page="/WEB-INF/views/sport_comm/footer.jsp"/>
 </body>
 </html>
