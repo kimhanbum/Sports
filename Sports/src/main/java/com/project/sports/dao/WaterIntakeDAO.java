@@ -1,6 +1,7 @@
 package com.project.sports.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,10 @@ public class WaterIntakeDAO {
 
 	public List<WaterIntake> getList(String yearMonth) {
 		return sqlSession.selectList("Water.select", yearMonth);
+	}
+
+	public void wateradd(WaterIntake water) {
+		sqlSession.insert("Water.add", water);
 	}
 	
 }

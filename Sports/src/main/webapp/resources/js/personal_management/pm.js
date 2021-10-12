@@ -82,8 +82,7 @@ $(function (){
 })//전체
 
 function go(page){
-	var data = "&state=getList&page=" + page;
-	getList(data);
+	getList(page);
 }
 
 function setPaging(href, digit){

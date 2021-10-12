@@ -3,6 +3,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <link
+        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+        rel="stylesheet">
+    <!-- Custom styles for this template-->
+    <link href="${pageContext.request.contextPath}/resources/css/water_intake/sb-admin-2.min.css" rel="stylesheet">
+
 <title>당일 운동량</title>
 		<script src="${pageContext.request.contextPath}/resources/js/jquery-3.6.0.js"></script>
 		<script src="${pageContext.request.contextPath}/resources/js/personal_management/pm.js" charset="utf-8"></script> 		
@@ -50,7 +56,7 @@ background-color: #fbfcfd
 </style>
 </head>
 
-<body class="body-wrapper">
+<body class="body-wrapper" id="page-top">
     
     <!-- Preloader Start -->
 	<div id="preloader-active">
@@ -172,12 +178,45 @@ background-color: #fbfcfd
 			</c:if>
 		 </ul>
 		</div>
-				</div>
+		</div>
+		</div>
+				
+				<!-- Row End -->
+<!-- Container End -->
+
+				
+				
+  <!-- Donut Chart -->
+  <div class="col-md-4 col-lg-5 float-right">
+    <div class="card shadow mb-4">
+     <!-- Card Header - Dropdown -->
+      <div class="card-header py-3">
+      <h6 class="m-0 font-weight-bold text-primary">목표물섭취량</h6>
+      </div>
+      
+      <!-- Card Body -->
+      <div class="card-body">
+        <div class="chart-pie pt-4">
+          <canvas id="myPieChart"></canvas>
+        </div>
+        <hr>
+        Styling for the donut chart can be found in the
+        <code>/js/demo/chart-pie-demo.js</code> file.
+      </div>
+     </div>
+
+
+
+
 			</div>
 		</div>
 	</div>
-<!-- Row End -->
-<!-- Container End -->
+    <!-- Page level plugins -->
+    <script src="${pageContext.request.contextPath}/resources/js/water_intake/Chart.min.js"></script>
+
+    <!-- Page level custom scripts -->
+    <script src="${pageContext.request.contextPath}/resources/js/water_intake/chart-pie-demo.js"></script>
+
 </section>
 </body>
 

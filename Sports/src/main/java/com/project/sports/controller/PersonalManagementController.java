@@ -73,7 +73,7 @@ public class PersonalManagementController {
 				//PersonalManagement pm, 
 				HttpSession session,
 				@RequestParam(value="page",defaultValue="1",required=false) int page,
-				@RequestParam(value="limit",defaultValue="10",required=false) int limit
+				@RequestParam(value="limit",defaultValue="3",required=false) int limit
 				){
 		String id =(String)session.getAttribute("USER_ID");
 		logger.info("id : " + id);
