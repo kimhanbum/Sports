@@ -1,6 +1,7 @@
 package com.project.sports.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,6 +24,13 @@ public class WaterIntakeServiceImpl implements WaterIntakeService{
 	public List<WaterIntake> getList(String yearMonth) {
 		return dao.getList(yearMonth);
 	}
+
+	@Override
+	public void wateradd(WaterIntake water) {
+		dao.wateradd(water);
+	}
+
+
 
 		
 }

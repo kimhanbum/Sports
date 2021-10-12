@@ -1,6 +1,7 @@
 package com.project.sports.controller;
 
 import java.sql.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -12,13 +13,16 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.project.sports.domain.Member;
 import com.project.sports.domain.WaterIntake;
+import com.project.sports.service.MemberService;
 import com.project.sports.service.WaterIntakeService;
 
 @Controller
@@ -30,6 +34,8 @@ public class WaterIntakeController {
 	
 	@Autowired
 	private WaterIntakeService WaterService;
+	@Autowired
+	private MemberService memberService;
 	
 	@RequestMapping(value="/calendar")
 	public String water1() {
@@ -58,4 +64,35 @@ public class WaterIntakeController {
 		return "redirect:calendar";
 	}
 	
+	@PostMapping(value="/wateradd2")
+	@ResponseBody
+	public Map<String, Object> add(WaterIntake water, HttpSession session, Member member,
+			@RequestParam(value="goaldata", defaultValue="0",required=false)
+	  		double goaldata,
+			@RequestParam(value="title", defaultValue="0", required=false)
+			String title
+			){
+		water.setUser_id((String)session.getAttribute("USER_ID"));
+		water.setTitle(title);
+		logger.info("title"+title);
+		WaterService.wateradd(water);
+		
+		
+		Map<String,Object> map =new HashMap<String,Object>();
+		map.put("goaldata", goaldata);
+		map.put("title", title);
+		logger.info("goaldata" + goaldata);
+		logger.info("water" + water);
+		
+		
+		logger.info("goaldata" + goaldata);
+		
+		return map;
+	}
+	@RequestMapping(value="/view")
+	public String view(Model md, HttpSession session) {
+		Member member = memberService.member_info((String)session.getAttribute("USER_ID"));
+		md.addAttribute("goaldata", member.getUSER_WWEIGHT() * 0.033);
+		return "sports_water/GoalWater"; 
+	}
 }

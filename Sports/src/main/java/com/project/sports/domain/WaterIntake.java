@@ -7,8 +7,15 @@ public class WaterIntake {
 	private String user_id;//로그인한 아이디
 	private String time_start;
 	private String time_end;
-	private String title;
+	private String title;//당일 섭취량
+	private String goaldata;
 	
+	public String getGoaldata() {
+		return goaldata;
+	}
+	public void setGoaldata(String goaldata) {
+		this.goaldata = goaldata;
+	}
 	public String getTime_start() {
 		return time_start;
 	}
