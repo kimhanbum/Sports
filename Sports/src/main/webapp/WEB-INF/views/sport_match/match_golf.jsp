@@ -1,9 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html class="no-js" lang="zxx">
     <head>
         <meta charset="utf-8">
-        <title>eCommerce HTML-5 Template </title>
+        <title>Sport - Soccer </title>
         
      
 <link rel="shortcut icon" type="image/x-icon" href="${pageContext.request.contextPath}/resources/img/favicon.ico">
@@ -17,7 +18,7 @@
 <link rel="stylesheet" href="https://www.baro-match.co.kr/newsite/system/match/css/match.css?sng=1632462206" />
 <link rel ="stylesheet" href="${pageContext.request.contextPath}/resources/css/match/sport_match.css">
 <style>
-	#icon_box .icon01:after{z-index:1;
+	#icon_box .icon08:after{z-index:1;
 						content: '';
 					    position: absolute;
 					    border-top: 10px solid #eb3b04;
@@ -33,15 +34,18 @@
 </style>
   </head>
   <body>
+  
    	<!-- 헤더 영역  -->
 <jsp:include page="/WEB-INF/views/sport_comm/header.jsp"/>
    <main>
+   		<div id="sport_num" style="display:none;">10</div>
+   		<div id="user_id" style="display:none;">${USER_ID}</div>
        <!-- slider Area Start -->
        <div class="slider-area ">
        	<div id="icon_box">
 			<div class="web_size">
 				<ul>
-					<a href="mainPage"><li class="icon01 top_icon" data-value="1/" style="background-color:#eb3b04;">축구/풋살</li></a>
+					<a href="mainPage"><li class="icon01 top_icon" data-value="1/" >축구</li></a>
 					<a href="baseball" ><li class="icon03 top_icon" data-value="3/">야구</li></a>
 					<a href="football"><li class="icon09 top_icon" data-value="9/">족구</li></a>
 					<a href="basketball"><li class="icon02 top_icon" data-value="2/">농구</li></a>
@@ -50,7 +54,7 @@
 					<a href="badminton"><li class="icon06 top_icon" data-value="6/">배드민턴</li></a>
 					<a href="tennis"><li class="icon07 top_icon" data-value="7/">테니스</li></a>
 					<a href="bowling"><li class="icon010 top_icon" data-value="10/">볼링</li></a>
-					<a href="golf"><li class="icon08 top_icon" data-value="8/">골프</li></a>
+					<a href="golf"><li class="icon08 top_icon" data-value="8/" style="background-color:#eb3b04;">골프</li></a>
 					<a href="http://ntler.co.kr" target="_blank">
 					<li class="icon00 top_icon">맞춤유니폼</li></a>
 				</ul>
@@ -72,27 +76,27 @@
 		</div>
 	</div>
 	</div>
-           <div class="slider-active">
-               <div class="single-slider slider-height" data-background="${pageContext.request.contextPath}/resources/image/sport/soccer.jpg">
-                   <div class="container1">
-                       <div class="row d-flex align-items-center justify-content-between">
-                           <div class="col-xl-5 col-lg-6 col-md-6 d-none d-md-block">
-                               <div class="hero__img" data-animation="bounceIn" data-delay=".4s">
-                                   <img class="smallsoccer" src="${pageContext.request.contextPath}/resources/image/sport/soccer.jpg" alt="">
-                               </div>
-                           </div>
-                           <div class="col-xl-5 col-lg-5 col-md-5 col-sm-8">
-                               <div class="hero__caption">
-                                   <h1 data-animation="fadeInRight" data-delay=".6s" style="color: white; font-size: 90px">Social<br>Match<br></h1>
-                                   <div class="hero__btn" data-animation="fadeInRight" data-delay="1s">
-                                       <a href="industries.html" class="btn hero-btn">Login Now</a>
-                                   </div>
-                               </div>
-                           </div>
-                       </div>
-                   </div>
-               </div>
-            </div> 
+     <div class="slider-active" id="social">
+         <div class="single-slider slider-height" data-background="${pageContext.request.contextPath}/resources/image/sport/golf.jpg">
+             <div class="container1">
+                 <div class="row d-flex align-items-center justify-content-between">
+                     <div class="col-xl-5 col-lg-6 col-md-6 d-none d-md-block">
+                         <div class="hero__img" data-animation="bounceIn" data-delay=".4s">
+                             <img class="smallsoccer" src="${pageContext.request.contextPath}/resources/image/sport/golf.jpg" alt="">
+                         </div>
+                     </div>
+                     <div class="col-xl-5 col-lg-5 col-md-5 col-sm-8">
+                         <div class="hero__caption">
+                             <h1 id="text" data-animation="fadeInRight" data-delay=".6s" style="color: white; font-size: 90px">Social<br>Match<br></h1>
+                             <div class="hero__btn" data-animation="fadeInRight" data-delay="1s">
+                                 <a href="#" class="btn hero-btn">Play now</a>
+                             </div>
+                         </div>
+                     </div>
+                 </div>
+             </div>
+         </div>
+      </div> 
    <div class="main">
        </div>
        <div class="container1">
@@ -101,163 +105,266 @@
                    <div class="city ibx">
                        <label for="city" style="color:white;  width: 30%">City</label>
                        <div class="rows">
-                       	<select name="city" class="form-control">
-	                       	<option value="" selected>지역선택</option>
-	                       	<option value="서울">서울</option>
-	                       	<option value="인천">인천</option>
+                       	<select id="city" name="city" class="form-control1" onchange="javascript:initAddress();">
+	                       	<option value="" selected>지역</option>
                        	</select>
                        </div>
                    </div>
                    <div class="city_detail ibx">
                        <label for="city" style="color:white;  width: 30%">detail</label>
                        <div class="rows">
-                       	<select name="city_detail" class="form-control">
-                       		<option value="" selected>세부지역 선택</option>
-                       		<option value="연수구">연수구</option>
+                       	<select id="city_detail" name="city_detail" class="form-control1">
+                       		<option value="" selected>세부지역</option>
                        	</select>
                        </div>
                    </div>
                    
-                   <div class="form-date-to form-icon ibx">
+                   <div id="date" class="form-date-to form-icon ibx">
                        <label for="date_to" style="color:white">Date</label>
                        <input type="date"
-									name="match_date" min="2015-12-30" max="2022-12-31"
+									name="match_date" max="2022-12-31"
 									id= "match_Date" class="match_Date"
 									 >
                    </div>
-                   <div class="form-quantity ibx">
+                   <div id="person" class="form-quantity ibx">
                        <label for="quantity" style="color:white">PERSON</label>
-                       <input type="number" value="0" min="0" max="11" >
+                       <input type="number" name="person" value="0" min="0" max="11" >
                    </div>
                    
                    <div class="skill ibx">
 	                   <div class="rows">
-	                   <label for="city" style="color:white;  width: 30%">Skill</label>
-	                   	<select name="skill" class="form-control">
-	                   		<option value="" selected>실력선택</option>
+	                   <label for="skill" style="color:white;  width: 30%">Skill</label>
+	                   	<select id="skill" name="skill" class="form-control1">
+	                   		<option value="" selected>실력</option>
 	                   		<option value="상">상</option>
 	                   		<option value="중">중</option>
 	                   		<option value="하">하</option>
 	                   	</select>
 	                   </div>
                    </div>
-                   <div id="btnSubmit" onclick="javascript:btnClick();" class="submit ibx">Search now</div>
-                   <!-- <div class="form-submit">
-                       <input type="submit" id="submit" class="submit" value="Search now" />
-                   </div> -->
+                   <c:if test="${empty USER_ID}">
+                    <div id="btnSubmit" onclick="location.href='${pageContext.request.contextPath}/member/login'" class="submit ibx">Search&nbsp;&nbsp;</div>
+                	</c:if>
+                	<c:if test="${!empty USER_ID}">
+                   <div id="btnSubmit" onclick="javascript:SearchClick();" class="submit ibx">Search&nbsp;&nbsp;</div>
+                   </c:if>
                </div>
            </form>
        </div>
+       <!-- 리스트 -->
       <div id="container" class="container">
-<%-- 게시글이 있는 경우--%> 
-<c:if test="${listcount > 0 }">
- <table class="table table-striped">
-  <thead>
-<tr>
-   <th colspan="3">Matching list</th>
-   <th colspan="2">
-		<font size=3>Total : ${listcount}</font>
-   </th>
-</tr>
-<tr>
-	<th><div>글번호</div></th>
-	<th><div>지역</div></th>
-	<th><div>작성자</div></th>
-	<th><div>날짜</div></th>
-	<th><div>인원</div></th>
-</tr>	
-  </thead>
-  <tbody>
-<c:set var="num" value="${listcount-(page-1)*limit}"/>	
-<c:forEach var="b" items="${boardlist}">	
-<tr>
-  <td><%--번호 --%>
-	<c:out value="${num}"/><%-- num 출력 --%>		
-	<c:set var="num" value="${num-1}"/>	<%-- num=num-1; 의미--%>	
-  </td>
-  <td><%--제목 --%>
-     <div>			
-		<%-- 답변글 제목앞에 여백 처리 부분 
-		      board_re_lev,  board_num, 
-		      board_subject, board_name, board_date, 
-		      board_readcount : property 이름 --%>
-	    <c:if test="${b.board_re_lev != 0}">  <!--  답글인 경우 -->
-			<c:forEach var="a" begin="0" end="${b.board_re_lev*2}" step="1">
-			&nbsp; 	
-			</c:forEach>		
-		</c:if>  
-		 
-		<c:if test="${b.board_re_lev == 0}">  <%-- 원문인 경우 --%>
-			&nbsp;  
-		</c:if> 			
-		
-		<a href="detail?num=${b.board_num}">
-			 <c:out value="${b.board_subject}" />  
-			<%-- ${b.board_subject} --%>
-			<%-- escapeXml="true" : HTML 태그를 화면에 그대로 보여줍니다. --%>	
-		</a>
-	  </div>
-	</td>
-	<td><div>${b.board_name}</div></td>
-	<td><div>${b.board_date}</div></td>	
-	<td><div>${b.board_readcount}</div></td>
-   </tr>
-  </c:forEach>
- </tbody>	
-</table>
-	<div class="center-block">
-		  <ul class="pagination justify-content-center">		
-			 <c:if test="${page <= 1 }">
-				<li class="page-item">
-				  <a class="page-link gray">이전&nbsp;</a>
-				</li>
-			 </c:if>
-			 <c:if test="${page > 1 }">			
-				<li class="page-item">
-				   <a href="list?page=${page-1}" 
-				      class="page-link">이전&nbsp;</a>
-				</li> 
-			 </c:if>
-					
-			<c:forEach var="a" begin="${startpage}" end="${endpage}">
-				<c:if test="${a == page }">
-					<li class="page-item " >
-					   <a class="page-link gray">${a}</a>
-					</li>
-				</c:if>
-				<c:if test="${a != page }">
-				    <li class="page-item">
-					   <a href="list?page=${a}" 
-					      class="page-link">${a}</a>
-				    </li>	
-				</c:if>
-			</c:forEach>
-			
-			<c:if test="${page >= maxpage }">
-				<li class="page-item">
-				   <a class="page-link gray">&nbsp;다음</a> 
-				</li>
+					<%-- 게시글이 있는 경우--%> 
+					<c:if test="${listcount > 0 }">
+			<table class="table table-striped">
+				<thead>
+					<tr>
+					   <th colspan="4">Matching list</th>
+					   <th colspan="4">
+							<font size=3>Total : <a id="all_cnt">${listcount}</a></font>
+					   </th>
+					</tr>
+					<tr>
+						<th><div class="classalign">작성자</div></th>
+						<th><div class="classalign">지역</div></th>
+						<th><div class="classalign">세부지역</div></th>
+						<th><div class="classalign">날짜</div></th>
+						<th><div class="classalign">인원</div></th>
+						<th><div class="classalign">실력</div></th>
+						<th><div class="classalign">신청</div></th>
+					</tr>	
+				</thead>
+				<tbody id="search_list">
+					<c:set var="num" value="${listcount-(page-1)*limit}"/>	
+					<c:forEach var="m" items="${matchlist}">	
+						<tr>
+							<td><div id="Regi_ID"class="classalign">${m.REGISTER_ID}</div></td>
+							<td><div class="classalign">${m.MATCH_ADR}</div></td>
+							<td><div class="classalign">${m.MATCH_DTL_ADR}</div></td>	
+							<td><div class="classalign">${m.MATCH_TIME}</div></td>
+							<td><div class="classalign">${m.MATCH_PRS}</div></td>
+							<td><div class="classalign">${m.MATCH_SKL}</div></td>
+						<c:if test="${m.REGISTER_ID == USER_ID}">
+							<td><div id="btnSubmit2" onclick="javascript:alertApply()" class="submit3">Apply</div></td>
+						</c:if>
+						<c:if test="${m.REGISTER_ID != USER_ID}">
+							<td><div id="btnSubmit2" onclick="javascript:btnApply(${m.REGISTER_NUM});" class="submit2">Apply</div></td>
+						</c:if>
+						</tr>
+							
+					</c:forEach>
+				 </tbody>	
+			</table>
+				<div id="center-block" class="center-block">
+					  <ul class="pagination justify-content-center">		
+						 <c:if test="${page <= 1 }">
+							<li class="page-item">
+							  <a class="page-link gray">이전&nbsp;</a>
+							</li>
+						 </c:if>
+						 <c:if test="${page > 1 }">			
+							<li class="page-item">
+							   <a href="mainPage?page=${page-1}" 
+							      class="page-link">이전&nbsp;</a>
+							</li> 
+						 </c:if>
+								
+						<c:forEach var="a" begin="${startpage}" end="${endpage}">
+							<c:if test="${a == page }">
+								<li class="page-item " >
+								   <a class="page-link gray">${a}</a>
+								</li>
+							</c:if>
+							<c:if test="${a != page }">
+							    <li class="page-item">
+								   <a href="mainPage?page=${a}" 
+								      class="page-link">${a}</a>
+							    </li>	
+							</c:if>
+						</c:forEach>
+						
+						<c:if test="${page >= maxpage }">
+							<li class="page-item">
+							   <a class="page-link gray">&nbsp;다음</a> 
+							</li>
+						</c:if>
+						<c:if test="${page < maxpage }">
+						  <li class="page-item">
+							<a href="mainPage?page=${page+1}" 
+							   class="page-link">&nbsp;다음</a>
+						  </li>	
+						</c:if>
+					 </ul>
+				</div>
 			</c:if>
-			<c:if test="${page < maxpage }">
-			  <li class="page-item">
-				<a href="list?page=${page+1}" 
-				   class="page-link">&nbsp;다음</a>
-			  </li>	
+			<%-- 게시글이 없는 경우--%>
+		<div style="text-align:center">
+			<c:if test="${listcount == 0 }">
+				<font size=5>등록된 글이 없습니다.</font>
 			</c:if>
-		 </ul>
 		</div>
-	    </c:if><%-- <c:if test="${listcount > 0 }"> end --%>
-	
-	<%-- 게시글이 없는 경우--%>
-	<c:if test="${listcount == 0 }">
-		<font size=5>등록된 글이 없습니다.</font>
-	</c:if>
 	</div>
-
 	
-    <script src="${pageContext.request.contextPath}/resources/js/match/jquery.min.js"></script>
+	<!--  등록모달 영역 -->
+	<div id="RegisterModal" class="modal hide" style="display: none;">
+	   	 <div class="wrapper">
+	        	<div class="container">
+	            	<div class="row_subject">매칭등록</div><div id="modal_id" class="modal_id">${USER_ID}</div>
+            		<div class="row1">
+                        <label class="radio radio-sm">
+                            <div class="container">
+                                <div class="label">Sport</div>
+                                 <input id="Sport" class="modal_input" name="Sport" type="text" readonly>
+                            </div>
+                        </label>
+                         <label>
+                            <div class="container ">
+                                <div class="label">Skill</div>
+                                 <input id="Skill" class="modal_input" name="Skill" type="text" value="" readonly>
+                            </div>
+                        </label>
+                    </div>
+                    <div class="row1">
+                        <label class="radio radio-sm">
+                            <div class="container">
+                                <div class="label">City</div>
+                                 <input id="City" class="modal_input" name="City" type="text" readonly>
+                            </div>
+                        </label>
+                         <label>
+                            <div class="container ">
+                                <div class="label">detail</div>
+                                 <input id="Detail" class="modal_input" name="detail" type="text" readonly>
+                            </div>
+                        </label>
+                    </div>
+                     <div class="row1">
+                        <label>
+                            <div class="container">
+                                <div class="label">Date</div>
+                                 <input id="Date" class="modal_input" name="Date" type="text" value="" readonly>
+                            </div>
+                        </label>
+                         <label>
+                            <div class="container">
+                                <div class="label">Person</div>
+                                 <input id="Person" class="modal_input" name="Person" type="text" value="" readonly>
+                            </div>
+                        </label>
+                    </div>
+         		</div>
+            <div class="modal_row">
+                <div class="modalbutton">
+                    <button class="closeModal row btn" onclick="javascript:closeModal1();">닫기</button>
+                </div>
+                <div class="modalbutton">
+                    	<button class="btnSearch row btn btn-fill btn-blue-light" onclick="javascript:registerModal()">등록</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- 신청 모달 -->
+    <div id="ApplyModal" class="modal hide" style="display: none;">
+	   	 <div class="wrapper">
+	        	<div class="container">
+	            	<div class="row_subject">매칭신청</div><div id="modal_id" class="modal_id">${USER_ID}</div>
+	            	<div id="regi_num" style="display:none;"></div>
+            		<div class="row1">
+                        <label class="radio radio-sm">
+                            <div class="container">
+                                <div class="label">Sport</div>
+                                 <input id="Sport" class="modal_input" name="Sport" type="text" value="" readonly>
+                            </div>
+                        </label>
+                         <label>
+                            <div class="container ">
+                                <div class="label">Skill</div>
+                                 <input id="Skill" class="modal_input" name="Skill" type="text" value="${MATCH_SKL}" readonly>
+                            </div>
+                        </label>
+                    </div>
+                    <div class="row1">
+                        <label class="radio radio-sm">
+                            <div class="container">
+                                <div class="label">City</div>
+                                 <input id="City" class="modal_input" name="City" type="text"  value="${MATCH_ADR}" readonly>
+                            </div>
+                        </label>
+                         <label>
+                            <div class="container ">
+                                <div class="label">detail</div>
+                                 <input id="Detail" class="modal_input" name="detail" type="text" value="${MATCH_DTL_ADR}" readonly>
+                            </div>
+                        </label>
+                    </div>
+                     <div class="row1">
+                        <label>
+                            <div class="container">
+                                <div class="label">Date</div>
+                                 <input id="Date" class="modal_input" name="Date" type="text" value="${MATCH_TIME}" readonly>
+                            </div>
+                        </label>
+                         <label>
+                            <div class="container">
+                                <div class="label">Person</div>
+                                 <input id="Person" class="modal_input" name="Person" type="text" value="${MATCH_PRS}" readonly>
+                            </div>
+                        </label>
+                    </div>
+         		</div>
+            <div class="modal_row">
+                <div class="modalbutton">
+                    <button class="closeModal row btn" onclick="javascript:closeModal2();">닫기</button>
+                </div>
+                <div class="modalbutton">
+                    	<button class="btnSearch row btn btn-fill btn-blue-light" onclick="javascript:ApplyModal()">신청</button>
+                </div>
+            </div>
+        </div>
+    </div>
+   <script src="${pageContext.request.contextPath}/resources/js/match/jquery.min.js"></script>
    <script src="${pageContext.request.contextPath}/resources/js/match/jquery-ui.min.js"></script>
-   <script src="${pageContext.request.contextPath}/resources/js/match/main.js"></script>
+   <script src="${pageContext.request.contextPath}/resources/js/match/match.js"></script>
    </main>
 <!-- Footer 영역  -->
 <jsp:include page="/WEB-INF/views/sport_comm/footer.jsp"/>

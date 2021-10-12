@@ -82,46 +82,52 @@ public class MatchController {
 	}
 	
 	@RequestMapping(value = "/basketball", method = RequestMethod.GET)
-	public ModelAndView basketball(ModelAndView mv) {
-		mv.setViewName("sport_match/match_basketball");
-		return mv;
+	public ModelAndView basketball(@RequestParam(value="page",defaultValue="1",required=false) int page, ModelAndView mv) {
+		int num=4;
+		String page_name ="sport_match/match_basketball";
+		return pageSet(num, page, page_name);
 	}
 	
 	@RequestMapping(value = "/golf", method = RequestMethod.GET)
-	public ModelAndView golf(ModelAndView mv) {
-		mv.setViewName("sport_match/match_golf");
-		return mv;
+	public ModelAndView golf(@RequestParam(value="page",defaultValue="1",required=false) int page, ModelAndView mv) {
+		int num = 10;
+		String page_name ="sport_match/match_golf";
+		return pageSet(num, page, page_name);
 	}
 	
 	@RequestMapping(value = "/bowling", method = RequestMethod.GET)
-	public ModelAndView bowling(ModelAndView mv) {
-		mv.setViewName("sport_match/match_bowling");
-		return mv;
+	public ModelAndView bowling(@RequestParam(value="page",defaultValue="1",required=false) int page, ModelAndView mv) {
+		int num = 9;
+		String page_name ="sport_match/match_bowling";
+		return pageSet(num, page, page_name);
 	}
 	
 	@RequestMapping(value = "/tennis", method = RequestMethod.GET)
-	public ModelAndView tennis(ModelAndView mv) {
-		mv.setViewName("sport_match/match_tennis");
-		return mv;
+	public ModelAndView tennis(@RequestParam(value="page",defaultValue="1",required=false) int page, ModelAndView mv) {
+		int num = 8;   //sport_num 확인
+		String page_name = "sport_match/match_tennis";
+		return pageSet(num, page, page_name);
 	}
 	
 	@RequestMapping(value = "/badminton", method = RequestMethod.GET)
-	public ModelAndView badminton(ModelAndView mv) {
-		mv.setViewName("sport_match/match_badminton");
-		return mv;
+	public ModelAndView badminton(@RequestParam(value="page",defaultValue="1",required=false) int page, ModelAndView mv) {
+		int num = 7;
+		String page_name= "sport_match/match_badminton";
+		return pageSet(num, page, page_name);
 	}
 	
 	
 	@RequestMapping(value = "/tabletennis", method = RequestMethod.GET)
-	public ModelAndView tabletennis(ModelAndView mv) {
-		mv.setViewName("sport_match/match_tabletennis");
-		return mv;
+	public ModelAndView tabletennis(@RequestParam(value="page",defaultValue="1",required=false) int page, ModelAndView mv) {
+		int num = 6;
+		String page_name=  "sport_match/match_tabletennis";
+		return pageSet(num, page, page_name);
 	}
 	
 	@RequestMapping(value = "/volleyball", method = RequestMethod.GET)
 	public ModelAndView vallyball(@RequestParam(value="page",defaultValue="1",required=false) int page,
 			ModelAndView mv) {
-		int num = 8;   //sport_num 확인
+		int num = 5;   //sport_num 확인
 		String page_name = "sport_match/match_volleyball";
 		return pageSet(num, page, page_name);
 	}

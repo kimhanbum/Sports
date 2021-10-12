@@ -4,7 +4,7 @@
 <html class="no-js" lang="zxx">
     <head>
         <meta charset="utf-8">
-        <title>eCommerce HTML-5 Template </title>
+        <title>Sport - Soccer </title>
         
      
 <link rel="shortcut icon" type="image/x-icon" href="${pageContext.request.contextPath}/resources/img/favicon.ico">
@@ -34,10 +34,12 @@
 </style>
   </head>
   <body>
+  
    	<!-- 헤더 영역  -->
 <jsp:include page="/WEB-INF/views/sport_comm/header.jsp"/>
    <main>
    		<div id="sport_num" style="display:none;">2</div>
+   		<div id="user_id" style="display:none;">${USER_ID}</div>
        <!-- slider Area Start -->
        <div class="slider-area ">
        	<div id="icon_box">
@@ -87,7 +89,7 @@
                          <div class="hero__caption">
                              <h1 id="text" data-animation="fadeInRight" data-delay=".6s" style="color: white; font-size: 90px">Social<br>Match<br></h1>
                              <div class="hero__btn" data-animation="fadeInRight" data-delay="1s">
-                                 <a href="industries.html" class="btn hero-btn">Login Now</a>
+                                 <a href="#" class="btn hero-btn">Play now</a>
                              </div>
                          </div>
                      </div>
@@ -140,10 +142,12 @@
 	                   	</select>
 	                   </div>
                    </div>
-                   <div id="btnSubmit" onclick="javascript:btnClick();" class="submit ibx">Search&nbsp;&nbsp;</div>
-                   <!-- <div class="form-submit">
-                       <input type="submit" id="submit" class="submit" value="Search now" />
-                   </div> -->
+                   <c:if test="${empty USER_ID}">
+                    <div id="btnSubmit" onclick="location.href='${pageContext.request.contextPath}/member/login'" class="submit ibx">Search&nbsp;&nbsp;</div>
+                	</c:if>
+                	<c:if test="${!empty USER_ID}">
+                   <div id="btnSubmit" onclick="javascript:SearchClick();" class="submit ibx">Search&nbsp;&nbsp;</div>
+                   </c:if>
                </div>
            </form>
        </div>
@@ -154,33 +158,43 @@
 			<table class="table table-striped">
 				<thead>
 					<tr>
-					   <th colspan="3">Matching list</th>
-					   <th colspan="2">
-							<font size=3>Total : ${listcount}</font>
+					   <th colspan="4">Matching list</th>
+					   <th colspan="4">
+							<font size=3>Total : <a id="all_cnt">${listcount}</a></font>
 					   </th>
 					</tr>
 					<tr>
-						<th><div>지역</div></th>
-						<th><div>세부지역</div></th>
-						<th><div>날짜</div></th>
-						<th><div>인원</div></th>
-						<th><div>실력</div></th>
+						<th><div class="classalign">작성자</div></th>
+						<th><div class="classalign">지역</div></th>
+						<th><div class="classalign">세부지역</div></th>
+						<th><div class="classalign">날짜</div></th>
+						<th><div class="classalign">인원</div></th>
+						<th><div class="classalign">실력</div></th>
+						<th><div class="classalign">신청</div></th>
 					</tr>	
 				</thead>
-				<tbody>
+				<tbody id="search_list">
 					<c:set var="num" value="${listcount-(page-1)*limit}"/>	
 					<c:forEach var="m" items="${matchlist}">	
 						<tr>
-							<td><div>${m.MATCH_ADR}</div></td>
-							<td><div>${m.MATCH_DTL_ADR}</div></td>	
-							<td><div>${m.MATCH_TIME}</div></td>
-							<td><div>${m.MATCH_PRS}</div></td>
-							<td><div>${m.MATCH_SKL}</div></td>
+							<td><div id="Regi_ID"class="classalign">${m.REGISTER_ID}</div></td>
+							<td><div class="classalign">${m.MATCH_ADR}</div></td>
+							<td><div class="classalign">${m.MATCH_DTL_ADR}</div></td>	
+							<td><div class="classalign">${m.MATCH_TIME}</div></td>
+							<td><div class="classalign">${m.MATCH_PRS}</div></td>
+							<td><div class="classalign">${m.MATCH_SKL}</div></td>
+						<c:if test="${m.REGISTER_ID == USER_ID}">
+							<td><div id="btnSubmit2" onclick="javascript:alertApply()" class="submit3">Apply</div></td>
+						</c:if>
+						<c:if test="${m.REGISTER_ID != USER_ID}">
+							<td><div id="btnSubmit2" onclick="javascript:btnApply(${m.REGISTER_NUM});" class="submit2">Apply</div></td>
+						</c:if>
 						</tr>
+							
 					</c:forEach>
 				 </tbody>	
 			</table>
-				<div class="center-block">
+				<div id="center-block" class="center-block">
 					  <ul class="pagination justify-content-center">		
 						 <c:if test="${page <= 1 }">
 							<li class="page-item">
@@ -189,7 +203,7 @@
 						 </c:if>
 						 <c:if test="${page > 1 }">			
 							<li class="page-item">
-							   <a href="baseball?page=${page-1}" 
+							   <a href="mainPage?page=${page-1}" 
 							      class="page-link">이전&nbsp;</a>
 							</li> 
 						 </c:if>
@@ -202,7 +216,7 @@
 							</c:if>
 							<c:if test="${a != page }">
 							    <li class="page-item">
-								   <a href="baseball?page=${a}" 
+								   <a href="mainPage?page=${a}" 
 								      class="page-link">${a}</a>
 							    </li>	
 							</c:if>
@@ -215,7 +229,7 @@
 						</c:if>
 						<c:if test="${page < maxpage }">
 						  <li class="page-item">
-							<a href="baseball?page=${page+1}" 
+							<a href="mainPage?page=${page+1}" 
 							   class="page-link">&nbsp;다음</a>
 						  </li>	
 						</c:if>
@@ -223,16 +237,18 @@
 				</div>
 			</c:if>
 			<%-- 게시글이 없는 경우--%>
+		<div style="text-align:center">
 			<c:if test="${listcount == 0 }">
 				<font size=5>등록된 글이 없습니다.</font>
 			</c:if>
+		</div>
 	</div>
 	
-	<!--  모달 영역 -->
+	<!--  등록모달 영역 -->
 	<div id="RegisterModal" class="modal hide" style="display: none;">
 	   	 <div class="wrapper">
 	        	<div class="container">
-	            	<div class="row_subject">매칭등록</div><div class="modal_id">ID:admin</div>
+	            	<div class="row_subject">매칭등록</div><div id="modal_id" class="modal_id">${USER_ID}</div>
             		<div class="row1">
                         <label class="radio radio-sm">
                             <div class="container">
@@ -278,16 +294,75 @@
          		</div>
             <div class="modal_row">
                 <div class="modalbutton">
-                    <button class="closeModal row btn" onclick="javascript:colseModal();">닫기</button>
+                    <button class="closeModal row btn" onclick="javascript:closeModal1();">닫기</button>
                 </div>
                 <div class="modalbutton">
-                    <button class="btnSearch row btn btn-fill btn-blue-light" onclick="javascript:registerModal()">등록</button>
+                    	<button class="btnSearch row btn btn-fill btn-blue-light" onclick="javascript:registerModal()">등록</button>
                 </div>
             </div>
         </div>
     </div>
-	
-    <script src="${pageContext.request.contextPath}/resources/js/match/jquery.min.js"></script>
+    
+    <!-- 신청 모달 -->
+    <div id="ApplyModal" class="modal hide" style="display: none;">
+	   	 <div class="wrapper">
+	        	<div class="container">
+	            	<div class="row_subject">매칭신청</div><div id="modal_id" class="modal_id">${USER_ID}</div>
+	            	<div id="regi_num" style="display:none;"></div>
+            		<div class="row1">
+                        <label class="radio radio-sm">
+                            <div class="container">
+                                <div class="label">Sport</div>
+                                 <input id="Sport" class="modal_input" name="Sport" type="text" value="" readonly>
+                            </div>
+                        </label>
+                         <label>
+                            <div class="container ">
+                                <div class="label">Skill</div>
+                                 <input id="Skill" class="modal_input" name="Skill" type="text" value="${MATCH_SKL}" readonly>
+                            </div>
+                        </label>
+                    </div>
+                    <div class="row1">
+                        <label class="radio radio-sm">
+                            <div class="container">
+                                <div class="label">City</div>
+                                 <input id="City" class="modal_input" name="City" type="text"  value="${MATCH_ADR}" readonly>
+                            </div>
+                        </label>
+                         <label>
+                            <div class="container ">
+                                <div class="label">detail</div>
+                                 <input id="Detail" class="modal_input" name="detail" type="text" value="${MATCH_DTL_ADR}" readonly>
+                            </div>
+                        </label>
+                    </div>
+                     <div class="row1">
+                        <label>
+                            <div class="container">
+                                <div class="label">Date</div>
+                                 <input id="Date" class="modal_input" name="Date" type="text" value="${MATCH_TIME}" readonly>
+                            </div>
+                        </label>
+                         <label>
+                            <div class="container">
+                                <div class="label">Person</div>
+                                 <input id="Person" class="modal_input" name="Person" type="text" value="${MATCH_PRS}" readonly>
+                            </div>
+                        </label>
+                    </div>
+         		</div>
+            <div class="modal_row">
+                <div class="modalbutton">
+                    <button class="closeModal row btn" onclick="javascript:closeModal2();">닫기</button>
+                </div>
+                <div class="modalbutton">
+                    	<button class="btnSearch row btn btn-fill btn-blue-light" onclick="javascript:ApplyModal()">신청</button>
+                </div>
+            </div>
+        </div>
+    </div>
+   <script src="${pageContext.request.contextPath}/resources/js/match/jquery.min.js"></script>
    <script src="${pageContext.request.contextPath}/resources/js/match/jquery-ui.min.js"></script>
    <script src="${pageContext.request.contextPath}/resources/js/match/match.js"></script>
    </main>
