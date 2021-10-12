@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.project.sports.dao.MmatchDAO;
+import com.project.sports.domain.MatchInfo;
+import com.project.sports.domain.Mentee;
 import com.project.sports.domain.Mentor;
 import com.project.sports.domain.Sports;
 import com.sun.media.jfxmedia.logging.Logger;
@@ -120,5 +122,154 @@ public class MmatchServiceImpl implements MmatchService {
 	@Override
 	public Mentor getMentorDetail(String code) {
 		return dao.getMentorDetail(code);
+	}
+
+	@Override
+	public int ApplyMentor(String id,String code) {
+		HashMap<String,String> map = new HashMap<String,String>();
+		map.put("id",id);
+		map.put("code",code);
+		return dao.ApplyWMentor(map);
+	}
+
+	@Override
+	public int checkApply(String id, String code) {
+		HashMap<String,String> map = new HashMap<String,String>();
+		map.put("id",id);
+		map.put("code",code);
+		return dao.checkApply(map);
+	}
+
+	@Override
+	public int deleteMentor(String code) {
+		return dao.deleteWMentor(code);
+	}
+
+	@Override
+	public int getSport(String subject) {
+		return dao.getSport(subject);
+	}
+
+	@Override
+	public int modifyMentorWriting(Mentor mentor) {
+		return dao.modifyMentorWriting(mentor);
+	}
+
+	@Override
+	public void changeApplyState(MatchInfo matchinfo) {
+		dao.changeApplyState(matchinfo);
+	}
+	
+	@Override
+	public int insertMenteeWriting(Mentee mentee) {
+		return dao.insertMenteeWriting(mentee);
+	}
+
+
+	
+	@Override
+	public int getMenteeListCount() {
+		return dao.getMenteeListCount();
+	}
+
+	@Override
+	public List<Mentee> getMenteeList(int page, int limit) {
+		HashMap <String,Integer> map = new HashMap <String,Integer>();
+		int startrow =(page-1)*limit +1;
+		int endrow=startrow+limit-1;
+		map.put("start",startrow);
+		map.put("end",endrow);
+		return dao.getMenteeList(map);
+	}
+
+	@Override
+	public int getSearchMenteeListCount(String search_field, String search_word) {
+		HashMap<String,Object> map = new HashMap<String,Object>();
+		if(!search_field.equals("")) {
+			//검색 영역이 있다면 map에 put
+			map.put("search_field",search_field);
+			
+			//검색 영역에 따라 map에 put을하는 조건이 틀림
+			switch(search_field) {
+				case "지역" : 
+					String[] loc =search_word.split(",");
+					map.put("search_word",loc[0]);
+					map.put("search_addword",loc[1]);
+					break;
+				case "수업료": 
+					String money =search_word.substring(0,2)+"0000";
+					map.put("search_word",money);
+					break;
+				case "과목" : 
+				case "성별" : 
+					map.put("search_word",search_word);
+					break;
+			}
+			
+		}
+		return dao.getSearchMenteeListCount(map);
+	}
+
+	@Override
+	public List<Mentee> getSearchMenteeList(int page, int limit, String search_field, String search_word) {
+		HashMap<String,Object> map = new HashMap<String,Object>();
+		if(!search_field.equals("")) {
+			//검색 영역이 있다면 map에 put
+			map.put("search_field",search_field);
+			
+			//검색 영역에 따라 map에 put을하는 조건이 틀림
+			switch(search_field) {
+				case "지역" : 
+					String[] loc =search_word.split(",");
+					map.put("search_word",loc[0]);
+					map.put("search_addword",loc[1]);
+					break;
+				case "수업료": 
+					String money =search_word.substring(0,2)+"0000";
+					map.put("search_word",money);
+					break;
+				case "과목" : 
+				case "성별" : 
+					map.put("search_word",search_word);
+					break;
+			}
+			
+		}
+		int startrow =(page-1)*limit +1;
+		int endrow=startrow+limit-1;
+		map.put("start",startrow);
+		map.put("end",endrow);
+		return dao.getSearchMenteeList(map);
+	}
+
+	@Override
+	public Mentee getMenteeDetail(String code) {
+		return dao.getMenteeDetail(code);
+	}
+
+	@Override
+	public int ApplyMentee(String id,String code) {
+		HashMap<String,String> map = new HashMap<String,String>();
+		map.put("id",id);
+		map.put("code",code);
+		return dao.ApplyWMentee(map);
+	}
+
+	@Override
+	public int checkMenteeApply(String id, String code) {
+		HashMap<String,String> map = new HashMap<String,String>();
+		map.put("id",id);
+		map.put("code",code);
+		return dao.checkApply(map);
+	}
+
+	@Override
+	public int deleteMentee(String code) {
+		return dao.deleteWMentee(code);
+	}
+
+	@Override
+	public int modifyMenteeWriting(Mentee mentee) {
+		return dao.modifyMenteeWriting(mentee);
 	}
 }

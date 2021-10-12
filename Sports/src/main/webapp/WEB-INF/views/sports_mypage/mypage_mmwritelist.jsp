@@ -11,8 +11,6 @@
         <!-- <link rel="manifest" href="site.webmanifest"> -->
 		<link rel="shortcut icon" type="image/x-icon" href="${pageContext.request.contextPath}/resources/img/favicon.ico">
 		<script src="https://unpkg.com/feather-icons"></script>
-		<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/weather.css">
-		<script src="${pageContext.request.contextPath}/resources/js/weather.js"></script>
 </head>
 <style>
 #paging {
@@ -32,13 +30,14 @@
 
 .pagination a.active {
 	background-color: #4CAF50;
-	color: white;
+	color: white !important;
 }
 
 .pagination a:hover:not(.active)
 {
-  background-color:#ddd;
+  color:red !important;
 }
+
 #paging {
 	text-align: center;
 	margin-top: 0
@@ -292,7 +291,6 @@ body .grid {
 #accordion li{
    list-style-type: circle;
 }
-
 </style>
 
 <body>
@@ -330,7 +328,7 @@ body .grid {
     </div>
     <!-- slider Area End-->
 
-    <section class="blog_area section-padding">
+    <section class="section-padding">
        <div class="row">
             	<div class="col-lg-2">
             		<!-- 마이 페이지 좌측 asideLeft 메뉴들 -->
