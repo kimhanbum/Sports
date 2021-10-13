@@ -26,7 +26,7 @@
 	float: left;
 	color: black;
 	font-weight: bold;
-	font-size: 25px
+	font-size: 20px
 }
 
 
@@ -78,10 +78,8 @@
 							<div class="dmoain-pricing">
 								<div class="table-responsive-sm">
 									 <a id="Apply" href="#">
-									 <i class="fas fa-running" 
-									
-									></i>&nbsp;&nbsp;등록 매칭</a> <br>
-									
+									 <i class="fas fa-running"></i>&nbsp;&nbsp;내가 등록한 매칭</a><br>
+									<br>
 									<table>
 										<thead>
 											<tr class="domain-head">
@@ -116,7 +114,7 @@
 								<div class="table-responsive-sm">
 									<a id="Register" 
 									href="#"
-									><i class="fas fa-running"></i>&nbsp;&nbsp;신청 매칭</a> <br>
+									><i class="fas fa-running"></i>&nbsp;&nbsp;내가 신청한 매칭</a><br>
 									<br>
 									<table>
 										<thead>
@@ -128,6 +126,7 @@
 												<th scope="col">인원</th>
 												<th scope="col">실력</th>
 												<th scope="col">상태</th>
+												<th scope="col">버튼</th>
 											</tr>
 										</thead>
 										<tbody>
@@ -137,20 +136,21 @@
 												<td data-label="renewal pricing">${SELL_DELIVERY}</td>
 												<td data-label="transfer-price"></td>
 											</tr>
-
 										</tbody>
 									</table>
-
 								</div>
 							</div>
-							<hr><br><br><br>
+							<hr><br>
 							<div class="dmoain-pricing">
 								<div class="table-responsive-sm">
 									<a id="Deadline"><i class="fas fa-running"></i>
-									&nbsp;마감 매칭</a> 
+									&nbsp;마감 매칭</a><br> 
+									<br>
 									<table>
 										<thead>
 											<tr class="domain-head">
+												<th scope="col">등록ID</th>
+												<th scope="col">신청ID</th>
 												<th scope="col">스포츠</th>
 												<th scope="col">지역</th>
 												<th scope="col">세부지역</th>
@@ -176,13 +176,12 @@
 										/Mydeal/delete2?num=${b.DIR_NUMBER}"><i class="far fa-trash-alt"></i></a></span></td>
 											</tr>
 										</c:forEach>
-
 										</tbody>
 									</table>
-
 								</div>
 							</div>
 						</div>
+						<hr>
 						<!-- end title -->
 					</div>
 					<!-- end container -->

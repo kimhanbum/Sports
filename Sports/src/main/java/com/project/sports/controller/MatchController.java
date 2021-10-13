@@ -21,13 +21,14 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.project.sports.domain.MailVO;
 import com.project.sports.domain.Match;
+import com.project.sports.domain.Match_Apply;
 import com.project.sports.domain.Member;
 import com.project.sports.domain.Sports;
 import com.project.sports.service.MatchService;
 import com.project.sports.task.SendMail;
  
 @Controller
-@RequestMapping(value="/match")
+@RequestMapping(value={"/match","/mypage"})
 public class MatchController {
 	private static final Logger logger = LoggerFactory.getLogger(MatchController.class);
 	
@@ -179,7 +180,10 @@ public class MatchController {
 	
 	@RequestMapping(value="/RegiUpdate",method=RequestMethod.POST)
 	@ResponseBody
-	public String Regiupdate(@RequestParam(value="REGISTER_ID") String REGISTER_ID, @RequestParam(value="REGISTER_NUM",defaultValue="1")int REGISTER_NUM) throws Exception{
+	public String Regiupdate(@RequestParam(value="REGISTER_ID") String REGISTER_ID, 
+							@RequestParam(value="REGISTER_NUM",defaultValue="1")int REGISTER_NUM,
+							Match_Apply match_apply)throws Exception{
+		matchservice.ApplyMatch(match_apply);
 		int result =  matchservice.RegiupdateMatch(REGISTER_NUM);
 		String email = matchservice.getemail(REGISTER_ID);
 		if(result ==0) {
@@ -197,5 +201,11 @@ public class MatchController {
 		sendMail.sendMail(vo);
 		return "1";
 		}
+	}
+	
+	@RequestMapping(value = "/mymatching", method = RequestMethod.GET)
+	public ModelAndView mymatching(ModelAndView mv) {
+		mv.setViewName("sports_mypage/mypage_mymatching");
+		return mv;
 	}
 }

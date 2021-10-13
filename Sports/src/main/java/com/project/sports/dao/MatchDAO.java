@@ -8,6 +8,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import com.project.sports.domain.Match;
+import com.project.sports.domain.Match_Apply;
 import com.project.sports.domain.Sports;
 
 @Repository
@@ -46,5 +47,9 @@ public class MatchDAO {
 
 	public String getemail(String REGISTER_ID) {
 		return sqlSession.selectOne("Match.getemail",REGISTER_ID);
+	}
+
+	public void ApplyMatch(Match_Apply match_apply) {
+		sqlSession.insert("Match.ApplyMatch",match_apply);
 	}
 }
