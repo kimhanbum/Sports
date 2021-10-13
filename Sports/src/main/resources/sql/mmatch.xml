@@ -124,8 +124,10 @@
    update match_info 
    set match_state = #{match_state}
    where match_state = 1 and match_code = #{match_code}
+   <if test='user_id !=""'>
+   		and user_id = #{user_id}
+   </if>
 </update>	
-
 
 <insert id="insertWMentee" parameterType="mentee">
 	<selectKey resultType="String"  order="BEFORE"
@@ -268,6 +270,50 @@
    )
    WHERE RNUM <![CDATA[>=]]> #{start} AND RNUM <![CDATA[<=]]> #{end}
 </select>
+
+
+
+<select id="MyMentorReqCount" parameterType="String" resultType="int" >
+   select count(*)
+   from match_info,mentor_match,member_info
+   where match_info.match_code = mentor_match.mentor_code
+   and mentor_match.user_id=#{id} 
+   and member_info.user_id = match_info.user_id	
+</select>
+<select id="MyMentorReqlist" parameterType="Map" resultType="AR">
+   SELECT * FROM 
+   (SELECT ROWNUM RNUM, m.*
+    FROM
+         (select mentor_title,sports_name,match_code,user_name,user_mobile,match_state,match_info.user_id
+   		  from match_info,mentor_match,member_info
+          where match_info.match_code = mentor_match.mentor_code 
+          and mentor_match.user_id=#{id} 
+          and member_info.user_id = match_info.user_id
+          ORDER BY MENTOR_CODE DESC) m
+   )
+   WHERE RNUM <![CDATA[>=]]> #{start} AND RNUM <![CDATA[<=]]> #{end}
+</select>
+<select id="MyMenteeReqCount" parameterType="String" resultType="int" >
+   select count(*)
+   from match_info,mentee_match,member_info
+   where match_info.match_code = mentee_match.mentee_code
+   and mentee_match.user_id=#{id} 
+   and member_info.user_id = match_info.user_id	
+</select>
+<select id="MyMenteeReqlist" parameterType="Map" resultType="AR">
+   SELECT * FROM 
+   (SELECT ROWNUM RNUM, m.*
+    FROM
+         (select mentee_title,sports_name,match_code,user_name,user_mobile,match_state,match_info.user_id
+   		  from match_info,mentee_match,member_info
+          where match_info.match_code = mentee_match.mentee_code 
+          and mentee_match.user_id=#{id} 
+          and member_info.user_id = match_info.user_id
+          ORDER BY MENTEE_CODE DESC) m
+   )
+   WHERE RNUM <![CDATA[>=]]> #{start} AND RNUM <![CDATA[<=]]> #{end}
+</select>
+
 
 <delete id="deleteMatchApp" parameterType="map">
 	delete from match_info 

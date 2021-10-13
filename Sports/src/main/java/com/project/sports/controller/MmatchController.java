@@ -30,6 +30,7 @@ import com.project.sports.domain.Mentee;
 import com.project.sports.domain.Mentor;
 import com.project.sports.domain.Sports;
 import com.project.sports.service.MmatchService;
+import com.project.sports.task.SendSms;
 
 @Controller
 @RequestMapping(value= {"/mmatch","/mypage"})
@@ -806,7 +807,7 @@ public class MmatchController {
 	}
 	
 	
-	//마이페이지의 멘토 글 리스트 보기(ajax)
+	//마이페이지의 신청 글 리스트 보기(ajax)
 	@RequestMapping(value = "/mentorwriteList_ajax", method = RequestMethod.GET)
 	@ResponseBody
 	public Map<String,Object> MypageMentorlistAjax(int page,
@@ -887,7 +888,7 @@ public class MmatchController {
 	    return map;
 	}
 	
-	//마이페이지의 요청 리스트 보기(멘토글 신청)
+	//마이페이지의 신청 리스트 보기(멘토글 신청)
 	@RequestMapping(value = "/mentorApplyList", method = RequestMethod.GET)
 	public ModelAndView MypageMentorApplylist(
 			@RequestParam(value="limit" ,defaultValue="4", required=false) int limit,
@@ -955,7 +956,7 @@ public class MmatchController {
 	    return map;
 	}
 	
-	//마이페이지의 요청 리스트 보기(멘티글 신청)
+	//마이페이지의 신청 리스트 보기(멘글에 대한 신청)
 	@RequestMapping(value = "/menteeApplyList", method = RequestMethod.GET)
 	public ModelAndView MypageMenteeApplylist(
 			@RequestParam(value="limit" ,defaultValue="4", required=false) int limit,
@@ -988,7 +989,7 @@ public class MmatchController {
 	    mv.addObject("applylist",applylist);
 		return mv;
 	}
-	//마이페이지의 요청 글 리스트 보기(멘티글 신청 ajax)
+	//마이페이지의 신청 글 리스트 보기(멘티글 신청 ajax)
 	@RequestMapping(value = "/menteeApplyList_ajax", method = RequestMethod.GET)
 	@ResponseBody
 	public Map<String,Object> MypageMenteeApplylistAjax(int page,
@@ -1030,5 +1031,160 @@ public class MmatchController {
 		String id =(String)session.getAttribute("USER_ID");
 		int result = mmatchservice.cancelApply(code,id);
 		return result;
+	}
+
+	//마이페이지의  내게 한 요청 리스트 보기(내가쓴 멘토글에 대한 요청 )
+	@RequestMapping(value = "/mentorReqList", method = RequestMethod.GET)
+	public ModelAndView MypageMentorReqlist(
+			@RequestParam(value="limit" ,defaultValue="4", required=false) int limit,
+			@RequestParam(value="page" ,defaultValue="1", required=false) int page,
+			HttpSession session,
+			ModelAndView mv)
+	{
+		String id =(String)session.getAttribute("USER_ID"); 
+	    int listcount = mmatchservice.getMyMentorReqListCount(id); //총 리스트 수를 받아옴
+	    //총 페이지 수
+	    int maxpage = (listcount + limit - 1) /limit;
+	    
+	    //현재 페이지에 보여줄 시작 페이지 수 (1,11,21 등등)
+	    int startpage = ((page-1) / 10) * 10 + 1;
+	    
+	    //현재 페이지에 보내줄 마지막 페이지 수 (10,20.30 등등)
+	    int endpage = startpage + 10 -1;
+	    
+	    if(endpage > maxpage)
+	    	endpage = maxpage;
+
+	    List<MatchAppReq> reqlist = mmatchservice.getMyMentorReqList(page, limit,id); //리스트를 받아옴
+	   
+	    mv.setViewName("sports_mypage/mypage_myMentorReqlist");
+	    mv.addObject("page",page);
+	    mv.addObject("maxpage",maxpage);
+	    mv.addObject("startpage",startpage);
+	    mv.addObject("endpage",endpage);
+	    mv.addObject("listcount",listcount);
+	    mv.addObject("reqlist",reqlist);
+		return mv;
+	}
+	//마이페이지의 내게 한 요청 리스트 보기(내가쓴 멘토글에 대한 요청 ajax)
+	@RequestMapping(value = "/mentorReqList_ajax", method = RequestMethod.GET)
+	@ResponseBody
+	public Map<String,Object> MypageMentorReqlistAjax(int page,
+			@RequestParam(value="limit" ,defaultValue="4", required=false) int limit,
+			HttpSession session)
+	{
+		String id =(String)session.getAttribute("USER_ID"); 
+	    int listcount = mmatchservice.getMyMentorReqListCount(id); //총 리스트 수를 받아옴
+	    //총 페이지 수
+	    int maxpage = (listcount + limit - 1) /limit;
+	    
+	    //현재 페이지에 보여줄 시작 페이지 수 (1,11,21 등등)
+	    int startpage = ((page-1) / 10) * 10 + 1;
+	    
+	    //현재 페이지에 보내줄 마지막 페이지 수 (10,20.30 등등)
+	    int endpage = startpage + 10 -1;
+	    
+	    if(endpage > maxpage)
+	    	endpage = maxpage;
+	    
+	    List<MatchAppReq> reqlist = mmatchservice.getMyMentorReqList(page, limit,id); //리스트를 받아옴
+	    
+	    
+	    Map<String,Object> map = new HashMap<String,Object>();
+
+	    map.put("page",page);
+	    map.put("maxpage",maxpage);
+	    map.put("startpage",startpage);
+	    map.put("endpage",endpage);
+	    map.put("listcount",listcount);
+	    map.put("reqlist",reqlist);
+	    return map;
+	}
+	
+	//마이페이지의 내게 한 요청 리스트 보기(내가쓴 멘티글에 대한 요청)
+	@RequestMapping(value = "/menteeReqList", method = RequestMethod.GET)
+	public ModelAndView MypageMenteeReqlist(
+			@RequestParam(value="limit" ,defaultValue="4", required=false) int limit,
+			@RequestParam(value="page" ,defaultValue="1", required=false) int page,
+			HttpSession session,
+			ModelAndView mv)
+	{
+		String id =(String)session.getAttribute("USER_ID"); 
+	    int listcount = mmatchservice.getMyMenteeReqListCount(id); //총 리스트 수를 받아옴
+	    //총 페이지 수
+	    int maxpage = (listcount + limit - 1) /limit;
+	    
+	    //현재 페이지에 보여줄 시작 페이지 수 (1,11,21 등등)
+	    int startpage = ((page-1) / 10) * 10 + 1;
+	    
+	    //현재 페이지에 보내줄 마지막 페이지 수 (10,20.30 등등)
+	    int endpage = startpage + 10 -1;
+	    
+	    if(endpage > maxpage)
+	    	endpage = maxpage;
+
+	    List<MatchAppReq> reqlist = mmatchservice.getMyMenteeReqList(page, limit,id); //리스트를 받아옴
+	   
+	    mv.setViewName("sports_mypage/mypage_myMenteeReqlist");
+	    mv.addObject("page",page);
+	    mv.addObject("maxpage",maxpage);
+	    mv.addObject("startpage",startpage);
+	    mv.addObject("endpage",endpage);
+	    mv.addObject("listcount",listcount);
+	    mv.addObject("reqlist",reqlist);
+		return mv;
+	}
+	//마이페이지의  내게 한 요청 리스트 보기(내가쓴 멘티글에 대한 요청 ajax)
+	@RequestMapping(value = "/menteeReqList_ajax", method = RequestMethod.GET)
+	@ResponseBody
+	public Map<String,Object> MypageMenteeReqlistAjax(int page,
+			@RequestParam(value="limit" ,defaultValue="4", required=false) int limit,
+			HttpSession session)
+	{
+		String id =(String)session.getAttribute("USER_ID"); 
+	    int listcount = mmatchservice.getMyMenteeReqListCount(id); //총 리스트 수를 받아옴
+	    //총 페이지 수
+	    int maxpage = (listcount + limit - 1) /limit;
+	    
+	    //현재 페이지에 보여줄 시작 페이지 수 (1,11,21 등등)
+	    int startpage = ((page-1) / 10) * 10 + 1;
+	    
+	    //현재 페이지에 보내줄 마지막 페이지 수 (10,20.30 등등)
+	    int endpage = startpage + 10 -1;
+	    
+	    if(endpage > maxpage)
+	    	endpage = maxpage;
+	    
+	    List<MatchAppReq> reqlist = mmatchservice.getMyMenteeReqList(page, limit,id); //리스트를 받아옴
+	    
+	    
+	    Map<String,Object> map = new HashMap<String,Object>();
+
+	    map.put("page",page);
+	    map.put("maxpage",maxpage);
+	    map.put("startpage",startpage);
+	    map.put("endpage",endpage);
+	    map.put("listcount",listcount);
+	    map.put("reqlist",reqlist);
+	    return map;
+	}
+	//요청에 대한 대답 처리 (수락/거절)
+	@PostMapping("/responsRequest")
+	@ResponseBody
+	public int responseRequest(int state,String code,String id,String tel){
+		MatchInfo matchInfo = new MatchInfo();
+		SendSms sms =new SendSms();
+		String message="";
+		matchInfo.setMatch_state(state);
+		matchInfo.setMatch_code(code);
+		matchInfo.setUser_id(id);
+		if(state == 2) {
+			message=id+"님의 멘티/멘토 매칭 신청이 거절되었습니다.(상세 내용은 웹확인)";
+		}else if(state ==3){
+			message=id+"님의 멘티/멘토 매칭 신청이 수락되었습니다.(상세 내용은 웹확인)";
+		}
+		//유료 서비스라 테스트 아닐떄는 주석 처리
+		//sms.sendSmsData(tel, message);
+	    return mmatchservice.changeApplyState(matchInfo);
 	}
 }

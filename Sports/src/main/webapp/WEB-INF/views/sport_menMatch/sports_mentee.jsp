@@ -353,10 +353,10 @@
 										<div class="product-img">
 											<a href="javascript:detail('${mentee.mentee_code}');" >
 												<c:if test="${mentee.mentee_pic1 == null}">
-													<img data-toggle="modal" data-target="#detailModal" style="height:250px" src="${pageContext.request.contextPath}/resources/image/mmatch/default.jpg" alt="">
+													<img style="height:250px" src="${pageContext.request.contextPath}/resources/image/mmatch/default.jpg" alt="">
 												</c:if>
 												<c:if test="${mentee.mentee_pic1 != null}">
-													<img data-toggle="modal" data-target="#detailModal" style="height:250px" src="<spring:url value='/matchupload${mentee.mentee_pic1}'/>" alt=""/>
+													<img style="height:250px" src="<spring:url value='/matchupload${mentee.mentee_pic1}'/>" alt=""/>
 												</c:if>
 											</a>
 										</div>
@@ -561,9 +561,9 @@
 								 +    '<div class="product-img">'
 								 +      '<a href="javascript:detail('+"'"+ item.mentee_code+"'" +');">';
 						  if(item.mentee_pic1 == null){ //사진이없으면 default 사진을 출력
-						    output+=       '<img data-toggle="modal" data-target="#detailModal" style="height:250px" src="/sports/resources/image/mmatch/default.jpg" alt="">';
+						    output+=       '<img style="height:250px" src="/sports/resources/image/mmatch/default.jpg" alt="">';
 						  }else{  //사진이 있으면 해당 사진으로 출력
-						    output+=       '<img data-toggle="modal" data-target="#detailModal" style="height:250px" src="<spring:url value="/matchupload'+item.mentee_pic1+'"/>" alt=""/>'; 
+						    output+=       '<img style="height:250px" src="<spring:url value="/matchupload'+item.mentee_pic1+'"/>" alt=""/>'; 
 						  }
 						 output+='       </a>'
 								 +    '</div>'
@@ -686,6 +686,7 @@
 						$('#detail_btn').append(output);						
 					}
 					
+					$("#detailModal").modal();
 				},
 				error : function(){
 					console.log('에러');

@@ -35,7 +35,7 @@ tbody>tr>td:nth-child(4){
     <!-- slider Area Start-->
     <div class="slider-area ">
         <!-- Mobile Menu -->
-        <div class="single-slider slider-height2 d-flex align-items-center" data-background="${pageContext.request.contextPath}/resources/image/mmatch/mypage_mm.jpg">
+        <div class="single-slider slider-height2 d-flex align-items-center" data-background="${pageContext.request.contextPath}/resources/image/mmatch/mypage_mmlist.jpg">
             <div class="container">
                 <div class="row">
                     <div class="col-xl-12">
@@ -90,7 +90,7 @@ tbody>tr>td:nth-child(4){
 										<td><span>${mentee.mentee_amount}</span>원</td>
 										<td>선호멘토:<span>${mentee.mentee_gender}</span></td>
 			  							<td colspan="1" style="text-align: right !important;">
-											<button class="genric-btn info circle" data-toggle="modal" data-target="#detailModal" onclick="javascript:detail('${mentee.mentee_code}');">상세보기</button>
+											<button class="genric-btn info circle" onclick="javascript:detail('${mentee.mentee_code}');">상세보기</button>
 											<button class="genric-btn info circle" onclick="javascript:modify('${mentee.mentee_code}');">수정하기</button>
 											<button class="genric-btn info circle" onclick="javascript:del('${mentee.mentee_code}');">삭제하기</button>
 										</td>	
@@ -285,6 +285,7 @@ tbody>tr>td:nth-child(4){
 					$('#detail_btn').append(output);						
 				}
 				
+				$("#detailModal").modal();
 			},
 			error : function(){
 				console.log('에러');

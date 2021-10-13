@@ -75,7 +75,7 @@ function ajax(sdata){
 					     +'<td><span>'+item.mentee_amount+'</span>원</td>'
 					     +'<td><div>'+item.mentee_name+'</div></td>'
 						 +'<td colspan="1" style="text-align: right !important;">'
-						 +'<button class="genric-btn info circle" data-toggle="modal" data-target="#detailModal" onclick="javascript:detail('+"'"+item.mentee_code+"'"+')">상세보기</button>'
+						 +'<button class="genric-btn info circle" onclick="javascript:detail('+"'"+item.mentee_code+"'"+')">상세보기</button>'
 						 +'<button class="genric-btn info circle" onclick="javascript:modify('+"'"+item.mentee_code+"'"+');">수정하기</button>'
 						 +'<button class="genric-btn info circle" onclick="javascript:del('+"'"+item.mentee_code+"'"+');">삭제하기</button>'
 					     +'</td></tr>';
