@@ -51,6 +51,7 @@ background-color: #fbfcfd
 }
 #wateradd{
 	text-transform: capitalize;
+	background-color: rgb(10 23 92);
     cursor: pointer;
     display: inline-block;
     font-size: 18px;
@@ -94,7 +95,7 @@ background-color: #fbfcfd
     <!-- slider Area Start-->
     <div class="slider-area ">
         <!-- Mobile Menu -->
-        <div class="single-slider slider-height2 d-flex align-items-center" data-background="${pageContext.request.contextPath}/resources/image/personalmanagement/sports.jpg">
+        <div class="single-slider slider-height2 d-flex align-items-center" data-background="${pageContext.request.contextPath}/resources/image/personalmanagement/workout.jpg">
             <div class="container">
                 <div class="row">
                     <div class="col-xl-12">
@@ -130,13 +131,14 @@ background-color: #fbfcfd
                      <option selected value="">-- 선택 --</option>
                     </select>
 		           <input type="text" id="time" name="SPORTS_TIME" class="form-control SPORTS_TIME" placeholder="운동시간 ">
+		           <input type="hidden" value="${USER_ID}" id="USER_ID" name="USER_ID">
                    <button class="add" id="add">Add</button>
                    </div> 	
                  </div> 
 				<!-- Recently Favorited -->
 				<div class="widget dashboard-container my-adslist" id="kcal_list">
 					<h3 class="widget-header">당일 운동량</h3>
-					<table class="table table-responsive product-dashboard-table table-striped">
+					<table class="table table-responsive product-dashboard-table">
 						<thead>
 							<tr>
 								<th width="20%">운동종목</th>
@@ -212,7 +214,7 @@ background-color: #fbfcfd
 			<canvas id ="myChart">
 			</canvas>
 			<input type="hidden" id="goaldata" name="goaldata" value="${goaldata}">
-			<input type="text" id="title" name="title"><button class="btn" id="wateradd">입력</button>
+			<input type="text" placeholder="당일 물 섭취량 입력" id="title" name="title"><button class="wateradd" id="wateradd">입력</button>
 		</div>
 	  </div>
 	</div>
@@ -232,7 +234,7 @@ function getDoughnut(goaldata, title){
 			datasets : [{
 				data : [
 					goaldata,
-					title
+					title,
 					],
 				backgroundColor: ['#4e73df', '#1cc88a'],
 				hoverBackgroundColor: ['#2e59d9', '#17a673'],
@@ -242,9 +244,10 @@ function getDoughnut(goaldata, title){
 		options:{
 			cutoutPercentage: 90
 		}
+		
 	});
 	
-	}
+}
 	var goaldata = '${goaldata}';
 	var title = '${title}';
 		
@@ -264,8 +267,9 @@ function getDoughnut(goaldata, title){
 					doughnutChart.destroy();
 					getDoughnut(rdata.goaldata, rdata.title);
 				}
-			})
+			})	
 	})
+	
 </script>
 			</div>
 		</div>

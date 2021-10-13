@@ -26,7 +26,14 @@ $(function(){
 	});	//change end
 	
 	$("#write").click(function(){
+		var USER_ID = $("#USER_ID").val();
+		console.log("아이디:" + USER_ID);
+		   if(USER_ID == ''||null){
+			   alert("로그인 후 이용해주세요");
+			   location.href="/sports/member/login";
+		   }else{
 		location.href="write";
+		   }
 	})
 	
 	$("#sub").click(function(){
