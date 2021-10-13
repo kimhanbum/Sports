@@ -567,6 +567,8 @@ input.checkbox:checked+label.input-label.radio::before {
 	<script>
 	$(function(){
 		$(".buttonJ").click(function(){ //찜하기 버튼 클릭
+			var aucdate = '${b.AUC_DATE}';
+			console.log(aucdate);
 			
 			var pickcheck ="${pickcheck}";
  			var num = ${param.num};
@@ -576,6 +578,7 @@ input.checkbox:checked+label.input-label.radio::before {
  			
 				
 			if(sessionid ==""){
+				
 				alert("로그인후 이용해주세요")
 				location.href = "${pageContext.request.contextPath}/member/login"
 			}else{

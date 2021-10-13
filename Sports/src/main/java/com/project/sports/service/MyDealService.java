@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.project.sports.domain.DealAuction;
 import com.project.sports.domain.DealDirect;
+import com.project.sports.domain.DealQuestion;
 
 public interface MyDealService {
 
@@ -50,5 +51,21 @@ public interface MyDealService {
 	int BUY_QUESTIONcount(String sessionid);
 
 	int SELL_QUESTIONcount(String sessionid);
+
+	List<DealQuestion> DealbuyQuestion(String sessionid);
+
+	List<DealQuestion> DealsellQuestion(String sessionid);
+
+	void Aanwser(int num, String tex);
+
+	void Aquestiondel(int num);
+
+	List<DealQuestion> DealbuyQuestion2(String sessionid);
+
+	List<DealQuestion> DealsellQuestion2(String sessionid);
+
+	void Danwser(int num, String tex);
+
+	void Dquestiondel(int num);
 
 }

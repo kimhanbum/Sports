@@ -6,7 +6,7 @@
   <typeAliases>
 		<typeAlias alias="member"	type="com.project.sports.domain.Member"/>
 		<typeAlias alias="FR"  		type="com.project.sports.domain.BBS_FR" />
-   		<typeAlias alias="FCM" 		type="com.project.sports.domain.BBS_FCM" />
+   	<typeAlias alias="FCM" 		type="com.project.sports.domain.BBS_FCM" />
 		<typeAlias alias="auction"	type="com.project.sports.domain.DealAuction"/>
 		<typeAlias alias="direct"	type="com.project.sports.domain.DealDirect"/>
 		<typeAlias alias="Water"	type="com.project.sports.domain.WaterIntake"/>
@@ -14,11 +14,12 @@
 		<typeAlias alias="sports"	type="com.project.sports.domain.Sports"/>
 		<typeAlias alias="mentor"	type="com.project.sports.domain.Mentor"/>
 		<typeAlias alias="pm"		type="com.project.sports.domain.PersonalManagement"/>
-  	    <typeAlias alias="mydeal"	type="com.project.sports.domain.MyDeal"/>
+  	<typeAlias alias="mydeal"	type="com.project.sports.domain.MyDeal"/>
 		<typeAlias alias="matchinfo" type="com.project.sports.domain.MatchInfo"/>	
 		<typeAlias alias="mentee"	type="com.project.sports.domain.Mentee"/>	
 		<typeAlias alias="AR"	    type="com.project.sports.domain.MatchAppReq"/>
-		<typeAlias alias="apply"	type="com.project.sports.domain.Match_Apply"/>
+		<typeAlias alias="apply"	    type="com.project.sports.domain.Match_Apply"/>
+		<typeAlias alias="question"	    type="com.project.sports.domain.DealQuestion"/>
   </typeAliases>
   
   <mappers>
@@ -32,5 +33,6 @@
  	<mapper resource="sql/mmatch.xml"/>
  	<mapper resource="sql/Personal_Management.xml"/>	
  	<mapper resource="sql/MyDeal.xml"/>
+ 	
   </mappers>
 </configuration>

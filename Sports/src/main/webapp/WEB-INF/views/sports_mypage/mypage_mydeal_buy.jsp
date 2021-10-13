@@ -101,7 +101,7 @@ background-color
 	margin-top: 0
 }
 #th2{
-	background-color:#9dc15b;
+	background-color:#2c3e50;
 	color:white
 }
 

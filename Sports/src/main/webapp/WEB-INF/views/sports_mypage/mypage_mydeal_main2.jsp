@@ -93,7 +93,7 @@
 												<th scope="col">입찰완료</th>
 												<th scope="col">입찰실패</th>
 												<th scope="col">배송중</th>
-												<th scope="col">문의</th>
+												
 											</tr>
 										</thead>
 										<tbody>
@@ -102,7 +102,7 @@
 												<td data-label="registration pricing">${BUY_BIDCOM}</td>
 												<td data-label="renewal pricing">${BUY_BIDFAIL}</td>
 												<td data-label="transfer-price">${BUY_DELIVERY}</td>
-												<td data-label="transfer-price">${BUY_QUESTION}</td>
+												
 											</tr>
 
 										</tbody>
@@ -126,7 +126,7 @@
 												<th scope="col">입찰중</th>
 												<th scope="col">입찰완료</th>
 												<th scope="col">배송중</th>
-												<th scope="col">문의내역</th>
+												
 											</tr>
 										</thead>
 										<tbody>
@@ -134,7 +134,44 @@
 												<td data-label="DOMAIN NAME">${SELL_BIDDING}</td>
 												<td data-label="registration pricing">${SELL_BIDCOM}</td>
 												<td data-label="renewal pricing">${SELL_DELIVERY}</td>
+												
+											</tr>
+
+										</tbody>
+									</table>
+
+								</div>
+							</div><hr>
+							<br>
+							<br>
+							<div class="dmoain-pricing">
+								<div class="table-responsive-sm">
+									<a id="sell" 
+									href="${pageContext.request.contextPath}/Mydeal/question"
+									><i class="fas fa-envelope-square"></i>&nbsp;&nbsp;문의내역</a> <br>
+									<br>
+									<table>
+										<thead>
+											<tr class="domain-head">
+												<th scope="col" colspan="2">경매거래</th>
+												<th scope="col" colspan="2" >직거래 </th>
+
+											</tr>
+											<tr class="domain-head">
+												<th scope="col">내가 한 문의</th>
+												<th scope="col">나에게 온 문의 </th>
+												<th scope="col">내가 한 문의</th>
+												<th scope="col">나에게 온 문의 </th>
+
+											</tr>
+										</thead>
+										<tbody>
+											<tr>
+												<td data-label="transfer-price">${BUY_QUESTION}</td>
 												<td data-label="transfer-price">${SELL_QUESTION}</td>
+												<td data-label="transfer-price">${BUY_QUESTION}</td>
+												<td data-label="transfer-price">${SELL_QUESTION}</td>
+												
 											</tr>
 
 										</tbody>

@@ -348,7 +348,7 @@ input.checkbox:checked+label.input-label.radio::before {
 									<label for="radio1" class="input-label radio">착불</label>
 								</div>
 								<div class="col-md-6 form-group">
-									<label for="AUC_DATE">경매 기간</label> <br> <input type="date"
+									<label for="AUC_DATE">경매 기간</label> <br> <input type="datetime-local"
 										name="AUC_DATE" min="2015-12-30" max="2022-12-31"
 										id= "AUC_DATE" required
 										 >

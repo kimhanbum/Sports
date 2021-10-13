@@ -386,9 +386,16 @@ background-color
 														
 						 	var aucdate = '${b.AUC_DATE}';
 						 	
+						 	
+						 	
 						 	var dateyear = aucdate.substring(0,4)
 						 	var datemonth = aucdate.substring(5,7)
 						 	var dateday = aucdate.substring(8,10)
+						 	var datehour = aucdate.substring(11,13)
+						 	var datemin = aucdate.substring(14,16)
+						 	
+						 	console.log(datehour)
+						 	console.log(datemin)
 						 	
 						 	var number = ${b.AUC_NUMBER}
 						 	var img = "${b.SAVE_AUC_MAINFILE}"
@@ -410,7 +417,7 @@ background-color
 						 	var watch = '<span class="fas fa-clock" /> <span id="' + number + '"></span>'
 						 	document.getElementById(timeid).innerHTML = watch;
 						 	
-							var endTime = new Date(dateyear,datemonth-1, dateday, 10, 0, 0) / 1000;
+							var endTime = new Date(dateyear,datemonth-1, dateday, datehour, datemin, 0) / 1000;
 							//var endTime = new Date(2021,09, 05, 19, 38, 0) / 1000;
 							function setClock() {
 								var elapsed = new Date() / 1000;
@@ -430,7 +437,7 @@ background-color
 								setTimeout(setClock, 1000);
 								
 								//if(eval("count" + number) == "14 시 0 분 9 초"){	
-								if(hr <=503 && min >=0 && sec >= 0){
+								if(hr <=0 && min <=0 && sec <= 0){
 									
 									clearTimeout(setClock);
 // 									document.getElementById(timeid).innerHTML = 

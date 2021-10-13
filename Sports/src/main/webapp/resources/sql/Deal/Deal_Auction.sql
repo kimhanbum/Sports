@@ -4,7 +4,7 @@ create table Deal_Auction (
 	AUC_CONTENT 	 VARCHAR2(4000), 			--글내용
 	USER_ID			 VARCHAR2(60) references MEMBER_INFO(USER_ID)
 					on delete cascade , 		--아이디
-	AUC_DATE 		 DATE, 						--경매기간/		
+	AUC_DATE 		 VARCHAR2(50), 						--경매기간/		
 	AUC_PRICE 		 NUMBER, 					--경매가
 	AUC_UNIT		 NUMBER, 					--입찰단위
 	AUC_LPRICE		 NUMBER, 					--즉시구매가
@@ -60,3 +60,5 @@ drop sequence auc_seq;
 /* 10-12일 변경 컬럼속성	변경  */
 ALTER TABLE DEAL_AUCTION MODIFY AUC_DELIVERYNUM VARCHAR2(50);
 /*-------------*/
+
+/* 10-13일 AUC_DATE 속성 VARCHAR2로 변경

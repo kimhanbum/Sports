@@ -190,4 +190,51 @@ where
    and SELL_ID = #{sessionid}
 </select>
 
+<select id="dealbuyquestion" parameterType="java.util.Map" resultType="question">
+select * from deal_question where question_id = #{sessionid} and DEAL_CSFC = 1 
+</select>
+
+<select id="dealsellquestion" parameterType="java.util.Map" resultType="question">
+select * from deal_question where SELL_ID = #{sessionid} and DEAL_CSFC =1
+</select>
+
+<update id="aanswer" parameterType="java.util.Map">
+update deal_question set 
+QUESTION_ANSWER = #{tex}
+where  QUESTION_NUMBER = #{num}  
+and deal_csfc=1
+
+</update>
+<delete id="aquestiondel" parameterType="int">
+delete from deal_question
+where 	
+	QUESTION_NUMBER = #{num} 
+	and deal_csfc =1 
+
+</delete>
+
+<select id="dealbuyquestion2" parameterType="java.util.Map" resultType="question">
+select * from deal_question where question_id = #{sessionid} and deal_csfc=2
+</select>
+
+<select id="dealsellquestion2" parameterType="java.util.Map" resultType="question">
+select * from deal_question where SELL_ID = #{sessionid} and DEAL_CSFC =2
+</select>
+
+<update id="danswer" parameterType="java.util.Map">
+update deal_question set 
+QUESTION_ANSWER = #{tex}
+where  QUESTION_NUMBER = #{num}  
+and deal_csfc=2
+
+</update>
+
+<delete id="dquestiondel" parameterType="int">
+delete from deal_question
+where 	
+	QUESTION_NUMBER = #{num} 
+	and deal_csfc =2 
+
+</delete>
+
 </mapper>

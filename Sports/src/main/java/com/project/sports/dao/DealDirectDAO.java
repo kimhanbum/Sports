@@ -59,4 +59,9 @@ public class DealDirectDAO {
 			return sqlSession.insert("Direct.pick" , map);
 			
 		}
+
+		public void questioninput2(HashMap<String, Object> map) {
+			sqlSession.insert("Direct.quesinput" , map);
+			
+		}
 }

@@ -136,6 +136,11 @@ select * from
 	
 </insert>
 
-
+<insert id="quesinput" parameterType="java.util.Map">
+	insert into deal_question
+	(QUESTION_NUMBER , WRITE_NUMBER , SUBJECT ,DEAL_CSFC , QUESTION_CONTENT , SELL_ID , QUESTION_ID)
+	VALUES( qs_seq.nextval  , #{num} , #{sub} , 2 ,  #{content} , #{sellid}, #{sessionid} )
+	
+</insert>
 
 </mapper>
