@@ -139,15 +139,16 @@ public class PersonalManagementController {
 			@RequestParam(value="title", defaultValue="0", required=false)
 			String title
 			){
-		water.setUser_id((String)session.getAttribute("USER_ID"));
+		String id =(String)session.getAttribute("USER_ID");
+		water.setUser_id(id);
 		water.setTitle(title);
 		logger.info("title"+title);
-		WaterService.wateradd(water);
+		WaterService.wateradd(water);//Ãß°¡
 		
 		
 		Map<String,Object> map =new HashMap<String,Object>();
-		map.put("goaldata", goaldata);
-		map.put("title", title);
+		map.put("goaldata", goaldata);		
+		map.put("title", WaterService.DoughnutList(id));
 		logger.info("goaldata" + goaldata);
 		logger.info("water" + water);
 		
@@ -159,9 +160,25 @@ public class PersonalManagementController {
 	
 	@RequestMapping(value="/doughnut")
 	public String view(Model md, HttpSession session) {
-		Member member = memberService.member_info((String)session.getAttribute("USER_ID"));
+		float title = (float) 0.0;
+		String id =(String)session.getAttribute("USER_ID");
+		Member member = memberService.member_info(id);
+		int count = WaterService.doughnutlistcount(id);
+		if(count > 0) {
+			title = WaterService.DoughnutList(id);
+		}
 		md.addAttribute("goaldata", member.getUSER_WWEIGHT() * 0.033);
-		return "sports_management/personal_management"; 
+		md.addAttribute("title", title);
+		return "sports_management/personal_management";
+	}
+	
+	@PostMapping(value="/DoughnutList")
+	@ResponseBody
+	public float doughnutList(HttpSession session){
+		String id =(String)session.getAttribute("USER_ID");
+		float title= WaterService.DoughnutList(id);
+		
+		return title;
 	}
 	
 }

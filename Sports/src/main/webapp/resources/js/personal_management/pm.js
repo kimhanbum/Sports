@@ -39,26 +39,26 @@ $(function (){
    $("#add").click(function(){
 	   console.log("time"+time);
 	   var data = $('#sports_name').val().split(" ");
-	   
-	   $.ajax({
-		   type:"post",
-		   url : "../pm/add",
-		   async : false,
-		   data:{
-			   cal : data[1],
-			   sports_name : data[0],
-			   sports_img : data[2],
-			   time : $("#time").val()
-		   },
-		   success : function(){
-			console.log("성공")
-			$("#sports_name").empty();
-			$("input").attr("placeholder", "운동 시간");
-		   }
-			   
+		   $.ajax({
+			   type:"post",
+			   url : "../pm/add",
+			   async : false,
+			   data:{
+				   cal : data[1],
+				   sports_name : data[0],
+				   sports_img : data[2],
+				   time : $("#time").val()
+			   },
+			   success : function(){
+				   console.log("성공")
+				   $("#sports_name").empty();
+				   $("input").attr("placeholder", "운동 시간");
+			   }
 	   })//ajax end
 	   getList(1);
-   })
+		   
+   });
+   
 
    $(document).on('click', '#remove', function(){
 	var delnum = $(this).next().val();
@@ -116,12 +116,12 @@ function getList(page){
 			console.log("list : " + item.sports_NAME);
 			console.log("list : " + item.sports_IMG);
         	var src ='../resources/image/mmatch/'+img;
-			output += "<tr><td class='product-thumb'><img  src=" + src +" 			alt='사진' width='50 height='50' 						id='sports_img'>"; 
+			output += "<tr><td class='product-thumb'><img  src=" + src + " alt='사진' width='50 height='50' id='sports_img'>"; 
   			output += "</td><td></td>";
-			output += "<td colspan='1' class='product-category'>" + 			item.sports_NAME +"</td>";
+			output += "<td colspan='1' class='product-category'>" + item.sports_NAME +"</td>";
 			output += "<td class='text-center'>" + item.pm_KCAL + "</td>";
-			output += "<td class='action' data-title='Action'><div 			class=''><ul class='list-inline 						justify-content-center'><li 			class='list-inline-item'><a data-toggle='tooltip' 						data-placement='top' title='Delete' class='delete'>";
-			output += "<i id='remove' class='fa fa-trash'></i><input id='num' 			type='hidden' value=" + item.pm_NO + "></a></li></ul>";
+			output += "<td class='action' data-title='Action'><div class=''><ul class='list-inline	justify-content-center'><li	class='list-inline-item'><a data-toggle='tooltip' data-placement='top' title='Delete' class='delete'>";
+			output += "<i id='remove' class='fa fa-trash'></i><input id='num' type='hidden' value=" + item.pm_NO + "></a></li></ul>";
 			output += "</div></td></tr>";
   			/*console.log("PM_NO" + item.PM_NO);*/
 		})//each

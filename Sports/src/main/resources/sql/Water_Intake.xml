@@ -15,8 +15,8 @@
 	</insert>
 	
 	<select id="select" resultType="Water" parameterType="String">
-	select * from water_intake
-	where SUBSTR(time_start,1,7) = #{date} 
+		select * from water_intake
+		where SUBSTR(time_start,1,7) = #{date} 
 	</select>
 	
 	<insert id="add" parameterType="map">
@@ -28,4 +28,16 @@
 		(WI_NO, USER_ID, title, time_start) values
 		(#{wi_no}, #{user_id}, #{title}, sysdate)	
 	</insert>
+	
+	<select id="doughnutlist" parameterType="String" resultType="float">
+		select sum(title) from water_intake
+		where time_start = to_char(sysdate, 'yy/mm/dd')
+		and user_id = #{id}
+	</select>
+	
+	<select id="doughnutlistcount" parameterType="String" resultType="int">
+		select count(*) from water_intake
+		where time_start = to_char(sysdate, 'yy/mm/dd')
+		and user_id = #{id}
+	</select>
 </mapper>
