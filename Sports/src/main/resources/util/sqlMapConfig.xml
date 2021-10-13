@@ -18,6 +18,7 @@
 		<typeAlias alias="matchinfo" type="com.project.sports.domain.MatchInfo"/>	
 		<typeAlias alias="mentee"	type="com.project.sports.domain.Mentee"/>	
 		<typeAlias alias="AR"	    type="com.project.sports.domain.MatchAppReq"/>
+		<typeAlias alias="apply"	    type="com.project.sports.domain.Match_Apply"/>
   </typeAliases>
   
   <mappers>

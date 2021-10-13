@@ -398,6 +398,11 @@ function registerModal(){ //레지스터모달(모달등록버튼) 눌렀을때 
 function ApplyModal(){ //ApplyModal창에서 신청버튼 클릭시 이벤트
 	var Regi_num = JSON.parse($("#ApplyModal #regi_num").val());
 	var Regi_ID = $("#Regi_ID").text();
+	var Apply_ID = $("#user_id").text();
+	var SPORT_NUM = Number($("#sport_num").text());
+	
+	console.log(SPORT_NUM);
+	console.log(Apply_ID);
 	console.log(Regi_num);
 	console.log(Regi_ID);
 	$.ajax({
@@ -406,8 +411,10 @@ function ApplyModal(){ //ApplyModal창에서 신청버튼 클릭시 이벤트
 		url: "./RegiUpdate",
 		dataType: "json",
 		data:{
+		   "SPORT_NUM"   : SPORT_NUM,
     	   "REGISTER_NUM": Regi_num,
-    	   "REGISTER_ID" : Regi_ID
+    	   "REGISTER_ID" : Regi_ID,
+    	   "APPLY_ID" : Apply_ID
 		},
 		success: function (result) {
 				alert('신청 되었습니다.');

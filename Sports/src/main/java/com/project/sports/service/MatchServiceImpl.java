@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.project.sports.dao.MatchDAO;
 import com.project.sports.domain.Match;
+import com.project.sports.domain.Match_Apply;
 import com.project.sports.domain.Sports;
 
 @Service
@@ -73,6 +74,11 @@ public class MatchServiceImpl implements MatchService {
 	@Override
 	public String getemail(String REGISTER_ID) {
 		return dao.getemail(REGISTER_ID);
+	}
+
+	@Override
+	public void ApplyMatch(Match_Apply match_apply) {
+		dao.ApplyMatch(match_apply);
 	}
 
 	

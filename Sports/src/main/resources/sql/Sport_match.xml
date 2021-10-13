@@ -78,4 +78,13 @@
 		where USER_ID = #{REGISTER_ID}
 	</select>
 	
+	<insert id="ApplyMatch" parameterType="apply">
+		<selectKey keyProperty="APPLY_NUM" resultType="int" order="BEFORE">
+			select aply_seq.nextval as APPLY_NUM FROM DUAL
+		</selectKey>
+		insert into SPORT_APPLY(SPORT_NUM,APPLY_ID,APPLY_NUM,REGISTER_NUM)
+		values
+		(#{SPORT_NUM}, #{APPLY_ID}, #{APPLY_NUM}, #{REGISTER_NUM})
+	</insert>
+	
 </mapper>
