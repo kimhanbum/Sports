@@ -52,6 +52,34 @@ $(function(){
 			return false;
 		}
 	});
+
+    $("#checkid").on("click", function(){
+		checkid=true;
+		//[A-Za-z0-9_]와 동일한 것이 \w
+		//+는 1회 이상 반복을 의미합니다. {1,}와 동일하다는 뜻
+		//\w 는 [A-Za-z0-9_]를 1개 이상 사용하라는 뜻
+		var pattern = /^\w{10,12}$/;
+		var pass = $("#USER_PASS").val();
+		if(!pattern.test(id)){//pattern통과하면
+			alert("영문,숫자,_로 10~16자 가능합니다.");
+			checkid=false;
+			return;
+		}
+		$.ajax({
+			url : "idcheck",
+			data : {"id" : id},
+			success : function(resp){
+				if(resp == -1){//db에 해당 id가 없는 경우
+					alert("사용 가능한 아이디 입니다.");
+					checkid=true;
+				} else{//db에 해당 id가 있는 경우(0)
+					alert("사용중인 아이디 입니다.");
+					$("#USER_ID").focus();
+					checkid=false;
+				}
+			}
+		});//ajax
+	})
 	//선호운동 checkbox
 	var chk = '${USER_PSPORTS}';
 	var chk_result = chk.val();
@@ -108,19 +136,6 @@ function Postcode() {//우편번호찾기
             document.getElementById("HOMEADDRESS").focus();
         }
     }).open();
-    $.ajax({
-		url : "idcheck",
-		data : {"USER_ID" : USER_ID},
-		success : function(resp){
-			if(resp == -1){//db에 해당 id가 없는 경우
-				alert("사용 가능한 아이디 입니다.");
-				checkid=true;
-			} else{//db에 해당 id가 있는 경우(0)
-				alert("사용중인 아이디 입니다.");
-				checkid=false;
-			}
-		}
-	});//ajax
 }
 </script>
 
@@ -137,7 +152,7 @@ function Postcode() {//우편번호찾기
                 </td>
                 <td>
                     <input type="text" name="USER_ID" id="USER_ID" size="20px" required>
-                    <input type="button" id="idcheck" value="중복확인">
+                    <input type="button"name="checkid" id="checkid" value="중복확인">
                 </td>
             </tr>
             <tr>
@@ -146,7 +161,7 @@ function Postcode() {//우편번호찾기
                 </td>
                 <td>
                     <input type="password" name="USER_PASS" id="USER_PASS" size="20px" required><br>
-                    <span style="font-size:5px;">*영문 대소문자/숫자/특수문자를 혼용하여 10~16자</span>
+                    <span style=font-size:5px;>*영문 대소문자/숫자/특수문자를 혼용하여 10~16자</span>
                 </td>
             </tr>
             <tr>
