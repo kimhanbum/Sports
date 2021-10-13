@@ -18,6 +18,7 @@
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" />
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/match/mymatching.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/match/style2.css">
 </head>
 <script src = "http://code.jquery.com/jquery-latest.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/match/mymatch.js"></script>
@@ -39,10 +40,6 @@
 }
 </style>
 <body>
-<div id="user_id" style="display:none;">${USER_ID}</div>
-
-	<!-- Preloader Start-->
-
 	<!-- 헤더 영역  -->
 	<jsp:include page="/WEB-INF/views/sport_comm/header.jsp" />
 
@@ -51,6 +48,7 @@
 		<!-- Mobile Menu -->
 		<div class="single-slider slider-height2 d-flex align-items-center"
 			data-background="${pageContext.request.contextPath}/resources/img/hero/category.jpg">
+			<div id="user_id" style="display:none;">${USER_ID}</div>
 			<div class="container">
 				<div class="row">
 					<div class="col-xl-12">
@@ -90,17 +88,32 @@
 												<th scope="col">인원</th>
 												<th scope="col">실력</th>
 												<th scope="col">상태</th>
+												<th scope="col">수정</th>
 											</tr>
 										</thead>
 										<tbody>
+										<c:forEach var="r" items="${RegiList}">
 											<tr>
-												<td><div class="classalign">${USER_ID}</div></td>
-												<td><div class="classalign">${MATCH_DTL_ADR}</div></td>	
-												<td><div class="classalign">${MATCH_TIME}</div></td>
-												<td><div class="classalign">${MATCH_PRS}</div></td>
-												<td><div class="classalign">${MATCH_SKL}</div></td>
+												<td><div id="sport_num" class="classalign">${r.SPORT_NUM}</div></td>
+												<td><div class="classalign">${r.MATCH_ADR}</div></td>	
+												<td><div class="classalign">${r.MATCH_DTL_ADR}</div></td>
+												<td><div class="classalign">${r.MATCH_TIME}</div></td>
+												<td><div class="classalign">${r.MATCH_PRS}</div></td>
+												<td><div class="classalign">${r.MATCH_SKL}</div></td>
+											<c:if test="${r.REGISTER_STUS == 0}">
+												<td><div id="btnSubmit2" onclick="" class="submit5">신청 대기중</div></td>
+											</c:if>
+											<c:if test="${r.REGISTER_STUS == 1}">
+												<td><div id="btnSubmit2" onclick="RegiOk()" class="submit4">응답하기</div></td>
+											</c:if>
+											<c:if test="${r.REGISTER_STUS == 0}">
+												<td><div id="btnSubmit2" onclick="UpdateClick(${r.REGISTER_NUM})" class="submit5">수정|삭제</div></td>
+											</c:if>
+											<c:if test="${r.REGISTER_STUS == 1}">
+												<td><div id="btnSubmit2" onclick="" class="submit6">수정|삭제</div></td>
+											</c:if>
 											</tr>
-
+										</c:forEach>
 										</tbody>
 									</table>
 
@@ -130,12 +143,13 @@
 											</tr>
 										</thead>
 										<tbody>
+										<c:forEach var="a" items="${ApplyList}">
 											<tr>
-												<td data-label="DOMAIN NAME">${SELL_BIDDING}</td>
-												<td data-label="registration pricing">${SELL_BIDCOM}</td>
-												<td data-label="renewal pricing">${SELL_DELIVERY}</td>
-												<td data-label="transfer-price"></td>
+												<td><div class="classalign">${a.SPORT_NUM}</div></td>
+												<td><div class="classalign">${a.APPLY_ID}</div></td>
+												<td><div id="btnSubmit2" onclick="" class="submit3">응답 대기중</div></td>
 											</tr>
+										</c:forEach>
 										</tbody>
 									</table>
 								</div>
@@ -160,22 +174,11 @@
 											</tr>
 										</thead>
 										<tbody>
-										<c:forEach var="b" items="${Direct}">
 											<tr>
-												<td data-label="DOMAIN NAME">${b.DIR_NUMBER }</td>
-												<td data-label="DOMAIN NAME">
-												<a href="${pageContext.request.contextPath}
-										/DealD/detail?num=${b.DIR_NUMBER}">${b.DIR_SUBJECT }</a></td>
-												<td data-label="registration pricing">${b.DIR_ADDRESS }</td>
-												<td data-label="renewal pricing">${b.DIR_PHONE }</td>
-												<td data-label="transfer-price">${b.DIR_DATE }</td>
-											
-												<td data-label="transfer-price">${b.USER_ID }&nbsp;
-												<span id ="delimg"><a href =
-												"${pageContext.request.contextPath}
-										/Mydeal/delete2?num=${b.DIR_NUMBER}"><i class="far fa-trash-alt"></i></a></span></td>
+												<td><div class="classalign">${a.SPORT_NUM}</div></td>
+												<td><div class="classalign">${a.APPLY_ID}</div></td>
+												<td><div id="btnSubmit2" onclick="" class="submit3">응답 대기중</div></td>
 											</tr>
-										</c:forEach>
 										</tbody>
 									</table>
 								</div>
@@ -189,24 +192,75 @@
 				<!-- end section -->
 			</div>
 		</div>
-
 	</section>
+	<!--  수정 모달 -->
+	<div id="UpdateModal" class="modal hide" style="display: none;">
+	   	 <div class="wrapper">
+	        	<div class="container">
+	            	<div class="row_subject">매칭등록</div><div id="modal_id" class="modal_id">${USER_ID}</div>
+	            	<div id="regi_num" style="display:none;"></div>
+            		<div class="row1">
+                        <label class="radio radio-sm">
+                            <div class="container">
+                                <div class="label">Sport</div>
+                                 <input id="Sport" class="modal_input" name="Sport" type="text" readonly>
+                            </div>
+                        </label>
+                         <label>
+                            <div class="container ">
+                                <div class="label">Skill</div>
+                        <select id="Skill" name="Skill" class="form-control1">
+	                   		<option value="" selected>실력</option>
+	                   		<option value="상">상</option>
+	                   		<option value="중">중</option>
+	                   		<option value="하">하</option>
+	                   	</select>
+                            </div>
+                        </label>
+                    </div>
+                    <div class="row1">
+                        <label class="radio radio-sm">
+                            <div class="container">
+                                <div class="label">City</div>
+                                 <input id="City" class="modal_input" name="City" type="text">
+                            </div>
+                        </label>
+                         <label>
+                            <div class="container ">
+                                <div class="label">detail</div>
+                                 <input id="Detail" class="modal_input" name="detail" type="text">
+                            </div>
+                        </label>
+                    </div>
+                     <div class="row1">
+                        <label>
+                            <div class="container">
+                                <div class="label">Date</div>
+                                 <input id="Date" class="modal_input" name="Date" type="date"  max="2022-12-31">
+                            </div>
+                        </label>
+                         <label>
+                            <div class="container">
+                                <div class="label">Person</div>
+                                 <input style="width : 181.53px;" id="Person" class="modal_input" name="Person" type="number" min="0" max="11" value="">
+                            </div>
+                        </label>
+                    </div>
+         		</div>
+            <div class="modal_row">
+                <div class="modalbutton">
+                    <button class="closeModal row btn" onclick="javascript:closeModal1();">닫기</button>
+                </div>
+                <div class="modalbutton">
+                    	<button class="btnSearch row btn btn-fill btn-blue-light" onclick="javascript:deleteModal()">삭제</button>
+                </div>
+                  <div class="modalbutton">
+                    	<button class="btnSearch row btn btn-fill btn-blue-light" onclick="javascript:updateModal()">수정</button>
+                </div>
+            </div>
+        </div>
+    </div>
 	<script>
-	$(function() {
-		
-		$("#view").change(function() { //최신순, 등록순, 조회순 변경 시
-			var view = $("#view").val();
-			
-			if(view=="1"){
-				location.href="main";
-			}else{
-				location.href="main2"
-			}
-			
-			
-		})
-		
-	})
 	</script>
 
 	<!-- Footer 영역  -->

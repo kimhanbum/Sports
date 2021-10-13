@@ -81,5 +81,29 @@ public class MatchServiceImpl implements MatchService {
 		dao.ApplyMatch(match_apply);
 	}
 
+	@Override
+	public List<Match> getRegiList(String id) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("id", id);
+		return dao.myRegi(map);
+	}
+
+	@Override
+	public List<Match> getApplyList(String id) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("id", id);
+		return dao.myApply(map);
+	}
+
+	@Override
+	public int MactingUpdate(Match match) {
+		return dao.MactingUpdate(match);
+	}
+
+	@Override
+	public int Regidelete(int REGISTER_NUM) {
+		return dao.Regidelete(REGISTER_NUM);
+	}
+
 	
 }
