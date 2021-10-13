@@ -32,7 +32,7 @@ $(function(){
 		} 
 	});
 	//선호운동 최대 3개 선택
-	$('input:checkbox').on('change', function(event) {//선호운동 선택 max값
+	$('#USER_PSPORTS').on('change', function(event) {//선호운동 선택 max값
 	   if($('input:checkbox:checked').length > 3) {
 		   alert("선호운동은 최대 3개 선택할 수 있습니다.");
 		   $('input:checkbox:checked').prop("checked",false); //비활성화
@@ -40,15 +40,25 @@ $(function(){
 	});
 	//회원가입버튼 클릭 시
 	$("#submit").on("click", function(){
-		if($("#USER_ID").val()==""){
-			alert("아이디를 입력해주세요.");
-			$("#USER_ID").focus();
+		if($("#USER_HEIGHT").val()==""){
+			alert("회원님의 키를 숫자로 입력해주세요.");
+			$("#USER_HEIGHT").focus();
 			return false;
-		}
-		else if($("#USER_PASS").val()!=$("#passcheck")){
+		}else if($("#USER_PASS").val()==""){
+			alert("비밀번호를 입력해주세요.");
+			$("#USER_PASS").focus();
+			return false;
+		}else if($("#USER_PASS").val()!=$("#passcheck")){
 			alert("비밀번호가 일치하지 않습니다.");
 			$("#passcheck").val()="";
 			$("#USER_PASS").focus();
+			return false;
+		}else if($("#USER_PSPORTS").val()==""){
+			alert("선호하는 운동을 1개 이상 선택해주세요.");
+			return false;
+		}else if(!checkid){
+			alert("ID 중복확인하세요.");
+			$("#checkid").focus();
 			return false;
 		}
 	});
@@ -58,10 +68,10 @@ $(function(){
 		//[A-Za-z0-9_]와 동일한 것이 \w
 		//+는 1회 이상 반복을 의미합니다. {1,}와 동일하다는 뜻
 		//\w 는 [A-Za-z0-9_]를 1개 이상 사용하라는 뜻
-		var pattern = /^\w{10,12}$/;
-		var pass = $("#USER_PASS").val();
+		var pattern = /^\w{5,12}$/;
+		var id = $("#USER_ID").val();
 		if(!pattern.test(id)){//pattern통과하면
-			alert("영문,숫자,_로 10~16자 가능합니다.");
+			alert("영문,숫자,_로 5~12자 가능합니다.");
 			checkid=false;
 			return;
 		}
@@ -161,7 +171,7 @@ function Postcode() {//우편번호찾기
                 </td>
                 <td>
                     <input type="password" name="USER_PASS" id="USER_PASS" size="20px" required><br>
-                    <span style=font-size:5px;>*영문 대소문자/숫자/특수문자를 혼용하여 10~16자</span>
+                    <span style=font-size:5px;>*영문 대소문자/숫자를 혼용하여 10~16자</span>
                 </td>
             </tr>
             <tr>
@@ -169,7 +179,7 @@ function Postcode() {//우편번호찾기
                     <label for="passcheck">비밀번호 확인</label>
                 </td>
                 <td>
-                    <input type="password" name="passcheck" id="passcheck" size="20px">
+                    <input type="password" name="passcheck" id="passcheck" size="20px" required>
                 </td>
             </tr>
             <tr>
@@ -177,7 +187,7 @@ function Postcode() {//우편번호찾기
                     <label for="USER_NAME">이름</label>
                 </td>
                 <td>
-                    <input type="text" name="USER_NAME" id="USER_NAME" size="20px"> 
+                    <input type="text" name="USER_NAME" id="USER_NAME" size="20px" required> 
                 </td>
             </tr>
             <tr>
@@ -185,8 +195,8 @@ function Postcode() {//우편번호찾기
                     <label for="JUMIN">주민등록번호</label>
                 </td>
                 <td>
-                    <input type="text" name="JUMIN" id="JUMIN" size="10px" maxLength="6">-
-                    <input type="text" name="JUMIN1" id="JUMIN1" size="10px" maxLength="7">
+                    <input type="text" name="JUMIN" id="JUMIN" size="10px" maxLength="6" pattern="[0-9]+" required>-
+                    <input type="text" name="JUMIN1" id="JUMIN1" size="10px" maxLength="7" pattern="[0-9]+" required>
                 </td>
             </tr>
             <tr>
@@ -200,18 +210,16 @@ function Postcode() {//우편번호찾기
                         <option value="019">019</option>
                     </select>
                     -
-                    <input type="text" name="MOBILE2" id="MOBILE2" size="4" maxLength="4">-
-                    <input type="text" name="MOBILE3" id="MOBILE3" size="4" maxLength="4">
+                    <input type="text" name="MOBILE2" id="MOBILE2" size="4" maxLength="4" pattern="[0-9]+" required>-
+                    <input type="text" name="MOBILE3" id="MOBILE3" size="4" maxLength="4" pattern="[0-9]+" required>
                 </td>
             </tr>
-            <tr>
-               </tr>
             <tr>
                 <td>
                     <label for="DONG">우편번호</label>
                 </td>
                 <td>
-                    <input type="text" name="DONG" id="DONG" size="6">
+                    <input type="text" name="DONG" id="DONG" size="6" pattern="[0-9]+" required>
                     <input type="button" onclick="Postcode()" value="우편번호 찾기">
                 </td>
             </tr>
@@ -220,7 +228,7 @@ function Postcode() {//우편번호찾기
                     <label for="HOME">집주소</label>
                 </td>
                 <td>
-                    <input type="text" name="HOME" id="HOME" size="40"> 
+                    <input type="text" name="HOME" id="HOME" size="40" required> 
                 </td>
             </tr>
             <tr>
@@ -236,8 +244,8 @@ function Postcode() {//우편번호찾기
                     <label for="EMAIL">이메일</label>
                 </td>
                 <td>
-                    <input type="text" name="USER_EMAIL" id="EMAIL" size="10">@
-                    <input type="text" name="USER_EMAILDOMAIN" id="EMAIL1" style="width:100px">
+                    <input type="text" name="USER_EMAIL" id="EMAIL" size="10" required>@
+                    <input type="text" name="USER_EMAILDOMAIN" id="EMAIL1" style="width:100px" required>
                     
                     <select id="EMAIL2" name="EMAIL2">
                         <option value="1">직접입력</option>
@@ -252,7 +260,7 @@ function Postcode() {//우편번호찾기
                     <label for="USER_HEIGHT">키</label>
                 </td>
                 <td>
-                	<input type="text" name="USER_HEIGHT" id="USER_HEIGHT" size="3" maxlength="3">cm
+                	<input type="text" name="USER_HEIGHT" id="USER_HEIGHT" size="3" maxlength="3" pattern="[0-9]+" required>cm
                 </td>
             </tr>
             <tr>
@@ -260,7 +268,7 @@ function Postcode() {//우편번호찾기
                     <label for="USER_PWEIGHT">현재몸무게</label>
                 </td>
                 <td>
-                	<input type="text" name="USER_PWEIGHT" id="USER_PWEIGHT" size="3" maxlength="3">kg
+                	<input type="text" name="USER_PWEIGHT" id="USER_PWEIGHT" size="3" maxlength="3" pattern="[0-9]+" required>kg
                 </td>
             </tr>
             <tr>
@@ -268,7 +276,7 @@ function Postcode() {//우편번호찾기
                     <label for="USER_WWEIGHT">목표몸무게</label>
                 </td>
                 <td>
-                	<input type="text" name="USER_WWEIGHT" id="USER_WWEIGHT" size="3" maxlength="3">kg
+                	<input type="text" name="USER_WWEIGHT" id="USER_WWEIGHT" size="3" maxlength="3" pattern="[0-9]+" required>kg
                 </td>
             </tr>
             <tr>
@@ -297,9 +305,9 @@ function Postcode() {//우편번호찾기
                 		<input type="checkbox" id="15" name="USER_PSPORTS" value="필라테스">필라테스	
                 		<input type="checkbox" id="16" name="USER_PSPORTS" value="등산">등산	
                 		<input type="checkbox" id="17" name="USER_PSPORTS" value="러닝">러닝	
-                		<input type="checkbox" id="18" name="USER_PSPORTS" value="주짓수">주짓수	
+                		<input type="checkbox" id="18" name="USER_PSPORTS" value="주짓수">주짓수	<br>
                 		<input type="checkbox" id="19" name="USER_PSPORTS" value="복싱">복싱	
-                		<input type="checkbox" id="20" name="USER_PSPORTS" value="태권도">태권도	<br><br>
+                		<input type="checkbox" id="20" name="USER_PSPORTS" value="태권도">태권도<br><br>
                 </td>
             </tr>
             
