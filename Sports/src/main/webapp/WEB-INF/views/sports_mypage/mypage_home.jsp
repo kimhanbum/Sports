@@ -1,4 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c"   uri="http://java.sun.com/jsp/jstl/core"%>
+<c:set var="m" value="${mypage_info}"/>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -40,7 +42,7 @@
                 <div class="row">
                     <div class="col-xl-12">
                         <div class="hero-cap text-center">
-                            <h2>Blog</h2>
+                            <h2>Mypage</h2>
                         </div>
                     </div>
                 </div>
@@ -56,8 +58,53 @@
 					<jsp:include page="/WEB-INF/views/sport_comm/asideLeft.jsp"/>
                 </div>
                 <div class="col-lg-10 mb-5 mb-lg-0">
-                    	마이페이지 중앙 article
-                </div> 
+                    <form method="get" name="myinfo">
+						<div class="container">
+							<p>member Infomation</p>
+							<table class="table table-bordered">
+							<tr>
+							<td>아이디</td><td>${m.USER_ID}</td>
+							</tr>
+							<tr>
+							<td>비밀번호</td><td>${m.USER_PASS}</td>
+							</tr>
+							<tr>
+							<td>이름</td><td>${m.USER_NAME}</td>
+							</tr>
+							<tr>
+							<td>주민번호</td><td>${m.USER_JUMIN}</td>
+							</tr>
+							<tr>
+							<td>휴대폰번호</td><td>${m.USER_MOBILE}</td>
+							</tr>
+							<tr>
+							<td>주소</td><td>${m.USER_ADDRESS}</td>
+							</tr>
+							<tr>
+							<td>이메일</td><td>${m.USER_EMAIL}</td>
+							</tr>
+							<tr>
+							<td>키</td><td>${m.USER_HEIGHT}</td>
+							</tr>
+							<tr>
+							<td>현재 몸무게</td><td>${m.USER_PWEIGHT}</td>
+							</tr>
+							<tr>
+							<td>목표 몸무게</td><td>${m.USER_WWEIGHT}</td>
+							</tr>
+							<tr>
+							<td>BMI</td><td>${m.USER_BMI}</td>
+							</tr>
+							<tr>
+							<td>기초대사량</td><td>${m.USER_RMR}</td>
+							</tr>
+							<tr>
+							<td>선호운동</td><td>${m.USER_PSPORTS}</td>
+							</tr>
+							</table>
+						</div>
+					</form>
+               </div> 
         </div>
     </section>
 
