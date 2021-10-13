@@ -1,11 +1,12 @@
 package com.project.sports.controller;
 
-import java.io.File; 
+import java.io.File;  
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,7 +23,6 @@ import org.springframework.web.servlet.ModelAndView;
 import com.project.sports.domain.MailVO;
 import com.project.sports.domain.Match;
 import com.project.sports.domain.Match_Apply;
-import com.project.sports.domain.Member;
 import com.project.sports.domain.Sports;
 import com.project.sports.service.MatchService;
 import com.project.sports.task.SendMail;
@@ -37,6 +37,9 @@ public class MatchController {
 	
 	@Autowired
 	private SendMail sendMail;
+	
+	
+	
 	
 	private ModelAndView pageSet(int num, int page, String page_name) {
 		int limit = 5; // 한 화면에 출력할 레코드 갯수
@@ -204,8 +207,45 @@ public class MatchController {
 	}
 	
 	@RequestMapping(value = "/mymatching", method = RequestMethod.GET)
-	public ModelAndView mymatching(ModelAndView mv) {
+	public ModelAndView mymatching(ModelAndView mv, HttpSession session) throws Exception{
+		
+		
+		String id =(String)session.getAttribute("USER_ID");
+		List<Match> RegiList = matchservice.getRegiList(id);
+		List<Match> ApplyList = matchservice.getApplyList(id);
+		
 		mv.setViewName("sports_mypage/mypage_mymatching");
+		mv.addObject("RegiList", RegiList);
+		mv.addObject("ApplyList", ApplyList);
 		return mv;
+	}
+	
+	@RequestMapping(value="/MactingUpdate",method=RequestMethod.POST)
+	@ResponseBody
+	public String MactingUpdate(Match match)throws Exception{
+		int result =  matchservice.MactingUpdate(match);
+		logger.info("result :" +result);
+		if(result ==0) {
+		logger.info("수정실패");
+			return "0";
+		}
+		else {
+		logger.info("수정성공");
+		return "1";
+		}
+	}
+	
+	@RequestMapping(value="/Regidelete", method=RequestMethod.GET)
+	public String Regidelete(@RequestParam(value="REGISTER_NUM",defaultValue="1")int REGISTER_NUM) {
+		int result =matchservice.Regidelete(REGISTER_NUM);
+		logger.info("result :" +result);
+		if(result ==0) {
+		logger.info("수정실패");
+			return "0";
+		}
+		else {
+		logger.info("수정성공");
+		return "1";
+		}
 	}
 }

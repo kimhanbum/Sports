@@ -157,8 +157,8 @@ public class MmatchServiceImpl implements MmatchService {
 	}
 
 	@Override
-	public void changeApplyState(MatchInfo matchinfo) {
-		dao.changeApplyState(matchinfo);
+	public int changeApplyState(MatchInfo matchinfo) {
+		return dao.changeApplyState(matchinfo);
 	}
 	
 	@Override
@@ -348,4 +348,37 @@ public class MmatchServiceImpl implements MmatchService {
 		return dao.cancelApply(map);
 	}
 	
+	@Override
+	public int getMyMentorReqListCount(String id) {
+		// TODO Auto-generated method stub
+		return dao.getMyMentorReqListCount(id);
+	}
+
+	@Override
+	public int getMyMenteeReqListCount(String id) {
+		// TODO Auto-generated method stub
+		return dao.getMyMenteeReqListCount(id);
+	}
+	
+	@Override
+	public List<MatchAppReq> getMyMentorReqList(int page, int limit, String id) {
+		HashMap <String,Object> map = new HashMap <String,Object>();
+		int startrow =(page-1)*limit +1;
+		int endrow=startrow+limit-1;
+		map.put("start",startrow);
+		map.put("end",endrow);
+		map.put("id",id);
+		return dao.getMyMentorReqList(map);
+	}
+
+	@Override
+	public List<MatchAppReq> getMyMenteeReqList(int page, int limit, String id) {
+		HashMap <String,Object> map = new HashMap <String,Object>();
+		int startrow =(page-1)*limit +1;
+		int endrow=startrow+limit-1;
+		map.put("start",startrow);
+		map.put("end",endrow);
+		map.put("id",id);
+		return dao.getMyMenteeReqList(map);
+	}
 }

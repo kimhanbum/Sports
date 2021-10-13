@@ -52,4 +52,20 @@ public class MatchDAO {
 	public void ApplyMatch(Match_Apply match_apply) {
 		sqlSession.insert("Match.ApplyMatch",match_apply);
 	}
+
+	public List<Match> myRegi(HashMap<String, Object> map) {
+		return sqlSession.selectList("Match.myRegi",map);
+	}
+
+	public List<Match> myApply(HashMap<String, Object> map) {
+		return sqlSession.selectList("Match.myApply",map);
+	}
+
+	public int MactingUpdate(Match match) {
+		return sqlSession.update("Match.MactingUpdate",match);
+	}
+
+	public int Regidelete(int REGISTER_NUM) {
+		return sqlSession.delete("Match.delete",REGISTER_NUM);
+	}
 }

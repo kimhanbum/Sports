@@ -24,7 +24,7 @@ public interface MmatchService {
     public int deleteMentor(String code);
     public int getSport(String subject);
     public int modifyMentorWriting(Mentor mentor);
-    public void changeApplyState(MatchInfo matchinfo);
+    public int changeApplyState(MatchInfo matchinfo);
 	public int insertMenteeWriting(Mentee mentee);
     public int getMenteeListCount();
     public List<Mentee> getMenteeList(int page, int limit);
@@ -44,4 +44,8 @@ public interface MmatchService {
     public List<MatchAppReq> getMyMentorAppList(int page, int limit,String id);
     public List<MatchAppReq> getMyMenteeAppList(int page, int limit,String id);
     public int cancelApply(String code,String id);
+    public int getMyMentorReqListCount(String id); 
+    public int getMyMenteeReqListCount(String id);
+    public List<MatchAppReq> getMyMentorReqList(int page, int limit,String id);
+    public List<MatchAppReq> getMyMenteeReqList(int page, int limit,String id);
 }
