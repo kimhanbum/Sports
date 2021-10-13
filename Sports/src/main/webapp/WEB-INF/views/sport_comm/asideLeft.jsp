@@ -11,23 +11,18 @@
                   </a>
               </li>
               <li>
-                  <a href="${pageContext.request.contextPath}/pm/view" class="d-flex">
-                      <p>당일운동량</p>
+                  <a href="${pageContext.request.contextPath}/pm/doughnut" class="d-flex">
+                      <p>당일운동량/물섭취량</p>
                   </a>
               </li>
-              <li>
-                  <a href="${pageContext.request.contextPath}/water/view" class="d-flex">
-                      <p>물 섭취량</p>
+               <li>
+                  <a href="${pageContext.request.contextPath}/water/calendar" class="d-flex">
+                      <p>캘린더</p>
                   </a>
               </li>
               <li>
                   <a href="${pageContext.request.contextPath}/member/info" class="d-flex">
                       <p>내 정보</p>
-                  </a>
-              </li>
-              <li>
-                 <a href="${pageContext.request.contextPath}/water/calendar" class="d-flex">
-                      <p>물 섭취량</p>
                   </a>
               </li>
               <li>

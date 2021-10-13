@@ -3,13 +3,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link
-        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
-        rel="stylesheet">
-    <!-- Custom styles for this template-->
-    <link href="${pageContext.request.contextPath}/resources/css/water_intake/sb-admin-2.min.css" rel="stylesheet">
-
 <title>당일 운동량</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 		<script src="${pageContext.request.contextPath}/resources/js/jquery-3.6.0.js"></script>
 		<script src="${pageContext.request.contextPath}/resources/js/personal_management/pm.js" charset="utf-8"></script> 		
 		<script src="${pageContext.request.contextPath}/resources/js/personal_management/date.js" charset="utf-8"></script> 		
@@ -52,6 +48,26 @@ background-color: #fbfcfd
 }
 #time{
 background-color: #fbfcfd
+}
+#wateradd{
+	text-transform: capitalize;
+    cursor: pointer;
+    display: inline-block;
+    font-size: 18px;
+    font-weight: 400;
+    letter-spacing: 1px;
+    line-height: 0;
+    margin-bottom: 0;
+    padding: 22px 20px 19px 18px;
+    border-radius: 25px;
+    margin-left: 10px;
+    cursor: pointer;
+    transition: color 0.4s linear;
+    position: relative;
+    z-index: 1;
+    border: 0;
+    overflow: hidden;
+    margin: 0;
 }
 </style>
 </head>
@@ -106,21 +122,19 @@ background-color: #fbfcfd
 		<jsp:include page="/WEB-INF/views/sport_comm/asideLeft.jsp"/>
      </div>
 <!-- 당일 운동 -->
-	<div class="col-md-10 offset-md-1 col-lg-8 offset-lg-0">
+	<div class="col-md-10 offset-md-1 col-lg-8 offset-lg-0 d-flex">
 	<div class="container">
-                  <div class="add-items d-flex col-md-6">
-                   <div class="select">
+                  <div class="add-items">
+                  <div class="input-group">
                     <select class="form-control sports_name" id="sports_name" name="sports_name">
                      <option selected value="">-- 선택 --</option>
                     </select>
-                   </div>
-                   <div class="input">
 		           <input type="text" id="time" name="SPORTS_TIME" class="form-control SPORTS_TIME" placeholder="운동시간 ">
-                   </div>
-                   <button class="add" id="add">Add</button> 	
+                   <button class="add" id="add">Add</button>
+                   </div> 	
                  </div> 
 				<!-- Recently Favorited -->
-				<div style="width:50%" class="widget dashboard-container my-adslist" id="kcal_list">
+				<div class="widget dashboard-container my-adslist" id="kcal_list">
 					<h3 class="widget-header">당일 운동량</h3>
 					<table class="table table-responsive product-dashboard-table table-striped">
 						<thead>
@@ -180,42 +194,83 @@ background-color: #fbfcfd
 		</div>
 		</div>
 		</div>
-				
 				<!-- Row End -->
 <!-- Container End -->
 
-				
-				
-  <!-- Donut Chart -->
+		<!-- Donut Chart -->
   <div class="col-md-4 col-lg-5 float-right">
     <div class="card shadow mb-4">
      <!-- Card Header - Dropdown -->
       <div class="card-header py-3">
-      <h6 class="m-0 font-weight-bold text-primary">목표물섭취량</h6>
+      <h6 class="m-0 font-weight-bold text-primary">목표물섭취량: ${goaldata}L</h6>
       </div>
-      
+
       <!-- Card Body -->
-      <div class="card-body">
-        <div class="chart-pie pt-4">
-          <canvas id="myPieChart"></canvas>
-        </div>
-        <hr>
-        Styling for the donut chart can be found in the
-        <code>/js/demo/chart-pie-demo.js</code> file.
-      </div>
-     </div>
+    <div class="container">
+	  <div class="row">
+		<div class="col-md-12">
+			<canvas id ="myChart">
+			</canvas>
+			<input type="hidden" id="goaldata" name="goaldata" value="${goaldata}">
+			<input type="text" id="title" name="title"><button class="btn" id="wateradd">입력</button>
+		</div>
+	  </div>
+	</div>
+				
+<script>
+//ajax로 값을 가져와요
+// [{label:""물섭취량""}]
+function getDoughnut(goaldata, title){		
+	
+	var ctx = $("#myChart");
+	//var doughnutLabels = ["목표물섭취량", "내 섭취량"];
+	//var doughnutdata = [100, 70];
+	 doughnutChart = new Chart(ctx,{
+		type : 'doughnut', //pie, line, doughnut, polarArea
+		data: {
+			labels : ["목표 물 섭취량", "내 섭취량"],//doughnutLabels,	
+			datasets : [{
+				data : [
+					goaldata,
+					title
+					],
+				backgroundColor: ['#4e73df', '#1cc88a'],
+				hoverBackgroundColor: ['#2e59d9', '#17a673'],
+				hoverBorderColor: "rgba(234, 236)",
+			}],
+		},
+		options:{
+			cutoutPercentage: 90
+		}
+	});
+	
+	}
+	var goaldata = '${goaldata}';
+	var title = '${title}';
+		
+	getDoughnut(goaldata, title);
+	
 
-
-
-
+	$("#wateradd").click(function(){
+		  $.ajax({	
+				type: "post",
+				url : "${pageContext.request.contextPath}/pm/wateradd",
+				data:{
+					goaldata: $("#goaldata").val(),
+					title : $("#title").val()
+				},
+				success: function(rdata){
+					console.log("성공");
+					doughnutChart.destroy();
+					getDoughnut(rdata.goaldata, rdata.title);
+				}
+			})
+	})
+</script>
 			</div>
 		</div>
 	</div>
-    <!-- Page level plugins -->
-    <script src="${pageContext.request.contextPath}/resources/js/water_intake/Chart.min.js"></script>
 
-    <!-- Page level custom scripts -->
-    <script src="${pageContext.request.contextPath}/resources/js/water_intake/chart-pie-demo.js"></script>
 
 </section>
 </body>

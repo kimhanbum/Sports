@@ -10,14 +10,19 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.project.sports.domain.Member;
 import com.project.sports.domain.PersonalManagement;
 import com.project.sports.domain.Sports;
+import com.project.sports.domain.WaterIntake;
+import com.project.sports.service.MemberService;
 import com.project.sports.service.PersonalManagementService;
+import com.project.sports.service.WaterIntakeService;
 
 @Controller
 @RequestMapping(value="/pm")
@@ -28,11 +33,15 @@ public class PersonalManagementController {
 
 	@Autowired
 	private PersonalManagementService pmService;
+	@Autowired
+	private MemberService memberService;
+	@Autowired
+	private WaterIntakeService WaterService;
 	
-	@RequestMapping(value="/view")
-	public String list(){
-		return "sports_management/personal_management";
-	}
+	/*
+	 * @RequestMapping(value="/view") public String list(){ return
+	 * "sports_management/personal_management"; }
+	 */
 	
 	@RequestMapping(value="/select")
 	@ResponseBody
@@ -119,6 +128,40 @@ public class PersonalManagementController {
 		int result = pmService.delete(num);
 		logger.info("result=" + result);
 		logger.info("num=" + num);
+	}
+	
+	
+	@PostMapping(value="/wateradd")
+	@ResponseBody
+	public Map<String, Object> add(WaterIntake water, HttpSession session, Member member,
+			@RequestParam(value="goaldata", defaultValue="0",required=false)
+	  		double goaldata,
+			@RequestParam(value="title", defaultValue="0", required=false)
+			String title
+			){
+		water.setUser_id((String)session.getAttribute("USER_ID"));
+		water.setTitle(title);
+		logger.info("title"+title);
+		WaterService.wateradd(water);
+		
+		
+		Map<String,Object> map =new HashMap<String,Object>();
+		map.put("goaldata", goaldata);
+		map.put("title", title);
+		logger.info("goaldata" + goaldata);
+		logger.info("water" + water);
+		
+		
+		logger.info("goaldata" + goaldata);
+		
+		return map;
+	}
+	
+	@RequestMapping(value="/doughnut")
+	public String view(Model md, HttpSession session) {
+		Member member = memberService.member_info((String)session.getAttribute("USER_ID"));
+		md.addAttribute("goaldata", member.getUSER_WWEIGHT() * 0.033);
+		return "sports_management/personal_management"; 
 	}
 	
 }
