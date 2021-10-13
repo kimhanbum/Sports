@@ -35,7 +35,7 @@ tbody>tr>td:nth-child(4){
     <!-- slider Area Start-->
     <div class="slider-area ">
         <!-- Mobile Menu -->
-        <div class="single-slider slider-height2 d-flex align-items-center" data-background="${pageContext.request.contextPath}/resources/image/mmatch/mypage_mm2.jpg">
+        <div class="single-slider slider-height2 d-flex align-items-center" data-background="${pageContext.request.contextPath}/resources/image/mmatch/mypage_mmapply.jpg">
             <div class="container">
                 <div class="row">
                     <div class="col-xl-12">
@@ -104,7 +104,7 @@ tbody>tr>td:nth-child(4){
 			  								<c:if test="${apply.match_state == 1}">
 											<button class="genric-btn info circle" onclick="javascript:cancel('${apply.match_code}');">신청취소</button>
 			  								</c:if>
-											<button class="genric-btn info circle" data-toggle="modal" data-target="#detailModal" onclick="javascript:detail('${apply.match_code}');">상세보기</button>
+											<button class="genric-btn info circle" onclick="javascript:detail('${apply.match_code}');">상세보기</button>
 										</td>	
 									</tr>
 								</c:forEach>	
@@ -278,7 +278,9 @@ tbody>tr>td:nth-child(4){
 					output+='" alt="no img" width="800px" height="350px"/>';
 					output+='</div>';
 				}
-				$('#slidePic').append(output);  	
+				$('#slidePic').append(output);  
+				
+				$("#detailModal").modal();
 			},
 			error : function(){
 				console.log('에러');

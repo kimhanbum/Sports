@@ -67,8 +67,8 @@ public class MmatchDAO {
 	public int modifyMentorWriting(Mentor mentor) {
 		return sqlSession.update("Mmatches.modifyWMentor",mentor);
 	}
-	public void changeApplyState(MatchInfo matchinfo) {
-		sqlSession.update("Mmatches.chgApplyState",matchinfo);
+	public int changeApplyState(MatchInfo matchinfo) {
+		return sqlSession.update("Mmatches.chgApplyState",matchinfo);
 	}
 	public int insertMenteeWriting(Mentee mentee) {
 		return sqlSession.insert("Mmatches.insertWMentee",mentee);
@@ -123,5 +123,17 @@ public class MmatchDAO {
 	}
 	public int cancelApply(HashMap <String,Object> map) {
 		return sqlSession.delete("Mmatches.deleteMatchApp",map);
+	}
+	public int getMyMentorReqListCount(String id) {
+		return sqlSession.selectOne("Mmatches.MyMentorReqCount",id);
+	}
+	public int getMyMenteeReqListCount(String id) {
+		return sqlSession.selectOne("Mmatches.MyMenteeReqCount",id);
+	}
+	public List<MatchAppReq> getMyMentorReqList(HashMap <String,Object> map){
+		return sqlSession.selectList("Mmatches.MyMentorReqlist",map);
+	}
+	public List<MatchAppReq> getMyMenteeReqList(HashMap <String,Object> map){
+		return sqlSession.selectList("Mmatches.MyMenteeReqlist",map);
 	}
 }

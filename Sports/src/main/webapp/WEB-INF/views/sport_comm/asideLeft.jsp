@@ -41,12 +41,13 @@
                   </a>
               </li>
               <li>
-                  <p>멘토/멘티 매칭 </p>
                   <a href="${pageContext.request.contextPath}/mypage/mentorApplyList" class="d-flex">
-                      <p> - 나의 신청 확인</p>
+                      <p>멘티/멘토 신청현황</p>
                   </a>
-                  <a href="${pageContext.request.contextPath}/mypage/requestedList" class="d-flex">
-                      <p> - 수락 요청 확인</p>
+              </li>
+                            <li>
+                   <a href="${pageContext.request.contextPath}/mypage/mentorReqList" class="d-flex">
+                      <p>멘티/멘토 요청현황</p>
                   </a>
               </li>
           </ul>

@@ -81,7 +81,7 @@ function ajax(sdata){
 				  if(item.match_state == 1){
 					output+='<button class="genric-btn info circle" onclick="javascript:cancel('+"'"+item.match_code+"'"+');">신청취소</button>  ';
 				  }
-				  output+='<button class="genric-btn info circle" data-toggle="modal" data-target="#detailModal" onclick="javascript:detail('+"'"+item.match_code+"'"+');">상세보기</button></td>';	
+				  output+='<button class="genric-btn info circle" onclick="javascript:detail('+"'"+item.match_code+"'"+');">상세보기</button></td>';	
 				});
 				//해당 결과를 append
 				$('tbody').append(output); 

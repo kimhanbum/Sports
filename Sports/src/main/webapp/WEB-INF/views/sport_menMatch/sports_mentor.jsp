@@ -353,10 +353,10 @@
 										<div class="product-img">
 											<a href="javascript:detail('${mentor.mentor_code}');" >
 												<c:if test="${mentor.mentor_pic1 == null}">
-													<img data-toggle="modal" data-target="#detailModal" style="height:250px" src="${pageContext.request.contextPath}/resources/image/mmatch/default.jpg" alt="">
+													<img  style="height:250px" src="${pageContext.request.contextPath}/resources/image/mmatch/default.jpg" alt="">
 												</c:if>
 												<c:if test="${mentor.mentor_pic1 != null}">
-													<img data-toggle="modal" data-target="#detailModal" style="height:250px" src="<spring:url value='/matchupload${mentor.mentor_pic1}'/>" alt=""/>
+													<img  style="height:250px" src="<spring:url value='/matchupload${mentor.mentor_pic1}'/>" alt=""/>
 												</c:if>
 											</a>
 										</div>
@@ -443,15 +443,6 @@
 					  
 					  <!-- The slideshow -->
 					  <div id="slidePic" class="carousel-inner">
-						<div class="carousel-item active">
-						  <img src="${pageContext.request.contextPath}/resources/image/mmatch/test1.jpg" alt="Los Angeles" width="800px" height="350px">
-						</div>
-						<div class="carousel-item">
-						  <img src="${pageContext.request.contextPath}/resources/image/mmatch/test2.jpg" alt="Chicago" width="800px" height="350px">
-						</div>
-						<div class="carousel-item">
-						  <img src="${pageContext.request.contextPath}/resources/image/mmatch/test3.jpg" alt="New York" width="800px" height="350px">
-						</div>
 					  </div>
 					  
 					  <!-- Left and right controls -->
@@ -463,7 +454,7 @@
 					  </a>
 					</div>				
 				
-					<br><h2 id="detail_title" class="mb-30">러닝 가르칩니다.</h2>
+					<br><h2 id="detail_title" class="mb-30">수업타이틀</h2>
 					<div style="text-align:left">
 					   <div id="accordion">
 						    <div class="card" style="border-bottom:none;">
@@ -479,19 +470,14 @@
 								 <div id="collapseOne" class="collapse" data-parent="#accordion">
 								      <div class="card-body" style="padding-top: 0px;">
 								      	<ul style="font-size:20px;padding-left: 20px">
-								      		<li>수업 과목 : <div id="detail_subject" class="element_inline">러닝</div></li>
+								      		<li>수업 과목 : <div id="detail_subject" class="element_inline">수업종목</div></li>
 								      		<li>수업 시간 :
 								      			<div id="detail_time">
-									      		    <div> - 월요일 10:30 ~ 12:30</div>
-									      			<div> - 월요일 10:30 ~ 12:30</div>
-									      			<div> - 화요일 08:30 ~ 10:30</div>
-									      			<div> - 수요일 10:30 ~ 12:30</div>
-									      			<div> - 목요일 08:30 ~ 10:30</div>
-									      			<div> - 금요일 10:30 ~ 12:30</div>
+									      		    수업시간정보
 								      			</div>
 								      		</li>
-								      		<li>수업 장소 : <div id="detail_loc" class="element_inline">올림픽 공원</div></li>
-								      		<li>수업 가격 : <div id="detila_amount" class="element_inline">10</div>원</li>
+								      		<li>수업 장소 : <div id="detail_loc" class="element_inline">수업장소정보</div></li>
+								      		<li>수업 가격 : <div id="detila_amount" class="element_inline">수업가격정보</div>원</li>
 								      	</ul>
 								      </div>
 							      </div>
@@ -509,10 +495,10 @@
 								 <div id="collapseTwo" class="collapse" data-parent="#accordion">
 								      <div class="card-body" style="padding-top: 0px;">
 								      	<ul style="font-size:20px;padding-left: 20px">
-								      		<li>멘토 이름 : <div id="deatil_name" class="element_inline">홍길동</div></li>
+								      		<li>멘토 이름 : <div id="deatil_name" class="element_inline">이름</div></li>
 								      		<li>멘토 경력 :
 								      			<div id="detail_career">
-								      				테스트1234
+								      			경력
 								      			</div>
 								      		</li>
 								      	</ul>
@@ -532,7 +518,7 @@
 								 <div id="collapseThree" class="collapse" data-parent="#accordion">
 								      <div class="card-body" style="padding-top: 0px;">
 								      	<ul style="font-size:20px;padding-left: 20px">
-								      		<li id="detail_caution">저희 수업은 고강도 체력 훈련자를 위한 수업이므로 기초 체력이 안되신 힘들 수 있으니 신청에 주의하세요</li>
+								      		<li id="detail_caution">수업주의사항</li>
 								      	</ul>
 								      </div>
 							      </div>
@@ -597,9 +583,9 @@
 								 +    '<div class="product-img">'
 								 +      '<a href="javascript:detail('+"'"+ item.mentor_code+"'" +');">';
 						  if(item.mentor_pic1 == null){ //사진이없으면 default 사진을 출력
-						    output+=       '<img data-toggle="modal" data-target="#detailModal" style="height:250px" src="/sports/resources/image/mmatch/default.jpg" alt="">';
+						    output+=       '<img style="height:250px" src="/sports/resources/image/mmatch/default.jpg" alt="">';
 						  }else{  //사진이 있으면 해당 사진으로 출력
-						    output+=       '<img data-toggle="modal" data-target="#detailModal" style="height:250px" src="<spring:url value="/matchupload'+item.mentor_pic1+'"/>" alt=""/>'; 
+						    output+=       '<img style="height:250px" src="<spring:url value="/matchupload'+item.mentor_pic1+'"/>" alt=""/>'; 
 						  }
 						 output+='       </a>'
 								 +    '</div>'
@@ -757,7 +743,7 @@
 						      +'<button style="width:48%" type="button" class="genric-btn danger  circle" data-dismiss="modal" onclick="javascript:del('+"'"+data.mentor_code+"'"+');">삭제하기</button> ';
 						$('#detail_btn').append(output);						
 					}
-					
+					 $("#detailModal").modal();
 				},
 				error : function(){
 					console.log('에러');
