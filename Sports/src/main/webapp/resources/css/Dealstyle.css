@@ -310,7 +310,7 @@ a img.aligncenter {
   left: 0;
   width: 100%;
   height: 50%;
-  background: #9dc15b;
+  background: #2c3e50;
   z-index: -1;
   transition: top 1.2s linear 3.1s;
 }
@@ -321,7 +321,7 @@ a img.aligncenter {
   left: 0;
   width: 100%;
   height: 50%;
-  background: #9dc15b;
+  background: #2c3e50;
   z-index: -1;
   transition: bottom 1.2s linear 3.1s;
 }
@@ -560,7 +560,7 @@ a img.aligncenter {
 	left: 40%;
 }
 .top-navbar .navbar-light .navbar-nav .nav-item.active .nav-link{
-	color: #9dc15b;
+	color: #2c3e50;
 }
 .top-navbar .navbar-light .navbar-nav .nav-item.active .nav-link::after{
 	opacity: 1;
@@ -576,7 +576,7 @@ a img.aligncenter {
 	left: 40%;
 }
 .top-navbar .navbar-light .navbar-nav .nav-item .nav-link:hover{
-	color: #9dc15b;
+	color: #2c3e50;
 }
 .top-navbar .navbar-light .navbar-nav .nav-item .nav-link:hover::after{
 	opacity: 1;
@@ -617,7 +617,7 @@ a img.aligncenter {
 }
 
 .top-navbar .navbar-light .navbar-nav li .dropdown-menu a:hover{
-	background: #9dc15b;
+	background: #2c3e50;
 	color: #ffffff;
 }
 
@@ -637,7 +637,7 @@ a img.aligncenter {
 
 .navbar-right li a.hover-btn-new::before,
 .navbar-right li a.hover-btn-new::after {
-  background: #9dc15b;
+  background: #2c3e50;
   content: '';
   position: absolute;
   z-index: 1;
@@ -690,7 +690,7 @@ a img.aligncenter {
 }
 
 .navbar-toggler:hover{
-	background: #9dc15b;
+	background: #2c3e50;
 }
 
 .navbar-toggler:hover .icon-bar{
@@ -704,7 +704,7 @@ a img.aligncenter {
 
 
 .box-slider .carousel-control-prev{
-	background: #9dc15b;
+	background: #2c3e50;
 	position: absolute;
 	left: 0px;
 	font-size: 38px;
@@ -715,7 +715,7 @@ a img.aligncenter {
 	opacity: 1;
 }
 .box-slider .carousel-control-next{
-	background: #9dc15b;
+	background: #2c3e50;
 	position: absolute;
 	right: 0px;
 	font-size: 38px;
@@ -754,7 +754,7 @@ a img.aligncenter {
 }
 
 .big-tagline a.hover-btn-new:hover span {
-  color: #9dc15b;
+  color: #2c3e50;
 }
 
 .hover-btn-new::before {
@@ -765,7 +765,7 @@ a img.aligncenter {
 }
 
 .hover-btn-new::after {
-  background: #9dc15b !important;
+  background: #2c3e50 !important;
   height: 100%;
   left: 0;
   top: 0;
@@ -802,7 +802,7 @@ a img.aligncenter {
 -------------------------------------------------------------------*/
 
 .dbcolor{
-	background: #9dc15b;
+	background: #2c3e50;
 }
 
 .parallax {
@@ -905,7 +905,7 @@ a img.aligncenter {
 }
 
 .first-section h2 strong{
-	color: #9dc15b;
+	color: #2c3e50;
 }
 
 .first-section .lead {
@@ -987,7 +987,7 @@ a img.aligncenter {
 
 .customwidget a.hover-btn-new::before,
 .customwidget a.hover-btn-new::after {
-  background: #9dc15b;
+  background: #2c3e50;
   content: '';
   position: absolute;
   z-index: 1;
@@ -1039,7 +1039,7 @@ a img.aligncenter {
 
 .message-box a.hover-btn-new::before,
 .message-box a.hover-btn-new::after {
-  background: #9dc15b;
+  background: #2c3e50;
   content: '';
   position: absolute;
   z-index: 1;
@@ -1227,7 +1227,7 @@ a img.aligncenter {
 }
 
 .desc h3 i {
-    color: #9dc15b;
+    color: #2c3e50;
     font-size: 37px;
     vertical-align: middle;
     margin-right: 12px;
@@ -1414,7 +1414,7 @@ a img.aligncenter {
 
 .pricing-table-sign-up a.hover-btn-new::before,
 .pricing-table-sign-up a.hover-btn-new::after {
-  background: #9dc15b;
+  background: #2c3e50;
   content: '';
   position: absolute;
   z-index: 1;
@@ -1565,7 +1565,7 @@ a img.aligncenter {
 }
 
 .icon-wrapper p small:hover a{
-	color: #9dc15b;
+	color: #2c3e50;
 }
 
 .icon-wrapper p small:after {
@@ -2547,7 +2547,7 @@ select.mobile-device {
 }
 
 .footer-distributed .footer-company-name a:hover{
-	color: #9dc15b;
+	color: #2c3e50;
 }
 .footer-links-soi{
 	margin: 0px;
@@ -2567,7 +2567,7 @@ select.mobile-device {
 	line-height: 32px;
 }
 .footer-links-soi li a:hover{
-	background: #9dc15b;
+	background: #2c3e50;
 }
 .footer-links-soi li a:hover i{
 	color: #ffffff;
@@ -2661,7 +2661,7 @@ select.mobile-device {
     right: 0;
     bottom: 0;
     left: 0;
-    background: #9dc15b;
+    background: #2c3e50;
     z-index: 11000;
     position: fixed;
     display: block
@@ -2782,7 +2782,7 @@ span.m_1 {
   color: #fff;
   font-size: 20px;
   font-weight: 400;
-  background: #9dc15b;
+  background: #2c3e50;
 }
 
 .dmoain-pricing table .domain-head th {
@@ -2873,7 +2873,7 @@ span.m_1 {
 .pricingTable .pricingContent > i{
     font-size: 60px;
     margin-top: 20px;
-	color: #9dc15b;
+	color: #2c3e50;
 }
 .pricingTable .pricingContent ul{
     list-style: none;
@@ -2966,7 +2966,7 @@ span.m_1 {
 
 .pricingTable-sign-up a.hover-btn-new::before,
 .pricingTable-sign-up a.hover-btn-new::after {
-  background: #9dc15b;
+  background: #2c3e50;
   content: '';
   position: absolute;
   z-index: 1;
@@ -3007,8 +3007,8 @@ span.m_1 {
 }
 
 #testimonial-box .desc:hover{
-	background: #9dc15b;
-	border: 1px solid #9dc15b;
+	background: #2c3e50;
+	border: 1px solid #2c3e50;
 }
 
 #testimonial-box .desc:hover .lead{
@@ -3026,7 +3026,7 @@ span.m_1 {
 
 .customer-box .nav-tabs > li > a.active{
 	border: none;
-	background: #9dc15b;
+	background: #2c3e50;
 	color: #fff;
 	border-radius: 0px;
 }
@@ -3042,7 +3042,7 @@ span.m_1 {
 }
 
 .customer-box .nav-tabs > li > a:hover{
-	background: #9dc15b;
+	background: #2c3e50;
 	color: #ffffff;
 	border: 0px;
 }
@@ -3129,7 +3129,7 @@ span.m_1 {
 
 .widget.server a.hover-btn-new::before,
 .widget.server a.hover-btn-new::after {
-  background: #9dc15b;
+  background: #2c3e50;
   content: '';
   position: absolute;
   z-index: 1;

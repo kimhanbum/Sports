@@ -386,7 +386,7 @@ public class DealAuctionController {
 		
 		logger.info("즉시구매" + num);
 		
-		//즉시구매 완료 이미지로 바꿔주기
+		//즉시구매 완료 이미지, 현재가 즉시구매가 로 바꿔주기
 		DealService.Auction_imgchan(num);
 		
 		//판매자 내거래내역 ( 판매중 -> 배송입력 )

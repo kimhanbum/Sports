@@ -19,6 +19,7 @@
 		<typeAlias alias="mentee"	type="com.project.sports.domain.Mentee"/>	
 		<typeAlias alias="AR"	    type="com.project.sports.domain.MatchAppReq"/>
 		<typeAlias alias="apply"	    type="com.project.sports.domain.Match_Apply"/>
+		<typeAlias alias="question"	    type="com.project.sports.domain.DealQuestion"/>
   </typeAliases>
   
   <mappers>
@@ -32,5 +33,6 @@
  	<mapper resource="sql/mmatch.xml"/>
  	<mapper resource="sql/Personal_Management.xml"/>	
  	<mapper resource="sql/MyDeal.xml"/>
+ 	
   </mappers>
 </configuration>

@@ -263,6 +263,19 @@ public class DealServiceImpl implements DealService {
 			
 		}
 
+		@Override
+		public void questioninput2(String sessionid, int num, String sub, String sellid, String content) {
+			HashMap<String , Object> map = new HashMap<String,Object>();
+			map.put("sessionid", sessionid);
+			map.put("num", num);
+			map.put("sub", sub);
+			map.put("sellid", sellid);
+			map.put("content", content);
+			
+			dao2.questioninput2(map);
+			
+		}
+
 
 
 

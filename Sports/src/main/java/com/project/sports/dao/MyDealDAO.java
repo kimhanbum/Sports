@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import com.project.sports.domain.DealAuction;
 import com.project.sports.domain.DealDirect;
+import com.project.sports.domain.DealQuestion;
 
 @Repository
 public class MyDealDAO {
@@ -105,5 +106,42 @@ public class MyDealDAO {
 	public int SELL_QUESTIONcount(String sessionid) {
 		return sqlSession.selectOne("MyDeal.squestion", sessionid);
 	}
+
+	public List<DealQuestion> DealbuyQuestion(HashMap<String, Object> map) {
+		return sqlSession.selectList("MyDeal.dealbuyquestion",map);
+	}
+
+	public List<DealQuestion> DealsellQuestion(HashMap<String, Object> map) {
+		return sqlSession.selectList("MyDeal.dealsellquestion",map);
+	}
+
+	public Object Aanswer(HashMap<String, Object> map) {
+		return sqlSession.update("MyDeal.aanswer",map);
+	}
+
+	public void Aquestiondel(int num) {
+		sqlSession.delete("MyDeal.aquestiondel", num);
+		
+	}
+
+	public List<DealQuestion> DealbuyQuestion2(HashMap<String, Object> map) {
+		return sqlSession.selectList("MyDeal.dealbuyquestion2",map);
+	}
+
+	public List<DealQuestion> DealsellQuestion2(HashMap<String, Object> map) {
+		return sqlSession.selectList("MyDeal.dealsellquestion2",map);
+	}
+
+	public void Danswer(HashMap<String, Object> map) {
+		sqlSession.update("MyDeal.danswer",map);
+		
+	}
+
+	public void Dquestiondel(int num) {
+		sqlSession.delete("MyDeal.dquestiondel", num);
+		
+	}
+
+
 
 }

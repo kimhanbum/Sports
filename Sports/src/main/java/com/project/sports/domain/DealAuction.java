@@ -61,7 +61,8 @@ public class DealAuction {
 		return AUC_DATE;
 	}
 	public void setAUC_DATE(String aUC_DATE) {
-		AUC_DATE = aUC_DATE.substring(0,10).replace("-", " ");
+		AUC_DATE = aUC_DATE;
+		
 	}
 	public String getAUC_PRICE() {
 		return AUC_PRICE;

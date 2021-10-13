@@ -22,6 +22,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.project.sports.domain.DealAuction;
 import com.project.sports.domain.DealDirect;
+import com.project.sports.domain.DealQuestion;
 import com.project.sports.service.MyDealService;
 
 @Controller
@@ -58,7 +59,6 @@ public class MydealController {
 		List<DealAuction> Auction = new ArrayList<DealAuction>();
 		Auction = MyDealService.AuctionCartList(sessionid);
 		
-		//직거래 장바구니
 		
 		
 		
@@ -92,15 +92,15 @@ public class MydealController {
 		int BUY_BIDCOM = MyDealService.BUY_BIDCOMcount(sessionid);
 		int BUY_BIDFAIL = MyDealService.BUY_BIDFAILcount(sessionid);
 		int BUY_DELIVERY = MyDealService.BUY_DELIVERYcount(sessionid);
+		int BUY_QUESTION = MyDealService.BUY_QUESTIONcount(sessionid);
 		int SELL_BIDDING = MyDealService.SELL_BIDDINGcount(sessionid);
 		int SELL_BIDCOM = MyDealService.SELL_BIDCOMcount(sessionid);
 		int SELL_DELIVERY = MyDealService.SELL_DELIVERYcount(sessionid);
+		int SELL_QUESTION = MyDealService.SELL_QUESTIONcount(sessionid);
 		
 		//직거래 장바구니
 		List<DealDirect> Direct = new ArrayList<DealDirect>();
 		Direct = MyDealService.DirectCartList(sessionid);
-		
-		
 		
 		
 		
@@ -111,6 +111,8 @@ public class MydealController {
 		mv.addObject("SELL_BIDDING",SELL_BIDDING);
 		mv.addObject("SELL_BIDCOM",SELL_BIDCOM);
 		mv.addObject("SELL_DELIVERY",SELL_DELIVERY);
+		mv.addObject("BUY_QUESTION",BUY_QUESTION);
+		mv.addObject("SELL_QUESTION",SELL_QUESTION);
 		mv.addObject("Direct" , Direct);
 		
 		mv.setViewName("sports_mypage/mypage_mydeal_main2");
@@ -279,6 +281,90 @@ public class MydealController {
 
 
 
+		return "redirect:main";
+	}
+	//경매거래 문의리스트
+	@GetMapping("/question")
+	public ModelAndView question( ModelAndView mv ,HttpSession session ) {
+		
+		String sessionid = (String) session.getAttribute("USER_ID");
+		
+		//경매 내가 한 문의
+		List<DealQuestion> AbuyQuestion = new ArrayList<DealQuestion>();
+		AbuyQuestion = MyDealService.DealbuyQuestion(sessionid);
+		
+		//경매 나에게 온 문의
+		List<DealQuestion> AsellQuestion = new ArrayList<DealQuestion>();
+		AsellQuestion = MyDealService.DealsellQuestion(sessionid);
+		
+		mv.addObject("AbuyQuestion",AbuyQuestion);
+		mv.addObject("AsellQuestion",AsellQuestion);
+		
+			
+		mv.setViewName("sports_mypage/mypage_mydeal_question");
+		return mv;
+	}
+	//경매거래 답변달기
+	@GetMapping("/answer")
+	public String answerinput(int num, String tex)
+				throws Exception{	
+		//답변 달아주기
+		MyDealService.Aanwser(num , tex);
+
+		return "redirect:main";
+	}
+	
+	//경매거래 문의글 삭제
+	@GetMapping("/questiondel")
+	public String Aquestiondel(int num)
+				throws Exception{
+
+		//질문글 삭제
+		MyDealService.Aquestiondel(num);
+	
+		return "redirect:main";
+	}
+	
+	//직거래 문의 리스트
+	@GetMapping("/question2")
+	public ModelAndView question2( ModelAndView mv ,HttpSession session ) {
+		
+		String sessionid = (String) session.getAttribute("USER_ID");
+		
+		//직거래 내가 한 문의
+		List<DealQuestion> DbuyQuestion = new ArrayList<DealQuestion>();
+		DbuyQuestion = MyDealService.DealbuyQuestion2(sessionid);
+		
+		//직거래 나에게 온 문의
+		List<DealQuestion> DsellQuestion = new ArrayList<DealQuestion>();
+		DsellQuestion = MyDealService.DealsellQuestion2(sessionid);
+		
+		mv.addObject("DbuyQuestion",DbuyQuestion);
+		mv.addObject("DsellQuestion",DsellQuestion);
+		
+			
+		mv.setViewName("sports_mypage/mypage_mydeal_question2");
+		return mv;
+	}
+	
+	//직거래 답변달기
+	@GetMapping("/answer2")
+	public String answer2input(int num, String tex)
+				throws Exception{	
+		//답변 달아주기
+		MyDealService.Danwser(num , tex);
+
+		return "redirect:main";
+	}
+
+	//직거래 문의글 삭제
+	@GetMapping("/questiondel2")
+	public String Dquestiondel(int num)
+				throws Exception{
+
+		//질문글 삭제
+		MyDealService.Dquestiondel(num);
+	
 		return "redirect:main";
 	}
 	

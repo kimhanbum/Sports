@@ -565,11 +565,13 @@ input.checkbox:checked+label.input-label.radio::before {
 			</div>
 		</div>
 
+
 	</section>
 	<!-- /teacher details --> <!-- Gallery End--> </main>
 	<!-- Footer 영역  -->
 	<jsp:include page="/WEB-INF/views/sport_comm/footer2.jsp" />
 	<!-- JS here -->
+
 <script>
 $(function(){
 	
@@ -586,6 +588,24 @@ $(function(){
 		$("#buttonG").remove();
 		$("#bubu").append(output)
 	}
+		
+		var sessionid = "${USER_ID}"
+		
+		
+		$(".buttonE").click(function(){
+			if(sessionid=""){
+				alert("로그인후 이용해주세요")
+				location.href = "${pageContext.request.contextPath}/member/login"
+			}else{
+				var e = prompt("문의할 내용을 남겨주세요\n(답변은 내 거래 내역에서 확인가능)")
+				if(e!=null){
+					location.href = "${pageContext.request.contextPath}/DealD/question2"
+						+"?num=" +${b.DIR_NUMBER} + "&sub=${b.DIR_SUBJECT}" + "&sellid=${b.USER_ID}" 
+						+"&content=" + e;
+				}
+			}
+			
+		})
 	
 		
 })

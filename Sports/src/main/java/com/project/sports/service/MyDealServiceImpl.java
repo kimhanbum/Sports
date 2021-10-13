@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.project.sports.dao.MyDealDAO;
 import com.project.sports.domain.DealAuction;
 import com.project.sports.domain.DealDirect;
+import com.project.sports.domain.DealQuestion;
 
 @Service
 public class MyDealServiceImpl implements MyDealService{
@@ -165,6 +166,64 @@ public class MyDealServiceImpl implements MyDealService{
 	@Override
 	public int SELL_QUESTIONcount(String sessionid) {
 		return dao.SELL_QUESTIONcount(sessionid);
+	}
+
+	@Override
+	public List<DealQuestion> DealbuyQuestion(String sessionid) {
+		HashMap<String , Object>map = new HashMap<String,Object>();
+		map.put("sessionid" , sessionid);
+		return dao.DealbuyQuestion(map);
+	}
+
+	@Override
+	public List<DealQuestion> DealsellQuestion(String sessionid) {
+		HashMap<String , Object>map = new HashMap<String,Object>();
+		map.put("sessionid" , sessionid);
+		return dao.DealsellQuestion(map);
+	}
+
+	@Override
+	public void Aanwser(int num, String tex) {
+		HashMap<String , Object>map = new HashMap<String,Object>();
+		map.put("num" , num);
+		map.put("tex" , tex);
+		dao.Aanswer(map);
+		
+	}
+
+	@Override
+	public void Aquestiondel(int num) {
+		dao.Aquestiondel(num);
+		
+	}
+
+	@Override
+	public List<DealQuestion> DealbuyQuestion2(String sessionid) {
+		HashMap<String , Object>map = new HashMap<String,Object>();
+		map.put("sessionid" , sessionid);
+		return dao.DealbuyQuestion2(map);
+	}
+
+	@Override
+	public List<DealQuestion> DealsellQuestion2(String sessionid) {
+		HashMap<String , Object>map = new HashMap<String,Object>();
+		map.put("sessionid" , sessionid);
+		return dao.DealsellQuestion2(map);
+	}
+
+	@Override
+	public void Danwser(int num, String tex) {
+		HashMap<String , Object>map = new HashMap<String,Object>();
+		map.put("num" , num);
+		map.put("tex" , tex);
+		dao.Danswer(map);
+		
+	}
+
+	@Override
+	public void Dquestiondel(int num) {
+		dao.Dquestiondel(num);
+		
 	}
 
 }
