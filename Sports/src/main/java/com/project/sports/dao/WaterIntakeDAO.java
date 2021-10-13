@@ -26,5 +26,13 @@ public class WaterIntakeDAO {
 	public void wateradd(WaterIntake water) {
 		sqlSession.insert("Water.add", water);
 	}
+
+	public float DoughnutList(String id) {
+		return sqlSession.selectOne("Water.doughnutlist", id);
+	}
+
+	public int doughnutlistcount(String id) {
+		return sqlSession.selectOne("Water.doughnutlistcount",id);
+	}
 	
 }

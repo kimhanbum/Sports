@@ -13,7 +13,9 @@ public interface WaterIntakeService {
 
 	public void wateradd(WaterIntake water);
 
+	public float DoughnutList(String id);
+
+	public int doughnutlistcount(String id);
 	
-		
-	}
+}
 
