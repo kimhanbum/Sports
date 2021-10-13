@@ -30,6 +30,16 @@ public class WaterIntakeServiceImpl implements WaterIntakeService{
 		dao.wateradd(water);
 	}
 
+	@Override
+	public float DoughnutList(String id) {
+		return dao.DoughnutList(id);
+	}
+
+	@Override
+	public int doughnutlistcount(String id) {
+		return dao.doughnutlistcount(id);
+	}
+
 
 
 		
