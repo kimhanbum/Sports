@@ -87,4 +87,26 @@
 		(#{SPORT_NUM}, #{APPLY_ID}, #{APPLY_NUM}, #{REGISTER_NUM})
 	</insert>
 	
+	
+	<select id="myRegi" parameterType="java.util.Map" resultType="match">
+		select * from Sport_register
+		where REGISTER_ID = #{id} and  REGISTER_STUS = 0 or REGISTER_ID = #{id} and REGISTER_STUS = 1
+	</select>
+	
+	
+	<select id="myApply" parameterType="java.util.Map" resultType="apply">
+		select * from SPORT_APPLY
+		where APPLY_ID =#{id} and APPLY_STUS = 0
+	</select>
+	
+	<update id="MactingUpdate" parameterType="match">
+		update Sport_register
+		set MATCH_PRS = #{MATCH_PRS} , MATCH_SKL = #{MATCH_SKL}, MATCH_TIME = #{MATCH_TIME}
+		where REGISTER_NUM = #{REGISTER_NUM}
+	</update>
+	
+	<delete id="delete" parameterType="int">
+		delete from Sport_register where REGISTER_NUM = #{REGISTER_NUM}
+	</delete>
+	
 </mapper>

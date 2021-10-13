@@ -28,5 +28,14 @@ public interface MatchService {
 
 	public void ApplyMatch(Match_Apply match_apply);
 
+	public List<Match> getRegiList(String id);
+
+	public List<Match> getApplyList(String id);
+
+	public int MactingUpdate(Match match);
+
+	public int Regidelete(int REGISTER_NUM);
+
+
 
 }

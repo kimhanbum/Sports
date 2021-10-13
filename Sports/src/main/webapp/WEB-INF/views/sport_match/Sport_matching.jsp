@@ -319,7 +319,7 @@
                          <label>
                             <div class="container ">
                                 <div class="label">Skill</div>
-                                 <input id="Skill" class="modal_input" name="Skill" type="text" value="${MATCH_SKL}" readonly>
+                                 <input id="Skill" class="modal_input" name="Skill" type="text" value="" readonly>
                             </div>
                         </label>
                     </div>
@@ -327,13 +327,13 @@
                         <label class="radio radio-sm">
                             <div class="container">
                                 <div class="label">City</div>
-                                 <input id="City" class="modal_input" name="City" type="text"  value="${MATCH_ADR}" readonly>
+                                 <input id="City" class="modal_input" name="City" type="text"  value="" readonly>
                             </div>
                         </label>
                          <label>
                             <div class="container ">
                                 <div class="label">detail</div>
-                                 <input id="Detail" class="modal_input" name="detail" type="text" value="${MATCH_DTL_ADR}" readonly>
+                                 <input id="Detail" class="modal_input" name="detail" type="text" value="" readonly>
                             </div>
                         </label>
                     </div>
@@ -341,13 +341,13 @@
                         <label>
                             <div class="container">
                                 <div class="label">Date</div>
-                                 <input id="Date" class="modal_input" name="Date" type="text" value="${MATCH_TIME}" readonly>
+                                 <input id="Date" class="modal_input" name="Date" type="text" value="" readonly>
                             </div>
                         </label>
                          <label>
                             <div class="container">
                                 <div class="label">Person</div>
-                                 <input id="Person" class="modal_input" name="Person" type="text" value="${MATCH_PRS}" readonly>
+                                 <input id="Person" class="modal_input" name="Person" type="text" value="" readonly>
                             </div>
                         </label>
                     </div>
