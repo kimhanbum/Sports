@@ -48,9 +48,11 @@ public class MydealController {
 		int BUY_BIDCOM = MyDealService.BUY_BIDCOMcount(sessionid);
 		int BUY_BIDFAIL = MyDealService.BUY_BIDFAILcount(sessionid);
 		int BUY_DELIVERY = MyDealService.BUY_DELIVERYcount(sessionid);
+		int BUY_QUESTION = MyDealService.BUY_QUESTIONcount(sessionid);
 		int SELL_BIDDING = MyDealService.SELL_BIDDINGcount(sessionid);
 		int SELL_BIDCOM = MyDealService.SELL_BIDCOMcount(sessionid);
 		int SELL_DELIVERY = MyDealService.SELL_DELIVERYcount(sessionid);
+		int SELL_QUESTION = MyDealService.SELL_QUESTIONcount(sessionid);
 		
 		//경매거래 장바구니
 		List<DealAuction> Auction = new ArrayList<DealAuction>();
@@ -67,6 +69,8 @@ public class MydealController {
 		mv.addObject("SELL_BIDDING",SELL_BIDDING);
 		mv.addObject("SELL_BIDCOM",SELL_BIDCOM);
 		mv.addObject("SELL_DELIVERY",SELL_DELIVERY);
+		mv.addObject("BUY_QUESTION",BUY_QUESTION);
+		mv.addObject("SELL_QUESTION",SELL_QUESTION);
 		mv.addObject("Auction" , Auction);
 		
 		mv.setViewName("sports_mypage/mypage_mydeal_main");

@@ -400,5 +400,29 @@ public class DealAuctionController {
 		
 		return"redirect:list";
 	}
+
+	@RequestMapping(value="/question")
+	public String question(int num , 
+			HttpSession session ,
+			String sub , String sellid , String content) {
+		
+		String sessionid = (String) session.getAttribute("USER_ID");
+		
+		//문의글 등록
+		DealService.questioninput(sessionid , num , sub , sellid, content);
+		
+		logger.info("sessionid  " + sessionid);
+		logger.info("num  " + num);
+		logger.info("sub  " + sub);
+		logger.info("sellid  " + sellid);
+		logger.info("content  " + content);
+		
+		
+		return"redirect:list";
+		
+		
+	}
+	
+	
 	
 }

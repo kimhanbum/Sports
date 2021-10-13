@@ -53,12 +53,12 @@
 	<div class="slider-area ">
 		<!-- Mobile Menu -->
 		<div class="single-slider slider-height2 d-flex align-items-center"
-			data-background="${pageContext.request.contextPath}/resources/img/hero/category.jpg">
+			data-background="${pageContext.request.contextPath}/resources/img/dealimg.png">
 			<div class="container">
 				<div class="row">
 					<div class="col-xl-12">
 						<div class="hero-cap text-center">
-							<h2>내 거래 내역</h2>
+							<h2  style = "font-family :'나눔고딕'">내 거래 내역</h2>
 						</div>
 					</div>
 				</div>
@@ -93,6 +93,7 @@
 												<th scope="col">입찰완료</th>
 												<th scope="col">입찰실패</th>
 												<th scope="col">배송중</th>
+												<th scope="col">문의내역</th>
 											</tr>
 										</thead>
 										<tbody>
@@ -101,6 +102,7 @@
 												<td data-label="registration pricing">${BUY_BIDCOM}</td>
 												<td data-label="renewal pricing">${BUY_BIDFAIL}</td>
 												<td data-label="transfer-price">${BUY_DELIVERY}</td>
+												<td data-label="transfer-price">${BUY_QUESTION}</td>
 											</tr>
 
 										</tbody>
@@ -125,7 +127,8 @@
 												<th scope="col">배송입력</th>
 												<th scope="col">배송중</th>
 												
-												<th scope="col"></th>
+												
+												<th scope="col">문의</th>
 											</tr>
 										</thead>
 										<tbody>
@@ -134,7 +137,7 @@
 												<td data-label="renewal pricing">${SELL_DELIVERY}</td>
 												<td data-label="registration pricing">${SELL_BIDCOM}</td>
 												
-												<td data-label="transfer-price"></td>
+												<td data-label="transfer-price">${SELL_QUESTION}</td>
 											</tr>
 
 										</tbody>

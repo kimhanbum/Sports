@@ -76,6 +76,8 @@ public interface DealService {
 
 	public void Auction_imgchan(int num);
 
+	public void questioninput(String sessionid, int num, String sub, String sellid, String content);
+
 
 	
 
