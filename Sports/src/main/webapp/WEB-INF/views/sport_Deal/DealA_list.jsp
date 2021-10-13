@@ -244,12 +244,12 @@ background-color
 	<div class="slider-area ">
 		<!-- Mobile Menu -->
 		<div class="single-slider slider-height2 d-flex align-items-center"
-			data-background="${pageContext.request.contextPath}/resources/img/hero/category.jpg">
+			data-background="${pageContext.request.contextPath}/resources/img/dealimg.png">
 			<div class="container">
 				<div class="row">
 					<div class="col-xl-12">
 						<div class="hero-cap text-center">
-							<h2>운동물품 거래</h2>
+							<h2  style = "font-family :'나눔고딕'">운동물품 거래</h2>
 						</div>
 					</div>
 				</div>

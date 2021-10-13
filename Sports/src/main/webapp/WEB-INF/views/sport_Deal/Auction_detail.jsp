@@ -415,12 +415,12 @@ input.checkbox:checked+label.input-label.radio::before {
 	<div class="slider-area ">
 		<!-- Mobile Menu -->
 		<div class="single-slider slider-height2 d-flex align-items-center"
-			data-background="${pageContext.request.contextPath}/resources/img/hero/category.jpg">
+			data-background="${pageContext.request.contextPath}/resources/img/dealimg.png">
 			<div class="container">
 				<div class="row">
 					<div class="col-xl-12">
 						<div class="hero-cap text-center">
-							<h2>경매 물품 상세</h2>
+							<h2  style = "font-family :'나눔고딕'">운동물품 거래</h2>
 						</div>
 					</div>
 				</div>
@@ -658,11 +658,28 @@ input.checkbox:checked+label.input-label.radio::before {
 				}
 			})
 			
+			
+				var sessionid = "${USER_ID}"
+				var writeid = "${b.USER_ID}"
+				
+				
 			$(".buttonE").click(function(){
-				var e = prompt("문의할 내용을 남겨주세요\n(답변은 내 거래 내역에서 확인가능)")
-				location.href = "${pageContext.request.contextPath}/DealA/question"
-				+"?num=" +${b.AUC_NUMBER} + "&sub=${b.AUC_SUBJECT}" + "&sellid=${b.USER_ID}" 
-				+"&content=" + e;
+				if(sessionid ==""){
+					alert("로그인후 이용해주세요")
+					location.href = "${pageContext.request.contextPath}/member/login"
+				}else{
+					if(writeid==sessionid){
+						alert("본인이 올린글 입니다.")
+					}else{
+						var e = prompt("문의할 내용을 남겨주세요\n(답변은 내 거래 내역에서 확인가능)")
+						if(e!=null){
+							location.href = "${pageContext.request.contextPath}/DealA/question"
+								+"?num=" +${b.AUC_NUMBER} + "&sub=${b.AUC_SUBJECT}" + "&sellid=${b.USER_ID}" 
+								+"&content=" + e;
+						}
+						
+					}
+				}
 			})
 			
 		})

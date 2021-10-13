@@ -102,6 +102,11 @@ public class DealAuctionDAO {
 		
 	}
 
+	public void questioninput(HashMap<String, Object> map) {
+		sqlSession.insert("Auction.quesinput" , map);
+		
+	}
+
 
 
 

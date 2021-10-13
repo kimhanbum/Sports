@@ -157,4 +157,14 @@ public class MyDealServiceImpl implements MyDealService{
 		
 	}
 
+	@Override
+	public int BUY_QUESTIONcount(String sessionid) {
+		return dao.BUY_QUESTIONcount(sessionid);
+	}
+
+	@Override
+	public int SELL_QUESTIONcount(String sessionid) {
+		return dao.SELL_QUESTIONcount(sessionid);
+	}
+
 }

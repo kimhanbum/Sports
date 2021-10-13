@@ -47,4 +47,8 @@ public interface MyDealService {
 
 	void receipt2(int num);
 
+	int BUY_QUESTIONcount(String sessionid);
+
+	int SELL_QUESTIONcount(String sessionid);
+
 }

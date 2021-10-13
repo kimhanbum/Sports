@@ -180,4 +180,14 @@ where
  
 </delete>
 
+<select id="bquestion" resultType="int">
+	select count(*) from deal_question where DEAL_CSFC = 1
+   and QUESTION_ID = #{sessionid}
+</select>
+
+<select id="squestion" resultType="int">
+	select count(*) from deal_question where DEAL_CSFC = 1
+   and SELL_ID = #{sessionid}
+</select>
+
 </mapper>

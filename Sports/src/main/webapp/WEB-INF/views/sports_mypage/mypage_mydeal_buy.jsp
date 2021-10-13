@@ -118,12 +118,12 @@ background-color
 	<div class="slider-area ">
 		<!-- Mobile Menu -->
 		<div class="single-slider slider-height2 d-flex align-items-center"
-			data-background="${pageContext.request.contextPath}/resources/img/hero/category.jpg">
+			data-background="${pageContext.request.contextPath}/resources/img/dealimg.png">
 			<div class="container">
 				<div class="row">
 					<div class="col-xl-12">
 						<div class="hero-cap text-center">
-							<h2>내 거래 내역</h2>
+							<h2  style = "font-family :'나눔고딕'">내 거래 내역</h2>
 						</div>
 					</div>
 				</div>
@@ -217,7 +217,8 @@ background-color
 						<tr>
 							<td>${b.AUC_NUMBER}</td>
 							<td>${b.USER_ID}</td>
-							<td><div>${b.AUC_SUBJECT}</div></td>
+							<td><div><a href="${pageContext.request.contextPath}
+										/DealA/detail?num=${b.AUC_NUMBER}">${b.AUC_SUBJECT}</a></div></td>
 							<td>
 								
 								<div>${b.AUC_SPRICE}원</div>
