@@ -10,7 +10,7 @@
 <link rel="shortcut icon" type="image/x-icon" href="${pageContext.request.contextPath}/resources/img/favicon.ico">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/match/style2.css">
 <link rel="stylesheet" href="https://www.baro-match.co.kr/newsite/core/css/swiper.css" />
-<link rel="stylesheet" href="https://www.baro-match.co.kr/newsite/web/korean/css/layout.css?sng=1632462206" />
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/match/style3.css">
 <link rel="stylesheet" href="https://www.baro-match.co.kr/newsite/web/korean/css/topmenu.css?sng=1632462206" />
 <link rel="stylesheet" href="https://www.baro-match.co.kr/newsite/web/korean/css/main.css?sng=1632462206" />
 <link rel="stylesheet" href="https://www.baro-match.co.kr/newsite/web/korean/css/sub.css?sng=1632462206" />

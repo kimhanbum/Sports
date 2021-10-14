@@ -95,8 +95,11 @@
 	
 	
 	<select id="myApply" parameterType="java.util.Map" resultType="apply">
-		select * from SPORT_APPLY
-		where APPLY_ID =#{id} and APPLY_STUS = 0
+		select SPORT_APPLY.SPORT_NUM, SPORT_REGISTER.MATCH_ADR, SPORT_REGISTER.MATCH_DTL_ADR, 
+			SPORT_REGISTER.MATCH_TIME, SPORT_REGISTER.MATCH_PRS, SPORT_REGISTER.MATCH_SKL
+			FROM SPORT_APPLY, SPORT_REGISTER
+			WHERE SPORT_APPLY.REGISTER_NUM = SPORT_REGISTER.REGISTER_NUM
+			AND SPORT_APPLY.APPLY_ID = #{id} and APPLY_STUS = 0
 	</select>
 	
 	<update id="MactingUpdate" parameterType="match">
@@ -105,8 +108,34 @@
 		where REGISTER_NUM = #{REGISTER_NUM}
 	</update>
 	
-	<delete id="delete" parameterType="int">
+	<delete id="delete" parameterType="match">
 		delete from Sport_register where REGISTER_NUM = #{REGISTER_NUM}
 	</delete>
 	
+	<select id="getApplyID" resultType="string" parameterType="int">
+		select APPLY_ID 
+		from SPORT_APPLY
+		where REGISTER_NUM = #{REGISTER_NUM}
+	</select>
+	
+	<update id="ApplyupdateMatch" parameterType="apply">
+		update SPORT_APPLY
+		set APPLY_STUS =1
+		where REGISTER_NUM = #{REGISTER_NUM}
+	</update>
+	
+	<update id="Regifinalupdate" parameterType="match">
+		update Sport_register
+		set REGISTER_STUS = 2
+		where REGISTER_NUM = #{REGISTER_NUM}
+	</update>
+	
+	<insert id="DeadMatch" parameterType="deadline">
+		<selectKey keyProperty="DEADLINE_NUM" resultType="int" order="BEFORE">
+			select dead_seq.nextval as DEADLINE_NUM FROM DUAL
+		</selectKey>
+		insert into SPORT_APPLY(REGISTER_ID,APPLY_ID,SPORT_NUM,DEADLINE_NUM)
+		values
+		(#{REGISTER_ID}, #{APPLY_ID}, #{SPORT_NUM}, #{DEADLINE_NUM})	
+	</insert>
 </mapper>

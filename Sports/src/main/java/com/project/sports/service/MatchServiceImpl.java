@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.project.sports.dao.MatchDAO;
 import com.project.sports.domain.Match;
 import com.project.sports.domain.Match_Apply;
+import com.project.sports.domain.Match_Deadline;
 import com.project.sports.domain.Sports;
 
 @Service
@@ -103,6 +104,26 @@ public class MatchServiceImpl implements MatchService {
 	@Override
 	public int Regidelete(int REGISTER_NUM) {
 		return dao.Regidelete(REGISTER_NUM);
+	}
+
+	@Override
+	public String getApplyID(int REGISTER_NUM) {
+		return dao.getApplyID(REGISTER_NUM);
+	}
+
+	@Override
+	public int ApplyupdateMatch(int REGISTER_NUM) {
+		return dao.ApplyupdateMatch(REGISTER_NUM);
+	}
+
+	@Override
+	public int Regifinalupdate(int REGISTER_NUM) {
+		return dao.Regifinalupdate(REGISTER_NUM);
+	}
+
+	@Override
+	public void DeadMatch(HashMap<String, Object> map) {
+		dao.DeadMatch(map);
 	}
 
 	

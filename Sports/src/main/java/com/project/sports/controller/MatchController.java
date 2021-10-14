@@ -23,6 +23,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.project.sports.domain.MailVO;
 import com.project.sports.domain.Match;
 import com.project.sports.domain.Match_Apply;
+import com.project.sports.domain.Match_Deadline;
 import com.project.sports.domain.Sports;
 import com.project.sports.service.MatchService;
 import com.project.sports.task.SendMail;
@@ -214,6 +215,8 @@ public class MatchController {
 		List<Match> RegiList = matchservice.getRegiList(id);
 		List<Match> ApplyList = matchservice.getApplyList(id);
 		
+		
+		
 		mv.setViewName("sports_mypage/mypage_mymatching");
 		mv.addObject("RegiList", RegiList);
 		mv.addObject("ApplyList", ApplyList);
@@ -235,17 +238,48 @@ public class MatchController {
 		}
 	}
 	
-	@RequestMapping(value="/Regidelete", method=RequestMethod.GET)
+	@RequestMapping(value="/Regidelete", method=RequestMethod.POST)
+	@ResponseBody
 	public String Regidelete(@RequestParam(value="REGISTER_NUM",defaultValue="1")int REGISTER_NUM) {
-		int result =matchservice.Regidelete(REGISTER_NUM);
-		logger.info("result :" +result);
+		int result = matchservice.Regidelete(REGISTER_NUM);
+		logger.info("result삭제 :" +result);
 		if(result ==0) {
-		logger.info("수정실패");
+		logger.info("삭제실패");
 			return "0";
 		}
 		else {
-		logger.info("수정성공");
+		logger.info("삭제성공");
 		return "1";
 		}
 	}
-}
+	
+	
+	@RequestMapping(value="/deadLine",method=RequestMethod.POST)
+	@ResponseBody
+	public String deadLine(@RequestParam(value="REGISTER_NUM",defaultValue="1")int REGISTER_NUM,
+						   @RequestParam(value="SPORT_NUM",defaultValue="1")int SPORT_NUM
+							)throws Exception{
+		logger.info("REGISTER_NUM"+ REGISTER_NUM );
+		logger.info("SPORT_NUM : "+ SPORT_NUM );
+		String Apply_ID =  matchservice.getApplyID(REGISTER_NUM);
+		logger.info("apply _id :" + Apply_ID);
+		List<Match> RegiList = matchservice.selRegi(REGISTER_NUM);
+		logger.info("Regi<List>" + RegiList);
+		int applyresult =  matchservice.ApplyupdateMatch(REGISTER_NUM);
+		logger.info("applyresult :" + applyresult);
+		int regiresult = matchservice.Regifinalupdate(REGISTER_NUM);
+		logger.info("regiresult :" + regiresult);
+		HashMap<String , Object>map = new HashMap<String,Object>();
+		map.put("RegiList", RegiList);
+		map.put("Apply_ID", Apply_ID);
+		matchservice.DeadMatch(map);
+		if(regiresult ==0) {
+			logger.info("응답실패");
+				return "0";
+			}
+			else {
+			logger.info("응답성공");
+			return "1";
+			}
+		}
+	}

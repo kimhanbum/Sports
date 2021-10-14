@@ -18,6 +18,10 @@
   			height: 600px;	
   }
   
+  a:link{
+  	color:#fff;
+  }
+  
   html { font-size:13px;}
   
   .submit {

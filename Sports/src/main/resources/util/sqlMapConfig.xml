@@ -20,6 +20,7 @@
 		<typeAlias alias="AR"	    type="com.project.sports.domain.MatchAppReq"/>
 		<typeAlias alias="apply"	    type="com.project.sports.domain.Match_Apply"/>
 		<typeAlias alias="question"	    type="com.project.sports.domain.DealQuestion"/>
+		<typeAlias alias="deadline"	    type="com.project.sports.domain.Match_Deadline"/>
   </typeAliases>
   
   <mappers>

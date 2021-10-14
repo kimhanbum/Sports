@@ -1,6 +1,8 @@
 package com.project.sports.domain;
 
-public class Match_Apply {
+public class Match_Deadline {
+	
+	private String REGISTER_ID;  
 	private String APPLY_ID;  
 	private String MATCH_ADR;
 	private String MATCH_DTL_ADR;
@@ -11,8 +13,12 @@ public class Match_Apply {
 	private int    SPORT_NUM;  
 	private int    APPLY_NUM;    
 	private int    APPLY_STUS;
-	
-	
+	public String getREGISTER_ID() {
+		return REGISTER_ID;
+	}
+	public void setREGISTER_ID(String rEGISTER_ID) {
+		REGISTER_ID = rEGISTER_ID;
+	}
 	public String getAPPLY_ID() {
 		return APPLY_ID;
 	}
@@ -73,7 +79,6 @@ public class Match_Apply {
 	public void setAPPLY_STUS(int aPPLY_STUS) {
 		APPLY_STUS = aPPLY_STUS;
 	}
-	
 	
 	
 }
