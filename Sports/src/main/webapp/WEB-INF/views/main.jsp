@@ -133,9 +133,9 @@
 						      <br>
 						      <span class="date-day">2021년 9월 27일</span>
 						      <i class="fas fa-map-marker-alt"></i>
-						      <span class="location">서울시 종로구</span>
+						      <span class="location">날씨검색완료</span>
 						    </div>
-						    <div class="weather-container">
+						    <div id="now-weather" class="weather-container">
 						      <img style="width:90px; height:90px;" src="${pageContext.request.contextPath}/resources/image/weather/sun.png" alt="">
 						      <!-- <i class="weather-icon" data-feather="sun"></i> -->
 						      <h1 style='color:white; font-family: "Poppins", sans-serif;' class="weather-temp">18°C</h1>
@@ -144,7 +144,7 @@
 						  </div>
 						  <div class="info-side">
 						    <div class="today-info-container">
-						      <div class="today-info">
+						      <div id="now-detail" class="today-info">
 						        <div class="precipitation"> <span class="title">강수확률</span><span class="value">0 %</span>
 						          <div class="clear"></div>
 						        </div>
@@ -157,7 +157,7 @@
 						      </div>
 						    </div>
 						    <div class="week-container">
-						      <ul class="week-list">
+						      <ul id="hour_weather" class="week-list">
 						        <li class="active">
 						        	<span class="day-icon">
 						        		<img style="width:30px; height:30px;" src="${pageContext.request.contextPath}/resources/image/weather/cloud.png" alt=""> 
@@ -195,7 +195,7 @@
 						    <div class="location-container">
 						      <button class="location-button"> 
 						      <i class="fas fa-map-marker-alt"></i>
-						      <span>위치 변경</span></button>
+						      <span>날씨 정보 새로고침</span></button>
 						    </div>
 						  </div>
 						</div>
@@ -212,9 +212,9 @@
 						      <br>
 						      <span class="date-day">2021년 9월 27일</span>
 						      <i class="fas fa-map-marker-alt"></i>
-						      <span class="location">서울시 종로구</span>
+						      <span class="location">대기검색완료</span>
 						    </div>
-						    <div class="weather-container">
+						    <div id="now-air-condition" class="weather-container">
 						      <img style="width:90px; height:90px;" src="${pageContext.request.contextPath}/resources/image/dust/good.png" alt="">
 						      <!-- <i class="weather-icon" data-feather="sun"></i> -->
 						      <h1 style='color:white; font-family: "Poppins", sans-serif;' class="weather-temp">좋음</h1>
@@ -223,7 +223,7 @@
 						  </div>
 						  <div class="info-side">
 						    <div class="today-info-container">
-						      <div class="today-info">
+						      <div id="now-air" class="today-info">
 						        <div class="precipitation"> <span class="title">미세먼지</span><span class="value">0uM</span>
 						          <div class="clear"></div>
 						        </div>
@@ -236,7 +236,7 @@
 						      </div>
 						    </div>
 						    <div class="week-container">
-						      <ul class="week-list">
+						      <ul id="hour_air-condition" class="week-list">
 						        <li class="active">
 						        	<span class="day-icon">
 						        		<img style="width:30px; height:30px;" src="${pageContext.request.contextPath}/resources/image/dust/good.png" alt=""> 
@@ -274,7 +274,7 @@
 						    <div class="location-container">
 						      <button class="location-button"> 
 						      <i class="fas fa-map-marker-alt"></i>
-						      <span>위치 변경</span></button>
+						      <span>대기 정보 새로고침</span></button>
 						    </div>
 						  </div>
 						</div>
@@ -298,27 +298,27 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-xl-4 col-lg-6">
+                    <div class="recomm_img col-xl-4 col-lg-6">
                     	<h2 style="text-align: center;">복싱</h2>
                         <div class="single-category mb-30">
-                            <div class="category-img">
-                                <img style="width: 100%; height:100%" src="${pageContext.request.contextPath}/resources/image/recomm_sports/boxing.jpg" alt="">
+                            <div class="category-img text-center">
+                                <img class="rounded-circle" style="width: 430px; height:430px" src="${pageContext.request.contextPath}/resources/image/recomm_sports/boxing.jpg" alt="">
                             </div>
                         </div>
                     </div>
-                    <div class="col-xl-4 col-lg-6">
+                    <div class="recomm_img col-xl-4 col-lg-6">
                     	<h2 style="text-align: center;">사이클</h2>
                         <div class="single-category mb-30">
                             <div class="category-img text-center">
-                                <img style="width: 100%; height:100%"  src="${pageContext.request.contextPath}/resources/image/recomm_sports/cycle.jpg" alt="">
+                                <img class="rounded-circle" style="width: 430px; height:430px"  src="${pageContext.request.contextPath}/resources/image/recomm_sports/cycle.jpg" alt="">
                             </div>
                         </div>
                     </div>
-                    <div class="col-xl-4 col-lg-6">
+                    <div class="recomm_img col-xl-4 col-lg-6">
                    		<h2 style="text-align: center;">요가</h2>
                         <div class="single-category mb-30">
-                            <div class="category-img">
-                                <img style="width: 100%; height:100%"  src="${pageContext.request.contextPath}/resources/image/recomm_sports/yoga.jpg" alt="">
+                            <div class="category-img text-center">
+                                <img class="rounded-circle" style="width: 430px; height:430px"  src="${pageContext.request.contextPath}/resources/image/recomm_sports/yoga.jpg" alt="">
                             </div>
                         </div>
                     </div>
@@ -386,6 +386,6 @@
 
 	<!-- Footer 영역  -->
 	<jsp:include page="/WEB-INF/views/sport_comm/footer.jsp"/>
-   
+	<script src="${pageContext.request.contextPath}/resources/js/main/main.js"></script>
     </body>
 </html>
