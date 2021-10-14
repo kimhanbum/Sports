@@ -35,7 +35,7 @@
 <select id="list" parameterType="java.util.Map" resultType="Auction">
 select * from
 	(select rownum rnum , 	AUC_NUMBER , AUC_SUBJECT , AUC_DATE
-	AUC_PRICE ,AUC_COUNT ,SAVE_AUC_MAINFILE  ,AUC_SPRICE , AUC_NOWDATE
+	AUC_PRICE ,AUC_COUNT ,SAVE_AUC_MAINFILE  ,AUC_SPRICE , AUC_NOWDATE ,USER_ID
 		from(
 		select * from Deal_Auction
 		order by <include refid="view" />))
@@ -46,7 +46,7 @@ select * from
 	resultType="Auction">
 select * from
 	(select rownum rnum , 	AUC_NUMBER , AUC_SUBJECT , 
-	AUC_DATE ,AUC_PRICE ,AUC_COUNT ,SAVE_AUC_MAINFILE , AUC_SPRICE , AUC_NOWDATE
+	AUC_DATE ,AUC_PRICE ,AUC_COUNT ,SAVE_AUC_MAINFILE , AUC_SPRICE , AUC_NOWDATE ,USER_ID
 		from(
 		select * from Deal_Auction
 		where AUC_SUBJECT like #{search_word}
@@ -191,5 +191,12 @@ SET   SAVE_AUC_MAINFILE='buynow.jpg',
 	select * from MY_DEAL WHERE 
 	pick = 1 AND USER_ID = #{sessionid} AND AUC_NUMBER = #{num} AND DEAL_CSFC = 1
 </select>
+
+<update id="soldimg" parameterType="int">
+UPDATE  Deal_Auction
+SET   SAVE_AUC_MAINFILE='soldout.jpg'
+ WHERE   AUC_NUMBER =  #{num}
+
+</update>
 
 </mapper>

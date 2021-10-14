@@ -68,4 +68,8 @@ public interface MyDealService {
 
 	void Dquestiondel(int num);
 
+	int BUY_QUESTIONcount2(String sessionid);
+
+	int SELL_QUESTIONcount2(String sessionid);
+
 }

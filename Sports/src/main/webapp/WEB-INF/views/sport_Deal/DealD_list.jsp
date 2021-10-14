@@ -375,6 +375,11 @@ background-color
 											<div class="price">
 												<table class="table">
 													<tr>
+														<th>올린사람</th>
+														<td>${b.USER_ID}</td>
+												
+													</tr>
+													<tr>
 														<th>금액</th>
 														<td>${b.DIR_PRICE}원</td>
 

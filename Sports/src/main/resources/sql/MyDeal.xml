@@ -237,4 +237,14 @@ where
 
 </delete>
 
+<select id="squestion2" resultType="int">
+	select count(*) from deal_question where DEAL_CSFC = 2
+   and SELL_ID = #{sessionid}
+</select>
+
+<select id="bquestion2" resultType="int">
+	select count(*) from deal_question where DEAL_CSFC = 2
+   and QUESTION_ID = #{sessionid}
+</select>
+
 </mapper>

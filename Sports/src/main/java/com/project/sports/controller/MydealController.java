@@ -55,6 +55,9 @@ public class MydealController {
 		int SELL_DELIVERY = MyDealService.SELL_DELIVERYcount(sessionid);
 		int SELL_QUESTION = MyDealService.SELL_QUESTIONcount(sessionid);
 		
+		int BUY_QUESTION2 = MyDealService.BUY_QUESTIONcount2(sessionid);
+		int SELL_QUESTION2 = MyDealService.SELL_QUESTIONcount2(sessionid);
+		
 		//경매거래 장바구니
 		List<DealAuction> Auction = new ArrayList<DealAuction>();
 		Auction = MyDealService.AuctionCartList(sessionid);
@@ -71,6 +74,8 @@ public class MydealController {
 		mv.addObject("SELL_DELIVERY",SELL_DELIVERY);
 		mv.addObject("BUY_QUESTION",BUY_QUESTION);
 		mv.addObject("SELL_QUESTION",SELL_QUESTION);
+		mv.addObject("BUY_QUESTION2",BUY_QUESTION2);
+		mv.addObject("SELL_QUESTION2",SELL_QUESTION2);
 		mv.addObject("Auction" , Auction);
 		
 		mv.setViewName("sports_mypage/mypage_mydeal_main");
@@ -97,6 +102,8 @@ public class MydealController {
 		int SELL_BIDCOM = MyDealService.SELL_BIDCOMcount(sessionid);
 		int SELL_DELIVERY = MyDealService.SELL_DELIVERYcount(sessionid);
 		int SELL_QUESTION = MyDealService.SELL_QUESTIONcount(sessionid);
+		int BUY_QUESTION2 = MyDealService.BUY_QUESTIONcount2(sessionid);
+		int SELL_QUESTION2 = MyDealService.SELL_QUESTIONcount2(sessionid);
 		
 		//직거래 장바구니
 		List<DealDirect> Direct = new ArrayList<DealDirect>();
@@ -113,6 +120,8 @@ public class MydealController {
 		mv.addObject("SELL_DELIVERY",SELL_DELIVERY);
 		mv.addObject("BUY_QUESTION",BUY_QUESTION);
 		mv.addObject("SELL_QUESTION",SELL_QUESTION);
+		mv.addObject("BUY_QUESTION2",BUY_QUESTION2);
+		mv.addObject("SELL_QUESTION2",SELL_QUESTION2);
 		mv.addObject("Direct" , Direct);
 		
 		mv.setViewName("sports_mypage/mypage_mydeal_main2");

@@ -107,6 +107,11 @@ public class DealAuctionDAO {
 		
 	}
 
+	public void soldoutimg(int num) {
+		sqlSession.update("Auction.soldimg",num);
+		
+	}
+
 
 
 

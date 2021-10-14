@@ -48,7 +48,7 @@
 <select id="list" parameterType="java.util.Map" resultType="Direct">
 select * from
 	(select rownum rnum , 	DIR_NUMBER , DIR_SUBJECT , 
-	DIR_PRICE ,DIR_ADDRESS ,DIR_DATE ,SAVE_DIR_MAINFILE ,DIR_READCOUNT
+	DIR_PRICE ,DIR_ADDRESS ,DIR_DATE ,SAVE_DIR_MAINFILE ,DIR_READCOUNT , USER_ID
 		from(
 		select * from deal_direct
 		order by   <include refid="view" />))
@@ -72,7 +72,7 @@ select * from
 	resultType="Direct">
 select * from
 	(select rownum rnum , 	DIR_NUMBER , DIR_SUBJECT , 
-	DIR_PRICE ,DIR_ADDRESS ,DIR_DATE ,SAVE_DIR_MAINFILE ,DIR_READCOUNT
+	DIR_PRICE ,DIR_ADDRESS ,DIR_DATE ,SAVE_DIR_MAINFILE ,DIR_READCOUNT ,USER_ID
 		from(
 		select * from deal_direct
 		where DIR_SUBJECT like #{search_word}
@@ -94,7 +94,7 @@ where dir_number = #{num}
 <select id="sortlist" parameterType="java.util.Map" resultType="Direct">
 select * from
 	(select rownum rnum , 	DIR_NUMBER , DIR_SUBJECT , 
-	DIR_PRICE ,DIR_ADDRESS ,DIR_DATE ,SAVE_DIR_MAINFILE ,DIR_READCOUNT
+	DIR_PRICE ,DIR_ADDRESS ,DIR_DATE ,SAVE_DIR_MAINFILE ,DIR_READCOUNT ,USER_ID
 		from(
 		select * from deal_direct
 		order by <include refid="sort" />))

@@ -80,6 +80,8 @@ public interface DealService {
 
 	public void questioninput2(String sessionid, int num, String sub, String sellid, String content);
 
+	public void Auction_soldoutimg(int num);
+
 
 	
 

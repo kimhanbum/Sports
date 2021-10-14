@@ -83,7 +83,7 @@
 									 <a id="buy" href="${pageContext.request.contextPath}/Mydeal/buy">
 									 <i class="fas fa-coins" 
 									
-									></i>&nbsp;&nbsp;구매현황</a> <br>
+									></i>&nbsp;&nbsp;구매현황<b style="color:red;font-size:15px">(클릭시 상세페이지)</b></a> <br>
 									<br>
 									
 									<table>
@@ -118,7 +118,7 @@
 								<div class="table-responsive-sm">
 									<a id="sell" 
 									href="${pageContext.request.contextPath}/Mydeal/sell"
-									><i class="fas fa-coins"></i>&nbsp;&nbsp;판매현황</a> <br>
+									><i class="fas fa-coins"></i>&nbsp;&nbsp;판매현황<b style="color:red;font-size:15px">(클릭시 상세페이지)</b></a> <br>
 									<br>
 									<table>
 										<thead>
@@ -132,8 +132,8 @@
 										<tbody>
 											<tr>
 												<td data-label="DOMAIN NAME">${SELL_BIDDING}</td>
-												<td data-label="registration pricing">${SELL_BIDCOM}</td>
-												<td data-label="renewal pricing">${SELL_DELIVERY}</td>
+												<td data-label="registration pricing">${SELL_DELIVERY}</td>
+												<td data-label="renewal pricing">${SELL_BIDCOM}</td>
 												
 											</tr>
 
@@ -148,7 +148,7 @@
 								<div class="table-responsive-sm">
 									<a id="sell" 
 									href="${pageContext.request.contextPath}/Mydeal/question"
-									><i class="fas fa-envelope-square"></i>&nbsp;&nbsp;문의내역</a> <br>
+									><i class="fas fa-envelope-square"></i>&nbsp;&nbsp;문의내역<b style="color:red;font-size:15px">(클릭시 상세페이지)</b></a> <br>
 									<br>
 									<table>
 										<thead>
@@ -169,8 +169,8 @@
 											<tr>
 												<td data-label="transfer-price">${BUY_QUESTION}</td>
 												<td data-label="transfer-price">${SELL_QUESTION}</td>
-												<td data-label="transfer-price">${BUY_QUESTION}</td>
-												<td data-label="transfer-price">${SELL_QUESTION}</td>
+												<td data-label="transfer-price">${BUY_QUESTION2}</td>
+												<td data-label="transfer-price">${SELL_QUESTION2}</td>
 												
 											</tr>
 

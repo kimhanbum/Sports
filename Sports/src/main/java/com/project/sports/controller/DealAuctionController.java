@@ -364,6 +364,8 @@ public class DealAuctionController {
 	public String Auctiontimout(int num ) {
 		
 		
+		//사진 판매완료로 변경
+		DealService.Auction_soldoutimg(num);
 		
 		//판매자 내거래내역 ( 판매중 -> 배송입력 )
 		DealService.Auction_timeout(num);
