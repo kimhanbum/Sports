@@ -16,7 +16,11 @@ create table SPORT_REGISTER(
 
 delete SPORT_REGISTER where REGISTER_NUM =25;
 
-select * from SPORT_REGISTER where REGISTER_STUS = 1;
+select * from SPORT_REGISTER where REGISTER_STUS = 2;
+
+update Sport_register
+		set REGISTER_STUS = 2
+		where REGISTER_NUM = 4
 
 update Sport_register
 		set REGISTER_STUS =1

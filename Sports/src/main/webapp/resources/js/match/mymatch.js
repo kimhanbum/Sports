@@ -2,25 +2,66 @@
 var sport_name= null;
 
 $(document).ready(function(){
-	var user_id = $("#user_id").text();
-	console.log(user_id);
-	var sport_num = document.getElementById('sport_num').innerHTML;
-	console.log(sport_num);
-	
-	if(sport_num ==1){
-		$("#sport_num").html("축구");
-	}
+	setSportName();
 });
 
+function setSportName(){
+	 $("div[name=regi_list]").each(function(i){
+		   var sport_num = $("div[name=regi_list]").eq(i).text();
+		   $("div[name=regi_list]").eq(i).text(getSportName(sport_num));
+	 });
+	 $("div[name=apply_list]").each(function(i){
+		   var sport_num = $("div[name=apply_list]").eq(i).text();
+		   $("div[name=apply_list]").eq(i).text(getSportName(sport_num));
+	 });
+}
 
-function RegiOk(){
+function getSportName(num){
+	var sendData = {sports_num: num};
+	$.ajax({
+		type: "POST",
+		contentType: "application/json; charset=utf-8;",
+		async: false,
+		url: "./selSportName",
+		data : JSON.stringify(sendData),
+		success: function (result) {
+			sport_name = result;
+		},
+		error:function(){
+		}
+	});
+	return sport_name;
+}
+
+function RegiOk(Regi_num, sport_num){ //응답하기 버튼 
+	var REGISTER_NUM = Regi_num;
+	var SPORT_NUM = sport_num;
+	console.log(REGISTER_NUM);
+	console.log(SPORT_NUM);
 	if(confirm('요청에 수락하시겠습니까?')){
-		return true;
+		//var Register_ID = document.getElementById('user_id').innerHTML;
+		$.ajax({
+			type: "post",
+			async: false,
+			dataType: "json",
+			url: "./deadLine",
+			data:{
+				"REGISTER_NUM": REGISTER_NUM,
+				"SPORT_NUM" : SPORT_NUM
+			},
+			success: function (result) {
+				alert("요청수락성공");
+				location.reload();
+			},
+			error:function(request,status,error){
+		        console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+		    }
+		});
 	}else
 		return false;
 }
 
-function UpdateClick(Regi_num){
+function UpdateClick(Regi_num){ //수정삭제 버튼 클릭시 모달에 해당 값 불러오기
 	console.log(Regi_num);
 	
 	var today = new Date();
@@ -68,7 +109,7 @@ function UpdateClick(Regi_num){
 	
 	var sport =  sport_name;
 	$("#UpdateModal #Sport").val(sport);
-	
+	console.log(sport);
 	$("#UpdateModal").css({
 		"display" :"block"
 	});
@@ -80,10 +121,14 @@ function updateModal(){
 		var MATCH_TIME = $("input[name=Date]").val();
 		var MATCH_PRS =  $("input[name=Person]").val();
 		var MATCH_SKL =	 $("select[name=Skill]").val();
-		console.log(Regi_num);
-		console.log(MATCH_TIME);
-		console.log(MATCH_PRS);
-		console.log(MATCH_SKL);
+		
+		if($.trim($("input[name=Person]").val())=="0"){
+			alert("1명이상 입력하세요.");
+			$("#RegisterModal").css({
+				"display" :"none"
+			});
+			return false;
+		}
 		
 		$.ajax({
 			async: false,

@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import com.project.sports.domain.Match;
 import com.project.sports.domain.Match_Apply;
+import com.project.sports.domain.Match_Deadline;
 import com.project.sports.domain.Sports;
 
 @Repository
@@ -67,5 +68,21 @@ public class MatchDAO {
 
 	public int Regidelete(int REGISTER_NUM) {
 		return sqlSession.delete("Match.delete",REGISTER_NUM);
+	}
+
+	public String getApplyID(int REGISTER_NUM) {
+		return sqlSession.selectOne("Match.getApplyID",REGISTER_NUM);
+	}
+
+	public int ApplyupdateMatch(int REGISTER_NUM) {
+		return sqlSession.update("Match.ApplyupdateMatch",REGISTER_NUM);
+	}
+
+	public int Regifinalupdate(int REGISTER_NUM) {
+		return sqlSession.update("Match.Regifinalupdate", REGISTER_NUM);
+	}
+
+	public void DeadMatch(HashMap<String, Object> map) {
+		sqlSession.insert("Match.DeadMatch",map);
 	}
 }

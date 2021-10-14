@@ -1,9 +1,11 @@
 package com.project.sports.service;
 
+import java.util.HashMap;
 import java.util.List;
 
 import com.project.sports.domain.Match;
 import com.project.sports.domain.Match_Apply;
+import com.project.sports.domain.Match_Deadline;
 import com.project.sports.domain.Sports;
 
 
@@ -35,6 +37,14 @@ public interface MatchService {
 	public int MactingUpdate(Match match);
 
 	public int Regidelete(int REGISTER_NUM);
+
+	public String getApplyID(int REGISTER_NUM);
+
+	public int ApplyupdateMatch(int REGISTER_NUM);
+
+	public int Regifinalupdate(int REGISTER_NUM);
+
+	public void DeadMatch(HashMap<String, Object> map);
 
 
 
