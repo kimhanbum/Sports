@@ -48,4 +48,9 @@ public class PersonalManagementServiceImpl implements PersonalManagementService{
 		return dao.delete(num);
 	}
 
+	@Override
+	public List<Map<String, Object>> getCalendar(Map<String,Object> map) {
+		return dao.getCalendar(map);
+	}
+
 }

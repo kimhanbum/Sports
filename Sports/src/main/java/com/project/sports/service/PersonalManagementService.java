@@ -12,14 +12,15 @@ public interface PersonalManagementService {
 	List<Sports> getSelect(String select);
 	//데이터 삽입
 	void insertPM(PersonalManagement pm);
-	//테이블에 값 출력
-	//List<Map<String, Object>> getList(PersonalManagement pm, int page, int limit);
-	//데이터 개
+	//데이터 개수
 	int getListCount(String id);
 	//삭제
 	int delete(int num);
-	
+	//칼로리, 운동종목, 사진 등 데이터(당일운동량페이지)
 	List<PersonalManagement> getList(String id,int page, int limit);
+	//캘린더에 나올 총 칼로리 데이터(캘린더 페이지)
+	
+	List<Map<String,Object>> getCalendar(Map<String, Object> map);
 	
 	
 }

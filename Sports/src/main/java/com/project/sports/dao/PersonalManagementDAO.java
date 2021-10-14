@@ -25,10 +25,6 @@ public class PersonalManagementDAO {
 		return sqlSession.selectList("Pm.select", select);
 	}
 
-	//public List<Map<String, Object>> getList(PersonalManagement pm) {
-	//	return sqlSession.selectList("Pm.selectdate", pm);
-	//}
-
 	public int delete(int num) {
 		return sqlSession.delete("Pm.delete", num);
 	}
@@ -40,5 +36,9 @@ public class PersonalManagementDAO {
 	public int getListCount(String id) {
 		return sqlSession.selectOne("Pm.selectcount",id);
 		
+	}
+
+	public List<Map<String, Object>> getCalendar(Map<String, Object> map) {
+		return sqlSession.selectList("Pm.getCalendar", map);
 	}
 }
