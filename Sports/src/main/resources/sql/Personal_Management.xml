@@ -49,4 +49,19 @@
 		delete PERSONAL_MANAGEMENT 
 		where PM_NO = #{num}
 	</delete>
+	
+	<select id="getCalendar" parameterType="map" resultType="map"> 
+		select title,time_start,pm_kcal 
+		from (select sum(title) title, time_start
+    		  from water_intake
+     		  where user_id = #{id}
+       		  group by time_start), 
+     	(select sum(pm_kcal) pm_kcal, to_char(PM_DATE, 'yyyy-mm-dd') as pm_date
+       	from personal_management 
+       	where user_id = #{id}
+       	group by to_char(PM_DATE, 'yyyy-mm-dd')
+       )
+		where  PM_DATE = time_start
+	</select>
+	
 </mapper>

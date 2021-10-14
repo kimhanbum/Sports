@@ -172,13 +172,15 @@ public class PersonalManagementController {
 		return "sports_management/personal_management";
 	}
 	
-	@PostMapping(value="/DoughnutList")
-	@ResponseBody
-	public float doughnutList(HttpSession session){
-		String id =(String)session.getAttribute("USER_ID");
-		float title= WaterService.DoughnutList(id);
-		
-		return title;
-	}
+	
+	/*
+	 * @PostMapping(value = "/DoughnutList")
+	 * 
+	 * @ResponseBody public float doughnutList(HttpSession session) { String id =
+	 * (String) session.getAttribute("USER_ID"); float title =
+	 * WaterService.DoughnutList(id);
+	 * 
+	 * return title; }
+	 */
 	
 }

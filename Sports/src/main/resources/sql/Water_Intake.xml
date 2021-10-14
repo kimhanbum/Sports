@@ -26,18 +26,18 @@
 	</selectKey>
 		insert into WATER_INTAKE 
 		(WI_NO, USER_ID, title, time_start) values
-		(#{wi_no}, #{user_id}, #{title}, sysdate)	
+		(#{wi_no}, #{user_id}, #{title}, to_char(sysdate, 'yyyy-mm-dd'))	
 	</insert>
 	
 	<select id="doughnutlist" parameterType="String" resultType="float">
 		select sum(title) from water_intake
-		where time_start = to_char(sysdate, 'yy/mm/dd')
-		and user_id = #{id}
+		where user_id = #{id}
+		group by time_start
 	</select>
 	
 	<select id="doughnutlistcount" parameterType="String" resultType="int">
 		select count(*) from water_intake
-		where time_start = to_char(sysdate, 'yy/mm/dd')
+		where time_start = to_char(sysdate, 'yyyy-mm-dd')
 		and user_id = #{id}
 	</select>
 </mapper>

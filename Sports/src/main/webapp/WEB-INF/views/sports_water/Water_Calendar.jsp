@@ -28,7 +28,7 @@ $(document).ready(function() {
     var dateString = year + '-' + month  + '-' + day;
     var yearMonth=year+"-"+month; 
     
-    getData();
+    var result=getData();
     
 	var calendar = new FullCalendar.Calendar(calendarEl, {
       plugins: [ 'interaction', 'dayGrid'],
@@ -42,9 +42,9 @@ $(document).ready(function() {
       navLinks: true, // can click day/week names to navigate views
       selectable: true,
       selectMirror: true,
-      //INSERT처리(눌렀을 때 반응 처리) 
+      //update처리(눌렀을 때 반응 처리) 
       select: function(arg) { 
-    	 console.log(arg);
+    	console.log(arg);
     	console.log(arg.startStr);
         var title = prompt('물 섭취량:');
         if (title) {
@@ -68,54 +68,48 @@ $(document).ready(function() {
         	  }
           })
         	  
-   
         }
         calendar.unselect()
       },
       editable: true,
       eventLimit: true, // allow "more" link when too many events
-
       
-     events: items
+     events: result
     });
-	
 	
 	function getData(){
 		 $.ajax({
-             url: '${pageContext.request.contextPath}/water/list',
-             data: {"yearMonth" : yearMonth
-             	 	},
-             dataType: 'json',
-             async:false,
-             
-             success: 
-                 function(result) {
+            url: '${pageContext.request.contextPath}/water/getCalendar',
+            data: {"dateString" : dateString
+            },
+            dataType: 'json',
+            async:false,
+            
+            success: 
+                function(result) {
 
-                     items = [];
-                    
-                     if(result!=null){
-                         
-                             $.each(result, function(index, element) {
+                    items = [];
+                   
+                    if(result!=null){
+                        
+                            $.each(result, function(index, element) {
+                            
+                           	 items.push({
+                                    title: element.TITLE + "L/" + element.PM_KCAL + "kcal",
+                                    start: element.TIME_START
+                                    
+                                    //color : element.color,
+                             }); //.push()
+                                         
                              
-                            	 items.push({
-                                     title: element.title,
-                                     start: element.time_start,
-                                     end: element.time_end,  
-                                     //color : element.color,
-                              }); //.push()
-                                          
-                              
-                         }); //.each()
-                         
-                         console.log(items);
-                         
-                     }//if end                           
-                                                   
-                 }//success: function end                          
-      }); //ajax end 
-      return items;
+                        }); //.each()
+                    }//if end                           
+                                                  
+                }//success: function end                          
+     }); //ajax end 
+     console.log("items:" + items);
+     return items;
 	}
-	
 	
 	
     calendar.render();	
@@ -167,30 +161,53 @@ $(document).ready(function() {
     margin: 0 auto;
   }
 
+  #prev,#next {
+    -moz-user-select: none;
+    text-transform: capitalize;
+    color: #fff;
+    cursor: pointer;
+    display: inline-block;
+    font-size: 18px;
+    font-weight: 400;
+    letter-spacing: 1px;
+    line-height: 0;
+    margin-bottom: 0;
+    padding: 27px 44px;
+    border-radius: 25px;
+    margin: 10px;
+    cursor: pointer;
+    transition: color 0.4s linear;
+    position: relative;
+    z-index: 1;
+    border: 0;
+    overflow: hidden;
+    margin: 0;
+  	background-color: #151c3e;
+  }
 </style>
 </head>
 <body>
-  <!-- Preloader Start -->
-    <div id="preloader-active">
-        <div class="preloader d-flex align-items-center justify-content-center">
-            <div class="preloader-inner position-relative">
-                <div class="preloader-circle"></div>
-                <div class="preloader-img pere-text">
-                    <img src="assets/img/logo/logo.png" alt="">
-                </div>
-            </div>
-        </div>
-    </div>
-
+ <!-- Preloader Start -->
+	<div id="preloader-active">
+		<div
+			class="preloader d-flex align-items-center justify-content-center">
+			<div class="preloader-inner position-relative">
+				<div class="preloader-circle"></div>
+				<div class="preloader-img pere-text">
+                    <img src="${pageContext.request.contextPath}/resources/image/logo/sports_logo.png" alt="">
+				</div>
+			</div>
+		</div>
+	</div>
  <!-- slider Area Start-->
     <div class="slider-area ">
         <!-- Mobile Menu -->
-        <div class="single-slider slider-height2 d-flex align-items-center" data-background="${pageContext.request.contextPath}/resources/image/water/water.jpg">
+        <div class="single-slider slider-height2 d-flex align-items-center" data-background="${pageContext.request.contextPath}/resources/image/water/calendar.jpg">
             <div class="container">
                 <div class="row">
                     <div class="col-xl-12">
                         <div class="hero-cap text-center">
-                            <h2>물 섭취량 기록</h2>
+                            <h2>CALENDAR</h2>
                         </div>
                     </div>
                 </div>
@@ -210,18 +227,14 @@ $(document).ready(function() {
 	<article class="ftco-section">
 		<div style="border:1px solid black;">
 			<div class="d-flex justify-content-around mb-3" style="margin:16px 0px 0px 0px !important">
-		 		<button id="prev" class="p-2 btn btn-dark">이전달</button>
+		 		<button id="prev" class="p-2 prev btn-dark">이전달</button>
 		 		<div id="yearMonth" style="vertical-align: center; font-size: 30px;"></div>
-	  			<button id="next" class="p-2 btn btn-dark">다음달</button>
+	  			<button id="next" class="p-2 next btn-dark">다음달</button>
 	  		</div>
 	  		<br>
 	  		<br>
 	  		<div id='calendar'></div>
 	  		<br>
-  		 	<!-- <div style="width:40%; float:right; text-align:right">
-				<button style="width:120px; height:40px; vertical-align:middle;
-				font-size:17px; cursor:pointer" onclick="javascript:allSave();">저장</button>
-  		 	</div> -->
   		</div>
 	</article> 
     </div>
