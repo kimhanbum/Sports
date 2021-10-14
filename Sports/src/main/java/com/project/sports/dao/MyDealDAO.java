@@ -142,6 +142,14 @@ public class MyDealDAO {
 		
 	}
 
+	public int BUY_QUESTIONcount2(String sessionid) {
+		return sqlSession.selectOne("MyDeal.bquestion2", sessionid);
+	}
+
+	public int SELL_QUESTIONcount2(String sessionid) {
+		return sqlSession.selectOne("MyDeal.squestion2", sessionid);
+	}
+
 
 
 }

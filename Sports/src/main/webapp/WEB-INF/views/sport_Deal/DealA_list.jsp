@@ -351,14 +351,35 @@ background-color
 
 									<h4>
 										<span style="float:left">No.${b.AUC_NUMBER}</span>
-										<a href="${pageContext.request.contextPath}
+										
+										<c:choose>
+											<c:when test="${b.SAVE_AUC_MAINFILE eq 'buynow.jpg'}">
+												<b style="font-size:15px">	${b.AUC_SUBJECT}</b><b style="color:red;font-size:15px">(판매완료)</b>
+											</c:when>
+											<c:when test="${b.SAVE_AUC_MAINFILE eq 'soldout.jpg'}">
+												<b style="font-size:15px">	${b.AUC_SUBJECT}</b><b style="color:red;font-size:15px">(판매완료)</b>
+											</c:when>
+											<c:otherwise>
+											<a href="${pageContext.request.contextPath}
 										/DealA/detail?num=${b.AUC_NUMBER}"><b>${b.AUC_SUBJECT}</b></a>
+											</c:otherwise>
+										</c:choose>
+										
+										
+										
+									
+										
 									</h4>
 									<div class="price">
 										<table class="table">
 											<tr>
+												<th>올린사람</th>
+												<td>${b.USER_ID}</td>
+												
+											</tr>
+											<tr>
 												<th>시작가</th>
-												<td>${b.AUC_SPRICE}원${session}</td>
+												<td>${b.AUC_SPRICE}원</td>
 												
 											</tr>
 											<tr>
@@ -405,7 +426,7 @@ background-color
 						 	var timeid = "timeback" + number;
 						 	var imgid = "imgimg" + number;
 						 	
-						 	var imgurl = "${pageContext.request.contextPath}/resources/dealupload1/soldout.jpg"
+						 
 						 	
 						 	$("#timeback").attr("id",timeid)
 						 	$("#imgimg").attr("id" , imgid)
@@ -445,15 +466,16 @@ background-color
 									$("#timeid").remove();
 									$(eval("'#timeback" +number + "'")).remove();
 									
-									$(eval("'#imgimg" +number + "'")).attr("src",imgurl );
+									
 									
 
 									//location.href="write"
 									
 									
 								}
-								if(hr == 503 && min ==0 && sec ==20){
-									location.href="timeout?num=" + number	
+								if(hr == 23 && min ==57 && sec ==50){
+									location.href="timeout?num=" + number
+									
 								}
 								
 								var imgfile = "${b.SAVE_AUC_MAINFILE}"

@@ -276,6 +276,12 @@ public class DealServiceImpl implements DealService {
 			
 		}
 
+		@Override
+		public void Auction_soldoutimg(int num) {
+			dao.soldoutimg(num);
+			
+		}
+
 
 
 
