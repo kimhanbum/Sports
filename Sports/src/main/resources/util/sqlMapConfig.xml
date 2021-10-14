@@ -33,6 +33,6 @@
  	<mapper resource="sql/mmatch.xml"/>
  	<mapper resource="sql/Personal_Management.xml"/>	
  	<mapper resource="sql/MyDeal.xml"/>
- 	
+  	<mapper resource="sql/Main.xml"/>	
   </mappers>
 </configuration>
