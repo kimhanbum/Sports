@@ -112,19 +112,19 @@ required=true 상태에서 지정한 이름을 가진 쿠키가 존재하지 않으면 스프링 MVC는 익
 			m.setUSER_RMR(
 					66.47+(13.75*m.getUSER_PWEIGHT())
 						+(5*m.getUSER_HEIGHT())
-							-(6.75*(21-Integer.parseInt(m.getJUMIN().substring(0,2))+1))
+							-Double.valueOf((6.75*(21-Integer.parseInt(m.getJUMIN().substring(0,2))+1)))
 					);
 		}else if(m.getJUMIN1().substring(0,1).equals("2")) {
 			m.setUSER_RMR(
 					655.1+(9.56*m.getUSER_PWEIGHT())
 						+(1.85*m.getUSER_HEIGHT())
-							-(4.68*(121-Integer.parseInt(m.getJUMIN().substring(0,2))+1))
+							-Double.valueOf((4.68*(121-Integer.parseInt(m.getJUMIN().substring(0,2))+1)))
 					);
 		}else if(m.getJUMIN1().substring(0,1).equals("4")) {
 			m.setUSER_RMR(
 					655.1+(9.56*m.getUSER_PWEIGHT())
 						+(1.85*m.getUSER_HEIGHT())
-							-(4.68*(21-Integer.parseInt(m.getJUMIN().substring(0,2))+1))
+							-Double.valueOf((4.68*(21-Integer.parseInt(m.getJUMIN().substring(0,2))+1)))
 					);
 		}else {m.setUSER_RMR(1);};
 		//(남자:66.47+(13.75*현재몸무게)+(5*키)-(6.75*나이)
@@ -204,12 +204,40 @@ required=true 상태에서 지정한 이름을 가진 쿠키가 존재하지 않으면 스프링 MVC는 익
 		return mv;
 	}
 	@RequestMapping(value="/updateProcess", method=RequestMethod.POST)
-	public String updateProcess(Member member, Model model,
+	public String updateProcess(Member m, Model model,
 			HttpServletRequest request, RedirectAttributes rattr) {
-		int result = memberservice.update(member);
+		/*
+		m.setUSER_BMI(Double.valueOf(m.getUSER_PWEIGHT()/(m.getUSER_HEIGHT()*m.getUSER_HEIGHT())*10000));
+		if(m.getJUMIN().substring(6,1).equals("1")) {
+			m.setUSER_RMR(
+					66.47+(13.75*m.getUSER_PWEIGHT())
+						+(5*m.getUSER_HEIGHT())
+						-Double.valueOf((6.75*(121-Integer.parseInt(m.getJUMIN().substring(0,2))+1)))
+					);
+		}else if(m.getJUMIN().substring(6,1).equals("3")) {
+			m.setUSER_RMR(
+					66.47+(13.75*m.getUSER_PWEIGHT())
+						+(5*m.getUSER_HEIGHT())
+							-Double.valueOf((6.75*(21-Integer.parseInt(m.getJUMIN().substring(0,2))+1)))
+					);
+		}else if(m.getJUMIN().substring(6,1).equals("2")) {
+			m.setUSER_RMR(
+					655.1+(9.56*m.getUSER_PWEIGHT())
+						+(1.85*m.getUSER_HEIGHT())
+							-Double.valueOf((4.68*(121-Integer.parseInt(m.getJUMIN().substring(0,2))+1)))
+					);
+		}else if(m.getJUMIN().substring(6,1).equals("4")) {
+			m.setUSER_RMR(
+					655.1+(9.56*m.getUSER_PWEIGHT())
+						+(1.85*m.getUSER_HEIGHT())
+							-Double.valueOf((4.68*(21-Integer.parseInt(m.getJUMIN().substring(0,2))+1)))
+					);
+		}else {m.setUSER_RMR(1);};
+		*/
+		int result = memberservice.update(m);
 		if(result==1) {
 			rattr.addFlashAttribute("result","updateSuccess");
-			return "redirect:mypage_info";
+			return "redirect:info";
 		}else {
 			model.addAttribute("url",request.getRequestURI());
 			model.addAttribute("message","정보 수정 실패");

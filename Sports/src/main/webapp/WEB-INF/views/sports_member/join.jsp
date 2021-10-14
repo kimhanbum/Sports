@@ -10,7 +10,7 @@ form {
     background-color: #e6fffe;
     margin: 5% auto 15% auto;
     border: 1px solid lightgray;
-    width: 550px;
+    width: 500px;
     height:900px;
     padding: 16px;
 }
@@ -40,9 +40,9 @@ $(function(){
 	});
 	//회원가입버튼 클릭 시
 	$("#submit").on("click", function(){
-		if($("#USER_HEIGHT").val()==""){
-			alert("회원님의 키를 숫자로 입력해주세요.");
-			$("#USER_HEIGHT").focus();
+		if(!checkid){
+			alert("ID 중복확인하세요.");
+			$("#checkid").focus();
 			return false;
 		}else if($("#USER_PASS").val()==""){
 			alert("비밀번호를 입력해주세요.");
@@ -53,18 +53,18 @@ $(function(){
 			$("#passcheck").val()="";
 			$("#USER_PASS").focus();
 			return false;
-		}else if($("#USER_PSPORTS").val()==""){
-			alert("선호하는 운동을 1개 이상 선택해주세요.");
+		}else if($("#USER_HEIGHT").val()==""){
+			alert("회원님의 키를 숫자로 입력해주세요.");
+			$("#USER_HEIGHT").focus();
 			return false;
-		}else if(!checkid){
-			alert("ID 중복확인하세요.");
-			$("#checkid").focus();
+		}else if(chk_result.length==0){
+			alert("선호하는 운동을 1개 이상 선택해주세요.");
 			return false;
 		}
 	});
 
     $("#checkid").on("click", function(){
-		checkid=true;
+		checkid=false;
 		//[A-Za-z0-9_]와 동일한 것이 \w
 		//+는 1회 이상 반복을 의미합니다. {1,}와 동일하다는 뜻
 		//\w 는 [A-Za-z0-9_]를 1개 이상 사용하라는 뜻
@@ -244,7 +244,7 @@ function Postcode() {//우편번호찾기
                     <label for="EMAIL">이메일</label>
                 </td>
                 <td>
-                    <input type="text" name="USER_EMAIL" id="EMAIL" size="10" required>@
+                    <input type="text" name="USER_EMAIL" id="EMAIL" size="8" required>@
                     <input type="text" name="USER_EMAILDOMAIN" id="EMAIL1" style="width:100px" required>
                     
                     <select id="EMAIL2" name="EMAIL2">

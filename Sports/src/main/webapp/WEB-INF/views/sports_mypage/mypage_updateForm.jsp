@@ -108,6 +108,22 @@ span{display:inline-block;margin-top:-20px;font-size:10px}
 </head>
 <body>
 <jsp:include page="/WEB-INF/views/sport_comm/header.jsp"/>
+<!-- slider Area Start-->
+    <div class="slider-area ">
+        <!-- Mobile Menu -->
+        <div class="single-slider slider-height2 d-flex align-items-center" data-background="${pageContext.request.contextPath}/resources/img/hero/category.jpg">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xl-12">
+                        <div class="hero-cap text-center">
+                            <h2>Mypage</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- slider Area End-->
 <section class="blog_area section-padding">
             <div class="row">
             	<div class="col-lg-2">
@@ -134,19 +150,19 @@ span{display:inline-block;margin-top:-20px;font-size:10px}
 						<input type="text" name="USER_MOBILE" value="${m.USER_MOBILE}" size="10" maxLength="11" pattern="[0-9]+" required>
   
 						<b>이메일 주소</b>
-						<input type="text" name="email" value="${m.USER_EMAIL}" placeholder="Enter email" required>
+						<input type="text" name="USER_EMAIL" value="${m.USER_EMAIL}" placeholder="Enter email" required>
   
 						<b>주소</b>
 						<input type="text" name="USER_ADDRESS" value="${m.USER_ADDRESS}" required>
   
 						<b>키(cm)</b>
-						<input type="text" name="USER_HEIGHT" value="${m.USER_HEIGHT}" maxLength="3" pattern="[0-9]+" required>
+						<input type="text" name="USER_HEIGHT" value="${m.USER_HEIGHT}" maxLength="5" pattern="[0-9.]+" required>
   
 						<b>현재 몸무게(kg)</b>
-						<input type="text" name="USER_PWEIGHT" value="${m.USER_PWEIGHT}" maxLength="3" pattern="[0-9]+" required>
+						<input type="text" name="USER_PWEIGHT" value="${m.USER_PWEIGHT}" maxLength="5" pattern="[0-9.]+" required>
   
 						<b>목표 몸무게(kg)</b>
-						<input type="text" name="USER_WWEIGHT" value="${m.USER_WWEIGHT}" maxLength="3" pattern="[0-9]+" required>
+						<input type="text" name="USER_WWEIGHT" value="${m.USER_WWEIGHT}" maxLength="5" pattern="[0-9.]+" required>
   
 						<div class="clearfix">
 						<button type="submit" class="submitbtn">수정</button>
