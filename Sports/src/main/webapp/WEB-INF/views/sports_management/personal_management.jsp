@@ -4,7 +4,7 @@
 <html lang="en">
 <head>
 <title>당일 운동량</title>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"> -->
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 		<script src="${pageContext.request.contextPath}/resources/js/jquery-3.6.0.js"></script>
 		<script src="${pageContext.request.contextPath}/resources/js/personal_management/pm.js" charset="utf-8"></script> 		
@@ -196,7 +196,7 @@ background-color: #fbfcfd
 		</div>
 		</div>
 		</div>
-				<!-- Row End -->
+	<!-- Row End -->
 <!-- Container End -->
 
 		<!-- Donut Chart -->
@@ -211,14 +211,37 @@ background-color: #fbfcfd
     <div class="container">
 	  <div class="row">
 		<div class="col-md-12">
-			<canvas id ="myChart">
+			<canvas id ="myChart" data-toggle="modal" data-target="#myModal">
 			</canvas>
 			<input type="hidden" id="goaldata" name="goaldata" value="${goaldata}">
-			<input type="text" placeholder="당일 물 섭취량 입력" id="title" name="title"><button class="wateradd" id="wateradd">입력</button>
+			<input type="text" placeholder="당일 물 섭취량 입력" id="title" name="title">
+			<button class="wateradd" id="wateradd">입력</button>
 		</div>
 	  </div>
 	</div>
-				
+		
+	<%--modal 시작--%>
+		<div class="modal" id="myModal">
+		  <div class="modal-dialog">
+			<div class="modal-content">
+				<%--Modal body --%>
+				<div class="modal-body">
+				 <form name="modify" action="modify" method="post">
+			   <%-- <input type="hidden" name="title" value="${title}" id="title"> --%>
+				 	<div class="form-group">
+				 		<label for ="modi">수정</label>
+				 		<input type="text"
+				 				class="form-control" placeholder="당일 물 섭취량 수정"
+				 				name="title" id="title">
+				 	</div>
+				 	<button type="submit" class="sub btn-dark">수정</button>
+				 	<button type="button" id="del" class="del">삭제</button>
+				 	<button type="button" class="can btn-danger" data-dismiss="modal">취소</button>
+				 </form>
+				</div><!-- class="modal-body" -->
+			</div><!-- class="modal-content -->
+		</div><!-- class="modal-dialog" -->
+		</div><!-- class="modal" end -->
 <script>
 //ajax로 값을 가져와요
 // [{label:""물섭취량""}]
@@ -236,15 +259,14 @@ function getDoughnut(goaldata, title){
 					goaldata,
 					title,
 					],
-				backgroundColor: ['#4e73df', '#1cc88a'],
-				hoverBackgroundColor: ['#2e59d9', '#17a673'],
+				backgroundColor: ['#8a6bff', '#f85867'],
+				hoverBackgroundColor: ['#5c09f0', '#e2081d'],
 				hoverBorderColor: "rgba(234, 236)",
 			}],
 		},
 		options:{
 			cutoutPercentage: 90
 		}
-		
 	});
 	
 }
@@ -266,6 +288,8 @@ function getDoughnut(goaldata, title){
 					console.log("성공");
 					doughnutChart.destroy();
 					getDoughnut(rdata.goaldata, rdata.title);
+					$('#title').val('');
+					$("#title").attr("placeholder", "당일 물 섭취량 입력");
 				}
 			})	
 	})
@@ -274,7 +298,6 @@ function getDoughnut(goaldata, title){
 			</div>
 		</div>
 	</div>
-
 
 </section>
 </body>

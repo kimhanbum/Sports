@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -183,4 +184,13 @@ public class PersonalManagementController {
 	 * return title; }
 	 */
 	
+	/*
+	 * @PostMapping(value="/modi") public String modi(WaterIntake water,
+	 * HttpServletRequest request RedirectAttributes rattr, Model mv) {
+	 * 
+	 * }
+	 */
 }
+
+
+

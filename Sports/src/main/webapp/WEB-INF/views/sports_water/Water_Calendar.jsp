@@ -27,10 +27,9 @@ $(document).ready(function() {
     var day = ('0' + today.getDate()).slice(-2);
     var dateString = year + '-' + month  + '-' + day;
     var yearMonth=year+"-"+month; 
-    
+
     var result=getData();
-    
-	var calendar = new FullCalendar.Calendar(calendarEl, {
+    var calendar = new FullCalendar.Calendar(calendarEl, {
       plugins: [ 'interaction', 'dayGrid'],
       header: {
   	    left:   '',
@@ -40,7 +39,7 @@ $(document).ready(function() {
       defaultDate:dateString,
       //변경
       navLinks: true, // can click day/week names to navigate views
-      selectable: true,
+      selectable: false,
       selectMirror: true,
       //update처리(눌렀을 때 반응 처리) 
       select: function(arg) { 
@@ -54,7 +53,7 @@ $(document).ready(function() {
             end: arg.endStr,
           })
           
-          //ajax 데이터베이스에 저장
+        /*   //ajax 데이터베이스에 저장
           $.ajax({
         	  type: "post",
         	  url : '${pageContext.request.contextPath}/water/wateradd',
@@ -66,7 +65,7 @@ $(document).ready(function() {
         	  success:function(){
         		  console.log("성공");
         	  }
-          })
+          }) */
         	  
         }
         calendar.unselect()
@@ -90,17 +89,25 @@ $(document).ready(function() {
 
                     items = [];
                    
-                    if(result!=null){
-                        
+                    if(result!=null){    
                             $.each(result, function(index, element) {
-                            
-                           	 items.push({
-                                    title: element.TITLE + "L/" + element.PM_KCAL + "kcal",
-                                    start: element.TIME_START
-                                    
-                                    //color : element.color,
-                             }); //.push()
-                                         
+                             
+                             if(element.TITLE != null){
+                               	 items.push({
+                                     title: element.TITLE + "L",
+                                     start: element.TIME_START,
+                                     color : '#4db151'
+                                 }); //.push()
+                             }
+                             if(element.PM_KCAL !=null){
+                            	 items.push({
+                                     title: element.PM_KCAL + "kcal",
+                                     start: element.TIME_START,
+                                     color : '#cedc4a'
+                              }); //.push()
+                             }
+                             
+                             
                              
                         }); //.each()
                     }//if end                           
@@ -233,6 +240,7 @@ $(document).ready(function() {
 	  		</div>
 	  		<br>
 	  		<br>
+	  		<input type="hidden" id="USER_ID" name="USER_ID" value="${USER_ID}"> 
 	  		<div id='calendar'></div>
 	  		<br>
   		</div>

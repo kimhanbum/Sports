@@ -1,6 +1,5 @@
 package com.project.sports.controller;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -16,9 +15,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
 
-import com.project.sports.domain.PersonalManagement;
 import com.project.sports.domain.WaterIntake;
 import com.project.sports.service.PersonalManagementService;
 import com.project.sports.service.WaterIntakeService;
@@ -40,14 +37,6 @@ public class WaterIntakeController {
 		return "sports_water/Water_Calendar";
 	}
 
-	/*
-	 * @ResponseBody
-	 * 
-	 * @RequestMapping(value = "/list") public List<WaterIntake> water(String
-	 * yearMonth) { logger.info("yearMonth=" + yearMonth);// 2021-10
-	 * List<WaterIntake> list = WaterService.getList(yearMonth); return list; }
-	 */
-	 
 
 	@PostMapping(value = "/wateradd")
 	@ResponseBody
