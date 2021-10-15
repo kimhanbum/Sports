@@ -33,19 +33,22 @@ public interface MatchService {
 	public List<Match> getRegiList(String id);
 
 	public List<Match> getApplyList(String id);
+	
+	public List<Match> getDeadList(String id);
 
 	public int MactingUpdate(Match match);
 
 	public int Regidelete(int REGISTER_NUM);
 
 	public String getApplyID(int REGISTER_NUM);
+	
+	public String getRegiID(int REGISTER_NUM);
 
 	public int ApplyupdateMatch(int REGISTER_NUM);
 
 	public int Regifinalupdate(int REGISTER_NUM);
 
-	public void DeadMatch(HashMap<String, Object> map);
+	public void DeadMatch(int SPORT_NUM, String Apply_ID, String Register_ID, int REGISTER_NUM);
 
-
-
+	public String getMobile(String Register_ID);
 }

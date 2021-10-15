@@ -1,5 +1,4 @@
 
-var sport_name= null;
 
 $(document).ready(function(){
 	setSportName();
@@ -13,6 +12,10 @@ function setSportName(){
 	 $("div[name=apply_list]").each(function(i){
 		   var sport_num = $("div[name=apply_list]").eq(i).text();
 		   $("div[name=apply_list]").eq(i).text(getSportName(sport_num));
+	 });
+	 $("div[name=dead_list]").each(function(i){
+		   var sport_num = $("div[name=dead_list]").eq(i).text();
+		   $("div[name=dead_list]").eq(i).text(getSportName(sport_num));
 	 });
 }
 
@@ -39,7 +42,7 @@ function RegiOk(Regi_num, sport_num){ //응답하기 버튼
 	console.log(REGISTER_NUM);
 	console.log(SPORT_NUM);
 	if(confirm('요청에 수락하시겠습니까?')){
-		//var Register_ID = document.getElementById('user_id').innerHTML;
+		//
 		$.ajax({
 			type: "post",
 			async: false,
@@ -94,6 +97,7 @@ function UpdateClick(Regi_num){ //수정삭제 버튼 클릭시 모달에 해당
 			var person =result[0]["match_PRS"];
 			var date =result[0]["match_TIME"];
 			var skill =result[0]["match_SKL"];
+			var sport_name = getSportName(result[0]["sport_NUM"]);
 			console.log(skill);
 			$("#UpdateModal #regi_num").val(num);
 			$("#UpdateModal #City").val(city);
@@ -101,15 +105,12 @@ function UpdateClick(Regi_num){ //수정삭제 버튼 클릭시 모달에 해당
 			$("#UpdateModal #Date").val(date);
 			$("#UpdateModal #Person").val(person);
 			$("#Skill").val(skill).prop("selected", true);
+			$("#UpdateModal #Sport").val(sport_name);
 		}, 
 		error: function(){
 			alert("불러오기실패");
 		}
 	});
-	
-	var sport =  sport_name;
-	$("#UpdateModal #Sport").val(sport);
-	console.log(sport);
 	$("#UpdateModal").css({
 		"display" :"block"
 	});
@@ -117,7 +118,7 @@ function UpdateClick(Regi_num){ //수정삭제 버튼 클릭시 모달에 해당
 
 function updateModal(){
 	if(confirm('정말 수정 하시겠습니까?')){
-		var Regi_num = JSON.parse($("#UpdateModal #regi_num").val());
+		var Regi_num = $("#UpdateModal #regi_num").val();
 		var MATCH_TIME = $("input[name=Date]").val();
 		var MATCH_PRS =  $("input[name=Person]").val();
 		var MATCH_SKL =	 $("select[name=Skill]").val();

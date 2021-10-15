@@ -78,6 +78,12 @@
 		where USER_ID = #{REGISTER_ID}
 	</select>
 	
+	<select id="getMobile" resultType="string" parameterType="string">
+		select USER_MOBILE
+		from MEMBER_INFO
+		where USER_ID = #{REGISTER_ID}
+	</select>
+	
 	<insert id="ApplyMatch" parameterType="apply">
 		<selectKey keyProperty="APPLY_NUM" resultType="int" order="BEFORE">
 			select aply_seq.nextval as APPLY_NUM FROM DUAL
@@ -102,6 +108,16 @@
 			AND SPORT_APPLY.APPLY_ID = #{id} and APPLY_STUS = 0
 	</select>
 	
+	
+	<select id="myDead" parameterType="java.util.Map" resultType="deadline">
+		select SPORT_DEADLINE.SPORT_NUM, SPORT_DEADLINE.REGISTER_ID, SPORT_DEADLINE.APPLY_ID, 
+		SPORT_REGISTER.MATCH_ADR, SPORT_REGISTER.MATCH_DTL_ADR, SPORT_REGISTER.MATCH_TIME,
+		SPORT_REGISTER.MATCH_PRS, SPORT_REGISTER.MATCH_SKL
+		FROM SPORT_DEADLINE, SPORT_REGISTER
+		WHERE SPORT_DEADLINE.REGISTER_NUM = SPORT_REGISTER.REGISTER_NUM
+		AND SPORT_DEADLINE.REGISTER_ID = #{id} OR SPORT_DEADLINE.REGISTER_NUM = SPORT_REGISTER.REGISTER_NUM and APPLY_ID = #{id}
+	</select>
+	
 	<update id="MactingUpdate" parameterType="match">
 		update Sport_register
 		set MATCH_PRS = #{MATCH_PRS} , MATCH_SKL = #{MATCH_SKL}, MATCH_TIME = #{MATCH_TIME}
@@ -118,6 +134,12 @@
 		where REGISTER_NUM = #{REGISTER_NUM}
 	</select>
 	
+	<select id="getRegiID" resultType="string" parameterType="int">
+		select REGISTER_ID 
+		from SPORT_REGISTER
+		where REGISTER_NUM = #{REGISTER_NUM}
+	</select>
+	
 	<update id="ApplyupdateMatch" parameterType="apply">
 		update SPORT_APPLY
 		set APPLY_STUS =1
@@ -130,12 +152,12 @@
 		where REGISTER_NUM = #{REGISTER_NUM}
 	</update>
 	
-	<insert id="DeadMatch" parameterType="deadline">
+	<insert id="DeadMatch" parameterType="java.util.Map">
 		<selectKey keyProperty="DEADLINE_NUM" resultType="int" order="BEFORE">
 			select dead_seq.nextval as DEADLINE_NUM FROM DUAL
 		</selectKey>
-		insert into SPORT_APPLY(REGISTER_ID,APPLY_ID,SPORT_NUM,DEADLINE_NUM)
+		insert into SPORT_DEADLINE(REGISTER_ID,APPLY_ID,SPORT_NUM,REGISTER_NUM,DEADLINE_NUM)
 		values
-		(#{REGISTER_ID}, #{APPLY_ID}, #{SPORT_NUM}, #{DEADLINE_NUM})	
+		(#{REGISTER_ID}, #{APPLY_ID}, #{SPORT_NUM}, #{REGISTER_NUM} ,#{DEADLINE_NUM})	
 	</insert>
 </mapper>

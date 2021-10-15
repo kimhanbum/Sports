@@ -69,10 +69,12 @@
                         <div class="col-xl-4 col-lg-3 col-md-3 col-sm-3 fix-card">
                             <ul class="header-right f-right d-none d-lg-block d-flex justify-content-between">
                                 <li>
-                                    <div class="shopping-card">
-                                        <a href="cart.html"><i class="fas fa-edit"></i></a>
+                                <c:if test="${!empty USER_ID}">
+                                    <div>
+                                       <i class="fas fa-user" style="font-size: 15px; margin-top:17px; margin-right:20px">&nbsp;${USER_ID}&nbsp;님&nbsp; 환영합니다.</i>
                                     </div>
-                                </li>						        
+                                </c:if>
+                                </li>
                                 <c:if test="${empty USER_ID}">
 						              <li class="d-none d-lg-block"> <a href="${pageContext.request.contextPath}/member/login" class="btn header-btn">로그인</a></li>
                                       <li class="d-none d-lg-block"> <a href="${pageContext.request.contextPath}/member/join" class="btn header-btn">회원가입</a></li>
