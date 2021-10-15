@@ -42,6 +42,7 @@
 #delimg{
 	color:red
 }
+
 </style>
 <body>
 
@@ -75,8 +76,10 @@
 				<!-- 마이 페이지 좌측 asideLeft 메뉴들 -->
 				<jsp:include page="/WEB-INF/views/sport_comm/asideLeft.jsp" />
 			</div>
+			
 			<div class="col-lg-8">
 				<div class="section lb">
+				
 					<div class="container">
 						<div class="section-title text-center">
 
@@ -85,7 +88,17 @@
 									 <a id="buy" href="${pageContext.request.contextPath}/Mydeal/buy">
 									 <i class="fas fa-coins" 
 									
-									></i>&nbsp;&nbsp;구매현황<b style="color:red;font-size:15px">(클릭시 상세페이지)</b></a> <br>
+									></i>&nbsp;&nbsp;구매현황<b style="color:red;font-size:15px">(클릭시 상세페이지)</b></a> 
+									
+									<c:if test="${sessionid eq 'admin'}">
+									<a 
+									href = "pointadmin" style="float:right" id="pointadmin">포인트 요청 내역</a> 
+									</c:if>
+									<c:if test="${sessionid ne 'admin'}">
+									<a 
+									href = "pointview" style="float:right" id="pointview">경매 포인트 충전 (현재 포인트 ${nowpoint}원)</a> 
+									</c:if>
+									<br>
 									<br>
 									
 									<table>
@@ -253,6 +266,10 @@
 			}
 			
 			
+		})
+		
+		$("#pointview").click(function(){
+			location.href="pointview"
 		})
 		
 		

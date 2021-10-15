@@ -431,9 +431,8 @@ input.checkbox:checked+label.input-label.radio::before {
 	<section class="section">
 		<div class="container" id="mainpic">
 			<h3><b>${b.AUC_SUBJECT}</b></h3>
-			<h6 class="text-color">Computer Science</h6>
-			<span>Lorem ipsum dolor, sit amet consectetur
-				adipisicing elit. Cumque ac voluptas quae.</span>
+			
+			
 				<div style="text-align:right"><b>조회수</b>&emsp;${b.AUC_READCOUNT}</div>
 				<hr>
 			<div class="row">
@@ -465,6 +464,8 @@ input.checkbox:checked+label.input-label.radio::before {
 									<hr></li>
 								<li><b>아이디</b>&emsp;&emsp;${b.USER_ID}
 									<hr></li>
+								<li><b>입찰자</b>&emsp;&emsp;${beforebidid}
+									<hr></li>
 							</ul>
 						</div>
 						<div class="col-md-6">
@@ -489,17 +490,7 @@ input.checkbox:checked+label.input-label.radio::before {
 				</div>
 				<div class="col-12">
 					<h4 class="mb-4"><b>글 내용</b></h4>
-					<p class="mb-5">Lorem ipsum dolor sit amet, consectetur
-						adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-						dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-						exercitation ullamco laboris nisi ut aliquip ex ea commodo
-						consequat. Duis aute irure dolor in reprehenderit in voluptate
-						velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
-						occaecat cupidatat non proident, sunt in culpa qui officia
-						deserunt mollit anim id est laborum. Sed ut perspiciatis unde
-						omnis iste natus error sit voluptatem accusantium doloremque
-						laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore
-						veritatis et quasi architecto.</p>
+					<p class="mb-5">${b.AUC_CONTENT }</p>
 				</div>
 			</div>
 			<div class="row justify-content-center">
@@ -609,6 +600,8 @@ input.checkbox:checked+label.input-label.radio::before {
 			$(".buttonA").click(function(){ //로그인창에서 회원가입버튼 클릭 시
 				var num = ${param.num};
 				var bidcheck ="${bidcheck}";
+				var possible = ${possible};
+				var point = ${nowpoint};
 				
 				var writeid = "${b.USER_ID}"
 				var sessionid = "${USER_ID}"
@@ -622,16 +615,20 @@ input.checkbox:checked+label.input-label.radio::before {
 					if(writeid==sessionid){
 						alert("본인이 올린글 입니다.")
 					}else{
-						if(bidcheck == "possible"){
-							var b = confirm("입찰 하시겠습니까 ? (현재금액: " + ${b.AUC_SPRICE} + " 입찰단위: " + ${b.AUC_UNIT} + ") ");		
-							
-							if(b==true){	
-								location.href = "${pageContext.request.contextPath}/DealA/bid"
-								 + "?num=" + num ;
-								
-							}
+						if(possible == 0){
+							alert("포인트가 부족합니다. (현재 point " + point +"원)" )
 						}else{
-							alert("입찰중인 물품입니다.")
+							if(bidcheck == "possible"){
+								var b = confirm("입찰 하시겠습니까 ? (현재금액: " + ${b.AUC_SPRICE} + " 입찰단위: " + ${b.AUC_UNIT} + ") ");		
+								
+								if(b==true){	
+									location.href = "${pageContext.request.contextPath}/DealA/bid"
+									 + "?num=" + num ;
+									
+								}
+							}else{
+								alert("입찰중인 물품입니다.")
+							}
 						}
 					}
 				}

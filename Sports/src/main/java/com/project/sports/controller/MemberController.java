@@ -23,6 +23,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.project.sports.domain.Member;
 import com.project.sports.service.MemberService;
+import com.project.sports.service.MyDealService;
 
 /*
 @Component를 이용해서 스프링 컨테이너가 해당 클래스 객체를 생성하도록 설정할 수 있지만
@@ -41,6 +42,10 @@ public class MemberController {
 	= LoggerFactory.getLogger(MemberController.class);
 	@Autowired
 	private MemberService memberservice;
+	
+	//장성진추가 (10-15)
+	@Autowired
+	private MyDealService mydealservice;
 	
 /*
 @CookieValue(value="saveid", required=false) Cookie readCookie
@@ -130,6 +135,11 @@ required=true 상태에서 지정한 이름을 가진 쿠키가 존재하지 않으면 스프링 MVC는 익
 		//(남자:66.47+(13.75*현재몸무게)+(5*키)-(6.75*나이)
 		//(여자:655.1+(9.56*현재몸무게)+(1.85*키)-(4.68*나이)
 		int result = memberservice.insert(m);
+		
+		//회원가입시 포인트 db 자동생성 (장성진10-15 추가)
+		String user_id = m.getUSER_ID();
+		mydealservice.pointdb(user_id);
+		
 		//삽입이 된 경우
 		if(result==1) {
 			rattr.addFlashAttribute("result","joinSuccess");

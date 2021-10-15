@@ -112,6 +112,18 @@ public class DealAuctionDAO {
 		
 	}
 
+	public int Dealunit(int num) {
+		return sqlSession.selectOne("Auction.dealunit", num);
+	}
+
+	public String beforebidid(int num) {
+		return sqlSession.selectOne("Auction.beforebidid" , num);
+	}
+
+	public int Deallprice(int num) {
+		return sqlSession.selectOne("Auction.deallprice", num);
+	}
+
 
 
 

@@ -82,6 +82,12 @@ public interface DealService {
 
 	public void Auction_soldoutimg(int num);
 
+	public int Dealunit(int num);
+
+	public String beforebidid(int num);
+
+	public int Deallprice(int num);
+
 
 	
 
