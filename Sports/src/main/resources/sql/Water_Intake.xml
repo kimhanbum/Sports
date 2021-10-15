@@ -30,9 +30,10 @@
 	</insert>
 	
 	<select id="doughnutlist" parameterType="String" resultType="float">
-		select sum(title) from water_intake
-		where user_id = #{id}
-		group by time_start
+		select sum(title) from water_intake 
+		where user_id = 'user01'
+		and time_start = to_char(sysdate, 'yyyy-mm-dd')
+		group by time_start 
 	</select>
 	
 	<select id="doughnutlistcount" parameterType="String" resultType="int">

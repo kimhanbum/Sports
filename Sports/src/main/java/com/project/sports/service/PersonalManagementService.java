@@ -18,8 +18,7 @@ public interface PersonalManagementService {
 	int delete(int num);
 	//칼로리, 운동종목, 사진 등 데이터(당일운동량페이지)
 	List<PersonalManagement> getList(String id,int page, int limit);
-	//캘린더에 나올 총 칼로리 데이터(캘린더 페이지)
-	
+	//캘린더에 나올 총 칼로리+총물섭취량 데이터(캘린더 페이지)
 	List<Map<String,Object>> getCalendar(Map<String, Object> map);
 	
 	
