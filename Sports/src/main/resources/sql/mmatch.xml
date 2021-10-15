@@ -3,24 +3,24 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="Mmatches">
-
+<!-- 카테고리에 해당되는 스포츠 이름들 조회 -->
 <select id="sportList" parameterType="int" resultType="String">
 	select sports_name 
 	from sports 
 	where sports_category=#{selType}
 </select>
-
+<!-- 전체 주소(시) 조회 -->
 <select id="siList" resultType="String">
 	select distinct city 
 	from city
 </select>
-
+<!-- 시에 해당되는 주소(동) 조회 -->
 <select id="dongList" parameterType="String" resultType="String">
 	select distinct sigungu 
 	from city 
 	where city=#{selType}
 </select>
-
+<!-- 작성 멘토 공고글 삽입 -->
 <insert id="insertWMentor" parameterType="mentor">
 	<selectKey resultType="String"  order="BEFORE"
 	           keyProperty="mentor_code">
@@ -37,20 +37,20 @@
     #{mentor_pic1,jdbcType=VARCHAR},#{mentor_origin_pic1,jdbcType=VARCHAR}, 
     #{mentor_pic2,jdbcType=VARCHAR}, #{mentor_origin_pic2,jdbcType=VARCHAR},
     #{mentor_pic3,jdbcType=VARCHAR}, #{mentor_origin_pic3,jdbcType=VARCHAR})
-</insert>
-    
+</insert> 
+<!-- 카테고리에 해당되는 스포츠 정보들(이름,이미지) 조회  -->
 <select id="sportDetailList" parameterType="int" resultType="sports">
 	select sports_name,sports_img
 	from sports 
 	where sports_category=#{selType}
 </select>
-
+<!-- 모든 멘토 공고글 갯수 조회 -->
 <select id="MentorCount" parameterType="Map" resultType="int" >
 	select count(*)
 	from mentor_match
 	<include refid="search_mentor"/>	
 </select>
-
+<!-- 모든 멘토 공고글 정보 리스트조회 -->
 <select id="Mentorlist" parameterType="Map" resultType="mentor">
    SELECT * FROM 
    (SELECT ROWNUM RNUM, m.*
@@ -61,40 +61,30 @@
    )
    WHERE RNUM <![CDATA[>=]]> #{start} AND RNUM <![CDATA[<=]]> #{end}
 </select>
-
+<!-- 선택된 멘토글의 상세 정보 조회 -->
 <select id="MentorDetail" parameterType="String" resultType="mentor">
 	select * 
 	from mentor_match 
 	where mentor_code=#{code}
 </select>
-
-<insert id="insertMentorApply" parameterType="Map">
-	<selectKey resultType="int"  order="BEFORE"
-	           keyProperty="match_no">
-	   select (nvl(max(match_no),1)+1) as match_no from match_info
-   </selectKey>
-   insert into match_info
-   values
-   (#{match_no},#{id},#{code},1)
-</insert>
-
+<!-- 특정유저가 특정멘토/멘티글에 신청을 했는지 여부를 조회 -->
 <select id="checkApply" parameterType="Map" resultType="int">
 	select count(*)
 	from match_info 
 	where user_id=#{id} and match_code=#{code}
 </select>
-
+<!-- 특정 멘토 공고글 삭제-->
 <delete id="deleteWMetor" parameterType="String">
 	delete from mentor_match 
 	where mentor_code=#{code}
 </delete>
-
+<!-- 특정 스포츠의 카테고리(구기/맨몸/기구)를 조회 -->
 <select id="getSports" parameterType="String" resultType="int">
 	select SPORTS_CATEGORY
 	from sports 
 	where sports_name = #{subject}
 </select>
-
+<!-- 특정 멘토 공고글을 수정-->
 <update id="modifyWMentor" parameterType="mentor">
    update mentor_match 
    set 
@@ -119,16 +109,16 @@
    mentor_origin_pic3 = #{mentor_origin_pic3,jdbcType=VARCHAR}
    where mentor_code = #{mentor_code}
 </update>	
-
+<!-- 멘토/멘티 공고글의 신청상태(신청중/신청완료/신청거부)를 변경-->
 <update id="chgApplyState" parameterType="matchinfo">
    update match_info 
    set match_state = #{match_state}
    where match_state = 1 and match_code = #{match_code}
-   <if test='user_id !=""'>
+   <if test='user_id !=null'>
    		and user_id = #{user_id}
    </if>
 </update>	
-
+<!-- 작성 멘티 공고글 삽입 -->
 <insert id="insertWMentee" parameterType="mentee">
 	<selectKey resultType="String"  order="BEFORE"
 	           keyProperty="mentee_code">
@@ -143,13 +133,13 @@
     #{mentee_req,jdbcType=VARCHAR},
     #{mentee_pic1,jdbcType=VARCHAR},#{mentee_origin_pic1,jdbcType=VARCHAR})
 </insert>
-    
+<!-- 모든 멘티 공고글 갯수 조회 -->
 <select id="MenteeCount" parameterType="Map" resultType="int" >
 	select count(*)
 	from mentee_match
 	<include refid="search_mentee"/>	
 </select>
-
+<!-- 모든 멘티 공고글 정보 리스트조회 -->
 <select id="Menteelist" parameterType="Map" resultType="mentee">
    SELECT * FROM 
    (SELECT ROWNUM RNUM, m.*
@@ -160,14 +150,14 @@
    )
    WHERE RNUM <![CDATA[>=]]> #{start} AND RNUM <![CDATA[<=]]> #{end}
 </select>
-
+<!-- 선택된 멘티글의 상세 정보 조회 -->
 <select id="MenteeDetail" parameterType="String" resultType="mentee">
 	select * 
 	from mentee_match 
 	where mentee_code=#{code}
 </select>
-
-<insert id="insertMenteeApply" parameterType="Map">
+<!-- 특정 멘토/멘티글에 지원 -->
+<insert id="insertApply" parameterType="Map">
 	<selectKey resultType="int"  order="BEFORE"
 	           keyProperty="match_no">
 	   select (nvl(max(match_no),1)+1) as match_no from match_info
@@ -176,12 +166,12 @@
    values
    (#{match_no},#{id},#{code},1)
 </insert>
-
+<!-- 특정 멘티 공고글 삭제-->
 <delete id="deleteWMetee" parameterType="String">
 	delete from mentee_match 
 	where mentee_code=#{code}
 </delete>
-
+<!-- 특정 멘티 공고글을 수정-->
 <update id="modifyWMentee" parameterType="mentee">
    update mentee_match 
    set 
@@ -199,13 +189,13 @@
    mentee_origin_pic1 = #{mentee_origin_pic1,jdbcType=VARCHAR}
    where mentee_code = #{mentee_code}
 </update>	
-
-
+<!-- 내가 작성한 멘티 작성글 갯수 조회-->
 <select id="MyMenteeCount" parameterType="String" resultType="int" >
 	select count(*)
 	from mentee_match
 	where user_id =#{id}	
 </select>
+<!-- 내가 작성한 멘티 작성글 정보 리스트 조회-->
 <select id="MyMenteelist" parameterType="Map" resultType="mentee">
    SELECT * FROM 
    (SELECT ROWNUM RNUM, m.*
@@ -216,12 +206,13 @@
    )
    WHERE RNUM <![CDATA[>=]]> #{start} AND RNUM <![CDATA[<=]]> #{end}
 </select>
+<!-- 내가 작성한 멘토 작성글 갯수 조회-->
 <select id="MyMentorCount" parameterType="String" resultType="int" >
 	select count(*)
 	from mentor_match
 	where user_id =#{id}		
 </select>
-
+<!-- 내가 작성한 멘토 작성글 정보 리스트 조회-->
 <select id="MyMentorlist" parameterType="Map" resultType="mentor">
    SELECT * FROM 
    (SELECT ROWNUM RNUM, m.*
@@ -232,15 +223,13 @@
    )
    WHERE RNUM <![CDATA[>=]]> #{start} AND RNUM <![CDATA[<=]]> #{end}
 </select>
-
-
-
+<!-- 멘토 작성글에 대한 내 신청 갯수 조회-->
 <select id="MyMentorAppCount" parameterType="String" resultType="int" >
    select count(*)
    from match_info,mentor_match
    where match_info.match_code = mentor_match.mentor_code and match_info.user_id=#{id}		
 </select>
-
+<!-- 멘토 작성글에 대한 내 신청 정보 리스트 조회-->
 <select id="MyMentorApplist" parameterType="Map" resultType="AR">
    SELECT * FROM 
    (SELECT ROWNUM RNUM, m.*
@@ -253,11 +242,13 @@
    )
    WHERE RNUM <![CDATA[>=]]> #{start} AND RNUM <![CDATA[<=]]> #{end}
 </select>
+<!-- 멘티 작성글에 대한 내 신청 갯수 조회-->
 <select id="MyMenteeAppCount" parameterType="String" resultType="int" >
    select count(*)
    from match_info,mentee_match
    where match_info.match_code = mentee_match.mentee_code and match_info.user_id=#{id}	
 </select>
+<!-- 멘티 작성글에 대한 내 신청 정보 리스트 조회-->
 <select id="MyMenteeApplist" parameterType="Map" resultType="AR">
    SELECT * FROM 
    (SELECT ROWNUM RNUM, m.*
@@ -270,9 +261,7 @@
    )
    WHERE RNUM <![CDATA[>=]]> #{start} AND RNUM <![CDATA[<=]]> #{end}
 </select>
-
-
-
+<!-- 내 멘토 작성글에 대한 유저들의 신청 갯수 조회-->
 <select id="MyMentorReqCount" parameterType="String" resultType="int" >
    select count(*)
    from match_info,mentor_match,member_info
@@ -280,6 +269,7 @@
    and mentor_match.user_id=#{id} 
    and member_info.user_id = match_info.user_id	
 </select>
+<!-- 내 멘토 작성글에 대한 유저들의 신청 정보 리스트 조회-->
 <select id="MyMentorReqlist" parameterType="Map" resultType="AR">
    SELECT * FROM 
    (SELECT ROWNUM RNUM, m.*
@@ -293,6 +283,7 @@
    )
    WHERE RNUM <![CDATA[>=]]> #{start} AND RNUM <![CDATA[<=]]> #{end}
 </select>
+<!-- 내 멘티 작성글에 대한 유저들의 신청 갯수 조회-->
 <select id="MyMenteeReqCount" parameterType="String" resultType="int" >
    select count(*)
    from match_info,mentee_match,member_info
@@ -300,6 +291,7 @@
    and mentee_match.user_id=#{id} 
    and member_info.user_id = match_info.user_id	
 </select>
+<!-- 내 멘티 작성글에 대한 유저들의 신청 정보 리스트 조회-->
 <select id="MyMenteeReqlist" parameterType="Map" resultType="AR">
    SELECT * FROM 
    (SELECT ROWNUM RNUM, m.*
@@ -313,13 +305,11 @@
    )
    WHERE RNUM <![CDATA[>=]]> #{start} AND RNUM <![CDATA[<=]]> #{end}
 </select>
-
-
+<!-- 특정 멘토/멘티 작성글에 신청을 취소-->
 <delete id="deleteMatchApp" parameterType="map">
 	delete from match_info 
 	where user_id=#{id} and match_code=#{code}
 </delete>
-
 <sql id="search_mentor">
     <where>
     	<if test='search_field !=""'>

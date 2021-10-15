@@ -208,12 +208,12 @@
 		}
 		
 		function recommSport(){
-		    //1.미세먼지 좋음 이상   2.날씨가 구름,맑음   3.온도가 12~26도 사이   4.시간이 적정시간대(10~20시)
+		    //1.미세먼지 좋음 이상   2.날씨가 구름,맑음   3.온도가 12~26도 사이   4.시간이 적정시간대(10~19시)
 		    //위조건 만족시 실외운동 추천
 		    if(recomm_mise <= 50  &&   
 		        (recomm_weather =='Clouds' || recomm_weather =='Clear') &&
 		        (recomm_temp >= 12 && recomm_temp <= 26)  &&
-		    	(recomm_hour >= 10 && recomm_hour <= 20) ){
+		    	(recomm_hour >= 10 && recomm_hour <= 19) ){
 		    	recommSport_ajax(2);
 		    }else{  //그외는 실내 운동 추천
 		    	recommSport_ajax(1);
@@ -248,4 +248,10 @@
 		
 		//위도경도 얻은 뒤 해당 위치정보로 날씨/대기 정보를 수신 후 상태에 따라 운동 추천
 	    SetCurentloaction();
+	    
+	    //날씨/대기 새로고침 버튼 클릭 이벤트
+	    $('.location-button').click(function(){
+	    	console.log("새로고침 버튼 클릭");
+	    	SetCurentloaction();
+	    })
     });

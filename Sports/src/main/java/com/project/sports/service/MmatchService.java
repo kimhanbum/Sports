@@ -32,7 +32,6 @@ public interface MmatchService {
     public List<Mentee> getSearchMenteeList(int page, int limit,String search_field,String search_word); 
     public Mentee getMenteeDetail(String code);
     public int ApplyMentee(String id,String code);
-    public int checkMenteeApply(String id,String code);
     public int deleteMentee(String code);
     public int modifyMenteeWriting(Mentee mentee);
     public int getMyMentorListCount(String id);
