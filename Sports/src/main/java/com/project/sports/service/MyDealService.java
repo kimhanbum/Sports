@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.project.sports.domain.DealAuction;
 import com.project.sports.domain.DealDirect;
+import com.project.sports.domain.DealPoint;
 import com.project.sports.domain.DealQuestion;
 
 public interface MyDealService {
@@ -71,5 +72,19 @@ public interface MyDealService {
 	int BUY_QUESTIONcount2(String sessionid);
 
 	int SELL_QUESTIONcount2(String sessionid);
+
+	void pointdb(String user_id);
+
+	int nowpoint(String sessionid);
+
+	int pointrequest(String sessionid, String name, int point);
+
+	List<DealPoint> pointreqlist();
+
+	void pointsuc(String id, int point);
+
+	void minuspoint(int minuspoint, String sessionid);
+
+	void moneyreturn(String beforebidid, int dealunit2);
 
 }

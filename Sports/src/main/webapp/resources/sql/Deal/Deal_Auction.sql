@@ -1,6 +1,6 @@
 create table Deal_Auction (
 	AUC_NUMBER		 NUMBER primary key , 		--글번호 
-	AUC_SUBJECT 	 VARCHAR2(50) , 				--글제목
+	AUC_SUBJECT 	 VARCHAR2(200) , 				--글제목
 	AUC_CONTENT 	 VARCHAR2(4000), 			--글내용
 	USER_ID			 VARCHAR2(60) references MEMBER_INFO(USER_ID)
 					on delete cascade , 		--아이디
@@ -62,3 +62,7 @@ ALTER TABLE DEAL_AUCTION MODIFY AUC_DELIVERYNUM VARCHAR2(50);
 /*-------------*/
 
 /* 10-13일 AUC_DATE 속성 VARCHAR2로 변경
+ */
+ 
+/* 10-15일 AUC_SUBJECT 크기 변경 */
+ ALTER TABLE DEAL_AUCTION MODIFY AUC_SUBJECT VARCHAR2(200);

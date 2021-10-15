@@ -26,6 +26,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.project.sports.domain.DealAuction;
 import com.project.sports.domain.DealDirect;
 import com.project.sports.service.DealService;
+import com.project.sports.service.MyDealService;
 
 @Controller
 @RequestMapping(value="/DealA")
@@ -36,6 +37,9 @@ public class DealAuctionController {
 	
 	@Autowired
 	private DealService DealService;
+	
+	@Autowired
+	private MyDealService MyDealService;
 	
 
 	private String saveFolder = "C:\\Users\\82109\\git\\Sports\\Sports\\src\\main\\webapp\\resources\\dealupload1\\";
@@ -48,10 +52,10 @@ public class DealAuctionController {
 			defaultValue = "", required = false) String search ,
 			@RequestParam(value = "view2",
 			defaultValue = "1", required = false) int view2,
-			 ModelAndView mv 
+			 ModelAndView mv , HttpSession session
 			 ) {
 		
-		
+		String sessionid = (String) session.getAttribute("USER_ID");
 		int limit = 6; // 한 화면에 출력할 레코드 갯수
 		
 		
@@ -79,7 +83,8 @@ public class DealAuctionController {
 			Auction = DealService.getSearchAuctionList(page,limit,search,view2);
 		}
 		
-
+		//현재 포인트 조회
+		int nowpoint = MyDealService.nowpoint(sessionid);
 		 
 		
 		mv.setViewName("sport_Deal/DealA_list");
@@ -91,6 +96,7 @@ public class DealAuctionController {
 		mv.addObject("Auction",Auction);
 		mv.addObject("limit",limit);
 		mv.addObject("view2",view2);
+		mv.addObject("nowpoint",nowpoint);
 		
 		
 		
@@ -113,14 +119,36 @@ public class DealAuctionController {
 			HttpServletRequest request,
 			HttpSession session
 			) {
+		String sessionid = (String) session.getAttribute("USER_ID");
 		
+		//입찰하고있는 사람 아이디 확인
+		String beforebidid = DealService.beforebidid(num);
 		
-		
+		//글정보 가져오기
 		DealAuction Auction = DealService.A_getDetail(num);
 		
-	
-	
-		String sessionid = (String) session.getAttribute("USER_ID");
+		//입찰단위값 가져오기
+		int Dealunit = DealService.Dealunit(num);
+		logger.info("입찰단위값" + Dealunit);
+		
+		//현재 포인트 조회
+		int nowpoint = MyDealService.nowpoint(sessionid);
+		
+		int possible ;
+		
+		//현재 포인트로 입찰이가능한지 판단
+		if(Dealunit > nowpoint) {
+			possible = 0 ;
+		}else {
+			possible = 1;
+		}
+		
+		logger.info("현재값" + nowpoint);
+		
+		mv.addObject("possible", possible);
+		mv.addObject("nowpoint", nowpoint);
+		mv.addObject("beforebidid", beforebidid);
+		
 		
 		logger.info("세션아아디" + sessionid);
 		
@@ -324,6 +352,21 @@ public class DealAuctionController {
 			HttpServletRequest request , int num,
 			HttpSession session) {
 		
+		//입찰하고있는 사람 아이디 확인
+		String beforebidid = DealService.beforebidid(num);
+		logger.info("비폴아ㅣ디" + beforebidid);
+		
+		//이글에 입찰단위
+		int Dealunit2 = DealService.Dealunit(num);
+		
+		
+		if(beforebidid != null) {
+			//입찰실패자 다시 입찰금 반환
+			MyDealService.moneyreturn(beforebidid , Dealunit2);
+		}
+		
+		
+		
 		//내거래내역 입찰중이 었던사람 입찰실패로 변경
 		int change = DealService.Auction_bidchange(num); 
 		
@@ -337,6 +380,22 @@ public class DealAuctionController {
 		
 		// 기존 경매가 변경
 		int pricemodify = DealService.Auction_pricemodi(Auction);
+		
+		
+		/*포인트 에서 입찰단위 만큼차감 */
+		//입찰단위값 가져오기
+		int Dealunit = DealService.Dealunit(num);
+		
+		//현재 포인트 조회
+		int nowpoint = MyDealService.nowpoint(sessionid);
+		
+		
+		int minuspoint = nowpoint - Dealunit;
+		
+		//차감된 금액만큼 포인트 업데이트
+		MyDealService.minuspoint(minuspoint , sessionid);
+		
+		/* ****************************/
 		
 		
 		
@@ -387,6 +446,34 @@ public class DealAuctionController {
 		String sessionid = (String) session.getAttribute("USER_ID");
 		
 		logger.info("즉시구매" + num);
+		
+		//입찰하고있는 사람 아이디 확인
+		String beforebidid = DealService.beforebidid(num);
+		logger.info("비폴아ㅣ디" + beforebidid);
+				
+		//이글에 입찰단위
+		int Dealunit2 = DealService.Dealunit(num);
+				
+			
+		if(beforebidid != null) {
+			//입찰실패자 다시 입찰금 반환
+			MyDealService.moneyreturn(beforebidid , Dealunit2);
+		}
+		
+		/*포인트 에서 입찰단위 만큼차감 */
+		//입찰단위값 가져오기
+		int Deallprice = DealService.Deallprice(num);
+		
+		//현재 포인트 조회
+		int nowpoint = MyDealService.nowpoint(sessionid);
+		
+		
+		int minuspoint = nowpoint - Deallprice;
+		
+		//차감된 금액만큼 포인트 업데이트
+		MyDealService.minuspoint(minuspoint , sessionid);
+		
+		/* ****************************/
 		
 		//즉시구매 완료 이미지, 현재가 즉시구매가 로 바꿔주기
 		DealService.Auction_imgchan(num);

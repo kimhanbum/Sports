@@ -316,10 +316,14 @@ input.checkbox:checked+label.input-label.radio::before {
 								<div class="col-md-3 form-group">
 									<label for="AUC_UNIT">입찰단위</label><br> 
 									<select name='AUC_UNIT' id="AUC_UNIT" >
-										<option value=1000 selected >1000</option>
 										<option value=3000>3000</option>
 										<option value=5000>5000</option>
 										<option value=10000>10000</option>
+										<option value=10000>15000</option>
+										<option value=10000>20000</option>
+										<option value=10000>30000</option>
+										<option value=10000>50000</option>
+										<option value=10000>100000</option>
 									</select>
 								</div>
 							</div>

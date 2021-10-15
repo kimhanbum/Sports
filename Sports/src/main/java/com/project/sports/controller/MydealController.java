@@ -22,6 +22,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.project.sports.domain.DealAuction;
 import com.project.sports.domain.DealDirect;
+import com.project.sports.domain.DealPoint;
 import com.project.sports.domain.DealQuestion;
 import com.project.sports.service.MyDealService;
 
@@ -62,6 +63,9 @@ public class MydealController {
 		List<DealAuction> Auction = new ArrayList<DealAuction>();
 		Auction = MyDealService.AuctionCartList(sessionid);
 		
+		//현재 포인트 조회
+		int nowpoint = MyDealService.nowpoint(sessionid);
+		
 		
 		
 		
@@ -76,7 +80,9 @@ public class MydealController {
 		mv.addObject("SELL_QUESTION",SELL_QUESTION);
 		mv.addObject("BUY_QUESTION2",BUY_QUESTION2);
 		mv.addObject("SELL_QUESTION2",SELL_QUESTION2);
+		mv.addObject("sessionid",sessionid);
 		mv.addObject("Auction" , Auction);
+		mv.addObject("nowpoint" , nowpoint);
 		
 		mv.setViewName("sports_mypage/mypage_mydeal_main");
 		
@@ -377,6 +383,73 @@ public class MydealController {
 		return "redirect:main";
 	}
 	
+	@GetMapping("/pointview")
+	public ModelAndView pointview( ModelAndView mv , HttpSession session )
+			throws Exception{
+		
+		
+		
+		String sessionid = (String) session.getAttribute("USER_ID");
+		
+		//현재 포인트 조회
+		int nowpoint = MyDealService.nowpoint(sessionid);
+		
+		mv.addObject("sessionid",sessionid);
+		mv.addObject("nowpoint",nowpoint);
+		mv.setViewName("sports_mypage/mypage_mydeal_point");
+		return mv;
+	}	
+	
+	@GetMapping("/pointrequest")
+	public String pointinput( ModelAndView mv , HttpSession session , String name , int point)
+			throws Exception{
+		
+		
+		
+		String sessionid = (String) session.getAttribute("USER_ID");
+		
+		//포인트 관리자에게 요청
+		int pointre = MyDealService.pointrequest(sessionid , name , point);
+		
+		
+	
+		
+		return "redirect:pointview";
+	}
+	
+	@GetMapping("/pointadmin")
+	public ModelAndView pointadmin( ModelAndView mv , HttpSession session )
+			throws Exception{
+		
+		
+		
+		String sessionid = (String) session.getAttribute("USER_ID");
+		
+		List<DealPoint> dealpoint = new ArrayList<DealPoint>();
+		
+		//요청 리스트 조회
+		dealpoint = MyDealService.pointreqlist();
+		
+		
+		mv.addObject("sessionid",sessionid);
+		mv.addObject("dealpoint",dealpoint);
+	
+		mv.setViewName("sports_mypage/mypage_mydeal_pointadmin");
+		return mv;
+	}
+	
+	@GetMapping("/pointsuc")
+	public String pointsuc( ModelAndView mv , HttpSession session , String id , int point)
+			throws Exception{
+		
+		//회원에게 포인트 입금
+		MyDealService.pointsuc( id , point);
+		
+		
+	
+		
+		return "redirect:pointadmin";
+	}
 	
 	
 	

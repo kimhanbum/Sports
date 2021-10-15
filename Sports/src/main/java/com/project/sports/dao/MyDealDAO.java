@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import com.project.sports.domain.DealAuction;
 import com.project.sports.domain.DealDirect;
+import com.project.sports.domain.DealPoint;
 import com.project.sports.domain.DealQuestion;
 
 @Repository
@@ -148,6 +149,38 @@ public class MyDealDAO {
 
 	public int SELL_QUESTIONcount2(String sessionid) {
 		return sqlSession.selectOne("MyDeal.squestion2", sessionid);
+	}
+
+	public void pointdb(HashMap<String, Object> map) {
+		sqlSession.insert("MyDeal.pointdb" , map);
+	}
+
+	public int nowpoint(HashMap<String, Object> map) {
+		return sqlSession.selectOne("MyDeal.nowpoint", map);
+		
+	}
+
+	public int pointrequest(HashMap<String, Object> map) {
+		return sqlSession.update("MyDeal.pointrequest", map);
+		
+	}
+
+	public List<DealPoint> pointreqlist() {
+		return sqlSession.selectList("MyDeal.pointreqlist");
+	}
+
+	public void pointsuc(HashMap<String, Object> map) {
+		sqlSession.update("MyDeal.pointsuc", map);
+	}
+
+	public void minuspoint(HashMap<String, Object> map) {
+		sqlSession.update("MyDeal.minuspoint", map);
+		
+	}
+
+	public void moneyreturn(HashMap<String, Object> map) {
+		sqlSession.update("MyDeal.moneyreturn", map);
+		
 	}
 
 

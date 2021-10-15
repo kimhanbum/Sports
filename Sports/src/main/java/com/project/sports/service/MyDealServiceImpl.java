@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.project.sports.dao.MyDealDAO;
 import com.project.sports.domain.DealAuction;
 import com.project.sports.domain.DealDirect;
+import com.project.sports.domain.DealPoint;
 import com.project.sports.domain.DealQuestion;
 
 @Service
@@ -234,6 +235,65 @@ public class MyDealServiceImpl implements MyDealService{
 	@Override
 	public int SELL_QUESTIONcount2(String sessionid) {
 		return dao.SELL_QUESTIONcount2(sessionid);
+	}
+
+	@Override
+	public void pointdb(String user_id) {
+		
+		HashMap<String , Object>map = new HashMap<String,Object>();
+		map.put("user_id" , user_id);
+		dao.pointdb(map);
+		
+	}
+
+	@Override
+	public int nowpoint(String sessionid) {
+		HashMap<String , Object>map = new HashMap<String,Object>();
+		map.put("sessionid" , sessionid);
+		return dao.nowpoint(map);
+	}
+
+	@Override
+	public int pointrequest(String sessionid, String name, int point) {
+		HashMap<String , Object>map = new HashMap<String,Object>();
+		map.put("sessionid" , sessionid);
+		map.put("name" , name);
+		map.put("point" , point);
+		return dao.pointrequest(map);
+		
+	}
+
+	@Override
+	public List<DealPoint> pointreqlist() {
+		// TODO Auto-generated method stub
+		return dao.pointreqlist();
+	}
+
+	@Override
+	public void pointsuc(String id, int point) {
+		HashMap<String , Object>map = new HashMap<String,Object>();
+		map.put("id" , id);
+		map.put("point" , point);
+		dao.pointsuc(map);
+		
+	}
+
+	@Override
+	public void minuspoint(int minuspoint, String sessionid) {
+		HashMap<String , Object>map = new HashMap<String,Object>();
+		map.put("sessionid" , sessionid);
+		map.put("minuspoint" , minuspoint);
+		dao.minuspoint(map);
+		
+	}
+
+	@Override
+	public void moneyreturn(String beforebidid, int dealunit2) {
+		HashMap<String , Object>map = new HashMap<String,Object>();
+		map.put("beforebidid" , beforebidid);
+		map.put("dealunit2" , dealunit2);
+		dao.moneyreturn(map);
+		
 	}
 
 }

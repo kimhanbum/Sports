@@ -247,4 +247,54 @@ where
    and QUESTION_ID = #{sessionid}
 </select>
 
+<insert id="pointdb" parameterType="java.util.Map">
+	insert into deal_point
+	(USER_ID)
+	VALUES( #{user_id})
+	
+</insert>
+
+<select id="nowpoint" resultType="int" parameterType="java.util.Map">
+	select REAL_POINT from deal_point
+   where USER_ID = #{sessionid}
+</select>
+
+<update id="pointrequest" parameterType="java.util.Map" >
+update deal_point set 
+SEND_NAME = #{name} , 
+REQUEST_POINT = #{point},
+POINT_PROCESS = 1 
+where  USER_ID = #{sessionid}  
+
+</update>
+
+<select id="pointreqlist" resultType="point">
+	select * from deal_point
+   where POINT_PROCESS = 1
+</select>
+
+<update id="pointsuc" parameterType="java.util.Map">
+update deal_point set 
+REAL_POINT = REAL_POINT + REQUEST_POINT ,
+REQUEST_POINT = 0 , 
+POINT_PROCESS = 0
+where  USER_ID = #{id}  
+
+</update>
+
+<update id="minuspoint" parameterType="java.util.Map" >
+update deal_point set 
+REAL_POINT = #{minuspoint}  
+where  USER_ID = #{sessionid}  
+
+</update>
+
+<update id="moneyreturn" parameterType="java.util.Map" >
+update deal_point set 
+REAL_POINT = #{dealunit2}  + REAL_POINT
+where  USER_ID = #{beforebidid}  
+
+</update>
+
+
 </mapper>

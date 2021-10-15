@@ -282,6 +282,21 @@ public class DealServiceImpl implements DealService {
 			
 		}
 
+		@Override
+		public int Dealunit(int num) {
+			return dao.Dealunit(num);
+		}
+
+		@Override
+		public String beforebidid(int num) {
+			return dao.beforebidid(num);
+		}
+
+		@Override
+		public int Deallprice(int num) {
+			return dao.Deallprice(num);
+		}
+
 
 
 

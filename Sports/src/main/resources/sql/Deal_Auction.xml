@@ -199,4 +199,20 @@ SET   SAVE_AUC_MAINFILE='soldout.jpg'
 
 </update>
 
+<select id="dealunit" resultType="int"  parameterType="int">
+	select AUC_UNIT from deal_auction WHERE 
+	AUC_NUMBER = #{num}
+</select>
+
+<select id="beforebidid" resultType="String"  parameterType="int">
+	select user_id from my_deal WHERE 
+	AUC_NUMBER = #{num} and
+	BUY_BIDDING = 1 
+</select>
+
+<select id="deallprice" resultType="int"  parameterType="int">
+	select AUC_LPRICE from deal_auction WHERE 
+	AUC_NUMBER = #{num}
+</select>
+
 </mapper>

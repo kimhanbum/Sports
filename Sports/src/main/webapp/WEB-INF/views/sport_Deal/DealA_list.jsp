@@ -276,8 +276,10 @@ background-color
 				<div class="select-this d-flex">
 					
 					<form action="#">
+					<b>나의 경매포인트 : ${nowpoint}원</b>
 						<div class="select-itms">
 							<div class="center">
+							
 							<select name="sources" id="view" 
 							class="custom-select sources"
 								placeholder="Source Type" name="view">
@@ -473,7 +475,7 @@ background-color
 									
 									
 								}
-								if(hr == 23 && min ==57 && sec ==50){
+								if(hr == 0 && min ==0 && sec ==0){
 									location.href="timeout?num=" + number
 									
 								}
