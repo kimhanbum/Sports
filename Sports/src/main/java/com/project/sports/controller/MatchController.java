@@ -199,9 +199,9 @@ public class MatchController {
 		MailVO vo = new MailVO();
 		vo.setTo(email);
 		vo.setSubject("[운동챙기조]" + REGISTER_ID + "님 등록하신 매칭에 신청내역이 있습니다.");
-		logger.info("email"+email);
+		logger.info("email : "+email);
 		vo.setContent(REGISTER_ID + "님 등록하신 매칭에 신청내역이 있습니다.");
-		logger.info("email"+REGISTER_ID );
+		logger.info("email : "+REGISTER_ID );
 		sendMail.sendMail(vo);
 		return "1";
 		}
@@ -214,12 +214,13 @@ public class MatchController {
 		String id =(String)session.getAttribute("USER_ID");
 		List<Match> RegiList = matchservice.getRegiList(id);
 		List<Match> ApplyList = matchservice.getApplyList(id);
-		
+		List<Match> DeadList = matchservice.getDeadList(id);
 		
 		
 		mv.setViewName("sports_mypage/mypage_mymatching");
 		mv.addObject("RegiList", RegiList);
 		mv.addObject("ApplyList", ApplyList);
+		mv.addObject("DeadList", DeadList);
 		return mv;
 	}
 	
@@ -261,18 +262,33 @@ public class MatchController {
 							)throws Exception{
 		logger.info("REGISTER_NUM"+ REGISTER_NUM );
 		logger.info("SPORT_NUM : "+ SPORT_NUM );
-		String Apply_ID =  matchservice.getApplyID(REGISTER_NUM);
-		logger.info("apply _id :" + Apply_ID);
-		List<Match> RegiList = matchservice.selRegi(REGISTER_NUM);
-		logger.info("Regi<List>" + RegiList);
+		String APPLY_ID =  matchservice.getApplyID(REGISTER_NUM);
+		logger.info("apply _id :" + APPLY_ID);
+		String REGISTER_ID =  matchservice.getRegiID(REGISTER_NUM);
+		logger.info("REGISTER_ID : "+ REGISTER_ID );
 		int applyresult =  matchservice.ApplyupdateMatch(REGISTER_NUM);
 		logger.info("applyresult :" + applyresult);
 		int regiresult = matchservice.Regifinalupdate(REGISTER_NUM);
 		logger.info("regiresult :" + regiresult);
-		HashMap<String , Object>map = new HashMap<String,Object>();
-		map.put("RegiList", RegiList);
-		map.put("Apply_ID", Apply_ID);
-		matchservice.DeadMatch(map);
+		matchservice.DeadMatch(SPORT_NUM, APPLY_ID, REGISTER_ID, REGISTER_NUM);
+		String Regiemail = matchservice.getemail(REGISTER_ID);
+		String Applyemail = matchservice.getemail(APPLY_ID);
+		String Regimobile = matchservice.getMobile(REGISTER_ID);
+		String Applymobile = matchservice.getMobile(APPLY_ID);
+		logger.info("등록이메일 : " + Regiemail);
+		logger.info("신청이메일 : " + Applyemail);
+		logger.info("등록번호 : " + Regimobile);
+		logger.info("신청번호 : " + Applymobile);
+		MailVO Re = new MailVO();
+		MailVO App = new MailVO();
+		Re.setTo(Regiemail);
+		App.setTo(Applyemail);
+		Re.setSubject("[운동챙기조]" + REGISTER_ID + "님 응답하신 매칭입니다.");
+		Re.setContent(REGISTER_ID + " 님 응답하신 매칭의 상대방 번호입니다." +"아이디 :  "+APPLY_ID + "   전화번호 :  "+Applymobile);
+		App.setSubject("[운동챙기조]" + APPLY_ID + "님이 신청하신 매칭입니다.");
+		App.setContent(APPLY_ID + "님 신청하신 매칭의 상대방 번호입니다." +"아이디 :  "+REGISTER_ID + "   전화번호 :  "+Regimobile);
+		sendMail.sendMail(Re);
+		sendMail.sendMail(App);
 		if(regiresult ==0) {
 			logger.info("응답실패");
 				return "0";

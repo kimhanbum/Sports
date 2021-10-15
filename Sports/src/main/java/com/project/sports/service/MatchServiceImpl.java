@@ -95,6 +95,13 @@ public class MatchServiceImpl implements MatchService {
 		map.put("id", id);
 		return dao.myApply(map);
 	}
+	
+	@Override
+	public List<Match> getDeadList(String id) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("id", id);
+		return dao.myDead(map);
+	}
 
 	@Override
 	public int MactingUpdate(Match match) {
@@ -110,6 +117,12 @@ public class MatchServiceImpl implements MatchService {
 	public String getApplyID(int REGISTER_NUM) {
 		return dao.getApplyID(REGISTER_NUM);
 	}
+	
+
+	@Override
+	public String getRegiID(int REGISTER_NUM) {
+		return dao.getRegiID(REGISTER_NUM);
+	}
 
 	@Override
 	public int ApplyupdateMatch(int REGISTER_NUM) {
@@ -122,9 +135,19 @@ public class MatchServiceImpl implements MatchService {
 	}
 
 	@Override
-	public void DeadMatch(HashMap<String, Object> map) {
+	public void DeadMatch(int SPORT_NUM, String APPLY_ID, String REGISTER_ID, int REGISTER_NUM) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("SPORT_NUM", SPORT_NUM);
+		map.put("APPLY_ID", APPLY_ID);
+		map.put("REGISTER_ID", REGISTER_ID);
+		map.put("REGISTER_NUM", REGISTER_NUM);
 		dao.DeadMatch(map);
+		
 	}
 
+	@Override
+	public String getMobile(String Register_ID) {
+		return dao.getMobile(Register_ID);
+	}
 	
 }

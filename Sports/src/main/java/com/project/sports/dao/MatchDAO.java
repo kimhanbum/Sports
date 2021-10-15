@@ -61,6 +61,10 @@ public class MatchDAO {
 	public List<Match> myApply(HashMap<String, Object> map) {
 		return sqlSession.selectList("Match.myApply",map);
 	}
+	
+	public List<Match> myDead(HashMap<String, Object> map) {
+		return sqlSession.selectList("Match.myDead",map);
+	}
 
 	public int MactingUpdate(Match match) {
 		return sqlSession.update("Match.MactingUpdate",match);
@@ -73,6 +77,10 @@ public class MatchDAO {
 	public String getApplyID(int REGISTER_NUM) {
 		return sqlSession.selectOne("Match.getApplyID",REGISTER_NUM);
 	}
+	
+	public String getRegiID(int REGISTER_NUM) {
+		return sqlSession.selectOne("Match.getRegiID",REGISTER_NUM);
+	}
 
 	public int ApplyupdateMatch(int REGISTER_NUM) {
 		return sqlSession.update("Match.ApplyupdateMatch",REGISTER_NUM);
@@ -84,5 +92,9 @@ public class MatchDAO {
 
 	public void DeadMatch(HashMap<String, Object> map) {
 		sqlSession.insert("Match.DeadMatch",map);
+	}
+
+	public String getMobile(String register_ID) {
+		return sqlSession.selectOne("Match.getMobile",register_ID);
 	}
 }

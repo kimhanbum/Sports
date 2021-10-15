@@ -3624,7 +3624,7 @@ input:focus {
 
 /* line 163, ../../SAIFUL/Running_project/250 eCommerce_HTML/250 eCommerce_HTML/250 eCommerce_HTML/assets/scss/_headerMenu.scss */
 .header-bottom .header-right li {
-  padding-left: 20px;
+  padding-left: 10px;
 }
 
 @media (min-width: 1200px) and (max-width: 1400px) {
@@ -3925,6 +3925,14 @@ input:focus {
   background-position: center center;
   background-size: cover;
 }
+
+/* .slider-height3 {
+  min-height: 300px;
+  width: 2144px;
+  background-repeat: no-repeat;
+  background-position: center center;
+  object-fit: cover;
+} */
 
 @media (max-width: 767px) {
   /* line 24, ../../SAIFUL/Running_project/250 eCommerce_HTML/250 eCommerce_HTML/250 eCommerce_HTML/assets/scss/_h1-hero.scss */
