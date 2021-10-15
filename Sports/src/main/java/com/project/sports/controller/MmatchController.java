@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -14,6 +15,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -43,13 +45,6 @@ public class MmatchController {
 	@Value("${savefoldername}")
 	private String saveFolder;
 
-	/*
-	 * //멘토 글 리스트 보기
-	 * 
-	 * @RequestMapping(value = "/mentorPage", method = RequestMethod.GET) public
-	 * String metorMainPage() { return "sport_menMatch/sports_mentor"; }
-	 */
-	
 	//멘토 글 작성
 	@RequestMapping(value = "/mentorWrite", method = RequestMethod.GET)
 	public String mentorWrite() {
@@ -299,13 +294,13 @@ public class MmatchController {
 	@PostMapping("/mentorModifyAction")
 	public String mentorModifyAction(Mentor mentor,String[] mentor_yoil,
 			String[] mentor_startTime,String[] mentor_endTime,String[] check,
-			RedirectAttributes rattr) throws Exception{
+			RedirectAttributes rattr,Model mv,HttpServletRequest request) throws Exception{
 
 		MultipartFile uploadfile1 =mentor.getUploadfile1();
 		MultipartFile uploadfile2 =mentor.getUploadfile2();
 		MultipartFile uploadfile3 =mentor.getUploadfile3();
 		String mentorDate="";
-		
+		String url="";
 		//1.파일 삭제 : ''
 		//2.기존파일 그대로 : '기존파일이름'
 		//3.파일 변경 : 'no'
@@ -381,21 +376,27 @@ public class MmatchController {
 		 
 		int result = mmatchservice.modifyMentorWriting(mentor);
 		if(result == 1 ) {
+			logger.info("멘토 공고글 수정  성공");
+			url ="redirect:mentorPage";
 			rattr.addFlashAttribute("result","modifySuccess");
+		}else{
+			logger.info("멘토 공고글 수정  실패");
+			mv.addAttribute("url",request.getRequestURI());
+			mv.addAttribute("message","멘토 공고글 수정 실패");
+			url = "error/error";
 		}
-		//Thread.sleep(3000); //2초 대기
-		return "redirect:mentorPage";
+		return url;
 	}
 	
 	//멘티글 수정 진행
 	@PostMapping("/menteeModifyAction")
 	public String menteeModifyAction(Mentee mentee,String[] mentee_yoil,
 			String[] mentee_startTime,String[] mentee_endTime,String check,
-			RedirectAttributes rattr) throws Exception{
+			RedirectAttributes rattr,Model mv,HttpServletRequest request) throws Exception{
 
 		MultipartFile uploadfile1 =mentee.getUploadfile1();
 		String menteeDate="";
-		
+		String url="";
 		//1.파일 삭제 : ''
 		//2.기존파일 그대로 : '기존파일이름'
 		//3.파일 변경 : '변경파일이름'
@@ -438,9 +439,15 @@ public class MmatchController {
 		int result = mmatchservice.modifyMenteeWriting(mentee);
 		if(result == 1 ) {
 			rattr.addFlashAttribute("result","modifySuccess");
+			logger.info("멘티 공고글 수정  성공");
+			url ="redirect:menteePage";
+		}else{
+			logger.info("멘티 공고글 수정  실패");
+			mv.addAttribute("url",request.getRequestURI());
+			mv.addAttribute("message","멘티 공고글 수정 실패");
+			url = "error/error";
 		}
-		//Thread.sleep(3000); //2초 대기
-		return "redirect:menteePage";
+		return url;
 	}
 	
 	//멘토 작성 글 추가
@@ -670,28 +677,36 @@ public class MmatchController {
 		return result;
 	}
 	
-	//특정 멘토 글 수정하기
+	//특정 멘토 글 수정 페이지 이동
 	@GetMapping("/mentorModify")
-	public ModelAndView mentorModify(String code,ModelAndView mv) {
+	public ModelAndView mentorModify(String code,ModelAndView mv,HttpServletRequest request) {
 		Mentor mentordata = mmatchservice.getMentorDetail(code);	
 		if(mentordata==null) {
 			//에러처리
+			logger.info("mentor_modify_view 실패");
+			mv.setViewName("error/error");
+			mv.addObject("url",request.getRequestURI());
+			mv.addObject("message","멘토공고글 수정 뷰 실패입니다.");
 		}else {
-			logger.info("metor view 성공");
+			logger.info("mentor_modify_view 성공");
 			mv.setViewName("sport_menMatch/sports_mentor_modify");
 			mv.addObject("mentordata",mentordata);
 		}
 		return mv;
 	}	
 	
-	//특정 멘티 글 수정하기
+	//특정 멘티 글 수정 페이지 이동
 	@GetMapping("/menteeModify")
-	public ModelAndView menteeModify(String code,ModelAndView mv) {
+	public ModelAndView menteeModify(String code,ModelAndView mv,HttpServletRequest request) {
 		Mentee menteedata = mmatchservice.getMenteeDetail(code);	
 		if(menteedata==null) {
 			//에러처리
+			logger.info("mentee_modify_view 실패");
+			mv.setViewName("error/error");
+			mv.addObject("url",request.getRequestURI());
+			mv.addObject("message","멘티 공고글 수정 뷰 실패입니다.");
 		}else {
-			logger.info("metee view 성공");
+			logger.info("mentee_modify_view 성공");
 			mv.setViewName("sport_menMatch/sports_mentee_modify");
 			mv.addObject("menteedata",menteedata);
 		}

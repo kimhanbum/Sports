@@ -22,15 +22,12 @@ public class MmatchDAO {
 	public List<String> getSportlist(int selType) {
 		return sqlSession.selectList("Mmatches.sportList",selType);
 	}
-	
 	public List<String> getSilist() {
 		return sqlSession.selectList("Mmatches.siList");
 	}
-	
 	public List<String> getDonglist(String selType) {
 		return sqlSession.selectList("Mmatches.dongList",selType);
 	}
-	
 	public int insertMentorWriting(Mentor mentor) {
 		return sqlSession.insert("Mmatches.insertWMentor",mentor);
 	}
@@ -53,7 +50,7 @@ public class MmatchDAO {
 		return sqlSession.selectOne("Mmatches.MentorDetail",code);
 	}
 	public int ApplyWMentor(HashMap<String,String> map) {
-		return sqlSession.insert("Mmatches.insertMentorApply",map);
+		return sqlSession.insert("Mmatches.insertApply",map);
 	}	
 	public int checkApply(HashMap<String,String> map) {
 		return sqlSession.selectOne("Mmatches.checkApply",map);
@@ -89,7 +86,7 @@ public class MmatchDAO {
 		return sqlSession.selectOne("Mmatches.MenteeDetail",code);
 	}
 	public int ApplyWMentee(HashMap<String,String> map) {
-		return sqlSession.insert("Mmatches.insertMenteeApply",map);
+		return sqlSession.insert("Mmatches.insertApply",map);
 	}	
 	public int deleteWMentee(String code) {
 		return sqlSession.delete("Mmatches.deleteWMetee",code);

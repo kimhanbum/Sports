@@ -195,7 +195,7 @@
 						    <div class="location-container">
 						      <button class="location-button"> 
 						      <i class="fas fa-map-marker-alt"></i>
-						      <span>날씨 정보 새로고침</span></button>
+						      <span>기상 정보 새로고침</span></button>
 						    </div>
 						  </div>
 						</div>
@@ -274,7 +274,7 @@
 						    <div class="location-container">
 						      <button class="location-button"> 
 						      <i class="fas fa-map-marker-alt"></i>
-						      <span>대기 정보 새로고침</span></button>
+						      <span>기상 정보 새로고침</span></button>
 						    </div>
 						  </div>
 						</div>

@@ -257,14 +257,6 @@ public class MmatchServiceImpl implements MmatchService {
 	}
 
 	@Override
-	public int checkMenteeApply(String id, String code) {
-		HashMap<String,String> map = new HashMap<String,String>();
-		map.put("id",id);
-		map.put("code",code);
-		return dao.checkApply(map);
-	}
-
-	@Override
 	public int deleteMentee(String code) {
 		return dao.deleteWMentee(code);
 	}
