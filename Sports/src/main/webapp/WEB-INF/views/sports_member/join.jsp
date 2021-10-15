@@ -21,6 +21,20 @@ td:first-child{width:110px;}
 
 <script>
 $(function(){
+	checkid=false;
+	passcheck=false;
+	checkjumin=false;
+	checkjumin1=false;
+	//줄 자동넘김
+	$(function() {
+	    $("input:text").keyup (function () {
+	        var charLimit = $(this).attr("maxlength");
+	        if (this.value.length >= charLimit) {
+	            $(this).next('input:text').focus();
+	            return false;
+	        }
+	    });
+	});
 	//이메일 선택
 	$('#EMAIL2').change(function(){  //이메일 뒷자리 선택
 		if($(this).val()== '1'){
@@ -32,42 +46,44 @@ $(function(){
 		} 
 	});
 	//선호운동 최대 3개 선택
-	$('#USER_PSPORTS').on('change', function(event) {//선호운동 선택 max값
+	$('input[name=USER_PSPORTS]').change(function(event) {//선호운동 선택 max값
 	   if($('input:checkbox:checked').length > 3) {
 		   alert("선호운동은 최대 3개 선택할 수 있습니다.");
 		   $('input:checkbox:checked').prop("checked",false); //비활성화
 	   }
 	});
 	//회원가입버튼 클릭 시
-	$("#submit").on("click", function(){
+	$('form').submit(function(){
 		if(!checkid){
 			alert("ID 중복확인하세요.");
-			$("#checkid").focus();
+			$(".checkid").focus();
 			return false;
-		}else if($("#USER_PASS").val()==""){
-			alert("비밀번호를 입력해주세요.");
+		}/* else if(!passcheck){
+			alert("비밀번호를 확인해주세요.");
+			$("#USER_PASS").val()="";
 			$("#USER_PASS").focus();
 			return false;
-		}else if($("#USER_PASS").val()!=$("#passcheck")){
-			alert("비밀번호가 일치하지 않습니다.");
-			$("#passcheck").val()="";
-			$("#USER_PASS").focus();
+		}else if(!checkjumin){
+			alert("주민등록번호 앞자리를 확인해주세요.");
+			$("input[name='USER_JUMIN']").focus();
 			return false;
-		}else if($("#USER_HEIGHT").val()==""){
-			alert("회원님의 키를 숫자로 입력해주세요.");
-			$("#USER_HEIGHT").focus();
+		}else if(!checkjumin1){
+			alert("주민등록번호 뒷자리를 확인해주세요.");
+			$("input[name='USER_JUMIN1']").focus();
 			return false;
-		}else if(chk_result.length==0){
+		}else if($(".USER_HEIGHT").val()==""){
+			alert("회원님의 키를 입력해주세요.");
+			$(".USER_HEIGHT").focus();
+			return false;
+		}else if($("input:checkbox").each()(function(){
+			this.checked=true;
+						})==false){
 			alert("선호하는 운동을 1개 이상 선택해주세요.");
 			return false;
-		}
+		} */
 	});
-
-    $("#checkid").on("click", function(){
-		checkid=false;
-		//[A-Za-z0-9_]와 동일한 것이 \w
-		//+는 1회 이상 반복을 의미합니다. {1,}와 동일하다는 뜻
-		//\w 는 [A-Za-z0-9_]를 1개 이상 사용하라는 뜻
+	//id중복체크,검사
+    $("#checkid").click(function(){
 		var pattern = /^\w{5,12}$/;
 		var id = $("#USER_ID").val();
 		if(!pattern.test(id)){//pattern통과하면
@@ -82,6 +98,7 @@ $(function(){
 				if(resp == -1){//db에 해당 id가 없는 경우
 					alert("사용 가능한 아이디 입니다.");
 					checkid=true;
+					$("#USER_PASS").focus();
 				} else{//db에 해당 id가 있는 경우(0)
 					alert("사용중인 아이디 입니다.");
 					$("#USER_ID").focus();
@@ -89,6 +106,35 @@ $(function(){
 				}
 			}
 		});//ajax
+	})
+	//비밀번호 검사
+	$("#USER_PASS").keyup(function(){
+		var pattern = /^\w{10,16}$/;
+		var pass = $("#USER_PASS").val();
+		if(!pattern.test(pass)){
+			passcheck=false;
+		}else{
+			passcheck=true;
+		}
+	})
+	//주민번호
+	$("#USER_JUMIN").keyup(function(){
+		var pattern = /^[0-9]{1,6}$/;
+		var jumin = $("#USER_JUMIN").val();
+		if(!pattern.test(jumin)){
+			checkjumin=false;
+		}else{
+			checkjumin=true;
+		}
+	})
+	$("#USER_JUMIN1").keyup(function(){
+		var pattern = /^[0-9]{1,7}$/;
+		var jumin1 = $("#USER_JUMIN1").val();
+		if(!pattern.test(jumin1)){
+			checkjumin1=false;
+		}else{
+			checkjumin1=true;
+		}
 	})
 	//선호운동 checkbox
 	var chk = '${USER_PSPORTS}';
@@ -170,7 +216,8 @@ function Postcode() {//우편번호찾기
                     <label for="USER_PASS">비밀번호</label>
                 </td>
                 <td>
-                    <input type="password" name="USER_PASS" id="USER_PASS" size="20px" required><br>
+                    <input type="password" name="USER_PASS" id="USER_PASS" size="20px" required>
+                    <span class="passalarm"></span><br>
                     <span style=font-size:5px;>*영문 대소문자/숫자를 혼용하여 10~16자</span>
                 </td>
             </tr>
@@ -179,7 +226,7 @@ function Postcode() {//우편번호찾기
                     <label for="passcheck">비밀번호 확인</label>
                 </td>
                 <td>
-                    <input type="password" name="passcheck" id="passcheck" size="20px" required>
+                    <input type="password" name="passcheck" id="passcheck" size="20px">
                 </td>
             </tr>
             <tr>
