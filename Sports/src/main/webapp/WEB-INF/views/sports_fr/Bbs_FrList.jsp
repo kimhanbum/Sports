@@ -26,7 +26,7 @@
             <div class="preloader-inner position-relative">
                 <div class="preloader-circle"></div>
                 <div class="preloader-img pere-text">
-                    <img src="assets/img/logo/logo.png" alt="">
+                    <img src="${pageContext.request.contextPath}/resources/image/logo/sports_logo.png" alt="">
                 </div>
             </div>
         </div>
@@ -77,6 +77,7 @@
  </div>
 </form>
 <%-- 게시글이 있는 경우--%> 
+<input type="hidden" id="USER_ID" name="USER_ID" value="${USER_ID}">
 <c:if test="${listcount > 0 }">
   <table class="table">
    <thead>

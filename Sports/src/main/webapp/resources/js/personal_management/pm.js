@@ -51,8 +51,9 @@ $(function (){
 			   },
 			   success : function(){
 				   console.log("성공")
-				   $("#sports_name").empty();
-				   $("input").attr("placeholder", "운동 시간");
+				   $("#sports_name").val('-- 선택 --').prop("selected", true);
+				   $("#time").val('');
+				   $("#time").attr("placeholder", "운동 시간");
 			   }
 	   })//ajax end
 	   getList(1);

@@ -50,7 +50,24 @@
 		where PM_NO = #{num}
 	</delete>
 	
-	<select id="getCalendar" parameterType="map" resultType="map"> 
+	<select id="getCalendar" parameterType="map" resultType="map">
+	select  title,time_start,pm_kcal,pm_date 
+	from (select sum(pm_kcal) as pm_kcal, to_char(PM_DATE, 'yyyy-mm-dd') as pm_date
+      from personal_management 
+      where user_id = #{id}
+      and  to_char(PM_DATE,'yyyy-mm') = to_char(sysdate,'YYYY-MM')
+      group by to_char(PM_DATE, 'yyyy-mm-dd')
+      )pm 
+      full outer join 
+      (select title, time_start
+      from water_intake 
+      where user_id = #{id}
+      and substr(time_start,1,7)= to_char(sysdate, 'yyyy-mm')
+     )wi
+	on to_date(time_start, 'yyyy-mm-dd') = to_date(PM_DATE,'yyyy-mm-dd')
+	</select>
+	
+	<!-- <select id="getCalendar" parameterType="map" resultType="map"> 
 		select title,time_start,pm_kcal 
 		from (select sum(title) title, time_start
     		  from water_intake
@@ -62,6 +79,6 @@
        	group by to_char(PM_DATE, 'yyyy-mm-dd')
         )
 		where  PM_DATE = time_start		
-	</select>
+	</select> -->
 	
 </mapper>

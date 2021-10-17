@@ -52,21 +52,6 @@ $(document).ready(function() {
             start: arg.startStr,
             end: arg.endStr,
           })
-          
-        /*   //ajax 데이터베이스에 저장
-          $.ajax({
-        	  type: "post",
-        	  url : '${pageContext.request.contextPath}/water/wateradd',
-        	  data: {
-        		  title: title,
-        		  time_start: arg.startStr,
-        		  time_end: arg.endStr
-        	  },
-        	  success:function(){
-        		  console.log("성공");
-        	  }
-          }) */
-        	  
         }
         calendar.unselect()
       },
@@ -91,7 +76,7 @@ $(document).ready(function() {
                    
                     if(result!=null){    
                             $.each(result, function(index, element) {
-                             
+                             console.log("kcal=" + element.PM_KCAL)
                              if(element.TITLE != null){
                                	 items.push({
                                      title: element.TITLE + "L",
@@ -102,11 +87,10 @@ $(document).ready(function() {
                              if(element.PM_KCAL !=null){
                             	 items.push({
                                      title: element.PM_KCAL + "kcal",
-                                     start: element.TIME_START,
+                                     start: element.PM_DATE,
                                      color : '#cedc4a'
                               }); //.push()
                              }
-                             
                              
                              
                         }); //.each()

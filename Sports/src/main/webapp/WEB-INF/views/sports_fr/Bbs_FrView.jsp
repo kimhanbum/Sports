@@ -134,11 +134,22 @@ form[action=down] > input[type=submit]{
 		</table>
 		</div> --%>
 <%-- 게시판view end --%>
-	
+	<!-- Preloader Start -->
+	<div id="preloader-active">
+		<div
+			class="preloader d-flex align-items-center justify-content-center">
+			<div class="preloader-inner position-relative">
+				<div class="preloader-circle"></div>
+				<div class="preloader-img pere-text">
+                    <img src="${pageContext.request.contextPath}/resources/image/logo/sports_logo.png" alt="">
+				</div>
+			</div>
+		</div>
+	</div>
 		
 		<!-- 게시판 상세보기 시작 -->
-		<%-- <input type="hidden" value="${id}" id="loginid" name="loginid"> --%>
-		<input type="hidden" value='admin01' id="loginid" name="loginid">
+		<!-- <input type="hidden" value='admin01' id="loginid" name="loginid"> -->
+		<input type="hidden" value="${USER_ID}" id="loginid" name="loginid">
 		<div class="blog-single gray-bg">
         <div class="container">
             <div class="row align-items-start">

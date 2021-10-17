@@ -28,7 +28,7 @@
 			<div class="preloader-inner position-relative">
 				<div class="preloader-circle"></div>
 				<div class="preloader-img pere-text">
-					<img src="${pageContext.request.contextPath}/resources/img/logo/logo.png" alt="">
+                    <img src="${pageContext.request.contextPath}/resources/image/logo/sports_logo.png" alt="">
 				</div>
 			</div>
 		</div>
@@ -51,8 +51,9 @@
 		</div>
 	</div>
 	</main>
-	<!-- slider Area End--> <!-- Latest Products Start -->
-
+	<!-- slider Area End--> 
+	
+	<!-- Latest Products Start -->
 <div class="site-section bg-light">
 	<div class="container">
 		<div class="row">
