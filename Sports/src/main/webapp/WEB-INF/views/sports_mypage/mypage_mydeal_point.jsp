@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+ <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -176,7 +177,7 @@ background-color
 						<tr>
 						
 							<td>${sessionid}</td>
-							<td> ${nowpoint}원</td>
+							<td> <fmt:formatNumber value="${nowpoint}" pattern="#,###"/>원</td>
 							<td><input type="text" id="name" name="name" required></td>
 							<td><input type="text" id="point" name="point" required></td>
 							<td><button  type= "submit" class="btn btn-success" id="receipt"

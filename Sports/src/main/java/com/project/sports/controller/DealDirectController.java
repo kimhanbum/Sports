@@ -50,10 +50,11 @@ public class DealDirectController {
 			@RequestParam(value = "view",
 			defaultValue = "1", required = false) String view , 
 			@RequestParam(value = "view2",
-			defaultValue = "1", required = false) int view2  )
+			defaultValue = "1", required = false) int view2 , HttpSession session  )
 			
 	{
 		
+		String sessionid = (String) session.getAttribute("USER_ID");
 		int limit = 6; // 한 화면에 출력할 레코드 갯수
 		
 		logger.info("히드닣딓느히늳ㅎ닣"  + view2);
@@ -91,6 +92,7 @@ public class DealDirectController {
 		mv.addObject("Direct",Direct);
 		mv.addObject("limit",limit);
 		mv.addObject("view2",view2);
+		mv.addObject("sessionid",sessionid);
 		mv.setViewName("sport_Deal/DealD_list");
 	
 		

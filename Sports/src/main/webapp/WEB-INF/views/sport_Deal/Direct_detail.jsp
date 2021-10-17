@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -435,9 +436,7 @@ input.checkbox:checked+label.input-label.radio::before {
 			<h3>
 				<b>${b.DIR_SUBJECT}</b>
 			</h3>
-			<h6 class="text-color">Computer Science</h6>
-			<span>Lorem ipsum dolor, sit amet consectetur adipisicing
-				elit. Cumque ac voluptas quae.</span>
+			
 			<div style="text-align:right"><b>조회수</b>&emsp;${b.DIR_READCOUNT}</div>
 			<hr>
 
@@ -457,7 +456,7 @@ input.checkbox:checked+label.input-label.radio::before {
 							<hr>
 							<ul class="list-unstyled">
 
-								<li><b>금액</b>&emsp;&emsp;&emsp;${b.DIR_PRICE}
+								<li><b>금액</b>&emsp;&emsp;&emsp;<fmt:formatNumber value="${b.DIR_PRICE}" pattern="#,###"/>원
 									<hr></li>
 								<li><b>올린시간</b>&emsp;${b.DIR_DATE}
 									<hr></li>

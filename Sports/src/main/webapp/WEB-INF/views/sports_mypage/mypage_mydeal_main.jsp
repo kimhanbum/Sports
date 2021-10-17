@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+ <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -96,7 +97,7 @@
 									</c:if>
 									<c:if test="${sessionid ne 'admin'}">
 									<a 
-									href = "pointview" style="float:right" id="pointview">경매 포인트 충전 (현재 포인트 ${nowpoint}원)</a> 
+									href = "pointview" style="float:right" id="pointview">경매 포인트 충전 (현재 포인트<fmt:formatNumber value="${nowpoint}" pattern="#,###"/>원)</a> 
 									</c:if>
 									<br>
 									<br>
