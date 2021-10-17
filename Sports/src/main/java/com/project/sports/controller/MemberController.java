@@ -1,8 +1,6 @@
 package com.project.sports.controller;
 
 import java.io.PrintWriter;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -97,16 +95,6 @@ required=true 상태에서 지정한 이름을 가진 쿠키가 존재하지 않으면 스프링 MVC는 익
 			m.setUSER_JUMIN(m.getJUMIN()+m.getJUMIN1());
 			m.setUSER_EMAIL(m.getUSER_EMAIL()+"@"+m.getUSER_EMAILDOMAIN());
 			m.setUSER_BMI(Double.valueOf(m.getUSER_PWEIGHT()/(m.getUSER_HEIGHT()*m.getUSER_HEIGHT())*10000));//BMI계산
-		/*
-		LocalDate now = LocalDate.now();
-		// 포맷 정의
-		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy");
-		// 포맷 적용
-		String formatedNow = now.format(formatter);
-		// 결과 출력
-		System.out.println(formatedNow);
-		*/
-		//m.setUSER_RMR(m.getJUMIN().substring(0,2)+1);
 		if(m.getJUMIN1().substring(0,1).equals("1")) {
 			m.setUSER_RMR(
 					66.47+(13.75*m.getUSER_PWEIGHT())
@@ -216,34 +204,32 @@ required=true 상태에서 지정한 이름을 가진 쿠키가 존재하지 않으면 스프링 MVC는 익
 	@RequestMapping(value="/updateProcess", method=RequestMethod.POST)
 	public String updateProcess(Member m, Model model,
 			HttpServletRequest request, RedirectAttributes rattr) {
-		/*
-		m.setUSER_BMI(Double.valueOf(m.getUSER_PWEIGHT()/(m.getUSER_HEIGHT()*m.getUSER_HEIGHT())*10000));
-		if(m.getJUMIN().substring(6,1).equals("1")) {
+		m.setUSER_BMI(Double.valueOf(m.getUSER_PWEIGHT()/(m.getUSER_HEIGHT()*m.getUSER_HEIGHT())*10000));//BMI계산
+		if(m.getUSER_JUMIN().substring(7,8).equals("1")) {
 			m.setUSER_RMR(
 					66.47+(13.75*m.getUSER_PWEIGHT())
 						+(5*m.getUSER_HEIGHT())
-						-Double.valueOf((6.75*(121-Integer.parseInt(m.getJUMIN().substring(0,2))+1)))
+						-Double.valueOf((6.75*(121-Integer.parseInt(m.getUSER_JUMIN().substring(0,2))+1)))
 					);
-		}else if(m.getJUMIN().substring(6,1).equals("3")) {
+		}else if(m.getUSER_JUMIN().substring(7,8).equals("3")) {
 			m.setUSER_RMR(
 					66.47+(13.75*m.getUSER_PWEIGHT())
 						+(5*m.getUSER_HEIGHT())
-							-Double.valueOf((6.75*(21-Integer.parseInt(m.getJUMIN().substring(0,2))+1)))
+							-Double.valueOf((6.75*(21-Integer.parseInt(m.getUSER_JUMIN().substring(0,2))+1)))
 					);
-		}else if(m.getJUMIN().substring(6,1).equals("2")) {
+		}else if(m.getUSER_JUMIN().substring(7,8).equals("2")) {
 			m.setUSER_RMR(
 					655.1+(9.56*m.getUSER_PWEIGHT())
 						+(1.85*m.getUSER_HEIGHT())
-							-Double.valueOf((4.68*(121-Integer.parseInt(m.getJUMIN().substring(0,2))+1)))
+							-Double.valueOf((4.68*(121-Integer.parseInt(m.getUSER_JUMIN().substring(0,2))+1)))
 					);
-		}else if(m.getJUMIN().substring(6,1).equals("4")) {
+		}else if(m.getUSER_JUMIN().substring(7,8).equals("4")) {
 			m.setUSER_RMR(
 					655.1+(9.56*m.getUSER_PWEIGHT())
 						+(1.85*m.getUSER_HEIGHT())
-							-Double.valueOf((4.68*(21-Integer.parseInt(m.getJUMIN().substring(0,2))+1)))
+							-Double.valueOf((4.68*(21-Integer.parseInt(m.getUSER_JUMIN().substring(0,2))+1)))
 					);
 		}else {m.setUSER_RMR(1);};
-		*/
 		int result = memberservice.update(m);
 		if(result==1) {
 			rattr.addFlashAttribute("result","updateSuccess");

@@ -17,16 +17,22 @@ form {
 td{border: 1px solid #6bd6d2;}
 td:first-child{width:110px;}
 #join{margin:15px auto; display:block; background-color:lightgreen; width:200px; height:150;}
+input:type:text {
+  border: 1px solid currentcolor;
+}
+input:type:button {
+  cursor: pointer;
+}
+input:invalid {
+  border: 1px dashed pink;
+}
 </style>
 
 <script>
 $(function(){
 	checkid=false;
-	passcheck=false;
-	checkjumin=false;
-	checkjumin1=false;
+	checkpass=false;
 	//줄 자동넘김
-	$(function() {
 	    $("input:text").keyup (function () {
 	        var charLimit = $(this).attr("maxlength");
 	        if (this.value.length >= charLimit) {
@@ -34,7 +40,6 @@ $(function(){
 	            return false;
 	        }
 	    });
-	});
 	//이메일 선택
 	$('#EMAIL2').change(function(){  //이메일 뒷자리 선택
 		if($(this).val()== '1'){
@@ -52,35 +57,22 @@ $(function(){
 		   $('input:checkbox:checked').prop("checked",false); //비활성화
 	   }
 	});
-	//회원가입버튼 클릭 시
+	//회원가입버튼 클릭 시 유효성 검사
 	$('form').submit(function(){
 		if(!checkid){
 			alert("ID 중복확인하세요.");
 			$(".checkid").focus();
 			return false;
-		}/* else if(!passcheck){
-			alert("비밀번호를 확인해주세요.");
-			$("#USER_PASS").val()="";
-			$("#USER_PASS").focus();
+		}else if(!checkpass){
+			alert("비밀번호를 확인해주세요.")
+			$("#passcheck").focus();
 			return false;
-		}else if(!checkjumin){
-			alert("주민등록번호 앞자리를 확인해주세요.");
-			$("input[name='USER_JUMIN']").focus();
-			return false;
-		}else if(!checkjumin1){
-			alert("주민등록번호 뒷자리를 확인해주세요.");
-			$("input[name='USER_JUMIN1']").focus();
-			return false;
-		}else if($(".USER_HEIGHT").val()==""){
-			alert("회원님의 키를 입력해주세요.");
-			$(".USER_HEIGHT").focus();
-			return false;
-		}else if($("input:checkbox").each()(function(){
+		}else if($("input[name=USER_PSPORTS]").each()(function(){
 			this.checked=true;
 						})==false){
 			alert("선호하는 운동을 1개 이상 선택해주세요.");
 			return false;
-		} */
+		}else{return true;}
 	});
 	//id중복체크,검사
     $("#checkid").click(function(){
@@ -111,38 +103,14 @@ $(function(){
 	$("#USER_PASS").keyup(function(){
 		var pattern = /^\w{10,16}$/;
 		var pass = $("#USER_PASS").val();
-		if(!pattern.test(pass)){
-			passcheck=false;
-		}else{
-			passcheck=true;
-		}
+		var pass1 = $("#passcheck").val();
+			if(pass!=pass1){
+				checkpass=false;
+			}else{
+				checkpass=true;
+				}
+		
 	})
-	//주민번호
-	$("#USER_JUMIN").keyup(function(){
-		var pattern = /^[0-9]{1,6}$/;
-		var jumin = $("#USER_JUMIN").val();
-		if(!pattern.test(jumin)){
-			checkjumin=false;
-		}else{
-			checkjumin=true;
-		}
-	})
-	$("#USER_JUMIN1").keyup(function(){
-		var pattern = /^[0-9]{1,7}$/;
-		var jumin1 = $("#USER_JUMIN1").val();
-		if(!pattern.test(jumin1)){
-			checkjumin1=false;
-		}else{
-			checkjumin1=true;
-		}
-	})
-	//선호운동 checkbox
-	var chk = '${USER_PSPORTS}';
-	var chk_result = chk.val();
-	for(var i=0; i<chk_result.length; i++){
-		var index = chk_result[i]-1;
-		$("input:checkbox").eq(index).prop("checked",true)
-	}
 	
 })
 
@@ -207,7 +175,7 @@ function Postcode() {//우편번호찾기
                     <label for="USER_ID">ID</label>
                 </td>
                 <td>
-                    <input type="text" name="USER_ID" id="USER_ID" size="20px" required>
+                    <input type="text" name="USER_ID" id="USER_ID" size="20px" pattern="\w{5,12}" required>
                     <input type="button"name="checkid" id="checkid" value="중복확인">
                 </td>
             </tr>
@@ -216,7 +184,7 @@ function Postcode() {//우편번호찾기
                     <label for="USER_PASS">비밀번호</label>
                 </td>
                 <td>
-                    <input type="password" name="USER_PASS" id="USER_PASS" size="20px" required>
+                    <input type="password" name="USER_PASS" id="USER_PASS" size="20px" pattern="\w{10,16}" required>
                     <span class="passalarm"></span><br>
                     <span style=font-size:5px;>*영문 대소문자/숫자를 혼용하여 10~16자</span>
                 </td>
@@ -226,7 +194,7 @@ function Postcode() {//우편번호찾기
                     <label for="passcheck">비밀번호 확인</label>
                 </td>
                 <td>
-                    <input type="password" name="passcheck" id="passcheck" size="20px">
+                    <input type="password" name="passcheck" id="passcheck" size="20px" pattern="\w{10,16}" required>
                 </td>
             </tr>
             <tr>
@@ -242,8 +210,8 @@ function Postcode() {//우편번호찾기
                     <label for="JUMIN">주민등록번호</label>
                 </td>
                 <td>
-                    <input type="text" name="JUMIN" id="JUMIN" size="10px" maxLength="6" pattern="[0-9]+" required>-
-                    <input type="text" name="JUMIN1" id="JUMIN1" size="10px" maxLength="7" pattern="[0-9]+" required>
+                    <input type="text" name="JUMIN" id="JUMIN" size="10px" pattern="[0-9]{6}" maxlength="6" required>-
+                    <input type="text" name="JUMIN1" id="JUMIN1" size="10px" pattern="[0-9]{7}" maxlength="7" required>
                 </td>
             </tr>
             <tr>
@@ -329,7 +297,7 @@ function Postcode() {//우편번호찾기
             <tr>
                 <td>
                     <label for="SPORTS">선호운동<br>
-                    (최대 3개)</label>
+                    (최소 1개)</label>
                 </td>
                 <td>
                 	<label for="sports1">구기운동</label><br>
