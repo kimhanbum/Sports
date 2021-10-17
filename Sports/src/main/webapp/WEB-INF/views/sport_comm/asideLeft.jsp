@@ -36,17 +36,17 @@
                   </a>
               </li>
               <li>
-                  <a href="${pageContext.request.contextPath}/mypage/mentorwriteList" class="d-flex">
+                  <a href="${pageContext.request.contextPath}/mypage/mmwriteList" class="d-flex">
                       <p>내 작성 멘토/멘티</p>
                   </a>
               </li>
               <li>
-                  <a href="${pageContext.request.contextPath}/mypage/mentorApplyList" class="d-flex">
+                  <a href="${pageContext.request.contextPath}/mypage/mmApplyList" class="d-flex">
                       <p>멘티/멘토 신청현황</p>
                   </a>
               </li>
                             <li>
-                   <a href="${pageContext.request.contextPath}/mypage/mentorReqList" class="d-flex">
+                   <a href="${pageContext.request.contextPath}/mypage/mmReqList" class="d-flex">
                       <p>멘티/멘토 요청현황</p>
                   </a>
               </li>
