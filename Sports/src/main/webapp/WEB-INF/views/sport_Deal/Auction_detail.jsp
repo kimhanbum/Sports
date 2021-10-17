@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
  <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+ <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -450,15 +451,15 @@ input.checkbox:checked+label.input-label.radio::before {
 								<li><b>경매기간</b>&emsp;${b.AUC_DATE}
 							
 									<hr></li>
-								<li><b>입찰단위</b>&emsp;${b.AUC_UNIT}
+								<li><b>입찰단위</b>&emsp;<fmt:formatNumber value="${b.AUC_UNIT}" pattern="#,###"/>원
 									<hr></li>
-								<li><b>시작가</b>&emsp;&emsp;${b.AUC_SPRICE}
+								<li><b>시작가</b>&emsp;&emsp;<fmt:formatNumber value="${b.AUC_SPRICE}" pattern="#,###"/>원
 									<hr></li>
-								<li><b>현재가</b>&emsp;&emsp;${b.AUC_PRICE}
+								<li><b>현재가</b>&emsp;&emsp;<fmt:formatNumber value="${b.AUC_PRICE}" pattern="#,###"/>원
 									<hr></li>
-								<li><b>즉시구매</b>&emsp;${b.AUC_LPRICE}
+								<li><b>즉시구매</b>&emsp;<fmt:formatNumber value="${b.AUC_LPRICE}" pattern="#,###"/>원
 									<hr></li>
-								<li><b>입찰수</b>&emsp;&emsp;${b.AUC_COUNT}
+								<li><b>입찰수</b>&emsp;&emsp;${b.AUC_COUNT}회
 									<hr></li>
 								<li><b>배송방법</b>&emsp;${b.AUC_DELIVERY}
 									<hr></li>

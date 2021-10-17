@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+ <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -178,7 +179,7 @@ background-color
 						
 							<td >${b.USER_ID}<input type="hidden" id="id" name="id" value="${b.USER_ID}"></td>
 							
-							<td> ${b.REAL_POINT}원</td>
+							<td><fmt:formatNumber value="${b.REAL_POINT}" pattern="#,###"/>원</td>
 							<td> ${b.SEND_NAME}</td>
 							<td > ${b.REQUEST_POINT}<input type="hidden" name= "point" id="point" value="${b.REQUEST_POINT}"></td>
 							

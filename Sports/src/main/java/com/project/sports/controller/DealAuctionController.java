@@ -83,11 +83,19 @@ public class DealAuctionController {
 			Auction = DealService.getSearchAuctionList(page,limit,search,view2);
 		}
 		
-		//현재 포인트 조회
-		int nowpoint = MyDealService.nowpoint(sessionid);
+		
+		int nowpoint=0;
+		
+		if(sessionid !=null) {
+			//현재 포인트 조회
+			nowpoint = MyDealService.nowpoint(sessionid);
+		}
+		
+		logger.info("세션아이디" + sessionid);
 		 
 		
 		mv.setViewName("sport_Deal/DealA_list");
+		mv.addObject("sessionid",sessionid);
 		mv.addObject("page",page);
 		mv.addObject("maxpage",maxpage);
 		mv.addObject("startpage",startpage);

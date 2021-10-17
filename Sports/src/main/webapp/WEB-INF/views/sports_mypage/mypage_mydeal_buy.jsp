@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+ <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -221,10 +222,10 @@ background-color
 										/DealA/detail?num=${b.AUC_NUMBER}">${b.AUC_SUBJECT}</a></div></td>
 							<td>
 								
-								<div>${b.AUC_SPRICE}원</div>
+								<div><fmt:formatNumber value="${b.AUC_SPRICE}" pattern="#,###"/>원</div>
 							</td>
-							<td><div>${b.AUC_PRICE}원</div></td>
-							<td><div>${b.AUC_LPRICE}원</div></td>
+							<td><div><fmt:formatNumber value="${b.AUC_PRICE}" pattern="#,###"/>원</div></td>
+							<td><div><fmt:formatNumber value="${b.AUC_LPRICE}" pattern="#,###"/>원</div></td>
 							<td><div>${b.AUC_DATE}</div></td>
 						</tr>
 						</c:if>
@@ -234,8 +235,8 @@ background-color
 							<td>${b.USER_ID}</td>
 							<td><div>${b.AUC_SUBJECT}</div></td>
 							
-							<td><div>${b.AUC_PRICE}원</div></td>
-							<td><div>${b.AUC_DELIVERYCOM}원</div></td>
+							<td><div><fmt:formatNumber value="${b.AUC_PRICE}" pattern="#,###"/>원</div></td>
+							<td><div>${b.AUC_DELIVERYCOM}</div></td>
 							<td><div>${b.AUC_DELIVERYNUM}</div></td>
 							<td><button  class="btn btn-success" id="receipt"
 											style="background-color: green;"

@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -276,7 +278,7 @@ background-color
 				<div class="select-this d-flex">
 					
 					<form action="#">
-					<b>나의 경매포인트 : ${nowpoint}원</b>
+					<b>나의 경매포인트 : <fmt:formatNumber value="${nowpoint}" pattern="#,###"/>원 </b>
 						<div class="select-itms">
 							<div class="center">
 							
@@ -381,12 +383,17 @@ background-color
 											</tr>
 											<tr>
 												<th>시작가</th>
-												<td>${b.AUC_SPRICE}원</td>
+												<td>
+												<fmt:formatNumber value="${b.AUC_SPRICE}" pattern="#,###"/>원
+
+												</td>
 												
 											</tr>
 											<tr>
 												<th class="discount2">현재가</th>
-												<td class="discount2">${b.AUC_PRICE}원</td>
+												<td class="discount2">
+												<fmt:formatNumber value="${b.AUC_PRICE}" pattern="#,###"/>원
+												</td>
 											</tr>
 											<tr>
 												<th>입찰횟수</th>
@@ -475,7 +482,7 @@ background-color
 									
 									
 								}
-								if(hr == 0 && min ==0 && sec ==0){
+								if(hr == 0 && min ==55 && sec ==20){
 									location.href="timeout?num=" + number
 									
 								}
@@ -519,12 +526,21 @@ background-color
 
 						</div>
 					</div>
+					
+					<c:if test="${sessionid ==null}">
+					<div id="write-b">
+						<a href="${pageContext.request.contextPath}/member/login"
+							class="btn header-btn">글쓰기</a>
 
+					</div>
+					</c:if>
+					<c:if test="${sessionid !=null}">
 					<div id="write-b">
 						<a href="${pageContext.request.contextPath}/DealA/write"
 							class="btn header-btn">글쓰기</a>
 
 					</div>
+					</c:if>
 					<div class="pagination">
 						<c:if test="${page <= 1 }">
 					<a id="paging">&laquo;</a>

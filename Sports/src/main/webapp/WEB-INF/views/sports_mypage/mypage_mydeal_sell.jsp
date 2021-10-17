@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+ <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -244,7 +245,7 @@ background-color
 
 									<td><div>${b.AUC_SUBJECT}</div></td>
 
-									<td><div>${b.AUC_PRICE}원</div></td>
+									<td><div><fmt:formatNumber value="${b.AUC_PRICE}" pattern="#,###"/>원</div></td>
 
 									<td><div>
 											<select id="sel" name="sel">
@@ -283,10 +284,10 @@ background-color
 										/DealA/detail?num=${b.AUC_NUMBER}">${b.AUC_SUBJECT}</a></div></td>
 									<td>
 
-										<div>${b.AUC_SPRICE}원</div>
+										<div><fmt:formatNumber value="${b.AUC_SPRICE}" pattern="#,###"/>원</div>
 									</td>
-									<td><div>${b.AUC_PRICE}원</div></td>
-									<td><div>${b.AUC_LPRICE}원</div></td>
+									<td><div><fmt:formatNumber value="${b.AUC_PRICE}" pattern="#,###"/>원</div></td>
+									<td><div><fmt:formatNumber value="${b.AUC_LPRICE}" pattern="#,###"/>원</div></td>
 									<td><div>${b.AUC_COUNT}</div></td>
 									<td><div>${b.AUC_DATE}</div></td>
 								</tr>
@@ -296,7 +297,7 @@ background-color
 									<td>${b.AUC_NUMBER}</td>
 									<td><div>${b.AUC_SUBJECT}</div></td>
 								
-									<td><div>${b.AUC_PRICE}원</div></td>
+									<td><div>${b.AUC_PRICE}원<fmt:formatNumber value="${b.AUC_PRICE}" pattern="#,###"/>원</div></td>
 									
 									<td><div>${b.AUC_DELIVERYCOM}</div></td>
 									<td><div>${b.AUC_DELIVERYNUM}</div></td>

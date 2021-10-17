@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -381,7 +382,9 @@ background-color
 													</tr>
 													<tr>
 														<th>금액</th>
-														<td>${b.DIR_PRICE}원</td>
+														<td>
+														<fmt:formatNumber value="${b.DIR_PRICE}" pattern="#,###"/>원
+														</td>
 
 													</tr>
 													<tr>
@@ -443,11 +446,20 @@ background-color
 			</div>
 
 
-			<div id="write-b">
-				<a href="${pageContext.request.contextPath}/DealD/write"
-					class="btn header-btn">글쓰기</a>
+			<c:if test="${sessionid ==null}">
+					<div id="write-b">
+						<a href="${pageContext.request.contextPath}/member/login"
+							class="btn header-btn">글쓰기</a>
 
-			</div>
+					</div>
+					</c:if>
+					<c:if test="${sessionid !=null}">
+					<div id="write-b">
+						<a href="${pageContext.request.contextPath}/DealD/write"
+							class="btn header-btn">글쓰기</a>
+
+					</div>
+					</c:if>
 
 			<div id="ajaxpage">
 				<div class="pagination">
@@ -528,6 +540,15 @@ background-color
 
 			})
 		})
+		
+		function AddComma(num)
+		{
+			var regexp = /\B(?=(\d{3})+(?!\d))/g;
+			return num.toString().replace(regexp, ',');
+		}
+
+
+
 
 		function ajax(sdata, sdata2, sdata3) {
 
@@ -580,6 +601,9 @@ background-color
 							$(rdata.Direct)
 									.each(
 											function(index, item) {
+												
+												 var price = AddComma(item.dir_PRICE);
+												
 												console.log(item.dir_PRICE
 														+ "가격")
 												output += '<div class="col-xl-4 col-lg-4 col-md-6" >'
@@ -598,7 +622,7 @@ background-color
 														+ '</b></a></h4>'
 												output += '<div class="price"><table class="table">'
 												output += '<tr><th>금액</th><td>'
-														+ item.dir_PRICE
+														+ price
 														+ '원</td>'
 												output += '<tr><th>거래지역</th><td>'
 														+ item.dir_ADDRESS
