@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.project.sports.domain.PersonalManagement;
 import com.project.sports.domain.WaterIntake;
 import com.project.sports.service.PersonalManagementService;
 import com.project.sports.service.WaterIntakeService;
@@ -58,6 +59,8 @@ public class WaterIntakeController {
 		Map<String,Object> map = new HashMap<String,Object>();
 		map.put("id", id);
 		map.put("dateString", dateString);
+		
 		return pmService.getCalendar(map);
+		
 	}
 }

@@ -211,90 +211,17 @@ background-color: #fbfcfd
     <div class="container">
 	  <div class="row">
 		<div class="col-md-12">
-			<canvas id ="myChart" data-toggle="modal" data-target="#myModal">
+			<canvas id ="myChart">
 			</canvas>
 			<input type="hidden" id="goaldata" name="goaldata" value="${goaldata}">
-			<input type="text" placeholder="당일 물 섭취량 입력" id="title" name="title">
+			<input type="hidden" id="title" name="title" value="${title}">
+			<input type="text" placeholder="당일 물 섭취량 입력" id="input_title" name="title">
 			<button class="wateradd" id="wateradd">입력</button>
 		</div>
 	  </div>
 	</div>
 		
-	<%--modal 시작--%>
-		<div class="modal" id="myModal">
-		  <div class="modal-dialog">
-			<div class="modal-content">
-				<%--Modal body --%>
-				<div class="modal-body">
-				 <form name="modify" action="modify" method="post">
-			   <%-- <input type="hidden" name="title" value="${title}" id="title"> --%>
-				 	<div class="form-group">
-				 		<label for ="modi">수정</label>
-				 		<input type="text"
-				 				class="form-control" placeholder="당일 물 섭취량 수정"
-				 				name="title" id="title">
-				 	</div>
-				 	<button type="submit" class="sub btn-dark">수정</button>
-				 	<button type="button" id="del" class="del">삭제</button>
-				 	<button type="button" class="can btn-danger" data-dismiss="modal">취소</button>
-				 </form>
-				</div><!-- class="modal-body" -->
-			</div><!-- class="modal-content -->
-		</div><!-- class="modal-dialog" -->
-		</div><!-- class="modal" end -->
-<script>
-//ajax로 값을 가져와요
-// [{label:""물섭취량""}]
-function getDoughnut(goaldata, title){		
-	
-	var ctx = $("#myChart");
-	//var doughnutLabels = ["목표물섭취량", "내 섭취량"];
-	//var doughnutdata = [100, 70];
-	 doughnutChart = new Chart(ctx,{
-		type : 'doughnut', //pie, line, doughnut, polarArea
-		data: {
-			labels : ["목표 물 섭취량", "내 섭취량"],//doughnutLabels,	
-			datasets : [{
-				data : [
-					goaldata,
-					title,
-					],
-				backgroundColor: ['#8a6bff', '#f85867'],
-				hoverBackgroundColor: ['#5c09f0', '#e2081d'],
-				hoverBorderColor: "rgba(234, 236)",
-			}],
-		},
-		options:{
-			cutoutPercentage: 90
-		}
-	});
-	
-}
-	var goaldata = '${goaldata}';
-	var title = '${title}';
-		
-	getDoughnut(goaldata, title);
-	
 
-	$("#wateradd").click(function(){
-		  $.ajax({	
-				type: "post",
-				url : "${pageContext.request.contextPath}/pm/wateradd",
-				data:{
-					goaldata: $("#goaldata").val(),
-					title : $("#title").val()
-				},
-				success: function(rdata){
-					console.log("성공");
-					doughnutChart.destroy();
-					getDoughnut(rdata.goaldata, rdata.title);
-					$('#title').val('');
-					$("#title").attr("placeholder", "당일 물 섭취량 입력");
-				}
-			})	
-	})
-	
-</script>
 			</div>
 		</div>
 	</div>
@@ -304,5 +231,78 @@ function getDoughnut(goaldata, title){
 
 	<!-- Footer 영역  -->
 	<jsp:include page="/WEB-INF/views/sport_comm/footer.jsp"/>
+	<script>
+var goaldata;
+var title;
+$(function(){
+	goaldata = $('#goaldata').val();
+	title =  $('#title').val();
+	getDoughnut(title);
+	
+	$("#wateradd").click(function(){
+		  $.ajax({	
+				type: "post",
+				url : "${pageContext.request.contextPath}/pm/wateradd",
+				data:{
+					title : $("#input_title").val()
+				},
+				success: function(rdata){
+					console.log("성공");
+					doughnutChart.destroy();
+					getDoughnut(rdata.title);
+					$('#input_title').val('');
+					$("#input_title").attr("placeholder", "당일 물 섭취량 입력");
+				}
+			})	
+	});
+	
+	
+	function getDoughnut(title){		
+		
+		var ctx = $("#myChart");
+		//var doughnutLabels = ["목표물섭취량", "내 섭취량"];
+		//var doughnutdata = [100, 70];
+		 doughnutChart = new Chart(ctx,{
+			type : 'doughnut', //pie, line, doughnut, polarArea
+			data: {
+				labels : ["목표 물 섭취량", "내 섭취량"],//doughnutLabels,	
+				datasets : [{
+					data : [
+						goaldata,
+						title,
+						],
+					backgroundColor: ['#8a6bff', '#f85867'],
+					hoverBackgroundColor: ['#5c09f0', '#e2081d'],
+					hoverBorderColor: "rgba(234, 236)",
+				}],
+			},
+			options:{
+				cutoutPercentage: 90
+			}
+		});
+	}
+	
+	$("#myChart").click(function(){
+		if(!confirm("해당 물 섭취량을 삭제하시겠습니까?")){
+			return;
+		}
+		$.ajax({
+			type: "post",
+			url: "${pageContext.request.contextPath}/pm/delWater",
+			data: {
+				title: title
+			},
+			success: function(rdata){
+				console.log("삭제 성공");
+				doughnutChart.destroy();
+				getDoughnut(rdata.title);
+				$('#input_title').val('');
+				$("#input_title").attr("placeholder", "당일 물 섭취량 입력");
+			}
+		})
+	})
+	
+})
+</script>
 </body>
 </html>

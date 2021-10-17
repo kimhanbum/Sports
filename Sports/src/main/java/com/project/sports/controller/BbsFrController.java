@@ -86,7 +86,7 @@ import com.project.sports.service.Bbs_FrService;
 	} 
 	//리스트
 	@RequestMapping(value="/list",method=RequestMethod.GET)
-	public ModelAndView boardList(
+	public ModelAndView List(
 			@RequestParam(value="page",defaultValue="1",required=false) int page,
 			@RequestParam(value="search_field", defaultValue="-1", required = false)
 			int index,
@@ -339,7 +339,7 @@ import com.project.sports.service.Bbs_FrService;
 			  
 		  }else {// 수정성공의 경우
 			  logger.info("게시판 수정 완료");
-			  //수정한 글 내용을 보여주기 위해 글 내용 보기 보기 페이지로 이동하기 위해 경로를 설정합니다.
+			  //수정한 글 내용을 보여주기 위해 글 내용 보기 페이지로 이동하기 위해 경로를 설정합니다.
 			  url = "redirect:list";
 			  rattr.addAttribute("num",boarddata.getFR_NO());
 		  }

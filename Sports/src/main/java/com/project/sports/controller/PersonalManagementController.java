@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.project.sports.domain.Member;
 import com.project.sports.domain.PersonalManagement;
@@ -135,8 +136,6 @@ public class PersonalManagementController {
 	@PostMapping(value="/wateradd")
 	@ResponseBody
 	public Map<String, Object> add(WaterIntake water, HttpSession session, Member member,
-			@RequestParam(value="goaldata", defaultValue="0",required=false)
-	  		double goaldata,
 			@RequestParam(value="title", defaultValue="0", required=false)
 			String title
 			){
@@ -144,18 +143,19 @@ public class PersonalManagementController {
 		water.setUser_id(id);
 		water.setTitle(title);
 		logger.info("title"+title);
-		WaterService.wateradd(water);//추가
+		int count = WaterService.doughnutlistcount(id);
+		if(count > 0) {  //이미 테이블에 물섭취 정보 존재
+			//해당 row를 업데이트
+			WaterService.waterUpdate(water);//추가
+		}else{ //테이블에 물섭취 정보 없음
+			//새로운 insert 수행
+			WaterService.wateradd(water);//추가
+		}
 		
-		
+		float result = WaterService.DoughnutList(id);
 		Map<String,Object> map =new HashMap<String,Object>();
-		map.put("goaldata", goaldata);		
-		map.put("title", WaterService.DoughnutList(id));
-		logger.info("goaldata" + goaldata);
-		logger.info("water" + water);
-		
-		
-		logger.info("goaldata" + goaldata);
-		
+		map.put("title", result);
+		logger.info("water : " + result);
 		return map;
 	}
 	
@@ -173,24 +173,22 @@ public class PersonalManagementController {
 		return "sports_management/personal_management";
 	}
 	
+	@PostMapping(value="/delWater")
+	@ResponseBody
+	public void delWater(@RequestParam(value ="title", required= false) String title,
+			 			HttpSession session) {
+		String id =(String)session.getAttribute("USER_ID");
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("id", id);
+		map.put("title", title);
+		int delresult = WaterService.delWater(map);
+		logger.info("delresult=" + delresult);
+		logger.info("title=" + title);
+	}
 	
-	/*
-	 * @PostMapping(value = "/DoughnutList")
-	 * 
-	 * @ResponseBody public float doughnutList(HttpSession session) { String id =
-	 * (String) session.getAttribute("USER_ID"); float title =
-	 * WaterService.DoughnutList(id);
-	 * 
-	 * return title; }
-	 */
 	
-	/*
-	 * @PostMapping(value="/modi") public String modi(WaterIntake water,
-	 * HttpServletRequest request RedirectAttributes rattr, Model mv) {
-	 * 
-	 * }
-	 */
-}
+	}
+	 
 
 
 
