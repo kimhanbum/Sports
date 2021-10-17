@@ -71,7 +71,7 @@
                                 <li>
                                 <c:if test="${!empty USER_ID}">
                                     <div>
-                                       <i class="fas fa-user" style="font-size: 15px; margin-top:17px; margin-right:20px">&nbsp;${USER_ID}&nbsp;님&nbsp; 환영합니다.</i>
+                                       <i class="fas fa-user" style="font-size: 13px; margin-top:17px; margin-right:5px">&nbsp;${USER_ID}&nbsp;님&nbsp; 환영합니다.</i>
                                     </div>
                                 </c:if>
                                 </li>
@@ -80,7 +80,7 @@
                                       <li class="d-none d-lg-block"> <a href="${pageContext.request.contextPath}/member/join" class="btn header-btn">회원가입</a></li>
 						        </c:if>
 						        <c:if test="${!empty USER_ID}">
-						        	  <li class="d-none d-lg-block"> <a href="${pageContext.request.contextPath}/member/info" class="btn header-btn">마이페이지</a></li>
+						        	  <li class="d-none d-lg-block"> <a href="${pageContext.request.contextPath}/mypage/main" class="btn header-btn">마이페이지</a></li>
 						              <li class="d-none d-lg-block"> <a href="${pageContext.request.contextPath}/member/logout" class="btn header-btn">로그아웃</a></li>
 						        </c:if>
                             </ul>
