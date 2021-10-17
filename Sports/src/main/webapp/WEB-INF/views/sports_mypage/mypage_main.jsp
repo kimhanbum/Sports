@@ -303,14 +303,14 @@ h1.heading {
 			<div class="col-lg-2">
 				<div class="card">
 					<a class="img-card"
-						 href="${pageContext.request.contextPath}/mypage/mentorwriteList">
+						 href="${pageContext.request.contextPath}/mypage/mmwriteList">
 						<img
 						src="${pageContext.request.contextPath}/resources/img/my_mymontor.png" />
 					</a>
 					<div class="card-content">
 						<h4 class="card-title">
 							<a
-								href="${pageContext.request.contextPath}/mypage/mentorwriteList">
+								href="${pageContext.request.contextPath}/mypage/mmwriteList">
 								내 작성 멘토멘티 </a>
 						</h4>
 						<p class="">내가 작성한 멘토/멘티 목록을 확인할 수 있습니다.</p>
@@ -321,14 +321,14 @@ h1.heading {
 			<div class="col-lg-2">
 				<div class="card">
 					<a class="img-card"
-						href="${pageContext.request.contextPath}/mypage/mentorApplyList">
+						href="${pageContext.request.contextPath}/mypage/mmApplyList">
 						<img
 						src="${pageContext.request.contextPath}/resources/img/my_mentorapply.png" />
 					</a>
 					<div class="card-content">
 						<h4 class="card-title">
 							<a
-								href="${pageContext.request.contextPath}/mypage/mentorApplyList">
+								href="${pageContext.request.contextPath}/mypage/mmApplyList">
 								멘티/멘토 신청 현황 </a>
 						</h4>
 						<p class="">멘티/멘토 신청 현황을 확인 할 수 있습니다.</p>
@@ -339,14 +339,14 @@ h1.heading {
 			<div class="col-lg-2">
 				<div class="card">
 					<a class="img-card"
-						 href="${pageContext.request.contextPath}/mypage/mentorReqList">
+						 href="${pageContext.request.contextPath}/mypage/mmReqList">
 						<img
 						src="${pageContext.request.contextPath}/resources/img/my_mentorrequest.png" />
 					</a>
 					<div class="card-content">
 						<h4 class="card-title">
 							<a
-								 href="${pageContext.request.contextPath}/mypage/mentorReqList">
+								 href="${pageContext.request.contextPath}/mypage/mmReqList">
 								멘티/멘토 요청 현황  </a>
 						</h4>
 						<p class="">멘티/멘토 요청 현황을 확인할 수 있습니다.</p>

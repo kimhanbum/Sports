@@ -221,9 +221,21 @@
 		}
 		
 		function recommSport_ajax(state){
+			var url;
+			var path = $(location).attr('pathname');
 			console.log(state);
+			console.log(path); 
+
+			if(path.indexOf("mainPage") == -1){
+				url ="main/recommSport";
+				console.log("index.jsp로 접속"); 
+			}else{
+				url ="recommSport";
+				console.log("redirect로 접속"); 
+			}
+			
 			$.ajax({
-				url : "recommSport",
+				url : url,
 				type : "get", 
 				data : {"state":state},
 				dataType : "json",

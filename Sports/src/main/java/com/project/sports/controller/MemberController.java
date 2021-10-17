@@ -173,7 +173,7 @@ required=true 상태에서 지정한 이름을 가진 쿠키가 존재하지 않으면 스프링 MVC는 익
 				savecookie.setMaxAge(0);
 			}
 			response.addCookie(savecookie);
-			return "/main";//boardController로
+			return "redirect:/main/mainPage";//boardController로
 		}else {
 			rattr.addFlashAttribute("result",result);
 			return "redirect:login";

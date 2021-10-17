@@ -33,6 +33,7 @@ public class MainController {
 	@RequestMapping(value = "/recommSport", method = RequestMethod.GET)
 	@ResponseBody
 	public List<Sports> smentorlistAjax(int state){
+		logger.info("recommand : "  + state);
 	    return mainservice.getRecommSportlList(state); //리스트를 받아옴
 	}
 }

@@ -729,6 +729,64 @@ public class MmatchController {
 	}
 	
 	//마이페이지의 멘토 글 리스트 보기
+	@RequestMapping(value = "/mmwriteList", method = RequestMethod.GET)
+	public ModelAndView MypageMentorlist(
+			@RequestParam(value="limit" ,defaultValue="4", required=false) int limit,
+			@RequestParam(value="page" ,defaultValue="1", required=false) int page,
+			HttpSession session,
+			ModelAndView mv)
+	{
+		String id =(String)session.getAttribute("USER_ID"); 
+		logger.info("user id : " + id);
+	    int listcount1 = mmatchservice.getMyMentorListCount(id); //총 리스트 수를 받아옴
+	    int listcount2 = mmatchservice.getMyMenteeListCount(id); //총 리스트 수를 받아옴
+	    //총 페이지 수
+	    int maxpage1 = (listcount1 + limit - 1) /limit;
+	    
+	    //현재 페이지에 보여줄 시작 페이지 수 (1,11,21 등등)
+	    int startpage1 = ((page-1) / 10) * 10 + 1;
+	    
+	    //현재 페이지에 보내줄 마지막 페이지 수 (10,20.30 등등)
+	    int endpage1 = startpage1 + 10 -1;
+	    
+	    if(endpage1 > maxpage1)
+	    	endpage1 = maxpage1;
+	    
+	    
+	    //총 페이지 수
+	    int maxpage2 = (listcount2 + limit - 1) /limit;
+	    
+	    //현재 페이지에 보여줄 시작 페이지 수 (1,11,21 등등)
+	    int startpage2 = ((page-1) / 10) * 10 + 1;
+	    
+	    //현재 페이지에 보내줄 마지막 페이지 수 (10,20.30 등등)
+	    int endpage2 = startpage2 + 10 -1;
+	    
+	    if(endpage2 > maxpage2)
+	    	endpage2 = maxpage2;
+	    
+	    List<Mentor> mentorlist = mmatchservice.getMyMentorList(page,limit,id); //리스트를 받아옴
+	    List<Mentee> menteelist = mmatchservice.getMyMenteeList(page, limit,id); //리스트를 받아옴
+	    
+	    mv.setViewName("sports_mypage/mypage_mymmwritelist");
+	    mv.addObject("page",page);
+	    mv.addObject("maxpage1",maxpage1);
+	    mv.addObject("startpage1",startpage1);
+	    mv.addObject("endpage1",endpage1);
+	    mv.addObject("listcount1",listcount1);
+	    mv.addObject("maxpage2",maxpage2);
+	    mv.addObject("startpage2",startpage2);
+	    mv.addObject("endpage2",endpage2);
+	    mv.addObject("listcount2",listcount2);
+	    mv.addObject("mentorlist",mentorlist);
+	    mv.addObject("menteelist",menteelist);
+	    mv.addObject("saveFolder",saveFolder);
+		
+		return mv;
+	}
+	
+/*	
+	//마이페이지의 멘토 글 리스트 보기
 	@RequestMapping(value = "/mentorwriteList", method = RequestMethod.GET)
 	public ModelAndView MypageMentorlist(
 			@RequestParam(value="limit" ,defaultValue="4", required=false) int limit,
@@ -760,18 +818,11 @@ public class MmatchController {
 	    mv.addObject("listcount",listcount);
 	    mv.addObject("mentorlist",mentorlist);
 	    mv.addObject("saveFolder",saveFolder);
-		/*
-		 * logger.info("page : " +page); logger.info("maxpage : " +maxpage);
-		 * logger.info("startpage : " +startpage); logger.info("endpage : " +endpage);
-		 * logger.info("listcount : " +listcount); for(Mentor m : mentorlist) {
-		 * logger.info("사진 : " +m.getMentor_pic1()); logger.info("종목 : "
-		 * +m.getSports_name()); logger.info("시 : " +m.getCity()); logger.info("군구 : "
-		 * +m.getSigungu()); logger.info("인원 : " +m.getMentor_number()); }
-		 * logger.info("saveFolder : " +saveFolder);
-		 */
+
 		return mv;
 	}
-	
+*/
+/*
 	//마이페이지의 멘티 글 리스트 보기
 	@RequestMapping(value = "/menteewriteList", method = RequestMethod.GET)
 	public ModelAndView MypageMenteelist(
@@ -804,23 +855,10 @@ public class MmatchController {
 	    mv.addObject("listcount",listcount);
 	    mv.addObject("menteelist",menteelist);
 	    mv.addObject("saveFolder",saveFolder);
-		
-	   
-		
-		/*
-		 * logger.info("page : " +page); logger.info("maxpage : " +maxpage);
-		 * logger.info("startpage : " +startpage); logger.info("endpage : " +endpage);
-		 * logger.info("listcount : " +listcount); for(Mentee m : menteelist) {
-		 * logger.info("사진 : " +m.getMentee_pic1());
-		 * logger.info("종목 : "+m.getSports_name()); logger.info("시 : " +m.getCity());
-		 * logger.info("군구 : "+m.getSigungu()); logger.info("code: " +
-		 * m.getMentee_code()); } logger.info("saveFolder : " +saveFolder);
-		 */
-		 
-		 
+
 		return mv;
 	}
-	
+*/	
 	
 	//마이페이지의 신청 글 리스트 보기(ajax)
 	@RequestMapping(value = "/mentorwriteList_ajax", method = RequestMethod.GET)
@@ -903,6 +941,64 @@ public class MmatchController {
 	    return map;
 	}
 	
+	
+	//마이페이지의 신청 리스트 보기(멘토/멘티 글 신청)
+	@RequestMapping(value = "/mmApplyList", method = RequestMethod.GET)
+	public ModelAndView MypageMentorApplylist(
+			@RequestParam(value="limit" ,defaultValue="4", required=false) int limit,
+			@RequestParam(value="page" ,defaultValue="1", required=false) int page,
+			HttpSession session,
+			ModelAndView mv)
+	{
+		String id =(String)session.getAttribute("USER_ID"); 
+		logger.info("user id : " + id);
+	    int listcount1 = mmatchservice.getMyMentorAppListCount(id); //총 리스트 수를 받아옴
+	    int listcount2 = mmatchservice.getMyMenteeAppListCount(id); //총 리스트 수를 받아옴
+	    //총 페이지 수
+	    int maxpage1 = (listcount1 + limit - 1) /limit;
+	    
+	    //현재 페이지에 보여줄 시작 페이지 수 (1,11,21 등등)
+	    int startpage1 = ((page-1) / 10) * 10 + 1;
+	    
+	    //현재 페이지에 보내줄 마지막 페이지 수 (10,20.30 등등)
+	    int endpage1 = startpage1 + 10 -1;
+	    
+	    if(endpage1 > maxpage1)
+	    	endpage1 = maxpage1;
+	    
+	    
+	    //총 페이지 수
+	    int maxpage2 = (listcount2 + limit - 1) /limit;
+	    
+	    //현재 페이지에 보여줄 시작 페이지 수 (1,11,21 등등)
+	    int startpage2 = ((page-1) / 10) * 10 + 1;
+	    
+	    //현재 페이지에 보내줄 마지막 페이지 수 (10,20.30 등등)
+	    int endpage2 = startpage2 + 10 -1;
+	    
+	    if(endpage2 > maxpage2)
+	    	endpage2 = maxpage2;
+	    
+	    List<MatchAppReq> mentorApplylist = mmatchservice.getMyMentorAppList(page,limit,id); //리스트를 받아옴
+	    List<MatchAppReq> menteeApplylist = mmatchservice.getMyMenteeAppList(page, limit,id); //리스트를 받아옴
+	    
+	    mv.setViewName("sports_mypage/mypage_mymmApplist");
+	    mv.addObject("page",page);
+	    mv.addObject("maxpage1",maxpage1);
+	    mv.addObject("startpage1",startpage1);
+	    mv.addObject("endpage1",endpage1);
+	    mv.addObject("listcount1",listcount1);
+	    mv.addObject("maxpage2",maxpage2);
+	    mv.addObject("startpage2",startpage2);
+	    mv.addObject("endpage2",endpage2);
+	    mv.addObject("listcount2",listcount2);
+	    mv.addObject("mentorApplylist",mentorApplylist);
+	    mv.addObject("menteeApplylist",menteeApplylist);
+		return mv;
+	}
+	
+	
+	/*
 	//마이페이지의 신청 리스트 보기(멘토글 신청)
 	@RequestMapping(value = "/mentorApplyList", method = RequestMethod.GET)
 	public ModelAndView MypageMentorApplylist(
@@ -936,6 +1032,8 @@ public class MmatchController {
 	    mv.addObject("applylist",applylist);
 		return mv;
 	}
+	*/
+	
 	//마이페이지의 요청 글 리스트 보기(멘토글 신청 ajax)
 	@RequestMapping(value = "/mentorApplyList_ajax", method = RequestMethod.GET)
 	@ResponseBody
@@ -970,7 +1068,7 @@ public class MmatchController {
 	    map.put("applylist",applylist);
 	    return map;
 	}
-	
+	/*
 	//마이페이지의 신청 리스트 보기(멘글에 대한 신청)
 	@RequestMapping(value = "/menteeApplyList", method = RequestMethod.GET)
 	public ModelAndView MypageMenteeApplylist(
@@ -1004,6 +1102,7 @@ public class MmatchController {
 	    mv.addObject("applylist",applylist);
 		return mv;
 	}
+	*/
 	//마이페이지의 신청 글 리스트 보기(멘티글 신청 ajax)
 	@RequestMapping(value = "/menteeApplyList_ajax", method = RequestMethod.GET)
 	@ResponseBody
@@ -1047,7 +1146,63 @@ public class MmatchController {
 		int result = mmatchservice.cancelApply(code,id);
 		return result;
 	}
-
+	//마이페이지의 요청 리스트 보기(멘토/멘티 글 신청)
+	@RequestMapping(value = "/mmReqList", method = RequestMethod.GET)
+	public ModelAndView MypageMentorReqlist(
+			@RequestParam(value="limit" ,defaultValue="4", required=false) int limit,
+			@RequestParam(value="page" ,defaultValue="1", required=false) int page,
+			HttpSession session,
+			ModelAndView mv)
+	{
+		String id =(String)session.getAttribute("USER_ID"); 
+		logger.info("user id : " + id);
+	    int listcount1 = mmatchservice.getMyMentorReqListCount(id); //총 리스트 수를 받아옴
+	    int listcount2 = mmatchservice.getMyMenteeReqListCount(id); //총 리스트 수를 받아옴
+	    //총 페이지 수
+	    int maxpage1 = (listcount1 + limit - 1) /limit;
+	    
+	    //현재 페이지에 보여줄 시작 페이지 수 (1,11,21 등등)
+	    int startpage1 = ((page-1) / 10) * 10 + 1;
+	    
+	    //현재 페이지에 보내줄 마지막 페이지 수 (10,20.30 등등)
+	    int endpage1 = startpage1 + 10 -1;
+	    
+	    if(endpage1 > maxpage1)
+	    	endpage1 = maxpage1;
+	    
+	    
+	    //총 페이지 수
+	    int maxpage2 = (listcount2 + limit - 1) /limit;
+	    
+	    //현재 페이지에 보여줄 시작 페이지 수 (1,11,21 등등)
+	    int startpage2 = ((page-1) / 10) * 10 + 1;
+	    
+	    //현재 페이지에 보내줄 마지막 페이지 수 (10,20.30 등등)
+	    int endpage2 = startpage2 + 10 -1;
+	    
+	    if(endpage2 > maxpage2)
+	    	endpage2 = maxpage2;
+	    
+	    List<MatchAppReq> mentorReqlylist = mmatchservice.getMyMentorReqList(page,limit,id); //리스트를 받아옴
+	    List<MatchAppReq> menteeReqlylist = mmatchservice.getMyMenteeReqList(page, limit,id); //리스트를 받아옴
+	    
+	    mv.setViewName("sports_mypage/mypage_mymmReqlist");
+	    mv.addObject("page",page);
+	    mv.addObject("maxpage1",maxpage1);
+	    mv.addObject("startpage1",startpage1);
+	    mv.addObject("endpage1",endpage1);
+	    mv.addObject("listcount1",listcount1);
+	    mv.addObject("maxpage2",maxpage2);
+	    mv.addObject("startpage2",startpage2);
+	    mv.addObject("endpage2",endpage2);
+	    mv.addObject("listcount2",listcount2);
+	    mv.addObject("mentorReqlylist",mentorReqlylist);
+	    mv.addObject("menteeReqlylist",menteeReqlylist);
+		return mv;
+	}
+	
+	
+/*
 	//마이페이지의  내게 한 요청 리스트 보기(내가쓴 멘토글에 대한 요청 )
 	@RequestMapping(value = "/mentorReqList", method = RequestMethod.GET)
 	public ModelAndView MypageMentorReqlist(
@@ -1081,6 +1236,7 @@ public class MmatchController {
 	    mv.addObject("reqlist",reqlist);
 		return mv;
 	}
+	*/
 	//마이페이지의 내게 한 요청 리스트 보기(내가쓴 멘토글에 대한 요청 ajax)
 	@RequestMapping(value = "/mentorReqList_ajax", method = RequestMethod.GET)
 	@ResponseBody
@@ -1115,7 +1271,7 @@ public class MmatchController {
 	    map.put("reqlist",reqlist);
 	    return map;
 	}
-	
+/*	
 	//마이페이지의 내게 한 요청 리스트 보기(내가쓴 멘티글에 대한 요청)
 	@RequestMapping(value = "/menteeReqList", method = RequestMethod.GET)
 	public ModelAndView MypageMenteeReqlist(
@@ -1149,6 +1305,7 @@ public class MmatchController {
 	    mv.addObject("reqlist",reqlist);
 		return mv;
 	}
+	*/
 	//마이페이지의  내게 한 요청 리스트 보기(내가쓴 멘티글에 대한 요청 ajax)
 	@RequestMapping(value = "/menteeReqList_ajax", method = RequestMethod.GET)
 	@ResponseBody
