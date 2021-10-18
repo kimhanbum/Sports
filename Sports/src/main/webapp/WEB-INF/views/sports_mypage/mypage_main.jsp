@@ -119,9 +119,9 @@ h1.heading {
   font-weight:600;
   text-transform: uppercase
 }
-#cardpadd{
+/* #cardpadd{
 	padding-top:150px
-}
+} */
 </style>
 <body>
 
@@ -176,185 +176,178 @@ h1.heading {
 				<!-- 마이 페이지 좌측 asideLeft 메뉴들 -->
 				<jsp:include page="/WEB-INF/views/sport_comm/asideLeft.jsp" />
 			</div>
-			<div class="col-lg-1">
-			</div>
-			<div class="col-lg-2" id="cardpadd">
-				<div class="card">
-					<a class="img-card"
-						href="${pageContext.request.contextPath}/member/update">
-						<img
-						src="${pageContext.request.contextPath}/resources/img/my_infomodi.png" />
-					</a>
-					<div class="card-content">
-						<h4 class="card-title">
-							<a
-								 href="${pageContext.request.contextPath}/member/update">
-								개인 정보 수정</a>
-						</h4>
-						<p class="">개인 정보 수정을할 수 있는 메뉴 입니다.</p>
+			<div class="col-lg-9">
+				<div class="row">
+					<div class="col-lg-4" id="cardpadd">
+						<div class="card">
+							<a class="img-card"
+								href="${pageContext.request.contextPath}/member/update">
+								<img
+								src="${pageContext.request.contextPath}/resources/img/my_infomodi.png" />
+							</a>
+							<div class="card-content">
+								<h4 class="card-title">
+									<a
+										 href="${pageContext.request.contextPath}/member/update">
+										개인 정보 수정</a>
+								</h4>
+								<p class="">개인 정보 수정을할 수 있는 메뉴 입니다.</p>
+							</div>
+							
+						</div>
 					</div>
-					
-				</div>
-			</div>
-			<div class="col-lg-2" id="cardpadd">
-				<div class="card">
-					<a class="img-card"
-						 href="${pageContext.request.contextPath}/pm/doughnut" >
-						<img
-						src="${pageContext.request.contextPath}/resources/img/my_water.png" />
-					</a>
-					<div class="card-content">
-						<h4 class="card-title">
-							<a
-								 href="${pageContext.request.contextPath}/pm/doughnut">
-								당일 운동량 / 물 섭취량 </a>
-						</h4>
-						<p class="">당일 운동량과 물 섭취량을 체크해 운동량을 매일 기록 하세요! </p>
+					<div class="col-lg-4" id="cardpadd">
+						<div class="card">
+							<a class="img-card"
+								 href="${pageContext.request.contextPath}/pm/doughnut" >
+								<img
+								src="${pageContext.request.contextPath}/resources/img/my_water.png" />
+							</a>
+							<div class="card-content">
+								<h4 class="card-title">
+									<a
+										 href="${pageContext.request.contextPath}/pm/doughnut">
+										당일 운동량 / 물 섭취량 </a>
+								</h4>
+								<p class="">당일 운동량과 물 섭취량을 체크해 매일 기록 하세요! </p>
+							</div>
+							
+						</div>
 					</div>
-					
-				</div>
-			</div>
-			<div class="col-lg-2" id="cardpadd">
-				<div class="card">
-					<a class="img-card"
-						 href="${pageContext.request.contextPath}/water/calendar" >
-						<img
-						src="${pageContext.request.contextPath}/resources/img/my_calendar.png" />
-					</a>
-					<div class="card-content">
-						<h4 class="card-title">
-							<a
-								href="${pageContext.request.contextPath}/water/calendar">
-								캘린더 </a>
-						</h4>
-						<p class="">달력 으로 원하는 날짜를 선택해 물 섭취량을 기록하세요!</p>
+					<div class="col-lg-4" id="cardpadd">
+						<div class="card">
+							<a class="img-card"
+								 href="${pageContext.request.contextPath}/water/calendar" >
+								<img
+								src="${pageContext.request.contextPath}/resources/img/my_calendar.png" />
+							</a>
+							<div class="card-content">
+								<h4 class="card-title">
+									<a
+										href="${pageContext.request.contextPath}/water/calendar">
+										캘린더 </a>
+								</h4>
+								<p class="">달력 으로 원하는 날짜를 선택해 물 섭취량을 기록하세요!</p>
+							</div>
+							
+						</div>
 					</div>
-					
 				</div>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-lg-2">
-				
-			</div>
-			<div class="col-lg-1">
-			</div>
-			<div class="col-lg-2">
-				<div class="card">
-					<a class="img-card"
-						href="${pageContext.request.contextPath}/member/info" >
-						<img
-						src="${pageContext.request.contextPath}/resources/img/my_myinfo.png" />
-					</a>
-					<div class="card-content">
-						<h4 class="card-title">
-							<a
-								href="${pageContext.request.contextPath}/member/info">
-								내 정보  </a>
-						</h4>
-						<p class="">내 정보를 확인하고 싶을때 오세요</p>
+				<div class="row">
+					<div class="col-lg-4">
+						<div class="card">
+							<a class="img-card"
+								href="${pageContext.request.contextPath}/member/info" >
+								<img
+								src="${pageContext.request.contextPath}/resources/img/my_myinfo.png" />
+							</a>
+							<div class="card-content">
+								<h4 class="card-title">
+									<a
+										href="${pageContext.request.contextPath}/member/info">
+										내 정보  </a>
+								</h4>
+								<p class="">내 정보를 확인하고 싶을때 오세요</p>
+							</div>
+							
+						</div>
 					</div>
-					
-				</div>
-			</div>
-			<div class="col-lg-2">
-				<div class="card">
-					<a class="img-card"
-						href="${pageContext.request.contextPath}/Mydeal/main">
-						<img
-						src="${pageContext.request.contextPath}/resources/img/my_mydeal.png" />
-					</a>
-					<div class="card-content">
-						<h4 class="card-title">
-							<a
+					<div class="col-lg-4">
+						<div class="card">
+							<a class="img-card"
 								href="${pageContext.request.contextPath}/Mydeal/main">
-								내 거래 내역 </a>
-						</h4>
-						<p class="">입찰,장바구니,구매내역,판매내역,거래 문의 는 이쪽에서 확인 해주세요</p>
+								<img
+								src="${pageContext.request.contextPath}/resources/img/my_mydeal2.png" />
+							</a>
+							<div class="card-content">
+								<h4 class="card-title">
+									<a
+										href="${pageContext.request.contextPath}/Mydeal/main">
+										내 거래 내역 </a>
+								</h4>
+								<p class="">나의 운동 거래 관련 내용은 이쪽에서 확인 해주세요</p>
+							</div>
+							
+						</div>
 					</div>
-					
-				</div>
-			</div>
-			<div class="col-lg-2">
-				<div class="card">
-					<a class="img-card"
-						href="${pageContext.request.contextPath}/mypage/mymatching">
-						<img
-						src="${pageContext.request.contextPath}/resources/img/my_mymatching.png" />
-					</a>
-					<div class="card-content">
-						<h4 class="card-title">
-							<a
+					<div class="col-lg-4">
+						<div class="card">
+							<a class="img-card"
 								href="${pageContext.request.contextPath}/mypage/mymatching">
-								내 매칭 정보 </a>
-						</h4>
-						<p class="">매칭에 대한 나의 이력을 확인할 수 있습니다.</p>
+								<img
+								src="${pageContext.request.contextPath}/resources/img/my_mymatching.png" />
+							</a>
+							<div class="card-content">
+								<h4 class="card-title">
+									<a
+										href="${pageContext.request.contextPath}/mypage/mymatching">
+										내 매칭 정보 </a>
+								</h4>
+								<p class="">매칭에 대한 나의 이력을 확인할 수 있습니다.</p>
+							</div>
+							
+						</div>
 					</div>
-					
 				</div>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-lg-2">
-				
-			</div>
-			<div class="col-lg-1">
-			</div>
-			<div class="col-lg-2">
-				<div class="card">
-					<a class="img-card"
-						 href="${pageContext.request.contextPath}/mypage/mmwriteList">
-						<img
-						src="${pageContext.request.contextPath}/resources/img/my_mymontor.png" />
-					</a>
-					<div class="card-content">
-						<h4 class="card-title">
-							<a
-								href="${pageContext.request.contextPath}/mypage/mmwriteList">
-								내 작성 멘토멘티 </a>
-						</h4>
-						<p class="">내가 작성한 멘토/멘티 목록을 확인할 수 있습니다.</p>
+				<div class="row">
+					<div class="col-lg-4">
+						<div class="card">
+							<a class="img-card"
+								 href="${pageContext.request.contextPath}/mypage/mmwriteList">
+								<img
+								src="${pageContext.request.contextPath}/resources/img/my_mymontor.png" />
+							</a>
+							<div class="card-content">
+								<h4 class="card-title">
+									<a
+										href="${pageContext.request.contextPath}/mypage/mmwriteList">
+										내 작성 멘토멘티 </a>
+								</h4>
+								<p class="">내가 작성한 멘토/멘티 목록을 확인할 수 있습니다.</p>
+							</div>
+							
+						</div>
 					</div>
-					
-				</div>
-			</div>
-			<div class="col-lg-2">
-				<div class="card">
-					<a class="img-card"
-						href="${pageContext.request.contextPath}/mypage/mmApplyList">
-						<img
-						src="${pageContext.request.contextPath}/resources/img/my_mentorapply.png" />
-					</a>
-					<div class="card-content">
-						<h4 class="card-title">
-							<a
+					<div class="col-lg-4">
+						<div class="card">
+							<a class="img-card"
 								href="${pageContext.request.contextPath}/mypage/mmApplyList">
-								멘티/멘토 신청 현황 </a>
-						</h4>
-						<p class="">멘티/멘토 신청 현황을 확인 할 수 있습니다.</p>
+								<img
+								src="${pageContext.request.contextPath}/resources/img/my_mentorapply.png" />
+							</a>
+							<div class="card-content">
+								<h4 class="card-title">
+									<a
+										href="${pageContext.request.contextPath}/mypage/mmApplyList">
+										멘티/멘토 신청 현황 </a>
+								</h4>
+								<p class="">멘티/멘토 신청 현황을 확인 할 수 있습니다.</p>
+							</div>
+							
+						</div>
 					</div>
-					
-				</div>
-			</div>
-			<div class="col-lg-2">
-				<div class="card">
-					<a class="img-card"
-						 href="${pageContext.request.contextPath}/mypage/mmReqList">
-						<img
-						src="${pageContext.request.contextPath}/resources/img/my_mentorrequest.png" />
-					</a>
-					<div class="card-content">
-						<h4 class="card-title">
-							<a
+					<div class="col-lg-4">
+						<div class="card">
+							<a class="img-card"
 								 href="${pageContext.request.contextPath}/mypage/mmReqList">
-								멘티/멘토 요청 현황  </a>
-						</h4>
-						<p class="">멘티/멘토 요청 현황을 확인할 수 있습니다.</p>
+								<img
+								src="${pageContext.request.contextPath}/resources/img/my_mentorrequest.png" />
+							</a>
+							<div class="card-content">
+								<h4 class="card-title">
+									<a
+										 href="${pageContext.request.contextPath}/mypage/mmReqList">
+										멘티/멘토 요청 현황  </a>
+								</h4>
+								<p class="">멘티/멘토 요청 현황을 확인할 수 있습니다.</p>
+							</div>
+							
+						</div>
 					</div>
-					
-				</div>
+				</div>				
 			</div>
 		</div>
+
 	</section>
 
 	<!-- Footer 영역  -->
