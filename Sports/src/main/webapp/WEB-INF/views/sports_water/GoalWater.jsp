@@ -18,8 +18,8 @@
 			<canvas id ="myChart">
 			</canvas>
 			<input type="hidden" id="goaldata" name="goaldata" value="${goaldata}">
-			<input type="text" id="title" name="title"><button id="add"></button>
-			<div>${goaldata}</div>
+			<div id="goaldata">${goaldata}</div>
+			<input type="text" id="title" name="title"><button class="btn" id="add">입력</button>
 		</div>
 	</div>
 	</div>
@@ -27,7 +27,6 @@
 <script>
 //ajax로 값을 가져와요
 // [{label:""물섭취량""}]
-function getDoughnut(goaldata, title){		
 	
 
 	var ctx = $("#myChart");
@@ -39,8 +38,8 @@ function getDoughnut(goaldata, title){
 			labels : ["목표 물 섭취량", "내 섭취량"],//doughnutLabels,	
 			datasets : [{
 				data : [
-					goaldata,
-					title
+					10,
+					100
 					],
 				backgroundColor: ['#4e73df', '#1cc88a'],
 				hoverBackgroundColor: ['#2e59d9', '#17a673'],
@@ -52,31 +51,10 @@ function getDoughnut(goaldata, title){
 		}
 	});
 	
-	}
-	var goaldata = '${goaldata}';
-	var title = '${title}';
 	
-		
-	getDoughnut(goaldata, title);
 	
 
-	$("#add").click(function(){
-		
-		  $.ajax({	
-				type: "post",
-				url : "${pageContext.request.contextPath}/water/wateradd2",
-				data:{
-					goaldata: $("#goaldata").val(),
-					title : $("#title").val()
-				},
-				success: function(rdata){
-					console.log("성공");
-					doughnutChart.destroy();
-					getDoughnut(rdata.goaldata, rdata.title);
-				}
-			})
-	})
-
+	
 	</script>
 </body>
 </html>

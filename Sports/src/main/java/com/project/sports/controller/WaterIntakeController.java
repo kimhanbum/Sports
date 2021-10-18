@@ -39,18 +39,18 @@ public class WaterIntakeController {
 	}
 
 
-	@PostMapping(value = "/wateradd")
-	@ResponseBody
-	public String add(WaterIntake water, HttpServletRequest request, HttpSession session) throws Exception {
-
-		String date = water.getTime_start();
-		logger.info("date:" + date);
-		water.setUser_id((String) session.getAttribute("USER_ID"));
-
-		WaterService.Waterinsert(water);
-		logger.info("water:" + water);
-		return "redirect:calendar";
-	}
+	/*
+	 * @PostMapping(value = "/wateradd")
+	 * 
+	 * @ResponseBody public String add(WaterIntake water, HttpServletRequest
+	 * request, HttpSession session) throws Exception {
+	 * 
+	 * String date = water.getTime_start(); logger.info("date:" + date);
+	 * water.setUser_id((String) session.getAttribute("USER_ID"));
+	 * 
+	 * WaterService.Waterinsert(water); logger.info("water:" + water); return
+	 * "redirect:calendar"; }
+	 */
 	
 	@GetMapping(value = "/getCalendar")
 	@ResponseBody
