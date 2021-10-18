@@ -75,19 +75,6 @@ background-color: #fbfcfd
 
 <body class="body-wrapper" id="page-top">
     
-    <!-- Preloader Start -->
-	<div id="preloader-active">
-		<div
-			class="preloader d-flex align-items-center justify-content-center">
-			<div class="preloader-inner position-relative">
-				<div class="preloader-circle"></div>
-				<div class="preloader-img pere-text">
-                    <img src="${pageContext.request.contextPath}/resources/image/logo/sports_logo.png" alt="">
-				</div>
-			</div>
-		</div>
-	</div>
-    <!-- Preloader end-->
 
   	<!-- 헤더 영역  -->
 	<jsp:include page="/WEB-INF/views/sport_comm/header.jsp"/>
@@ -271,8 +258,8 @@ $(function(){
 						goaldata,
 						title,
 						],
-					backgroundColor: ['#8a6bff', '#f85867'],
-					hoverBackgroundColor: ['#5c09f0', '#e2081d'],
+					backgroundColor: ['#1aca96', '#f5dd0a'],
+					hoverBackgroundColor: ['#048861', '#c8b505'],
 					hoverBorderColor: "rgba(234, 236)",
 				}],
 			},

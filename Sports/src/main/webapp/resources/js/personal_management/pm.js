@@ -121,7 +121,9 @@ function getList(page){
   			output += "</td><td></td>";
 			output += "<td colspan='1' class='product-category'>" + item.sports_NAME +"</td>";
 			output += "<td class='text-center'>" + item.pm_KCAL + "</td>";
-			output += "<td class='action' data-title='Action'><div class=''><ul class='list-inline	justify-content-center'><li	class='list-inline-item'><a data-toggle='tooltip' data-placement='top' title='Delete' class='delete'>";
+			output += "<td class='action' data-title='Action'><div class=''>" +
+					  "<ul class='list-inline	justify-content-center'>" +
+					  "<li	class='list-inline-item'><a data-toggle='tooltip' data-placement='top' title='Delete' class='delete'>";
 			output += "<i id='remove' class='fa fa-trash'></i><input id='num' type='hidden' value=" + item.pm_NO + "></a></li></ul>";
 			output += "</div></td></tr>";
   			/*console.log("PM_NO" + item.PM_NO);*/

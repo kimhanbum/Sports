@@ -65,10 +65,9 @@ $(document).ready(function() {
 		 $.ajax({
             url: '${pageContext.request.contextPath}/water/getCalendar',
             data: {"dateString" : dateString
-            },
+            	  },
             dataType: 'json',
             async:false,
-            
             success: 
                 function(result) {
 
@@ -141,8 +140,8 @@ $(document).ready(function() {
 <style>
 
   body {
-    margin: 40px 10px;
-    padding: 0;
+     /* margin: 40px 10px; */
+     padding: 0;
     font-family: Arial, Helvetica Neue, Helvetica, sans-serif;
     font-size: 14px;
   }
@@ -178,22 +177,10 @@ $(document).ready(function() {
 </style>
 </head>
 <body>
- <!-- Preloader Start -->
-	<div id="preloader-active">
-		<div
-			class="preloader d-flex align-items-center justify-content-center">
-			<div class="preloader-inner position-relative">
-				<div class="preloader-circle"></div>
-				<div class="preloader-img pere-text">
-                    <img src="${pageContext.request.contextPath}/resources/image/logo/sports_logo.png" alt="">
-				</div>
-			</div>
-		</div>
-	</div>
  <!-- slider Area Start-->
     <div class="slider-area ">
         <!-- Mobile Menu -->
-        <div class="single-slider slider-height2 d-flex align-items-center" data-background="${pageContext.request.contextPath}/resources/image/water/calendar.jpg">
+        <div class="single-slider slider-height2 d-flex align-items-center" data-background="${pageContext.request.contextPath}/resources/image/water/calendar1.jpg">
             <div class="container">
                 <div class="row">
                     <div class="col-xl-12">
