@@ -3,7 +3,10 @@
 <div class="container">
   <div class="blog_right_sidebar">
       <aside class="single_sidebar_widget post_category_widget">
-          <h4 class="widget_title">마이페이지</h4>
+          <a href="${pageContext.request.contextPath}/mypage/main" class="d-flex">
+              <p style="margin-bottom :0px">마이페이지</p>
+           </a>
+          <hr>
           <ul>
           	  <li>
                   <a href="${pageContext.request.contextPath}/member/update" class="d-flex">
@@ -12,7 +15,7 @@
               </li>
               <li>
                   <a href="${pageContext.request.contextPath}/pm/doughnut" class="d-flex">
-                      <p>당일운동량/물섭취량</p>
+                      <p>당일 운동/물섭취</p>
                   </a>
               </li>
                <li>
@@ -42,12 +45,12 @@
               </li>
               <li>
                   <a href="${pageContext.request.contextPath}/mypage/mmApplyList" class="d-flex">
-                      <p>멘티/멘토 신청현황</p>
+                      <p>멘티/멘토 신청</p>
                   </a>
               </li>
                             <li>
                    <a href="${pageContext.request.contextPath}/mypage/mmReqList" class="d-flex">
-                      <p>멘티/멘토 요청현황</p>
+                      <p>멘티/멘토 요청</p>
                   </a>
               </li>
           </ul>

@@ -49,12 +49,13 @@ h1{text-align:center}
 <!-- slider Area Start-->
     <div class="slider-area ">
         <!-- Mobile Menu -->
-        <div class="single-slider slider-height2 d-flex align-items-center" data-background="${pageContext.request.contextPath}/resources/img/hero/category.jpg">
+        <div style="background-image: url('/sports/resources/image/privacy.jpg')"    
+             class="single-slider slider-height2 d-flex align-items-center">
             <div class="container">
                 <div class="row">
                     <div class="col-xl-12">
                         <div class="hero-cap text-center">
-                            <h2>update</h2>
+                            <h2>개인정보수정</h2>
                         </div>
                     </div>
                 </div>

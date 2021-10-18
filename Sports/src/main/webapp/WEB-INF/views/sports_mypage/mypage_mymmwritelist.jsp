@@ -164,7 +164,7 @@
 												<td colspan="3" ><div class="classalign">${mentee.mentee_title}</div></td>
 												<td><div class="classalign">${mentee.mentee_amount}</div></td>
 												<td><div class="classalign">${mentee.mentee_gender}</div></td>
-												<td><div id="btnSubmit2" onclick="javascript:menteeDetail('${mentee.mentee_code}');" class="submit5">상세보기</div></td>
+												<td><div onclick="javascript:menteeDetail('${mentee.mentee_code}');" class="submit5">상세보기</div></td>
 											</tr>	
 										</c:forEach>
 										</c:if>
