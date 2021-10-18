@@ -67,12 +67,7 @@ $(function(){
 			alert("비밀번호를 확인해주세요.")
 			$("#passcheck").focus();
 			return false;
-		}else if($("input[name=USER_PSPORTS]").each()(function(){
-			this.checked=true;
-						})==false){
-			alert("선호하는 운동을 1개 이상 선택해주세요.");
-			return false;
-		}else{return true;}
+		}
 	});
 	//id중복체크,검사
     $("#checkid").click(function(){
@@ -100,8 +95,7 @@ $(function(){
 		});//ajax
 	})
 	//비밀번호 검사
-	$("#USER_PASS").keyup(function(){
-		var pattern = /^\w{10,16}$/;
+	$("#passcheck").keyup(function(){
 		var pass = $("#USER_PASS").val();
 		var pass1 = $("#passcheck").val();
 			if(pass!=pass1){
@@ -109,7 +103,6 @@ $(function(){
 			}else{
 				checkpass=true;
 				}
-		
 	})
 	
 })
