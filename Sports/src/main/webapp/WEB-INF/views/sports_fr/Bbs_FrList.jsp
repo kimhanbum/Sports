@@ -20,22 +20,10 @@
 </head>
 
 <body>
-    <!-- Preloader Start -->
-    <div id="preloader-active">
-        <div class="preloader d-flex align-items-center justify-content-center">
-            <div class="preloader-inner position-relative">
-                <div class="preloader-circle"></div>
-                <div class="preloader-img pere-text">
-                    <img src="${pageContext.request.contextPath}/resources/image/logo/sports_logo.png" alt="">
-                </div>
-            </div>
-        </div>
-    </div>
-
     <!-- slider Area Start-->
     <div class="slider-area ">
         <!-- Mobile Menu -->
-        <div class="single-slider slider-height2 d-flex align-items-center" data-background="${pageContext.request.contextPath}/resources/image/bbs_fr/board_headline.jpg">
+        <div class="single-slider slider-height2 d-flex align-items-center" data-background="${pageContext.request.contextPath}/resources/image/bbs_fr/jogging.jpg">
             <div class="container">
                 <div class="row">
                     <div class="col-xl-12">

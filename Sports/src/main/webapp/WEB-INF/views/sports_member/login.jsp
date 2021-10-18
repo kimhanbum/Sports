@@ -39,7 +39,7 @@ if(result=='joinSuccess'){
     <!-- slider Area Start-->
     <div class="slider-area ">
         <!-- Mobile Menu -->
-        <div class="single-slider slider-height2 d-flex align-items-center" data-background="${pageContext.request.contextPath}/resources/img/hero/category.jpg">
+        <div class="single-slider slider-height2 d-flex align-items-center" data-background="${pageContext.request.contextPath}/resources/image/bbs_fr/meditate.jpg">
             <div class="container">
                 <div class="row">
                     <div class="col-xl-12">

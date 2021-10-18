@@ -209,7 +209,7 @@ h1.heading {
 								 href="${pageContext.request.contextPath}/pm/doughnut">
 								당일 운동량 / 물 섭취량 </a>
 						</h4>
-						<p class="">당일 운동량과 물 섭취량을 체크해 운동량을 매일 기록 하세요! </p>
+						<p class="">매일 기록한 총 운동량과 총 물 섭취량을 달력을 통해서 확인하세요! </p>
 					</div>
 					
 				</div>
