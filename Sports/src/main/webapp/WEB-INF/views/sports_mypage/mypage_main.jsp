@@ -209,7 +209,7 @@ h1.heading {
 										 href="${pageContext.request.contextPath}/pm/doughnut">
 										당일 운동량 / 물 섭취량 </a>
 								</h4>
-								<p class="">매일 기록한 총 운동량과 총 물 섭취량을 달력을 통해서 확인하세요! </p>
+								<p class="">당일 총 운동량과 총 물 섭취량을 기록하세요! </p>
 							</div>
 						</div>
 					</div>
@@ -226,7 +226,7 @@ h1.heading {
 										href="${pageContext.request.contextPath}/water/calendar">
 										캘린더 </a>
 								</h4>
-								<p class="">달력 으로 원하는 날짜를 선택해 물 섭취량을 기록하세요!</p>
+								<p class="">기록된 운동량과 물 섭취량을 달력으로 확인하세요</p>
 							</div>
 							
 						</div>
@@ -302,7 +302,7 @@ h1.heading {
 										href="${pageContext.request.contextPath}/mypage/mmwriteList">
 										내 작성 멘토멘티 </a>
 								</h4>
-								<p class="">내가 작성한 멘토/멘티 목록을 확인할 수 있습니다.</p>
+								<p class="">내가 작성한 멘토/멘티 작성 목록을 확인할 수 있습니다.</p>
 							</div>
 							
 						</div>
