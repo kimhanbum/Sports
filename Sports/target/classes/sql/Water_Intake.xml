@@ -4,7 +4,7 @@
 
 <mapper namespace="Water">
 
-	<insert id="insert" parameterType="Water">
+	<!-- <insert id="insert" parameterType="Water">
 	<selectKey resultType="int" order="BEFORE"
 					keyProperty="wi_no">
 			select nvl(max(WI_NO),0)+1 from WATER_INTAKE
@@ -12,7 +12,7 @@
 		insert into WATER_INTAKE 
 		(WI_NO, USER_ID, title, time_start, time_end) values
 		(#{wi_no}, #{user_id}, #{title}, #{time_start}, #{time_end})		
-	</insert>
+	</insert> -->
 	
 	<select id="select" resultType="Water" parameterType="String">
 		select * from water_intake
@@ -30,10 +30,10 @@
 	</insert>
 	
 	<select id="doughnutlist" parameterType="String" resultType="float">
-		select sum(title) from water_intake 
-		where user_id = 'user01'
+		select title 
+		from water_intake 
+		where user_id = #{id}
 		and time_start = to_char(sysdate, 'yyyy-mm-dd')
-		group by time_start 
 	</select>
 	
 	<select id="doughnutlistcount" parameterType="String" resultType="int">
@@ -41,4 +41,18 @@
 		where time_start = to_char(sysdate, 'yyyy-mm-dd')
 		and user_id = #{id}
 	</select>
+	
+	<update id="update" parameterType="Water">
+		update water_intake 
+		set title = title + #{title}
+		where time_start = to_char(sysdate, 'yyyy-mm-dd')
+		and user_id = #{user_id}
+	</update>
+	
+	<delete id="delWater" parameterType="map">
+		delete water_intake
+		where time_start = to_char(sysdate, 'yyyy-mm-dd')
+		and user_id = #{id}
+	</delete>
+	
 </mapper>

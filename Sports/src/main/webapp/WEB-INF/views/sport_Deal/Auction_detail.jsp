@@ -598,17 +598,15 @@ input.checkbox:checked+label.input-label.radio::before {
 	</script>
 	<script>
 		$(function(){
-			$(".buttonA").click(function(){ //로그인창에서 회원가입버튼 클릭 시
-				var num = ${param.num};
-				var bidcheck ="${bidcheck}";
-				var possible = ${possible};
-				var point = ${nowpoint};
+			$(".buttonA").click(function(){ //입찰 버튼 클릭 시 
+				var num = ${param.num};			//글 번호
+				var bidcheck ="${bidcheck}";	//입찰 가능여부
+				var possible = ${possible};		//현재 포인트로 입찰 가능한지 여부
+				var point = ${nowpoint};		//현재 포인트
 				
-				var writeid = "${b.USER_ID}"
-				var sessionid = "${USER_ID}"
-				
-				console.log("aa" + bidcheck);
-				
+				var writeid = "${b.USER_ID}"	//글을 올린 사람 아이디
+				var sessionid = "${USER_ID}"	//현재 로그인된 아이디
+	
 				if(sessionid ==""){
 					alert("로그인후 이용해주세요")
 					location.href = "${pageContext.request.contextPath}/member/login"
@@ -620,9 +618,9 @@ input.checkbox:checked+label.input-label.radio::before {
 							alert("포인트가 부족합니다. (현재 point " + point +"원)" )
 						}else{
 							if(bidcheck == "possible"){
-								var b = confirm("입찰 하시겠습니까 ? (현재금액: " + ${b.AUC_SPRICE} + " 입찰단위: " + ${b.AUC_UNIT} + ") ");		
+								var b = confirm("입찰 하시겠습니까 ? (현재 포인트: " + ${b.AUC_SPRICE} + " 입찰단위: " + ${b.AUC_UNIT} + ") ");		
 								
-								if(b==true){	
+								if(b==true){				//입찰 완료
 									location.href = "${pageContext.request.contextPath}/DealA/bid"
 									 + "?num=" + num ;
 									

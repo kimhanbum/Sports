@@ -207,18 +207,16 @@ public class DealDirectController {
 		DealDirect Direct = DealService.D_getDetail(num);
 		
 		//찜했던 물품인지 확인
-		String sessionid = (String) session.getAttribute("USER_ID");
+		String sessionid = (String) session.getAttribute("USER_ID");	//현재 로그인 된 아이디
 		if(sessionid !=null) {
 			//찜한물품인지 확인
 			Object pickcheck = DealService.pickcheck2(sessionid, num);
-			if(pickcheck == null) {
+			if(pickcheck == null) {						//찜 했던 물품이 아님 
 				mv.addObject("pickcheck", "possible");
-			}else {
+			}else {										//찜 했던 물품임
 				mv.addObject("pickcheck", "impossible");
 			}
 		}
-		
-		
 		//조회수
 		int count = DealService.D_readcount(num);
 		

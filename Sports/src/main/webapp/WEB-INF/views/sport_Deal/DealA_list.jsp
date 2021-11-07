@@ -413,42 +413,39 @@ background-color
 						<!-- 남은 시간 구하는 스크립트문 -->
 						<script>
 						 $(function() {
-														
-						 	var aucdate = '${b.AUC_DATE}';
-						 	
-						 	
-						 	
-						 	var dateyear = aucdate.substring(0,4)
+																
+							//경매기간 
+						 	var aucdate = '${b.AUC_DATE}';			
+						 	/*경매기간 년도,월,일,시간,초 로 나눔 */
+						 	var dateyear = aucdate.substring(0,4)	
 						 	var datemonth = aucdate.substring(5,7)
 						 	var dateday = aucdate.substring(8,10)
 						 	var datehour = aucdate.substring(11,13)
 						 	var datemin = aucdate.substring(14,16)
-						 	
-						 	console.log(datehour)
-						 	console.log(datemin)
-						 	
+						 	/*****************************/
+
+						 	//글번호
 						 	var number = ${b.AUC_NUMBER}
+						 	//글 이미지 파일 저장용 이름
 						 	var img = "${b.SAVE_AUC_MAINFILE}"
 						 	
 						 	
-						 	
+						 	/* 남은시간 부분 과 이미지 부분 태그 id를 동적으로 주기위해 
+						 		해당 글의 정보를 변수로 선언하여 그 변수를 아이디로 바꿔줌
+						 	*/
 						 	var timeid = "timeback" + number;
-						 	var imgid = "imgimg" + number;
-						 	
-						 
-						 	
+						 	var imgid = "imgimg" + number;	 	
 						 	$("#timeback").attr("id",timeid)
 						 	$("#imgimg").attr("id" , imgid)
 						 	
-						 	
-						 	
-						 	
-						 	
+							//남은 시간 들어갈태그 동적변수로 id 기입
 						 	var watch = '<span class="fas fa-clock" /> <span id="' + number + '"></span>'
 						 	document.getElementById(timeid).innerHTML = watch;
 						 	
-							var endTime = new Date(dateyear,datemonth-1, dateday, datehour, datemin, 0) / 1000;
-							//var endTime = new Date(2021,09, 05, 19, 38, 0) / 1000;
+						 	//남은시간 구하기 (현재시간 - 경매기간)
+							var endTime = new Date(dateyear,datemonth-1, dateday, datehour, datemin, 0) / 1000;       					           
+						 	
+						 	//남은 시간 1초마다 갱신
 							function setClock() {
 								var elapsed = new Date() / 1000;
 								var totalTime = endTime - elapsed;
@@ -456,43 +453,39 @@ background-color
 								var min = parseInt(totalTime / 60) % 60;
 								var sec = parseInt(totalTime % 60, 10);
 								
-								
-
-								
+								//남은시간 변수로 선언 후 innerHTML로 삽입
 								var result = "남은시간 " +  hr + "시 " + min + "분 " + sec
 										+ "초";
 								eval("var count"+number+"=" + "'" + result + "'");
 	
 								document.getElementById(number).innerHTML = result;
+								//1초마다 setClock 함수 실행 
 								setTimeout(setClock, 1000);
 								
-								//if(eval("count" + number) == "14 시 0 분 9 초"){	
-								if(hr <=0 && min <=0 && sec <= 0){
+								//남은 시간이 0시0분0초 보다 감소하면 위 함수 종료 후 시간 기입되는 태그 삭제
+								//함수 종료
+								if(hr <=0 && min <=0 && sec <=0 ){
 									
 									clearTimeout(setClock);
-// 									document.getElementById(timeid).innerHTML = 
-// 										"<div style='background-color:red'>배송시 글이 자동 삭제됩니다.</div>";
 									$("#timeid").remove();
 									$(eval("'#timeback" +number + "'")).remove();
-									
-									
-									
-
-									//location.href="write"
-									
-									
+					
 								}
-								if(hr == 0 && min ==55 && sec ==20){
+								//남은 시간이 0시0분0초가 되면 
+								//글번호 값을 갖고 timeout 으로 이동 
+								if(hr == 0 && min ==0 && sec ==0){
 									location.href="timeout?num=" + number
 									
 								}
-								
+								//남은 시간이 0시0분0초가 되면 
+								//이미지 판매완료 이미지로 바뀜 
 								var imgfile = "${b.SAVE_AUC_MAINFILE}"
 								if(imgfile == 'buynow.jpg'){
 									$(eval("'#timeback" +number + "'")).remove();
 								}
 								
 							}
+						 	//함수 실행
 							setClock();
 							
 						 })

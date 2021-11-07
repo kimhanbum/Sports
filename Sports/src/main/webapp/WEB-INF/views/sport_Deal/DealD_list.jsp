@@ -551,10 +551,8 @@ background-color
 
 
 		function ajax(sdata, sdata2, sdata3) {
-
 			output = "";
-			$
-					.ajax({
+			$.ajax({
 						type : "post",
 						data : sdata,
 						url : "list_ajax",
@@ -600,8 +598,7 @@ background-color
 							console.log(rdata)
 							$(rdata.Direct)
 									.each(
-											function(index, item) {
-												
+											function(index, item) {				
 												 var price = AddComma(item.dir_PRICE);
 												
 												console.log(item.dir_PRICE
@@ -637,10 +634,6 @@ background-color
 
 											})
 							output += "</div>"
-
-							console.log(output)
-
-							console.log(outputP)
 
 							$('#ajax').append(output).trigger("create") //table 완성
 							$('#ajaxpage').append(outputP).trigger("create") //페이징

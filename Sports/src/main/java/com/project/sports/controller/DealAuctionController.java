@@ -150,16 +150,11 @@ public class DealAuctionController {
 		}else {
 			possible = 1;
 		}
-		
-		logger.info("현재값" + nowpoint);
-		
-		mv.addObject("possible", possible);
-		mv.addObject("nowpoint", nowpoint);
-		mv.addObject("beforebidid", beforebidid);
-		
-		
-		logger.info("세션아아디" + sessionid);
-		
+
+		mv.addObject("possible", possible);	 //현재 포인트로 입찰 가능여부
+		mv.addObject("nowpoint", nowpoint);	 //현재 포인트
+		mv.addObject("beforebidid", beforebidid);	//현재 입찰자 아이디 확인
+
 		
 		if(sessionid !=null) {
 			//찜한물품인지 확인
@@ -360,22 +355,19 @@ public class DealAuctionController {
 			HttpServletRequest request , int num,
 			HttpSession session) {
 		
-		//입찰하고있는 사람 아이디 확인
+		//입찰하고 있는 사람 아이디 확인
 		String beforebidid = DealService.beforebidid(num);
 		logger.info("비폴아ㅣ디" + beforebidid);
 		
 		//이글에 입찰단위
 		int Dealunit2 = DealService.Dealunit(num);
 		
-		
 		if(beforebidid != null) {
 			//입찰실패자 다시 입찰금 반환
 			MyDealService.moneyreturn(beforebidid , Dealunit2);
 		}
 		
-		
-		
-		//내거래내역 입찰중이 었던사람 입찰실패로 변경
+		//내 거래 내역 입찰중이 었던사람 입찰실패로 변경
 		int change = DealService.Auction_bidchange(num); 
 		
 		String sessionid = (String) session.getAttribute("USER_ID");
@@ -384,6 +376,7 @@ public class DealAuctionController {
 		// 내거래내역 입찰중 추가 
 		DealService.Auction_biding(sessionid , num);
 		
+		//입찰한 글 조회
 		DealAuction Auction = DealService.A_getDetail(num);
 		
 		// 기존 경매가 변경
@@ -397,7 +390,7 @@ public class DealAuctionController {
 		//현재 포인트 조회
 		int nowpoint = MyDealService.nowpoint(sessionid);
 		
-		
+		//입찰한 금액만큼 차감된 포인트
 		int minuspoint = nowpoint - Dealunit;
 		
 		//차감된 금액만큼 포인트 업데이트
@@ -409,6 +402,30 @@ public class DealAuctionController {
 		
 		return "redirect:list"; 
 	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	//경매 찜하기
 	@RequestMapping(value="/pick")

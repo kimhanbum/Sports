@@ -574,8 +574,8 @@ input.checkbox:checked+label.input-label.radio::before {
 <script>
 $(function(){
 	
-	var id = "${b.USER_ID}";
-	var sessionid = "${USER_ID}";
+	var id = "${b.USER_ID}";			//게시글 작성장 아이디
+	var sessionid = "${USER_ID}";		//현재 록인된 아이디
 	var output ='<ul class="list-unstyled" id="buttonG">'
 		output +='<li class="mb-3" id="modifyB">';
 		output +='<button class="buttonJ">찜 하기</button></li>'
@@ -637,11 +637,11 @@ $(function(){
 	
 	$(".buttonJ").click(function(){ //찜하기 버튼 클릭
 		
-		var pickcheck ="${pickcheck}";
-			var num = ${param.num};
-			
-			var writeid = "${b.USER_ID}"
-		var sessionid = "${USER_ID}"
+		var pickcheck ="${pickcheck}";	//찜 가능 여부
+		var num = ${param.num};			//글 번호
+				
+		var writeid = "${b.USER_ID}"	//글 작성자
+		var sessionid = "${USER_ID}"	//로그인된 아이디
 			
 			
 		if(sessionid ==""){
@@ -654,7 +654,7 @@ $(function(){
 				if(pickcheck == "possible"){
 	 				var b = confirm("찜 하시겠습니까 ?");		
 	 				
-	 				if(b==true){	
+	 				if(b==true){					//찜 완료
 	 					location.href = "${pageContext.request.contextPath}/DealD/pick"
 	 					 + "?num=" + num ;
 	 				}

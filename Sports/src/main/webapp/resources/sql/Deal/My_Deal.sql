@@ -20,13 +20,43 @@ create table MY_DEAL(
 	ALTER TABLE MY_DEAL ADD DEAL_CSFC number  DEFAULT 0;
 	/*************************/
 	
+/* 발표세팅 삭제*/ 
+delete from deal_auction;
+delete from deal_direct;
+delete from deal_question;
+delete from my_deal;
+delete from deal_point;
+drop sequence auc_seq;
+drop sequence dir_seq;
+drop sequence qs_seq ; 
+
+
+
+create sequence auc_seq;
+create sequence dir_seq;
+create sequence qs_seq ; 
+
+insert into deal_point
+	(USER_ID)
+	VALUES( 'admin');
+
+insert into deal_point
+	(USER_ID)
+	VALUES( 'admin01');
 	
-select * from
-	(select  rownum rnum , deal_auction.AUC_NUMBER , AUC_SUBJECT, AUC_CONTENT , DEAL_AUCTION.USER_ID ,
-AUC_DATE , AUC_PRICE , AUC_UNIT , AUC_LPRICE , AUC_COUNT , AUC_DELIVERY , AUC_DELIVERYCOM , AUC_DELIVERYNUM ,
-AUC_READCOUNT , AUC_NOWDATE , AUC_SPRICE
-from  deal_auction inner join my_deal
-on deal_auction.auc_number = deal_auction.auc_number 
-where deal_csfc = 1 and pick =1 and my_deal.user_id = 'admin01'
-and DEAL_AUCTION.auc_number = my_deal.auc_number)
-where rnum >= 1 and rnum <=10
+	insert into deal_point
+	(USER_ID)
+	VALUES( 'admin02');
+	
+	insert into deal_point
+	(USER_ID)
+	VALUES( 'user01');
+	
+	insert into deal_point
+	(USER_ID)
+	VALUES( 'user02');
+	
+	insert into deal_point
+	(USER_ID)
+	VALUES( 'user03');
+

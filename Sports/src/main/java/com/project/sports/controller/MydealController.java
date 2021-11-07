@@ -167,7 +167,6 @@ public class MydealController {
 		
 		Auction = MyDealService.MybuyList(view,page,limit,sessionid);
 
-		
 		mv.addObject("view2",view);
 		mv.addObject("Auction",Auction);
 		mv.addObject("page",page);
